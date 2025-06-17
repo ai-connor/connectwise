@@ -13,8 +13,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run build script
+        run: ./build.sh
+        with:
+          working-directory: .github/workflows
+
+      - name: Go formatting
         run: |
-          .github/workflows/build.sh
           gofmt -w ./
 
       - name: Commit and push changes
