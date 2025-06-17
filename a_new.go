@@ -9,7 +9,6 @@ import (
 
 func ConnectwiseConfiguration(cwClientId, cwCompanyName, cwPublicKey, cwPrivateKey string) *Configuration {
 	config := NewConfiguration()
-	config.AddDefaultHeader("User-Agent", "Nexigen-Connectwise-Client")
 	config.AddDefaultHeader("Accept", "application/vnd.connectwise.com+json")
 	config.AddDefaultHeader("Content-Type", "application/json")
 	// This removes the need to set the clientId in each request
