@@ -78,9 +78,6 @@ func (a *SalesTeamMembersAPIService) DeleteSalesSalesTeamsByParentIdMembersByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *SalesTeamMembersAPIService) DeleteSalesSalesTeamsByParentIdMembersByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetSalesSalesTeamsByParentIdMembersRequest struct {
 	ctx context.Context
 	ApiService *SalesTeamMembersAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetSalesSalesTeamsByParentIdMembersRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesSalesTeamsByParentIdMembersRequest) ClientId(clientId string) ApiGetSalesSalesTeamsByParentIdMembersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetSalesSalesTeamsByParentIdMembersRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetSalesSalesTeamsByParentIdMembersRequest) ClientId(clientId string) ApiGetSalesSalesTeamsByParentIdMembersRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesSalesTeamsByParentIdMembersRequest) Execute() ([]SalesTeamMember, *http.Response, error) {
 	return r.ApiService.GetSalesSalesTeamsByParentIdMembersExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *SalesTeamMembersAPIService) GetSalesSalesTeamsByParentIdMembersExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *SalesTeamMembersAPIService) GetSalesSalesTeamsByParentIdMembersExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetSalesSalesTeamsByParentIdMembersByIdRequest struct {
 	ApiService *SalesTeamMembersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetSalesSalesTeamsByParentIdMembersByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesSalesTeamsByParentIdMembersByIdRequest) ClientId(clientId string) ApiGetSalesSalesTeamsByParentIdMembersByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetSalesSalesTeamsByParentIdMembersByIdRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetSalesSalesTeamsByParentIdMembersByIdRequest) ClientId(clientId string) ApiGetSalesSalesTeamsByParentIdMembersByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesSalesTeamsByParentIdMembersByIdRequest) Execute() (*SalesTeamMember, *http.Response, error) {
 	return r.ApiService.GetSalesSalesTeamsByParentIdMembersByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *SalesTeamMembersAPIService) GetSalesSalesTeamsByParentIdMembersByIdExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *SalesTeamMembersAPIService) GetSalesSalesTeamsByParentIdMembersByIdExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetSalesSalesTeamsByParentIdMembersCountRequest struct {
 	ctx context.Context
 	ApiService *SalesTeamMembersAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetSalesSalesTeamsByParentIdMembersCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesSalesTeamsByParentIdMembersCountRequest) ClientId(clientId string) ApiGetSalesSalesTeamsByParentIdMembersCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetSalesSalesTeamsByParentIdMembersCountRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetSalesSalesTeamsByParentIdMembersCountRequest) ClientId(clientId string) ApiGetSalesSalesTeamsByParentIdMembersCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesSalesTeamsByParentIdMembersCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesSalesTeamsByParentIdMembersCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *SalesTeamMembersAPIService) GetSalesSalesTeamsByParentIdMembersCountExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *SalesTeamMembersAPIService) GetSalesSalesTeamsByParentIdMembersCountExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchSalesSalesTeamsByParentIdMembersByIdRequest struct {
 	ApiService *SalesTeamMembersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesSalesTeamsByParentIdMembersByIdRequest) ClientId(clientId string) ApiPatchSalesSalesTeamsByParentIdMembersByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesSalesTeamsByParentIdMembersByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesSalesTeamsByParentIdMembersByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesSalesTeamsByParentIdMembersByIdRequest) ClientId(clientId string) ApiPatchSalesSalesTeamsByParentIdMembersByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *SalesTeamMembersAPIService) PatchSalesSalesTeamsByParentIdMembersByIdEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *SalesTeamMembersAPIService) PatchSalesSalesTeamsByParentIdMembersByIdEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostSalesSalesTeamsByParentIdMembersRequest struct {
 	ctx context.Context
 	ApiService *SalesTeamMembersAPIService
 	parentId int32
-	clientId *string
 	salesTeamMember *SalesTeamMember
-}
-
-// 
-func (r ApiPostSalesSalesTeamsByParentIdMembersRequest) ClientId(clientId string) ApiPostSalesSalesTeamsByParentIdMembersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // salesTeamMember
 func (r ApiPostSalesSalesTeamsByParentIdMembersRequest) SalesTeamMember(salesTeamMember SalesTeamMember) ApiPostSalesSalesTeamsByParentIdMembersRequest {
 	r.salesTeamMember = &salesTeamMember
+	return r
+}
+
+// 
+func (r ApiPostSalesSalesTeamsByParentIdMembersRequest) ClientId(clientId string) ApiPostSalesSalesTeamsByParentIdMembersRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *SalesTeamMembersAPIService) PostSalesSalesTeamsByParentIdMembersExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.salesTeamMember == nil {
 		return localVarReturnValue, nil, reportError("salesTeamMember is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *SalesTeamMembersAPIService) PostSalesSalesTeamsByParentIdMembersExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.salesTeamMember
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutSalesSalesTeamsByParentIdMembersByIdRequest struct {
 	ApiService *SalesTeamMembersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	salesTeamMember *SalesTeamMember
-}
-
-// 
-func (r ApiPutSalesSalesTeamsByParentIdMembersByIdRequest) ClientId(clientId string) ApiPutSalesSalesTeamsByParentIdMembersByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // salesTeamMember
 func (r ApiPutSalesSalesTeamsByParentIdMembersByIdRequest) SalesTeamMember(salesTeamMember SalesTeamMember) ApiPutSalesSalesTeamsByParentIdMembersByIdRequest {
 	r.salesTeamMember = &salesTeamMember
+	return r
+}
+
+// 
+func (r ApiPutSalesSalesTeamsByParentIdMembersByIdRequest) ClientId(clientId string) ApiPutSalesSalesTeamsByParentIdMembersByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *SalesTeamMembersAPIService) PutSalesSalesTeamsByParentIdMembersByIdExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.salesTeamMember == nil {
 		return localVarReturnValue, nil, reportError("salesTeamMember is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *SalesTeamMembersAPIService) PutSalesSalesTeamsByParentIdMembersByIdExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.salesTeamMember
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

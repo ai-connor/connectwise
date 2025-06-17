@@ -74,9 +74,6 @@ func (a *ConfigurationStatusesAPIService) DeleteCompanyConfigurationsStatusesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ConfigurationStatusesAPIService) DeleteCompanyConfigurationsStatusesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ConfigurationStatusesAPIService) DeleteCompanyConfigurationsStatusesByI
 type ApiGetCompanyConfigurationsStatusesRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyConfigurationsStatusesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsStatusesRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyConfigurationsStatusesRequest) PageId(pageId int32) ApiGetC
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsStatusesRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsStatusesRequest) Execute() ([]ConfigurationStatus, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsStatusesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyConfigurationsStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyConfigurationsStatusesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsStatusesByIdRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyConfigurationsStatusesByIdRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsStatusesByIdRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsStatusesByIdRequest) Execute() (*ConfigurationStatus, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsStatusesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesByIdEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesByIdEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetCompanyConfigurationsStatusesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetCompanyConfigurationsStatusesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsStatusesByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetCompanyConfigurationsStatusesByIdUsagesRequest) PageId(pageId int3
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsStatusesByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsStatusesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsStatusesByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesByIdUs
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesByIdUs
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetCompanyConfigurationsStatusesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetCompanyConfigurationsStatusesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsStatusesByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetCompanyConfigurationsStatusesByIdUsagesListRequest) PageId(pageId 
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsStatusesByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsStatusesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsStatusesByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesByIdUs
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesByIdUs
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesByIdUs
 type ApiGetCompanyConfigurationsStatusesCountRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetCompanyConfigurationsStatusesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsStatusesCountRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetCompanyConfigurationsStatusesCountRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsStatusesCountRequest) ClientId(clientId string) ApiGetCompanyConfigurationsStatusesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsStatusesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsStatusesCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesCountE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *ConfigurationStatusesAPIService) GetCompanyConfigurationsStatusesCountE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchCompanyConfigurationsStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationStatusesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyConfigurationsStatusesByIdRequest) ClientId(clientId string) ApiPatchCompanyConfigurationsStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyConfigurationsStatusesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyConfigurationsStatusesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyConfigurationsStatusesByIdRequest) ClientId(clientId string) ApiPatchCompanyConfigurationsStatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *ConfigurationStatusesAPIService) PatchCompanyConfigurationsStatusesById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *ConfigurationStatusesAPIService) PatchCompanyConfigurationsStatusesById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *ConfigurationStatusesAPIService) PatchCompanyConfigurationsStatusesById
 type ApiPostCompanyConfigurationsStatusesRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationStatusesAPIService
-	clientId *string
 	configurationStatus *ConfigurationStatus
-}
-
-// 
-func (r ApiPostCompanyConfigurationsStatusesRequest) ClientId(clientId string) ApiPostCompanyConfigurationsStatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // configurationStatus
 func (r ApiPostCompanyConfigurationsStatusesRequest) ConfigurationStatus(configurationStatus ConfigurationStatus) ApiPostCompanyConfigurationsStatusesRequest {
 	r.configurationStatus = &configurationStatus
+	return r
+}
+
+// 
+func (r ApiPostCompanyConfigurationsStatusesRequest) ClientId(clientId string) ApiPostCompanyConfigurationsStatusesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *ConfigurationStatusesAPIService) PostCompanyConfigurationsStatusesExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.configurationStatus == nil {
 		return localVarReturnValue, nil, reportError("configurationStatus is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *ConfigurationStatusesAPIService) PostCompanyConfigurationsStatusesExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.configurationStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutCompanyConfigurationsStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationStatusesAPIService
 	id int32
-	clientId *string
 	configurationStatus *ConfigurationStatus
-}
-
-// 
-func (r ApiPutCompanyConfigurationsStatusesByIdRequest) ClientId(clientId string) ApiPutCompanyConfigurationsStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // configurationStatus
 func (r ApiPutCompanyConfigurationsStatusesByIdRequest) ConfigurationStatus(configurationStatus ConfigurationStatus) ApiPutCompanyConfigurationsStatusesByIdRequest {
 	r.configurationStatus = &configurationStatus
+	return r
+}
+
+// 
+func (r ApiPutCompanyConfigurationsStatusesByIdRequest) ClientId(clientId string) ApiPutCompanyConfigurationsStatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *ConfigurationStatusesAPIService) PutCompanyConfigurationsStatusesByIdEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.configurationStatus == nil {
 		return localVarReturnValue, nil, reportError("configurationStatus is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *ConfigurationStatusesAPIService) PutCompanyConfigurationsStatusesByIdEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.configurationStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

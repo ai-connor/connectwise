@@ -74,9 +74,6 @@ func (a *WorkflowsAPIService) DeleteSystemWorkflowsByIdExecute(r ApiDeleteSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *WorkflowsAPIService) DeleteSystemWorkflowsByIdExecute(r ApiDeleteSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *WorkflowsAPIService) DeleteSystemWorkflowsByIdExecute(r ApiDeleteSystem
 type ApiGetSystemWorkflowsRequest struct {
 	ctx context.Context
 	ApiService *WorkflowsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemWorkflowsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsRequest) ClientId(clientId string) ApiGetSystemWorkflowsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemWorkflowsRequest) PageId(pageId int32) ApiGetSystemWorkflows
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsRequest) ClientId(clientId string) ApiGetSystemWorkflowsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsRequest) Execute() ([]Workflow, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *WorkflowsAPIService) GetSystemWorkflowsExecute(r ApiGetSystemWorkflowsR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *WorkflowsAPIService) GetSystemWorkflowsExecute(r ApiGetSystemWorkflowsR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemWorkflowsByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkflowsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemWorkflowsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemWorkflowsByIdRequest) PageId(pageId int32) ApiGetSystemWorkf
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByIdRequest) Execute() (*Workflow, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *WorkflowsAPIService) GetSystemWorkflowsByIdExecute(r ApiGetSystemWorkfl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *WorkflowsAPIService) GetSystemWorkflowsByIdExecute(r ApiGetSystemWorkfl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *WorkflowsAPIService) GetSystemWorkflowsByIdExecute(r ApiGetSystemWorkfl
 type ApiGetSystemWorkflowsCountRequest struct {
 	ctx context.Context
 	ApiService *WorkflowsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemWorkflowsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemWorkflowsCountRequest) PageId(pageId int32) ApiGetSystemWork
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *WorkflowsAPIService) GetSystemWorkflowsCountExecute(r ApiGetSystemWorkf
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *WorkflowsAPIService) GetSystemWorkflowsCountExecute(r ApiGetSystemWorkf
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemWorkflowsByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkflowsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemWorkflowsByIdRequest) ClientId(clientId string) ApiPatchSystemWorkflowsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemWorkflowsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemWorkflowsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemWorkflowsByIdRequest) ClientId(clientId string) ApiPatchSystemWorkflowsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *WorkflowsAPIService) PatchSystemWorkflowsByIdExecute(r ApiPatchSystemWo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *WorkflowsAPIService) PatchSystemWorkflowsByIdExecute(r ApiPatchSystemWo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *WorkflowsAPIService) PatchSystemWorkflowsByIdExecute(r ApiPatchSystemWo
 type ApiPostSystemWorkflowsRequest struct {
 	ctx context.Context
 	ApiService *WorkflowsAPIService
-	clientId *string
 	workflow *Workflow
-}
-
-// 
-func (r ApiPostSystemWorkflowsRequest) ClientId(clientId string) ApiPostSystemWorkflowsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workflow
 func (r ApiPostSystemWorkflowsRequest) Workflow(workflow Workflow) ApiPostSystemWorkflowsRequest {
 	r.workflow = &workflow
+	return r
+}
+
+// 
+func (r ApiPostSystemWorkflowsRequest) ClientId(clientId string) ApiPostSystemWorkflowsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *WorkflowsAPIService) PostSystemWorkflowsExecute(r ApiPostSystemWorkflow
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.workflow == nil {
 		return localVarReturnValue, nil, reportError("workflow is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *WorkflowsAPIService) PostSystemWorkflowsExecute(r ApiPostSystemWorkflow
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.workflow
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -989,9 +983,6 @@ func (a *WorkflowsAPIService) PostSystemWorkflowsByIdCopyExecute(r ApiPostSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1010,7 +1001,9 @@ func (a *WorkflowsAPIService) PostSystemWorkflowsByIdCopyExecute(r ApiPostSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1052,19 +1045,19 @@ type ApiPutSystemWorkflowsByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkflowsAPIService
 	id int32
-	clientId *string
 	workflow *Workflow
-}
-
-// 
-func (r ApiPutSystemWorkflowsByIdRequest) ClientId(clientId string) ApiPutSystemWorkflowsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workflow
 func (r ApiPutSystemWorkflowsByIdRequest) Workflow(workflow Workflow) ApiPutSystemWorkflowsByIdRequest {
 	r.workflow = &workflow
+	return r
+}
+
+// 
+func (r ApiPutSystemWorkflowsByIdRequest) ClientId(clientId string) ApiPutSystemWorkflowsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1108,9 +1101,6 @@ func (a *WorkflowsAPIService) PutSystemWorkflowsByIdExecute(r ApiPutSystemWorkfl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.workflow == nil {
 		return localVarReturnValue, nil, reportError("workflow is required and must be specified")
 	}
@@ -1132,7 +1122,9 @@ func (a *WorkflowsAPIService) PutSystemWorkflowsByIdExecute(r ApiPutSystemWorkfl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.workflow
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

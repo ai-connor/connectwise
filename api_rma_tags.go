@@ -74,9 +74,6 @@ func (a *RmaTagsAPIService) DeleteProcurementRmaTagsByIdExecute(r ApiDeleteProcu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *RmaTagsAPIService) DeleteProcurementRmaTagsByIdExecute(r ApiDeleteProcu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *RmaTagsAPIService) DeleteProcurementRmaTagsByIdExecute(r ApiDeleteProcu
 type ApiGetProcurementRmaTagsRequest struct {
 	ctx context.Context
 	ApiService *RmaTagsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementRmaTagsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaTagsRequest) ClientId(clientId string) ApiGetProcurementRmaTagsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementRmaTagsRequest) PageId(pageId int32) ApiGetProcurementR
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaTagsRequest) ClientId(clientId string) ApiGetProcurementRmaTagsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaTagsRequest) Execute() ([]RmaTag, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaTagsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsExecute(r ApiGetProcurementRmaT
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsExecute(r ApiGetProcurementRmaT
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProcurementRmaTagsByIdRequest struct {
 	ctx context.Context
 	ApiService *RmaTagsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProcurementRmaTagsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaTagsByIdRequest) ClientId(clientId string) ApiGetProcurementRmaTagsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProcurementRmaTagsByIdRequest) PageId(pageId int32) ApiGetProcurem
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaTagsByIdRequest) ClientId(clientId string) ApiGetProcurementRmaTagsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaTagsByIdRequest) Execute() (*RmaTag, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaTagsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsByIdExecute(r ApiGetProcurement
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsByIdExecute(r ApiGetProcurement
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsByIdExecute(r ApiGetProcurement
 type ApiGetProcurementRmaTagsCountRequest struct {
 	ctx context.Context
 	ApiService *RmaTagsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetProcurementRmaTagsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaTagsCountRequest) ClientId(clientId string) ApiGetProcurementRmaTagsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetProcurementRmaTagsCountRequest) PageId(pageId int32) ApiGetProcure
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaTagsCountRequest) ClientId(clientId string) ApiGetProcurementRmaTagsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaTagsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaTagsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsCountExecute(r ApiGetProcuremen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsCountExecute(r ApiGetProcuremen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -695,7 +691,6 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsCountExecute(r ApiGetProcuremen
 type ApiGetProcurementRmaTagsDefaultRequest struct {
 	ctx context.Context
 	ApiService *RmaTagsAPIService
-	clientId *string
 	productId int32
 	billingLogId int32
 	ticketId int32
@@ -710,12 +705,7 @@ type ApiGetProcurementRmaTagsDefaultRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaTagsDefaultRequest) ClientId(clientId string) ApiGetProcurementRmaTagsDefaultRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -763,6 +753,12 @@ func (r ApiGetProcurementRmaTagsDefaultRequest) PageSize(pageSize int32) ApiGetP
 // 
 func (r ApiGetProcurementRmaTagsDefaultRequest) PageId(pageId int32) ApiGetProcurementRmaTagsDefaultRequest {
 	r.pageId = &pageId
+	return r
+}
+
+// 
+func (r ApiGetProcurementRmaTagsDefaultRequest) ClientId(clientId string) ApiGetProcurementRmaTagsDefaultRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -821,9 +817,6 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsDefaultExecute(r ApiGetProcurem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -866,7 +859,9 @@ func (a *RmaTagsAPIService) GetProcurementRmaTagsDefaultExecute(r ApiGetProcurem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -908,19 +903,19 @@ type ApiPatchProcurementRmaTagsByIdRequest struct {
 	ctx context.Context
 	ApiService *RmaTagsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementRmaTagsByIdRequest) ClientId(clientId string) ApiPatchProcurementRmaTagsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementRmaTagsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementRmaTagsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementRmaTagsByIdRequest) ClientId(clientId string) ApiPatchProcurementRmaTagsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -964,9 +959,6 @@ func (a *RmaTagsAPIService) PatchProcurementRmaTagsByIdExecute(r ApiPatchProcure
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -988,7 +980,9 @@ func (a *RmaTagsAPIService) PatchProcurementRmaTagsByIdExecute(r ApiPatchProcure
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1031,19 +1025,19 @@ func (a *RmaTagsAPIService) PatchProcurementRmaTagsByIdExecute(r ApiPatchProcure
 type ApiPostProcurementRmaTagsRequest struct {
 	ctx context.Context
 	ApiService *RmaTagsAPIService
-	clientId *string
 	rmaTag *RmaTag
-}
-
-// 
-func (r ApiPostProcurementRmaTagsRequest) ClientId(clientId string) ApiPostProcurementRmaTagsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // rmaTag
 func (r ApiPostProcurementRmaTagsRequest) RmaTag(rmaTag RmaTag) ApiPostProcurementRmaTagsRequest {
 	r.rmaTag = &rmaTag
+	return r
+}
+
+// 
+func (r ApiPostProcurementRmaTagsRequest) ClientId(clientId string) ApiPostProcurementRmaTagsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1084,9 +1078,6 @@ func (a *RmaTagsAPIService) PostProcurementRmaTagsExecute(r ApiPostProcurementRm
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.rmaTag == nil {
 		return localVarReturnValue, nil, reportError("rmaTag is required and must be specified")
 	}
@@ -1108,7 +1099,9 @@ func (a *RmaTagsAPIService) PostProcurementRmaTagsExecute(r ApiPostProcurementRm
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.rmaTag
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1152,19 +1145,19 @@ type ApiPutProcurementRmaTagsByIdRequest struct {
 	ctx context.Context
 	ApiService *RmaTagsAPIService
 	id int32
-	clientId *string
 	rmaTag *RmaTag
-}
-
-// 
-func (r ApiPutProcurementRmaTagsByIdRequest) ClientId(clientId string) ApiPutProcurementRmaTagsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // rmaTag
 func (r ApiPutProcurementRmaTagsByIdRequest) RmaTag(rmaTag RmaTag) ApiPutProcurementRmaTagsByIdRequest {
 	r.rmaTag = &rmaTag
+	return r
+}
+
+// 
+func (r ApiPutProcurementRmaTagsByIdRequest) ClientId(clientId string) ApiPutProcurementRmaTagsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1208,9 +1201,6 @@ func (a *RmaTagsAPIService) PutProcurementRmaTagsByIdExecute(r ApiPutProcurement
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.rmaTag == nil {
 		return localVarReturnValue, nil, reportError("rmaTag is required and must be specified")
 	}
@@ -1232,7 +1222,9 @@ func (a *RmaTagsAPIService) PutProcurementRmaTagsByIdExecute(r ApiPutProcurement
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.rmaTag
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

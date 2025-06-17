@@ -74,9 +74,6 @@ func (a *CompanyNoteTypesAPIService) DeleteCompanyNoteTypesByIdExecute(r ApiDele
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CompanyNoteTypesAPIService) DeleteCompanyNoteTypesByIdExecute(r ApiDele
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CompanyNoteTypesAPIService) DeleteCompanyNoteTypesByIdExecute(r ApiDele
 type ApiGetCompanyNoteTypesRequest struct {
 	ctx context.Context
 	ApiService *CompanyNoteTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyNoteTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyNoteTypesRequest) ClientId(clientId string) ApiGetCompanyNoteTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyNoteTypesRequest) PageId(pageId int32) ApiGetCompanyNoteTyp
 	return r
 }
 
+// 
+func (r ApiGetCompanyNoteTypesRequest) ClientId(clientId string) ApiGetCompanyNoteTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyNoteTypesRequest) Execute() ([]CompanyNoteType, *http.Response, error) {
 	return r.ApiService.GetCompanyNoteTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CompanyNoteTypesAPIService) GetCompanyNoteTypesExecute(r ApiGetCompanyN
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CompanyNoteTypesAPIService) GetCompanyNoteTypesExecute(r ApiGetCompanyN
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyNoteTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyNoteTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyNoteTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyNoteTypesByIdRequest) ClientId(clientId string) ApiGetCompanyNoteTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyNoteTypesByIdRequest) PageId(pageId int32) ApiGetCompanyNot
 	return r
 }
 
+// 
+func (r ApiGetCompanyNoteTypesByIdRequest) ClientId(clientId string) ApiGetCompanyNoteTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyNoteTypesByIdRequest) Execute() (*CompanyNoteType, *http.Response, error) {
 	return r.ApiService.GetCompanyNoteTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CompanyNoteTypesAPIService) GetCompanyNoteTypesByIdExecute(r ApiGetComp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CompanyNoteTypesAPIService) GetCompanyNoteTypesByIdExecute(r ApiGetComp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *CompanyNoteTypesAPIService) GetCompanyNoteTypesByIdExecute(r ApiGetComp
 type ApiGetCompanyNoteTypesCountRequest struct {
 	ctx context.Context
 	ApiService *CompanyNoteTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetCompanyNoteTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyNoteTypesCountRequest) ClientId(clientId string) ApiGetCompanyNoteTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetCompanyNoteTypesCountRequest) PageId(pageId int32) ApiGetCompanyNo
 	return r
 }
 
+// 
+func (r ApiGetCompanyNoteTypesCountRequest) ClientId(clientId string) ApiGetCompanyNoteTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyNoteTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyNoteTypesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *CompanyNoteTypesAPIService) GetCompanyNoteTypesCountExecute(r ApiGetCom
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *CompanyNoteTypesAPIService) GetCompanyNoteTypesCountExecute(r ApiGetCom
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchCompanyNoteTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyNoteTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyNoteTypesByIdRequest) ClientId(clientId string) ApiPatchCompanyNoteTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyNoteTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyNoteTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyNoteTypesByIdRequest) ClientId(clientId string) ApiPatchCompanyNoteTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *CompanyNoteTypesAPIService) PatchCompanyNoteTypesByIdExecute(r ApiPatch
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *CompanyNoteTypesAPIService) PatchCompanyNoteTypesByIdExecute(r ApiPatch
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *CompanyNoteTypesAPIService) PatchCompanyNoteTypesByIdExecute(r ApiPatch
 type ApiPostCompanyNoteTypesRequest struct {
 	ctx context.Context
 	ApiService *CompanyNoteTypesAPIService
-	clientId *string
 	companyNoteType *CompanyNoteType
-}
-
-// 
-func (r ApiPostCompanyNoteTypesRequest) ClientId(clientId string) ApiPostCompanyNoteTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // noteType
 func (r ApiPostCompanyNoteTypesRequest) CompanyNoteType(companyNoteType CompanyNoteType) ApiPostCompanyNoteTypesRequest {
 	r.companyNoteType = &companyNoteType
+	return r
+}
+
+// 
+func (r ApiPostCompanyNoteTypesRequest) ClientId(clientId string) ApiPostCompanyNoteTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *CompanyNoteTypesAPIService) PostCompanyNoteTypesExecute(r ApiPostCompan
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.companyNoteType == nil {
 		return localVarReturnValue, nil, reportError("companyNoteType is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *CompanyNoteTypesAPIService) PostCompanyNoteTypesExecute(r ApiPostCompan
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.companyNoteType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutCompanyNoteTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyNoteTypesAPIService
 	id int32
-	clientId *string
 	companyNoteType *CompanyNoteType
-}
-
-// 
-func (r ApiPutCompanyNoteTypesByIdRequest) ClientId(clientId string) ApiPutCompanyNoteTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // noteType
 func (r ApiPutCompanyNoteTypesByIdRequest) CompanyNoteType(companyNoteType CompanyNoteType) ApiPutCompanyNoteTypesByIdRequest {
 	r.companyNoteType = &companyNoteType
+	return r
+}
+
+// 
+func (r ApiPutCompanyNoteTypesByIdRequest) ClientId(clientId string) ApiPutCompanyNoteTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *CompanyNoteTypesAPIService) PutCompanyNoteTypesByIdExecute(r ApiPutComp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.companyNoteType == nil {
 		return localVarReturnValue, nil, reportError("companyNoteType is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *CompanyNoteTypesAPIService) PutCompanyNoteTypesByIdExecute(r ApiPutComp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.companyNoteType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *GLPathsAPIService) DeleteFinanceGlpathsByIdExecute(r ApiDeleteFinanceGl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *GLPathsAPIService) DeleteFinanceGlpathsByIdExecute(r ApiDeleteFinanceGl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *GLPathsAPIService) DeleteFinanceGlpathsByIdExecute(r ApiDeleteFinanceGl
 type ApiGetFinanceGlpathsRequest struct {
 	ctx context.Context
 	ApiService *GLPathsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetFinanceGlpathsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlpathsRequest) ClientId(clientId string) ApiGetFinanceGlpathsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetFinanceGlpathsRequest) PageId(pageId int32) ApiGetFinanceGlpathsRe
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlpathsRequest) ClientId(clientId string) ApiGetFinanceGlpathsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlpathsRequest) Execute() ([]GLPath, *http.Response, error) {
 	return r.ApiService.GetFinanceGlpathsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *GLPathsAPIService) GetFinanceGlpathsExecute(r ApiGetFinanceGlpathsReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *GLPathsAPIService) GetFinanceGlpathsExecute(r ApiGetFinanceGlpathsReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetFinanceGlpathsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLPathsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetFinanceGlpathsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlpathsByIdRequest) ClientId(clientId string) ApiGetFinanceGlpathsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetFinanceGlpathsByIdRequest) PageId(pageId int32) ApiGetFinanceGlpat
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlpathsByIdRequest) ClientId(clientId string) ApiGetFinanceGlpathsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlpathsByIdRequest) Execute() (*GLPath, *http.Response, error) {
 	return r.ApiService.GetFinanceGlpathsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *GLPathsAPIService) GetFinanceGlpathsByIdExecute(r ApiGetFinanceGlpathsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *GLPathsAPIService) GetFinanceGlpathsByIdExecute(r ApiGetFinanceGlpathsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *GLPathsAPIService) GetFinanceGlpathsByIdExecute(r ApiGetFinanceGlpathsB
 type ApiGetFinanceGlpathsCountRequest struct {
 	ctx context.Context
 	ApiService *GLPathsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetFinanceGlpathsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlpathsCountRequest) ClientId(clientId string) ApiGetFinanceGlpathsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetFinanceGlpathsCountRequest) PageId(pageId int32) ApiGetFinanceGlpa
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlpathsCountRequest) ClientId(clientId string) ApiGetFinanceGlpathsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlpathsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceGlpathsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *GLPathsAPIService) GetFinanceGlpathsCountExecute(r ApiGetFinanceGlpaths
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *GLPathsAPIService) GetFinanceGlpathsCountExecute(r ApiGetFinanceGlpaths
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchFinanceGlpathsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLPathsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceGlpathsByIdRequest) ClientId(clientId string) ApiPatchFinanceGlpathsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceGlpathsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceGlpathsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceGlpathsByIdRequest) ClientId(clientId string) ApiPatchFinanceGlpathsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *GLPathsAPIService) PatchFinanceGlpathsByIdExecute(r ApiPatchFinanceGlpa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *GLPathsAPIService) PatchFinanceGlpathsByIdExecute(r ApiPatchFinanceGlpa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *GLPathsAPIService) PatchFinanceGlpathsByIdExecute(r ApiPatchFinanceGlpa
 type ApiPostFinanceGlpathsRequest struct {
 	ctx context.Context
 	ApiService *GLPathsAPIService
-	clientId *string
 	gLPath *GLPath
-}
-
-// 
-func (r ApiPostFinanceGlpathsRequest) ClientId(clientId string) ApiPostFinanceGlpathsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // gLPath
 func (r ApiPostFinanceGlpathsRequest) GLPath(gLPath GLPath) ApiPostFinanceGlpathsRequest {
 	r.gLPath = &gLPath
+	return r
+}
+
+// 
+func (r ApiPostFinanceGlpathsRequest) ClientId(clientId string) ApiPostFinanceGlpathsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *GLPathsAPIService) PostFinanceGlpathsExecute(r ApiPostFinanceGlpathsReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.gLPath == nil {
 		return localVarReturnValue, nil, reportError("gLPath is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *GLPathsAPIService) PostFinanceGlpathsExecute(r ApiPostFinanceGlpathsReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.gLPath
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutFinanceGlpathsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLPathsAPIService
 	id int32
-	clientId *string
 	gLPath *GLPath
-}
-
-// 
-func (r ApiPutFinanceGlpathsByIdRequest) ClientId(clientId string) ApiPutFinanceGlpathsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // gLPath
 func (r ApiPutFinanceGlpathsByIdRequest) GLPath(gLPath GLPath) ApiPutFinanceGlpathsByIdRequest {
 	r.gLPath = &gLPath
+	return r
+}
+
+// 
+func (r ApiPutFinanceGlpathsByIdRequest) ClientId(clientId string) ApiPutFinanceGlpathsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *GLPathsAPIService) PutFinanceGlpathsByIdExecute(r ApiPutFinanceGlpathsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.gLPath == nil {
 		return localVarReturnValue, nil, reportError("gLPath is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *GLPathsAPIService) PutFinanceGlpathsByIdExecute(r ApiPutFinanceGlpathsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.gLPath
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

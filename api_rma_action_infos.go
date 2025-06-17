@@ -27,7 +27,6 @@ type ApiGetProcurementRmaActionsByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *RmaActionInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetProcurementRmaActionsByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaActionsByIdInfoRequest) ClientId(clientId string) ApiGetProcurementRmaActionsByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetProcurementRmaActionsByIdInfoRequest) PageId(pageId int32) ApiGetP
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaActionsByIdInfoRequest) ClientId(clientId string) ApiGetProcurementRmaActionsByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaActionsByIdInfoRequest) Execute() (*RmaActionInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaActionsByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *RmaActionInfosAPIService) GetProcurementRmaActionsByIdInfoExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *RmaActionInfosAPIService) GetProcurementRmaActionsByIdInfoExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *RmaActionInfosAPIService) GetProcurementRmaActionsByIdInfoExecute(r Api
 type ApiGetProcurementRmaActionsInfoRequest struct {
 	ctx context.Context
 	ApiService *RmaActionInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetProcurementRmaActionsInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaActionsInfoRequest) ClientId(clientId string) ApiGetProcurementRmaActionsInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetProcurementRmaActionsInfoRequest) PageId(pageId int32) ApiGetProcu
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaActionsInfoRequest) ClientId(clientId string) ApiGetProcurementRmaActionsInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaActionsInfoRequest) Execute() ([]RmaActionInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaActionsInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *RmaActionInfosAPIService) GetProcurementRmaActionsInfoExecute(r ApiGetP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *RmaActionInfosAPIService) GetProcurementRmaActionsInfoExecute(r ApiGetP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *RmaActionInfosAPIService) GetProcurementRmaActionsInfoExecute(r ApiGetP
 type ApiGetProcurementRmaActionsInfoCountRequest struct {
 	ctx context.Context
 	ApiService *RmaActionInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetProcurementRmaActionsInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaActionsInfoCountRequest) ClientId(clientId string) ApiGetProcurementRmaActionsInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetProcurementRmaActionsInfoCountRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaActionsInfoCountRequest) ClientId(clientId string) ApiGetProcurementRmaActionsInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaActionsInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaActionsInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *RmaActionInfosAPIService) GetProcurementRmaActionsInfoCountExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *RmaActionInfosAPIService) GetProcurementRmaActionsInfoCountExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

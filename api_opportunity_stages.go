@@ -74,9 +74,6 @@ func (a *OpportunityStagesAPIService) DeleteSalesStagesByIdExecute(r ApiDeleteSa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *OpportunityStagesAPIService) DeleteSalesStagesByIdExecute(r ApiDeleteSa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *OpportunityStagesAPIService) DeleteSalesStagesByIdExecute(r ApiDeleteSa
 type ApiGetSalesStagesRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSalesStagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesStagesRequest) ClientId(clientId string) ApiGetSalesStagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSalesStagesRequest) PageId(pageId int32) ApiGetSalesStagesRequest 
 	return r
 }
 
+// 
+func (r ApiGetSalesStagesRequest) ClientId(clientId string) ApiGetSalesStagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesStagesRequest) Execute() ([]OpportunityStage, *http.Response, error) {
 	return r.ApiService.GetSalesStagesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *OpportunityStagesAPIService) GetSalesStagesExecute(r ApiGetSalesStagesR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *OpportunityStagesAPIService) GetSalesStagesExecute(r ApiGetSalesStagesR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSalesStagesByIdRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSalesStagesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesStagesByIdRequest) ClientId(clientId string) ApiGetSalesStagesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSalesStagesByIdRequest) PageId(pageId int32) ApiGetSalesStagesById
 	return r
 }
 
+// 
+func (r ApiGetSalesStagesByIdRequest) ClientId(clientId string) ApiGetSalesStagesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesStagesByIdRequest) Execute() (*OpportunityStage, *http.Response, error) {
 	return r.ApiService.GetSalesStagesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *OpportunityStagesAPIService) GetSalesStagesByIdExecute(r ApiGetSalesSta
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *OpportunityStagesAPIService) GetSalesStagesByIdExecute(r ApiGetSalesSta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSalesStagesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetSalesStagesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesStagesByIdUsagesRequest) ClientId(clientId string) ApiGetSalesStagesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetSalesStagesByIdUsagesRequest) PageId(pageId int32) ApiGetSalesStag
 	return r
 }
 
+// 
+func (r ApiGetSalesStagesByIdUsagesRequest) ClientId(clientId string) ApiGetSalesStagesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesStagesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSalesStagesByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *OpportunityStagesAPIService) GetSalesStagesByIdUsagesExecute(r ApiGetSa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *OpportunityStagesAPIService) GetSalesStagesByIdUsagesExecute(r ApiGetSa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetSalesStagesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetSalesStagesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesStagesByIdUsagesListRequest) ClientId(clientId string) ApiGetSalesStagesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetSalesStagesByIdUsagesListRequest) PageId(pageId int32) ApiGetSales
 	return r
 }
 
+// 
+func (r ApiGetSalesStagesByIdUsagesListRequest) ClientId(clientId string) ApiGetSalesStagesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesStagesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSalesStagesByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *OpportunityStagesAPIService) GetSalesStagesByIdUsagesListExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *OpportunityStagesAPIService) GetSalesStagesByIdUsagesListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *OpportunityStagesAPIService) GetSalesStagesByIdUsagesListExecute(r ApiG
 type ApiGetSalesStagesCountRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetSalesStagesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesStagesCountRequest) ClientId(clientId string) ApiGetSalesStagesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetSalesStagesCountRequest) PageId(pageId int32) ApiGetSalesStagesCou
 	return r
 }
 
+// 
+func (r ApiGetSalesStagesCountRequest) ClientId(clientId string) ApiGetSalesStagesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesStagesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesStagesCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *OpportunityStagesAPIService) GetSalesStagesCountExecute(r ApiGetSalesSt
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *OpportunityStagesAPIService) GetSalesStagesCountExecute(r ApiGetSalesSt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchSalesStagesByIdRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesStagesByIdRequest) ClientId(clientId string) ApiPatchSalesStagesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesStagesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesStagesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesStagesByIdRequest) ClientId(clientId string) ApiPatchSalesStagesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *OpportunityStagesAPIService) PatchSalesStagesByIdExecute(r ApiPatchSale
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *OpportunityStagesAPIService) PatchSalesStagesByIdExecute(r ApiPatchSale
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *OpportunityStagesAPIService) PatchSalesStagesByIdExecute(r ApiPatchSale
 type ApiPostSalesStagesRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesAPIService
-	clientId *string
 	opportunityStage *OpportunityStage
-}
-
-// 
-func (r ApiPostSalesStagesRequest) ClientId(clientId string) ApiPostSalesStagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // stage
 func (r ApiPostSalesStagesRequest) OpportunityStage(opportunityStage OpportunityStage) ApiPostSalesStagesRequest {
 	r.opportunityStage = &opportunityStage
+	return r
+}
+
+// 
+func (r ApiPostSalesStagesRequest) ClientId(clientId string) ApiPostSalesStagesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *OpportunityStagesAPIService) PostSalesStagesExecute(r ApiPostSalesStage
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.opportunityStage == nil {
 		return localVarReturnValue, nil, reportError("opportunityStage is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *OpportunityStagesAPIService) PostSalesStagesExecute(r ApiPostSalesStage
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.opportunityStage
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutSalesStagesByIdRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesAPIService
 	id int32
-	clientId *string
 	opportunityStage *OpportunityStage
-}
-
-// 
-func (r ApiPutSalesStagesByIdRequest) ClientId(clientId string) ApiPutSalesStagesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // stage
 func (r ApiPutSalesStagesByIdRequest) OpportunityStage(opportunityStage OpportunityStage) ApiPutSalesStagesByIdRequest {
 	r.opportunityStage = &opportunityStage
+	return r
+}
+
+// 
+func (r ApiPutSalesStagesByIdRequest) ClientId(clientId string) ApiPutSalesStagesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *OpportunityStagesAPIService) PutSalesStagesByIdExecute(r ApiPutSalesSta
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.opportunityStage == nil {
 		return localVarReturnValue, nil, reportError("opportunityStage is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *OpportunityStagesAPIService) PutSalesStagesByIdExecute(r ApiPutSalesSta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.opportunityStage
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

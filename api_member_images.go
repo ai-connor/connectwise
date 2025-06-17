@@ -27,7 +27,6 @@ type ApiGetSystemMembersByIdImageRequest struct {
 	ctx context.Context
 	ApiService *MemberImagesAPIService
 	id int32
-	clientId *string
 	useDefaultFlag bool
 	lastmodified string
 	conditions *string
@@ -38,12 +37,7 @@ type ApiGetSystemMembersByIdImageRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersByIdImageRequest) ClientId(clientId string) ApiGetSystemMembersByIdImageRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -94,6 +88,12 @@ func (r ApiGetSystemMembersByIdImageRequest) PageId(pageId int32) ApiGetSystemMe
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersByIdImageRequest) ClientId(clientId string) ApiGetSystemMembersByIdImageRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersByIdImageRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetSystemMembersByIdImageExecute(r)
 }
@@ -138,9 +138,6 @@ func (a *MemberImagesAPIService) GetSystemMembersByIdImageExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -183,7 +180,9 @@ func (a *MemberImagesAPIService) GetSystemMembersByIdImageExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err

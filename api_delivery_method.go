@@ -74,9 +74,6 @@ func (a *DeliveryMethodAPIService) DeleteFinanceDeliveryMethodsByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *DeliveryMethodAPIService) DeleteFinanceDeliveryMethodsByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *DeliveryMethodAPIService) DeleteFinanceDeliveryMethodsByIdExecute(r Api
 type ApiGetFinanceDeliveryMethodsRequest struct {
 	ctx context.Context
 	ApiService *DeliveryMethodAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetFinanceDeliveryMethodsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceDeliveryMethodsRequest) ClientId(clientId string) ApiGetFinanceDeliveryMethodsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetFinanceDeliveryMethodsRequest) PageId(pageId int32) ApiGetFinanceD
 	return r
 }
 
+// 
+func (r ApiGetFinanceDeliveryMethodsRequest) ClientId(clientId string) ApiGetFinanceDeliveryMethodsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceDeliveryMethodsRequest) Execute() ([]DeliveryMethod, *http.Response, error) {
 	return r.ApiService.GetFinanceDeliveryMethodsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *DeliveryMethodAPIService) GetFinanceDeliveryMethodsExecute(r ApiGetFina
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *DeliveryMethodAPIService) GetFinanceDeliveryMethodsExecute(r ApiGetFina
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetFinanceDeliveryMethodsByIdRequest struct {
 	ctx context.Context
 	ApiService *DeliveryMethodAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetFinanceDeliveryMethodsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceDeliveryMethodsByIdRequest) ClientId(clientId string) ApiGetFinanceDeliveryMethodsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetFinanceDeliveryMethodsByIdRequest) PageId(pageId int32) ApiGetFina
 	return r
 }
 
+// 
+func (r ApiGetFinanceDeliveryMethodsByIdRequest) ClientId(clientId string) ApiGetFinanceDeliveryMethodsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceDeliveryMethodsByIdRequest) Execute() (*DeliveryMethod, *http.Response, error) {
 	return r.ApiService.GetFinanceDeliveryMethodsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *DeliveryMethodAPIService) GetFinanceDeliveryMethodsByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *DeliveryMethodAPIService) GetFinanceDeliveryMethodsByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *DeliveryMethodAPIService) GetFinanceDeliveryMethodsByIdExecute(r ApiGet
 type ApiGetFinanceDeliveryMethodsCountRequest struct {
 	ctx context.Context
 	ApiService *DeliveryMethodAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetFinanceDeliveryMethodsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceDeliveryMethodsCountRequest) ClientId(clientId string) ApiGetFinanceDeliveryMethodsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetFinanceDeliveryMethodsCountRequest) PageId(pageId int32) ApiGetFin
 	return r
 }
 
+// 
+func (r ApiGetFinanceDeliveryMethodsCountRequest) ClientId(clientId string) ApiGetFinanceDeliveryMethodsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceDeliveryMethodsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceDeliveryMethodsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *DeliveryMethodAPIService) GetFinanceDeliveryMethodsCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *DeliveryMethodAPIService) GetFinanceDeliveryMethodsCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchFinanceDeliveryMethodsByIdRequest struct {
 	ctx context.Context
 	ApiService *DeliveryMethodAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceDeliveryMethodsByIdRequest) ClientId(clientId string) ApiPatchFinanceDeliveryMethodsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceDeliveryMethodsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceDeliveryMethodsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceDeliveryMethodsByIdRequest) ClientId(clientId string) ApiPatchFinanceDeliveryMethodsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *DeliveryMethodAPIService) PatchFinanceDeliveryMethodsByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *DeliveryMethodAPIService) PatchFinanceDeliveryMethodsByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *DeliveryMethodAPIService) PatchFinanceDeliveryMethodsByIdExecute(r ApiP
 type ApiPostFinanceDeliveryMethodsRequest struct {
 	ctx context.Context
 	ApiService *DeliveryMethodAPIService
-	clientId *string
 	deliveryMethod *DeliveryMethod
-}
-
-// 
-func (r ApiPostFinanceDeliveryMethodsRequest) ClientId(clientId string) ApiPostFinanceDeliveryMethodsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // deliveryMethod
 func (r ApiPostFinanceDeliveryMethodsRequest) DeliveryMethod(deliveryMethod DeliveryMethod) ApiPostFinanceDeliveryMethodsRequest {
 	r.deliveryMethod = &deliveryMethod
+	return r
+}
+
+// 
+func (r ApiPostFinanceDeliveryMethodsRequest) ClientId(clientId string) ApiPostFinanceDeliveryMethodsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *DeliveryMethodAPIService) PostFinanceDeliveryMethodsExecute(r ApiPostFi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.deliveryMethod == nil {
 		return localVarReturnValue, nil, reportError("deliveryMethod is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *DeliveryMethodAPIService) PostFinanceDeliveryMethodsExecute(r ApiPostFi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.deliveryMethod
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutFinanceDeliveryMethodsByIdRequest struct {
 	ctx context.Context
 	ApiService *DeliveryMethodAPIService
 	id int32
-	clientId *string
 	deliveryMethod *DeliveryMethod
-}
-
-// 
-func (r ApiPutFinanceDeliveryMethodsByIdRequest) ClientId(clientId string) ApiPutFinanceDeliveryMethodsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // deliveryMethod
 func (r ApiPutFinanceDeliveryMethodsByIdRequest) DeliveryMethod(deliveryMethod DeliveryMethod) ApiPutFinanceDeliveryMethodsByIdRequest {
 	r.deliveryMethod = &deliveryMethod
+	return r
+}
+
+// 
+func (r ApiPutFinanceDeliveryMethodsByIdRequest) ClientId(clientId string) ApiPutFinanceDeliveryMethodsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *DeliveryMethodAPIService) PutFinanceDeliveryMethodsByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.deliveryMethod == nil {
 		return localVarReturnValue, nil, reportError("deliveryMethod is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *DeliveryMethodAPIService) PutFinanceDeliveryMethodsByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.deliveryMethod
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

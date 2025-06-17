@@ -74,9 +74,6 @@ func (a *CountriesAPIService) DeleteCompanyCountriesByIdExecute(r ApiDeleteCompa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CountriesAPIService) DeleteCompanyCountriesByIdExecute(r ApiDeleteCompa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CountriesAPIService) DeleteCompanyCountriesByIdExecute(r ApiDeleteCompa
 type ApiGetCompanyCountriesRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyCountriesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCountriesRequest) ClientId(clientId string) ApiGetCompanyCountriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyCountriesRequest) PageId(pageId int32) ApiGetCompanyCountri
 	return r
 }
 
+// 
+func (r ApiGetCompanyCountriesRequest) ClientId(clientId string) ApiGetCompanyCountriesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCountriesRequest) Execute() ([]Country, *http.Response, error) {
 	return r.ApiService.GetCompanyCountriesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CountriesAPIService) GetCompanyCountriesExecute(r ApiGetCompanyCountrie
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CountriesAPIService) GetCompanyCountriesExecute(r ApiGetCompanyCountrie
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyCountriesByIdRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyCountriesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCountriesByIdRequest) ClientId(clientId string) ApiGetCompanyCountriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyCountriesByIdRequest) PageId(pageId int32) ApiGetCompanyCou
 	return r
 }
 
+// 
+func (r ApiGetCompanyCountriesByIdRequest) ClientId(clientId string) ApiGetCompanyCountriesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCountriesByIdRequest) Execute() (*Country, *http.Response, error) {
 	return r.ApiService.GetCompanyCountriesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CountriesAPIService) GetCompanyCountriesByIdExecute(r ApiGetCompanyCoun
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CountriesAPIService) GetCompanyCountriesByIdExecute(r ApiGetCompanyCoun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *CountriesAPIService) GetCompanyCountriesByIdExecute(r ApiGetCompanyCoun
 type ApiGetCompanyCountriesCountRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetCompanyCountriesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCountriesCountRequest) ClientId(clientId string) ApiGetCompanyCountriesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetCompanyCountriesCountRequest) PageId(pageId int32) ApiGetCompanyCo
 	return r
 }
 
+// 
+func (r ApiGetCompanyCountriesCountRequest) ClientId(clientId string) ApiGetCompanyCountriesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCountriesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyCountriesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *CountriesAPIService) GetCompanyCountriesCountExecute(r ApiGetCompanyCou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *CountriesAPIService) GetCompanyCountriesCountExecute(r ApiGetCompanyCou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchCompanyCountriesByIdRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyCountriesByIdRequest) ClientId(clientId string) ApiPatchCompanyCountriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyCountriesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyCountriesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyCountriesByIdRequest) ClientId(clientId string) ApiPatchCompanyCountriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *CountriesAPIService) PatchCompanyCountriesByIdExecute(r ApiPatchCompany
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *CountriesAPIService) PatchCompanyCountriesByIdExecute(r ApiPatchCompany
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *CountriesAPIService) PatchCompanyCountriesByIdExecute(r ApiPatchCompany
 type ApiPostCompanyCountriesRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
-	clientId *string
 	country *Country
-}
-
-// 
-func (r ApiPostCompanyCountriesRequest) ClientId(clientId string) ApiPostCompanyCountriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // country
 func (r ApiPostCompanyCountriesRequest) Country(country Country) ApiPostCompanyCountriesRequest {
 	r.country = &country
+	return r
+}
+
+// 
+func (r ApiPostCompanyCountriesRequest) ClientId(clientId string) ApiPostCompanyCountriesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *CountriesAPIService) PostCompanyCountriesExecute(r ApiPostCompanyCountr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.country == nil {
 		return localVarReturnValue, nil, reportError("country is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *CountriesAPIService) PostCompanyCountriesExecute(r ApiPostCompanyCountr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.country
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutCompanyCountriesByIdRequest struct {
 	ctx context.Context
 	ApiService *CountriesAPIService
 	id int32
-	clientId *string
 	country *Country
-}
-
-// 
-func (r ApiPutCompanyCountriesByIdRequest) ClientId(clientId string) ApiPutCompanyCountriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // country
 func (r ApiPutCompanyCountriesByIdRequest) Country(country Country) ApiPutCompanyCountriesByIdRequest {
 	r.country = &country
+	return r
+}
+
+// 
+func (r ApiPutCompanyCountriesByIdRequest) ClientId(clientId string) ApiPutCompanyCountriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *CountriesAPIService) PutCompanyCountriesByIdExecute(r ApiPutCompanyCoun
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.country == nil {
 		return localVarReturnValue, nil, reportError("country is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *CountriesAPIService) PutCompanyCountriesByIdExecute(r ApiPutCompanyCoun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.country
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

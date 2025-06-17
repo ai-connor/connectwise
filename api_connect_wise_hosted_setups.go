@@ -74,9 +74,6 @@ func (a *ConnectWiseHostedSetupsAPIService) DeleteSystemConnectwisehostedsetupsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ConnectWiseHostedSetupsAPIService) DeleteSystemConnectwisehostedsetupsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ConnectWiseHostedSetupsAPIService) DeleteSystemConnectwisehostedsetupsB
 type ApiGetSystemConnectwisehostedsetupsRequest struct {
 	ctx context.Context
 	ApiService *ConnectWiseHostedSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemConnectwisehostedsetupsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemConnectwisehostedsetupsRequest) ClientId(clientId string) ApiGetSystemConnectwisehostedsetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemConnectwisehostedsetupsRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSystemConnectwisehostedsetupsRequest) ClientId(clientId string) ApiGetSystemConnectwisehostedsetupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemConnectwisehostedsetupsRequest) Execute() ([]ConnectWiseHostedSetup, *http.Response, error) {
 	return r.ApiService.GetSystemConnectwisehostedsetupsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ConnectWiseHostedSetupsAPIService) GetSystemConnectwisehostedsetupsExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ConnectWiseHostedSetupsAPIService) GetSystemConnectwisehostedsetupsExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemConnectwisehostedsetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *ConnectWiseHostedSetupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemConnectwisehostedsetupsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemConnectwisehostedsetupsByIdRequest) ClientId(clientId string) ApiGetSystemConnectwisehostedsetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemConnectwisehostedsetupsByIdRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetSystemConnectwisehostedsetupsByIdRequest) ClientId(clientId string) ApiGetSystemConnectwisehostedsetupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemConnectwisehostedsetupsByIdRequest) Execute() (*ConnectWiseHostedSetup, *http.Response, error) {
 	return r.ApiService.GetSystemConnectwisehostedsetupsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ConnectWiseHostedSetupsAPIService) GetSystemConnectwisehostedsetupsById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ConnectWiseHostedSetupsAPIService) GetSystemConnectwisehostedsetupsById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *ConnectWiseHostedSetupsAPIService) GetSystemConnectwisehostedsetupsById
 type ApiGetSystemConnectwisehostedsetupsCountRequest struct {
 	ctx context.Context
 	ApiService *ConnectWiseHostedSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemConnectwisehostedsetupsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemConnectwisehostedsetupsCountRequest) ClientId(clientId string) ApiGetSystemConnectwisehostedsetupsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemConnectwisehostedsetupsCountRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetSystemConnectwisehostedsetupsCountRequest) ClientId(clientId string) ApiGetSystemConnectwisehostedsetupsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemConnectwisehostedsetupsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemConnectwisehostedsetupsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *ConnectWiseHostedSetupsAPIService) GetSystemConnectwisehostedsetupsCoun
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *ConnectWiseHostedSetupsAPIService) GetSystemConnectwisehostedsetupsCoun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemConnectwisehostedsetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *ConnectWiseHostedSetupsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemConnectwisehostedsetupsByIdRequest) ClientId(clientId string) ApiPatchSystemConnectwisehostedsetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemConnectwisehostedsetupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemConnectwisehostedsetupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemConnectwisehostedsetupsByIdRequest) ClientId(clientId string) ApiPatchSystemConnectwisehostedsetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *ConnectWiseHostedSetupsAPIService) PatchSystemConnectwisehostedsetupsBy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *ConnectWiseHostedSetupsAPIService) PatchSystemConnectwisehostedsetupsBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *ConnectWiseHostedSetupsAPIService) PatchSystemConnectwisehostedsetupsBy
 type ApiPostSystemConnectwisehostedsetupsRequest struct {
 	ctx context.Context
 	ApiService *ConnectWiseHostedSetupsAPIService
-	clientId *string
 	connectWiseHostedSetup *ConnectWiseHostedSetup
-}
-
-// 
-func (r ApiPostSystemConnectwisehostedsetupsRequest) ClientId(clientId string) ApiPostSystemConnectwisehostedsetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // connectWiseHostedSetup
 func (r ApiPostSystemConnectwisehostedsetupsRequest) ConnectWiseHostedSetup(connectWiseHostedSetup ConnectWiseHostedSetup) ApiPostSystemConnectwisehostedsetupsRequest {
 	r.connectWiseHostedSetup = &connectWiseHostedSetup
+	return r
+}
+
+// 
+func (r ApiPostSystemConnectwisehostedsetupsRequest) ClientId(clientId string) ApiPostSystemConnectwisehostedsetupsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *ConnectWiseHostedSetupsAPIService) PostSystemConnectwisehostedsetupsExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.connectWiseHostedSetup == nil {
 		return localVarReturnValue, nil, reportError("connectWiseHostedSetup is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *ConnectWiseHostedSetupsAPIService) PostSystemConnectwisehostedsetupsExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.connectWiseHostedSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemConnectwisehostedsetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *ConnectWiseHostedSetupsAPIService
 	id int32
-	clientId *string
 	connectWiseHostedSetup *ConnectWiseHostedSetup
-}
-
-// 
-func (r ApiPutSystemConnectwisehostedsetupsByIdRequest) ClientId(clientId string) ApiPutSystemConnectwisehostedsetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // connectWiseHostedSetup
 func (r ApiPutSystemConnectwisehostedsetupsByIdRequest) ConnectWiseHostedSetup(connectWiseHostedSetup ConnectWiseHostedSetup) ApiPutSystemConnectwisehostedsetupsByIdRequest {
 	r.connectWiseHostedSetup = &connectWiseHostedSetup
+	return r
+}
+
+// 
+func (r ApiPutSystemConnectwisehostedsetupsByIdRequest) ClientId(clientId string) ApiPutSystemConnectwisehostedsetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *ConnectWiseHostedSetupsAPIService) PutSystemConnectwisehostedsetupsById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.connectWiseHostedSetup == nil {
 		return localVarReturnValue, nil, reportError("connectWiseHostedSetup is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *ConnectWiseHostedSetupsAPIService) PutSystemConnectwisehostedsetupsById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.connectWiseHostedSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *CommissionsAPIService) DeleteSalesCommissionsByIdExecute(r ApiDeleteSal
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CommissionsAPIService) DeleteSalesCommissionsByIdExecute(r ApiDeleteSal
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CommissionsAPIService) DeleteSalesCommissionsByIdExecute(r ApiDeleteSal
 type ApiGetSalesCommissionsRequest struct {
 	ctx context.Context
 	ApiService *CommissionsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSalesCommissionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesCommissionsRequest) ClientId(clientId string) ApiGetSalesCommissionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSalesCommissionsRequest) PageId(pageId int32) ApiGetSalesCommissio
 	return r
 }
 
+// 
+func (r ApiGetSalesCommissionsRequest) ClientId(clientId string) ApiGetSalesCommissionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesCommissionsRequest) Execute() ([]Commission, *http.Response, error) {
 	return r.ApiService.GetSalesCommissionsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CommissionsAPIService) GetSalesCommissionsExecute(r ApiGetSalesCommissi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CommissionsAPIService) GetSalesCommissionsExecute(r ApiGetSalesCommissi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSalesCommissionsByIdRequest struct {
 	ctx context.Context
 	ApiService *CommissionsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSalesCommissionsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesCommissionsByIdRequest) ClientId(clientId string) ApiGetSalesCommissionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSalesCommissionsByIdRequest) PageId(pageId int32) ApiGetSalesCommi
 	return r
 }
 
+// 
+func (r ApiGetSalesCommissionsByIdRequest) ClientId(clientId string) ApiGetSalesCommissionsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesCommissionsByIdRequest) Execute() (*Commission, *http.Response, error) {
 	return r.ApiService.GetSalesCommissionsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CommissionsAPIService) GetSalesCommissionsByIdExecute(r ApiGetSalesComm
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CommissionsAPIService) GetSalesCommissionsByIdExecute(r ApiGetSalesComm
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSalesCommissionsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *CommissionsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetSalesCommissionsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesCommissionsByIdUsagesRequest) ClientId(clientId string) ApiGetSalesCommissionsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetSalesCommissionsByIdUsagesRequest) PageId(pageId int32) ApiGetSale
 	return r
 }
 
+// 
+func (r ApiGetSalesCommissionsByIdUsagesRequest) ClientId(clientId string) ApiGetSalesCommissionsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesCommissionsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSalesCommissionsByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *CommissionsAPIService) GetSalesCommissionsByIdUsagesExecute(r ApiGetSal
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *CommissionsAPIService) GetSalesCommissionsByIdUsagesExecute(r ApiGetSal
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetSalesCommissionsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *CommissionsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetSalesCommissionsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesCommissionsByIdUsagesListRequest) ClientId(clientId string) ApiGetSalesCommissionsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetSalesCommissionsByIdUsagesListRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetSalesCommissionsByIdUsagesListRequest) ClientId(clientId string) ApiGetSalesCommissionsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesCommissionsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSalesCommissionsByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *CommissionsAPIService) GetSalesCommissionsByIdUsagesListExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *CommissionsAPIService) GetSalesCommissionsByIdUsagesListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *CommissionsAPIService) GetSalesCommissionsByIdUsagesListExecute(r ApiGe
 type ApiGetSalesCommissionsCountRequest struct {
 	ctx context.Context
 	ApiService *CommissionsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetSalesCommissionsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesCommissionsCountRequest) ClientId(clientId string) ApiGetSalesCommissionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetSalesCommissionsCountRequest) PageId(pageId int32) ApiGetSalesComm
 	return r
 }
 
+// 
+func (r ApiGetSalesCommissionsCountRequest) ClientId(clientId string) ApiGetSalesCommissionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesCommissionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesCommissionsCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *CommissionsAPIService) GetSalesCommissionsCountExecute(r ApiGetSalesCom
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *CommissionsAPIService) GetSalesCommissionsCountExecute(r ApiGetSalesCom
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchSalesCommissionsByIdRequest struct {
 	ctx context.Context
 	ApiService *CommissionsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesCommissionsByIdRequest) ClientId(clientId string) ApiPatchSalesCommissionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesCommissionsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesCommissionsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesCommissionsByIdRequest) ClientId(clientId string) ApiPatchSalesCommissionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *CommissionsAPIService) PatchSalesCommissionsByIdExecute(r ApiPatchSales
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *CommissionsAPIService) PatchSalesCommissionsByIdExecute(r ApiPatchSales
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *CommissionsAPIService) PatchSalesCommissionsByIdExecute(r ApiPatchSales
 type ApiPostSalesCommissionsRequest struct {
 	ctx context.Context
 	ApiService *CommissionsAPIService
-	clientId *string
 	commission *Commission
-}
-
-// 
-func (r ApiPostSalesCommissionsRequest) ClientId(clientId string) ApiPostSalesCommissionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // commission
 func (r ApiPostSalesCommissionsRequest) Commission(commission Commission) ApiPostSalesCommissionsRequest {
 	r.commission = &commission
+	return r
+}
+
+// 
+func (r ApiPostSalesCommissionsRequest) ClientId(clientId string) ApiPostSalesCommissionsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *CommissionsAPIService) PostSalesCommissionsExecute(r ApiPostSalesCommis
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.commission == nil {
 		return localVarReturnValue, nil, reportError("commission is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *CommissionsAPIService) PostSalesCommissionsExecute(r ApiPostSalesCommis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.commission
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutSalesCommissionsByIdRequest struct {
 	ctx context.Context
 	ApiService *CommissionsAPIService
 	id int32
-	clientId *string
 	commission *Commission
-}
-
-// 
-func (r ApiPutSalesCommissionsByIdRequest) ClientId(clientId string) ApiPutSalesCommissionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // commission
 func (r ApiPutSalesCommissionsByIdRequest) Commission(commission Commission) ApiPutSalesCommissionsByIdRequest {
 	r.commission = &commission
+	return r
+}
+
+// 
+func (r ApiPutSalesCommissionsByIdRequest) ClientId(clientId string) ApiPutSalesCommissionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *CommissionsAPIService) PutSalesCommissionsByIdExecute(r ApiPutSalesComm
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.commission == nil {
 		return localVarReturnValue, nil, reportError("commission is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *CommissionsAPIService) PutSalesCommissionsByIdExecute(r ApiPutSalesComm
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.commission
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

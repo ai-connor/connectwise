@@ -78,9 +78,6 @@ func (a *BillingSetupRoutingsAPIService) DeleteFinanceBillingSetupsByParentIdRou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *BillingSetupRoutingsAPIService) DeleteFinanceBillingSetupsByParentIdRou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetFinanceBillingSetupsByParentIdRoutingsRequest struct {
 	ctx context.Context
 	ApiService *BillingSetupRoutingsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetFinanceBillingSetupsByParentIdRoutingsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceBillingSetupsByParentIdRoutingsRequest) ClientId(clientId string) ApiGetFinanceBillingSetupsByParentIdRoutingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetFinanceBillingSetupsByParentIdRoutingsRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetFinanceBillingSetupsByParentIdRoutingsRequest) ClientId(clientId string) ApiGetFinanceBillingSetupsByParentIdRoutingsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceBillingSetupsByParentIdRoutingsRequest) Execute() ([]BillingSetupRouting, *http.Response, error) {
 	return r.ApiService.GetFinanceBillingSetupsByParentIdRoutingsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *BillingSetupRoutingsAPIService) GetFinanceBillingSetupsByParentIdRoutin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *BillingSetupRoutingsAPIService) GetFinanceBillingSetupsByParentIdRoutin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetFinanceBillingSetupsByParentIdRoutingsByIdRequest struct {
 	ApiService *BillingSetupRoutingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetFinanceBillingSetupsByParentIdRoutingsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceBillingSetupsByParentIdRoutingsByIdRequest) ClientId(clientId string) ApiGetFinanceBillingSetupsByParentIdRoutingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetFinanceBillingSetupsByParentIdRoutingsByIdRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetFinanceBillingSetupsByParentIdRoutingsByIdRequest) ClientId(clientId string) ApiGetFinanceBillingSetupsByParentIdRoutingsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceBillingSetupsByParentIdRoutingsByIdRequest) Execute() (*BillingSetupRouting, *http.Response, error) {
 	return r.ApiService.GetFinanceBillingSetupsByParentIdRoutingsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *BillingSetupRoutingsAPIService) GetFinanceBillingSetupsByParentIdRoutin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *BillingSetupRoutingsAPIService) GetFinanceBillingSetupsByParentIdRoutin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetFinanceBillingSetupsByParentIdRoutingsCountRequest struct {
 	ctx context.Context
 	ApiService *BillingSetupRoutingsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetFinanceBillingSetupsByParentIdRoutingsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceBillingSetupsByParentIdRoutingsCountRequest) ClientId(clientId string) ApiGetFinanceBillingSetupsByParentIdRoutingsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetFinanceBillingSetupsByParentIdRoutingsCountRequest) PageId(pageId 
 	return r
 }
 
+// 
+func (r ApiGetFinanceBillingSetupsByParentIdRoutingsCountRequest) ClientId(clientId string) ApiGetFinanceBillingSetupsByParentIdRoutingsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceBillingSetupsByParentIdRoutingsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceBillingSetupsByParentIdRoutingsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *BillingSetupRoutingsAPIService) GetFinanceBillingSetupsByParentIdRoutin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *BillingSetupRoutingsAPIService) GetFinanceBillingSetupsByParentIdRoutin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchFinanceBillingSetupsByParentIdRoutingsByIdRequest struct {
 	ApiService *BillingSetupRoutingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceBillingSetupsByParentIdRoutingsByIdRequest) ClientId(clientId string) ApiPatchFinanceBillingSetupsByParentIdRoutingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceBillingSetupsByParentIdRoutingsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceBillingSetupsByParentIdRoutingsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceBillingSetupsByParentIdRoutingsByIdRequest) ClientId(clientId string) ApiPatchFinanceBillingSetupsByParentIdRoutingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *BillingSetupRoutingsAPIService) PatchFinanceBillingSetupsByParentIdRout
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *BillingSetupRoutingsAPIService) PatchFinanceBillingSetupsByParentIdRout
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostFinanceBillingSetupsByParentIdRoutingsRequest struct {
 	ctx context.Context
 	ApiService *BillingSetupRoutingsAPIService
 	parentId int32
-	clientId *string
 	billingSetupRouting *BillingSetupRouting
-}
-
-// 
-func (r ApiPostFinanceBillingSetupsByParentIdRoutingsRequest) ClientId(clientId string) ApiPostFinanceBillingSetupsByParentIdRoutingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // billingSetupRouting
 func (r ApiPostFinanceBillingSetupsByParentIdRoutingsRequest) BillingSetupRouting(billingSetupRouting BillingSetupRouting) ApiPostFinanceBillingSetupsByParentIdRoutingsRequest {
 	r.billingSetupRouting = &billingSetupRouting
+	return r
+}
+
+// 
+func (r ApiPostFinanceBillingSetupsByParentIdRoutingsRequest) ClientId(clientId string) ApiPostFinanceBillingSetupsByParentIdRoutingsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *BillingSetupRoutingsAPIService) PostFinanceBillingSetupsByParentIdRouti
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.billingSetupRouting == nil {
 		return localVarReturnValue, nil, reportError("billingSetupRouting is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *BillingSetupRoutingsAPIService) PostFinanceBillingSetupsByParentIdRouti
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.billingSetupRouting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutFinanceBillingSetupsByParentIdRoutingsByIdRequest struct {
 	ApiService *BillingSetupRoutingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	billingSetupRouting *BillingSetupRouting
-}
-
-// 
-func (r ApiPutFinanceBillingSetupsByParentIdRoutingsByIdRequest) ClientId(clientId string) ApiPutFinanceBillingSetupsByParentIdRoutingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // billingSetupRouting
 func (r ApiPutFinanceBillingSetupsByParentIdRoutingsByIdRequest) BillingSetupRouting(billingSetupRouting BillingSetupRouting) ApiPutFinanceBillingSetupsByParentIdRoutingsByIdRequest {
 	r.billingSetupRouting = &billingSetupRouting
+	return r
+}
+
+// 
+func (r ApiPutFinanceBillingSetupsByParentIdRoutingsByIdRequest) ClientId(clientId string) ApiPutFinanceBillingSetupsByParentIdRoutingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *BillingSetupRoutingsAPIService) PutFinanceBillingSetupsByParentIdRoutin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.billingSetupRouting == nil {
 		return localVarReturnValue, nil, reportError("billingSetupRouting is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *BillingSetupRoutingsAPIService) PutFinanceBillingSetupsByParentIdRoutin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.billingSetupRouting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

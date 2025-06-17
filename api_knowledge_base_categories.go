@@ -74,9 +74,6 @@ func (a *KnowledgeBaseCategoriesAPIService) DeleteServiceKnowledgeBaseCategories
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *KnowledgeBaseCategoriesAPIService) DeleteServiceKnowledgeBaseCategories
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *KnowledgeBaseCategoriesAPIService) DeleteServiceKnowledgeBaseCategories
 type ApiGetServiceKnowledgeBaseCategoriesRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseCategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetServiceKnowledgeBaseCategoriesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceKnowledgeBaseCategoriesRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseCategoriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetServiceKnowledgeBaseCategoriesRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetServiceKnowledgeBaseCategoriesRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseCategoriesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceKnowledgeBaseCategoriesRequest) Execute() ([]KnowledgeBaseCategory, *http.Response, error) {
 	return r.ApiService.GetServiceKnowledgeBaseCategoriesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *KnowledgeBaseCategoriesAPIService) GetServiceKnowledgeBaseCategoriesExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *KnowledgeBaseCategoriesAPIService) GetServiceKnowledgeBaseCategoriesExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetServiceKnowledgeBaseCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseCategoriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetServiceKnowledgeBaseCategoriesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceKnowledgeBaseCategoriesByIdRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetServiceKnowledgeBaseCategoriesByIdRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetServiceKnowledgeBaseCategoriesByIdRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseCategoriesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceKnowledgeBaseCategoriesByIdRequest) Execute() (*KnowledgeBaseCategory, *http.Response, error) {
 	return r.ApiService.GetServiceKnowledgeBaseCategoriesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *KnowledgeBaseCategoriesAPIService) GetServiceKnowledgeBaseCategoriesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *KnowledgeBaseCategoriesAPIService) GetServiceKnowledgeBaseCategoriesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *KnowledgeBaseCategoriesAPIService) GetServiceKnowledgeBaseCategoriesByI
 type ApiGetServiceKnowledgeBaseCategoriesCountRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseCategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetServiceKnowledgeBaseCategoriesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceKnowledgeBaseCategoriesCountRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseCategoriesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetServiceKnowledgeBaseCategoriesCountRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetServiceKnowledgeBaseCategoriesCountRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseCategoriesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceKnowledgeBaseCategoriesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceKnowledgeBaseCategoriesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *KnowledgeBaseCategoriesAPIService) GetServiceKnowledgeBaseCategoriesCou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *KnowledgeBaseCategoriesAPIService) GetServiceKnowledgeBaseCategoriesCou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchServiceKnowledgeBaseCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseCategoriesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceKnowledgeBaseCategoriesByIdRequest) ClientId(clientId string) ApiPatchServiceKnowledgeBaseCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceKnowledgeBaseCategoriesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceKnowledgeBaseCategoriesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceKnowledgeBaseCategoriesByIdRequest) ClientId(clientId string) ApiPatchServiceKnowledgeBaseCategoriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *KnowledgeBaseCategoriesAPIService) PatchServiceKnowledgeBaseCategoriesB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *KnowledgeBaseCategoriesAPIService) PatchServiceKnowledgeBaseCategoriesB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *KnowledgeBaseCategoriesAPIService) PatchServiceKnowledgeBaseCategoriesB
 type ApiPostServiceKnowledgeBaseCategoriesRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseCategoriesAPIService
-	clientId *string
 	knowledgeBaseCategory *KnowledgeBaseCategory
-}
-
-// 
-func (r ApiPostServiceKnowledgeBaseCategoriesRequest) ClientId(clientId string) ApiPostServiceKnowledgeBaseCategoriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // knowledgeBaseCategory
 func (r ApiPostServiceKnowledgeBaseCategoriesRequest) KnowledgeBaseCategory(knowledgeBaseCategory KnowledgeBaseCategory) ApiPostServiceKnowledgeBaseCategoriesRequest {
 	r.knowledgeBaseCategory = &knowledgeBaseCategory
+	return r
+}
+
+// 
+func (r ApiPostServiceKnowledgeBaseCategoriesRequest) ClientId(clientId string) ApiPostServiceKnowledgeBaseCategoriesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *KnowledgeBaseCategoriesAPIService) PostServiceKnowledgeBaseCategoriesEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.knowledgeBaseCategory == nil {
 		return localVarReturnValue, nil, reportError("knowledgeBaseCategory is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *KnowledgeBaseCategoriesAPIService) PostServiceKnowledgeBaseCategoriesEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.knowledgeBaseCategory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutServiceKnowledgeBaseCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseCategoriesAPIService
 	id int32
-	clientId *string
 	knowledgeBaseCategory *KnowledgeBaseCategory
-}
-
-// 
-func (r ApiPutServiceKnowledgeBaseCategoriesByIdRequest) ClientId(clientId string) ApiPutServiceKnowledgeBaseCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // knowledgeBaseCategory
 func (r ApiPutServiceKnowledgeBaseCategoriesByIdRequest) KnowledgeBaseCategory(knowledgeBaseCategory KnowledgeBaseCategory) ApiPutServiceKnowledgeBaseCategoriesByIdRequest {
 	r.knowledgeBaseCategory = &knowledgeBaseCategory
+	return r
+}
+
+// 
+func (r ApiPutServiceKnowledgeBaseCategoriesByIdRequest) ClientId(clientId string) ApiPutServiceKnowledgeBaseCategoriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *KnowledgeBaseCategoriesAPIService) PutServiceKnowledgeBaseCategoriesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.knowledgeBaseCategory == nil {
 		return localVarReturnValue, nil, reportError("knowledgeBaseCategory is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *KnowledgeBaseCategoriesAPIService) PutServiceKnowledgeBaseCategoriesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.knowledgeBaseCategory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

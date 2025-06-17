@@ -69,9 +69,6 @@ func (a *TicketChangeLogAPIService) DeleteServiceTicketsChangelogsExecute(r ApiD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -90,7 +87,9 @@ func (a *TicketChangeLogAPIService) DeleteServiceTicketsChangelogsExecute(r ApiD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -122,7 +121,6 @@ func (a *TicketChangeLogAPIService) DeleteServiceTicketsChangelogsExecute(r ApiD
 type ApiGetServiceTicketsChangelogsRequest struct {
 	ctx context.Context
 	ApiService *TicketChangeLogAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -131,12 +129,7 @@ type ApiGetServiceTicketsChangelogsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketsChangelogsRequest) ClientId(clientId string) ApiGetServiceTicketsChangelogsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -187,6 +180,12 @@ func (r ApiGetServiceTicketsChangelogsRequest) PageId(pageId int32) ApiGetServic
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketsChangelogsRequest) ClientId(clientId string) ApiGetServiceTicketsChangelogsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketsChangelogsRequest) Execute() ([]TicketChangeLog, *http.Response, error) {
 	return r.ApiService.GetServiceTicketsChangelogsExecute(r)
 }
@@ -224,9 +223,6 @@ func (a *TicketChangeLogAPIService) GetServiceTicketsChangelogsExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -269,7 +265,9 @@ func (a *TicketChangeLogAPIService) GetServiceTicketsChangelogsExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

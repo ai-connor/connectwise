@@ -78,9 +78,6 @@ func (a *PurchaseOrdersNoteAPIService) DeleteProcurementPurchaseordersByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *PurchaseOrdersNoteAPIService) DeleteProcurementPurchaseordersByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -133,7 +132,6 @@ type ApiGetProcurementPurchaseordersByParentIdNotesByIdRequest struct {
 	ApiService *PurchaseOrdersNoteAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -142,12 +140,7 @@ type ApiGetProcurementPurchaseordersByParentIdNotesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseordersByParentIdNotesByIdRequest) ClientId(clientId string) ApiGetProcurementPurchaseordersByParentIdNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -198,6 +191,12 @@ func (r ApiGetProcurementPurchaseordersByParentIdNotesByIdRequest) PageId(pageId
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseordersByParentIdNotesByIdRequest) ClientId(clientId string) ApiGetProcurementPurchaseordersByParentIdNotesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseordersByParentIdNotesByIdRequest) Execute() (*PurchaseOrderNote, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseordersByParentIdNotesByIdExecute(r)
 }
@@ -241,9 +240,6 @@ func (a *PurchaseOrdersNoteAPIService) GetProcurementPurchaseordersByParentIdNot
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -286,7 +282,9 @@ func (a *PurchaseOrdersNoteAPIService) GetProcurementPurchaseordersByParentIdNot
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -328,7 +326,6 @@ type ApiGetProcurementPurchaseordersByParentIdNotesCountRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrdersNoteAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -337,12 +334,7 @@ type ApiGetProcurementPurchaseordersByParentIdNotesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseordersByParentIdNotesCountRequest) ClientId(clientId string) ApiGetProcurementPurchaseordersByParentIdNotesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -393,6 +385,12 @@ func (r ApiGetProcurementPurchaseordersByParentIdNotesCountRequest) PageId(pageI
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseordersByParentIdNotesCountRequest) ClientId(clientId string) ApiGetProcurementPurchaseordersByParentIdNotesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseordersByParentIdNotesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseordersByParentIdNotesCountExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *PurchaseOrdersNoteAPIService) GetProcurementPurchaseordersByParentIdNot
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *PurchaseOrdersNoteAPIService) GetProcurementPurchaseordersByParentIdNot
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -521,19 +518,19 @@ type ApiPatchProcurementPurchaseordersByParentIdNotesByIdRequest struct {
 	ApiService *PurchaseOrdersNoteAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementPurchaseordersByParentIdNotesByIdRequest) ClientId(clientId string) ApiPatchProcurementPurchaseordersByParentIdNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementPurchaseordersByParentIdNotesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementPurchaseordersByParentIdNotesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementPurchaseordersByParentIdNotesByIdRequest) ClientId(clientId string) ApiPatchProcurementPurchaseordersByParentIdNotesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -580,9 +577,6 @@ func (a *PurchaseOrdersNoteAPIService) PatchProcurementPurchaseordersByParentIdN
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -604,7 +598,9 @@ func (a *PurchaseOrdersNoteAPIService) PatchProcurementPurchaseordersByParentIdN
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -648,19 +644,19 @@ type ApiPostProcurementPurchaseordersByParentIdNotesRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrdersNoteAPIService
 	parentId int32
-	clientId *string
 	purchaseOrderNote *PurchaseOrderNote
-}
-
-// 
-func (r ApiPostProcurementPurchaseordersByParentIdNotesRequest) ClientId(clientId string) ApiPostProcurementPurchaseordersByParentIdNotesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // PurchaseOrderNote
 func (r ApiPostProcurementPurchaseordersByParentIdNotesRequest) PurchaseOrderNote(purchaseOrderNote PurchaseOrderNote) ApiPostProcurementPurchaseordersByParentIdNotesRequest {
 	r.purchaseOrderNote = &purchaseOrderNote
+	return r
+}
+
+// 
+func (r ApiPostProcurementPurchaseordersByParentIdNotesRequest) ClientId(clientId string) ApiPostProcurementPurchaseordersByParentIdNotesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -704,9 +700,6 @@ func (a *PurchaseOrdersNoteAPIService) PostProcurementPurchaseordersByParentIdNo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.purchaseOrderNote == nil {
 		return localVarReturnValue, nil, reportError("purchaseOrderNote is required and must be specified")
 	}
@@ -728,7 +721,9 @@ func (a *PurchaseOrdersNoteAPIService) PostProcurementPurchaseordersByParentIdNo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.purchaseOrderNote
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -773,19 +768,19 @@ type ApiPutProcurementPurchaseordersByParentIdNotesByIdRequest struct {
 	ApiService *PurchaseOrdersNoteAPIService
 	id int32
 	parentId int32
-	clientId *string
 	purchaseOrderNote *PurchaseOrderNote
-}
-
-// 
-func (r ApiPutProcurementPurchaseordersByParentIdNotesByIdRequest) ClientId(clientId string) ApiPutProcurementPurchaseordersByParentIdNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // PurchaseOrderNote
 func (r ApiPutProcurementPurchaseordersByParentIdNotesByIdRequest) PurchaseOrderNote(purchaseOrderNote PurchaseOrderNote) ApiPutProcurementPurchaseordersByParentIdNotesByIdRequest {
 	r.purchaseOrderNote = &purchaseOrderNote
+	return r
+}
+
+// 
+func (r ApiPutProcurementPurchaseordersByParentIdNotesByIdRequest) ClientId(clientId string) ApiPutProcurementPurchaseordersByParentIdNotesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -832,9 +827,6 @@ func (a *PurchaseOrdersNoteAPIService) PutProcurementPurchaseordersByParentIdNot
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.purchaseOrderNote == nil {
 		return localVarReturnValue, nil, reportError("purchaseOrderNote is required and must be specified")
 	}
@@ -856,7 +848,9 @@ func (a *PurchaseOrdersNoteAPIService) PutProcurementPurchaseordersByParentIdNot
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.purchaseOrderNote
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

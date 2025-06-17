@@ -26,7 +26,6 @@ type AccountingUnpostedInvoicesAPIService service
 type ApiGetFinanceAccountingUnpostedinvoicesRequest struct {
 	ctx context.Context
 	ApiService *AccountingUnpostedInvoicesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetFinanceAccountingUnpostedinvoicesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedinvoicesRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetFinanceAccountingUnpostedinvoicesRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedinvoicesRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedinvoicesRequest) Execute() ([]UnpostedInvoice, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedinvoicesExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *AccountingUnpostedInvoicesAPIService) GetFinanceAccountingUnpostedinvoi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *AccountingUnpostedInvoicesAPIService) GetFinanceAccountingUnpostedinvoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetFinanceAccountingUnpostedinvoicesByIdRequest struct {
 	ctx context.Context
 	ApiService *AccountingUnpostedInvoicesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetFinanceAccountingUnpostedinvoicesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedinvoicesByIdRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetFinanceAccountingUnpostedinvoicesByIdRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedinvoicesByIdRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedinvoicesByIdRequest) Execute() (*UnpostedInvoice, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedinvoicesByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *AccountingUnpostedInvoicesAPIService) GetFinanceAccountingUnpostedinvoi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *AccountingUnpostedInvoicesAPIService) GetFinanceAccountingUnpostedinvoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *AccountingUnpostedInvoicesAPIService) GetFinanceAccountingUnpostedinvoi
 type ApiGetFinanceAccountingUnpostedinvoicesCountRequest struct {
 	ctx context.Context
 	ApiService *AccountingUnpostedInvoicesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetFinanceAccountingUnpostedinvoicesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedinvoicesCountRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetFinanceAccountingUnpostedinvoicesCountRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedinvoicesCountRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedinvoicesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedinvoicesCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *AccountingUnpostedInvoicesAPIService) GetFinanceAccountingUnpostedinvoi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *AccountingUnpostedInvoicesAPIService) GetFinanceAccountingUnpostedinvoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

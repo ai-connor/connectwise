@@ -78,9 +78,6 @@ func (a *SurveyQuestionsAPIService) DeleteSystemSurveysByParentIdQuestionsByIdEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *SurveyQuestionsAPIService) DeleteSystemSurveysByParentIdQuestionsByIdEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetSystemSurveysByParentIdQuestionsRequest struct {
 	ctx context.Context
 	ApiService *SurveyQuestionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetSystemSurveysByParentIdQuestionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSurveysByParentIdQuestionsRequest) ClientId(clientId string) ApiGetSystemSurveysByParentIdQuestionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetSystemSurveysByParentIdQuestionsRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetSystemSurveysByParentIdQuestionsRequest) ClientId(clientId string) ApiGetSystemSurveysByParentIdQuestionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSurveysByParentIdQuestionsRequest) Execute() ([]SurveyQuestion, *http.Response, error) {
 	return r.ApiService.GetSystemSurveysByParentIdQuestionsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *SurveyQuestionsAPIService) GetSystemSurveysByParentIdQuestionsExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *SurveyQuestionsAPIService) GetSystemSurveysByParentIdQuestionsExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetSystemSurveysByParentIdQuestionsByIdRequest struct {
 	ApiService *SurveyQuestionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetSystemSurveysByParentIdQuestionsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSurveysByParentIdQuestionsByIdRequest) ClientId(clientId string) ApiGetSystemSurveysByParentIdQuestionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetSystemSurveysByParentIdQuestionsByIdRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetSystemSurveysByParentIdQuestionsByIdRequest) ClientId(clientId string) ApiGetSystemSurveysByParentIdQuestionsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSurveysByParentIdQuestionsByIdRequest) Execute() (*SurveyQuestion, *http.Response, error) {
 	return r.ApiService.GetSystemSurveysByParentIdQuestionsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *SurveyQuestionsAPIService) GetSystemSurveysByParentIdQuestionsByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *SurveyQuestionsAPIService) GetSystemSurveysByParentIdQuestionsByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetSystemSurveysByParentIdQuestionsCountRequest struct {
 	ctx context.Context
 	ApiService *SurveyQuestionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetSystemSurveysByParentIdQuestionsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSurveysByParentIdQuestionsCountRequest) ClientId(clientId string) ApiGetSystemSurveysByParentIdQuestionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetSystemSurveysByParentIdQuestionsCountRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetSystemSurveysByParentIdQuestionsCountRequest) ClientId(clientId string) ApiGetSystemSurveysByParentIdQuestionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSurveysByParentIdQuestionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSurveysByParentIdQuestionsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *SurveyQuestionsAPIService) GetSystemSurveysByParentIdQuestionsCountExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *SurveyQuestionsAPIService) GetSystemSurveysByParentIdQuestionsCountExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchSystemSurveysByParentIdQuestionsByIdRequest struct {
 	ApiService *SurveyQuestionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemSurveysByParentIdQuestionsByIdRequest) ClientId(clientId string) ApiPatchSystemSurveysByParentIdQuestionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemSurveysByParentIdQuestionsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemSurveysByParentIdQuestionsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemSurveysByParentIdQuestionsByIdRequest) ClientId(clientId string) ApiPatchSystemSurveysByParentIdQuestionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *SurveyQuestionsAPIService) PatchSystemSurveysByParentIdQuestionsByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *SurveyQuestionsAPIService) PatchSystemSurveysByParentIdQuestionsByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostSystemSurveysByParentIdQuestionsRequest struct {
 	ctx context.Context
 	ApiService *SurveyQuestionsAPIService
 	parentId int32
-	clientId *string
 	surveyQuestion *SurveyQuestion
-}
-
-// 
-func (r ApiPostSystemSurveysByParentIdQuestionsRequest) ClientId(clientId string) ApiPostSystemSurveysByParentIdQuestionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // surveyQuestion
 func (r ApiPostSystemSurveysByParentIdQuestionsRequest) SurveyQuestion(surveyQuestion SurveyQuestion) ApiPostSystemSurveysByParentIdQuestionsRequest {
 	r.surveyQuestion = &surveyQuestion
+	return r
+}
+
+// 
+func (r ApiPostSystemSurveysByParentIdQuestionsRequest) ClientId(clientId string) ApiPostSystemSurveysByParentIdQuestionsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *SurveyQuestionsAPIService) PostSystemSurveysByParentIdQuestionsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.surveyQuestion == nil {
 		return localVarReturnValue, nil, reportError("surveyQuestion is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *SurveyQuestionsAPIService) PostSystemSurveysByParentIdQuestionsExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.surveyQuestion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutSystemSurveysByParentIdQuestionsByIdRequest struct {
 	ApiService *SurveyQuestionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	surveyQuestion *SurveyQuestion
-}
-
-// 
-func (r ApiPutSystemSurveysByParentIdQuestionsByIdRequest) ClientId(clientId string) ApiPutSystemSurveysByParentIdQuestionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // surveyQuestion
 func (r ApiPutSystemSurveysByParentIdQuestionsByIdRequest) SurveyQuestion(surveyQuestion SurveyQuestion) ApiPutSystemSurveysByParentIdQuestionsByIdRequest {
 	r.surveyQuestion = &surveyQuestion
+	return r
+}
+
+// 
+func (r ApiPutSystemSurveysByParentIdQuestionsByIdRequest) ClientId(clientId string) ApiPutSystemSurveysByParentIdQuestionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *SurveyQuestionsAPIService) PutSystemSurveysByParentIdQuestionsByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.surveyQuestion == nil {
 		return localVarReturnValue, nil, reportError("surveyQuestion is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *SurveyQuestionsAPIService) PutSystemSurveysByParentIdQuestionsByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.surveyQuestion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

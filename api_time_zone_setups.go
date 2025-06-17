@@ -74,9 +74,6 @@ func (a *TimeZoneSetupsAPIService) DeleteSystemTimeZoneSetupsByIdExecute(r ApiDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *TimeZoneSetupsAPIService) DeleteSystemTimeZoneSetupsByIdExecute(r ApiDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *TimeZoneSetupsAPIService) DeleteSystemTimeZoneSetupsByIdExecute(r ApiDe
 type ApiGetSystemTimeZoneSetupsRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemTimeZoneSetupsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTimeZoneSetupsRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemTimeZoneSetupsRequest) PageId(pageId int32) ApiGetSystemTime
 	return r
 }
 
+// 
+func (r ApiGetSystemTimeZoneSetupsRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTimeZoneSetupsRequest) Execute() ([]TimeZoneSetup, *http.Response, error) {
 	return r.ApiService.GetSystemTimeZoneSetupsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *TimeZoneSetupsAPIService) GetSystemTimeZoneSetupsExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *TimeZoneSetupsAPIService) GetSystemTimeZoneSetupsExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemTimeZoneSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemTimeZoneSetupsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTimeZoneSetupsByIdRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemTimeZoneSetupsByIdRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemTimeZoneSetupsByIdRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTimeZoneSetupsByIdRequest) Execute() (*TimeZoneSetup, *http.Response, error) {
 	return r.ApiService.GetSystemTimeZoneSetupsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *TimeZoneSetupsAPIService) GetSystemTimeZoneSetupsByIdExecute(r ApiGetSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *TimeZoneSetupsAPIService) GetSystemTimeZoneSetupsByIdExecute(r ApiGetSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *TimeZoneSetupsAPIService) GetSystemTimeZoneSetupsByIdExecute(r ApiGetSy
 type ApiGetSystemTimeZoneSetupsCountRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemTimeZoneSetupsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTimeZoneSetupsCountRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemTimeZoneSetupsCountRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemTimeZoneSetupsCountRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTimeZoneSetupsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemTimeZoneSetupsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *TimeZoneSetupsAPIService) GetSystemTimeZoneSetupsCountExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *TimeZoneSetupsAPIService) GetSystemTimeZoneSetupsCountExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemTimeZoneSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemTimeZoneSetupsByIdRequest) ClientId(clientId string) ApiPatchSystemTimeZoneSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemTimeZoneSetupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemTimeZoneSetupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemTimeZoneSetupsByIdRequest) ClientId(clientId string) ApiPatchSystemTimeZoneSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *TimeZoneSetupsAPIService) PatchSystemTimeZoneSetupsByIdExecute(r ApiPat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *TimeZoneSetupsAPIService) PatchSystemTimeZoneSetupsByIdExecute(r ApiPat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *TimeZoneSetupsAPIService) PatchSystemTimeZoneSetupsByIdExecute(r ApiPat
 type ApiPostSystemTimeZoneSetupsRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupsAPIService
-	clientId *string
 	timeZoneSetup *TimeZoneSetup
-}
-
-// 
-func (r ApiPostSystemTimeZoneSetupsRequest) ClientId(clientId string) ApiPostSystemTimeZoneSetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timeZoneSetup
 func (r ApiPostSystemTimeZoneSetupsRequest) TimeZoneSetup(timeZoneSetup TimeZoneSetup) ApiPostSystemTimeZoneSetupsRequest {
 	r.timeZoneSetup = &timeZoneSetup
+	return r
+}
+
+// 
+func (r ApiPostSystemTimeZoneSetupsRequest) ClientId(clientId string) ApiPostSystemTimeZoneSetupsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *TimeZoneSetupsAPIService) PostSystemTimeZoneSetupsExecute(r ApiPostSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timeZoneSetup == nil {
 		return localVarReturnValue, nil, reportError("timeZoneSetup is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *TimeZoneSetupsAPIService) PostSystemTimeZoneSetupsExecute(r ApiPostSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timeZoneSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemTimeZoneSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupsAPIService
 	id int32
-	clientId *string
 	timeZoneSetup *TimeZoneSetup
-}
-
-// 
-func (r ApiPutSystemTimeZoneSetupsByIdRequest) ClientId(clientId string) ApiPutSystemTimeZoneSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timeZoneSetup
 func (r ApiPutSystemTimeZoneSetupsByIdRequest) TimeZoneSetup(timeZoneSetup TimeZoneSetup) ApiPutSystemTimeZoneSetupsByIdRequest {
 	r.timeZoneSetup = &timeZoneSetup
+	return r
+}
+
+// 
+func (r ApiPutSystemTimeZoneSetupsByIdRequest) ClientId(clientId string) ApiPutSystemTimeZoneSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *TimeZoneSetupsAPIService) PutSystemTimeZoneSetupsByIdExecute(r ApiPutSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timeZoneSetup == nil {
 		return localVarReturnValue, nil, reportError("timeZoneSetup is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *TimeZoneSetupsAPIService) PutSystemTimeZoneSetupsByIdExecute(r ApiPutSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timeZoneSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

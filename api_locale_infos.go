@@ -26,7 +26,6 @@ type LocaleInfosAPIService service
 type ApiGetSystemInfoLocalesRequest struct {
 	ctx context.Context
 	ApiService *LocaleInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemInfoLocalesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemInfoLocalesRequest) ClientId(clientId string) ApiGetSystemInfoLocalesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemInfoLocalesRequest) PageId(pageId int32) ApiGetSystemInfoLoc
 	return r
 }
 
+// 
+func (r ApiGetSystemInfoLocalesRequest) ClientId(clientId string) ApiGetSystemInfoLocalesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemInfoLocalesRequest) Execute() ([]LocaleInfo, *http.Response, error) {
 	return r.ApiService.GetSystemInfoLocalesExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *LocaleInfosAPIService) GetSystemInfoLocalesExecute(r ApiGetSystemInfoLo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *LocaleInfosAPIService) GetSystemInfoLocalesExecute(r ApiGetSystemInfoLo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemInfoLocalesByIdRequest struct {
 	ctx context.Context
 	ApiService *LocaleInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemInfoLocalesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemInfoLocalesByIdRequest) ClientId(clientId string) ApiGetSystemInfoLocalesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemInfoLocalesByIdRequest) PageId(pageId int32) ApiGetSystemInf
 	return r
 }
 
+// 
+func (r ApiGetSystemInfoLocalesByIdRequest) ClientId(clientId string) ApiGetSystemInfoLocalesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemInfoLocalesByIdRequest) Execute() (*LocaleInfo, *http.Response, error) {
 	return r.ApiService.GetSystemInfoLocalesByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *LocaleInfosAPIService) GetSystemInfoLocalesByIdExecute(r ApiGetSystemIn
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *LocaleInfosAPIService) GetSystemInfoLocalesByIdExecute(r ApiGetSystemIn
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *LocaleInfosAPIService) GetSystemInfoLocalesByIdExecute(r ApiGetSystemIn
 type ApiGetSystemInfoLocalesCountRequest struct {
 	ctx context.Context
 	ApiService *LocaleInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemInfoLocalesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemInfoLocalesCountRequest) ClientId(clientId string) ApiGetSystemInfoLocalesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemInfoLocalesCountRequest) PageId(pageId int32) ApiGetSystemIn
 	return r
 }
 
+// 
+func (r ApiGetSystemInfoLocalesCountRequest) ClientId(clientId string) ApiGetSystemInfoLocalesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemInfoLocalesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemInfoLocalesCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *LocaleInfosAPIService) GetSystemInfoLocalesCountExecute(r ApiGetSystemI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *LocaleInfosAPIService) GetSystemInfoLocalesCountExecute(r ApiGetSystemI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

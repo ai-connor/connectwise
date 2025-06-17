@@ -27,7 +27,6 @@ type ApiGetProjectStatusesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesInfoAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetProjectStatusesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectStatusesByIdInfoRequest) ClientId(clientId string) ApiGetProjectStatusesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetProjectStatusesByIdInfoRequest) PageId(pageId int32) ApiGetProject
 	return r
 }
 
+// 
+func (r ApiGetProjectStatusesByIdInfoRequest) ClientId(clientId string) ApiGetProjectStatusesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectStatusesByIdInfoRequest) Execute() (*ProjectStatusInfo, *http.Response, error) {
 	return r.ApiService.GetProjectStatusesByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *ProjectStatusesInfoAPIService) GetProjectStatusesByIdInfoExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *ProjectStatusesInfoAPIService) GetProjectStatusesByIdInfoExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *ProjectStatusesInfoAPIService) GetProjectStatusesByIdInfoExecute(r ApiG
 type ApiGetProjectStatusesInfoRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesInfoAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetProjectStatusesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectStatusesInfoRequest) ClientId(clientId string) ApiGetProjectStatusesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetProjectStatusesInfoRequest) PageId(pageId int32) ApiGetProjectStat
 	return r
 }
 
+// 
+func (r ApiGetProjectStatusesInfoRequest) ClientId(clientId string) ApiGetProjectStatusesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectStatusesInfoRequest) Execute() ([]ProjectStatusInfo, *http.Response, error) {
 	return r.ApiService.GetProjectStatusesInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *ProjectStatusesInfoAPIService) GetProjectStatusesInfoExecute(r ApiGetPr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *ProjectStatusesInfoAPIService) GetProjectStatusesInfoExecute(r ApiGetPr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *ProjectStatusesInfoAPIService) GetProjectStatusesInfoExecute(r ApiGetPr
 type ApiGetProjectStatusesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesInfoAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetProjectStatusesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectStatusesInfoCountRequest) ClientId(clientId string) ApiGetProjectStatusesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetProjectStatusesInfoCountRequest) PageId(pageId int32) ApiGetProjec
 	return r
 }
 
+// 
+func (r ApiGetProjectStatusesInfoCountRequest) ClientId(clientId string) ApiGetProjectStatusesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectStatusesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProjectStatusesInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *ProjectStatusesInfoAPIService) GetProjectStatusesInfoCountExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *ProjectStatusesInfoAPIService) GetProjectStatusesInfoCountExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

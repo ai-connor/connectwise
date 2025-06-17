@@ -82,9 +82,6 @@ func (a *ProjectTemplateTasksAPIService) DeleteProjectProjectTemplatesByGrandPar
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -103,7 +100,9 @@ func (a *ProjectTemplateTasksAPIService) DeleteProjectProjectTemplatesByGrandPar
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -137,7 +136,6 @@ type ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentI
 	ApiService *ProjectTemplateTasksAPIService
 	grandParentId int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -146,12 +144,7 @@ type ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentI
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -202,6 +195,12 @@ func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByPare
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest) Execute() ([]ProjectTemplateTask, *http.Response, error) {
 	return r.ApiService.GetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksExecute(r)
 }
@@ -245,9 +244,6 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesByGrandParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -290,7 +286,9 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesByGrandParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -334,7 +332,6 @@ type ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentI
 	id int32
 	grandParentId int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -343,12 +340,7 @@ type ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentI
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -399,6 +391,12 @@ func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByPare
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) Execute() (*ProjectTemplateTask, *http.Response, error) {
 	return r.ApiService.GetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdExecute(r)
 }
@@ -445,9 +443,6 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesByGrandParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -490,7 +485,9 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesByGrandParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -533,7 +530,6 @@ type ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentI
 	ApiService *ProjectTemplateTasksAPIService
 	grandParentId int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -542,12 +538,7 @@ type ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentI
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksCountRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -598,6 +589,12 @@ func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByPare
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksCountRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksCountExecute(r)
 }
@@ -641,9 +638,6 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesByGrandParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -686,7 +680,9 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesByGrandParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -727,7 +723,6 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesByGrandParent
 type ApiGetProjectProjectTemplatesProjectTemplateTicketsTasksRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplateTasksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -736,12 +731,7 @@ type ApiGetProjectProjectTemplatesProjectTemplateTicketsTasksRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectTemplatesProjectTemplateTicketsTasksRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesProjectTemplateTicketsTasksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -792,6 +782,12 @@ func (r ApiGetProjectProjectTemplatesProjectTemplateTicketsTasksRequest) PageId(
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectTemplatesProjectTemplateTicketsTasksRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesProjectTemplateTicketsTasksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectTemplatesProjectTemplateTicketsTasksRequest) Execute() ([]ProjectTemplateTask, *http.Response, error) {
 	return r.ApiService.GetProjectProjectTemplatesProjectTemplateTicketsTasksExecute(r)
 }
@@ -829,9 +825,6 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesProjectTempla
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -874,7 +867,9 @@ func (a *ProjectTemplateTasksAPIService) GetProjectProjectTemplatesProjectTempla
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -918,19 +913,19 @@ type ApiPatchProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParen
 	id int32
 	grandParentId int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPatchProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPatchProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -980,9 +975,6 @@ func (a *ProjectTemplateTasksAPIService) PatchProjectProjectTemplatesByGrandPare
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1004,7 +996,9 @@ func (a *ProjectTemplateTasksAPIService) PatchProjectProjectTemplatesByGrandPare
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1049,19 +1043,19 @@ type ApiPostProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParent
 	ApiService *ProjectTemplateTasksAPIService
 	grandParentId int32
 	parentId int32
-	clientId *string
 	projectTemplateTask *ProjectTemplateTask
-}
-
-// 
-func (r ApiPostProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest) ClientId(clientId string) ApiPostProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ProjectTemplateTask
 func (r ApiPostProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest) ProjectTemplateTask(projectTemplateTask ProjectTemplateTask) ApiPostProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest {
 	r.projectTemplateTask = &projectTemplateTask
+	return r
+}
+
+// 
+func (r ApiPostProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest) ClientId(clientId string) ApiPostProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1108,9 +1102,6 @@ func (a *ProjectTemplateTasksAPIService) PostProjectProjectTemplatesByGrandParen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectTemplateTask == nil {
 		return localVarReturnValue, nil, reportError("projectTemplateTask is required and must be specified")
 	}
@@ -1132,7 +1123,9 @@ func (a *ProjectTemplateTasksAPIService) PostProjectProjectTemplatesByGrandParen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectTemplateTask
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1178,19 +1171,19 @@ type ApiPutProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentI
 	id int32
 	grandParentId int32
 	parentId int32
-	clientId *string
 	projectTemplateTask *ProjectTemplateTask
-}
-
-// 
-func (r ApiPutProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPutProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // companyTypeAssociation
 func (r ApiPutProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) ProjectTemplateTask(projectTemplateTask ProjectTemplateTask) ApiPutProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest {
 	r.projectTemplateTask = &projectTemplateTask
+	return r
+}
+
+// 
+func (r ApiPutProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPutProjectProjectTemplatesByGrandParentIdProjectTemplateTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1240,9 +1233,6 @@ func (a *ProjectTemplateTasksAPIService) PutProjectProjectTemplatesByGrandParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectTemplateTask == nil {
 		return localVarReturnValue, nil, reportError("projectTemplateTask is required and must be specified")
 	}
@@ -1264,7 +1254,9 @@ func (a *ProjectTemplateTasksAPIService) PutProjectProjectTemplatesByGrandParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectTemplateTask
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *ProjectTemplatesAPIService) DeleteProjectProjectTemplatesByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ProjectTemplatesAPIService) DeleteProjectProjectTemplatesByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ProjectTemplatesAPIService) DeleteProjectProjectTemplatesByIdExecute(r 
 type ApiGetProjectProjectTemplatesRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplatesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProjectProjectTemplatesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectTemplatesRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProjectProjectTemplatesRequest) PageId(pageId int32) ApiGetProject
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectTemplatesRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectTemplatesRequest) Execute() ([]ProjectTemplate, *http.Response, error) {
 	return r.ApiService.GetProjectProjectTemplatesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesExecute(r ApiGetP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesExecute(r ApiGetP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProjectProjectTemplatesByIdRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProjectProjectTemplatesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectTemplatesByIdRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProjectProjectTemplatesByIdRequest) PageId(pageId int32) ApiGetPro
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectTemplatesByIdRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectTemplatesByIdRequest) Execute() (*ProjectTemplate, *http.Response, error) {
 	return r.ApiService.GetProjectProjectTemplatesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetProjectProjectTemplatesByIdWorkplanRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetProjectProjectTemplatesByIdWorkplanRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectTemplatesByIdWorkplanRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByIdWorkplanRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetProjectProjectTemplatesByIdWorkplanRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectTemplatesByIdWorkplanRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesByIdWorkplanRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectTemplatesByIdWorkplanRequest) Execute() ([]ProjectTemplateWorkPlan, *http.Response, error) {
 	return r.ApiService.GetProjectProjectTemplatesByIdWorkplanExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesByIdWorkplanExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesByIdWorkplanExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -699,7 +695,6 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesByIdWorkplanExecu
 type ApiGetProjectProjectTemplatesCountRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplatesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -708,12 +703,7 @@ type ApiGetProjectProjectTemplatesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectTemplatesCountRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -764,6 +754,12 @@ func (r ApiGetProjectProjectTemplatesCountRequest) PageId(pageId int32) ApiGetPr
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectTemplatesCountRequest) ClientId(clientId string) ApiGetProjectProjectTemplatesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectTemplatesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProjectProjectTemplatesCountExecute(r)
 }
@@ -801,9 +797,6 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesCountExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -846,7 +839,9 @@ func (a *ProjectTemplatesAPIService) GetProjectProjectTemplatesCountExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -888,19 +883,19 @@ type ApiPatchProjectProjectTemplatesByIdRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplatesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProjectProjectTemplatesByIdRequest) ClientId(clientId string) ApiPatchProjectProjectTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProjectProjectTemplatesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProjectProjectTemplatesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProjectProjectTemplatesByIdRequest) ClientId(clientId string) ApiPatchProjectProjectTemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -944,9 +939,6 @@ func (a *ProjectTemplatesAPIService) PatchProjectProjectTemplatesByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -968,7 +960,9 @@ func (a *ProjectTemplatesAPIService) PatchProjectProjectTemplatesByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1011,19 +1005,19 @@ func (a *ProjectTemplatesAPIService) PatchProjectProjectTemplatesByIdExecute(r A
 type ApiPostProjectProjectTemplatesRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplatesAPIService
-	clientId *string
 	projectTemplate *ProjectTemplate
-}
-
-// 
-func (r ApiPostProjectProjectTemplatesRequest) ClientId(clientId string) ApiPostProjectProjectTemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ProjectTemplate
 func (r ApiPostProjectProjectTemplatesRequest) ProjectTemplate(projectTemplate ProjectTemplate) ApiPostProjectProjectTemplatesRequest {
 	r.projectTemplate = &projectTemplate
+	return r
+}
+
+// 
+func (r ApiPostProjectProjectTemplatesRequest) ClientId(clientId string) ApiPostProjectProjectTemplatesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1064,9 +1058,6 @@ func (a *ProjectTemplatesAPIService) PostProjectProjectTemplatesExecute(r ApiPos
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectTemplate == nil {
 		return localVarReturnValue, nil, reportError("projectTemplate is required and must be specified")
 	}
@@ -1088,7 +1079,9 @@ func (a *ProjectTemplatesAPIService) PostProjectProjectTemplatesExecute(r ApiPos
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1132,19 +1125,19 @@ type ApiPostProjectProjectTemplatesCreateFromProjectByIdRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplatesAPIService
 	id int32
-	clientId *string
 	projectTemplate *ProjectTemplate
-}
-
-// 
-func (r ApiPostProjectProjectTemplatesCreateFromProjectByIdRequest) ClientId(clientId string) ApiPostProjectProjectTemplatesCreateFromProjectByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ProjectTemplate
 func (r ApiPostProjectProjectTemplatesCreateFromProjectByIdRequest) ProjectTemplate(projectTemplate ProjectTemplate) ApiPostProjectProjectTemplatesCreateFromProjectByIdRequest {
 	r.projectTemplate = &projectTemplate
+	return r
+}
+
+// 
+func (r ApiPostProjectProjectTemplatesCreateFromProjectByIdRequest) ClientId(clientId string) ApiPostProjectProjectTemplatesCreateFromProjectByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1188,9 +1181,6 @@ func (a *ProjectTemplatesAPIService) PostProjectProjectTemplatesCreateFromProjec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectTemplate == nil {
 		return localVarReturnValue, nil, reportError("projectTemplate is required and must be specified")
 	}
@@ -1212,7 +1202,9 @@ func (a *ProjectTemplatesAPIService) PostProjectProjectTemplatesCreateFromProjec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1256,19 +1248,19 @@ type ApiPutProjectProjectTemplatesByIdRequest struct {
 	ctx context.Context
 	ApiService *ProjectTemplatesAPIService
 	id int32
-	clientId *string
 	projectTemplate *ProjectTemplate
-}
-
-// 
-func (r ApiPutProjectProjectTemplatesByIdRequest) ClientId(clientId string) ApiPutProjectProjectTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // companyTypeAssociation
 func (r ApiPutProjectProjectTemplatesByIdRequest) ProjectTemplate(projectTemplate ProjectTemplate) ApiPutProjectProjectTemplatesByIdRequest {
 	r.projectTemplate = &projectTemplate
+	return r
+}
+
+// 
+func (r ApiPutProjectProjectTemplatesByIdRequest) ClientId(clientId string) ApiPutProjectProjectTemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1312,9 +1304,6 @@ func (a *ProjectTemplatesAPIService) PutProjectProjectTemplatesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectTemplate == nil {
 		return localVarReturnValue, nil, reportError("projectTemplate is required and must be specified")
 	}
@@ -1336,7 +1325,9 @@ func (a *ProjectTemplatesAPIService) PutProjectProjectTemplatesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

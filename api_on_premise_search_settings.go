@@ -26,7 +26,6 @@ type OnPremiseSearchSettingsAPIService service
 type ApiGetSystemOnPremiseSearchSettingRequest struct {
 	ctx context.Context
 	ApiService *OnPremiseSearchSettingsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemOnPremiseSearchSettingRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOnPremiseSearchSettingRequest) ClientId(clientId string) ApiGetSystemOnPremiseSearchSettingRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemOnPremiseSearchSettingRequest) PageId(pageId int32) ApiGetSy
 	return r
 }
 
+// 
+func (r ApiGetSystemOnPremiseSearchSettingRequest) ClientId(clientId string) ApiGetSystemOnPremiseSearchSettingRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOnPremiseSearchSettingRequest) Execute() ([]OnPremiseSearchSetting, *http.Response, error) {
 	return r.ApiService.GetSystemOnPremiseSearchSettingExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *OnPremiseSearchSettingsAPIService) GetSystemOnPremiseSearchSettingExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *OnPremiseSearchSettingsAPIService) GetSystemOnPremiseSearchSettingExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemOnPremiseSearchSettingByIdRequest struct {
 	ctx context.Context
 	ApiService *OnPremiseSearchSettingsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemOnPremiseSearchSettingByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOnPremiseSearchSettingByIdRequest) ClientId(clientId string) ApiGetSystemOnPremiseSearchSettingByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemOnPremiseSearchSettingByIdRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetSystemOnPremiseSearchSettingByIdRequest) ClientId(clientId string) ApiGetSystemOnPremiseSearchSettingByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOnPremiseSearchSettingByIdRequest) Execute() (*OnPremiseSearchSetting, *http.Response, error) {
 	return r.ApiService.GetSystemOnPremiseSearchSettingByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *OnPremiseSearchSettingsAPIService) GetSystemOnPremiseSearchSettingByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *OnPremiseSearchSettingsAPIService) GetSystemOnPremiseSearchSettingByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *OnPremiseSearchSettingsAPIService) GetSystemOnPremiseSearchSettingByIdE
 type ApiGetSystemOnPremiseSearchSettingCountRequest struct {
 	ctx context.Context
 	ApiService *OnPremiseSearchSettingsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemOnPremiseSearchSettingCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOnPremiseSearchSettingCountRequest) ClientId(clientId string) ApiGetSystemOnPremiseSearchSettingCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemOnPremiseSearchSettingCountRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetSystemOnPremiseSearchSettingCountRequest) ClientId(clientId string) ApiGetSystemOnPremiseSearchSettingCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOnPremiseSearchSettingCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemOnPremiseSearchSettingCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *OnPremiseSearchSettingsAPIService) GetSystemOnPremiseSearchSettingCount
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *OnPremiseSearchSettingsAPIService) GetSystemOnPremiseSearchSettingCount
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchSystemOnPremiseSearchSettingByIdRequest struct {
 	ctx context.Context
 	ApiService *OnPremiseSearchSettingsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemOnPremiseSearchSettingByIdRequest) ClientId(clientId string) ApiPatchSystemOnPremiseSearchSettingByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemOnPremiseSearchSettingByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemOnPremiseSearchSettingByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemOnPremiseSearchSettingByIdRequest) ClientId(clientId string) ApiPatchSystemOnPremiseSearchSettingByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *OnPremiseSearchSettingsAPIService) PatchSystemOnPremiseSearchSettingByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *OnPremiseSearchSettingsAPIService) PatchSystemOnPremiseSearchSettingByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutSystemOnPremiseSearchSettingByIdRequest struct {
 	ctx context.Context
 	ApiService *OnPremiseSearchSettingsAPIService
 	id int32
-	clientId *string
 	onPremiseSearchSetting *OnPremiseSearchSetting
-}
-
-// 
-func (r ApiPutSystemOnPremiseSearchSettingByIdRequest) ClientId(clientId string) ApiPutSystemOnPremiseSearchSettingByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // onPremiseSearchSetting
 func (r ApiPutSystemOnPremiseSearchSettingByIdRequest) OnPremiseSearchSetting(onPremiseSearchSetting OnPremiseSearchSetting) ApiPutSystemOnPremiseSearchSettingByIdRequest {
 	r.onPremiseSearchSetting = &onPremiseSearchSetting
+	return r
+}
+
+// 
+func (r ApiPutSystemOnPremiseSearchSettingByIdRequest) ClientId(clientId string) ApiPutSystemOnPremiseSearchSettingByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *OnPremiseSearchSettingsAPIService) PutSystemOnPremiseSearchSettingByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.onPremiseSearchSetting == nil {
 		return localVarReturnValue, nil, reportError("onPremiseSearchSetting is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *OnPremiseSearchSettingsAPIService) PutSystemOnPremiseSearchSettingByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.onPremiseSearchSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

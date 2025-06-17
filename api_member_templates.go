@@ -26,7 +26,6 @@ type MemberTemplatesAPIService service
 type ApiGetSystemMembertemplatesRequest struct {
 	ctx context.Context
 	ApiService *MemberTemplatesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemMembertemplatesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembertemplatesRequest) ClientId(clientId string) ApiGetSystemMembertemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemMembertemplatesRequest) PageId(pageId int32) ApiGetSystemMem
 	return r
 }
 
+// 
+func (r ApiGetSystemMembertemplatesRequest) ClientId(clientId string) ApiGetSystemMembertemplatesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembertemplatesRequest) Execute() ([]MemberTemplate, *http.Response, error) {
 	return r.ApiService.GetSystemMembertemplatesExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *MemberTemplatesAPIService) GetSystemMembertemplatesExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *MemberTemplatesAPIService) GetSystemMembertemplatesExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemMembertemplatesByIdRequest struct {
 	ctx context.Context
 	ApiService *MemberTemplatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemMembertemplatesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembertemplatesByIdRequest) ClientId(clientId string) ApiGetSystemMembertemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemMembertemplatesByIdRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemMembertemplatesByIdRequest) ClientId(clientId string) ApiGetSystemMembertemplatesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembertemplatesByIdRequest) Execute() (*MemberTemplate, *http.Response, error) {
 	return r.ApiService.GetSystemMembertemplatesByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *MemberTemplatesAPIService) GetSystemMembertemplatesByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *MemberTemplatesAPIService) GetSystemMembertemplatesByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *MemberTemplatesAPIService) GetSystemMembertemplatesByIdExecute(r ApiGet
 type ApiGetSystemMembertemplatesCountRequest struct {
 	ctx context.Context
 	ApiService *MemberTemplatesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemMembertemplatesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembertemplatesCountRequest) ClientId(clientId string) ApiGetSystemMembertemplatesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemMembertemplatesCountRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemMembertemplatesCountRequest) ClientId(clientId string) ApiGetSystemMembertemplatesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembertemplatesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMembertemplatesCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *MemberTemplatesAPIService) GetSystemMembertemplatesCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *MemberTemplatesAPIService) GetSystemMembertemplatesCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchSystemMembertemplatesByIdRequest struct {
 	ctx context.Context
 	ApiService *MemberTemplatesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemMembertemplatesByIdRequest) ClientId(clientId string) ApiPatchSystemMembertemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemMembertemplatesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemMembertemplatesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemMembertemplatesByIdRequest) ClientId(clientId string) ApiPatchSystemMembertemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *MemberTemplatesAPIService) PatchSystemMembertemplatesByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *MemberTemplatesAPIService) PatchSystemMembertemplatesByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -718,19 +714,19 @@ func (a *MemberTemplatesAPIService) PatchSystemMembertemplatesByIdExecute(r ApiP
 type ApiPostSystemMembertemplatesRequest struct {
 	ctx context.Context
 	ApiService *MemberTemplatesAPIService
-	clientId *string
 	memberTemplate *MemberTemplate
-}
-
-// 
-func (r ApiPostSystemMembertemplatesRequest) ClientId(clientId string) ApiPostSystemMembertemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // MemberTemplate
 func (r ApiPostSystemMembertemplatesRequest) MemberTemplate(memberTemplate MemberTemplate) ApiPostSystemMembertemplatesRequest {
 	r.memberTemplate = &memberTemplate
+	return r
+}
+
+// 
+func (r ApiPostSystemMembertemplatesRequest) ClientId(clientId string) ApiPostSystemMembertemplatesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -771,9 +767,6 @@ func (a *MemberTemplatesAPIService) PostSystemMembertemplatesExecute(r ApiPostSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberTemplate == nil {
 		return localVarReturnValue, nil, reportError("memberTemplate is required and must be specified")
 	}
@@ -795,7 +788,9 @@ func (a *MemberTemplatesAPIService) PostSystemMembertemplatesExecute(r ApiPostSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

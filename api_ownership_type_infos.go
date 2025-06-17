@@ -27,7 +27,6 @@ type ApiGetCompanyOwnershipTypesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *OwnershipTypeInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetCompanyOwnershipTypesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyOwnershipTypesByIdInfoRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetCompanyOwnershipTypesByIdInfoRequest) PageId(pageId int32) ApiGetC
 	return r
 }
 
+// 
+func (r ApiGetCompanyOwnershipTypesByIdInfoRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyOwnershipTypesByIdInfoRequest) Execute() (*OwnershipTypeInfo, *http.Response, error) {
 	return r.ApiService.GetCompanyOwnershipTypesByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *OwnershipTypeInfosAPIService) GetCompanyOwnershipTypesByIdInfoExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *OwnershipTypeInfosAPIService) GetCompanyOwnershipTypesByIdInfoExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *OwnershipTypeInfosAPIService) GetCompanyOwnershipTypesByIdInfoExecute(r
 type ApiGetCompanyOwnershipTypesInfoRequest struct {
 	ctx context.Context
 	ApiService *OwnershipTypeInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetCompanyOwnershipTypesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyOwnershipTypesInfoRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetCompanyOwnershipTypesInfoRequest) PageId(pageId int32) ApiGetCompa
 	return r
 }
 
+// 
+func (r ApiGetCompanyOwnershipTypesInfoRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyOwnershipTypesInfoRequest) Execute() ([]OwnershipTypeInfo, *http.Response, error) {
 	return r.ApiService.GetCompanyOwnershipTypesInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *OwnershipTypeInfosAPIService) GetCompanyOwnershipTypesInfoExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *OwnershipTypeInfosAPIService) GetCompanyOwnershipTypesInfoExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *OwnershipTypeInfosAPIService) GetCompanyOwnershipTypesInfoExecute(r Api
 type ApiGetCompanyOwnershipTypesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *OwnershipTypeInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetCompanyOwnershipTypesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyOwnershipTypesInfoCountRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetCompanyOwnershipTypesInfoCountRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetCompanyOwnershipTypesInfoCountRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyOwnershipTypesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyOwnershipTypesInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *OwnershipTypeInfosAPIService) GetCompanyOwnershipTypesInfoCountExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *OwnershipTypeInfosAPIService) GetCompanyOwnershipTypesInfoCountExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -27,8 +27,8 @@ type ApiDeleteCompanyContactsByIdRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
 	id int32
-	clientId *string
 	transferContactId int32
+	clientId *string
 }
 
 // 
@@ -78,9 +78,6 @@ func (a *ContactsAPIService) DeleteCompanyContactsByIdExecute(r ApiDeleteCompany
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *ContactsAPIService) DeleteCompanyContactsByIdExecute(r ApiDeleteCompany
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -131,7 +130,6 @@ func (a *ContactsAPIService) DeleteCompanyContactsByIdExecute(r ApiDeleteCompany
 type ApiGetCompanyContactsRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -140,12 +138,7 @@ type ApiGetCompanyContactsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsRequest) ClientId(clientId string) ApiGetCompanyContactsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -196,6 +189,12 @@ func (r ApiGetCompanyContactsRequest) PageId(pageId int32) ApiGetCompanyContacts
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsRequest) ClientId(clientId string) ApiGetCompanyContactsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsRequest) Execute() ([]Contact, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsExecute(r)
 }
@@ -233,9 +232,6 @@ func (a *ContactsAPIService) GetCompanyContactsExecute(r ApiGetCompanyContactsRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -278,7 +274,9 @@ func (a *ContactsAPIService) GetCompanyContactsExecute(r ApiGetCompanyContactsRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -320,7 +318,6 @@ type ApiGetCompanyContactsByIdRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -329,12 +326,7 @@ type ApiGetCompanyContactsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsByIdRequest) ClientId(clientId string) ApiGetCompanyContactsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -385,6 +377,12 @@ func (r ApiGetCompanyContactsByIdRequest) PageId(pageId int32) ApiGetCompanyCont
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsByIdRequest) ClientId(clientId string) ApiGetCompanyContactsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsByIdRequest) Execute() (*Contact, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsByIdExecute(r)
 }
@@ -425,9 +423,6 @@ func (a *ContactsAPIService) GetCompanyContactsByIdExecute(r ApiGetCompanyContac
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -470,7 +465,9 @@ func (a *ContactsAPIService) GetCompanyContactsByIdExecute(r ApiGetCompanyContac
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -512,7 +509,6 @@ type ApiGetCompanyContactsByIdImageRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
 	id int32
-	clientId *string
 	useDefaultFlag bool
 	lastModified string
 	conditions *string
@@ -523,12 +519,7 @@ type ApiGetCompanyContactsByIdImageRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsByIdImageRequest) ClientId(clientId string) ApiGetCompanyContactsByIdImageRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -579,6 +570,12 @@ func (r ApiGetCompanyContactsByIdImageRequest) PageId(pageId int32) ApiGetCompan
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsByIdImageRequest) ClientId(clientId string) ApiGetCompanyContactsByIdImageRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsByIdImageRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetCompanyContactsByIdImageExecute(r)
 }
@@ -623,9 +620,6 @@ func (a *ContactsAPIService) GetCompanyContactsByIdImageExecute(r ApiGetCompanyC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -668,7 +662,9 @@ func (a *ContactsAPIService) GetCompanyContactsByIdImageExecute(r ApiGetCompanyC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -701,7 +697,6 @@ type ApiGetCompanyContactsByIdPortalSecurityRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -710,12 +705,7 @@ type ApiGetCompanyContactsByIdPortalSecurityRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsByIdPortalSecurityRequest) ClientId(clientId string) ApiGetCompanyContactsByIdPortalSecurityRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -766,6 +756,12 @@ func (r ApiGetCompanyContactsByIdPortalSecurityRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsByIdPortalSecurityRequest) ClientId(clientId string) ApiGetCompanyContactsByIdPortalSecurityRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsByIdPortalSecurityRequest) Execute() ([]PortalSecurity, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsByIdPortalSecurityExecute(r)
 }
@@ -806,9 +802,6 @@ func (a *ContactsAPIService) GetCompanyContactsByIdPortalSecurityExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -851,7 +844,9 @@ func (a *ContactsAPIService) GetCompanyContactsByIdPortalSecurityExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -893,7 +888,6 @@ type ApiGetCompanyContactsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -902,12 +896,7 @@ type ApiGetCompanyContactsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyContactsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -958,6 +947,12 @@ func (r ApiGetCompanyContactsByIdUsagesRequest) PageId(pageId int32) ApiGetCompa
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyContactsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsByIdUsagesExecute(r)
 }
@@ -998,9 +993,6 @@ func (a *ContactsAPIService) GetCompanyContactsByIdUsagesExecute(r ApiGetCompany
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1043,7 +1035,9 @@ func (a *ContactsAPIService) GetCompanyContactsByIdUsagesExecute(r ApiGetCompany
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1085,7 +1079,6 @@ type ApiGetCompanyContactsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1094,12 +1087,7 @@ type ApiGetCompanyContactsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyContactsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1150,6 +1138,12 @@ func (r ApiGetCompanyContactsByIdUsagesListRequest) PageId(pageId int32) ApiGetC
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyContactsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsByIdUsagesListExecute(r)
 }
@@ -1190,9 +1184,6 @@ func (a *ContactsAPIService) GetCompanyContactsByIdUsagesListExecute(r ApiGetCom
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1235,7 +1226,9 @@ func (a *ContactsAPIService) GetCompanyContactsByIdUsagesListExecute(r ApiGetCom
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1276,7 +1269,6 @@ func (a *ContactsAPIService) GetCompanyContactsByIdUsagesListExecute(r ApiGetCom
 type ApiGetCompanyContactsCountRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1285,12 +1277,7 @@ type ApiGetCompanyContactsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsCountRequest) ClientId(clientId string) ApiGetCompanyContactsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1341,6 +1328,12 @@ func (r ApiGetCompanyContactsCountRequest) PageId(pageId int32) ApiGetCompanyCon
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsCountRequest) ClientId(clientId string) ApiGetCompanyContactsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsCountExecute(r)
 }
@@ -1378,9 +1371,6 @@ func (a *ContactsAPIService) GetCompanyContactsCountExecute(r ApiGetCompanyConta
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1423,7 +1413,9 @@ func (a *ContactsAPIService) GetCompanyContactsCountExecute(r ApiGetCompanyConta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1464,7 +1456,6 @@ func (a *ContactsAPIService) GetCompanyContactsCountExecute(r ApiGetCompanyConta
 type ApiGetCompanyContactsDefaultRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
-	clientId *string
 	companyId int32
 	conditions *string
 	childConditions *string
@@ -1474,12 +1465,7 @@ type ApiGetCompanyContactsDefaultRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsDefaultRequest) ClientId(clientId string) ApiGetCompanyContactsDefaultRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1530,6 +1516,12 @@ func (r ApiGetCompanyContactsDefaultRequest) PageId(pageId int32) ApiGetCompanyC
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsDefaultRequest) ClientId(clientId string) ApiGetCompanyContactsDefaultRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsDefaultRequest) Execute() (*Contact, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsDefaultExecute(r)
 }
@@ -1570,9 +1562,6 @@ func (a *ContactsAPIService) GetCompanyContactsDefaultExecute(r ApiGetCompanyCon
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1615,7 +1604,9 @@ func (a *ContactsAPIService) GetCompanyContactsDefaultExecute(r ApiGetCompanyCon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1657,19 +1648,19 @@ type ApiPatchCompanyContactsByIdRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyContactsByIdRequest) ClientId(clientId string) ApiPatchCompanyContactsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyContactsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyContactsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyContactsByIdRequest) ClientId(clientId string) ApiPatchCompanyContactsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1713,9 +1704,6 @@ func (a *ContactsAPIService) PatchCompanyContactsByIdExecute(r ApiPatchCompanyCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1737,7 +1725,9 @@ func (a *ContactsAPIService) PatchCompanyContactsByIdExecute(r ApiPatchCompanyCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1780,19 +1770,19 @@ func (a *ContactsAPIService) PatchCompanyContactsByIdExecute(r ApiPatchCompanyCo
 type ApiPostCompanyContactsRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
-	clientId *string
 	contact *Contact
-}
-
-// 
-func (r ApiPostCompanyContactsRequest) ClientId(clientId string) ApiPostCompanyContactsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // contact
 func (r ApiPostCompanyContactsRequest) Contact(contact Contact) ApiPostCompanyContactsRequest {
 	r.contact = &contact
+	return r
+}
+
+// 
+func (r ApiPostCompanyContactsRequest) ClientId(clientId string) ApiPostCompanyContactsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1833,9 +1823,6 @@ func (a *ContactsAPIService) PostCompanyContactsExecute(r ApiPostCompanyContacts
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.contact == nil {
 		return localVarReturnValue, nil, reportError("contact is required and must be specified")
 	}
@@ -1857,7 +1844,9 @@ func (a *ContactsAPIService) PostCompanyContactsExecute(r ApiPostCompanyContacts
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.contact
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1900,19 +1889,19 @@ func (a *ContactsAPIService) PostCompanyContactsExecute(r ApiPostCompanyContacts
 type ApiPostCompanyContactsRequestPasswordRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
-	clientId *string
 	requestPasswordRequest *RequestPasswordRequest
-}
-
-// 
-func (r ApiPostCompanyContactsRequestPasswordRequest) ClientId(clientId string) ApiPostCompanyContactsRequestPasswordRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // request
 func (r ApiPostCompanyContactsRequestPasswordRequest) RequestPasswordRequest(requestPasswordRequest RequestPasswordRequest) ApiPostCompanyContactsRequestPasswordRequest {
 	r.requestPasswordRequest = &requestPasswordRequest
+	return r
+}
+
+// 
+func (r ApiPostCompanyContactsRequestPasswordRequest) ClientId(clientId string) ApiPostCompanyContactsRequestPasswordRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1951,9 +1940,6 @@ func (a *ContactsAPIService) PostCompanyContactsRequestPasswordExecute(r ApiPost
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 	if r.requestPasswordRequest == nil {
 		return nil, reportError("requestPasswordRequest is required and must be specified")
 	}
@@ -1975,7 +1961,9 @@ func (a *ContactsAPIService) PostCompanyContactsRequestPasswordExecute(r ApiPost
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.requestPasswordRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -2009,19 +1997,19 @@ func (a *ContactsAPIService) PostCompanyContactsRequestPasswordExecute(r ApiPost
 type ApiPostCompanyContactsValidatePortalCredentialsRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
-	clientId *string
 	validatePortalRequest *ValidatePortalRequest
-}
-
-// 
-func (r ApiPostCompanyContactsValidatePortalCredentialsRequest) ClientId(clientId string) ApiPostCompanyContactsValidatePortalCredentialsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // request
 func (r ApiPostCompanyContactsValidatePortalCredentialsRequest) ValidatePortalRequest(validatePortalRequest ValidatePortalRequest) ApiPostCompanyContactsValidatePortalCredentialsRequest {
 	r.validatePortalRequest = &validatePortalRequest
+	return r
+}
+
+// 
+func (r ApiPostCompanyContactsValidatePortalCredentialsRequest) ClientId(clientId string) ApiPostCompanyContactsValidatePortalCredentialsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -2062,9 +2050,6 @@ func (a *ContactsAPIService) PostCompanyContactsValidatePortalCredentialsExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.validatePortalRequest == nil {
 		return localVarReturnValue, nil, reportError("validatePortalRequest is required and must be specified")
 	}
@@ -2086,7 +2071,9 @@ func (a *ContactsAPIService) PostCompanyContactsValidatePortalCredentialsExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.validatePortalRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -2130,19 +2117,19 @@ type ApiPutCompanyContactsByIdRequest struct {
 	ctx context.Context
 	ApiService *ContactsAPIService
 	id int32
-	clientId *string
 	contact *Contact
-}
-
-// 
-func (r ApiPutCompanyContactsByIdRequest) ClientId(clientId string) ApiPutCompanyContactsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // contact
 func (r ApiPutCompanyContactsByIdRequest) Contact(contact Contact) ApiPutCompanyContactsByIdRequest {
 	r.contact = &contact
+	return r
+}
+
+// 
+func (r ApiPutCompanyContactsByIdRequest) ClientId(clientId string) ApiPutCompanyContactsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -2186,9 +2173,6 @@ func (a *ContactsAPIService) PutCompanyContactsByIdExecute(r ApiPutCompanyContac
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.contact == nil {
 		return localVarReturnValue, nil, reportError("contact is required and must be specified")
 	}
@@ -2210,7 +2194,9 @@ func (a *ContactsAPIService) PutCompanyContactsByIdExecute(r ApiPutCompanyContac
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.contact
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

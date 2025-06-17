@@ -74,9 +74,6 @@ func (a *LinksAPIService) DeleteSystemLinksByIdExecute(r ApiDeleteSystemLinksByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *LinksAPIService) DeleteSystemLinksByIdExecute(r ApiDeleteSystemLinksByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *LinksAPIService) DeleteSystemLinksByIdExecute(r ApiDeleteSystemLinksByI
 type ApiGetSystemLinksRequest struct {
 	ctx context.Context
 	ApiService *LinksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemLinksRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLinksRequest) ClientId(clientId string) ApiGetSystemLinksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemLinksRequest) PageId(pageId int32) ApiGetSystemLinksRequest 
 	return r
 }
 
+// 
+func (r ApiGetSystemLinksRequest) ClientId(clientId string) ApiGetSystemLinksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLinksRequest) Execute() ([]Link, *http.Response, error) {
 	return r.ApiService.GetSystemLinksExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *LinksAPIService) GetSystemLinksExecute(r ApiGetSystemLinksRequest) ([]L
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *LinksAPIService) GetSystemLinksExecute(r ApiGetSystemLinksRequest) ([]L
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemLinksByIdRequest struct {
 	ctx context.Context
 	ApiService *LinksAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemLinksByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLinksByIdRequest) ClientId(clientId string) ApiGetSystemLinksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemLinksByIdRequest) PageId(pageId int32) ApiGetSystemLinksById
 	return r
 }
 
+// 
+func (r ApiGetSystemLinksByIdRequest) ClientId(clientId string) ApiGetSystemLinksByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLinksByIdRequest) Execute() (*Link, *http.Response, error) {
 	return r.ApiService.GetSystemLinksByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *LinksAPIService) GetSystemLinksByIdExecute(r ApiGetSystemLinksByIdReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *LinksAPIService) GetSystemLinksByIdExecute(r ApiGetSystemLinksByIdReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *LinksAPIService) GetSystemLinksByIdExecute(r ApiGetSystemLinksByIdReque
 type ApiGetSystemLinksCountRequest struct {
 	ctx context.Context
 	ApiService *LinksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemLinksCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLinksCountRequest) ClientId(clientId string) ApiGetSystemLinksCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemLinksCountRequest) PageId(pageId int32) ApiGetSystemLinksCou
 	return r
 }
 
+// 
+func (r ApiGetSystemLinksCountRequest) ClientId(clientId string) ApiGetSystemLinksCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLinksCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemLinksCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *LinksAPIService) GetSystemLinksCountExecute(r ApiGetSystemLinksCountReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *LinksAPIService) GetSystemLinksCountExecute(r ApiGetSystemLinksCountReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemLinksByIdRequest struct {
 	ctx context.Context
 	ApiService *LinksAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemLinksByIdRequest) ClientId(clientId string) ApiPatchSystemLinksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemLinksByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemLinksByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemLinksByIdRequest) ClientId(clientId string) ApiPatchSystemLinksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *LinksAPIService) PatchSystemLinksByIdExecute(r ApiPatchSystemLinksByIdR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *LinksAPIService) PatchSystemLinksByIdExecute(r ApiPatchSystemLinksByIdR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *LinksAPIService) PatchSystemLinksByIdExecute(r ApiPatchSystemLinksByIdR
 type ApiPostSystemLinksRequest struct {
 	ctx context.Context
 	ApiService *LinksAPIService
-	clientId *string
 	link *Link
-}
-
-// 
-func (r ApiPostSystemLinksRequest) ClientId(clientId string) ApiPostSystemLinksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // link
 func (r ApiPostSystemLinksRequest) Link(link Link) ApiPostSystemLinksRequest {
 	r.link = &link
+	return r
+}
+
+// 
+func (r ApiPostSystemLinksRequest) ClientId(clientId string) ApiPostSystemLinksRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *LinksAPIService) PostSystemLinksExecute(r ApiPostSystemLinksRequest) (*
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.link == nil {
 		return localVarReturnValue, nil, reportError("link is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *LinksAPIService) PostSystemLinksExecute(r ApiPostSystemLinksRequest) (*
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.link
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemLinksByIdRequest struct {
 	ctx context.Context
 	ApiService *LinksAPIService
 	id int32
-	clientId *string
 	link *Link
-}
-
-// 
-func (r ApiPutSystemLinksByIdRequest) ClientId(clientId string) ApiPutSystemLinksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // link
 func (r ApiPutSystemLinksByIdRequest) Link(link Link) ApiPutSystemLinksByIdRequest {
 	r.link = &link
+	return r
+}
+
+// 
+func (r ApiPutSystemLinksByIdRequest) ClientId(clientId string) ApiPutSystemLinksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *LinksAPIService) PutSystemLinksByIdExecute(r ApiPutSystemLinksByIdReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.link == nil {
 		return localVarReturnValue, nil, reportError("link is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *LinksAPIService) PutSystemLinksByIdExecute(r ApiPutSystemLinksByIdReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.link
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

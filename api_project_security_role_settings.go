@@ -27,7 +27,6 @@ type ApiGetProjectSecurityRolesByParentIdSettingsRequest struct {
 	ctx context.Context
 	ApiService *ProjectSecurityRoleSettingsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetProjectSecurityRolesByParentIdSettingsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectSecurityRolesByParentIdSettingsRequest) ClientId(clientId string) ApiGetProjectSecurityRolesByParentIdSettingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetProjectSecurityRolesByParentIdSettingsRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetProjectSecurityRolesByParentIdSettingsRequest) ClientId(clientId string) ApiGetProjectSecurityRolesByParentIdSettingsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectSecurityRolesByParentIdSettingsRequest) Execute() ([]ProjectSecurityRoleSetting, *http.Response, error) {
 	return r.ApiService.GetProjectSecurityRolesByParentIdSettingsExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *ProjectSecurityRoleSettingsAPIService) GetProjectSecurityRolesByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *ProjectSecurityRoleSettingsAPIService) GetProjectSecurityRolesByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetProjectSecurityRolesByParentIdSettingsByIdRequest struct {
 	ApiService *ProjectSecurityRoleSettingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetProjectSecurityRolesByParentIdSettingsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectSecurityRolesByParentIdSettingsByIdRequest) ClientId(clientId string) ApiGetProjectSecurityRolesByParentIdSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetProjectSecurityRolesByParentIdSettingsByIdRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetProjectSecurityRolesByParentIdSettingsByIdRequest) ClientId(clientId string) ApiGetProjectSecurityRolesByParentIdSettingsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectSecurityRolesByParentIdSettingsByIdRequest) Execute() (*ProjectSecurityRoleSetting, *http.Response, error) {
 	return r.ApiService.GetProjectSecurityRolesByParentIdSettingsByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *ProjectSecurityRoleSettingsAPIService) GetProjectSecurityRolesByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *ProjectSecurityRoleSettingsAPIService) GetProjectSecurityRolesByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetProjectSecurityRolesByParentIdSettingsCountRequest struct {
 	ctx context.Context
 	ApiService *ProjectSecurityRoleSettingsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetProjectSecurityRolesByParentIdSettingsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectSecurityRolesByParentIdSettingsCountRequest) ClientId(clientId string) ApiGetProjectSecurityRolesByParentIdSettingsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetProjectSecurityRolesByParentIdSettingsCountRequest) PageId(pageId 
 	return r
 }
 
+// 
+func (r ApiGetProjectSecurityRolesByParentIdSettingsCountRequest) ClientId(clientId string) ApiGetProjectSecurityRolesByParentIdSettingsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectSecurityRolesByParentIdSettingsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProjectSecurityRolesByParentIdSettingsCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *ProjectSecurityRoleSettingsAPIService) GetProjectSecurityRolesByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *ProjectSecurityRoleSettingsAPIService) GetProjectSecurityRolesByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -608,19 +605,19 @@ type ApiPatchProjectSecurityRolesByParentIdSettingsByIdRequest struct {
 	ApiService *ProjectSecurityRoleSettingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProjectSecurityRolesByParentIdSettingsByIdRequest) ClientId(clientId string) ApiPatchProjectSecurityRolesByParentIdSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProjectSecurityRolesByParentIdSettingsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProjectSecurityRolesByParentIdSettingsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProjectSecurityRolesByParentIdSettingsByIdRequest) ClientId(clientId string) ApiPatchProjectSecurityRolesByParentIdSettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -667,9 +664,6 @@ func (a *ProjectSecurityRoleSettingsAPIService) PatchProjectSecurityRolesByParen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -691,7 +685,9 @@ func (a *ProjectSecurityRoleSettingsAPIService) PatchProjectSecurityRolesByParen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -736,19 +732,19 @@ type ApiPutProjectSecurityRolesByParentIdSettingsByIdRequest struct {
 	ApiService *ProjectSecurityRoleSettingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	projectSecurityRoleSetting *ProjectSecurityRoleSetting
-}
-
-// 
-func (r ApiPutProjectSecurityRolesByParentIdSettingsByIdRequest) ClientId(clientId string) ApiPutProjectSecurityRolesByParentIdSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // projectSecurityRoleSetting
 func (r ApiPutProjectSecurityRolesByParentIdSettingsByIdRequest) ProjectSecurityRoleSetting(projectSecurityRoleSetting ProjectSecurityRoleSetting) ApiPutProjectSecurityRolesByParentIdSettingsByIdRequest {
 	r.projectSecurityRoleSetting = &projectSecurityRoleSetting
+	return r
+}
+
+// 
+func (r ApiPutProjectSecurityRolesByParentIdSettingsByIdRequest) ClientId(clientId string) ApiPutProjectSecurityRolesByParentIdSettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -795,9 +791,6 @@ func (a *ProjectSecurityRoleSettingsAPIService) PutProjectSecurityRolesByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectSecurityRoleSetting == nil {
 		return localVarReturnValue, nil, reportError("projectSecurityRoleSetting is required and must be specified")
 	}
@@ -819,7 +812,9 @@ func (a *ProjectSecurityRoleSettingsAPIService) PutProjectSecurityRolesByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectSecurityRoleSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -27,7 +27,6 @@ type ApiGetSalesStagesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesInfoAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSalesStagesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesStagesByIdInfoRequest) ClientId(clientId string) ApiGetSalesStagesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSalesStagesByIdInfoRequest) PageId(pageId int32) ApiGetSalesStages
 	return r
 }
 
+// 
+func (r ApiGetSalesStagesByIdInfoRequest) ClientId(clientId string) ApiGetSalesStagesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesStagesByIdInfoRequest) Execute() (*OpportunityStageInfo, *http.Response, error) {
 	return r.ApiService.GetSalesStagesByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *OpportunityStagesInfoAPIService) GetSalesStagesByIdInfoExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *OpportunityStagesInfoAPIService) GetSalesStagesByIdInfoExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *OpportunityStagesInfoAPIService) GetSalesStagesByIdInfoExecute(r ApiGet
 type ApiGetSalesStagesInfoRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesInfoAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetSalesStagesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesStagesInfoRequest) ClientId(clientId string) ApiGetSalesStagesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetSalesStagesInfoRequest) PageId(pageId int32) ApiGetSalesStagesInfo
 	return r
 }
 
+// 
+func (r ApiGetSalesStagesInfoRequest) ClientId(clientId string) ApiGetSalesStagesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesStagesInfoRequest) Execute() ([]OpportunityStageInfo, *http.Response, error) {
 	return r.ApiService.GetSalesStagesInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *OpportunityStagesInfoAPIService) GetSalesStagesInfoExecute(r ApiGetSale
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *OpportunityStagesInfoAPIService) GetSalesStagesInfoExecute(r ApiGetSale
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *OpportunityStagesInfoAPIService) GetSalesStagesInfoExecute(r ApiGetSale
 type ApiGetSalesStagesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStagesInfoAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSalesStagesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesStagesInfoCountRequest) ClientId(clientId string) ApiGetSalesStagesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSalesStagesInfoCountRequest) PageId(pageId int32) ApiGetSalesStage
 	return r
 }
 
+// 
+func (r ApiGetSalesStagesInfoCountRequest) ClientId(clientId string) ApiGetSalesStagesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesStagesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesStagesInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *OpportunityStagesInfoAPIService) GetSalesStagesInfoCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *OpportunityStagesInfoAPIService) GetSalesStagesInfoCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

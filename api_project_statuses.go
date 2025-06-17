@@ -74,9 +74,6 @@ func (a *ProjectStatusesAPIService) DeleteProjectStatusesByIdExecute(r ApiDelete
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ProjectStatusesAPIService) DeleteProjectStatusesByIdExecute(r ApiDelete
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ProjectStatusesAPIService) DeleteProjectStatusesByIdExecute(r ApiDelete
 type ApiGetProjectStatusesRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProjectStatusesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectStatusesRequest) ClientId(clientId string) ApiGetProjectStatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProjectStatusesRequest) PageId(pageId int32) ApiGetProjectStatuses
 	return r
 }
 
+// 
+func (r ApiGetProjectStatusesRequest) ClientId(clientId string) ApiGetProjectStatusesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectStatusesRequest) Execute() ([]ProjectStatus, *http.Response, error) {
 	return r.ApiService.GetProjectStatusesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ProjectStatusesAPIService) GetProjectStatusesExecute(r ApiGetProjectSta
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ProjectStatusesAPIService) GetProjectStatusesExecute(r ApiGetProjectSta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProjectStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProjectStatusesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectStatusesByIdRequest) ClientId(clientId string) ApiGetProjectStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProjectStatusesByIdRequest) PageId(pageId int32) ApiGetProjectStat
 	return r
 }
 
+// 
+func (r ApiGetProjectStatusesByIdRequest) ClientId(clientId string) ApiGetProjectStatusesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectStatusesByIdRequest) Execute() (*ProjectStatus, *http.Response, error) {
 	return r.ApiService.GetProjectStatusesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ProjectStatusesAPIService) GetProjectStatusesByIdExecute(r ApiGetProjec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ProjectStatusesAPIService) GetProjectStatusesByIdExecute(r ApiGetProjec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *ProjectStatusesAPIService) GetProjectStatusesByIdExecute(r ApiGetProjec
 type ApiGetProjectStatusesCountRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetProjectStatusesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectStatusesCountRequest) ClientId(clientId string) ApiGetProjectStatusesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetProjectStatusesCountRequest) PageId(pageId int32) ApiGetProjectSta
 	return r
 }
 
+// 
+func (r ApiGetProjectStatusesCountRequest) ClientId(clientId string) ApiGetProjectStatusesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectStatusesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProjectStatusesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *ProjectStatusesAPIService) GetProjectStatusesCountExecute(r ApiGetProje
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *ProjectStatusesAPIService) GetProjectStatusesCountExecute(r ApiGetProje
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchProjectStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProjectStatusesByIdRequest) ClientId(clientId string) ApiPatchProjectStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProjectStatusesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProjectStatusesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProjectStatusesByIdRequest) ClientId(clientId string) ApiPatchProjectStatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *ProjectStatusesAPIService) PatchProjectStatusesByIdExecute(r ApiPatchPr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *ProjectStatusesAPIService) PatchProjectStatusesByIdExecute(r ApiPatchPr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *ProjectStatusesAPIService) PatchProjectStatusesByIdExecute(r ApiPatchPr
 type ApiPostProjectStatusesRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesAPIService
-	clientId *string
 	projectStatus *ProjectStatus
-}
-
-// 
-func (r ApiPostProjectStatusesRequest) ClientId(clientId string) ApiPostProjectStatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // projectStatus
 func (r ApiPostProjectStatusesRequest) ProjectStatus(projectStatus ProjectStatus) ApiPostProjectStatusesRequest {
 	r.projectStatus = &projectStatus
+	return r
+}
+
+// 
+func (r ApiPostProjectStatusesRequest) ClientId(clientId string) ApiPostProjectStatusesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *ProjectStatusesAPIService) PostProjectStatusesExecute(r ApiPostProjectS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectStatus == nil {
 		return localVarReturnValue, nil, reportError("projectStatus is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *ProjectStatusesAPIService) PostProjectStatusesExecute(r ApiPostProjectS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutProjectStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ProjectStatusesAPIService
 	id int32
-	clientId *string
 	projectStatus *ProjectStatus
-}
-
-// 
-func (r ApiPutProjectStatusesByIdRequest) ClientId(clientId string) ApiPutProjectStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // projectStatus
 func (r ApiPutProjectStatusesByIdRequest) ProjectStatus(projectStatus ProjectStatus) ApiPutProjectStatusesByIdRequest {
 	r.projectStatus = &projectStatus
+	return r
+}
+
+// 
+func (r ApiPutProjectStatusesByIdRequest) ClientId(clientId string) ApiPutProjectStatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *ProjectStatusesAPIService) PutProjectStatusesByIdExecute(r ApiPutProjec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectStatus == nil {
 		return localVarReturnValue, nil, reportError("projectStatus is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *ProjectStatusesAPIService) PutProjectStatusesByIdExecute(r ApiPutProjec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

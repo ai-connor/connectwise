@@ -78,9 +78,6 @@ func (a *ServiceSignoffCustomFieldAPIService) DeleteServiceServiceSignoffByParen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *ServiceSignoffCustomFieldAPIService) DeleteServiceServiceSignoffByParen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsRequest struct {
 	ctx context.Context
 	ApiService *ServiceSignoffCustomFieldAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsRequest) ClientId(clientId string) ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsRequest) PageId(
 	return r
 }
 
+// 
+func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsRequest) ClientId(clientId string) ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsRequest) Execute() ([]ServiceSignoffCustomField, *http.Response, error) {
 	return r.ApiService.GetServiceServiceSignoffByParentIdSignoffcustomfieldsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *ServiceSignoffCustomFieldAPIService) GetServiceServiceSignoffByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *ServiceSignoffCustomFieldAPIService) GetServiceServiceSignoffByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest struct 
 	ApiService *ServiceSignoffCustomFieldAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest struct 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) ClientId(clientId string) ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) Pag
 	return r
 }
 
+// 
+func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) ClientId(clientId string) ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) Execute() (*ServiceSignoffCustomField, *http.Response, error) {
 	return r.ApiService.GetServiceServiceSignoffByParentIdSignoffcustomfieldsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *ServiceSignoffCustomFieldAPIService) GetServiceServiceSignoffByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *ServiceSignoffCustomFieldAPIService) GetServiceServiceSignoffByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsCountRequest struct
 	ctx context.Context
 	ApiService *ServiceSignoffCustomFieldAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsCountRequest struct
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsCountRequest) ClientId(clientId string) ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsCountRequest) Pa
 	return r
 }
 
+// 
+func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsCountRequest) ClientId(clientId string) ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceServiceSignoffByParentIdSignoffcustomfieldsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceServiceSignoffByParentIdSignoffcustomfieldsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *ServiceSignoffCustomFieldAPIService) GetServiceServiceSignoffByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *ServiceSignoffCustomFieldAPIService) GetServiceServiceSignoffByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest struc
 	ApiService *ServiceSignoffCustomFieldAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) ClientId(clientId string) ApiPatchServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) ClientId(clientId string) ApiPatchServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *ServiceSignoffCustomFieldAPIService) PatchServiceServiceSignoffByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *ServiceSignoffCustomFieldAPIService) PatchServiceServiceSignoffByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostServiceServiceSignoffByParentIdSignoffcustomfieldsRequest struct {
 	ctx context.Context
 	ApiService *ServiceSignoffCustomFieldAPIService
 	parentId int32
-	clientId *string
 	serviceSignoffCustomField *ServiceSignoffCustomField
-}
-
-// 
-func (r ApiPostServiceServiceSignoffByParentIdSignoffcustomfieldsRequest) ClientId(clientId string) ApiPostServiceServiceSignoffByParentIdSignoffcustomfieldsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // serviceSignoff
 func (r ApiPostServiceServiceSignoffByParentIdSignoffcustomfieldsRequest) ServiceSignoffCustomField(serviceSignoffCustomField ServiceSignoffCustomField) ApiPostServiceServiceSignoffByParentIdSignoffcustomfieldsRequest {
 	r.serviceSignoffCustomField = &serviceSignoffCustomField
+	return r
+}
+
+// 
+func (r ApiPostServiceServiceSignoffByParentIdSignoffcustomfieldsRequest) ClientId(clientId string) ApiPostServiceServiceSignoffByParentIdSignoffcustomfieldsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *ServiceSignoffCustomFieldAPIService) PostServiceServiceSignoffByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.serviceSignoffCustomField == nil {
 		return localVarReturnValue, nil, reportError("serviceSignoffCustomField is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *ServiceSignoffCustomFieldAPIService) PostServiceServiceSignoffByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.serviceSignoffCustomField
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest struct 
 	ApiService *ServiceSignoffCustomFieldAPIService
 	id int32
 	parentId int32
-	clientId *string
 	serviceSignoffCustomField *ServiceSignoffCustomField
-}
-
-// 
-func (r ApiPutServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) ClientId(clientId string) ApiPutServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ServiceSignoffCustomField
 func (r ApiPutServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) ServiceSignoffCustomField(serviceSignoffCustomField ServiceSignoffCustomField) ApiPutServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest {
 	r.serviceSignoffCustomField = &serviceSignoffCustomField
+	return r
+}
+
+// 
+func (r ApiPutServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest) ClientId(clientId string) ApiPutServiceServiceSignoffByParentIdSignoffcustomfieldsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *ServiceSignoffCustomFieldAPIService) PutServiceServiceSignoffByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.serviceSignoffCustomField == nil {
 		return localVarReturnValue, nil, reportError("serviceSignoffCustomField is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *ServiceSignoffCustomFieldAPIService) PutServiceServiceSignoffByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.serviceSignoffCustomField
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -26,7 +26,6 @@ type KnowledgeBaseSettingsesAPIService service
 type ApiGetServiceKnowledgebasesettingsRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseSettingsesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetServiceKnowledgebasesettingsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceKnowledgebasesettingsRequest) ClientId(clientId string) ApiGetServiceKnowledgebasesettingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetServiceKnowledgebasesettingsRequest) PageId(pageId int32) ApiGetSe
 	return r
 }
 
+// 
+func (r ApiGetServiceKnowledgebasesettingsRequest) ClientId(clientId string) ApiGetServiceKnowledgebasesettingsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceKnowledgebasesettingsRequest) Execute() (*KnowledgeBaseSettings, *http.Response, error) {
 	return r.ApiService.GetServiceKnowledgebasesettingsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *KnowledgeBaseSettingsesAPIService) GetServiceKnowledgebasesettingsExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *KnowledgeBaseSettingsesAPIService) GetServiceKnowledgebasesettingsExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetServiceKnowledgebasesettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseSettingsesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetServiceKnowledgebasesettingsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceKnowledgebasesettingsByIdRequest) ClientId(clientId string) ApiGetServiceKnowledgebasesettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetServiceKnowledgebasesettingsByIdRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetServiceKnowledgebasesettingsByIdRequest) ClientId(clientId string) ApiGetServiceKnowledgebasesettingsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceKnowledgebasesettingsByIdRequest) Execute() (*KnowledgeBaseSettings, *http.Response, error) {
 	return r.ApiService.GetServiceKnowledgebasesettingsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *KnowledgeBaseSettingsesAPIService) GetServiceKnowledgebasesettingsByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *KnowledgeBaseSettingsesAPIService) GetServiceKnowledgebasesettingsByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -407,19 +405,19 @@ type ApiPatchServiceKnowledgebasesettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseSettingsesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceKnowledgebasesettingsByIdRequest) ClientId(clientId string) ApiPatchServiceKnowledgebasesettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceKnowledgebasesettingsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceKnowledgebasesettingsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceKnowledgebasesettingsByIdRequest) ClientId(clientId string) ApiPatchServiceKnowledgebasesettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -463,9 +461,6 @@ func (a *KnowledgeBaseSettingsesAPIService) PatchServiceKnowledgebasesettingsByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -487,7 +482,9 @@ func (a *KnowledgeBaseSettingsesAPIService) PatchServiceKnowledgebasesettingsByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -530,19 +527,19 @@ func (a *KnowledgeBaseSettingsesAPIService) PatchServiceKnowledgebasesettingsByI
 type ApiPostServiceKnowledgebasesettingsRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseSettingsesAPIService
-	clientId *string
 	knowledgeBaseSettings *KnowledgeBaseSettings
-}
-
-// 
-func (r ApiPostServiceKnowledgebasesettingsRequest) ClientId(clientId string) ApiPostServiceKnowledgebasesettingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // knowledgeBaseSettings
 func (r ApiPostServiceKnowledgebasesettingsRequest) KnowledgeBaseSettings(knowledgeBaseSettings KnowledgeBaseSettings) ApiPostServiceKnowledgebasesettingsRequest {
 	r.knowledgeBaseSettings = &knowledgeBaseSettings
+	return r
+}
+
+// 
+func (r ApiPostServiceKnowledgebasesettingsRequest) ClientId(clientId string) ApiPostServiceKnowledgebasesettingsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -583,9 +580,6 @@ func (a *KnowledgeBaseSettingsesAPIService) PostServiceKnowledgebasesettingsExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.knowledgeBaseSettings == nil {
 		return localVarReturnValue, nil, reportError("knowledgeBaseSettings is required and must be specified")
 	}
@@ -607,7 +601,9 @@ func (a *KnowledgeBaseSettingsesAPIService) PostServiceKnowledgebasesettingsExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.knowledgeBaseSettings
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -651,19 +647,19 @@ type ApiPutServiceKnowledgebasesettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseSettingsesAPIService
 	id int32
-	clientId *string
 	knowledgeBaseSettings *KnowledgeBaseSettings
-}
-
-// 
-func (r ApiPutServiceKnowledgebasesettingsByIdRequest) ClientId(clientId string) ApiPutServiceKnowledgebasesettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // knowledgeBaseSettings
 func (r ApiPutServiceKnowledgebasesettingsByIdRequest) KnowledgeBaseSettings(knowledgeBaseSettings KnowledgeBaseSettings) ApiPutServiceKnowledgebasesettingsByIdRequest {
 	r.knowledgeBaseSettings = &knowledgeBaseSettings
+	return r
+}
+
+// 
+func (r ApiPutServiceKnowledgebasesettingsByIdRequest) ClientId(clientId string) ApiPutServiceKnowledgebasesettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -707,9 +703,6 @@ func (a *KnowledgeBaseSettingsesAPIService) PutServiceKnowledgebasesettingsByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.knowledgeBaseSettings == nil {
 		return localVarReturnValue, nil, reportError("knowledgeBaseSettings is required and must be specified")
 	}
@@ -731,7 +724,9 @@ func (a *KnowledgeBaseSettingsesAPIService) PutServiceKnowledgebasesettingsByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.knowledgeBaseSettings
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

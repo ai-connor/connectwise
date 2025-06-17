@@ -26,7 +26,6 @@ type WorkflowAttachmentsAPIService service
 type ApiGetSystemWorkflowsAttachmentsRequest struct {
 	ctx context.Context
 	ApiService *WorkflowAttachmentsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemWorkflowsAttachmentsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsAttachmentsRequest) ClientId(clientId string) ApiGetSystemWorkflowsAttachmentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemWorkflowsAttachmentsRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsAttachmentsRequest) ClientId(clientId string) ApiGetSystemWorkflowsAttachmentsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsAttachmentsRequest) Execute() ([]WorkflowAttachment, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsAttachmentsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsAttachmentsExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsAttachmentsExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemWorkflowsAttachmentsByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkflowAttachmentsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemWorkflowsAttachmentsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsAttachmentsByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsAttachmentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemWorkflowsAttachmentsByIdRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsAttachmentsByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsAttachmentsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsAttachmentsByIdRequest) Execute() ([]WorkflowAttachment, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsAttachmentsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsAttachmentsByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsAttachmentsByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -407,7 +405,6 @@ type ApiGetSystemWorkflowsByParentIdAttachmentsRequest struct {
 	ctx context.Context
 	ApiService *WorkflowAttachmentsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -416,12 +413,7 @@ type ApiGetSystemWorkflowsByParentIdAttachmentsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdAttachmentsRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdAttachmentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -472,6 +464,12 @@ func (r ApiGetSystemWorkflowsByParentIdAttachmentsRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdAttachmentsRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdAttachmentsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdAttachmentsRequest) Execute() ([]WorkflowAttachment, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdAttachmentsExecute(r)
 }
@@ -512,9 +510,6 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsByParentIdAttachmentsE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -557,7 +552,9 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsByParentIdAttachmentsE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -600,7 +597,6 @@ type ApiGetSystemWorkflowsByParentIdAttachmentsByIdRequest struct {
 	ApiService *WorkflowAttachmentsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -609,12 +605,7 @@ type ApiGetSystemWorkflowsByParentIdAttachmentsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdAttachmentsByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdAttachmentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -665,6 +656,12 @@ func (r ApiGetSystemWorkflowsByParentIdAttachmentsByIdRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdAttachmentsByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdAttachmentsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdAttachmentsByIdRequest) Execute() (*WorkflowAttachment, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdAttachmentsByIdExecute(r)
 }
@@ -708,9 +705,6 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsByParentIdAttachmentsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -753,7 +747,9 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsByParentIdAttachmentsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -795,7 +791,6 @@ type ApiGetSystemWorkflowsByParentIdAttachmentsCountRequest struct {
 	ctx context.Context
 	ApiService *WorkflowAttachmentsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -804,12 +799,7 @@ type ApiGetSystemWorkflowsByParentIdAttachmentsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdAttachmentsCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdAttachmentsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -860,6 +850,12 @@ func (r ApiGetSystemWorkflowsByParentIdAttachmentsCountRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdAttachmentsCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdAttachmentsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdAttachmentsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdAttachmentsCountExecute(r)
 }
@@ -900,9 +896,6 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsByParentIdAttachmentsC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -945,7 +938,9 @@ func (a *WorkflowAttachmentsAPIService) GetSystemWorkflowsByParentIdAttachmentsC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

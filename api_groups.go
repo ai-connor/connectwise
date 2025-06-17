@@ -74,9 +74,6 @@ func (a *GroupsAPIService) DeleteMarketingGroupsByIdExecute(r ApiDeleteMarketing
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *GroupsAPIService) DeleteMarketingGroupsByIdExecute(r ApiDeleteMarketing
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *GroupsAPIService) DeleteMarketingGroupsByIdExecute(r ApiDeleteMarketing
 type ApiGetMarketingGroupsRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetMarketingGroupsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetMarketingGroupsRequest) ClientId(clientId string) ApiGetMarketingGroupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetMarketingGroupsRequest) PageId(pageId int32) ApiGetMarketingGroups
 	return r
 }
 
+// 
+func (r ApiGetMarketingGroupsRequest) ClientId(clientId string) ApiGetMarketingGroupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetMarketingGroupsRequest) Execute() ([]Group, *http.Response, error) {
 	return r.ApiService.GetMarketingGroupsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *GroupsAPIService) GetMarketingGroupsExecute(r ApiGetMarketingGroupsRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *GroupsAPIService) GetMarketingGroupsExecute(r ApiGetMarketingGroupsRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetMarketingGroupsByIdRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetMarketingGroupsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetMarketingGroupsByIdRequest) ClientId(clientId string) ApiGetMarketingGroupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetMarketingGroupsByIdRequest) PageId(pageId int32) ApiGetMarketingGr
 	return r
 }
 
+// 
+func (r ApiGetMarketingGroupsByIdRequest) ClientId(clientId string) ApiGetMarketingGroupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetMarketingGroupsByIdRequest) Execute() (*Group, *http.Response, error) {
 	return r.ApiService.GetMarketingGroupsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *GroupsAPIService) GetMarketingGroupsByIdExecute(r ApiGetMarketingGroups
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *GroupsAPIService) GetMarketingGroupsByIdExecute(r ApiGetMarketingGroups
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetMarketingGroupsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetMarketingGroupsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetMarketingGroupsByIdUsagesRequest) ClientId(clientId string) ApiGetMarketingGroupsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetMarketingGroupsByIdUsagesRequest) PageId(pageId int32) ApiGetMarke
 	return r
 }
 
+// 
+func (r ApiGetMarketingGroupsByIdUsagesRequest) ClientId(clientId string) ApiGetMarketingGroupsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetMarketingGroupsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetMarketingGroupsByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *GroupsAPIService) GetMarketingGroupsByIdUsagesExecute(r ApiGetMarketing
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *GroupsAPIService) GetMarketingGroupsByIdUsagesExecute(r ApiGetMarketing
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetMarketingGroupsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetMarketingGroupsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetMarketingGroupsByIdUsagesListRequest) ClientId(clientId string) ApiGetMarketingGroupsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetMarketingGroupsByIdUsagesListRequest) PageId(pageId int32) ApiGetM
 	return r
 }
 
+// 
+func (r ApiGetMarketingGroupsByIdUsagesListRequest) ClientId(clientId string) ApiGetMarketingGroupsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetMarketingGroupsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetMarketingGroupsByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *GroupsAPIService) GetMarketingGroupsByIdUsagesListExecute(r ApiGetMarke
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *GroupsAPIService) GetMarketingGroupsByIdUsagesListExecute(r ApiGetMarke
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *GroupsAPIService) GetMarketingGroupsByIdUsagesListExecute(r ApiGetMarke
 type ApiGetMarketingGroupsCountRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetMarketingGroupsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetMarketingGroupsCountRequest) ClientId(clientId string) ApiGetMarketingGroupsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetMarketingGroupsCountRequest) PageId(pageId int32) ApiGetMarketingG
 	return r
 }
 
+// 
+func (r ApiGetMarketingGroupsCountRequest) ClientId(clientId string) ApiGetMarketingGroupsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetMarketingGroupsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetMarketingGroupsCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *GroupsAPIService) GetMarketingGroupsCountExecute(r ApiGetMarketingGroup
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *GroupsAPIService) GetMarketingGroupsCountExecute(r ApiGetMarketingGroup
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchMarketingGroupsByIdRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchMarketingGroupsByIdRequest) ClientId(clientId string) ApiPatchMarketingGroupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchMarketingGroupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchMarketingGroupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchMarketingGroupsByIdRequest) ClientId(clientId string) ApiPatchMarketingGroupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *GroupsAPIService) PatchMarketingGroupsByIdExecute(r ApiPatchMarketingGr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *GroupsAPIService) PatchMarketingGroupsByIdExecute(r ApiPatchMarketingGr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *GroupsAPIService) PatchMarketingGroupsByIdExecute(r ApiPatchMarketingGr
 type ApiPostMarketingGroupsRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
-	clientId *string
 	group *Group
-}
-
-// 
-func (r ApiPostMarketingGroupsRequest) ClientId(clientId string) ApiPostMarketingGroupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // group
 func (r ApiPostMarketingGroupsRequest) Group(group Group) ApiPostMarketingGroupsRequest {
 	r.group = &group
+	return r
+}
+
+// 
+func (r ApiPostMarketingGroupsRequest) ClientId(clientId string) ApiPostMarketingGroupsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *GroupsAPIService) PostMarketingGroupsExecute(r ApiPostMarketingGroupsRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.group == nil {
 		return localVarReturnValue, nil, reportError("group is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *GroupsAPIService) PostMarketingGroupsExecute(r ApiPostMarketingGroupsRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.group
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutMarketingGroupsByIdRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
 	id int32
-	clientId *string
 	group *Group
-}
-
-// 
-func (r ApiPutMarketingGroupsByIdRequest) ClientId(clientId string) ApiPutMarketingGroupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // group
 func (r ApiPutMarketingGroupsByIdRequest) Group(group Group) ApiPutMarketingGroupsByIdRequest {
 	r.group = &group
+	return r
+}
+
+// 
+func (r ApiPutMarketingGroupsByIdRequest) ClientId(clientId string) ApiPutMarketingGroupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *GroupsAPIService) PutMarketingGroupsByIdExecute(r ApiPutMarketingGroups
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.group == nil {
 		return localVarReturnValue, nil, reportError("group is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *GroupsAPIService) PutMarketingGroupsByIdExecute(r ApiPutMarketingGroups
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.group
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

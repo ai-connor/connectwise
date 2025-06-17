@@ -74,9 +74,6 @@ func (a *SalesQuotasAPIService) DeleteSalesQuotasByIdExecute(r ApiDeleteSalesQuo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *SalesQuotasAPIService) DeleteSalesQuotasByIdExecute(r ApiDeleteSalesQuo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *SalesQuotasAPIService) DeleteSalesQuotasByIdExecute(r ApiDeleteSalesQuo
 type ApiGetSalesQuotasRequest struct {
 	ctx context.Context
 	ApiService *SalesQuotasAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSalesQuotasRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesQuotasRequest) ClientId(clientId string) ApiGetSalesQuotasRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSalesQuotasRequest) PageId(pageId int32) ApiGetSalesQuotasRequest 
 	return r
 }
 
+// 
+func (r ApiGetSalesQuotasRequest) ClientId(clientId string) ApiGetSalesQuotasRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesQuotasRequest) Execute() ([]SalesQuota, *http.Response, error) {
 	return r.ApiService.GetSalesQuotasExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *SalesQuotasAPIService) GetSalesQuotasExecute(r ApiGetSalesQuotasRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *SalesQuotasAPIService) GetSalesQuotasExecute(r ApiGetSalesQuotasRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSalesQuotasByIdRequest struct {
 	ctx context.Context
 	ApiService *SalesQuotasAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSalesQuotasByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesQuotasByIdRequest) ClientId(clientId string) ApiGetSalesQuotasByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSalesQuotasByIdRequest) PageId(pageId int32) ApiGetSalesQuotasById
 	return r
 }
 
+// 
+func (r ApiGetSalesQuotasByIdRequest) ClientId(clientId string) ApiGetSalesQuotasByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesQuotasByIdRequest) Execute() (*SalesQuota, *http.Response, error) {
 	return r.ApiService.GetSalesQuotasByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *SalesQuotasAPIService) GetSalesQuotasByIdExecute(r ApiGetSalesQuotasByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *SalesQuotasAPIService) GetSalesQuotasByIdExecute(r ApiGetSalesQuotasByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *SalesQuotasAPIService) GetSalesQuotasByIdExecute(r ApiGetSalesQuotasByI
 type ApiGetSalesQuotasCountRequest struct {
 	ctx context.Context
 	ApiService *SalesQuotasAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSalesQuotasCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesQuotasCountRequest) ClientId(clientId string) ApiGetSalesQuotasCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSalesQuotasCountRequest) PageId(pageId int32) ApiGetSalesQuotasCou
 	return r
 }
 
+// 
+func (r ApiGetSalesQuotasCountRequest) ClientId(clientId string) ApiGetSalesQuotasCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesQuotasCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesQuotasCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *SalesQuotasAPIService) GetSalesQuotasCountExecute(r ApiGetSalesQuotasCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *SalesQuotasAPIService) GetSalesQuotasCountExecute(r ApiGetSalesQuotasCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSalesQuotasByIdRequest struct {
 	ctx context.Context
 	ApiService *SalesQuotasAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesQuotasByIdRequest) ClientId(clientId string) ApiPatchSalesQuotasByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesQuotasByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesQuotasByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesQuotasByIdRequest) ClientId(clientId string) ApiPatchSalesQuotasByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *SalesQuotasAPIService) PatchSalesQuotasByIdExecute(r ApiPatchSalesQuota
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *SalesQuotasAPIService) PatchSalesQuotasByIdExecute(r ApiPatchSalesQuota
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *SalesQuotasAPIService) PatchSalesQuotasByIdExecute(r ApiPatchSalesQuota
 type ApiPostSalesQuotasRequest struct {
 	ctx context.Context
 	ApiService *SalesQuotasAPIService
-	clientId *string
 	salesQuota *SalesQuota
-}
-
-// 
-func (r ApiPostSalesQuotasRequest) ClientId(clientId string) ApiPostSalesQuotasRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // salesQuota
 func (r ApiPostSalesQuotasRequest) SalesQuota(salesQuota SalesQuota) ApiPostSalesQuotasRequest {
 	r.salesQuota = &salesQuota
+	return r
+}
+
+// 
+func (r ApiPostSalesQuotasRequest) ClientId(clientId string) ApiPostSalesQuotasRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *SalesQuotasAPIService) PostSalesQuotasExecute(r ApiPostSalesQuotasReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.salesQuota == nil {
 		return localVarReturnValue, nil, reportError("salesQuota is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *SalesQuotasAPIService) PostSalesQuotasExecute(r ApiPostSalesQuotasReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.salesQuota
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSalesQuotasByIdRequest struct {
 	ctx context.Context
 	ApiService *SalesQuotasAPIService
 	id int32
-	clientId *string
 	salesQuota *SalesQuota
-}
-
-// 
-func (r ApiPutSalesQuotasByIdRequest) ClientId(clientId string) ApiPutSalesQuotasByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // salesQuota
 func (r ApiPutSalesQuotasByIdRequest) SalesQuota(salesQuota SalesQuota) ApiPutSalesQuotasByIdRequest {
 	r.salesQuota = &salesQuota
+	return r
+}
+
+// 
+func (r ApiPutSalesQuotasByIdRequest) ClientId(clientId string) ApiPutSalesQuotasByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *SalesQuotasAPIService) PutSalesQuotasByIdExecute(r ApiPutSalesQuotasByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.salesQuota == nil {
 		return localVarReturnValue, nil, reportError("salesQuota is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *SalesQuotasAPIService) PutSalesQuotasByIdExecute(r ApiPutSalesQuotasByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.salesQuota
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

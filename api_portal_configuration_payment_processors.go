@@ -26,7 +26,6 @@ type PortalConfigurationPaymentProcessorsAPIService service
 type ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsRequest struct {
 	ctx context.Context
 	ApiService *PortalConfigurationPaymentProcessorsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsRequest struc
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsRequest) P
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsRequest) Execute() ([]PortalConfigurationPaymentProcessor, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *PortalConfigurationPaymentProcessorsAPIService) GetCompanyPortalConfigu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *PortalConfigurationPaymentProcessorsAPIService) GetCompanyPortalConfigu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdRequest s
 	ctx context.Context
 	ApiService *PortalConfigurationPaymentProcessorsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdRequest s
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdReques
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdRequest) Execute() (*PortalConfigurationPaymentProcessor, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *PortalConfigurationPaymentProcessorsAPIService) GetCompanyPortalConfigu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *PortalConfigurationPaymentProcessorsAPIService) GetCompanyPortalConfigu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *PortalConfigurationPaymentProcessorsAPIService) GetCompanyPortalConfigu
 type ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountRequest struct {
 	ctx context.Context
 	ApiService *PortalConfigurationPaymentProcessorsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountRequest 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountReque
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsInvoiceSetupPaymentProcessorsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *PortalConfigurationPaymentProcessorsAPIService) GetCompanyPortalConfigu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *PortalConfigurationPaymentProcessorsAPIService) GetCompanyPortalConfigu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

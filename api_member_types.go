@@ -74,9 +74,6 @@ func (a *MemberTypesAPIService) DeleteSystemMembersTypesByIdExecute(r ApiDeleteS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *MemberTypesAPIService) DeleteSystemMembersTypesByIdExecute(r ApiDeleteS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *MemberTypesAPIService) DeleteSystemMembersTypesByIdExecute(r ApiDeleteS
 type ApiGetSystemMembersTypesRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemMembersTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersTypesRequest) ClientId(clientId string) ApiGetSystemMembersTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemMembersTypesRequest) PageId(pageId int32) ApiGetSystemMember
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersTypesRequest) ClientId(clientId string) ApiGetSystemMembersTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersTypesRequest) Execute() ([]MemberType, *http.Response, error) {
 	return r.ApiService.GetSystemMembersTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesExecute(r ApiGetSystemMembe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesExecute(r ApiGetSystemMembe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemMembersTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemMembersTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersTypesByIdRequest) ClientId(clientId string) ApiGetSystemMembersTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemMembersTypesByIdRequest) PageId(pageId int32) ApiGetSystemMe
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersTypesByIdRequest) ClientId(clientId string) ApiGetSystemMembersTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersTypesByIdRequest) Execute() (*MemberType, *http.Response, error) {
 	return r.ApiService.GetSystemMembersTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesByIdExecute(r ApiGetSystemM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesByIdExecute(r ApiGetSystemM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSystemMembersTypesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetSystemMembersTypesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersTypesByIdInfoRequest) ClientId(clientId string) ApiGetSystemMembersTypesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetSystemMembersTypesByIdInfoRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersTypesByIdInfoRequest) ClientId(clientId string) ApiGetSystemMembersTypesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersTypesByIdInfoRequest) Execute() (*MemberTypeInfo, *http.Response, error) {
 	return r.ApiService.GetSystemMembersTypesByIdInfoExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesByIdInfoExecute(r ApiGetSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesByIdInfoExecute(r ApiGetSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -699,7 +695,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesByIdInfoExecute(r ApiGetSys
 type ApiGetSystemMembersTypesCountRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -708,12 +703,7 @@ type ApiGetSystemMembersTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersTypesCountRequest) ClientId(clientId string) ApiGetSystemMembersTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -764,6 +754,12 @@ func (r ApiGetSystemMembersTypesCountRequest) PageId(pageId int32) ApiGetSystemM
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersTypesCountRequest) ClientId(clientId string) ApiGetSystemMembersTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMembersTypesCountExecute(r)
 }
@@ -801,9 +797,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesCountExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -846,7 +839,9 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesCountExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -887,7 +882,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesCountExecute(r ApiGetSystem
 type ApiGetSystemMembersTypesInfoRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -896,12 +890,7 @@ type ApiGetSystemMembersTypesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersTypesInfoRequest) ClientId(clientId string) ApiGetSystemMembersTypesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -952,6 +941,12 @@ func (r ApiGetSystemMembersTypesInfoRequest) PageId(pageId int32) ApiGetSystemMe
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersTypesInfoRequest) ClientId(clientId string) ApiGetSystemMembersTypesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersTypesInfoRequest) Execute() ([]MemberTypeInfo, *http.Response, error) {
 	return r.ApiService.GetSystemMembersTypesInfoExecute(r)
 }
@@ -989,9 +984,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesInfoExecute(r ApiGetSystemM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1034,7 +1026,9 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesInfoExecute(r ApiGetSystemM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1075,7 +1069,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesInfoExecute(r ApiGetSystemM
 type ApiGetSystemMembersTypesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1084,12 +1077,7 @@ type ApiGetSystemMembersTypesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersTypesInfoCountRequest) ClientId(clientId string) ApiGetSystemMembersTypesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1140,6 +1128,12 @@ func (r ApiGetSystemMembersTypesInfoCountRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersTypesInfoCountRequest) ClientId(clientId string) ApiGetSystemMembersTypesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersTypesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMembersTypesInfoCountExecute(r)
 }
@@ -1177,9 +1171,6 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesInfoCountExecute(r ApiGetSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1222,7 +1213,9 @@ func (a *MemberTypesAPIService) GetSystemMembersTypesInfoCountExecute(r ApiGetSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1264,19 +1257,19 @@ type ApiPatchSystemMembersTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemMembersTypesByIdRequest) ClientId(clientId string) ApiPatchSystemMembersTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemMembersTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemMembersTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemMembersTypesByIdRequest) ClientId(clientId string) ApiPatchSystemMembersTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1320,9 +1313,6 @@ func (a *MemberTypesAPIService) PatchSystemMembersTypesByIdExecute(r ApiPatchSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1344,7 +1334,9 @@ func (a *MemberTypesAPIService) PatchSystemMembersTypesByIdExecute(r ApiPatchSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1387,19 +1379,19 @@ func (a *MemberTypesAPIService) PatchSystemMembersTypesByIdExecute(r ApiPatchSys
 type ApiPostSystemMembersTypesRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
-	clientId *string
 	memberType *MemberType
-}
-
-// 
-func (r ApiPostSystemMembersTypesRequest) ClientId(clientId string) ApiPostSystemMembersTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // type
 func (r ApiPostSystemMembersTypesRequest) MemberType(memberType MemberType) ApiPostSystemMembersTypesRequest {
 	r.memberType = &memberType
+	return r
+}
+
+// 
+func (r ApiPostSystemMembersTypesRequest) ClientId(clientId string) ApiPostSystemMembersTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1440,9 +1432,6 @@ func (a *MemberTypesAPIService) PostSystemMembersTypesExecute(r ApiPostSystemMem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberType == nil {
 		return localVarReturnValue, nil, reportError("memberType is required and must be specified")
 	}
@@ -1464,7 +1453,9 @@ func (a *MemberTypesAPIService) PostSystemMembersTypesExecute(r ApiPostSystemMem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1508,19 +1499,19 @@ type ApiPutSystemMembersTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *MemberTypesAPIService
 	id int32
-	clientId *string
 	memberType *MemberType
-}
-
-// 
-func (r ApiPutSystemMembersTypesByIdRequest) ClientId(clientId string) ApiPutSystemMembersTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // type
 func (r ApiPutSystemMembersTypesByIdRequest) MemberType(memberType MemberType) ApiPutSystemMembersTypesByIdRequest {
 	r.memberType = &memberType
+	return r
+}
+
+// 
+func (r ApiPutSystemMembersTypesByIdRequest) ClientId(clientId string) ApiPutSystemMembersTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1564,9 +1555,6 @@ func (a *MemberTypesAPIService) PutSystemMembersTypesByIdExecute(r ApiPutSystemM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberType == nil {
 		return localVarReturnValue, nil, reportError("memberType is required and must be specified")
 	}
@@ -1588,7 +1576,9 @@ func (a *MemberTypesAPIService) PutSystemMembersTypesByIdExecute(r ApiPutSystemM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

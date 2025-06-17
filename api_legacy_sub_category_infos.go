@@ -28,7 +28,6 @@ type ApiGetProcurementCategoriesByParentIdSubcategoriesByIdInfoRequest struct {
 	ApiService *LegacySubCategoryInfosAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -37,12 +36,7 @@ type ApiGetProcurementCategoriesByParentIdSubcategoriesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesByParentIdSubcategoriesByIdInfoRequest) ClientId(clientId string) ApiGetProcurementCategoriesByParentIdSubcategoriesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -93,6 +87,12 @@ func (r ApiGetProcurementCategoriesByParentIdSubcategoriesByIdInfoRequest) PageI
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesByParentIdSubcategoriesByIdInfoRequest) ClientId(clientId string) ApiGetProcurementCategoriesByParentIdSubcategoriesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesByParentIdSubcategoriesByIdInfoRequest) Execute() (*LegacySubCategoryInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesByParentIdSubcategoriesByIdInfoExecute(r)
 }
@@ -136,9 +136,6 @@ func (a *LegacySubCategoryInfosAPIService) GetProcurementCategoriesByParentIdSub
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -181,7 +178,9 @@ func (a *LegacySubCategoryInfosAPIService) GetProcurementCategoriesByParentIdSub
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -223,7 +222,6 @@ type ApiGetProcurementCategoriesByParentIdSubcategoriesInfoRequest struct {
 	ctx context.Context
 	ApiService *LegacySubCategoryInfosAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -232,12 +230,7 @@ type ApiGetProcurementCategoriesByParentIdSubcategoriesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesByParentIdSubcategoriesInfoRequest) ClientId(clientId string) ApiGetProcurementCategoriesByParentIdSubcategoriesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -288,6 +281,12 @@ func (r ApiGetProcurementCategoriesByParentIdSubcategoriesInfoRequest) PageId(pa
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesByParentIdSubcategoriesInfoRequest) ClientId(clientId string) ApiGetProcurementCategoriesByParentIdSubcategoriesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesByParentIdSubcategoriesInfoRequest) Execute() ([]LegacySubCategoryInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesByParentIdSubcategoriesInfoExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *LegacySubCategoryInfosAPIService) GetProcurementCategoriesByParentIdSub
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *LegacySubCategoryInfosAPIService) GetProcurementCategoriesByParentIdSub
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetProcurementCategoriesByParentIdSubcategoriesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *LegacySubCategoryInfosAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetProcurementCategoriesByParentIdSubcategoriesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesByParentIdSubcategoriesInfoCountRequest) ClientId(clientId string) ApiGetProcurementCategoriesByParentIdSubcategoriesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetProcurementCategoriesByParentIdSubcategoriesInfoCountRequest) Page
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesByParentIdSubcategoriesInfoCountRequest) ClientId(clientId string) ApiGetProcurementCategoriesByParentIdSubcategoriesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesByParentIdSubcategoriesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesByParentIdSubcategoriesInfoCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *LegacySubCategoryInfosAPIService) GetProcurementCategoriesByParentIdSub
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *LegacySubCategoryInfosAPIService) GetProcurementCategoriesByParentIdSub
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

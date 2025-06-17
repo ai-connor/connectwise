@@ -27,7 +27,6 @@ type ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsRequest struct {
 	ctx context.Context
 	ApiService *BoardTypeSubTypeItemAssociationAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsRequest) PageId(
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsRequest) Execute() ([]BoardTypeSubTypeItemAssociation, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdTypeSubTypeItemAssociationsExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *BoardTypeSubTypeItemAssociationAPIService) GetServiceBoardsByParentIdTy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *BoardTypeSubTypeItemAssociationAPIService) GetServiceBoardsByParentIdTy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdRequest struct 
 	ApiService *BoardTypeSubTypeItemAssociationAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdRequest struct 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdRequest) Pag
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdRequest) Execute() (*BoardTypeSubTypeItemAssociation, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdTypeSubTypeItemAssociationsByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *BoardTypeSubTypeItemAssociationAPIService) GetServiceBoardsByParentIdTy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *BoardTypeSubTypeItemAssociationAPIService) GetServiceBoardsByParentIdTy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountRequest struct
 	ctx context.Context
 	ApiService *BoardTypeSubTypeItemAssociationAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountRequest struct
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountRequest) Pa
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdTypeSubTypeItemAssociationsCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *BoardTypeSubTypeItemAssociationAPIService) GetServiceBoardsByParentIdTy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *BoardTypeSubTypeItemAssociationAPIService) GetServiceBoardsByParentIdTy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

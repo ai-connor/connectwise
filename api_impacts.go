@@ -26,7 +26,6 @@ type ImpactsAPIService service
 type ApiGetServiceImpactsRequest struct {
 	ctx context.Context
 	ApiService *ImpactsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetServiceImpactsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceImpactsRequest) ClientId(clientId string) ApiGetServiceImpactsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetServiceImpactsRequest) PageId(pageId int32) ApiGetServiceImpactsRe
 	return r
 }
 
+// 
+func (r ApiGetServiceImpactsRequest) ClientId(clientId string) ApiGetServiceImpactsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceImpactsRequest) Execute() ([]Impact, *http.Response, error) {
 	return r.ApiService.GetServiceImpactsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *ImpactsAPIService) GetServiceImpactsExecute(r ApiGetServiceImpactsReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *ImpactsAPIService) GetServiceImpactsExecute(r ApiGetServiceImpactsReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetServiceImpactsByIdRequest struct {
 	ctx context.Context
 	ApiService *ImpactsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetServiceImpactsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceImpactsByIdRequest) ClientId(clientId string) ApiGetServiceImpactsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetServiceImpactsByIdRequest) PageId(pageId int32) ApiGetServiceImpac
 	return r
 }
 
+// 
+func (r ApiGetServiceImpactsByIdRequest) ClientId(clientId string) ApiGetServiceImpactsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceImpactsByIdRequest) Execute() (*Impact, *http.Response, error) {
 	return r.ApiService.GetServiceImpactsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *ImpactsAPIService) GetServiceImpactsByIdExecute(r ApiGetServiceImpactsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *ImpactsAPIService) GetServiceImpactsByIdExecute(r ApiGetServiceImpactsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *ImpactsAPIService) GetServiceImpactsByIdExecute(r ApiGetServiceImpactsB
 type ApiGetServiceImpactsCountRequest struct {
 	ctx context.Context
 	ApiService *ImpactsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetServiceImpactsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceImpactsCountRequest) ClientId(clientId string) ApiGetServiceImpactsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetServiceImpactsCountRequest) PageId(pageId int32) ApiGetServiceImpa
 	return r
 }
 
+// 
+func (r ApiGetServiceImpactsCountRequest) ClientId(clientId string) ApiGetServiceImpactsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceImpactsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceImpactsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *ImpactsAPIService) GetServiceImpactsCountExecute(r ApiGetServiceImpacts
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *ImpactsAPIService) GetServiceImpactsCountExecute(r ApiGetServiceImpacts
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchServiceImpactsByIdRequest struct {
 	ctx context.Context
 	ApiService *ImpactsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceImpactsByIdRequest) ClientId(clientId string) ApiPatchServiceImpactsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceImpactsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceImpactsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceImpactsByIdRequest) ClientId(clientId string) ApiPatchServiceImpactsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *ImpactsAPIService) PatchServiceImpactsByIdExecute(r ApiPatchServiceImpa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *ImpactsAPIService) PatchServiceImpactsByIdExecute(r ApiPatchServiceImpa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutServiceImpactsByIdRequest struct {
 	ctx context.Context
 	ApiService *ImpactsAPIService
 	id int32
-	clientId *string
 	impact *Impact
-}
-
-// 
-func (r ApiPutServiceImpactsByIdRequest) ClientId(clientId string) ApiPutServiceImpactsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // impact
 func (r ApiPutServiceImpactsByIdRequest) Impact(impact Impact) ApiPutServiceImpactsByIdRequest {
 	r.impact = &impact
+	return r
+}
+
+// 
+func (r ApiPutServiceImpactsByIdRequest) ClientId(clientId string) ApiPutServiceImpactsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *ImpactsAPIService) PutServiceImpactsByIdExecute(r ApiPutServiceImpactsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.impact == nil {
 		return localVarReturnValue, nil, reportError("impact is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *ImpactsAPIService) PutServiceImpactsByIdExecute(r ApiPutServiceImpactsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.impact
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

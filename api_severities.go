@@ -26,7 +26,6 @@ type SeveritiesAPIService service
 type ApiGetServiceSeveritiesRequest struct {
 	ctx context.Context
 	ApiService *SeveritiesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetServiceSeveritiesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSeveritiesRequest) ClientId(clientId string) ApiGetServiceSeveritiesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetServiceSeveritiesRequest) PageId(pageId int32) ApiGetServiceSeveri
 	return r
 }
 
+// 
+func (r ApiGetServiceSeveritiesRequest) ClientId(clientId string) ApiGetServiceSeveritiesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSeveritiesRequest) Execute() ([]Severity, *http.Response, error) {
 	return r.ApiService.GetServiceSeveritiesExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *SeveritiesAPIService) GetServiceSeveritiesExecute(r ApiGetServiceSeveri
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *SeveritiesAPIService) GetServiceSeveritiesExecute(r ApiGetServiceSeveri
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetServiceSeveritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *SeveritiesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetServiceSeveritiesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSeveritiesByIdRequest) ClientId(clientId string) ApiGetServiceSeveritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetServiceSeveritiesByIdRequest) PageId(pageId int32) ApiGetServiceSe
 	return r
 }
 
+// 
+func (r ApiGetServiceSeveritiesByIdRequest) ClientId(clientId string) ApiGetServiceSeveritiesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSeveritiesByIdRequest) Execute() (*Severity, *http.Response, error) {
 	return r.ApiService.GetServiceSeveritiesByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *SeveritiesAPIService) GetServiceSeveritiesByIdExecute(r ApiGetServiceSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *SeveritiesAPIService) GetServiceSeveritiesByIdExecute(r ApiGetServiceSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *SeveritiesAPIService) GetServiceSeveritiesByIdExecute(r ApiGetServiceSe
 type ApiGetServiceSeveritiesCountRequest struct {
 	ctx context.Context
 	ApiService *SeveritiesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetServiceSeveritiesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSeveritiesCountRequest) ClientId(clientId string) ApiGetServiceSeveritiesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetServiceSeveritiesCountRequest) PageId(pageId int32) ApiGetServiceS
 	return r
 }
 
+// 
+func (r ApiGetServiceSeveritiesCountRequest) ClientId(clientId string) ApiGetServiceSeveritiesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSeveritiesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceSeveritiesCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *SeveritiesAPIService) GetServiceSeveritiesCountExecute(r ApiGetServiceS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *SeveritiesAPIService) GetServiceSeveritiesCountExecute(r ApiGetServiceS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchServiceSeveritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *SeveritiesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceSeveritiesByIdRequest) ClientId(clientId string) ApiPatchServiceSeveritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceSeveritiesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceSeveritiesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceSeveritiesByIdRequest) ClientId(clientId string) ApiPatchServiceSeveritiesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *SeveritiesAPIService) PatchServiceSeveritiesByIdExecute(r ApiPatchServi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *SeveritiesAPIService) PatchServiceSeveritiesByIdExecute(r ApiPatchServi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutServiceSeveritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *SeveritiesAPIService
 	id int32
-	clientId *string
 	severity *Severity
-}
-
-// 
-func (r ApiPutServiceSeveritiesByIdRequest) ClientId(clientId string) ApiPutServiceSeveritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // severity
 func (r ApiPutServiceSeveritiesByIdRequest) Severity(severity Severity) ApiPutServiceSeveritiesByIdRequest {
 	r.severity = &severity
+	return r
+}
+
+// 
+func (r ApiPutServiceSeveritiesByIdRequest) ClientId(clientId string) ApiPutServiceSeveritiesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *SeveritiesAPIService) PutServiceSeveritiesByIdExecute(r ApiPutServiceSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.severity == nil {
 		return localVarReturnValue, nil, reportError("severity is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *SeveritiesAPIService) PutServiceSeveritiesByIdExecute(r ApiPutServiceSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.severity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

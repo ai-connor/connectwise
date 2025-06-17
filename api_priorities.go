@@ -74,9 +74,6 @@ func (a *PrioritiesAPIService) DeleteServicePrioritiesByIdExecute(r ApiDeleteSer
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *PrioritiesAPIService) DeleteServicePrioritiesByIdExecute(r ApiDeleteSer
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *PrioritiesAPIService) DeleteServicePrioritiesByIdExecute(r ApiDeleteSer
 type ApiGetServicePrioritiesRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetServicePrioritiesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServicePrioritiesRequest) ClientId(clientId string) ApiGetServicePrioritiesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetServicePrioritiesRequest) PageId(pageId int32) ApiGetServicePriori
 	return r
 }
 
+// 
+func (r ApiGetServicePrioritiesRequest) ClientId(clientId string) ApiGetServicePrioritiesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServicePrioritiesRequest) Execute() ([]Priority, *http.Response, error) {
 	return r.ApiService.GetServicePrioritiesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *PrioritiesAPIService) GetServicePrioritiesExecute(r ApiGetServicePriori
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *PrioritiesAPIService) GetServicePrioritiesExecute(r ApiGetServicePriori
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetServicePrioritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetServicePrioritiesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServicePrioritiesByIdRequest) ClientId(clientId string) ApiGetServicePrioritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetServicePrioritiesByIdRequest) PageId(pageId int32) ApiGetServicePr
 	return r
 }
 
+// 
+func (r ApiGetServicePrioritiesByIdRequest) ClientId(clientId string) ApiGetServicePrioritiesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServicePrioritiesByIdRequest) Execute() (*Priority, *http.Response, error) {
 	return r.ApiService.GetServicePrioritiesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdExecute(r ApiGetServicePr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdExecute(r ApiGetServicePr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetServicePrioritiesByIdImageRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
 	id int32
-	clientId *string
 	lastModified string
 	conditions *string
 	childConditions *string
@@ -518,12 +514,7 @@ type ApiGetServicePrioritiesByIdImageRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServicePrioritiesByIdImageRequest) ClientId(clientId string) ApiGetServicePrioritiesByIdImageRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -574,6 +565,12 @@ func (r ApiGetServicePrioritiesByIdImageRequest) PageId(pageId int32) ApiGetServ
 	return r
 }
 
+// 
+func (r ApiGetServicePrioritiesByIdImageRequest) ClientId(clientId string) ApiGetServicePrioritiesByIdImageRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServicePrioritiesByIdImageRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetServicePrioritiesByIdImageExecute(r)
 }
@@ -615,9 +612,6 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdImageExecute(r ApiGetServ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -660,7 +654,9 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdImageExecute(r ApiGetServ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -693,7 +689,6 @@ type ApiGetServicePrioritiesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -702,12 +697,7 @@ type ApiGetServicePrioritiesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServicePrioritiesByIdUsagesRequest) ClientId(clientId string) ApiGetServicePrioritiesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -758,6 +748,12 @@ func (r ApiGetServicePrioritiesByIdUsagesRequest) PageId(pageId int32) ApiGetSer
 	return r
 }
 
+// 
+func (r ApiGetServicePrioritiesByIdUsagesRequest) ClientId(clientId string) ApiGetServicePrioritiesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServicePrioritiesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetServicePrioritiesByIdUsagesExecute(r)
 }
@@ -798,9 +794,6 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdUsagesExecute(r ApiGetSer
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -843,7 +836,9 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdUsagesExecute(r ApiGetSer
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -885,7 +880,6 @@ type ApiGetServicePrioritiesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -894,12 +888,7 @@ type ApiGetServicePrioritiesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServicePrioritiesByIdUsagesListRequest) ClientId(clientId string) ApiGetServicePrioritiesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -950,6 +939,12 @@ func (r ApiGetServicePrioritiesByIdUsagesListRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetServicePrioritiesByIdUsagesListRequest) ClientId(clientId string) ApiGetServicePrioritiesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServicePrioritiesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetServicePrioritiesByIdUsagesListExecute(r)
 }
@@ -990,9 +985,6 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdUsagesListExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1035,7 +1027,9 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdUsagesListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1076,7 +1070,6 @@ func (a *PrioritiesAPIService) GetServicePrioritiesByIdUsagesListExecute(r ApiGe
 type ApiGetServicePrioritiesCountRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1085,12 +1078,7 @@ type ApiGetServicePrioritiesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServicePrioritiesCountRequest) ClientId(clientId string) ApiGetServicePrioritiesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1141,6 +1129,12 @@ func (r ApiGetServicePrioritiesCountRequest) PageId(pageId int32) ApiGetServiceP
 	return r
 }
 
+// 
+func (r ApiGetServicePrioritiesCountRequest) ClientId(clientId string) ApiGetServicePrioritiesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServicePrioritiesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServicePrioritiesCountExecute(r)
 }
@@ -1178,9 +1172,6 @@ func (a *PrioritiesAPIService) GetServicePrioritiesCountExecute(r ApiGetServiceP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1223,7 +1214,9 @@ func (a *PrioritiesAPIService) GetServicePrioritiesCountExecute(r ApiGetServiceP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1265,19 +1258,19 @@ type ApiPatchServicePrioritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServicePrioritiesByIdRequest) ClientId(clientId string) ApiPatchServicePrioritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServicePrioritiesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServicePrioritiesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServicePrioritiesByIdRequest) ClientId(clientId string) ApiPatchServicePrioritiesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1321,9 +1314,6 @@ func (a *PrioritiesAPIService) PatchServicePrioritiesByIdExecute(r ApiPatchServi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1345,7 +1335,9 @@ func (a *PrioritiesAPIService) PatchServicePrioritiesByIdExecute(r ApiPatchServi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1388,19 +1380,19 @@ func (a *PrioritiesAPIService) PatchServicePrioritiesByIdExecute(r ApiPatchServi
 type ApiPostServicePrioritiesRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
-	clientId *string
 	priority *Priority
-}
-
-// 
-func (r ApiPostServicePrioritiesRequest) ClientId(clientId string) ApiPostServicePrioritiesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // priority
 func (r ApiPostServicePrioritiesRequest) Priority(priority Priority) ApiPostServicePrioritiesRequest {
 	r.priority = &priority
+	return r
+}
+
+// 
+func (r ApiPostServicePrioritiesRequest) ClientId(clientId string) ApiPostServicePrioritiesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1441,9 +1433,6 @@ func (a *PrioritiesAPIService) PostServicePrioritiesExecute(r ApiPostServicePrio
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.priority == nil {
 		return localVarReturnValue, nil, reportError("priority is required and must be specified")
 	}
@@ -1465,7 +1454,9 @@ func (a *PrioritiesAPIService) PostServicePrioritiesExecute(r ApiPostServicePrio
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.priority
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1509,19 +1500,19 @@ type ApiPutServicePrioritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
 	id int32
-	clientId *string
 	priority *Priority
-}
-
-// 
-func (r ApiPutServicePrioritiesByIdRequest) ClientId(clientId string) ApiPutServicePrioritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // priority
 func (r ApiPutServicePrioritiesByIdRequest) Priority(priority Priority) ApiPutServicePrioritiesByIdRequest {
 	r.priority = &priority
+	return r
+}
+
+// 
+func (r ApiPutServicePrioritiesByIdRequest) ClientId(clientId string) ApiPutServicePrioritiesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1565,9 +1556,6 @@ func (a *PrioritiesAPIService) PutServicePrioritiesByIdExecute(r ApiPutServicePr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.priority == nil {
 		return localVarReturnValue, nil, reportError("priority is required and must be specified")
 	}
@@ -1589,7 +1577,9 @@ func (a *PrioritiesAPIService) PutServicePrioritiesByIdExecute(r ApiPutServicePr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.priority
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

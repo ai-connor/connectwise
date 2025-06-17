@@ -27,7 +27,6 @@ type ApiGetServicePriorityByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *PriorityInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetServicePriorityByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServicePriorityByIdInfoRequest) ClientId(clientId string) ApiGetServicePriorityByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetServicePriorityByIdInfoRequest) PageId(pageId int32) ApiGetService
 	return r
 }
 
+// 
+func (r ApiGetServicePriorityByIdInfoRequest) ClientId(clientId string) ApiGetServicePriorityByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServicePriorityByIdInfoRequest) Execute() (*PriorityInfo, *http.Response, error) {
 	return r.ApiService.GetServicePriorityByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *PriorityInfosAPIService) GetServicePriorityByIdInfoExecute(r ApiGetServ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *PriorityInfosAPIService) GetServicePriorityByIdInfoExecute(r ApiGetServ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *PriorityInfosAPIService) GetServicePriorityByIdInfoExecute(r ApiGetServ
 type ApiGetServicePriorityInfoRequest struct {
 	ctx context.Context
 	ApiService *PriorityInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetServicePriorityInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServicePriorityInfoRequest) ClientId(clientId string) ApiGetServicePriorityInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetServicePriorityInfoRequest) PageId(pageId int32) ApiGetServicePrio
 	return r
 }
 
+// 
+func (r ApiGetServicePriorityInfoRequest) ClientId(clientId string) ApiGetServicePriorityInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServicePriorityInfoRequest) Execute() ([]PriorityInfo, *http.Response, error) {
 	return r.ApiService.GetServicePriorityInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *PriorityInfosAPIService) GetServicePriorityInfoExecute(r ApiGetServiceP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *PriorityInfosAPIService) GetServicePriorityInfoExecute(r ApiGetServiceP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

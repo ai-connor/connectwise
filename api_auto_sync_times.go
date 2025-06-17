@@ -74,9 +74,6 @@ func (a *AutoSyncTimesAPIService) DeleteSystemAutoSyncTimeByIdExecute(r ApiDelet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *AutoSyncTimesAPIService) DeleteSystemAutoSyncTimeByIdExecute(r ApiDelet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *AutoSyncTimesAPIService) DeleteSystemAutoSyncTimeByIdExecute(r ApiDelet
 type ApiGetSystemAutoSyncTimeRequest struct {
 	ctx context.Context
 	ApiService *AutoSyncTimesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemAutoSyncTimeRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAutoSyncTimeRequest) ClientId(clientId string) ApiGetSystemAutoSyncTimeRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemAutoSyncTimeRequest) PageId(pageId int32) ApiGetSystemAutoSy
 	return r
 }
 
+// 
+func (r ApiGetSystemAutoSyncTimeRequest) ClientId(clientId string) ApiGetSystemAutoSyncTimeRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAutoSyncTimeRequest) Execute() ([]AutoSyncTime, *http.Response, error) {
 	return r.ApiService.GetSystemAutoSyncTimeExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *AutoSyncTimesAPIService) GetSystemAutoSyncTimeExecute(r ApiGetSystemAut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *AutoSyncTimesAPIService) GetSystemAutoSyncTimeExecute(r ApiGetSystemAut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemAutoSyncTimeByIdRequest struct {
 	ctx context.Context
 	ApiService *AutoSyncTimesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemAutoSyncTimeByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAutoSyncTimeByIdRequest) ClientId(clientId string) ApiGetSystemAutoSyncTimeByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemAutoSyncTimeByIdRequest) PageId(pageId int32) ApiGetSystemAu
 	return r
 }
 
+// 
+func (r ApiGetSystemAutoSyncTimeByIdRequest) ClientId(clientId string) ApiGetSystemAutoSyncTimeByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAutoSyncTimeByIdRequest) Execute() (*AutoSyncTime, *http.Response, error) {
 	return r.ApiService.GetSystemAutoSyncTimeByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *AutoSyncTimesAPIService) GetSystemAutoSyncTimeByIdExecute(r ApiGetSyste
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *AutoSyncTimesAPIService) GetSystemAutoSyncTimeByIdExecute(r ApiGetSyste
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *AutoSyncTimesAPIService) GetSystemAutoSyncTimeByIdExecute(r ApiGetSyste
 type ApiGetSystemAutoSyncTimeCountRequest struct {
 	ctx context.Context
 	ApiService *AutoSyncTimesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemAutoSyncTimeCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAutoSyncTimeCountRequest) ClientId(clientId string) ApiGetSystemAutoSyncTimeCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemAutoSyncTimeCountRequest) PageId(pageId int32) ApiGetSystemA
 	return r
 }
 
+// 
+func (r ApiGetSystemAutoSyncTimeCountRequest) ClientId(clientId string) ApiGetSystemAutoSyncTimeCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAutoSyncTimeCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemAutoSyncTimeCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *AutoSyncTimesAPIService) GetSystemAutoSyncTimeCountExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *AutoSyncTimesAPIService) GetSystemAutoSyncTimeCountExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemAutoSyncTimeByIdRequest struct {
 	ctx context.Context
 	ApiService *AutoSyncTimesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemAutoSyncTimeByIdRequest) ClientId(clientId string) ApiPatchSystemAutoSyncTimeByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemAutoSyncTimeByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemAutoSyncTimeByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemAutoSyncTimeByIdRequest) ClientId(clientId string) ApiPatchSystemAutoSyncTimeByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *AutoSyncTimesAPIService) PatchSystemAutoSyncTimeByIdExecute(r ApiPatchS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *AutoSyncTimesAPIService) PatchSystemAutoSyncTimeByIdExecute(r ApiPatchS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *AutoSyncTimesAPIService) PatchSystemAutoSyncTimeByIdExecute(r ApiPatchS
 type ApiPostSystemAutoSyncTimeRequest struct {
 	ctx context.Context
 	ApiService *AutoSyncTimesAPIService
-	clientId *string
 	autoSyncTime *AutoSyncTime
-}
-
-// 
-func (r ApiPostSystemAutoSyncTimeRequest) ClientId(clientId string) ApiPostSystemAutoSyncTimeRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // autoSyncTime
 func (r ApiPostSystemAutoSyncTimeRequest) AutoSyncTime(autoSyncTime AutoSyncTime) ApiPostSystemAutoSyncTimeRequest {
 	r.autoSyncTime = &autoSyncTime
+	return r
+}
+
+// 
+func (r ApiPostSystemAutoSyncTimeRequest) ClientId(clientId string) ApiPostSystemAutoSyncTimeRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *AutoSyncTimesAPIService) PostSystemAutoSyncTimeExecute(r ApiPostSystemA
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.autoSyncTime == nil {
 		return localVarReturnValue, nil, reportError("autoSyncTime is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *AutoSyncTimesAPIService) PostSystemAutoSyncTimeExecute(r ApiPostSystemA
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.autoSyncTime
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemAutoSyncTimeByIdRequest struct {
 	ctx context.Context
 	ApiService *AutoSyncTimesAPIService
 	id int32
-	clientId *string
 	autoSyncTime *AutoSyncTime
-}
-
-// 
-func (r ApiPutSystemAutoSyncTimeByIdRequest) ClientId(clientId string) ApiPutSystemAutoSyncTimeByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // autoSyncTime
 func (r ApiPutSystemAutoSyncTimeByIdRequest) AutoSyncTime(autoSyncTime AutoSyncTime) ApiPutSystemAutoSyncTimeByIdRequest {
 	r.autoSyncTime = &autoSyncTime
+	return r
+}
+
+// 
+func (r ApiPutSystemAutoSyncTimeByIdRequest) ClientId(clientId string) ApiPutSystemAutoSyncTimeByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *AutoSyncTimesAPIService) PutSystemAutoSyncTimeByIdExecute(r ApiPutSyste
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.autoSyncTime == nil {
 		return localVarReturnValue, nil, reportError("autoSyncTime is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *AutoSyncTimesAPIService) PutSystemAutoSyncTimeByIdExecute(r ApiPutSyste
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.autoSyncTime
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

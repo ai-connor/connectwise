@@ -78,9 +78,6 @@ func (a *OpportunityNotesAPIService) DeleteSalesOpportunitiesByParentIdNotesById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *OpportunityNotesAPIService) DeleteSalesOpportunitiesByParentIdNotesById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetSalesOpportunitiesByParentIdNotesRequest struct {
 	ctx context.Context
 	ApiService *OpportunityNotesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetSalesOpportunitiesByParentIdNotesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesByParentIdNotesRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdNotesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetSalesOpportunitiesByParentIdNotesRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesByParentIdNotesRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdNotesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesByParentIdNotesRequest) Execute() ([]OpportunityNote, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesByParentIdNotesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *OpportunityNotesAPIService) GetSalesOpportunitiesByParentIdNotesExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *OpportunityNotesAPIService) GetSalesOpportunitiesByParentIdNotesExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetSalesOpportunitiesByParentIdNotesByIdRequest struct {
 	ApiService *OpportunityNotesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetSalesOpportunitiesByParentIdNotesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesByParentIdNotesByIdRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetSalesOpportunitiesByParentIdNotesByIdRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesByParentIdNotesByIdRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdNotesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesByParentIdNotesByIdRequest) Execute() (*OpportunityNote, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesByParentIdNotesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *OpportunityNotesAPIService) GetSalesOpportunitiesByParentIdNotesByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *OpportunityNotesAPIService) GetSalesOpportunitiesByParentIdNotesByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetSalesOpportunitiesByParentIdNotesCountRequest struct {
 	ctx context.Context
 	ApiService *OpportunityNotesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetSalesOpportunitiesByParentIdNotesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesByParentIdNotesCountRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdNotesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetSalesOpportunitiesByParentIdNotesCountRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesByParentIdNotesCountRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdNotesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesByParentIdNotesCountRequest) Execute() ([]OpportunityNote, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesByParentIdNotesCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *OpportunityNotesAPIService) GetSalesOpportunitiesByParentIdNotesCountEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *OpportunityNotesAPIService) GetSalesOpportunitiesByParentIdNotesCountEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchSalesOpportunitiesByParentIdNotesByIdRequest struct {
 	ApiService *OpportunityNotesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesOpportunitiesByParentIdNotesByIdRequest) ClientId(clientId string) ApiPatchSalesOpportunitiesByParentIdNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesOpportunitiesByParentIdNotesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesOpportunitiesByParentIdNotesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesOpportunitiesByParentIdNotesByIdRequest) ClientId(clientId string) ApiPatchSalesOpportunitiesByParentIdNotesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *OpportunityNotesAPIService) PatchSalesOpportunitiesByParentIdNotesByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *OpportunityNotesAPIService) PatchSalesOpportunitiesByParentIdNotesByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostSalesOpportunitiesByParentIdNotesRequest struct {
 	ctx context.Context
 	ApiService *OpportunityNotesAPIService
 	parentId int32
-	clientId *string
 	opportunityNote *OpportunityNote
-}
-
-// 
-func (r ApiPostSalesOpportunitiesByParentIdNotesRequest) ClientId(clientId string) ApiPostSalesOpportunitiesByParentIdNotesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // note
 func (r ApiPostSalesOpportunitiesByParentIdNotesRequest) OpportunityNote(opportunityNote OpportunityNote) ApiPostSalesOpportunitiesByParentIdNotesRequest {
 	r.opportunityNote = &opportunityNote
+	return r
+}
+
+// 
+func (r ApiPostSalesOpportunitiesByParentIdNotesRequest) ClientId(clientId string) ApiPostSalesOpportunitiesByParentIdNotesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *OpportunityNotesAPIService) PostSalesOpportunitiesByParentIdNotesExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.opportunityNote == nil {
 		return localVarReturnValue, nil, reportError("opportunityNote is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *OpportunityNotesAPIService) PostSalesOpportunitiesByParentIdNotesExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.opportunityNote
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutSalesOpportunitiesByParentIdNotesByIdRequest struct {
 	ApiService *OpportunityNotesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	opportunityNote *OpportunityNote
-}
-
-// 
-func (r ApiPutSalesOpportunitiesByParentIdNotesByIdRequest) ClientId(clientId string) ApiPutSalesOpportunitiesByParentIdNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // note
 func (r ApiPutSalesOpportunitiesByParentIdNotesByIdRequest) OpportunityNote(opportunityNote OpportunityNote) ApiPutSalesOpportunitiesByParentIdNotesByIdRequest {
 	r.opportunityNote = &opportunityNote
+	return r
+}
+
+// 
+func (r ApiPutSalesOpportunitiesByParentIdNotesByIdRequest) ClientId(clientId string) ApiPutSalesOpportunitiesByParentIdNotesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *OpportunityNotesAPIService) PutSalesOpportunitiesByParentIdNotesByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.opportunityNote == nil {
 		return localVarReturnValue, nil, reportError("opportunityNote is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *OpportunityNotesAPIService) PutSalesOpportunitiesByParentIdNotesByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.opportunityNote
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

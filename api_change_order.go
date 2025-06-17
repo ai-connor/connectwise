@@ -74,9 +74,6 @@ func (a *ChangeOrderAPIService) DeleteProcurementChangeorderByIdExecute(r ApiDel
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ChangeOrderAPIService) DeleteProcurementChangeorderByIdExecute(r ApiDel
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ChangeOrderAPIService) DeleteProcurementChangeorderByIdExecute(r ApiDel
 type ApiGetProcurementChangeorderRequest struct {
 	ctx context.Context
 	ApiService *ChangeOrderAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementChangeorderRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementChangeorderRequest) ClientId(clientId string) ApiGetProcurementChangeorderRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementChangeorderRequest) PageId(pageId int32) ApiGetProcurem
 	return r
 }
 
+// 
+func (r ApiGetProcurementChangeorderRequest) ClientId(clientId string) ApiGetProcurementChangeorderRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementChangeorderRequest) Execute() ([]ChangeOrder, *http.Response, error) {
 	return r.ApiService.GetProcurementChangeorderExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ChangeOrderAPIService) GetProcurementChangeorderExecute(r ApiGetProcure
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ChangeOrderAPIService) GetProcurementChangeorderExecute(r ApiGetProcure
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -315,7 +313,6 @@ func (a *ChangeOrderAPIService) GetProcurementChangeorderExecute(r ApiGetProcure
 type ApiGetProcurementChangeordersCountRequest struct {
 	ctx context.Context
 	ApiService *ChangeOrderAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -324,12 +321,7 @@ type ApiGetProcurementChangeordersCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementChangeordersCountRequest) ClientId(clientId string) ApiGetProcurementChangeordersCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -380,6 +372,12 @@ func (r ApiGetProcurementChangeordersCountRequest) PageId(pageId int32) ApiGetPr
 	return r
 }
 
+// 
+func (r ApiGetProcurementChangeordersCountRequest) ClientId(clientId string) ApiGetProcurementChangeordersCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementChangeordersCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementChangeordersCountExecute(r)
 }
@@ -417,9 +415,6 @@ func (a *ChangeOrderAPIService) GetProcurementChangeordersCountExecute(r ApiGetP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -462,7 +457,9 @@ func (a *ChangeOrderAPIService) GetProcurementChangeordersCountExecute(r ApiGetP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -504,19 +501,19 @@ type ApiPatchProcurementChangeorderByIdRequest struct {
 	ctx context.Context
 	ApiService *ChangeOrderAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementChangeorderByIdRequest) ClientId(clientId string) ApiPatchProcurementChangeorderByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementChangeorderByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementChangeorderByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementChangeorderByIdRequest) ClientId(clientId string) ApiPatchProcurementChangeorderByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -560,9 +557,6 @@ func (a *ChangeOrderAPIService) PatchProcurementChangeorderByIdExecute(r ApiPatc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -584,7 +578,9 @@ func (a *ChangeOrderAPIService) PatchProcurementChangeorderByIdExecute(r ApiPatc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -627,19 +623,19 @@ func (a *ChangeOrderAPIService) PatchProcurementChangeorderByIdExecute(r ApiPatc
 type ApiPostProcurementChangeorderRequest struct {
 	ctx context.Context
 	ApiService *ChangeOrderAPIService
-	clientId *string
 	changeOrder *ChangeOrder
-}
-
-// 
-func (r ApiPostProcurementChangeorderRequest) ClientId(clientId string) ApiPostProcurementChangeorderRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // changeOrder
 func (r ApiPostProcurementChangeorderRequest) ChangeOrder(changeOrder ChangeOrder) ApiPostProcurementChangeorderRequest {
 	r.changeOrder = &changeOrder
+	return r
+}
+
+// 
+func (r ApiPostProcurementChangeorderRequest) ClientId(clientId string) ApiPostProcurementChangeorderRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -680,9 +676,6 @@ func (a *ChangeOrderAPIService) PostProcurementChangeorderExecute(r ApiPostProcu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.changeOrder == nil {
 		return localVarReturnValue, nil, reportError("changeOrder is required and must be specified")
 	}
@@ -704,7 +697,9 @@ func (a *ChangeOrderAPIService) PostProcurementChangeorderExecute(r ApiPostProcu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.changeOrder
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

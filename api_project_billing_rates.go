@@ -78,9 +78,6 @@ func (a *ProjectBillingRatesAPIService) DeleteProjectByParentIdBillingRatesByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *ProjectBillingRatesAPIService) DeleteProjectByParentIdBillingRatesByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetProjectByParentIdBillingRatesRequest struct {
 	ctx context.Context
 	ApiService *ProjectBillingRatesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetProjectByParentIdBillingRatesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectByParentIdBillingRatesRequest) ClientId(clientId string) ApiGetProjectByParentIdBillingRatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetProjectByParentIdBillingRatesRequest) PageId(pageId int32) ApiGetP
 	return r
 }
 
+// 
+func (r ApiGetProjectByParentIdBillingRatesRequest) ClientId(clientId string) ApiGetProjectByParentIdBillingRatesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectByParentIdBillingRatesRequest) Execute() ([]ProjectBillingRate, *http.Response, error) {
 	return r.ApiService.GetProjectByParentIdBillingRatesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *ProjectBillingRatesAPIService) GetProjectByParentIdBillingRatesExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *ProjectBillingRatesAPIService) GetProjectByParentIdBillingRatesExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetProjectByParentIdBillingRatesByIdRequest struct {
 	ApiService *ProjectBillingRatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetProjectByParentIdBillingRatesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectByParentIdBillingRatesByIdRequest) ClientId(clientId string) ApiGetProjectByParentIdBillingRatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetProjectByParentIdBillingRatesByIdRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetProjectByParentIdBillingRatesByIdRequest) ClientId(clientId string) ApiGetProjectByParentIdBillingRatesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectByParentIdBillingRatesByIdRequest) Execute() (*ProjectBillingRate, *http.Response, error) {
 	return r.ApiService.GetProjectByParentIdBillingRatesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *ProjectBillingRatesAPIService) GetProjectByParentIdBillingRatesByIdExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *ProjectBillingRatesAPIService) GetProjectByParentIdBillingRatesByIdExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetProjectByParentIdBillingRatesCountRequest struct {
 	ctx context.Context
 	ApiService *ProjectBillingRatesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetProjectByParentIdBillingRatesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectByParentIdBillingRatesCountRequest) ClientId(clientId string) ApiGetProjectByParentIdBillingRatesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetProjectByParentIdBillingRatesCountRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetProjectByParentIdBillingRatesCountRequest) ClientId(clientId string) ApiGetProjectByParentIdBillingRatesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectByParentIdBillingRatesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProjectByParentIdBillingRatesCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *ProjectBillingRatesAPIService) GetProjectByParentIdBillingRatesCountExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *ProjectBillingRatesAPIService) GetProjectByParentIdBillingRatesCountExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchProjectBillingRatesByParentIdBillingRatesByIdRequest struct {
 	ApiService *ProjectBillingRatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProjectBillingRatesByParentIdBillingRatesByIdRequest) ClientId(clientId string) ApiPatchProjectBillingRatesByParentIdBillingRatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProjectBillingRatesByParentIdBillingRatesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProjectBillingRatesByParentIdBillingRatesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProjectBillingRatesByParentIdBillingRatesByIdRequest) ClientId(clientId string) ApiPatchProjectBillingRatesByParentIdBillingRatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *ProjectBillingRatesAPIService) PatchProjectBillingRatesByParentIdBillin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *ProjectBillingRatesAPIService) PatchProjectBillingRatesByParentIdBillin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostProjectByParentIdBillingRatesRequest struct {
 	ctx context.Context
 	ApiService *ProjectBillingRatesAPIService
 	parentId int32
-	clientId *string
 	projectBillingRate *ProjectBillingRate
-}
-
-// 
-func (r ApiPostProjectByParentIdBillingRatesRequest) ClientId(clientId string) ApiPostProjectByParentIdBillingRatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // billingRate
 func (r ApiPostProjectByParentIdBillingRatesRequest) ProjectBillingRate(projectBillingRate ProjectBillingRate) ApiPostProjectByParentIdBillingRatesRequest {
 	r.projectBillingRate = &projectBillingRate
+	return r
+}
+
+// 
+func (r ApiPostProjectByParentIdBillingRatesRequest) ClientId(clientId string) ApiPostProjectByParentIdBillingRatesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *ProjectBillingRatesAPIService) PostProjectByParentIdBillingRatesExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectBillingRate == nil {
 		return localVarReturnValue, nil, reportError("projectBillingRate is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *ProjectBillingRatesAPIService) PostProjectByParentIdBillingRatesExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectBillingRate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutProjectByParentIdBillingRatesByIdRequest struct {
 	ApiService *ProjectBillingRatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	projectBillingRate *ProjectBillingRate
-}
-
-// 
-func (r ApiPutProjectByParentIdBillingRatesByIdRequest) ClientId(clientId string) ApiPutProjectByParentIdBillingRatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // billingRate
 func (r ApiPutProjectByParentIdBillingRatesByIdRequest) ProjectBillingRate(projectBillingRate ProjectBillingRate) ApiPutProjectByParentIdBillingRatesByIdRequest {
 	r.projectBillingRate = &projectBillingRate
+	return r
+}
+
+// 
+func (r ApiPutProjectByParentIdBillingRatesByIdRequest) ClientId(clientId string) ApiPutProjectByParentIdBillingRatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *ProjectBillingRatesAPIService) PutProjectByParentIdBillingRatesByIdExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectBillingRate == nil {
 		return localVarReturnValue, nil, reportError("projectBillingRate is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *ProjectBillingRatesAPIService) PutProjectByParentIdBillingRatesByIdExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectBillingRate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

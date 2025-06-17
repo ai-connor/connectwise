@@ -74,9 +74,6 @@ func (a *M365ContactSyncMonitoringsAPIService) DeleteSystemContactsyncMonitoring
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *M365ContactSyncMonitoringsAPIService) DeleteSystemContactsyncMonitoring
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *M365ContactSyncMonitoringsAPIService) DeleteSystemContactsyncMonitoring
 type ApiGetSystemContactsyncMonitoringRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncMonitoringsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemContactsyncMonitoringRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemContactsyncMonitoringRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemContactsyncMonitoringRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemContactsyncMonitoringRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemContactsyncMonitoringRequest) Execute() ([]M365ContactSyncMonitoring, *http.Response, error) {
 	return r.ApiService.GetSystemContactsyncMonitoringExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemContactsyncMonitoringByIdRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncMonitoringsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemContactsyncMonitoringByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemContactsyncMonitoringByIdRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemContactsyncMonitoringByIdRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetSystemContactsyncMonitoringByIdRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemContactsyncMonitoringByIdRequest) Execute() (*M365ContactSyncMonitoring, *http.Response, error) {
 	return r.ApiService.GetSystemContactsyncMonitoringByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringByI
 type ApiGetSystemContactsyncMonitoringCountRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncMonitoringsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemContactsyncMonitoringCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemContactsyncMonitoringCountRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemContactsyncMonitoringCountRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetSystemContactsyncMonitoringCountRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemContactsyncMonitoringCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemContactsyncMonitoringCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringCou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringCou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -695,7 +691,6 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringCou
 type ApiGetSystemContactsyncMonitoringNotificationtypeRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncMonitoringsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -704,12 +699,7 @@ type ApiGetSystemContactsyncMonitoringNotificationtypeRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemContactsyncMonitoringNotificationtypeRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringNotificationtypeRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -760,6 +750,12 @@ func (r ApiGetSystemContactsyncMonitoringNotificationtypeRequest) PageId(pageId 
 	return r
 }
 
+// 
+func (r ApiGetSystemContactsyncMonitoringNotificationtypeRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringNotificationtypeRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemContactsyncMonitoringNotificationtypeRequest) Execute() (*M365ContactSyncMonitoring, *http.Response, error) {
 	return r.ApiService.GetSystemContactsyncMonitoringNotificationtypeExecute(r)
 }
@@ -797,9 +793,6 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringNot
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -842,7 +835,9 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringNot
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -884,7 +879,6 @@ type ApiGetSystemContactsyncMonitoringTypeByIdRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncMonitoringsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -893,12 +887,7 @@ type ApiGetSystemContactsyncMonitoringTypeByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemContactsyncMonitoringTypeByIdRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringTypeByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -949,6 +938,12 @@ func (r ApiGetSystemContactsyncMonitoringTypeByIdRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetSystemContactsyncMonitoringTypeByIdRequest) ClientId(clientId string) ApiGetSystemContactsyncMonitoringTypeByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemContactsyncMonitoringTypeByIdRequest) Execute() (*M365ContactSyncMonitoring, *http.Response, error) {
 	return r.ApiService.GetSystemContactsyncMonitoringTypeByIdExecute(r)
 }
@@ -989,9 +984,6 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringTyp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1034,7 +1026,9 @@ func (a *M365ContactSyncMonitoringsAPIService) GetSystemContactsyncMonitoringTyp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1121,9 +1115,6 @@ func (a *M365ContactSyncMonitoringsAPIService) PatchSystemContactsyncMonitoringE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1142,7 +1133,9 @@ func (a *M365ContactSyncMonitoringsAPIService) PatchSystemContactsyncMonitoringE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1229,9 +1222,6 @@ func (a *M365ContactSyncMonitoringsAPIService) PostSystemContactsyncMonitoringEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1250,7 +1240,9 @@ func (a *M365ContactSyncMonitoringsAPIService) PostSystemContactsyncMonitoringEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

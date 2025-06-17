@@ -26,7 +26,6 @@ type ServiceTeamsAPIService service
 type ApiGetServiceTeamsRequest struct {
 	ctx context.Context
 	ApiService *ServiceTeamsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetServiceTeamsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTeamsRequest) ClientId(clientId string) ApiGetServiceTeamsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetServiceTeamsRequest) PageId(pageId int32) ApiGetServiceTeamsReques
 	return r
 }
 
+// 
+func (r ApiGetServiceTeamsRequest) ClientId(clientId string) ApiGetServiceTeamsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTeamsRequest) Execute() ([]ServiceTeam, *http.Response, error) {
 	return r.ApiService.GetServiceTeamsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *ServiceTeamsAPIService) GetServiceTeamsExecute(r ApiGetServiceTeamsRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *ServiceTeamsAPIService) GetServiceTeamsExecute(r ApiGetServiceTeamsRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetServiceTeamsByIdRequest struct {
 	ctx context.Context
 	ApiService *ServiceTeamsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetServiceTeamsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTeamsByIdRequest) ClientId(clientId string) ApiGetServiceTeamsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetServiceTeamsByIdRequest) PageId(pageId int32) ApiGetServiceTeamsBy
 	return r
 }
 
+// 
+func (r ApiGetServiceTeamsByIdRequest) ClientId(clientId string) ApiGetServiceTeamsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTeamsByIdRequest) Execute() (*ServiceTeam, *http.Response, error) {
 	return r.ApiService.GetServiceTeamsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *ServiceTeamsAPIService) GetServiceTeamsByIdExecute(r ApiGetServiceTeams
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *ServiceTeamsAPIService) GetServiceTeamsByIdExecute(r ApiGetServiceTeams
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *ServiceTeamsAPIService) GetServiceTeamsByIdExecute(r ApiGetServiceTeams
 type ApiGetServiceTeamsCountRequest struct {
 	ctx context.Context
 	ApiService *ServiceTeamsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetServiceTeamsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTeamsCountRequest) ClientId(clientId string) ApiGetServiceTeamsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetServiceTeamsCountRequest) PageId(pageId int32) ApiGetServiceTeamsC
 	return r
 }
 
+// 
+func (r ApiGetServiceTeamsCountRequest) ClientId(clientId string) ApiGetServiceTeamsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTeamsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceTeamsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *ServiceTeamsAPIService) GetServiceTeamsCountExecute(r ApiGetServiceTeam
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *ServiceTeamsAPIService) GetServiceTeamsCountExecute(r ApiGetServiceTeam
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

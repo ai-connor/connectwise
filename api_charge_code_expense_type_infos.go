@@ -25,7 +25,6 @@ type ChargeCodeExpenseTypeInfosAPIService service
 type ApiGetTimeInfoChargeCodeExpenseTypesRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodeExpenseTypeInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -34,12 +33,7 @@ type ApiGetTimeInfoChargeCodeExpenseTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeInfoChargeCodeExpenseTypesRequest) ClientId(clientId string) ApiGetTimeInfoChargeCodeExpenseTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -90,6 +84,12 @@ func (r ApiGetTimeInfoChargeCodeExpenseTypesRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetTimeInfoChargeCodeExpenseTypesRequest) ClientId(clientId string) ApiGetTimeInfoChargeCodeExpenseTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeInfoChargeCodeExpenseTypesRequest) Execute() ([]ChargeCodeExpenseType, *http.Response, error) {
 	return r.ApiService.GetTimeInfoChargeCodeExpenseTypesExecute(r)
 }
@@ -127,9 +127,6 @@ func (a *ChargeCodeExpenseTypeInfosAPIService) GetTimeInfoChargeCodeExpenseTypes
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -172,7 +169,9 @@ func (a *ChargeCodeExpenseTypeInfosAPIService) GetTimeInfoChargeCodeExpenseTypes
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -213,7 +212,6 @@ func (a *ChargeCodeExpenseTypeInfosAPIService) GetTimeInfoChargeCodeExpenseTypes
 type ApiGetTimeInfoChargeCodeExpenseTypesCountRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodeExpenseTypeInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -222,12 +220,7 @@ type ApiGetTimeInfoChargeCodeExpenseTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeInfoChargeCodeExpenseTypesCountRequest) ClientId(clientId string) ApiGetTimeInfoChargeCodeExpenseTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -278,6 +271,12 @@ func (r ApiGetTimeInfoChargeCodeExpenseTypesCountRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetTimeInfoChargeCodeExpenseTypesCountRequest) ClientId(clientId string) ApiGetTimeInfoChargeCodeExpenseTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeInfoChargeCodeExpenseTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeInfoChargeCodeExpenseTypesCountExecute(r)
 }
@@ -315,9 +314,6 @@ func (a *ChargeCodeExpenseTypeInfosAPIService) GetTimeInfoChargeCodeExpenseTypes
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -360,7 +356,9 @@ func (a *ChargeCodeExpenseTypeInfosAPIService) GetTimeInfoChargeCodeExpenseTypes
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -27,7 +27,6 @@ type ApiGetSalesOpportunitiesStatusesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStatusInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSalesOpportunitiesStatusesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesStatusesByIdInfoRequest) ClientId(clientId string) ApiGetSalesOpportunitiesStatusesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSalesOpportunitiesStatusesByIdInfoRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesStatusesByIdInfoRequest) ClientId(clientId string) ApiGetSalesOpportunitiesStatusesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesStatusesByIdInfoRequest) Execute() (*OpportunityStatusInfo, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesStatusesByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *OpportunityStatusInfosAPIService) GetSalesOpportunitiesStatusesByIdInfo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *OpportunityStatusInfosAPIService) GetSalesOpportunitiesStatusesByIdInfo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *OpportunityStatusInfosAPIService) GetSalesOpportunitiesStatusesByIdInfo
 type ApiGetSalesOpportunitiesStatusesInfoRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStatusInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetSalesOpportunitiesStatusesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesStatusesInfoRequest) ClientId(clientId string) ApiGetSalesOpportunitiesStatusesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetSalesOpportunitiesStatusesInfoRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesStatusesInfoRequest) ClientId(clientId string) ApiGetSalesOpportunitiesStatusesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesStatusesInfoRequest) Execute() ([]OpportunityStatusInfo, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesStatusesInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *OpportunityStatusInfosAPIService) GetSalesOpportunitiesStatusesInfoExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *OpportunityStatusInfosAPIService) GetSalesOpportunitiesStatusesInfoExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *OpportunityStatusInfosAPIService) GetSalesOpportunitiesStatusesInfoExec
 type ApiGetSalesOpportunitiesStatusesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *OpportunityStatusInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSalesOpportunitiesStatusesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesStatusesInfoCountRequest) ClientId(clientId string) ApiGetSalesOpportunitiesStatusesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSalesOpportunitiesStatusesInfoCountRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesStatusesInfoCountRequest) ClientId(clientId string) ApiGetSalesOpportunitiesStatusesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesStatusesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesStatusesInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *OpportunityStatusInfosAPIService) GetSalesOpportunitiesStatusesInfoCoun
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *OpportunityStatusInfosAPIService) GetSalesOpportunitiesStatusesInfoCoun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -25,19 +25,19 @@ type BundlesAPIService service
 type ApiPostSystemBundlesRequest struct {
 	ctx context.Context
 	ApiService *BundlesAPIService
-	clientId *string
 	bundleRequestsCollection *BundleRequestsCollection
-}
-
-// 
-func (r ApiPostSystemBundlesRequest) ClientId(clientId string) ApiPostSystemBundlesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // requests
 func (r ApiPostSystemBundlesRequest) BundleRequestsCollection(bundleRequestsCollection BundleRequestsCollection) ApiPostSystemBundlesRequest {
 	r.bundleRequestsCollection = &bundleRequestsCollection
+	return r
+}
+
+// 
+func (r ApiPostSystemBundlesRequest) ClientId(clientId string) ApiPostSystemBundlesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -78,9 +78,6 @@ func (a *BundlesAPIService) PostSystemBundlesExecute(r ApiPostSystemBundlesReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.bundleRequestsCollection == nil {
 		return localVarReturnValue, nil, reportError("bundleRequestsCollection is required and must be specified")
 	}
@@ -102,7 +99,9 @@ func (a *BundlesAPIService) PostSystemBundlesExecute(r ApiPostSystemBundlesReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.bundleRequestsCollection
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -145,19 +144,19 @@ func (a *BundlesAPIService) PostSystemBundlesExecute(r ApiPostSystemBundlesReque
 type ApiPostSystemBundlesCountRequest struct {
 	ctx context.Context
 	ApiService *BundlesAPIService
-	clientId *string
 	bundleRequestsCollection *BundleRequestsCollection
-}
-
-// 
-func (r ApiPostSystemBundlesCountRequest) ClientId(clientId string) ApiPostSystemBundlesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // requests
 func (r ApiPostSystemBundlesCountRequest) BundleRequestsCollection(bundleRequestsCollection BundleRequestsCollection) ApiPostSystemBundlesCountRequest {
 	r.bundleRequestsCollection = &bundleRequestsCollection
+	return r
+}
+
+// 
+func (r ApiPostSystemBundlesCountRequest) ClientId(clientId string) ApiPostSystemBundlesCountRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -198,9 +197,6 @@ func (a *BundlesAPIService) PostSystemBundlesCountExecute(r ApiPostSystemBundles
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.bundleRequestsCollection == nil {
 		return localVarReturnValue, nil, reportError("bundleRequestsCollection is required and must be specified")
 	}
@@ -222,7 +218,9 @@ func (a *BundlesAPIService) PostSystemBundlesCountExecute(r ApiPostSystemBundles
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.bundleRequestsCollection
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

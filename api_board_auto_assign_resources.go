@@ -78,9 +78,6 @@ func (a *BoardAutoAssignResourcesAPIService) DeleteServiceBoardsByParentIdAutoAs
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *BoardAutoAssignResourcesAPIService) DeleteServiceBoardsByParentIdAutoAs
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetServiceBoardsByParentIdAutoAssignResourcesRequest struct {
 	ctx context.Context
 	ApiService *BoardAutoAssignResourcesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetServiceBoardsByParentIdAutoAssignResourcesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoAssignResourcesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoAssignResourcesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesRequest) Execute() ([]BoardAutoAssignResource, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdAutoAssignResourcesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *BoardAutoAssignResourcesAPIService) GetServiceBoardsByParentIdAutoAssig
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *BoardAutoAssignResourcesAPIService) GetServiceBoardsByParentIdAutoAssig
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetServiceBoardsByParentIdAutoAssignResourcesByIdRequest struct {
 	ApiService *BoardAutoAssignResourcesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetServiceBoardsByParentIdAutoAssignResourcesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoAssignResourcesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesByIdRequest) PageId(page
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoAssignResourcesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesByIdRequest) Execute() (*BoardAutoAssignResource, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdAutoAssignResourcesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *BoardAutoAssignResourcesAPIService) GetServiceBoardsByParentIdAutoAssig
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *BoardAutoAssignResourcesAPIService) GetServiceBoardsByParentIdAutoAssig
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetServiceBoardsByParentIdAutoAssignResourcesCountRequest struct {
 	ctx context.Context
 	ApiService *BoardAutoAssignResourcesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetServiceBoardsByParentIdAutoAssignResourcesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesCountRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoAssignResourcesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesCountRequest) PageId(pag
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesCountRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoAssignResourcesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdAutoAssignResourcesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdAutoAssignResourcesCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *BoardAutoAssignResourcesAPIService) GetServiceBoardsByParentIdAutoAssig
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *BoardAutoAssignResourcesAPIService) GetServiceBoardsByParentIdAutoAssig
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchServiceBoardsByParentIdAutoAssignResourcesByIdRequest struct {
 	ApiService *BoardAutoAssignResourcesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceBoardsByParentIdAutoAssignResourcesByIdRequest) ClientId(clientId string) ApiPatchServiceBoardsByParentIdAutoAssignResourcesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceBoardsByParentIdAutoAssignResourcesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceBoardsByParentIdAutoAssignResourcesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceBoardsByParentIdAutoAssignResourcesByIdRequest) ClientId(clientId string) ApiPatchServiceBoardsByParentIdAutoAssignResourcesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *BoardAutoAssignResourcesAPIService) PatchServiceBoardsByParentIdAutoAss
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *BoardAutoAssignResourcesAPIService) PatchServiceBoardsByParentIdAutoAss
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostServiceBoardsByParentIdAutoAssignResourcesRequest struct {
 	ctx context.Context
 	ApiService *BoardAutoAssignResourcesAPIService
 	parentId int32
-	clientId *string
 	boardAutoAssignResource *BoardAutoAssignResource
-}
-
-// 
-func (r ApiPostServiceBoardsByParentIdAutoAssignResourcesRequest) ClientId(clientId string) ApiPostServiceBoardsByParentIdAutoAssignResourcesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardAutoAssignResource
 func (r ApiPostServiceBoardsByParentIdAutoAssignResourcesRequest) BoardAutoAssignResource(boardAutoAssignResource BoardAutoAssignResource) ApiPostServiceBoardsByParentIdAutoAssignResourcesRequest {
 	r.boardAutoAssignResource = &boardAutoAssignResource
+	return r
+}
+
+// 
+func (r ApiPostServiceBoardsByParentIdAutoAssignResourcesRequest) ClientId(clientId string) ApiPostServiceBoardsByParentIdAutoAssignResourcesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *BoardAutoAssignResourcesAPIService) PostServiceBoardsByParentIdAutoAssi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardAutoAssignResource == nil {
 		return localVarReturnValue, nil, reportError("boardAutoAssignResource is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *BoardAutoAssignResourcesAPIService) PostServiceBoardsByParentIdAutoAssi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardAutoAssignResource
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutServiceBoardsByParentIdAutoAssignResourcesByIdRequest struct {
 	ApiService *BoardAutoAssignResourcesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	boardAutoAssignResource *BoardAutoAssignResource
-}
-
-// 
-func (r ApiPutServiceBoardsByParentIdAutoAssignResourcesByIdRequest) ClientId(clientId string) ApiPutServiceBoardsByParentIdAutoAssignResourcesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardAutoAssignResource
 func (r ApiPutServiceBoardsByParentIdAutoAssignResourcesByIdRequest) BoardAutoAssignResource(boardAutoAssignResource BoardAutoAssignResource) ApiPutServiceBoardsByParentIdAutoAssignResourcesByIdRequest {
 	r.boardAutoAssignResource = &boardAutoAssignResource
+	return r
+}
+
+// 
+func (r ApiPutServiceBoardsByParentIdAutoAssignResourcesByIdRequest) ClientId(clientId string) ApiPutServiceBoardsByParentIdAutoAssignResourcesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *BoardAutoAssignResourcesAPIService) PutServiceBoardsByParentIdAutoAssig
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardAutoAssignResource == nil {
 		return localVarReturnValue, nil, reportError("boardAutoAssignResource is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *BoardAutoAssignResourcesAPIService) PutServiceBoardsByParentIdAutoAssig
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardAutoAssignResource
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

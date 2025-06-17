@@ -74,9 +74,6 @@ func (a *ScheduleTypesAPIService) DeleteScheduleTypesByIdExecute(r ApiDeleteSche
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ScheduleTypesAPIService) DeleteScheduleTypesByIdExecute(r ApiDeleteSche
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ScheduleTypesAPIService) DeleteScheduleTypesByIdExecute(r ApiDeleteSche
 type ApiGetScheduleTypesRequest struct {
 	ctx context.Context
 	ApiService *ScheduleTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetScheduleTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleTypesRequest) ClientId(clientId string) ApiGetScheduleTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetScheduleTypesRequest) PageId(pageId int32) ApiGetScheduleTypesRequ
 	return r
 }
 
+// 
+func (r ApiGetScheduleTypesRequest) ClientId(clientId string) ApiGetScheduleTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleTypesRequest) Execute() ([]ScheduleType, *http.Response, error) {
 	return r.ApiService.GetScheduleTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesExecute(r ApiGetScheduleTypesR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesExecute(r ApiGetScheduleTypesR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetScheduleTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetScheduleTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleTypesByIdRequest) ClientId(clientId string) ApiGetScheduleTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetScheduleTypesByIdRequest) PageId(pageId int32) ApiGetScheduleTypes
 	return r
 }
 
+// 
+func (r ApiGetScheduleTypesByIdRequest) ClientId(clientId string) ApiGetScheduleTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleTypesByIdRequest) Execute() (*ScheduleType, *http.Response, error) {
 	return r.ApiService.GetScheduleTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesByIdExecute(r ApiGetScheduleTy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesByIdExecute(r ApiGetScheduleTy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetScheduleTypesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *ScheduleTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetScheduleTypesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleTypesByIdUsagesRequest) ClientId(clientId string) ApiGetScheduleTypesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetScheduleTypesByIdUsagesRequest) PageId(pageId int32) ApiGetSchedul
 	return r
 }
 
+// 
+func (r ApiGetScheduleTypesByIdUsagesRequest) ClientId(clientId string) ApiGetScheduleTypesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleTypesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetScheduleTypesByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesByIdUsagesExecute(r ApiGetSche
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesByIdUsagesExecute(r ApiGetSche
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetScheduleTypesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *ScheduleTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetScheduleTypesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleTypesByIdUsagesListRequest) ClientId(clientId string) ApiGetScheduleTypesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetScheduleTypesByIdUsagesListRequest) PageId(pageId int32) ApiGetSch
 	return r
 }
 
+// 
+func (r ApiGetScheduleTypesByIdUsagesListRequest) ClientId(clientId string) ApiGetScheduleTypesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleTypesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetScheduleTypesByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesByIdUsagesListExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesByIdUsagesListExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesByIdUsagesListExecute(r ApiGet
 type ApiGetScheduleTypesCountRequest struct {
 	ctx context.Context
 	ApiService *ScheduleTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetScheduleTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleTypesCountRequest) ClientId(clientId string) ApiGetScheduleTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetScheduleTypesCountRequest) PageId(pageId int32) ApiGetScheduleType
 	return r
 }
 
+// 
+func (r ApiGetScheduleTypesCountRequest) ClientId(clientId string) ApiGetScheduleTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetScheduleTypesCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesCountExecute(r ApiGetScheduleT
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *ScheduleTypesAPIService) GetScheduleTypesCountExecute(r ApiGetScheduleT
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchScheduleTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchScheduleTypesByIdRequest) ClientId(clientId string) ApiPatchScheduleTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchScheduleTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchScheduleTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchScheduleTypesByIdRequest) ClientId(clientId string) ApiPatchScheduleTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *ScheduleTypesAPIService) PatchScheduleTypesByIdExecute(r ApiPatchSchedu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *ScheduleTypesAPIService) PatchScheduleTypesByIdExecute(r ApiPatchSchedu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *ScheduleTypesAPIService) PatchScheduleTypesByIdExecute(r ApiPatchSchedu
 type ApiPostScheduleTypesRequest struct {
 	ctx context.Context
 	ApiService *ScheduleTypesAPIService
-	clientId *string
 	scheduleType *ScheduleType
-}
-
-// 
-func (r ApiPostScheduleTypesRequest) ClientId(clientId string) ApiPostScheduleTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // scheduleType
 func (r ApiPostScheduleTypesRequest) ScheduleType(scheduleType ScheduleType) ApiPostScheduleTypesRequest {
 	r.scheduleType = &scheduleType
+	return r
+}
+
+// 
+func (r ApiPostScheduleTypesRequest) ClientId(clientId string) ApiPostScheduleTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *ScheduleTypesAPIService) PostScheduleTypesExecute(r ApiPostScheduleType
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.scheduleType == nil {
 		return localVarReturnValue, nil, reportError("scheduleType is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *ScheduleTypesAPIService) PostScheduleTypesExecute(r ApiPostScheduleType
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.scheduleType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutScheduleTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleTypesAPIService
 	id int32
-	clientId *string
 	scheduleType *ScheduleType
-}
-
-// 
-func (r ApiPutScheduleTypesByIdRequest) ClientId(clientId string) ApiPutScheduleTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // scheduleType
 func (r ApiPutScheduleTypesByIdRequest) ScheduleType(scheduleType ScheduleType) ApiPutScheduleTypesByIdRequest {
 	r.scheduleType = &scheduleType
+	return r
+}
+
+// 
+func (r ApiPutScheduleTypesByIdRequest) ClientId(clientId string) ApiPutScheduleTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *ScheduleTypesAPIService) PutScheduleTypesByIdExecute(r ApiPutScheduleTy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.scheduleType == nil {
 		return localVarReturnValue, nil, reportError("scheduleType is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *ScheduleTypesAPIService) PutScheduleTypesByIdExecute(r ApiPutScheduleTy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.scheduleType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

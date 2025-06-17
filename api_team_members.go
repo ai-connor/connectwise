@@ -25,19 +25,19 @@ type TeamMembersAPIService service
 type ApiPostServiceTeamMembersRequest struct {
 	ctx context.Context
 	ApiService *TeamMembersAPIService
-	clientId *string
 	teamMember *TeamMember
-}
-
-// 
-func (r ApiPostServiceTeamMembersRequest) ClientId(clientId string) ApiPostServiceTeamMembersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // teamMember
 func (r ApiPostServiceTeamMembersRequest) TeamMember(teamMember TeamMember) ApiPostServiceTeamMembersRequest {
 	r.teamMember = &teamMember
+	return r
+}
+
+// 
+func (r ApiPostServiceTeamMembersRequest) ClientId(clientId string) ApiPostServiceTeamMembersRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -78,9 +78,6 @@ func (a *TeamMembersAPIService) PostServiceTeamMembersExecute(r ApiPostServiceTe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.teamMember == nil {
 		return localVarReturnValue, nil, reportError("teamMember is required and must be specified")
 	}
@@ -102,7 +99,9 @@ func (a *TeamMembersAPIService) PostServiceTeamMembersExecute(r ApiPostServiceTe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.teamMember
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

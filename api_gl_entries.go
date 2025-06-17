@@ -27,7 +27,6 @@ type ApiGetFinanceInvoicesByParentIdGlEntriesRequest struct {
 	ctx context.Context
 	ApiService *GLEntriesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetFinanceInvoicesByParentIdGlEntriesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceInvoicesByParentIdGlEntriesRequest) ClientId(clientId string) ApiGetFinanceInvoicesByParentIdGlEntriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetFinanceInvoicesByParentIdGlEntriesRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetFinanceInvoicesByParentIdGlEntriesRequest) ClientId(clientId string) ApiGetFinanceInvoicesByParentIdGlEntriesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceInvoicesByParentIdGlEntriesRequest) Execute() ([]GLEntry, *http.Response, error) {
 	return r.ApiService.GetFinanceInvoicesByParentIdGlEntriesExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *GLEntriesAPIService) GetFinanceInvoicesByParentIdGlEntriesExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *GLEntriesAPIService) GetFinanceInvoicesByParentIdGlEntriesExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetFinanceInvoicesByParentIdGlEntriesByIdRequest struct {
 	ApiService *GLEntriesAPIService
 	parentId int32
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetFinanceInvoicesByParentIdGlEntriesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceInvoicesByParentIdGlEntriesByIdRequest) ClientId(clientId string) ApiGetFinanceInvoicesByParentIdGlEntriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetFinanceInvoicesByParentIdGlEntriesByIdRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetFinanceInvoicesByParentIdGlEntriesByIdRequest) ClientId(clientId string) ApiGetFinanceInvoicesByParentIdGlEntriesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceInvoicesByParentIdGlEntriesByIdRequest) Execute() (*GLEntry, *http.Response, error) {
 	return r.ApiService.GetFinanceInvoicesByParentIdGlEntriesByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *GLEntriesAPIService) GetFinanceInvoicesByParentIdGlEntriesByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *GLEntriesAPIService) GetFinanceInvoicesByParentIdGlEntriesByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -416,19 +414,19 @@ type ApiPatchFinanceInvoicesByParentIdGlEntriesByIdRequest struct {
 	ApiService *GLEntriesAPIService
 	parentId int32
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceInvoicesByParentIdGlEntriesByIdRequest) ClientId(clientId string) ApiPatchFinanceInvoicesByParentIdGlEntriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceInvoicesByParentIdGlEntriesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceInvoicesByParentIdGlEntriesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceInvoicesByParentIdGlEntriesByIdRequest) ClientId(clientId string) ApiPatchFinanceInvoicesByParentIdGlEntriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -475,9 +473,6 @@ func (a *GLEntriesAPIService) PatchFinanceInvoicesByParentIdGlEntriesByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -499,7 +494,9 @@ func (a *GLEntriesAPIService) PatchFinanceInvoicesByParentIdGlEntriesByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -544,19 +541,19 @@ type ApiPutFinanceInvoicesByParentIdGlEntriesByIdRequest struct {
 	ApiService *GLEntriesAPIService
 	parentId int32
 	id int32
-	clientId *string
 	gLEntry *GLEntry
-}
-
-// 
-func (r ApiPutFinanceInvoicesByParentIdGlEntriesByIdRequest) ClientId(clientId string) ApiPutFinanceInvoicesByParentIdGlEntriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // gLEntry
 func (r ApiPutFinanceInvoicesByParentIdGlEntriesByIdRequest) GLEntry(gLEntry GLEntry) ApiPutFinanceInvoicesByParentIdGlEntriesByIdRequest {
 	r.gLEntry = &gLEntry
+	return r
+}
+
+// 
+func (r ApiPutFinanceInvoicesByParentIdGlEntriesByIdRequest) ClientId(clientId string) ApiPutFinanceInvoicesByParentIdGlEntriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -603,9 +600,6 @@ func (a *GLEntriesAPIService) PutFinanceInvoicesByParentIdGlEntriesByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.gLEntry == nil {
 		return localVarReturnValue, nil, reportError("gLEntry is required and must be specified")
 	}
@@ -627,7 +621,9 @@ func (a *GLEntriesAPIService) PutFinanceInvoicesByParentIdGlEntriesByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.gLEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

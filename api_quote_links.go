@@ -74,9 +74,6 @@ func (a *QuoteLinksAPIService) DeleteSystemQuoteLinkSetupByIdExecute(r ApiDelete
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *QuoteLinksAPIService) DeleteSystemQuoteLinkSetupByIdExecute(r ApiDelete
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *QuoteLinksAPIService) DeleteSystemQuoteLinkSetupByIdExecute(r ApiDelete
 type ApiGetSystemQuoteLinkSetupRequest struct {
 	ctx context.Context
 	ApiService *QuoteLinksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemQuoteLinkSetupRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemQuoteLinkSetupRequest) ClientId(clientId string) ApiGetSystemQuoteLinkSetupRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemQuoteLinkSetupRequest) PageId(pageId int32) ApiGetSystemQuot
 	return r
 }
 
+// 
+func (r ApiGetSystemQuoteLinkSetupRequest) ClientId(clientId string) ApiGetSystemQuoteLinkSetupRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemQuoteLinkSetupRequest) Execute() ([]QuoteLink, *http.Response, error) {
 	return r.ApiService.GetSystemQuoteLinkSetupExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupExecute(r ApiGetSystemQuot
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupExecute(r ApiGetSystemQuot
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemQuoteLinkSetupByIdRequest struct {
 	ctx context.Context
 	ApiService *QuoteLinksAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemQuoteLinkSetupByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemQuoteLinkSetupByIdRequest) ClientId(clientId string) ApiGetSystemQuoteLinkSetupByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemQuoteLinkSetupByIdRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemQuoteLinkSetupByIdRequest) ClientId(clientId string) ApiGetSystemQuoteLinkSetupByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemQuoteLinkSetupByIdRequest) Execute() (*QuoteLink, *http.Response, error) {
 	return r.ApiService.GetSystemQuoteLinkSetupByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupByIdExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupByIdExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupByIdExecute(r ApiGetSystem
 type ApiGetSystemQuoteLinkSetupCountRequest struct {
 	ctx context.Context
 	ApiService *QuoteLinksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemQuoteLinkSetupCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemQuoteLinkSetupCountRequest) ClientId(clientId string) ApiGetSystemQuoteLinkSetupCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemQuoteLinkSetupCountRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemQuoteLinkSetupCountRequest) ClientId(clientId string) ApiGetSystemQuoteLinkSetupCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemQuoteLinkSetupCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemQuoteLinkSetupCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupCountExecute(r ApiGetSyste
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupCountExecute(r ApiGetSyste
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -695,7 +691,6 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupCountExecute(r ApiGetSyste
 type ApiGetSystemQuoteLinkSetupTestConnectionRequest struct {
 	ctx context.Context
 	ApiService *QuoteLinksAPIService
-	clientId *string
 	url string
 	conditions *string
 	childConditions *string
@@ -705,12 +700,7 @@ type ApiGetSystemQuoteLinkSetupTestConnectionRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemQuoteLinkSetupTestConnectionRequest) ClientId(clientId string) ApiGetSystemQuoteLinkSetupTestConnectionRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -761,6 +751,12 @@ func (r ApiGetSystemQuoteLinkSetupTestConnectionRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetSystemQuoteLinkSetupTestConnectionRequest) ClientId(clientId string) ApiGetSystemQuoteLinkSetupTestConnectionRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemQuoteLinkSetupTestConnectionRequest) Execute() (*SuccessResponse, *http.Response, error) {
 	return r.ApiService.GetSystemQuoteLinkSetupTestConnectionExecute(r)
 }
@@ -801,9 +797,6 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupTestConnectionExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -846,7 +839,9 @@ func (a *QuoteLinksAPIService) GetSystemQuoteLinkSetupTestConnectionExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -888,19 +883,19 @@ type ApiPatchSystemQuoteLinkSetupByIdRequest struct {
 	ctx context.Context
 	ApiService *QuoteLinksAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemQuoteLinkSetupByIdRequest) ClientId(clientId string) ApiPatchSystemQuoteLinkSetupByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemQuoteLinkSetupByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemQuoteLinkSetupByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemQuoteLinkSetupByIdRequest) ClientId(clientId string) ApiPatchSystemQuoteLinkSetupByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -944,9 +939,6 @@ func (a *QuoteLinksAPIService) PatchSystemQuoteLinkSetupByIdExecute(r ApiPatchSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -968,7 +960,9 @@ func (a *QuoteLinksAPIService) PatchSystemQuoteLinkSetupByIdExecute(r ApiPatchSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1011,19 +1005,19 @@ func (a *QuoteLinksAPIService) PatchSystemQuoteLinkSetupByIdExecute(r ApiPatchSy
 type ApiPostSystemQuoteLinkSetupRequest struct {
 	ctx context.Context
 	ApiService *QuoteLinksAPIService
-	clientId *string
 	quoteLink *QuoteLink
-}
-
-// 
-func (r ApiPostSystemQuoteLinkSetupRequest) ClientId(clientId string) ApiPostSystemQuoteLinkSetupRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // quoteLink
 func (r ApiPostSystemQuoteLinkSetupRequest) QuoteLink(quoteLink QuoteLink) ApiPostSystemQuoteLinkSetupRequest {
 	r.quoteLink = &quoteLink
+	return r
+}
+
+// 
+func (r ApiPostSystemQuoteLinkSetupRequest) ClientId(clientId string) ApiPostSystemQuoteLinkSetupRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1064,9 +1058,6 @@ func (a *QuoteLinksAPIService) PostSystemQuoteLinkSetupExecute(r ApiPostSystemQu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.quoteLink == nil {
 		return localVarReturnValue, nil, reportError("quoteLink is required and must be specified")
 	}
@@ -1088,7 +1079,9 @@ func (a *QuoteLinksAPIService) PostSystemQuoteLinkSetupExecute(r ApiPostSystemQu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.quoteLink
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1132,19 +1125,19 @@ type ApiPutSystemQuoteLinkSetupByIdRequest struct {
 	ctx context.Context
 	ApiService *QuoteLinksAPIService
 	id int32
-	clientId *string
 	quoteLink *QuoteLink
-}
-
-// 
-func (r ApiPutSystemQuoteLinkSetupByIdRequest) ClientId(clientId string) ApiPutSystemQuoteLinkSetupByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // quoteLink
 func (r ApiPutSystemQuoteLinkSetupByIdRequest) QuoteLink(quoteLink QuoteLink) ApiPutSystemQuoteLinkSetupByIdRequest {
 	r.quoteLink = &quoteLink
+	return r
+}
+
+// 
+func (r ApiPutSystemQuoteLinkSetupByIdRequest) ClientId(clientId string) ApiPutSystemQuoteLinkSetupByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1188,9 +1181,6 @@ func (a *QuoteLinksAPIService) PutSystemQuoteLinkSetupByIdExecute(r ApiPutSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.quoteLink == nil {
 		return localVarReturnValue, nil, reportError("quoteLink is required and must be specified")
 	}
@@ -1212,7 +1202,9 @@ func (a *QuoteLinksAPIService) PutSystemQuoteLinkSetupByIdExecute(r ApiPutSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.quoteLink
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

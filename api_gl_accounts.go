@@ -74,9 +74,6 @@ func (a *GLAccountsAPIService) DeleteFinanceGlAccountsByIdExecute(r ApiDeleteFin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *GLAccountsAPIService) DeleteFinanceGlAccountsByIdExecute(r ApiDeleteFin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *GLAccountsAPIService) DeleteFinanceGlAccountsByIdExecute(r ApiDeleteFin
 type ApiGetFinanceGlAccountsRequest struct {
 	ctx context.Context
 	ApiService *GLAccountsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetFinanceGlAccountsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlAccountsRequest) ClientId(clientId string) ApiGetFinanceGlAccountsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetFinanceGlAccountsRequest) PageId(pageId int32) ApiGetFinanceGlAcco
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlAccountsRequest) ClientId(clientId string) ApiGetFinanceGlAccountsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlAccountsRequest) Execute() ([]GLAccount, *http.Response, error) {
 	return r.ApiService.GetFinanceGlAccountsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *GLAccountsAPIService) GetFinanceGlAccountsExecute(r ApiGetFinanceGlAcco
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *GLAccountsAPIService) GetFinanceGlAccountsExecute(r ApiGetFinanceGlAcco
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetFinanceGlAccountsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLAccountsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetFinanceGlAccountsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlAccountsByIdRequest) ClientId(clientId string) ApiGetFinanceGlAccountsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetFinanceGlAccountsByIdRequest) PageId(pageId int32) ApiGetFinanceGl
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlAccountsByIdRequest) ClientId(clientId string) ApiGetFinanceGlAccountsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlAccountsByIdRequest) Execute() (*GLAccount, *http.Response, error) {
 	return r.ApiService.GetFinanceGlAccountsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *GLAccountsAPIService) GetFinanceGlAccountsByIdExecute(r ApiGetFinanceGl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *GLAccountsAPIService) GetFinanceGlAccountsByIdExecute(r ApiGetFinanceGl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *GLAccountsAPIService) GetFinanceGlAccountsByIdExecute(r ApiGetFinanceGl
 type ApiGetFinanceGlAccountsCountRequest struct {
 	ctx context.Context
 	ApiService *GLAccountsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetFinanceGlAccountsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlAccountsCountRequest) ClientId(clientId string) ApiGetFinanceGlAccountsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetFinanceGlAccountsCountRequest) PageId(pageId int32) ApiGetFinanceG
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlAccountsCountRequest) ClientId(clientId string) ApiGetFinanceGlAccountsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlAccountsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceGlAccountsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *GLAccountsAPIService) GetFinanceGlAccountsCountExecute(r ApiGetFinanceG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *GLAccountsAPIService) GetFinanceGlAccountsCountExecute(r ApiGetFinanceG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchFinanceGlAccountsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLAccountsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceGlAccountsByIdRequest) ClientId(clientId string) ApiPatchFinanceGlAccountsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceGlAccountsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceGlAccountsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceGlAccountsByIdRequest) ClientId(clientId string) ApiPatchFinanceGlAccountsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *GLAccountsAPIService) PatchFinanceGlAccountsByIdExecute(r ApiPatchFinan
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *GLAccountsAPIService) PatchFinanceGlAccountsByIdExecute(r ApiPatchFinan
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *GLAccountsAPIService) PatchFinanceGlAccountsByIdExecute(r ApiPatchFinan
 type ApiPostFinanceGlAccountsRequest struct {
 	ctx context.Context
 	ApiService *GLAccountsAPIService
-	clientId *string
 	gLAccount *GLAccount
-}
-
-// 
-func (r ApiPostFinanceGlAccountsRequest) ClientId(clientId string) ApiPostFinanceGlAccountsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // glAccount
 func (r ApiPostFinanceGlAccountsRequest) GLAccount(gLAccount GLAccount) ApiPostFinanceGlAccountsRequest {
 	r.gLAccount = &gLAccount
+	return r
+}
+
+// 
+func (r ApiPostFinanceGlAccountsRequest) ClientId(clientId string) ApiPostFinanceGlAccountsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *GLAccountsAPIService) PostFinanceGlAccountsExecute(r ApiPostFinanceGlAc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.gLAccount == nil {
 		return localVarReturnValue, nil, reportError("gLAccount is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *GLAccountsAPIService) PostFinanceGlAccountsExecute(r ApiPostFinanceGlAc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.gLAccount
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutFinanceGlAccountsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLAccountsAPIService
 	id int32
-	clientId *string
 	gLAccount *GLAccount
-}
-
-// 
-func (r ApiPutFinanceGlAccountsByIdRequest) ClientId(clientId string) ApiPutFinanceGlAccountsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // glAccount
 func (r ApiPutFinanceGlAccountsByIdRequest) GLAccount(gLAccount GLAccount) ApiPutFinanceGlAccountsByIdRequest {
 	r.gLAccount = &gLAccount
+	return r
+}
+
+// 
+func (r ApiPutFinanceGlAccountsByIdRequest) ClientId(clientId string) ApiPutFinanceGlAccountsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *GLAccountsAPIService) PutFinanceGlAccountsByIdExecute(r ApiPutFinanceGl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.gLAccount == nil {
 		return localVarReturnValue, nil, reportError("gLAccount is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *GLAccountsAPIService) PutFinanceGlAccountsByIdExecute(r ApiPutFinanceGl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.gLAccount
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

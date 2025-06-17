@@ -26,7 +26,6 @@ type OthersAPIService service
 type ApiGetSystemMyCompanyOtherRequest struct {
 	ctx context.Context
 	ApiService *OthersAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemMyCompanyOtherRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyCompanyOtherRequest) ClientId(clientId string) ApiGetSystemMyCompanyOtherRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemMyCompanyOtherRequest) PageId(pageId int32) ApiGetSystemMyCo
 	return r
 }
 
+// 
+func (r ApiGetSystemMyCompanyOtherRequest) ClientId(clientId string) ApiGetSystemMyCompanyOtherRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyCompanyOtherRequest) Execute() ([]Other, *http.Response, error) {
 	return r.ApiService.GetSystemMyCompanyOtherExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *OthersAPIService) GetSystemMyCompanyOtherExecute(r ApiGetSystemMyCompan
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *OthersAPIService) GetSystemMyCompanyOtherExecute(r ApiGetSystemMyCompan
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemMyCompanyOtherByIdRequest struct {
 	ctx context.Context
 	ApiService *OthersAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemMyCompanyOtherByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyCompanyOtherByIdRequest) ClientId(clientId string) ApiGetSystemMyCompanyOtherByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemMyCompanyOtherByIdRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemMyCompanyOtherByIdRequest) ClientId(clientId string) ApiGetSystemMyCompanyOtherByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyCompanyOtherByIdRequest) Execute() (*Other, *http.Response, error) {
 	return r.ApiService.GetSystemMyCompanyOtherByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *OthersAPIService) GetSystemMyCompanyOtherByIdExecute(r ApiGetSystemMyCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *OthersAPIService) GetSystemMyCompanyOtherByIdExecute(r ApiGetSystemMyCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *OthersAPIService) GetSystemMyCompanyOtherByIdExecute(r ApiGetSystemMyCo
 type ApiGetSystemMyCompanyOtherCountRequest struct {
 	ctx context.Context
 	ApiService *OthersAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemMyCompanyOtherCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyCompanyOtherCountRequest) ClientId(clientId string) ApiGetSystemMyCompanyOtherCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemMyCompanyOtherCountRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemMyCompanyOtherCountRequest) ClientId(clientId string) ApiGetSystemMyCompanyOtherCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyCompanyOtherCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMyCompanyOtherCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *OthersAPIService) GetSystemMyCompanyOtherCountExecute(r ApiGetSystemMyC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *OthersAPIService) GetSystemMyCompanyOtherCountExecute(r ApiGetSystemMyC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchSystemMyCompanyOtherByIdRequest struct {
 	ctx context.Context
 	ApiService *OthersAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemMyCompanyOtherByIdRequest) ClientId(clientId string) ApiPatchSystemMyCompanyOtherByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemMyCompanyOtherByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemMyCompanyOtherByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemMyCompanyOtherByIdRequest) ClientId(clientId string) ApiPatchSystemMyCompanyOtherByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *OthersAPIService) PatchSystemMyCompanyOtherByIdExecute(r ApiPatchSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *OthersAPIService) PatchSystemMyCompanyOtherByIdExecute(r ApiPatchSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutSystemMyCompanyOtherByIdRequest struct {
 	ctx context.Context
 	ApiService *OthersAPIService
 	id int32
-	clientId *string
 	other *Other
-}
-
-// 
-func (r ApiPutSystemMyCompanyOtherByIdRequest) ClientId(clientId string) ApiPutSystemMyCompanyOtherByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // other
 func (r ApiPutSystemMyCompanyOtherByIdRequest) Other(other Other) ApiPutSystemMyCompanyOtherByIdRequest {
 	r.other = &other
+	return r
+}
+
+// 
+func (r ApiPutSystemMyCompanyOtherByIdRequest) ClientId(clientId string) ApiPutSystemMyCompanyOtherByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *OthersAPIService) PutSystemMyCompanyOtherByIdExecute(r ApiPutSystemMyCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.other == nil {
 		return localVarReturnValue, nil, reportError("other is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *OthersAPIService) PutSystemMyCompanyOtherByIdExecute(r ApiPutSystemMyCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.other
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

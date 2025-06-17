@@ -26,7 +26,6 @@ type KPIsAPIService service
 type ApiGetSystemKpisRequest struct {
 	ctx context.Context
 	ApiService *KPIsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemKpisRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemKpisRequest) ClientId(clientId string) ApiGetSystemKpisRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemKpisRequest) PageId(pageId int32) ApiGetSystemKpisRequest {
 	return r
 }
 
+// 
+func (r ApiGetSystemKpisRequest) ClientId(clientId string) ApiGetSystemKpisRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemKpisRequest) Execute() ([]KPI, *http.Response, error) {
 	return r.ApiService.GetSystemKpisExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *KPIsAPIService) GetSystemKpisExecute(r ApiGetSystemKpisRequest) ([]KPI,
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *KPIsAPIService) GetSystemKpisExecute(r ApiGetSystemKpisRequest) ([]KPI,
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemKpisByIdRequest struct {
 	ctx context.Context
 	ApiService *KPIsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemKpisByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemKpisByIdRequest) ClientId(clientId string) ApiGetSystemKpisByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemKpisByIdRequest) PageId(pageId int32) ApiGetSystemKpisByIdRe
 	return r
 }
 
+// 
+func (r ApiGetSystemKpisByIdRequest) ClientId(clientId string) ApiGetSystemKpisByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemKpisByIdRequest) Execute() (*KPI, *http.Response, error) {
 	return r.ApiService.GetSystemKpisByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *KPIsAPIService) GetSystemKpisByIdExecute(r ApiGetSystemKpisByIdRequest)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *KPIsAPIService) GetSystemKpisByIdExecute(r ApiGetSystemKpisByIdRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *KPIsAPIService) GetSystemKpisByIdExecute(r ApiGetSystemKpisByIdRequest)
 type ApiGetSystemKpisCountRequest struct {
 	ctx context.Context
 	ApiService *KPIsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemKpisCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemKpisCountRequest) ClientId(clientId string) ApiGetSystemKpisCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemKpisCountRequest) PageId(pageId int32) ApiGetSystemKpisCount
 	return r
 }
 
+// 
+func (r ApiGetSystemKpisCountRequest) ClientId(clientId string) ApiGetSystemKpisCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemKpisCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemKpisCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *KPIsAPIService) GetSystemKpisCountExecute(r ApiGetSystemKpisCountReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *KPIsAPIService) GetSystemKpisCountExecute(r ApiGetSystemKpisCountReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -74,9 +74,6 @@ func (a *TimeEntriesAPIService) DeleteTimeEntriesByIdExecute(r ApiDeleteTimeEntr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *TimeEntriesAPIService) DeleteTimeEntriesByIdExecute(r ApiDeleteTimeEntr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *TimeEntriesAPIService) DeleteTimeEntriesByIdExecute(r ApiDeleteTimeEntr
 type ApiGetTimeEntriesRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetTimeEntriesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeEntriesRequest) ClientId(clientId string) ApiGetTimeEntriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetTimeEntriesRequest) PageId(pageId int32) ApiGetTimeEntriesRequest 
 	return r
 }
 
+// 
+func (r ApiGetTimeEntriesRequest) ClientId(clientId string) ApiGetTimeEntriesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeEntriesRequest) Execute() ([]TimeEntry, *http.Response, error) {
 	return r.ApiService.GetTimeEntriesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *TimeEntriesAPIService) GetTimeEntriesExecute(r ApiGetTimeEntriesRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *TimeEntriesAPIService) GetTimeEntriesExecute(r ApiGetTimeEntriesRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetTimeEntriesByIdRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetTimeEntriesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeEntriesByIdRequest) ClientId(clientId string) ApiGetTimeEntriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetTimeEntriesByIdRequest) PageId(pageId int32) ApiGetTimeEntriesById
 	return r
 }
 
+// 
+func (r ApiGetTimeEntriesByIdRequest) ClientId(clientId string) ApiGetTimeEntriesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeEntriesByIdRequest) Execute() (*TimeEntry, *http.Response, error) {
 	return r.ApiService.GetTimeEntriesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *TimeEntriesAPIService) GetTimeEntriesByIdExecute(r ApiGetTimeEntriesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *TimeEntriesAPIService) GetTimeEntriesByIdExecute(r ApiGetTimeEntriesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *TimeEntriesAPIService) GetTimeEntriesByIdExecute(r ApiGetTimeEntriesByI
 type ApiGetTimeEntriesCountRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetTimeEntriesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeEntriesCountRequest) ClientId(clientId string) ApiGetTimeEntriesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetTimeEntriesCountRequest) PageId(pageId int32) ApiGetTimeEntriesCou
 	return r
 }
 
+// 
+func (r ApiGetTimeEntriesCountRequest) ClientId(clientId string) ApiGetTimeEntriesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeEntriesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeEntriesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *TimeEntriesAPIService) GetTimeEntriesCountExecute(r ApiGetTimeEntriesCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *TimeEntriesAPIService) GetTimeEntriesCountExecute(r ApiGetTimeEntriesCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchTimeEntriesByIdRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchTimeEntriesByIdRequest) ClientId(clientId string) ApiPatchTimeEntriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchTimeEntriesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchTimeEntriesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchTimeEntriesByIdRequest) ClientId(clientId string) ApiPatchTimeEntriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *TimeEntriesAPIService) PatchTimeEntriesByIdExecute(r ApiPatchTimeEntrie
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *TimeEntriesAPIService) PatchTimeEntriesByIdExecute(r ApiPatchTimeEntrie
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *TimeEntriesAPIService) PatchTimeEntriesByIdExecute(r ApiPatchTimeEntrie
 type ApiPostTimeEntriesRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	clientId *string
 	timeEntry *TimeEntry
-}
-
-// 
-func (r ApiPostTimeEntriesRequest) ClientId(clientId string) ApiPostTimeEntriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timeEntry
 func (r ApiPostTimeEntriesRequest) TimeEntry(timeEntry TimeEntry) ApiPostTimeEntriesRequest {
 	r.timeEntry = &timeEntry
+	return r
+}
+
+// 
+func (r ApiPostTimeEntriesRequest) ClientId(clientId string) ApiPostTimeEntriesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *TimeEntriesAPIService) PostTimeEntriesExecute(r ApiPostTimeEntriesReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timeEntry == nil {
 		return localVarReturnValue, nil, reportError("timeEntry is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *TimeEntriesAPIService) PostTimeEntriesExecute(r ApiPostTimeEntriesReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timeEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -939,19 +933,19 @@ func (a *TimeEntriesAPIService) PostTimeEntriesExecute(r ApiPostTimeEntriesReque
 type ApiPostTimeEntriesDefaultsRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	clientId *string
 	timeEntry *TimeEntry
-}
-
-// 
-func (r ApiPostTimeEntriesDefaultsRequest) ClientId(clientId string) ApiPostTimeEntriesDefaultsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timeEntry
 func (r ApiPostTimeEntriesDefaultsRequest) TimeEntry(timeEntry TimeEntry) ApiPostTimeEntriesDefaultsRequest {
 	r.timeEntry = &timeEntry
+	return r
+}
+
+// 
+func (r ApiPostTimeEntriesDefaultsRequest) ClientId(clientId string) ApiPostTimeEntriesDefaultsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -992,9 +986,6 @@ func (a *TimeEntriesAPIService) PostTimeEntriesDefaultsExecute(r ApiPostTimeEntr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timeEntry == nil {
 		return localVarReturnValue, nil, reportError("timeEntry is required and must be specified")
 	}
@@ -1016,7 +1007,9 @@ func (a *TimeEntriesAPIService) PostTimeEntriesDefaultsExecute(r ApiPostTimeEntr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timeEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1060,19 +1053,19 @@ type ApiPutTimeEntriesByIdRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
 	id int32
-	clientId *string
 	timeEntry *TimeEntry
-}
-
-// 
-func (r ApiPutTimeEntriesByIdRequest) ClientId(clientId string) ApiPutTimeEntriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timeEntry
 func (r ApiPutTimeEntriesByIdRequest) TimeEntry(timeEntry TimeEntry) ApiPutTimeEntriesByIdRequest {
 	r.timeEntry = &timeEntry
+	return r
+}
+
+// 
+func (r ApiPutTimeEntriesByIdRequest) ClientId(clientId string) ApiPutTimeEntriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1116,9 +1109,6 @@ func (a *TimeEntriesAPIService) PutTimeEntriesByIdExecute(r ApiPutTimeEntriesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timeEntry == nil {
 		return localVarReturnValue, nil, reportError("timeEntry is required and must be specified")
 	}
@@ -1140,7 +1130,9 @@ func (a *TimeEntriesAPIService) PutTimeEntriesByIdExecute(r ApiPutTimeEntriesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timeEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

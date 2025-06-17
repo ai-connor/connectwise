@@ -26,7 +26,6 @@ type HolidayListInfosAPIService service
 type ApiGetSalesScheduleHolidaylistsInfoCountRequest struct {
 	ctx context.Context
 	ApiService *HolidayListInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSalesScheduleHolidaylistsInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesScheduleHolidaylistsInfoCountRequest) ClientId(clientId string) ApiGetSalesScheduleHolidaylistsInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSalesScheduleHolidaylistsInfoCountRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetSalesScheduleHolidaylistsInfoCountRequest) ClientId(clientId string) ApiGetSalesScheduleHolidaylistsInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesScheduleHolidaylistsInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesScheduleHolidaylistsInfoCountExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *HolidayListInfosAPIService) GetSalesScheduleHolidaylistsInfoCountExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *HolidayListInfosAPIService) GetSalesScheduleHolidaylistsInfoCountExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetScheduleHolidaylistsByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *HolidayListInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetScheduleHolidaylistsByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleHolidaylistsByIdInfoRequest) ClientId(clientId string) ApiGetScheduleHolidaylistsByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetScheduleHolidaylistsByIdInfoRequest) PageId(pageId int32) ApiGetSc
 	return r
 }
 
+// 
+func (r ApiGetScheduleHolidaylistsByIdInfoRequest) ClientId(clientId string) ApiGetScheduleHolidaylistsByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleHolidaylistsByIdInfoRequest) Execute() (*HolidayListInfo, *http.Response, error) {
 	return r.ApiService.GetScheduleHolidaylistsByIdInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *HolidayListInfosAPIService) GetScheduleHolidaylistsByIdInfoExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *HolidayListInfosAPIService) GetScheduleHolidaylistsByIdInfoExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *HolidayListInfosAPIService) GetScheduleHolidaylistsByIdInfoExecute(r Ap
 type ApiGetScheduleHolidaylistsInfoRequest struct {
 	ctx context.Context
 	ApiService *HolidayListInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetScheduleHolidaylistsInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleHolidaylistsInfoRequest) ClientId(clientId string) ApiGetScheduleHolidaylistsInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetScheduleHolidaylistsInfoRequest) PageId(pageId int32) ApiGetSchedu
 	return r
 }
 
+// 
+func (r ApiGetScheduleHolidaylistsInfoRequest) ClientId(clientId string) ApiGetScheduleHolidaylistsInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleHolidaylistsInfoRequest) Execute() ([]HolidayListInfo, *http.Response, error) {
 	return r.ApiService.GetScheduleHolidaylistsInfoExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *HolidayListInfosAPIService) GetScheduleHolidaylistsInfoExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *HolidayListInfosAPIService) GetScheduleHolidaylistsInfoExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

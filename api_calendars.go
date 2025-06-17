@@ -74,9 +74,6 @@ func (a *CalendarsAPIService) DeleteScheduleCalendarsByIdExecute(r ApiDeleteSche
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CalendarsAPIService) DeleteScheduleCalendarsByIdExecute(r ApiDeleteSche
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CalendarsAPIService) DeleteScheduleCalendarsByIdExecute(r ApiDeleteSche
 type ApiGetScheduleCalendarsRequest struct {
 	ctx context.Context
 	ApiService *CalendarsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetScheduleCalendarsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleCalendarsRequest) ClientId(clientId string) ApiGetScheduleCalendarsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetScheduleCalendarsRequest) PageId(pageId int32) ApiGetScheduleCalen
 	return r
 }
 
+// 
+func (r ApiGetScheduleCalendarsRequest) ClientId(clientId string) ApiGetScheduleCalendarsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleCalendarsRequest) Execute() ([]Calendar, *http.Response, error) {
 	return r.ApiService.GetScheduleCalendarsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CalendarsAPIService) GetScheduleCalendarsExecute(r ApiGetScheduleCalend
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CalendarsAPIService) GetScheduleCalendarsExecute(r ApiGetScheduleCalend
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetScheduleCalendarsByIdRequest struct {
 	ctx context.Context
 	ApiService *CalendarsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetScheduleCalendarsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleCalendarsByIdRequest) ClientId(clientId string) ApiGetScheduleCalendarsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetScheduleCalendarsByIdRequest) PageId(pageId int32) ApiGetScheduleC
 	return r
 }
 
+// 
+func (r ApiGetScheduleCalendarsByIdRequest) ClientId(clientId string) ApiGetScheduleCalendarsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleCalendarsByIdRequest) Execute() (*Calendar, *http.Response, error) {
 	return r.ApiService.GetScheduleCalendarsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CalendarsAPIService) GetScheduleCalendarsByIdExecute(r ApiGetScheduleCa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CalendarsAPIService) GetScheduleCalendarsByIdExecute(r ApiGetScheduleCa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetScheduleCalendarsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *CalendarsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetScheduleCalendarsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleCalendarsByIdUsagesRequest) ClientId(clientId string) ApiGetScheduleCalendarsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetScheduleCalendarsByIdUsagesRequest) PageId(pageId int32) ApiGetSch
 	return r
 }
 
+// 
+func (r ApiGetScheduleCalendarsByIdUsagesRequest) ClientId(clientId string) ApiGetScheduleCalendarsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleCalendarsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetScheduleCalendarsByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *CalendarsAPIService) GetScheduleCalendarsByIdUsagesExecute(r ApiGetSche
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *CalendarsAPIService) GetScheduleCalendarsByIdUsagesExecute(r ApiGetSche
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetScheduleCalendarsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *CalendarsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetScheduleCalendarsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleCalendarsByIdUsagesListRequest) ClientId(clientId string) ApiGetScheduleCalendarsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetScheduleCalendarsByIdUsagesListRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetScheduleCalendarsByIdUsagesListRequest) ClientId(clientId string) ApiGetScheduleCalendarsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleCalendarsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetScheduleCalendarsByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *CalendarsAPIService) GetScheduleCalendarsByIdUsagesListExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *CalendarsAPIService) GetScheduleCalendarsByIdUsagesListExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *CalendarsAPIService) GetScheduleCalendarsByIdUsagesListExecute(r ApiGet
 type ApiGetScheduleCalendarsCountRequest struct {
 	ctx context.Context
 	ApiService *CalendarsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetScheduleCalendarsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleCalendarsCountRequest) ClientId(clientId string) ApiGetScheduleCalendarsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetScheduleCalendarsCountRequest) PageId(pageId int32) ApiGetSchedule
 	return r
 }
 
+// 
+func (r ApiGetScheduleCalendarsCountRequest) ClientId(clientId string) ApiGetScheduleCalendarsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleCalendarsCountRequest) Execute() (*Calendar, *http.Response, error) {
 	return r.ApiService.GetScheduleCalendarsCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *CalendarsAPIService) GetScheduleCalendarsCountExecute(r ApiGetScheduleC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *CalendarsAPIService) GetScheduleCalendarsCountExecute(r ApiGetScheduleC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchScheduleCalendarsByIdRequest struct {
 	ctx context.Context
 	ApiService *CalendarsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchScheduleCalendarsByIdRequest) ClientId(clientId string) ApiPatchScheduleCalendarsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchScheduleCalendarsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchScheduleCalendarsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchScheduleCalendarsByIdRequest) ClientId(clientId string) ApiPatchScheduleCalendarsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *CalendarsAPIService) PatchScheduleCalendarsByIdExecute(r ApiPatchSchedu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *CalendarsAPIService) PatchScheduleCalendarsByIdExecute(r ApiPatchSchedu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *CalendarsAPIService) PatchScheduleCalendarsByIdExecute(r ApiPatchSchedu
 type ApiPostScheduleCalendarsRequest struct {
 	ctx context.Context
 	ApiService *CalendarsAPIService
-	clientId *string
 	calendar *Calendar
-}
-
-// 
-func (r ApiPostScheduleCalendarsRequest) ClientId(clientId string) ApiPostScheduleCalendarsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // calendar
 func (r ApiPostScheduleCalendarsRequest) Calendar(calendar Calendar) ApiPostScheduleCalendarsRequest {
 	r.calendar = &calendar
+	return r
+}
+
+// 
+func (r ApiPostScheduleCalendarsRequest) ClientId(clientId string) ApiPostScheduleCalendarsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *CalendarsAPIService) PostScheduleCalendarsExecute(r ApiPostScheduleCale
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.calendar == nil {
 		return localVarReturnValue, nil, reportError("calendar is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *CalendarsAPIService) PostScheduleCalendarsExecute(r ApiPostScheduleCale
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.calendar
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1373,9 +1365,6 @@ func (a *CalendarsAPIService) PostScheduleCalendarsByIdCopyExecute(r ApiPostSche
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1394,7 +1383,9 @@ func (a *CalendarsAPIService) PostScheduleCalendarsByIdCopyExecute(r ApiPostSche
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1436,19 +1427,19 @@ type ApiPutScheduleCalendarsByIdRequest struct {
 	ctx context.Context
 	ApiService *CalendarsAPIService
 	id int32
-	clientId *string
 	calendar *Calendar
-}
-
-// 
-func (r ApiPutScheduleCalendarsByIdRequest) ClientId(clientId string) ApiPutScheduleCalendarsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // calendar
 func (r ApiPutScheduleCalendarsByIdRequest) Calendar(calendar Calendar) ApiPutScheduleCalendarsByIdRequest {
 	r.calendar = &calendar
+	return r
+}
+
+// 
+func (r ApiPutScheduleCalendarsByIdRequest) ClientId(clientId string) ApiPutScheduleCalendarsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1492,9 +1483,6 @@ func (a *CalendarsAPIService) PutScheduleCalendarsByIdExecute(r ApiPutScheduleCa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.calendar == nil {
 		return localVarReturnValue, nil, reportError("calendar is required and must be specified")
 	}
@@ -1516,7 +1504,9 @@ func (a *CalendarsAPIService) PutScheduleCalendarsByIdExecute(r ApiPutScheduleCa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.calendar
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

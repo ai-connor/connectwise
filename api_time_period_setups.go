@@ -74,9 +74,6 @@ func (a *TimePeriodSetupsAPIService) DeleteTimeTimePeriodSetupsByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *TimePeriodSetupsAPIService) DeleteTimeTimePeriodSetupsByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *TimePeriodSetupsAPIService) DeleteTimeTimePeriodSetupsByIdExecute(r Api
 type ApiGetTimeTimePeriodSetupsRequest struct {
 	ctx context.Context
 	ApiService *TimePeriodSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetTimeTimePeriodSetupsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeTimePeriodSetupsRequest) ClientId(clientId string) ApiGetTimeTimePeriodSetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetTimeTimePeriodSetupsRequest) PageId(pageId int32) ApiGetTimeTimePe
 	return r
 }
 
+// 
+func (r ApiGetTimeTimePeriodSetupsRequest) ClientId(clientId string) ApiGetTimeTimePeriodSetupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeTimePeriodSetupsRequest) Execute() ([]TimePeriodSetup, *http.Response, error) {
 	return r.ApiService.GetTimeTimePeriodSetupsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsExecute(r ApiGetTime
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsExecute(r ApiGetTime
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetTimeTimePeriodSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *TimePeriodSetupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetTimeTimePeriodSetupsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeTimePeriodSetupsByIdRequest) ClientId(clientId string) ApiGetTimeTimePeriodSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetTimeTimePeriodSetupsByIdRequest) PageId(pageId int32) ApiGetTimeTi
 	return r
 }
 
+// 
+func (r ApiGetTimeTimePeriodSetupsByIdRequest) ClientId(clientId string) ApiGetTimeTimePeriodSetupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeTimePeriodSetupsByIdRequest) Execute() (*TimePeriodSetup, *http.Response, error) {
 	return r.ApiService.GetTimeTimePeriodSetupsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsByIdExecute(r ApiGet
 type ApiGetTimeTimePeriodSetupsCountRequest struct {
 	ctx context.Context
 	ApiService *TimePeriodSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetTimeTimePeriodSetupsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeTimePeriodSetupsCountRequest) ClientId(clientId string) ApiGetTimeTimePeriodSetupsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetTimeTimePeriodSetupsCountRequest) PageId(pageId int32) ApiGetTimeT
 	return r
 }
 
+// 
+func (r ApiGetTimeTimePeriodSetupsCountRequest) ClientId(clientId string) ApiGetTimeTimePeriodSetupsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeTimePeriodSetupsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeTimePeriodSetupsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -695,7 +691,6 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsCountExecute(r ApiGe
 type ApiGetTimeTimePeriodSetupsDefaultRequest struct {
 	ctx context.Context
 	ApiService *TimePeriodSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -704,12 +699,7 @@ type ApiGetTimeTimePeriodSetupsDefaultRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeTimePeriodSetupsDefaultRequest) ClientId(clientId string) ApiGetTimeTimePeriodSetupsDefaultRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -760,6 +750,12 @@ func (r ApiGetTimeTimePeriodSetupsDefaultRequest) PageId(pageId int32) ApiGetTim
 	return r
 }
 
+// 
+func (r ApiGetTimeTimePeriodSetupsDefaultRequest) ClientId(clientId string) ApiGetTimeTimePeriodSetupsDefaultRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeTimePeriodSetupsDefaultRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.GetTimeTimePeriodSetupsDefaultExecute(r)
 }
@@ -797,9 +793,6 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsDefaultExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -842,7 +835,9 @@ func (a *TimePeriodSetupsAPIService) GetTimeTimePeriodSetupsDefaultExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -884,19 +879,19 @@ type ApiPatchTimeTimePeriodSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *TimePeriodSetupsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchTimeTimePeriodSetupsByIdRequest) ClientId(clientId string) ApiPatchTimeTimePeriodSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchTimeTimePeriodSetupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchTimeTimePeriodSetupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchTimeTimePeriodSetupsByIdRequest) ClientId(clientId string) ApiPatchTimeTimePeriodSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -940,9 +935,6 @@ func (a *TimePeriodSetupsAPIService) PatchTimeTimePeriodSetupsByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -964,7 +956,9 @@ func (a *TimePeriodSetupsAPIService) PatchTimeTimePeriodSetupsByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1007,19 +1001,19 @@ func (a *TimePeriodSetupsAPIService) PatchTimeTimePeriodSetupsByIdExecute(r ApiP
 type ApiPostTimeTimePeriodSetupsRequest struct {
 	ctx context.Context
 	ApiService *TimePeriodSetupsAPIService
-	clientId *string
 	timePeriodSetup *TimePeriodSetup
-}
-
-// 
-func (r ApiPostTimeTimePeriodSetupsRequest) ClientId(clientId string) ApiPostTimeTimePeriodSetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timePeriodSetup
 func (r ApiPostTimeTimePeriodSetupsRequest) TimePeriodSetup(timePeriodSetup TimePeriodSetup) ApiPostTimeTimePeriodSetupsRequest {
 	r.timePeriodSetup = &timePeriodSetup
+	return r
+}
+
+// 
+func (r ApiPostTimeTimePeriodSetupsRequest) ClientId(clientId string) ApiPostTimeTimePeriodSetupsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1060,9 +1054,6 @@ func (a *TimePeriodSetupsAPIService) PostTimeTimePeriodSetupsExecute(r ApiPostTi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timePeriodSetup == nil {
 		return localVarReturnValue, nil, reportError("timePeriodSetup is required and must be specified")
 	}
@@ -1084,7 +1075,9 @@ func (a *TimePeriodSetupsAPIService) PostTimeTimePeriodSetupsExecute(r ApiPostTi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timePeriodSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1128,19 +1121,19 @@ type ApiPutTimeTimePeriodSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *TimePeriodSetupsAPIService
 	id int32
-	clientId *string
 	timePeriodSetup *TimePeriodSetup
-}
-
-// 
-func (r ApiPutTimeTimePeriodSetupsByIdRequest) ClientId(clientId string) ApiPutTimeTimePeriodSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timePeriodSetup
 func (r ApiPutTimeTimePeriodSetupsByIdRequest) TimePeriodSetup(timePeriodSetup TimePeriodSetup) ApiPutTimeTimePeriodSetupsByIdRequest {
 	r.timePeriodSetup = &timePeriodSetup
+	return r
+}
+
+// 
+func (r ApiPutTimeTimePeriodSetupsByIdRequest) ClientId(clientId string) ApiPutTimeTimePeriodSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1184,9 +1177,6 @@ func (a *TimePeriodSetupsAPIService) PutTimeTimePeriodSetupsByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timePeriodSetup == nil {
 		return localVarReturnValue, nil, reportError("timePeriodSetup is required and must be specified")
 	}
@@ -1208,7 +1198,9 @@ func (a *TimePeriodSetupsAPIService) PutTimeTimePeriodSetupsByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timePeriodSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

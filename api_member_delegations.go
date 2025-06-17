@@ -78,9 +78,6 @@ func (a *MemberDelegationsAPIService) DeleteSystemMembersByParentIdDelegationsBy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *MemberDelegationsAPIService) DeleteSystemMembersByParentIdDelegationsBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -183,9 +182,6 @@ func (a *MemberDelegationsAPIService) DeleteSystemMyAccountByParentIdDelegations
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -204,7 +200,9 @@ func (a *MemberDelegationsAPIService) DeleteSystemMyAccountByParentIdDelegations
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -237,7 +235,6 @@ type ApiGetSystemMembersByParentIdDelegationsRequest struct {
 	ctx context.Context
 	ApiService *MemberDelegationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -246,12 +243,7 @@ type ApiGetSystemMembersByParentIdDelegationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersByParentIdDelegationsRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdDelegationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -302,6 +294,12 @@ func (r ApiGetSystemMembersByParentIdDelegationsRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersByParentIdDelegationsRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdDelegationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersByParentIdDelegationsRequest) Execute() ([]MemberDelegation, *http.Response, error) {
 	return r.ApiService.GetSystemMembersByParentIdDelegationsExecute(r)
 }
@@ -342,9 +340,6 @@ func (a *MemberDelegationsAPIService) GetSystemMembersByParentIdDelegationsExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -387,7 +382,9 @@ func (a *MemberDelegationsAPIService) GetSystemMembersByParentIdDelegationsExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -430,7 +427,6 @@ type ApiGetSystemMembersByParentIdDelegationsByIdRequest struct {
 	ApiService *MemberDelegationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -439,12 +435,7 @@ type ApiGetSystemMembersByParentIdDelegationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdDelegationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -495,6 +486,12 @@ func (r ApiGetSystemMembersByParentIdDelegationsByIdRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdDelegationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersByParentIdDelegationsByIdRequest) Execute() (*MemberDelegation, *http.Response, error) {
 	return r.ApiService.GetSystemMembersByParentIdDelegationsByIdExecute(r)
 }
@@ -538,9 +535,6 @@ func (a *MemberDelegationsAPIService) GetSystemMembersByParentIdDelegationsByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -583,7 +577,9 @@ func (a *MemberDelegationsAPIService) GetSystemMembersByParentIdDelegationsByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -625,7 +621,6 @@ type ApiGetSystemMembersByParentIdDelegationsCountRequest struct {
 	ctx context.Context
 	ApiService *MemberDelegationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -634,12 +629,7 @@ type ApiGetSystemMembersByParentIdDelegationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersByParentIdDelegationsCountRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdDelegationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -690,6 +680,12 @@ func (r ApiGetSystemMembersByParentIdDelegationsCountRequest) PageId(pageId int3
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersByParentIdDelegationsCountRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdDelegationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersByParentIdDelegationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMembersByParentIdDelegationsCountExecute(r)
 }
@@ -730,9 +726,6 @@ func (a *MemberDelegationsAPIService) GetSystemMembersByParentIdDelegationsCount
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -775,7 +768,9 @@ func (a *MemberDelegationsAPIService) GetSystemMembersByParentIdDelegationsCount
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -817,7 +812,6 @@ type ApiGetSystemMyAccountByParentIdDelegationsRequest struct {
 	ctx context.Context
 	ApiService *MemberDelegationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -826,12 +820,7 @@ type ApiGetSystemMyAccountByParentIdDelegationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyAccountByParentIdDelegationsRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdDelegationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -882,6 +871,12 @@ func (r ApiGetSystemMyAccountByParentIdDelegationsRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetSystemMyAccountByParentIdDelegationsRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdDelegationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyAccountByParentIdDelegationsRequest) Execute() ([]MemberDelegation, *http.Response, error) {
 	return r.ApiService.GetSystemMyAccountByParentIdDelegationsExecute(r)
 }
@@ -922,9 +917,6 @@ func (a *MemberDelegationsAPIService) GetSystemMyAccountByParentIdDelegationsExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -967,7 +959,9 @@ func (a *MemberDelegationsAPIService) GetSystemMyAccountByParentIdDelegationsExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1010,7 +1004,6 @@ type ApiGetSystemMyAccountByParentIdDelegationsByIdRequest struct {
 	ApiService *MemberDelegationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1019,12 +1012,7 @@ type ApiGetSystemMyAccountByParentIdDelegationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyAccountByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdDelegationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1075,6 +1063,12 @@ func (r ApiGetSystemMyAccountByParentIdDelegationsByIdRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetSystemMyAccountByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdDelegationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyAccountByParentIdDelegationsByIdRequest) Execute() (*MemberDelegation, *http.Response, error) {
 	return r.ApiService.GetSystemMyAccountByParentIdDelegationsByIdExecute(r)
 }
@@ -1118,9 +1112,6 @@ func (a *MemberDelegationsAPIService) GetSystemMyAccountByParentIdDelegationsByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1163,7 +1154,9 @@ func (a *MemberDelegationsAPIService) GetSystemMyAccountByParentIdDelegationsByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1205,7 +1198,6 @@ type ApiGetSystemMyAccountByParentIdDelegationsCountRequest struct {
 	ctx context.Context
 	ApiService *MemberDelegationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1214,12 +1206,7 @@ type ApiGetSystemMyAccountByParentIdDelegationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyAccountByParentIdDelegationsCountRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdDelegationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1270,6 +1257,12 @@ func (r ApiGetSystemMyAccountByParentIdDelegationsCountRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetSystemMyAccountByParentIdDelegationsCountRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdDelegationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyAccountByParentIdDelegationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMyAccountByParentIdDelegationsCountExecute(r)
 }
@@ -1310,9 +1303,6 @@ func (a *MemberDelegationsAPIService) GetSystemMyAccountByParentIdDelegationsCou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1355,7 +1345,9 @@ func (a *MemberDelegationsAPIService) GetSystemMyAccountByParentIdDelegationsCou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1398,19 +1390,19 @@ type ApiPatchSystemMembersByParentIdDelegationsByIdRequest struct {
 	ApiService *MemberDelegationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemMembersByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiPatchSystemMembersByParentIdDelegationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemMembersByParentIdDelegationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemMembersByParentIdDelegationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemMembersByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiPatchSystemMembersByParentIdDelegationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1457,9 +1449,6 @@ func (a *MemberDelegationsAPIService) PatchSystemMembersByParentIdDelegationsByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1481,7 +1470,9 @@ func (a *MemberDelegationsAPIService) PatchSystemMembersByParentIdDelegationsByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1526,19 +1517,19 @@ type ApiPatchSystemMyAccountByParentIdDelegationsByIdRequest struct {
 	ApiService *MemberDelegationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemMyAccountByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiPatchSystemMyAccountByParentIdDelegationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemMyAccountByParentIdDelegationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemMyAccountByParentIdDelegationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemMyAccountByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiPatchSystemMyAccountByParentIdDelegationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1585,9 +1576,6 @@ func (a *MemberDelegationsAPIService) PatchSystemMyAccountByParentIdDelegationsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1609,7 +1597,9 @@ func (a *MemberDelegationsAPIService) PatchSystemMyAccountByParentIdDelegationsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1653,19 +1643,19 @@ type ApiPostSystemMembersByParentIdDelegationsRequest struct {
 	ctx context.Context
 	ApiService *MemberDelegationsAPIService
 	parentId int32
-	clientId *string
 	memberDelegation *MemberDelegation
-}
-
-// 
-func (r ApiPostSystemMembersByParentIdDelegationsRequest) ClientId(clientId string) ApiPostSystemMembersByParentIdDelegationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // memberDelegation
 func (r ApiPostSystemMembersByParentIdDelegationsRequest) MemberDelegation(memberDelegation MemberDelegation) ApiPostSystemMembersByParentIdDelegationsRequest {
 	r.memberDelegation = &memberDelegation
+	return r
+}
+
+// 
+func (r ApiPostSystemMembersByParentIdDelegationsRequest) ClientId(clientId string) ApiPostSystemMembersByParentIdDelegationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1709,9 +1699,6 @@ func (a *MemberDelegationsAPIService) PostSystemMembersByParentIdDelegationsExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberDelegation == nil {
 		return localVarReturnValue, nil, reportError("memberDelegation is required and must be specified")
 	}
@@ -1733,7 +1720,9 @@ func (a *MemberDelegationsAPIService) PostSystemMembersByParentIdDelegationsExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberDelegation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1777,19 +1766,19 @@ type ApiPostSystemMyAccountByParentIdDelegationsRequest struct {
 	ctx context.Context
 	ApiService *MemberDelegationsAPIService
 	parentId int32
-	clientId *string
 	memberDelegation *MemberDelegation
-}
-
-// 
-func (r ApiPostSystemMyAccountByParentIdDelegationsRequest) ClientId(clientId string) ApiPostSystemMyAccountByParentIdDelegationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // memberDelegation
 func (r ApiPostSystemMyAccountByParentIdDelegationsRequest) MemberDelegation(memberDelegation MemberDelegation) ApiPostSystemMyAccountByParentIdDelegationsRequest {
 	r.memberDelegation = &memberDelegation
+	return r
+}
+
+// 
+func (r ApiPostSystemMyAccountByParentIdDelegationsRequest) ClientId(clientId string) ApiPostSystemMyAccountByParentIdDelegationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1833,9 +1822,6 @@ func (a *MemberDelegationsAPIService) PostSystemMyAccountByParentIdDelegationsEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberDelegation == nil {
 		return localVarReturnValue, nil, reportError("memberDelegation is required and must be specified")
 	}
@@ -1857,7 +1843,9 @@ func (a *MemberDelegationsAPIService) PostSystemMyAccountByParentIdDelegationsEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberDelegation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1902,19 +1890,19 @@ type ApiPutSystemMembersByParentIdDelegationsByIdRequest struct {
 	ApiService *MemberDelegationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	memberDelegation *MemberDelegation
-}
-
-// 
-func (r ApiPutSystemMembersByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiPutSystemMembersByParentIdDelegationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // memberDelegation
 func (r ApiPutSystemMembersByParentIdDelegationsByIdRequest) MemberDelegation(memberDelegation MemberDelegation) ApiPutSystemMembersByParentIdDelegationsByIdRequest {
 	r.memberDelegation = &memberDelegation
+	return r
+}
+
+// 
+func (r ApiPutSystemMembersByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiPutSystemMembersByParentIdDelegationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1961,9 +1949,6 @@ func (a *MemberDelegationsAPIService) PutSystemMembersByParentIdDelegationsByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberDelegation == nil {
 		return localVarReturnValue, nil, reportError("memberDelegation is required and must be specified")
 	}
@@ -1985,7 +1970,9 @@ func (a *MemberDelegationsAPIService) PutSystemMembersByParentIdDelegationsByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberDelegation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -2030,19 +2017,19 @@ type ApiPutSystemMyAccountByParentIdDelegationsByIdRequest struct {
 	ApiService *MemberDelegationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	memberDelegation *MemberDelegation
-}
-
-// 
-func (r ApiPutSystemMyAccountByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiPutSystemMyAccountByParentIdDelegationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // memberDelegation
 func (r ApiPutSystemMyAccountByParentIdDelegationsByIdRequest) MemberDelegation(memberDelegation MemberDelegation) ApiPutSystemMyAccountByParentIdDelegationsByIdRequest {
 	r.memberDelegation = &memberDelegation
+	return r
+}
+
+// 
+func (r ApiPutSystemMyAccountByParentIdDelegationsByIdRequest) ClientId(clientId string) ApiPutSystemMyAccountByParentIdDelegationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -2089,9 +2076,6 @@ func (a *MemberDelegationsAPIService) PutSystemMyAccountByParentIdDelegationsByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberDelegation == nil {
 		return localVarReturnValue, nil, reportError("memberDelegation is required and must be specified")
 	}
@@ -2113,7 +2097,9 @@ func (a *MemberDelegationsAPIService) PutSystemMyAccountByParentIdDelegationsByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberDelegation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

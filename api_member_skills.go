@@ -78,9 +78,6 @@ func (a *MemberSkillsAPIService) DeleteSystemMembersByParentIdSkillsByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *MemberSkillsAPIService) DeleteSystemMembersByParentIdSkillsByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -183,9 +182,6 @@ func (a *MemberSkillsAPIService) DeleteSystemMyAccountByParentIdSkillsByIdExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -204,7 +200,9 @@ func (a *MemberSkillsAPIService) DeleteSystemMyAccountByParentIdSkillsByIdExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -237,7 +235,6 @@ type ApiGetSystemMembersByParentIdSkillsRequest struct {
 	ctx context.Context
 	ApiService *MemberSkillsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -246,12 +243,7 @@ type ApiGetSystemMembersByParentIdSkillsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersByParentIdSkillsRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdSkillsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -302,6 +294,12 @@ func (r ApiGetSystemMembersByParentIdSkillsRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersByParentIdSkillsRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdSkillsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersByParentIdSkillsRequest) Execute() ([]MemberSkill, *http.Response, error) {
 	return r.ApiService.GetSystemMembersByParentIdSkillsExecute(r)
 }
@@ -342,9 +340,6 @@ func (a *MemberSkillsAPIService) GetSystemMembersByParentIdSkillsExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -387,7 +382,9 @@ func (a *MemberSkillsAPIService) GetSystemMembersByParentIdSkillsExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -430,7 +427,6 @@ type ApiGetSystemMembersByParentIdSkillsByIdRequest struct {
 	ApiService *MemberSkillsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -439,12 +435,7 @@ type ApiGetSystemMembersByParentIdSkillsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersByParentIdSkillsByIdRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdSkillsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -495,6 +486,12 @@ func (r ApiGetSystemMembersByParentIdSkillsByIdRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersByParentIdSkillsByIdRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdSkillsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersByParentIdSkillsByIdRequest) Execute() (*MemberSkill, *http.Response, error) {
 	return r.ApiService.GetSystemMembersByParentIdSkillsByIdExecute(r)
 }
@@ -538,9 +535,6 @@ func (a *MemberSkillsAPIService) GetSystemMembersByParentIdSkillsByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -583,7 +577,9 @@ func (a *MemberSkillsAPIService) GetSystemMembersByParentIdSkillsByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -625,7 +621,6 @@ type ApiGetSystemMembersByParentIdSkillsCountRequest struct {
 	ctx context.Context
 	ApiService *MemberSkillsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -634,12 +629,7 @@ type ApiGetSystemMembersByParentIdSkillsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMembersByParentIdSkillsCountRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdSkillsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -690,6 +680,12 @@ func (r ApiGetSystemMembersByParentIdSkillsCountRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetSystemMembersByParentIdSkillsCountRequest) ClientId(clientId string) ApiGetSystemMembersByParentIdSkillsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMembersByParentIdSkillsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMembersByParentIdSkillsCountExecute(r)
 }
@@ -730,9 +726,6 @@ func (a *MemberSkillsAPIService) GetSystemMembersByParentIdSkillsCountExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -775,7 +768,9 @@ func (a *MemberSkillsAPIService) GetSystemMembersByParentIdSkillsCountExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -817,7 +812,6 @@ type ApiGetSystemMyAccountByParentIdSkillsRequest struct {
 	ctx context.Context
 	ApiService *MemberSkillsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -826,12 +820,7 @@ type ApiGetSystemMyAccountByParentIdSkillsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyAccountByParentIdSkillsRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdSkillsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -882,6 +871,12 @@ func (r ApiGetSystemMyAccountByParentIdSkillsRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetSystemMyAccountByParentIdSkillsRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdSkillsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyAccountByParentIdSkillsRequest) Execute() ([]MemberSkill, *http.Response, error) {
 	return r.ApiService.GetSystemMyAccountByParentIdSkillsExecute(r)
 }
@@ -922,9 +917,6 @@ func (a *MemberSkillsAPIService) GetSystemMyAccountByParentIdSkillsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -967,7 +959,9 @@ func (a *MemberSkillsAPIService) GetSystemMyAccountByParentIdSkillsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1010,7 +1004,6 @@ type ApiGetSystemMyAccountByParentIdSkillsByIdRequest struct {
 	ApiService *MemberSkillsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1019,12 +1012,7 @@ type ApiGetSystemMyAccountByParentIdSkillsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyAccountByParentIdSkillsByIdRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdSkillsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1075,6 +1063,12 @@ func (r ApiGetSystemMyAccountByParentIdSkillsByIdRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetSystemMyAccountByParentIdSkillsByIdRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdSkillsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyAccountByParentIdSkillsByIdRequest) Execute() (*MemberSkill, *http.Response, error) {
 	return r.ApiService.GetSystemMyAccountByParentIdSkillsByIdExecute(r)
 }
@@ -1118,9 +1112,6 @@ func (a *MemberSkillsAPIService) GetSystemMyAccountByParentIdSkillsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1163,7 +1154,9 @@ func (a *MemberSkillsAPIService) GetSystemMyAccountByParentIdSkillsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1205,7 +1198,6 @@ type ApiGetSystemMyAccountByParentIdSkillsCountRequest struct {
 	ctx context.Context
 	ApiService *MemberSkillsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1214,12 +1206,7 @@ type ApiGetSystemMyAccountByParentIdSkillsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyAccountByParentIdSkillsCountRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdSkillsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1270,6 +1257,12 @@ func (r ApiGetSystemMyAccountByParentIdSkillsCountRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetSystemMyAccountByParentIdSkillsCountRequest) ClientId(clientId string) ApiGetSystemMyAccountByParentIdSkillsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyAccountByParentIdSkillsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMyAccountByParentIdSkillsCountExecute(r)
 }
@@ -1310,9 +1303,6 @@ func (a *MemberSkillsAPIService) GetSystemMyAccountByParentIdSkillsCountExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1355,7 +1345,9 @@ func (a *MemberSkillsAPIService) GetSystemMyAccountByParentIdSkillsCountExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1398,19 +1390,19 @@ type ApiPatchSystemMembersByParentIdSkillsByIdRequest struct {
 	ApiService *MemberSkillsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemMembersByParentIdSkillsByIdRequest) ClientId(clientId string) ApiPatchSystemMembersByParentIdSkillsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemMembersByParentIdSkillsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemMembersByParentIdSkillsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemMembersByParentIdSkillsByIdRequest) ClientId(clientId string) ApiPatchSystemMembersByParentIdSkillsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1457,9 +1449,6 @@ func (a *MemberSkillsAPIService) PatchSystemMembersByParentIdSkillsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1481,7 +1470,9 @@ func (a *MemberSkillsAPIService) PatchSystemMembersByParentIdSkillsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1526,19 +1517,19 @@ type ApiPatchSystemMyAccountByParentIdSkillsByIdRequest struct {
 	ApiService *MemberSkillsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemMyAccountByParentIdSkillsByIdRequest) ClientId(clientId string) ApiPatchSystemMyAccountByParentIdSkillsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemMyAccountByParentIdSkillsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemMyAccountByParentIdSkillsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemMyAccountByParentIdSkillsByIdRequest) ClientId(clientId string) ApiPatchSystemMyAccountByParentIdSkillsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1585,9 +1576,6 @@ func (a *MemberSkillsAPIService) PatchSystemMyAccountByParentIdSkillsByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1609,7 +1597,9 @@ func (a *MemberSkillsAPIService) PatchSystemMyAccountByParentIdSkillsByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1653,19 +1643,19 @@ type ApiPostSystemMembersByParentIdSkillsRequest struct {
 	ctx context.Context
 	ApiService *MemberSkillsAPIService
 	parentId int32
-	clientId *string
 	memberSkill *MemberSkill
-}
-
-// 
-func (r ApiPostSystemMembersByParentIdSkillsRequest) ClientId(clientId string) ApiPostSystemMembersByParentIdSkillsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // memberSkill
 func (r ApiPostSystemMembersByParentIdSkillsRequest) MemberSkill(memberSkill MemberSkill) ApiPostSystemMembersByParentIdSkillsRequest {
 	r.memberSkill = &memberSkill
+	return r
+}
+
+// 
+func (r ApiPostSystemMembersByParentIdSkillsRequest) ClientId(clientId string) ApiPostSystemMembersByParentIdSkillsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1709,9 +1699,6 @@ func (a *MemberSkillsAPIService) PostSystemMembersByParentIdSkillsExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberSkill == nil {
 		return localVarReturnValue, nil, reportError("memberSkill is required and must be specified")
 	}
@@ -1733,7 +1720,9 @@ func (a *MemberSkillsAPIService) PostSystemMembersByParentIdSkillsExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberSkill
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1777,19 +1766,19 @@ type ApiPostSystemMyAccountByParentIdSkillsRequest struct {
 	ctx context.Context
 	ApiService *MemberSkillsAPIService
 	parentId int32
-	clientId *string
 	memberSkill *MemberSkill
-}
-
-// 
-func (r ApiPostSystemMyAccountByParentIdSkillsRequest) ClientId(clientId string) ApiPostSystemMyAccountByParentIdSkillsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // memberSkill
 func (r ApiPostSystemMyAccountByParentIdSkillsRequest) MemberSkill(memberSkill MemberSkill) ApiPostSystemMyAccountByParentIdSkillsRequest {
 	r.memberSkill = &memberSkill
+	return r
+}
+
+// 
+func (r ApiPostSystemMyAccountByParentIdSkillsRequest) ClientId(clientId string) ApiPostSystemMyAccountByParentIdSkillsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1833,9 +1822,6 @@ func (a *MemberSkillsAPIService) PostSystemMyAccountByParentIdSkillsExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberSkill == nil {
 		return localVarReturnValue, nil, reportError("memberSkill is required and must be specified")
 	}
@@ -1857,7 +1843,9 @@ func (a *MemberSkillsAPIService) PostSystemMyAccountByParentIdSkillsExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberSkill
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1902,19 +1890,19 @@ type ApiPutSystemMembersByParentIdSkillsByIdRequest struct {
 	ApiService *MemberSkillsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	memberSkill *MemberSkill
-}
-
-// 
-func (r ApiPutSystemMembersByParentIdSkillsByIdRequest) ClientId(clientId string) ApiPutSystemMembersByParentIdSkillsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // memberSkill
 func (r ApiPutSystemMembersByParentIdSkillsByIdRequest) MemberSkill(memberSkill MemberSkill) ApiPutSystemMembersByParentIdSkillsByIdRequest {
 	r.memberSkill = &memberSkill
+	return r
+}
+
+// 
+func (r ApiPutSystemMembersByParentIdSkillsByIdRequest) ClientId(clientId string) ApiPutSystemMembersByParentIdSkillsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1961,9 +1949,6 @@ func (a *MemberSkillsAPIService) PutSystemMembersByParentIdSkillsByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberSkill == nil {
 		return localVarReturnValue, nil, reportError("memberSkill is required and must be specified")
 	}
@@ -1985,7 +1970,9 @@ func (a *MemberSkillsAPIService) PutSystemMembersByParentIdSkillsByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberSkill
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -2030,19 +2017,19 @@ type ApiPutSystemMyAccountByParentIdSkillsByIdRequest struct {
 	ApiService *MemberSkillsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	memberSkill *MemberSkill
-}
-
-// 
-func (r ApiPutSystemMyAccountByParentIdSkillsByIdRequest) ClientId(clientId string) ApiPutSystemMyAccountByParentIdSkillsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // memberSkill
 func (r ApiPutSystemMyAccountByParentIdSkillsByIdRequest) MemberSkill(memberSkill MemberSkill) ApiPutSystemMyAccountByParentIdSkillsByIdRequest {
 	r.memberSkill = &memberSkill
+	return r
+}
+
+// 
+func (r ApiPutSystemMyAccountByParentIdSkillsByIdRequest) ClientId(clientId string) ApiPutSystemMyAccountByParentIdSkillsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -2089,9 +2076,6 @@ func (a *MemberSkillsAPIService) PutSystemMyAccountByParentIdSkillsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.memberSkill == nil {
 		return localVarReturnValue, nil, reportError("memberSkill is required and must be specified")
 	}
@@ -2113,7 +2097,9 @@ func (a *MemberSkillsAPIService) PutSystemMyAccountByParentIdSkillsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.memberSkill
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

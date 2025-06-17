@@ -74,9 +74,6 @@ func (a *LocationsAPIService) DeleteSystemLocationsByIdExecute(r ApiDeleteSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *LocationsAPIService) DeleteSystemLocationsByIdExecute(r ApiDeleteSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *LocationsAPIService) DeleteSystemLocationsByIdExecute(r ApiDeleteSystem
 type ApiGetSystemLocationsRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemLocationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLocationsRequest) ClientId(clientId string) ApiGetSystemLocationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemLocationsRequest) PageId(pageId int32) ApiGetSystemLocations
 	return r
 }
 
+// 
+func (r ApiGetSystemLocationsRequest) ClientId(clientId string) ApiGetSystemLocationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLocationsRequest) Execute() ([]Location, *http.Response, error) {
 	return r.ApiService.GetSystemLocationsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *LocationsAPIService) GetSystemLocationsExecute(r ApiGetSystemLocationsR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *LocationsAPIService) GetSystemLocationsExecute(r ApiGetSystemLocationsR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemLocationsByIdRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemLocationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLocationsByIdRequest) ClientId(clientId string) ApiGetSystemLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemLocationsByIdRequest) PageId(pageId int32) ApiGetSystemLocat
 	return r
 }
 
+// 
+func (r ApiGetSystemLocationsByIdRequest) ClientId(clientId string) ApiGetSystemLocationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLocationsByIdRequest) Execute() (*Location, *http.Response, error) {
 	return r.ApiService.GetSystemLocationsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *LocationsAPIService) GetSystemLocationsByIdExecute(r ApiGetSystemLocati
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *LocationsAPIService) GetSystemLocationsByIdExecute(r ApiGetSystemLocati
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSystemLocationsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetSystemLocationsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLocationsByIdUsagesRequest) ClientId(clientId string) ApiGetSystemLocationsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetSystemLocationsByIdUsagesRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemLocationsByIdUsagesRequest) ClientId(clientId string) ApiGetSystemLocationsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLocationsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSystemLocationsByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *LocationsAPIService) GetSystemLocationsByIdUsagesExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *LocationsAPIService) GetSystemLocationsByIdUsagesExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetSystemLocationsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetSystemLocationsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLocationsByIdUsagesListRequest) ClientId(clientId string) ApiGetSystemLocationsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetSystemLocationsByIdUsagesListRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSystemLocationsByIdUsagesListRequest) ClientId(clientId string) ApiGetSystemLocationsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLocationsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSystemLocationsByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *LocationsAPIService) GetSystemLocationsByIdUsagesListExecute(r ApiGetSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *LocationsAPIService) GetSystemLocationsByIdUsagesListExecute(r ApiGetSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *LocationsAPIService) GetSystemLocationsByIdUsagesListExecute(r ApiGetSy
 type ApiGetSystemLocationsCountRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetSystemLocationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLocationsCountRequest) ClientId(clientId string) ApiGetSystemLocationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetSystemLocationsCountRequest) PageId(pageId int32) ApiGetSystemLoca
 	return r
 }
 
+// 
+func (r ApiGetSystemLocationsCountRequest) ClientId(clientId string) ApiGetSystemLocationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLocationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemLocationsCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *LocationsAPIService) GetSystemLocationsCountExecute(r ApiGetSystemLocat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *LocationsAPIService) GetSystemLocationsCountExecute(r ApiGetSystemLocat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchSystemLocationsByIdRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemLocationsByIdRequest) ClientId(clientId string) ApiPatchSystemLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemLocationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemLocationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemLocationsByIdRequest) ClientId(clientId string) ApiPatchSystemLocationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *LocationsAPIService) PatchSystemLocationsByIdExecute(r ApiPatchSystemLo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *LocationsAPIService) PatchSystemLocationsByIdExecute(r ApiPatchSystemLo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *LocationsAPIService) PatchSystemLocationsByIdExecute(r ApiPatchSystemLo
 type ApiPostSystemLocationsRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
-	clientId *string
 	location *Location
-}
-
-// 
-func (r ApiPostSystemLocationsRequest) ClientId(clientId string) ApiPostSystemLocationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // location
 func (r ApiPostSystemLocationsRequest) Location(location Location) ApiPostSystemLocationsRequest {
 	r.location = &location
+	return r
+}
+
+// 
+func (r ApiPostSystemLocationsRequest) ClientId(clientId string) ApiPostSystemLocationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *LocationsAPIService) PostSystemLocationsExecute(r ApiPostSystemLocation
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.location == nil {
 		return localVarReturnValue, nil, reportError("location is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *LocationsAPIService) PostSystemLocationsExecute(r ApiPostSystemLocation
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.location
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutSystemLocationsByIdRequest struct {
 	ctx context.Context
 	ApiService *LocationsAPIService
 	id int32
-	clientId *string
 	location *Location
-}
-
-// 
-func (r ApiPutSystemLocationsByIdRequest) ClientId(clientId string) ApiPutSystemLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // location
 func (r ApiPutSystemLocationsByIdRequest) Location(location Location) ApiPutSystemLocationsByIdRequest {
 	r.location = &location
+	return r
+}
+
+// 
+func (r ApiPutSystemLocationsByIdRequest) ClientId(clientId string) ApiPutSystemLocationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *LocationsAPIService) PutSystemLocationsByIdExecute(r ApiPutSystemLocati
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.location == nil {
 		return localVarReturnValue, nil, reportError("location is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *LocationsAPIService) PutSystemLocationsByIdExecute(r ApiPutSystemLocati
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.location
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

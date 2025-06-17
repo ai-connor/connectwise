@@ -26,7 +26,6 @@ type GLCaptionsAPIService service
 type ApiGetFinanceGlCaptionsRequest struct {
 	ctx context.Context
 	ApiService *GLCaptionsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetFinanceGlCaptionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlCaptionsRequest) ClientId(clientId string) ApiGetFinanceGlCaptionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetFinanceGlCaptionsRequest) PageId(pageId int32) ApiGetFinanceGlCapt
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlCaptionsRequest) ClientId(clientId string) ApiGetFinanceGlCaptionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlCaptionsRequest) Execute() ([]GLCaption, *http.Response, error) {
 	return r.ApiService.GetFinanceGlCaptionsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *GLCaptionsAPIService) GetFinanceGlCaptionsExecute(r ApiGetFinanceGlCapt
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *GLCaptionsAPIService) GetFinanceGlCaptionsExecute(r ApiGetFinanceGlCapt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetFinanceGlCaptionsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLCaptionsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetFinanceGlCaptionsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlCaptionsByIdRequest) ClientId(clientId string) ApiGetFinanceGlCaptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetFinanceGlCaptionsByIdRequest) PageId(pageId int32) ApiGetFinanceGl
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlCaptionsByIdRequest) ClientId(clientId string) ApiGetFinanceGlCaptionsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlCaptionsByIdRequest) Execute() (*GLCaption, *http.Response, error) {
 	return r.ApiService.GetFinanceGlCaptionsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *GLCaptionsAPIService) GetFinanceGlCaptionsByIdExecute(r ApiGetFinanceGl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *GLCaptionsAPIService) GetFinanceGlCaptionsByIdExecute(r ApiGetFinanceGl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *GLCaptionsAPIService) GetFinanceGlCaptionsByIdExecute(r ApiGetFinanceGl
 type ApiGetFinanceGlCaptionsCountRequest struct {
 	ctx context.Context
 	ApiService *GLCaptionsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetFinanceGlCaptionsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceGlCaptionsCountRequest) ClientId(clientId string) ApiGetFinanceGlCaptionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetFinanceGlCaptionsCountRequest) PageId(pageId int32) ApiGetFinanceG
 	return r
 }
 
+// 
+func (r ApiGetFinanceGlCaptionsCountRequest) ClientId(clientId string) ApiGetFinanceGlCaptionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceGlCaptionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceGlCaptionsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *GLCaptionsAPIService) GetFinanceGlCaptionsCountExecute(r ApiGetFinanceG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *GLCaptionsAPIService) GetFinanceGlCaptionsCountExecute(r ApiGetFinanceG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchFinanceGlCaptionsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLCaptionsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceGlCaptionsByIdRequest) ClientId(clientId string) ApiPatchFinanceGlCaptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceGlCaptionsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceGlCaptionsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceGlCaptionsByIdRequest) ClientId(clientId string) ApiPatchFinanceGlCaptionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *GLCaptionsAPIService) PatchFinanceGlCaptionsByIdExecute(r ApiPatchFinan
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *GLCaptionsAPIService) PatchFinanceGlCaptionsByIdExecute(r ApiPatchFinan
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutFinanceGlCaptionsByIdRequest struct {
 	ctx context.Context
 	ApiService *GLCaptionsAPIService
 	id int32
-	clientId *string
 	gLCaption *GLCaption
-}
-
-// 
-func (r ApiPutFinanceGlCaptionsByIdRequest) ClientId(clientId string) ApiPutFinanceGlCaptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // glCaption
 func (r ApiPutFinanceGlCaptionsByIdRequest) GLCaption(gLCaption GLCaption) ApiPutFinanceGlCaptionsByIdRequest {
 	r.gLCaption = &gLCaption
+	return r
+}
+
+// 
+func (r ApiPutFinanceGlCaptionsByIdRequest) ClientId(clientId string) ApiPutFinanceGlCaptionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *GLCaptionsAPIService) PutFinanceGlCaptionsByIdExecute(r ApiPutFinanceGl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.gLCaption == nil {
 		return localVarReturnValue, nil, reportError("gLCaption is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *GLCaptionsAPIService) PutFinanceGlCaptionsByIdExecute(r ApiPutFinanceGl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.gLCaption
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

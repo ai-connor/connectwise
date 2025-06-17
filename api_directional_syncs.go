@@ -74,9 +74,6 @@ func (a *DirectionalSyncsAPIService) DeleteProcurementDirectionalSyncsByIdExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *DirectionalSyncsAPIService) DeleteProcurementDirectionalSyncsByIdExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *DirectionalSyncsAPIService) DeleteProcurementDirectionalSyncsByIdExecut
 type ApiGetProcurementDirectionalSyncsRequest struct {
 	ctx context.Context
 	ApiService *DirectionalSyncsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementDirectionalSyncsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementDirectionalSyncsRequest) ClientId(clientId string) ApiGetProcurementDirectionalSyncsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementDirectionalSyncsRequest) PageId(pageId int32) ApiGetPro
 	return r
 }
 
+// 
+func (r ApiGetProcurementDirectionalSyncsRequest) ClientId(clientId string) ApiGetProcurementDirectionalSyncsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementDirectionalSyncsRequest) Execute() ([]DirectionalSync, *http.Response, error) {
 	return r.ApiService.GetProcurementDirectionalSyncsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *DirectionalSyncsAPIService) GetProcurementDirectionalSyncsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *DirectionalSyncsAPIService) GetProcurementDirectionalSyncsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProcurementDirectionalSyncsByIdRequest struct {
 	ctx context.Context
 	ApiService *DirectionalSyncsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProcurementDirectionalSyncsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementDirectionalSyncsByIdRequest) ClientId(clientId string) ApiGetProcurementDirectionalSyncsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProcurementDirectionalSyncsByIdRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetProcurementDirectionalSyncsByIdRequest) ClientId(clientId string) ApiGetProcurementDirectionalSyncsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementDirectionalSyncsByIdRequest) Execute() (*DirectionalSync, *http.Response, error) {
 	return r.ApiService.GetProcurementDirectionalSyncsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *DirectionalSyncsAPIService) GetProcurementDirectionalSyncsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *DirectionalSyncsAPIService) GetProcurementDirectionalSyncsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *DirectionalSyncsAPIService) GetProcurementDirectionalSyncsByIdExecute(r
 type ApiGetProcurementDirectionalSyncsCountRequest struct {
 	ctx context.Context
 	ApiService *DirectionalSyncsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetProcurementDirectionalSyncsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementDirectionalSyncsCountRequest) ClientId(clientId string) ApiGetProcurementDirectionalSyncsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetProcurementDirectionalSyncsCountRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetProcurementDirectionalSyncsCountRequest) ClientId(clientId string) ApiGetProcurementDirectionalSyncsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementDirectionalSyncsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementDirectionalSyncsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *DirectionalSyncsAPIService) GetProcurementDirectionalSyncsCountExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *DirectionalSyncsAPIService) GetProcurementDirectionalSyncsCountExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchProcurementDirectionalSyncsByIdRequest struct {
 	ctx context.Context
 	ApiService *DirectionalSyncsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementDirectionalSyncsByIdRequest) ClientId(clientId string) ApiPatchProcurementDirectionalSyncsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementDirectionalSyncsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementDirectionalSyncsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementDirectionalSyncsByIdRequest) ClientId(clientId string) ApiPatchProcurementDirectionalSyncsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *DirectionalSyncsAPIService) PatchProcurementDirectionalSyncsByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *DirectionalSyncsAPIService) PatchProcurementDirectionalSyncsByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *DirectionalSyncsAPIService) PatchProcurementDirectionalSyncsByIdExecute
 type ApiPostProcurementDirectionalSyncsRequest struct {
 	ctx context.Context
 	ApiService *DirectionalSyncsAPIService
-	clientId *string
 	directionalSync *DirectionalSync
-}
-
-// 
-func (r ApiPostProcurementDirectionalSyncsRequest) ClientId(clientId string) ApiPostProcurementDirectionalSyncsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // directionalSync
 func (r ApiPostProcurementDirectionalSyncsRequest) DirectionalSync(directionalSync DirectionalSync) ApiPostProcurementDirectionalSyncsRequest {
 	r.directionalSync = &directionalSync
+	return r
+}
+
+// 
+func (r ApiPostProcurementDirectionalSyncsRequest) ClientId(clientId string) ApiPostProcurementDirectionalSyncsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *DirectionalSyncsAPIService) PostProcurementDirectionalSyncsExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.directionalSync == nil {
 		return localVarReturnValue, nil, reportError("directionalSync is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *DirectionalSyncsAPIService) PostProcurementDirectionalSyncsExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.directionalSync
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutProcurementDirectionalSyncsByIdRequest struct {
 	ctx context.Context
 	ApiService *DirectionalSyncsAPIService
 	id int32
-	clientId *string
 	directionalSync *DirectionalSync
-}
-
-// 
-func (r ApiPutProcurementDirectionalSyncsByIdRequest) ClientId(clientId string) ApiPutProcurementDirectionalSyncsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // directionalSync
 func (r ApiPutProcurementDirectionalSyncsByIdRequest) DirectionalSync(directionalSync DirectionalSync) ApiPutProcurementDirectionalSyncsByIdRequest {
 	r.directionalSync = &directionalSync
+	return r
+}
+
+// 
+func (r ApiPutProcurementDirectionalSyncsByIdRequest) ClientId(clientId string) ApiPutProcurementDirectionalSyncsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *DirectionalSyncsAPIService) PutProcurementDirectionalSyncsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.directionalSync == nil {
 		return localVarReturnValue, nil, reportError("directionalSync is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *DirectionalSyncsAPIService) PutProcurementDirectionalSyncsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.directionalSync
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

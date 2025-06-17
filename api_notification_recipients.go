@@ -26,7 +26,6 @@ type NotificationRecipientsAPIService service
 type ApiGetSystemNotificationRecipientsRequest struct {
 	ctx context.Context
 	ApiService *NotificationRecipientsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemNotificationRecipientsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemNotificationRecipientsRequest) ClientId(clientId string) ApiGetSystemNotificationRecipientsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemNotificationRecipientsRequest) PageId(pageId int32) ApiGetSy
 	return r
 }
 
+// 
+func (r ApiGetSystemNotificationRecipientsRequest) ClientId(clientId string) ApiGetSystemNotificationRecipientsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemNotificationRecipientsRequest) Execute() ([]NotificationRecipient, *http.Response, error) {
 	return r.ApiService.GetSystemNotificationRecipientsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *NotificationRecipientsAPIService) GetSystemNotificationRecipientsExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *NotificationRecipientsAPIService) GetSystemNotificationRecipientsExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemNotificationRecipientsByIdRequest struct {
 	ctx context.Context
 	ApiService *NotificationRecipientsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemNotificationRecipientsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemNotificationRecipientsByIdRequest) ClientId(clientId string) ApiGetSystemNotificationRecipientsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemNotificationRecipientsByIdRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetSystemNotificationRecipientsByIdRequest) ClientId(clientId string) ApiGetSystemNotificationRecipientsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemNotificationRecipientsByIdRequest) Execute() (*NotificationRecipient, *http.Response, error) {
 	return r.ApiService.GetSystemNotificationRecipientsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *NotificationRecipientsAPIService) GetSystemNotificationRecipientsByIdEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *NotificationRecipientsAPIService) GetSystemNotificationRecipientsByIdEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *NotificationRecipientsAPIService) GetSystemNotificationRecipientsByIdEx
 type ApiGetSystemNotificationRecipientsCountRequest struct {
 	ctx context.Context
 	ApiService *NotificationRecipientsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemNotificationRecipientsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemNotificationRecipientsCountRequest) ClientId(clientId string) ApiGetSystemNotificationRecipientsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemNotificationRecipientsCountRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetSystemNotificationRecipientsCountRequest) ClientId(clientId string) ApiGetSystemNotificationRecipientsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemNotificationRecipientsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemNotificationRecipientsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *NotificationRecipientsAPIService) GetSystemNotificationRecipientsCountE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *NotificationRecipientsAPIService) GetSystemNotificationRecipientsCountE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

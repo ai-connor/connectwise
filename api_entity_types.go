@@ -26,7 +26,6 @@ type EntityTypesAPIService service
 type ApiGetCompanyEntityTypesRequest struct {
 	ctx context.Context
 	ApiService *EntityTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetCompanyEntityTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyEntityTypesRequest) ClientId(clientId string) ApiGetCompanyEntityTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetCompanyEntityTypesRequest) PageId(pageId int32) ApiGetCompanyEntit
 	return r
 }
 
+// 
+func (r ApiGetCompanyEntityTypesRequest) ClientId(clientId string) ApiGetCompanyEntityTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyEntityTypesRequest) Execute() ([]EntityType, *http.Response, error) {
 	return r.ApiService.GetCompanyEntityTypesExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *EntityTypesAPIService) GetCompanyEntityTypesExecute(r ApiGetCompanyEnti
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *EntityTypesAPIService) GetCompanyEntityTypesExecute(r ApiGetCompanyEnti
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetCompanyEntityTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *EntityTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetCompanyEntityTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyEntityTypesByIdRequest) ClientId(clientId string) ApiGetCompanyEntityTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetCompanyEntityTypesByIdRequest) PageId(pageId int32) ApiGetCompanyE
 	return r
 }
 
+// 
+func (r ApiGetCompanyEntityTypesByIdRequest) ClientId(clientId string) ApiGetCompanyEntityTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyEntityTypesByIdRequest) Execute() (*EntityType, *http.Response, error) {
 	return r.ApiService.GetCompanyEntityTypesByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *EntityTypesAPIService) GetCompanyEntityTypesByIdExecute(r ApiGetCompany
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *EntityTypesAPIService) GetCompanyEntityTypesByIdExecute(r ApiGetCompany
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *EntityTypesAPIService) GetCompanyEntityTypesByIdExecute(r ApiGetCompany
 type ApiGetCompanyEntityTypesCountRequest struct {
 	ctx context.Context
 	ApiService *EntityTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetCompanyEntityTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyEntityTypesCountRequest) ClientId(clientId string) ApiGetCompanyEntityTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetCompanyEntityTypesCountRequest) PageId(pageId int32) ApiGetCompany
 	return r
 }
 
+// 
+func (r ApiGetCompanyEntityTypesCountRequest) ClientId(clientId string) ApiGetCompanyEntityTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyEntityTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyEntityTypesCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *EntityTypesAPIService) GetCompanyEntityTypesCountExecute(r ApiGetCompan
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *EntityTypesAPIService) GetCompanyEntityTypesCountExecute(r ApiGetCompan
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

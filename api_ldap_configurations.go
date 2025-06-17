@@ -74,9 +74,6 @@ func (a *LdapConfigurationsAPIService) DeleteSystemLdapConfigurationsByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *LdapConfigurationsAPIService) DeleteSystemLdapConfigurationsByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *LdapConfigurationsAPIService) DeleteSystemLdapConfigurationsByIdExecute
 type ApiGetSystemLdapConfigurationsRequest struct {
 	ctx context.Context
 	ApiService *LdapConfigurationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemLdapConfigurationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLdapConfigurationsRequest) ClientId(clientId string) ApiGetSystemLdapConfigurationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemLdapConfigurationsRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemLdapConfigurationsRequest) ClientId(clientId string) ApiGetSystemLdapConfigurationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLdapConfigurationsRequest) Execute() ([]LdapConfiguration, *http.Response, error) {
 	return r.ApiService.GetSystemLdapConfigurationsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *LdapConfigurationsAPIService) GetSystemLdapConfigurationsExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *LdapConfigurationsAPIService) GetSystemLdapConfigurationsExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemLdapConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *LdapConfigurationsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemLdapConfigurationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLdapConfigurationsByIdRequest) ClientId(clientId string) ApiGetSystemLdapConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemLdapConfigurationsByIdRequest) PageId(pageId int32) ApiGetSy
 	return r
 }
 
+// 
+func (r ApiGetSystemLdapConfigurationsByIdRequest) ClientId(clientId string) ApiGetSystemLdapConfigurationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLdapConfigurationsByIdRequest) Execute() (*LdapConfiguration, *http.Response, error) {
 	return r.ApiService.GetSystemLdapConfigurationsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *LdapConfigurationsAPIService) GetSystemLdapConfigurationsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *LdapConfigurationsAPIService) GetSystemLdapConfigurationsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *LdapConfigurationsAPIService) GetSystemLdapConfigurationsByIdExecute(r 
 type ApiGetSystemLdapConfigurationsCountRequest struct {
 	ctx context.Context
 	ApiService *LdapConfigurationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemLdapConfigurationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLdapConfigurationsCountRequest) ClientId(clientId string) ApiGetSystemLdapConfigurationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemLdapConfigurationsCountRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSystemLdapConfigurationsCountRequest) ClientId(clientId string) ApiGetSystemLdapConfigurationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLdapConfigurationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemLdapConfigurationsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *LdapConfigurationsAPIService) GetSystemLdapConfigurationsCountExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *LdapConfigurationsAPIService) GetSystemLdapConfigurationsCountExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemLdapConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *LdapConfigurationsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemLdapConfigurationsByIdRequest) ClientId(clientId string) ApiPatchSystemLdapConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemLdapConfigurationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemLdapConfigurationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemLdapConfigurationsByIdRequest) ClientId(clientId string) ApiPatchSystemLdapConfigurationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *LdapConfigurationsAPIService) PatchSystemLdapConfigurationsByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *LdapConfigurationsAPIService) PatchSystemLdapConfigurationsByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *LdapConfigurationsAPIService) PatchSystemLdapConfigurationsByIdExecute(
 type ApiPostSystemLdapConfigurationsRequest struct {
 	ctx context.Context
 	ApiService *LdapConfigurationsAPIService
-	clientId *string
 	ldapConfiguration *LdapConfiguration
-}
-
-// 
-func (r ApiPostSystemLdapConfigurationsRequest) ClientId(clientId string) ApiPostSystemLdapConfigurationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ldapConfiguration
 func (r ApiPostSystemLdapConfigurationsRequest) LdapConfiguration(ldapConfiguration LdapConfiguration) ApiPostSystemLdapConfigurationsRequest {
 	r.ldapConfiguration = &ldapConfiguration
+	return r
+}
+
+// 
+func (r ApiPostSystemLdapConfigurationsRequest) ClientId(clientId string) ApiPostSystemLdapConfigurationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *LdapConfigurationsAPIService) PostSystemLdapConfigurationsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ldapConfiguration == nil {
 		return localVarReturnValue, nil, reportError("ldapConfiguration is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *LdapConfigurationsAPIService) PostSystemLdapConfigurationsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ldapConfiguration
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -939,19 +933,19 @@ func (a *LdapConfigurationsAPIService) PostSystemLdapConfigurationsExecute(r Api
 type ApiPostSystemLdapConfigurationsTestLinkRequest struct {
 	ctx context.Context
 	ApiService *LdapConfigurationsAPIService
-	clientId *string
 	ldapConfigurationTestLink *LdapConfigurationTestLink
-}
-
-// 
-func (r ApiPostSystemLdapConfigurationsTestLinkRequest) ClientId(clientId string) ApiPostSystemLdapConfigurationsTestLinkRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // server
 func (r ApiPostSystemLdapConfigurationsTestLinkRequest) LdapConfigurationTestLink(ldapConfigurationTestLink LdapConfigurationTestLink) ApiPostSystemLdapConfigurationsTestLinkRequest {
 	r.ldapConfigurationTestLink = &ldapConfigurationTestLink
+	return r
+}
+
+// 
+func (r ApiPostSystemLdapConfigurationsTestLinkRequest) ClientId(clientId string) ApiPostSystemLdapConfigurationsTestLinkRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -992,9 +986,6 @@ func (a *LdapConfigurationsAPIService) PostSystemLdapConfigurationsTestLinkExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ldapConfigurationTestLink == nil {
 		return localVarReturnValue, nil, reportError("ldapConfigurationTestLink is required and must be specified")
 	}
@@ -1016,7 +1007,9 @@ func (a *LdapConfigurationsAPIService) PostSystemLdapConfigurationsTestLinkExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ldapConfigurationTestLink
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1060,19 +1053,19 @@ type ApiPutSystemLdapConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *LdapConfigurationsAPIService
 	id int32
-	clientId *string
 	ldapConfiguration *LdapConfiguration
-}
-
-// 
-func (r ApiPutSystemLdapConfigurationsByIdRequest) ClientId(clientId string) ApiPutSystemLdapConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ldapConfiguration
 func (r ApiPutSystemLdapConfigurationsByIdRequest) LdapConfiguration(ldapConfiguration LdapConfiguration) ApiPutSystemLdapConfigurationsByIdRequest {
 	r.ldapConfiguration = &ldapConfiguration
+	return r
+}
+
+// 
+func (r ApiPutSystemLdapConfigurationsByIdRequest) ClientId(clientId string) ApiPutSystemLdapConfigurationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1116,9 +1109,6 @@ func (a *LdapConfigurationsAPIService) PutSystemLdapConfigurationsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ldapConfiguration == nil {
 		return localVarReturnValue, nil, reportError("ldapConfiguration is required and must be specified")
 	}
@@ -1140,7 +1130,9 @@ func (a *LdapConfigurationsAPIService) PutSystemLdapConfigurationsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ldapConfiguration
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

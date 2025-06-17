@@ -74,9 +74,6 @@ func (a *SalesProbabilitiesAPIService) DeleteSalesProbabilitiesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *SalesProbabilitiesAPIService) DeleteSalesProbabilitiesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *SalesProbabilitiesAPIService) DeleteSalesProbabilitiesByIdExecute(r Api
 type ApiGetSalesProbabilitiesRequest struct {
 	ctx context.Context
 	ApiService *SalesProbabilitiesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSalesProbabilitiesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesProbabilitiesRequest) ClientId(clientId string) ApiGetSalesProbabilitiesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSalesProbabilitiesRequest) PageId(pageId int32) ApiGetSalesProbabi
 	return r
 }
 
+// 
+func (r ApiGetSalesProbabilitiesRequest) ClientId(clientId string) ApiGetSalesProbabilitiesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesProbabilitiesRequest) Execute() ([]SalesProbability, *http.Response, error) {
 	return r.ApiService.GetSalesProbabilitiesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *SalesProbabilitiesAPIService) GetSalesProbabilitiesExecute(r ApiGetSale
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *SalesProbabilitiesAPIService) GetSalesProbabilitiesExecute(r ApiGetSale
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSalesProbabilitiesByIdRequest struct {
 	ctx context.Context
 	ApiService *SalesProbabilitiesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSalesProbabilitiesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesProbabilitiesByIdRequest) ClientId(clientId string) ApiGetSalesProbabilitiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSalesProbabilitiesByIdRequest) PageId(pageId int32) ApiGetSalesPro
 	return r
 }
 
+// 
+func (r ApiGetSalesProbabilitiesByIdRequest) ClientId(clientId string) ApiGetSalesProbabilitiesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesProbabilitiesByIdRequest) Execute() (*SalesProbability, *http.Response, error) {
 	return r.ApiService.GetSalesProbabilitiesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *SalesProbabilitiesAPIService) GetSalesProbabilitiesByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *SalesProbabilitiesAPIService) GetSalesProbabilitiesByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *SalesProbabilitiesAPIService) GetSalesProbabilitiesByIdExecute(r ApiGet
 type ApiGetSalesProbabilitiesCountRequest struct {
 	ctx context.Context
 	ApiService *SalesProbabilitiesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSalesProbabilitiesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesProbabilitiesCountRequest) ClientId(clientId string) ApiGetSalesProbabilitiesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSalesProbabilitiesCountRequest) PageId(pageId int32) ApiGetSalesPr
 	return r
 }
 
+// 
+func (r ApiGetSalesProbabilitiesCountRequest) ClientId(clientId string) ApiGetSalesProbabilitiesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesProbabilitiesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesProbabilitiesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *SalesProbabilitiesAPIService) GetSalesProbabilitiesCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *SalesProbabilitiesAPIService) GetSalesProbabilitiesCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSalesProbabilitiesByIdRequest struct {
 	ctx context.Context
 	ApiService *SalesProbabilitiesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesProbabilitiesByIdRequest) ClientId(clientId string) ApiPatchSalesProbabilitiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesProbabilitiesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesProbabilitiesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesProbabilitiesByIdRequest) ClientId(clientId string) ApiPatchSalesProbabilitiesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *SalesProbabilitiesAPIService) PatchSalesProbabilitiesByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *SalesProbabilitiesAPIService) PatchSalesProbabilitiesByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *SalesProbabilitiesAPIService) PatchSalesProbabilitiesByIdExecute(r ApiP
 type ApiPostSalesProbabilitiesRequest struct {
 	ctx context.Context
 	ApiService *SalesProbabilitiesAPIService
-	clientId *string
 	salesProbability *SalesProbability
-}
-
-// 
-func (r ApiPostSalesProbabilitiesRequest) ClientId(clientId string) ApiPostSalesProbabilitiesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // probability
 func (r ApiPostSalesProbabilitiesRequest) SalesProbability(salesProbability SalesProbability) ApiPostSalesProbabilitiesRequest {
 	r.salesProbability = &salesProbability
+	return r
+}
+
+// 
+func (r ApiPostSalesProbabilitiesRequest) ClientId(clientId string) ApiPostSalesProbabilitiesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *SalesProbabilitiesAPIService) PostSalesProbabilitiesExecute(r ApiPostSa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.salesProbability == nil {
 		return localVarReturnValue, nil, reportError("salesProbability is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *SalesProbabilitiesAPIService) PostSalesProbabilitiesExecute(r ApiPostSa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.salesProbability
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSalesProbabilitiesByIdRequest struct {
 	ctx context.Context
 	ApiService *SalesProbabilitiesAPIService
 	id int32
-	clientId *string
 	salesProbability *SalesProbability
-}
-
-// 
-func (r ApiPutSalesProbabilitiesByIdRequest) ClientId(clientId string) ApiPutSalesProbabilitiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // probability
 func (r ApiPutSalesProbabilitiesByIdRequest) SalesProbability(salesProbability SalesProbability) ApiPutSalesProbabilitiesByIdRequest {
 	r.salesProbability = &salesProbability
+	return r
+}
+
+// 
+func (r ApiPutSalesProbabilitiesByIdRequest) ClientId(clientId string) ApiPutSalesProbabilitiesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *SalesProbabilitiesAPIService) PutSalesProbabilitiesByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.salesProbability == nil {
 		return localVarReturnValue, nil, reportError("salesProbability is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *SalesProbabilitiesAPIService) PutSalesProbabilitiesByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.salesProbability
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

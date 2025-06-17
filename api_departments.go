@@ -74,9 +74,6 @@ func (a *DepartmentsAPIService) DeleteSystemDepartmentsByIdExecute(r ApiDeleteSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *DepartmentsAPIService) DeleteSystemDepartmentsByIdExecute(r ApiDeleteSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *DepartmentsAPIService) DeleteSystemDepartmentsByIdExecute(r ApiDeleteSy
 type ApiGetSystemDepartmentsRequest struct {
 	ctx context.Context
 	ApiService *DepartmentsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemDepartmentsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDepartmentsRequest) ClientId(clientId string) ApiGetSystemDepartmentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemDepartmentsRequest) PageId(pageId int32) ApiGetSystemDepartm
 	return r
 }
 
+// 
+func (r ApiGetSystemDepartmentsRequest) ClientId(clientId string) ApiGetSystemDepartmentsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDepartmentsRequest) Execute() ([]Department, *http.Response, error) {
 	return r.ApiService.GetSystemDepartmentsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsExecute(r ApiGetSystemDepart
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsExecute(r ApiGetSystemDepart
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemDepartmentsByIdRequest struct {
 	ctx context.Context
 	ApiService *DepartmentsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemDepartmentsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDepartmentsByIdRequest) ClientId(clientId string) ApiGetSystemDepartmentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemDepartmentsByIdRequest) PageId(pageId int32) ApiGetSystemDep
 	return r
 }
 
+// 
+func (r ApiGetSystemDepartmentsByIdRequest) ClientId(clientId string) ApiGetSystemDepartmentsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDepartmentsByIdRequest) Execute() (*Department, *http.Response, error) {
 	return r.ApiService.GetSystemDepartmentsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsByIdExecute(r ApiGetSystemDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsByIdExecute(r ApiGetSystemDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSystemDepartmentsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *DepartmentsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetSystemDepartmentsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDepartmentsByIdUsagesRequest) ClientId(clientId string) ApiGetSystemDepartmentsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetSystemDepartmentsByIdUsagesRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemDepartmentsByIdUsagesRequest) ClientId(clientId string) ApiGetSystemDepartmentsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDepartmentsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSystemDepartmentsByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsByIdUsagesExecute(r ApiGetSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsByIdUsagesExecute(r ApiGetSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetSystemDepartmentsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *DepartmentsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetSystemDepartmentsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDepartmentsByIdUsagesListRequest) ClientId(clientId string) ApiGetSystemDepartmentsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetSystemDepartmentsByIdUsagesListRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetSystemDepartmentsByIdUsagesListRequest) ClientId(clientId string) ApiGetSystemDepartmentsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDepartmentsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSystemDepartmentsByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsByIdUsagesListExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsByIdUsagesListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsByIdUsagesListExecute(r ApiG
 type ApiGetSystemDepartmentsCountRequest struct {
 	ctx context.Context
 	ApiService *DepartmentsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetSystemDepartmentsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDepartmentsCountRequest) ClientId(clientId string) ApiGetSystemDepartmentsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetSystemDepartmentsCountRequest) PageId(pageId int32) ApiGetSystemDe
 	return r
 }
 
+// 
+func (r ApiGetSystemDepartmentsCountRequest) ClientId(clientId string) ApiGetSystemDepartmentsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDepartmentsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemDepartmentsCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsCountExecute(r ApiGetSystemD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *DepartmentsAPIService) GetSystemDepartmentsCountExecute(r ApiGetSystemD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchSystemDepartmentsByIdRequest struct {
 	ctx context.Context
 	ApiService *DepartmentsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemDepartmentsByIdRequest) ClientId(clientId string) ApiPatchSystemDepartmentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemDepartmentsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemDepartmentsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemDepartmentsByIdRequest) ClientId(clientId string) ApiPatchSystemDepartmentsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *DepartmentsAPIService) PatchSystemDepartmentsByIdExecute(r ApiPatchSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *DepartmentsAPIService) PatchSystemDepartmentsByIdExecute(r ApiPatchSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *DepartmentsAPIService) PatchSystemDepartmentsByIdExecute(r ApiPatchSyst
 type ApiPostSystemDepartmentsRequest struct {
 	ctx context.Context
 	ApiService *DepartmentsAPIService
-	clientId *string
 	department *Department
-}
-
-// 
-func (r ApiPostSystemDepartmentsRequest) ClientId(clientId string) ApiPostSystemDepartmentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // department
 func (r ApiPostSystemDepartmentsRequest) Department(department Department) ApiPostSystemDepartmentsRequest {
 	r.department = &department
+	return r
+}
+
+// 
+func (r ApiPostSystemDepartmentsRequest) ClientId(clientId string) ApiPostSystemDepartmentsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *DepartmentsAPIService) PostSystemDepartmentsExecute(r ApiPostSystemDepa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.department == nil {
 		return localVarReturnValue, nil, reportError("department is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *DepartmentsAPIService) PostSystemDepartmentsExecute(r ApiPostSystemDepa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.department
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutSystemDepartmentsByIdRequest struct {
 	ctx context.Context
 	ApiService *DepartmentsAPIService
 	id int32
-	clientId *string
 	department *Department
-}
-
-// 
-func (r ApiPutSystemDepartmentsByIdRequest) ClientId(clientId string) ApiPutSystemDepartmentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // department
 func (r ApiPutSystemDepartmentsByIdRequest) Department(department Department) ApiPutSystemDepartmentsByIdRequest {
 	r.department = &department
+	return r
+}
+
+// 
+func (r ApiPutSystemDepartmentsByIdRequest) ClientId(clientId string) ApiPutSystemDepartmentsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *DepartmentsAPIService) PutSystemDepartmentsByIdExecute(r ApiPutSystemDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.department == nil {
 		return localVarReturnValue, nil, reportError("department is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *DepartmentsAPIService) PutSystemDepartmentsByIdExecute(r ApiPutSystemDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.department
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

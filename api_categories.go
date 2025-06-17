@@ -74,9 +74,6 @@ func (a *CategoriesAPIService) DeleteProcurementCategoriesByIdExecute(r ApiDelet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CategoriesAPIService) DeleteProcurementCategoriesByIdExecute(r ApiDelet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CategoriesAPIService) DeleteProcurementCategoriesByIdExecute(r ApiDelet
 type ApiGetProcurementCategoriesRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementCategoriesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesRequest) ClientId(clientId string) ApiGetProcurementCategoriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementCategoriesRequest) PageId(pageId int32) ApiGetProcureme
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesRequest) ClientId(clientId string) ApiGetProcurementCategoriesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesRequest) Execute() ([]Category, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesExecute(r ApiGetProcureme
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CategoriesAPIService) GetProcurementCategoriesExecute(r ApiGetProcureme
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProcurementCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProcurementCategoriesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesByIdRequest) ClientId(clientId string) ApiGetProcurementCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProcurementCategoriesByIdRequest) PageId(pageId int32) ApiGetProcu
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesByIdRequest) ClientId(clientId string) ApiGetProcurementCategoriesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesByIdRequest) Execute() (*Category, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesByIdExecute(r ApiGetProcu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CategoriesAPIService) GetProcurementCategoriesByIdExecute(r ApiGetProcu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetProcurementCategoriesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetProcurementCategoriesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesByIdInfoRequest) ClientId(clientId string) ApiGetProcurementCategoriesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetProcurementCategoriesByIdInfoRequest) PageId(pageId int32) ApiGetP
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesByIdInfoRequest) ClientId(clientId string) ApiGetProcurementCategoriesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesByIdInfoRequest) Execute() (*CategoryInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesByIdInfoExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesByIdInfoExecute(r ApiGetP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *CategoriesAPIService) GetProcurementCategoriesByIdInfoExecute(r ApiGetP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -699,7 +695,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesByIdInfoExecute(r ApiGetP
 type ApiGetProcurementCategoriesCountRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -708,12 +703,7 @@ type ApiGetProcurementCategoriesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesCountRequest) ClientId(clientId string) ApiGetProcurementCategoriesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -764,6 +754,12 @@ func (r ApiGetProcurementCategoriesCountRequest) PageId(pageId int32) ApiGetProc
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesCountRequest) ClientId(clientId string) ApiGetProcurementCategoriesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesCountExecute(r)
 }
@@ -801,9 +797,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesCountExecute(r ApiGetProc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -846,7 +839,9 @@ func (a *CategoriesAPIService) GetProcurementCategoriesCountExecute(r ApiGetProc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -887,7 +882,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesCountExecute(r ApiGetProc
 type ApiGetProcurementCategoriesInfoRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -896,12 +890,7 @@ type ApiGetProcurementCategoriesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesInfoRequest) ClientId(clientId string) ApiGetProcurementCategoriesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -952,6 +941,12 @@ func (r ApiGetProcurementCategoriesInfoRequest) PageId(pageId int32) ApiGetProcu
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesInfoRequest) ClientId(clientId string) ApiGetProcurementCategoriesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesInfoRequest) Execute() ([]CategoryInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesInfoExecute(r)
 }
@@ -989,9 +984,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesInfoExecute(r ApiGetProcu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1034,7 +1026,9 @@ func (a *CategoriesAPIService) GetProcurementCategoriesInfoExecute(r ApiGetProcu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1075,7 +1069,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesInfoExecute(r ApiGetProcu
 type ApiGetProcurementCategoriesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1084,12 +1077,7 @@ type ApiGetProcurementCategoriesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCategoriesInfoCountRequest) ClientId(clientId string) ApiGetProcurementCategoriesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1140,6 +1128,12 @@ func (r ApiGetProcurementCategoriesInfoCountRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetProcurementCategoriesInfoCountRequest) ClientId(clientId string) ApiGetProcurementCategoriesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCategoriesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementCategoriesInfoCountExecute(r)
 }
@@ -1177,9 +1171,6 @@ func (a *CategoriesAPIService) GetProcurementCategoriesInfoCountExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1222,7 +1213,9 @@ func (a *CategoriesAPIService) GetProcurementCategoriesInfoCountExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1264,19 +1257,19 @@ type ApiPatchProcurementCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementCategoriesByIdRequest) ClientId(clientId string) ApiPatchProcurementCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementCategoriesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementCategoriesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementCategoriesByIdRequest) ClientId(clientId string) ApiPatchProcurementCategoriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1320,9 +1313,6 @@ func (a *CategoriesAPIService) PatchProcurementCategoriesByIdExecute(r ApiPatchP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1344,7 +1334,9 @@ func (a *CategoriesAPIService) PatchProcurementCategoriesByIdExecute(r ApiPatchP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1387,19 +1379,19 @@ func (a *CategoriesAPIService) PatchProcurementCategoriesByIdExecute(r ApiPatchP
 type ApiPostProcurementCategoriesRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
-	clientId *string
 	category *Category
-}
-
-// 
-func (r ApiPostProcurementCategoriesRequest) ClientId(clientId string) ApiPostProcurementCategoriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // category
 func (r ApiPostProcurementCategoriesRequest) Category(category Category) ApiPostProcurementCategoriesRequest {
 	r.category = &category
+	return r
+}
+
+// 
+func (r ApiPostProcurementCategoriesRequest) ClientId(clientId string) ApiPostProcurementCategoriesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1440,9 +1432,6 @@ func (a *CategoriesAPIService) PostProcurementCategoriesExecute(r ApiPostProcure
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.category == nil {
 		return localVarReturnValue, nil, reportError("category is required and must be specified")
 	}
@@ -1464,7 +1453,9 @@ func (a *CategoriesAPIService) PostProcurementCategoriesExecute(r ApiPostProcure
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.category
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1508,19 +1499,19 @@ type ApiPutProcurementCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
 	id int32
-	clientId *string
 	category *Category
-}
-
-// 
-func (r ApiPutProcurementCategoriesByIdRequest) ClientId(clientId string) ApiPutProcurementCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // category
 func (r ApiPutProcurementCategoriesByIdRequest) Category(category Category) ApiPutProcurementCategoriesByIdRequest {
 	r.category = &category
+	return r
+}
+
+// 
+func (r ApiPutProcurementCategoriesByIdRequest) ClientId(clientId string) ApiPutProcurementCategoriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1564,9 +1555,6 @@ func (a *CategoriesAPIService) PutProcurementCategoriesByIdExecute(r ApiPutProcu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.category == nil {
 		return localVarReturnValue, nil, reportError("category is required and must be specified")
 	}
@@ -1588,7 +1576,9 @@ func (a *CategoriesAPIService) PutProcurementCategoriesByIdExecute(r ApiPutProcu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.category
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

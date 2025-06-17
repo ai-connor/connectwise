@@ -74,9 +74,6 @@ func (a *ReportCardsAPIService) DeleteSystemReportCardsByIdExecute(r ApiDeleteSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ReportCardsAPIService) DeleteSystemReportCardsByIdExecute(r ApiDeleteSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ReportCardsAPIService) DeleteSystemReportCardsByIdExecute(r ApiDeleteSy
 type ApiGetSystemReportCardsRequest struct {
 	ctx context.Context
 	ApiService *ReportCardsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemReportCardsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemReportCardsRequest) ClientId(clientId string) ApiGetSystemReportCardsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemReportCardsRequest) PageId(pageId int32) ApiGetSystemReportC
 	return r
 }
 
+// 
+func (r ApiGetSystemReportCardsRequest) ClientId(clientId string) ApiGetSystemReportCardsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemReportCardsRequest) Execute() ([]ReportCard, *http.Response, error) {
 	return r.ApiService.GetSystemReportCardsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ReportCardsAPIService) GetSystemReportCardsExecute(r ApiGetSystemReport
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ReportCardsAPIService) GetSystemReportCardsExecute(r ApiGetSystemReport
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemReportCardsByIdRequest struct {
 	ctx context.Context
 	ApiService *ReportCardsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemReportCardsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemReportCardsByIdRequest) ClientId(clientId string) ApiGetSystemReportCardsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemReportCardsByIdRequest) PageId(pageId int32) ApiGetSystemRep
 	return r
 }
 
+// 
+func (r ApiGetSystemReportCardsByIdRequest) ClientId(clientId string) ApiGetSystemReportCardsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemReportCardsByIdRequest) Execute() (*ReportCard, *http.Response, error) {
 	return r.ApiService.GetSystemReportCardsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ReportCardsAPIService) GetSystemReportCardsByIdExecute(r ApiGetSystemRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ReportCardsAPIService) GetSystemReportCardsByIdExecute(r ApiGetSystemRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *ReportCardsAPIService) GetSystemReportCardsByIdExecute(r ApiGetSystemRe
 type ApiGetSystemReportCardsCountRequest struct {
 	ctx context.Context
 	ApiService *ReportCardsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemReportCardsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemReportCardsCountRequest) ClientId(clientId string) ApiGetSystemReportCardsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemReportCardsCountRequest) PageId(pageId int32) ApiGetSystemRe
 	return r
 }
 
+// 
+func (r ApiGetSystemReportCardsCountRequest) ClientId(clientId string) ApiGetSystemReportCardsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemReportCardsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemReportCardsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *ReportCardsAPIService) GetSystemReportCardsCountExecute(r ApiGetSystemR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *ReportCardsAPIService) GetSystemReportCardsCountExecute(r ApiGetSystemR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemReportCardsByIdRequest struct {
 	ctx context.Context
 	ApiService *ReportCardsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemReportCardsByIdRequest) ClientId(clientId string) ApiPatchSystemReportCardsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemReportCardsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemReportCardsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemReportCardsByIdRequest) ClientId(clientId string) ApiPatchSystemReportCardsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *ReportCardsAPIService) PatchSystemReportCardsByIdExecute(r ApiPatchSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *ReportCardsAPIService) PatchSystemReportCardsByIdExecute(r ApiPatchSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *ReportCardsAPIService) PatchSystemReportCardsByIdExecute(r ApiPatchSyst
 type ApiPostSystemReportCardsRequest struct {
 	ctx context.Context
 	ApiService *ReportCardsAPIService
-	clientId *string
 	reportCard *ReportCard
-}
-
-// 
-func (r ApiPostSystemReportCardsRequest) ClientId(clientId string) ApiPostSystemReportCardsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // reportCard
 func (r ApiPostSystemReportCardsRequest) ReportCard(reportCard ReportCard) ApiPostSystemReportCardsRequest {
 	r.reportCard = &reportCard
+	return r
+}
+
+// 
+func (r ApiPostSystemReportCardsRequest) ClientId(clientId string) ApiPostSystemReportCardsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *ReportCardsAPIService) PostSystemReportCardsExecute(r ApiPostSystemRepo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.reportCard == nil {
 		return localVarReturnValue, nil, reportError("reportCard is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *ReportCardsAPIService) PostSystemReportCardsExecute(r ApiPostSystemRepo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.reportCard
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemReportCardsByIdRequest struct {
 	ctx context.Context
 	ApiService *ReportCardsAPIService
 	id int32
-	clientId *string
 	reportCard *ReportCard
-}
-
-// 
-func (r ApiPutSystemReportCardsByIdRequest) ClientId(clientId string) ApiPutSystemReportCardsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // reportCard
 func (r ApiPutSystemReportCardsByIdRequest) ReportCard(reportCard ReportCard) ApiPutSystemReportCardsByIdRequest {
 	r.reportCard = &reportCard
+	return r
+}
+
+// 
+func (r ApiPutSystemReportCardsByIdRequest) ClientId(clientId string) ApiPutSystemReportCardsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *ReportCardsAPIService) PutSystemReportCardsByIdExecute(r ApiPutSystemRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.reportCard == nil {
 		return localVarReturnValue, nil, reportError("reportCard is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *ReportCardsAPIService) PutSystemReportCardsByIdExecute(r ApiPutSystemRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.reportCard
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

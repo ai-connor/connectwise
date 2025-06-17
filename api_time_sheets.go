@@ -74,9 +74,6 @@ func (a *TimeSheetsAPIService) DeleteTimeSheetsByIdExecute(r ApiDeleteTimeSheets
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *TimeSheetsAPIService) DeleteTimeSheetsByIdExecute(r ApiDeleteTimeSheets
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *TimeSheetsAPIService) DeleteTimeSheetsByIdExecute(r ApiDeleteTimeSheets
 type ApiGetTimeSheetsRequest struct {
 	ctx context.Context
 	ApiService *TimeSheetsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetTimeSheetsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeSheetsRequest) ClientId(clientId string) ApiGetTimeSheetsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetTimeSheetsRequest) PageId(pageId int32) ApiGetTimeSheetsRequest {
 	return r
 }
 
+// 
+func (r ApiGetTimeSheetsRequest) ClientId(clientId string) ApiGetTimeSheetsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeSheetsRequest) Execute() ([]TimeSheet, *http.Response, error) {
 	return r.ApiService.GetTimeSheetsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *TimeSheetsAPIService) GetTimeSheetsExecute(r ApiGetTimeSheetsRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *TimeSheetsAPIService) GetTimeSheetsExecute(r ApiGetTimeSheetsRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetTimeSheetsByIdRequest struct {
 	ctx context.Context
 	ApiService *TimeSheetsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetTimeSheetsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeSheetsByIdRequest) ClientId(clientId string) ApiGetTimeSheetsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetTimeSheetsByIdRequest) PageId(pageId int32) ApiGetTimeSheetsByIdRe
 	return r
 }
 
+// 
+func (r ApiGetTimeSheetsByIdRequest) ClientId(clientId string) ApiGetTimeSheetsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeSheetsByIdRequest) Execute() (*TimeSheet, *http.Response, error) {
 	return r.ApiService.GetTimeSheetsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *TimeSheetsAPIService) GetTimeSheetsByIdExecute(r ApiGetTimeSheetsByIdRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *TimeSheetsAPIService) GetTimeSheetsByIdExecute(r ApiGetTimeSheetsByIdRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *TimeSheetsAPIService) GetTimeSheetsByIdExecute(r ApiGetTimeSheetsByIdRe
 type ApiGetTimeSheetsCountRequest struct {
 	ctx context.Context
 	ApiService *TimeSheetsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetTimeSheetsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeSheetsCountRequest) ClientId(clientId string) ApiGetTimeSheetsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetTimeSheetsCountRequest) PageId(pageId int32) ApiGetTimeSheetsCount
 	return r
 }
 
+// 
+func (r ApiGetTimeSheetsCountRequest) ClientId(clientId string) ApiGetTimeSheetsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeSheetsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeSheetsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *TimeSheetsAPIService) GetTimeSheetsCountExecute(r ApiGetTimeSheetsCount
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *TimeSheetsAPIService) GetTimeSheetsCountExecute(r ApiGetTimeSheetsCount
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPostTimeSheetsByIdApproveRequest struct {
 	ctx context.Context
 	ApiService *TimeSheetsAPIService
 	id int32
-	clientId *string
 	timeSheetTierUpdate *TimeSheetTierUpdate
-}
-
-// 
-func (r ApiPostTimeSheetsByIdApproveRequest) ClientId(clientId string) ApiPostTimeSheetsByIdApproveRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // sheetId
 func (r ApiPostTimeSheetsByIdApproveRequest) TimeSheetTierUpdate(timeSheetTierUpdate TimeSheetTierUpdate) ApiPostTimeSheetsByIdApproveRequest {
 	r.timeSheetTierUpdate = &timeSheetTierUpdate
+	return r
+}
+
+// 
+func (r ApiPostTimeSheetsByIdApproveRequest) ClientId(clientId string) ApiPostTimeSheetsByIdApproveRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *TimeSheetsAPIService) PostTimeSheetsByIdApproveExecute(r ApiPostTimeShe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timeSheetTierUpdate == nil {
 		return localVarReturnValue, nil, reportError("timeSheetTierUpdate is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *TimeSheetsAPIService) PostTimeSheetsByIdApproveExecute(r ApiPostTimeShe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timeSheetTierUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -869,9 +864,6 @@ func (a *TimeSheetsAPIService) PostTimeSheetsByIdRejectExecute(r ApiPostTimeShee
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -890,7 +882,9 @@ func (a *TimeSheetsAPIService) PostTimeSheetsByIdRejectExecute(r ApiPostTimeShee
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -981,9 +975,6 @@ func (a *TimeSheetsAPIService) PostTimeSheetsByIdReverseExecute(r ApiPostTimeShe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1002,7 +993,9 @@ func (a *TimeSheetsAPIService) PostTimeSheetsByIdReverseExecute(r ApiPostTimeShe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1093,9 +1086,6 @@ func (a *TimeSheetsAPIService) PostTimeSheetsByIdSubmitExecute(r ApiPostTimeShee
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1114,7 +1104,9 @@ func (a *TimeSheetsAPIService) PostTimeSheetsByIdSubmitExecute(r ApiPostTimeShee
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

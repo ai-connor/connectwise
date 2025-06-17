@@ -78,9 +78,6 @@ func (a *ProjectBoardKanbanSettingsAPIService) DeleteProjectBoardsByParentIdKanb
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *ProjectBoardKanbanSettingsAPIService) DeleteProjectBoardsByParentIdKanb
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetProjectBoardsByParentIdKanbanSettingsRequest struct {
 	ctx context.Context
 	ApiService *ProjectBoardKanbanSettingsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetProjectBoardsByParentIdKanbanSettingsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectBoardsByParentIdKanbanSettingsRequest) ClientId(clientId string) ApiGetProjectBoardsByParentIdKanbanSettingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetProjectBoardsByParentIdKanbanSettingsRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetProjectBoardsByParentIdKanbanSettingsRequest) ClientId(clientId string) ApiGetProjectBoardsByParentIdKanbanSettingsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectBoardsByParentIdKanbanSettingsRequest) Execute() ([]ProjectBoardKanbanSetting, *http.Response, error) {
 	return r.ApiService.GetProjectBoardsByParentIdKanbanSettingsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *ProjectBoardKanbanSettingsAPIService) GetProjectBoardsByParentIdKanbanS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *ProjectBoardKanbanSettingsAPIService) GetProjectBoardsByParentIdKanbanS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetProjectBoardsByParentIdKanbanSettingsByIdRequest struct {
 	ApiService *ProjectBoardKanbanSettingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetProjectBoardsByParentIdKanbanSettingsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectBoardsByParentIdKanbanSettingsByIdRequest) ClientId(clientId string) ApiGetProjectBoardsByParentIdKanbanSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetProjectBoardsByParentIdKanbanSettingsByIdRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetProjectBoardsByParentIdKanbanSettingsByIdRequest) ClientId(clientId string) ApiGetProjectBoardsByParentIdKanbanSettingsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectBoardsByParentIdKanbanSettingsByIdRequest) Execute() (*ProjectBoardKanbanSetting, *http.Response, error) {
 	return r.ApiService.GetProjectBoardsByParentIdKanbanSettingsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *ProjectBoardKanbanSettingsAPIService) GetProjectBoardsByParentIdKanbanS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *ProjectBoardKanbanSettingsAPIService) GetProjectBoardsByParentIdKanbanS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -521,19 +518,19 @@ type ApiPatchProjectBoardsByParentIdKanbanSettingsByIdRequest struct {
 	ApiService *ProjectBoardKanbanSettingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProjectBoardsByParentIdKanbanSettingsByIdRequest) ClientId(clientId string) ApiPatchProjectBoardsByParentIdKanbanSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProjectBoardsByParentIdKanbanSettingsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProjectBoardsByParentIdKanbanSettingsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProjectBoardsByParentIdKanbanSettingsByIdRequest) ClientId(clientId string) ApiPatchProjectBoardsByParentIdKanbanSettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -580,9 +577,6 @@ func (a *ProjectBoardKanbanSettingsAPIService) PatchProjectBoardsByParentIdKanba
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -604,7 +598,9 @@ func (a *ProjectBoardKanbanSettingsAPIService) PatchProjectBoardsByParentIdKanba
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -648,19 +644,19 @@ type ApiPostProjectBoardsByParentIdKanbanSettingsRequest struct {
 	ctx context.Context
 	ApiService *ProjectBoardKanbanSettingsAPIService
 	parentId int32
-	clientId *string
 	projectBoardKanbanSetting *ProjectBoardKanbanSetting
-}
-
-// 
-func (r ApiPostProjectBoardsByParentIdKanbanSettingsRequest) ClientId(clientId string) ApiPostProjectBoardsByParentIdKanbanSettingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // kanbanSettings
 func (r ApiPostProjectBoardsByParentIdKanbanSettingsRequest) ProjectBoardKanbanSetting(projectBoardKanbanSetting ProjectBoardKanbanSetting) ApiPostProjectBoardsByParentIdKanbanSettingsRequest {
 	r.projectBoardKanbanSetting = &projectBoardKanbanSetting
+	return r
+}
+
+// 
+func (r ApiPostProjectBoardsByParentIdKanbanSettingsRequest) ClientId(clientId string) ApiPostProjectBoardsByParentIdKanbanSettingsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -704,9 +700,6 @@ func (a *ProjectBoardKanbanSettingsAPIService) PostProjectBoardsByParentIdKanban
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectBoardKanbanSetting == nil {
 		return localVarReturnValue, nil, reportError("projectBoardKanbanSetting is required and must be specified")
 	}
@@ -728,7 +721,9 @@ func (a *ProjectBoardKanbanSettingsAPIService) PostProjectBoardsByParentIdKanban
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectBoardKanbanSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -773,19 +768,19 @@ type ApiPutProjectBoardsByParentIdKanbanSettingsByIdRequest struct {
 	ApiService *ProjectBoardKanbanSettingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	projectBoardKanbanSetting *ProjectBoardKanbanSetting
-}
-
-// 
-func (r ApiPutProjectBoardsByParentIdKanbanSettingsByIdRequest) ClientId(clientId string) ApiPutProjectBoardsByParentIdKanbanSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // Kanban
 func (r ApiPutProjectBoardsByParentIdKanbanSettingsByIdRequest) ProjectBoardKanbanSetting(projectBoardKanbanSetting ProjectBoardKanbanSetting) ApiPutProjectBoardsByParentIdKanbanSettingsByIdRequest {
 	r.projectBoardKanbanSetting = &projectBoardKanbanSetting
+	return r
+}
+
+// 
+func (r ApiPutProjectBoardsByParentIdKanbanSettingsByIdRequest) ClientId(clientId string) ApiPutProjectBoardsByParentIdKanbanSettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -832,9 +827,6 @@ func (a *ProjectBoardKanbanSettingsAPIService) PutProjectBoardsByParentIdKanbanS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectBoardKanbanSetting == nil {
 		return localVarReturnValue, nil, reportError("projectBoardKanbanSetting is required and must be specified")
 	}
@@ -856,7 +848,9 @@ func (a *ProjectBoardKanbanSettingsAPIService) PutProjectBoardsByParentIdKanbanS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectBoardKanbanSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

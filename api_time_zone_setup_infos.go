@@ -27,7 +27,6 @@ type ApiGetSystemTimeZoneSetupsByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSystemTimeZoneSetupsByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTimeZoneSetupsByIdInfoRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSystemTimeZoneSetupsByIdInfoRequest) PageId(pageId int32) ApiGetSy
 	return r
 }
 
+// 
+func (r ApiGetSystemTimeZoneSetupsByIdInfoRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTimeZoneSetupsByIdInfoRequest) Execute() (*TimeZoneSetupInfo, *http.Response, error) {
 	return r.ApiService.GetSystemTimeZoneSetupsByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *TimeZoneSetupInfosAPIService) GetSystemTimeZoneSetupsByIdInfoExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *TimeZoneSetupInfosAPIService) GetSystemTimeZoneSetupsByIdInfoExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *TimeZoneSetupInfosAPIService) GetSystemTimeZoneSetupsByIdInfoExecute(r 
 type ApiGetSystemTimeZoneSetupsInfoRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetSystemTimeZoneSetupsInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTimeZoneSetupsInfoRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetSystemTimeZoneSetupsInfoRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemTimeZoneSetupsInfoRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTimeZoneSetupsInfoRequest) Execute() ([]TimeZoneSetupInfo, *http.Response, error) {
 	return r.ApiService.GetSystemTimeZoneSetupsInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *TimeZoneSetupInfosAPIService) GetSystemTimeZoneSetupsInfoExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *TimeZoneSetupInfosAPIService) GetSystemTimeZoneSetupsInfoExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *TimeZoneSetupInfosAPIService) GetSystemTimeZoneSetupsInfoExecute(r ApiG
 type ApiGetSystemTimeZoneSetupsInfoCountRequest struct {
 	ctx context.Context
 	ApiService *TimeZoneSetupInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemTimeZoneSetupsInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTimeZoneSetupsInfoCountRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemTimeZoneSetupsInfoCountRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSystemTimeZoneSetupsInfoCountRequest) ClientId(clientId string) ApiGetSystemTimeZoneSetupsInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTimeZoneSetupsInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemTimeZoneSetupsInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *TimeZoneSetupInfosAPIService) GetSystemTimeZoneSetupsInfoCountExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *TimeZoneSetupInfosAPIService) GetSystemTimeZoneSetupsInfoCountExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

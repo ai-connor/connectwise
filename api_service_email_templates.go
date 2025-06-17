@@ -74,9 +74,6 @@ func (a *ServiceEmailTemplatesAPIService) DeleteServiceEmailTemplatesByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ServiceEmailTemplatesAPIService) DeleteServiceEmailTemplatesByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ServiceEmailTemplatesAPIService) DeleteServiceEmailTemplatesByIdExecute
 type ApiGetServiceEmailTemplatesRequest struct {
 	ctx context.Context
 	ApiService *ServiceEmailTemplatesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetServiceEmailTemplatesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceEmailTemplatesRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetServiceEmailTemplatesRequest) PageId(pageId int32) ApiGetServiceEm
 	return r
 }
 
+// 
+func (r ApiGetServiceEmailTemplatesRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceEmailTemplatesRequest) Execute() ([]ServiceEmailTemplate, *http.Response, error) {
 	return r.ApiService.GetServiceEmailTemplatesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetServiceEmailTemplatesByIdRequest struct {
 	ctx context.Context
 	ApiService *ServiceEmailTemplatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetServiceEmailTemplatesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceEmailTemplatesByIdRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetServiceEmailTemplatesByIdRequest) PageId(pageId int32) ApiGetServi
 	return r
 }
 
+// 
+func (r ApiGetServiceEmailTemplatesByIdRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceEmailTemplatesByIdRequest) Execute() (*ServiceEmailTemplate, *http.Response, error) {
 	return r.ApiService.GetServiceEmailTemplatesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetServiceEmailTemplatesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *ServiceEmailTemplatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetServiceEmailTemplatesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceEmailTemplatesByIdUsagesRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetServiceEmailTemplatesByIdUsagesRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetServiceEmailTemplatesByIdUsagesRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceEmailTemplatesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetServiceEmailTemplatesByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesByIdUsagesExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesByIdUsagesExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetServiceEmailTemplatesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *ServiceEmailTemplatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetServiceEmailTemplatesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceEmailTemplatesByIdUsagesListRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetServiceEmailTemplatesByIdUsagesListRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetServiceEmailTemplatesByIdUsagesListRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceEmailTemplatesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetServiceEmailTemplatesByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesByIdUsagesList
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesByIdUsagesList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesByIdUsagesList
 type ApiGetServiceEmailTemplatesCountRequest struct {
 	ctx context.Context
 	ApiService *ServiceEmailTemplatesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetServiceEmailTemplatesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceEmailTemplatesCountRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetServiceEmailTemplatesCountRequest) PageId(pageId int32) ApiGetServ
 	return r
 }
 
+// 
+func (r ApiGetServiceEmailTemplatesCountRequest) ClientId(clientId string) ApiGetServiceEmailTemplatesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceEmailTemplatesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceEmailTemplatesCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesCountExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *ServiceEmailTemplatesAPIService) GetServiceEmailTemplatesCountExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchServiceEmailTemplatesByIdRequest struct {
 	ctx context.Context
 	ApiService *ServiceEmailTemplatesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceEmailTemplatesByIdRequest) ClientId(clientId string) ApiPatchServiceEmailTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceEmailTemplatesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceEmailTemplatesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceEmailTemplatesByIdRequest) ClientId(clientId string) ApiPatchServiceEmailTemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *ServiceEmailTemplatesAPIService) PatchServiceEmailTemplatesByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *ServiceEmailTemplatesAPIService) PatchServiceEmailTemplatesByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *ServiceEmailTemplatesAPIService) PatchServiceEmailTemplatesByIdExecute(
 type ApiPostServiceEmailTemplatesRequest struct {
 	ctx context.Context
 	ApiService *ServiceEmailTemplatesAPIService
-	clientId *string
 	serviceEmailTemplate *ServiceEmailTemplate
-}
-
-// 
-func (r ApiPostServiceEmailTemplatesRequest) ClientId(clientId string) ApiPostServiceEmailTemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // serviceEmailTemplate
 func (r ApiPostServiceEmailTemplatesRequest) ServiceEmailTemplate(serviceEmailTemplate ServiceEmailTemplate) ApiPostServiceEmailTemplatesRequest {
 	r.serviceEmailTemplate = &serviceEmailTemplate
+	return r
+}
+
+// 
+func (r ApiPostServiceEmailTemplatesRequest) ClientId(clientId string) ApiPostServiceEmailTemplatesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *ServiceEmailTemplatesAPIService) PostServiceEmailTemplatesExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.serviceEmailTemplate == nil {
 		return localVarReturnValue, nil, reportError("serviceEmailTemplate is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *ServiceEmailTemplatesAPIService) PostServiceEmailTemplatesExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.serviceEmailTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutServiceEmailTemplatesByIdRequest struct {
 	ctx context.Context
 	ApiService *ServiceEmailTemplatesAPIService
 	id int32
-	clientId *string
 	serviceEmailTemplate *ServiceEmailTemplate
-}
-
-// 
-func (r ApiPutServiceEmailTemplatesByIdRequest) ClientId(clientId string) ApiPutServiceEmailTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // serviceEmailTemplate
 func (r ApiPutServiceEmailTemplatesByIdRequest) ServiceEmailTemplate(serviceEmailTemplate ServiceEmailTemplate) ApiPutServiceEmailTemplatesByIdRequest {
 	r.serviceEmailTemplate = &serviceEmailTemplate
+	return r
+}
+
+// 
+func (r ApiPutServiceEmailTemplatesByIdRequest) ClientId(clientId string) ApiPutServiceEmailTemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *ServiceEmailTemplatesAPIService) PutServiceEmailTemplatesByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.serviceEmailTemplate == nil {
 		return localVarReturnValue, nil, reportError("serviceEmailTemplate is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *ServiceEmailTemplatesAPIService) PutServiceEmailTemplatesByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.serviceEmailTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

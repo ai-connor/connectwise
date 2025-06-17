@@ -74,9 +74,6 @@ func (a *SsoConfigurationsAPIService) DeleteSystemSsoConfigurationsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *SsoConfigurationsAPIService) DeleteSystemSsoConfigurationsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *SsoConfigurationsAPIService) DeleteSystemSsoConfigurationsByIdExecute(r
 type ApiGetSystemSsoConfigurationsRequest struct {
 	ctx context.Context
 	ApiService *SsoConfigurationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemSsoConfigurationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSsoConfigurationsRequest) ClientId(clientId string) ApiGetSystemSsoConfigurationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemSsoConfigurationsRequest) PageId(pageId int32) ApiGetSystemS
 	return r
 }
 
+// 
+func (r ApiGetSystemSsoConfigurationsRequest) ClientId(clientId string) ApiGetSystemSsoConfigurationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSsoConfigurationsRequest) Execute() ([]SsoConfiguration, *http.Response, error) {
 	return r.ApiService.GetSystemSsoConfigurationsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *SsoConfigurationsAPIService) GetSystemSsoConfigurationsExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *SsoConfigurationsAPIService) GetSystemSsoConfigurationsExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemSsoConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *SsoConfigurationsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemSsoConfigurationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSsoConfigurationsByIdRequest) ClientId(clientId string) ApiGetSystemSsoConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemSsoConfigurationsByIdRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemSsoConfigurationsByIdRequest) ClientId(clientId string) ApiGetSystemSsoConfigurationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSsoConfigurationsByIdRequest) Execute() (*SsoConfiguration, *http.Response, error) {
 	return r.ApiService.GetSystemSsoConfigurationsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *SsoConfigurationsAPIService) GetSystemSsoConfigurationsByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *SsoConfigurationsAPIService) GetSystemSsoConfigurationsByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *SsoConfigurationsAPIService) GetSystemSsoConfigurationsByIdExecute(r Ap
 type ApiGetSystemSsoConfigurationsCountRequest struct {
 	ctx context.Context
 	ApiService *SsoConfigurationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemSsoConfigurationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSsoConfigurationsCountRequest) ClientId(clientId string) ApiGetSystemSsoConfigurationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemSsoConfigurationsCountRequest) PageId(pageId int32) ApiGetSy
 	return r
 }
 
+// 
+func (r ApiGetSystemSsoConfigurationsCountRequest) ClientId(clientId string) ApiGetSystemSsoConfigurationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSsoConfigurationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSsoConfigurationsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *SsoConfigurationsAPIService) GetSystemSsoConfigurationsCountExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *SsoConfigurationsAPIService) GetSystemSsoConfigurationsCountExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemSsoConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *SsoConfigurationsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemSsoConfigurationsByIdRequest) ClientId(clientId string) ApiPatchSystemSsoConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemSsoConfigurationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemSsoConfigurationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemSsoConfigurationsByIdRequest) ClientId(clientId string) ApiPatchSystemSsoConfigurationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *SsoConfigurationsAPIService) PatchSystemSsoConfigurationsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *SsoConfigurationsAPIService) PatchSystemSsoConfigurationsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *SsoConfigurationsAPIService) PatchSystemSsoConfigurationsByIdExecute(r 
 type ApiPostSystemSsoConfigurationsRequest struct {
 	ctx context.Context
 	ApiService *SsoConfigurationsAPIService
-	clientId *string
 	ssoConfiguration *SsoConfiguration
-}
-
-// 
-func (r ApiPostSystemSsoConfigurationsRequest) ClientId(clientId string) ApiPostSystemSsoConfigurationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ssoConfiguration
 func (r ApiPostSystemSsoConfigurationsRequest) SsoConfiguration(ssoConfiguration SsoConfiguration) ApiPostSystemSsoConfigurationsRequest {
 	r.ssoConfiguration = &ssoConfiguration
+	return r
+}
+
+// 
+func (r ApiPostSystemSsoConfigurationsRequest) ClientId(clientId string) ApiPostSystemSsoConfigurationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *SsoConfigurationsAPIService) PostSystemSsoConfigurationsExecute(r ApiPo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ssoConfiguration == nil {
 		return localVarReturnValue, nil, reportError("ssoConfiguration is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *SsoConfigurationsAPIService) PostSystemSsoConfigurationsExecute(r ApiPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ssoConfiguration
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPostSystemSsoConfigurationsByIdRegistertokenRequest struct {
 	ctx context.Context
 	ApiService *SsoConfigurationsAPIService
 	id int32
-	clientId *string
 	ssoConfiguration *SsoConfiguration
-}
-
-// 
-func (r ApiPostSystemSsoConfigurationsByIdRegistertokenRequest) ClientId(clientId string) ApiPostSystemSsoConfigurationsByIdRegistertokenRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ssoConfiguration
 func (r ApiPostSystemSsoConfigurationsByIdRegistertokenRequest) SsoConfiguration(ssoConfiguration SsoConfiguration) ApiPostSystemSsoConfigurationsByIdRegistertokenRequest {
 	r.ssoConfiguration = &ssoConfiguration
+	return r
+}
+
+// 
+func (r ApiPostSystemSsoConfigurationsByIdRegistertokenRequest) ClientId(clientId string) ApiPostSystemSsoConfigurationsByIdRegistertokenRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *SsoConfigurationsAPIService) PostSystemSsoConfigurationsByIdRegistertok
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ssoConfiguration == nil {
 		return localVarReturnValue, nil, reportError("ssoConfiguration is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *SsoConfigurationsAPIService) PostSystemSsoConfigurationsByIdRegistertok
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ssoConfiguration
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1064,19 +1057,19 @@ type ApiPostSystemSsoConfigurationsByIdSubmitmembersRequest struct {
 	ctx context.Context
 	ApiService *SsoConfigurationsAPIService
 	id int32
-	clientId *string
 	ssoConfiguration *SsoConfiguration
-}
-
-// 
-func (r ApiPostSystemSsoConfigurationsByIdSubmitmembersRequest) ClientId(clientId string) ApiPostSystemSsoConfigurationsByIdSubmitmembersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ssoConfiguration
 func (r ApiPostSystemSsoConfigurationsByIdSubmitmembersRequest) SsoConfiguration(ssoConfiguration SsoConfiguration) ApiPostSystemSsoConfigurationsByIdSubmitmembersRequest {
 	r.ssoConfiguration = &ssoConfiguration
+	return r
+}
+
+// 
+func (r ApiPostSystemSsoConfigurationsByIdSubmitmembersRequest) ClientId(clientId string) ApiPostSystemSsoConfigurationsByIdSubmitmembersRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1120,9 +1113,6 @@ func (a *SsoConfigurationsAPIService) PostSystemSsoConfigurationsByIdSubmitmembe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ssoConfiguration == nil {
 		return localVarReturnValue, nil, reportError("ssoConfiguration is required and must be specified")
 	}
@@ -1144,7 +1134,9 @@ func (a *SsoConfigurationsAPIService) PostSystemSsoConfigurationsByIdSubmitmembe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ssoConfiguration
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1188,19 +1180,19 @@ type ApiPutSystemSsoConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *SsoConfigurationsAPIService
 	id int32
-	clientId *string
 	ssoConfiguration *SsoConfiguration
-}
-
-// 
-func (r ApiPutSystemSsoConfigurationsByIdRequest) ClientId(clientId string) ApiPutSystemSsoConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ssoConfiguration
 func (r ApiPutSystemSsoConfigurationsByIdRequest) SsoConfiguration(ssoConfiguration SsoConfiguration) ApiPutSystemSsoConfigurationsByIdRequest {
 	r.ssoConfiguration = &ssoConfiguration
+	return r
+}
+
+// 
+func (r ApiPutSystemSsoConfigurationsByIdRequest) ClientId(clientId string) ApiPutSystemSsoConfigurationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1244,9 +1236,6 @@ func (a *SsoConfigurationsAPIService) PutSystemSsoConfigurationsByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ssoConfiguration == nil {
 		return localVarReturnValue, nil, reportError("ssoConfiguration is required and must be specified")
 	}
@@ -1268,7 +1257,9 @@ func (a *SsoConfigurationsAPIService) PutSystemSsoConfigurationsByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ssoConfiguration
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

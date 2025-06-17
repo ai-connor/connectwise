@@ -70,9 +70,6 @@ func (a *M365ContactSyncPropertiesAPIService) DeleteCompanyM365contactsyncProper
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -91,7 +88,9 @@ func (a *M365ContactSyncPropertiesAPIService) DeleteCompanyM365contactsyncProper
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -124,7 +123,6 @@ type ApiGetCompanyM365contactsyncByIdPropertyRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncPropertiesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -133,12 +131,7 @@ type ApiGetCompanyM365contactsyncByIdPropertyRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyM365contactsyncByIdPropertyRequest) ClientId(clientId string) ApiGetCompanyM365contactsyncByIdPropertyRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -189,6 +182,12 @@ func (r ApiGetCompanyM365contactsyncByIdPropertyRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetCompanyM365contactsyncByIdPropertyRequest) ClientId(clientId string) ApiGetCompanyM365contactsyncByIdPropertyRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyM365contactsyncByIdPropertyRequest) Execute() (*M365ContactSyncProperty, *http.Response, error) {
 	return r.ApiService.GetCompanyM365contactsyncByIdPropertyExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncByIdPrope
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncByIdPrope
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -315,7 +313,6 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncByIdPrope
 type ApiGetCompanyM365contactsyncPropertyCountRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncPropertiesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -324,12 +321,7 @@ type ApiGetCompanyM365contactsyncPropertyCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyM365contactsyncPropertyCountRequest) ClientId(clientId string) ApiGetCompanyM365contactsyncPropertyCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -380,6 +372,12 @@ func (r ApiGetCompanyM365contactsyncPropertyCountRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetCompanyM365contactsyncPropertyCountRequest) ClientId(clientId string) ApiGetCompanyM365contactsyncPropertyCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyM365contactsyncPropertyCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyM365contactsyncPropertyCountExecute(r)
 }
@@ -417,9 +415,6 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -462,7 +457,9 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -503,7 +500,6 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyC
 type ApiGetCompanyM365contactsyncPropertyExcludedRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncPropertiesAPIService
-	clientId *string
 	id int32
 	conditions *string
 	childConditions *string
@@ -513,12 +509,7 @@ type ApiGetCompanyM365contactsyncPropertyExcludedRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyM365contactsyncPropertyExcludedRequest) ClientId(clientId string) ApiGetCompanyM365contactsyncPropertyExcludedRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -569,6 +560,12 @@ func (r ApiGetCompanyM365contactsyncPropertyExcludedRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetCompanyM365contactsyncPropertyExcludedRequest) ClientId(clientId string) ApiGetCompanyM365contactsyncPropertyExcludedRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyM365contactsyncPropertyExcludedRequest) Execute() ([]M365ContactSyncProperty, *http.Response, error) {
 	return r.ApiService.GetCompanyM365contactsyncPropertyExcludedExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -695,7 +691,6 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyE
 type ApiGetCompanyM365contactsyncPropertyIncludedRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncPropertiesAPIService
-	clientId *string
 	id int32
 	conditions *string
 	childConditions *string
@@ -705,12 +700,7 @@ type ApiGetCompanyM365contactsyncPropertyIncludedRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyM365contactsyncPropertyIncludedRequest) ClientId(clientId string) ApiGetCompanyM365contactsyncPropertyIncludedRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -761,6 +751,12 @@ func (r ApiGetCompanyM365contactsyncPropertyIncludedRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetCompanyM365contactsyncPropertyIncludedRequest) ClientId(clientId string) ApiGetCompanyM365contactsyncPropertyIncludedRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyM365contactsyncPropertyIncludedRequest) Execute() ([]M365ContactSyncProperty, *http.Response, error) {
 	return r.ApiService.GetCompanyM365contactsyncPropertyIncludedExecute(r)
 }
@@ -801,9 +797,6 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -846,7 +839,9 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -887,19 +882,19 @@ func (a *M365ContactSyncPropertiesAPIService) GetCompanyM365contactsyncPropertyI
 type ApiPostCompanyM365contactsyncPropertyRequest struct {
 	ctx context.Context
 	ApiService *M365ContactSyncPropertiesAPIService
-	clientId *string
 	m365ContactSyncProperty *M365ContactSyncProperty
-}
-
-// 
-func (r ApiPostCompanyM365contactsyncPropertyRequest) ClientId(clientId string) ApiPostCompanyM365contactsyncPropertyRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // country
 func (r ApiPostCompanyM365contactsyncPropertyRequest) M365ContactSyncProperty(m365ContactSyncProperty M365ContactSyncProperty) ApiPostCompanyM365contactsyncPropertyRequest {
 	r.m365ContactSyncProperty = &m365ContactSyncProperty
+	return r
+}
+
+// 
+func (r ApiPostCompanyM365contactsyncPropertyRequest) ClientId(clientId string) ApiPostCompanyM365contactsyncPropertyRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -940,9 +935,6 @@ func (a *M365ContactSyncPropertiesAPIService) PostCompanyM365contactsyncProperty
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.m365ContactSyncProperty == nil {
 		return localVarReturnValue, nil, reportError("m365ContactSyncProperty is required and must be specified")
 	}
@@ -964,7 +956,9 @@ func (a *M365ContactSyncPropertiesAPIService) PostCompanyM365contactsyncProperty
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.m365ContactSyncProperty
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

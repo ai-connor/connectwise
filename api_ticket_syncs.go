@@ -74,9 +74,6 @@ func (a *TicketSyncsAPIService) DeleteServiceTicketSyncsByIdExecute(r ApiDeleteS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *TicketSyncsAPIService) DeleteServiceTicketSyncsByIdExecute(r ApiDeleteS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *TicketSyncsAPIService) DeleteServiceTicketSyncsByIdExecute(r ApiDeleteS
 type ApiGetServiceTicketSyncsRequest struct {
 	ctx context.Context
 	ApiService *TicketSyncsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetServiceTicketSyncsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketSyncsRequest) ClientId(clientId string) ApiGetServiceTicketSyncsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetServiceTicketSyncsRequest) PageId(pageId int32) ApiGetServiceTicke
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketSyncsRequest) ClientId(clientId string) ApiGetServiceTicketSyncsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketSyncsRequest) Execute() ([]TicketSync, *http.Response, error) {
 	return r.ApiService.GetServiceTicketSyncsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *TicketSyncsAPIService) GetServiceTicketSyncsExecute(r ApiGetServiceTick
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *TicketSyncsAPIService) GetServiceTicketSyncsExecute(r ApiGetServiceTick
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetServiceTicketSyncsByIdRequest struct {
 	ctx context.Context
 	ApiService *TicketSyncsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetServiceTicketSyncsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketSyncsByIdRequest) ClientId(clientId string) ApiGetServiceTicketSyncsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetServiceTicketSyncsByIdRequest) PageId(pageId int32) ApiGetServiceT
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketSyncsByIdRequest) ClientId(clientId string) ApiGetServiceTicketSyncsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketSyncsByIdRequest) Execute() (*TicketSync, *http.Response, error) {
 	return r.ApiService.GetServiceTicketSyncsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *TicketSyncsAPIService) GetServiceTicketSyncsByIdExecute(r ApiGetService
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *TicketSyncsAPIService) GetServiceTicketSyncsByIdExecute(r ApiGetService
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *TicketSyncsAPIService) GetServiceTicketSyncsByIdExecute(r ApiGetService
 type ApiGetServiceTicketSyncsCountRequest struct {
 	ctx context.Context
 	ApiService *TicketSyncsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetServiceTicketSyncsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketSyncsCountRequest) ClientId(clientId string) ApiGetServiceTicketSyncsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetServiceTicketSyncsCountRequest) PageId(pageId int32) ApiGetService
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketSyncsCountRequest) ClientId(clientId string) ApiGetServiceTicketSyncsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketSyncsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceTicketSyncsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *TicketSyncsAPIService) GetServiceTicketSyncsCountExecute(r ApiGetServic
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *TicketSyncsAPIService) GetServiceTicketSyncsCountExecute(r ApiGetServic
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchServiceTicketSyncsByIdRequest struct {
 	ctx context.Context
 	ApiService *TicketSyncsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceTicketSyncsByIdRequest) ClientId(clientId string) ApiPatchServiceTicketSyncsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceTicketSyncsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceTicketSyncsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceTicketSyncsByIdRequest) ClientId(clientId string) ApiPatchServiceTicketSyncsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *TicketSyncsAPIService) PatchServiceTicketSyncsByIdExecute(r ApiPatchSer
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *TicketSyncsAPIService) PatchServiceTicketSyncsByIdExecute(r ApiPatchSer
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *TicketSyncsAPIService) PatchServiceTicketSyncsByIdExecute(r ApiPatchSer
 type ApiPostServiceTicketSyncsRequest struct {
 	ctx context.Context
 	ApiService *TicketSyncsAPIService
-	clientId *string
 	ticketSync *TicketSync
-}
-
-// 
-func (r ApiPostServiceTicketSyncsRequest) ClientId(clientId string) ApiPostServiceTicketSyncsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ticketSync
 func (r ApiPostServiceTicketSyncsRequest) TicketSync(ticketSync TicketSync) ApiPostServiceTicketSyncsRequest {
 	r.ticketSync = &ticketSync
+	return r
+}
+
+// 
+func (r ApiPostServiceTicketSyncsRequest) ClientId(clientId string) ApiPostServiceTicketSyncsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *TicketSyncsAPIService) PostServiceTicketSyncsExecute(r ApiPostServiceTi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ticketSync == nil {
 		return localVarReturnValue, nil, reportError("ticketSync is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *TicketSyncsAPIService) PostServiceTicketSyncsExecute(r ApiPostServiceTi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ticketSync
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutServiceTicketSyncsByIdRequest struct {
 	ctx context.Context
 	ApiService *TicketSyncsAPIService
 	id int32
-	clientId *string
 	ticketSync *TicketSync
-}
-
-// 
-func (r ApiPutServiceTicketSyncsByIdRequest) ClientId(clientId string) ApiPutServiceTicketSyncsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ticketSync
 func (r ApiPutServiceTicketSyncsByIdRequest) TicketSync(ticketSync TicketSync) ApiPutServiceTicketSyncsByIdRequest {
 	r.ticketSync = &ticketSync
+	return r
+}
+
+// 
+func (r ApiPutServiceTicketSyncsByIdRequest) ClientId(clientId string) ApiPutServiceTicketSyncsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *TicketSyncsAPIService) PutServiceTicketSyncsByIdExecute(r ApiPutService
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ticketSync == nil {
 		return localVarReturnValue, nil, reportError("ticketSync is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *TicketSyncsAPIService) PutServiceTicketSyncsByIdExecute(r ApiPutService
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ticketSync
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

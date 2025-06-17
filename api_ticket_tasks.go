@@ -78,9 +78,6 @@ func (a *TicketTasksAPIService) DeleteProjectTicketsByParentIdTasksByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *TicketTasksAPIService) DeleteProjectTicketsByParentIdTasksByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -183,9 +182,6 @@ func (a *TicketTasksAPIService) DeleteServiceTicketsByParentIdTasksByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -204,7 +200,9 @@ func (a *TicketTasksAPIService) DeleteServiceTicketsByParentIdTasksByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -237,7 +235,6 @@ type ApiGetProjectTicketsByParentIdTasksRequest struct {
 	ctx context.Context
 	ApiService *TicketTasksAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -246,12 +243,7 @@ type ApiGetProjectTicketsByParentIdTasksRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectTicketsByParentIdTasksRequest) ClientId(clientId string) ApiGetProjectTicketsByParentIdTasksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -302,6 +294,12 @@ func (r ApiGetProjectTicketsByParentIdTasksRequest) PageId(pageId int32) ApiGetP
 	return r
 }
 
+// 
+func (r ApiGetProjectTicketsByParentIdTasksRequest) ClientId(clientId string) ApiGetProjectTicketsByParentIdTasksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectTicketsByParentIdTasksRequest) Execute() ([]TicketTask, *http.Response, error) {
 	return r.ApiService.GetProjectTicketsByParentIdTasksExecute(r)
 }
@@ -342,9 +340,6 @@ func (a *TicketTasksAPIService) GetProjectTicketsByParentIdTasksExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -387,7 +382,9 @@ func (a *TicketTasksAPIService) GetProjectTicketsByParentIdTasksExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -430,7 +427,6 @@ type ApiGetProjectTicketsByParentIdTasksByIdRequest struct {
 	ApiService *TicketTasksAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -439,12 +435,7 @@ type ApiGetProjectTicketsByParentIdTasksByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiGetProjectTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -495,6 +486,12 @@ func (r ApiGetProjectTicketsByParentIdTasksByIdRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetProjectTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiGetProjectTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectTicketsByParentIdTasksByIdRequest) Execute() (*TicketTask, *http.Response, error) {
 	return r.ApiService.GetProjectTicketsByParentIdTasksByIdExecute(r)
 }
@@ -538,9 +535,6 @@ func (a *TicketTasksAPIService) GetProjectTicketsByParentIdTasksByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -583,7 +577,9 @@ func (a *TicketTasksAPIService) GetProjectTicketsByParentIdTasksByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -625,7 +621,6 @@ type ApiGetProjectTicketsByParentIdTasksCountRequest struct {
 	ctx context.Context
 	ApiService *TicketTasksAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -634,12 +629,7 @@ type ApiGetProjectTicketsByParentIdTasksCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectTicketsByParentIdTasksCountRequest) ClientId(clientId string) ApiGetProjectTicketsByParentIdTasksCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -690,6 +680,12 @@ func (r ApiGetProjectTicketsByParentIdTasksCountRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetProjectTicketsByParentIdTasksCountRequest) ClientId(clientId string) ApiGetProjectTicketsByParentIdTasksCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectTicketsByParentIdTasksCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProjectTicketsByParentIdTasksCountExecute(r)
 }
@@ -730,9 +726,6 @@ func (a *TicketTasksAPIService) GetProjectTicketsByParentIdTasksCountExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -775,7 +768,9 @@ func (a *TicketTasksAPIService) GetProjectTicketsByParentIdTasksCountExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -817,7 +812,6 @@ type ApiGetServiceTicketsByParentIdTasksRequest struct {
 	ctx context.Context
 	ApiService *TicketTasksAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -826,12 +820,7 @@ type ApiGetServiceTicketsByParentIdTasksRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketsByParentIdTasksRequest) ClientId(clientId string) ApiGetServiceTicketsByParentIdTasksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -882,6 +871,12 @@ func (r ApiGetServiceTicketsByParentIdTasksRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketsByParentIdTasksRequest) ClientId(clientId string) ApiGetServiceTicketsByParentIdTasksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketsByParentIdTasksRequest) Execute() ([]ServiceTask, *http.Response, error) {
 	return r.ApiService.GetServiceTicketsByParentIdTasksExecute(r)
 }
@@ -922,9 +917,6 @@ func (a *TicketTasksAPIService) GetServiceTicketsByParentIdTasksExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -967,7 +959,9 @@ func (a *TicketTasksAPIService) GetServiceTicketsByParentIdTasksExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1010,7 +1004,6 @@ type ApiGetServiceTicketsByParentIdTasksByIdRequest struct {
 	ApiService *TicketTasksAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1019,12 +1012,7 @@ type ApiGetServiceTicketsByParentIdTasksByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiGetServiceTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1075,6 +1063,12 @@ func (r ApiGetServiceTicketsByParentIdTasksByIdRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiGetServiceTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketsByParentIdTasksByIdRequest) Execute() (*ServiceTask, *http.Response, error) {
 	return r.ApiService.GetServiceTicketsByParentIdTasksByIdExecute(r)
 }
@@ -1118,9 +1112,6 @@ func (a *TicketTasksAPIService) GetServiceTicketsByParentIdTasksByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1163,7 +1154,9 @@ func (a *TicketTasksAPIService) GetServiceTicketsByParentIdTasksByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1205,7 +1198,6 @@ type ApiGetServiceTicketsByParentIdTasksCountRequest struct {
 	ctx context.Context
 	ApiService *TicketTasksAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1214,12 +1206,7 @@ type ApiGetServiceTicketsByParentIdTasksCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketsByParentIdTasksCountRequest) ClientId(clientId string) ApiGetServiceTicketsByParentIdTasksCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1270,6 +1257,12 @@ func (r ApiGetServiceTicketsByParentIdTasksCountRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketsByParentIdTasksCountRequest) ClientId(clientId string) ApiGetServiceTicketsByParentIdTasksCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketsByParentIdTasksCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceTicketsByParentIdTasksCountExecute(r)
 }
@@ -1310,9 +1303,6 @@ func (a *TicketTasksAPIService) GetServiceTicketsByParentIdTasksCountExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1355,7 +1345,9 @@ func (a *TicketTasksAPIService) GetServiceTicketsByParentIdTasksCountExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1398,19 +1390,19 @@ type ApiPatchProjectTicketsByParentIdTasksByIdRequest struct {
 	ApiService *TicketTasksAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProjectTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPatchProjectTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProjectTicketsByParentIdTasksByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProjectTicketsByParentIdTasksByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProjectTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPatchProjectTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1457,9 +1449,6 @@ func (a *TicketTasksAPIService) PatchProjectTicketsByParentIdTasksByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1481,7 +1470,9 @@ func (a *TicketTasksAPIService) PatchProjectTicketsByParentIdTasksByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1526,19 +1517,19 @@ type ApiPatchServiceTicketsByParentIdTasksByIdRequest struct {
 	ApiService *TicketTasksAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPatchServiceTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceTicketsByParentIdTasksByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceTicketsByParentIdTasksByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPatchServiceTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1585,9 +1576,6 @@ func (a *TicketTasksAPIService) PatchServiceTicketsByParentIdTasksByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1609,7 +1597,9 @@ func (a *TicketTasksAPIService) PatchServiceTicketsByParentIdTasksByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1653,19 +1643,19 @@ type ApiPostProjectTicketsByParentIdTasksRequest struct {
 	ctx context.Context
 	ApiService *TicketTasksAPIService
 	parentId int32
-	clientId *string
 	ticketTask *TicketTask
-}
-
-// 
-func (r ApiPostProjectTicketsByParentIdTasksRequest) ClientId(clientId string) ApiPostProjectTicketsByParentIdTasksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ticketTask
 func (r ApiPostProjectTicketsByParentIdTasksRequest) TicketTask(ticketTask TicketTask) ApiPostProjectTicketsByParentIdTasksRequest {
 	r.ticketTask = &ticketTask
+	return r
+}
+
+// 
+func (r ApiPostProjectTicketsByParentIdTasksRequest) ClientId(clientId string) ApiPostProjectTicketsByParentIdTasksRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1709,9 +1699,6 @@ func (a *TicketTasksAPIService) PostProjectTicketsByParentIdTasksExecute(r ApiPo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ticketTask == nil {
 		return localVarReturnValue, nil, reportError("ticketTask is required and must be specified")
 	}
@@ -1733,7 +1720,9 @@ func (a *TicketTasksAPIService) PostProjectTicketsByParentIdTasksExecute(r ApiPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ticketTask
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1777,19 +1766,19 @@ type ApiPostServiceTicketsByParentIdTasksRequest struct {
 	ctx context.Context
 	ApiService *TicketTasksAPIService
 	parentId int32
-	clientId *string
 	serviceTask *ServiceTask
-}
-
-// 
-func (r ApiPostServiceTicketsByParentIdTasksRequest) ClientId(clientId string) ApiPostServiceTicketsByParentIdTasksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // task
 func (r ApiPostServiceTicketsByParentIdTasksRequest) ServiceTask(serviceTask ServiceTask) ApiPostServiceTicketsByParentIdTasksRequest {
 	r.serviceTask = &serviceTask
+	return r
+}
+
+// 
+func (r ApiPostServiceTicketsByParentIdTasksRequest) ClientId(clientId string) ApiPostServiceTicketsByParentIdTasksRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1833,9 +1822,6 @@ func (a *TicketTasksAPIService) PostServiceTicketsByParentIdTasksExecute(r ApiPo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.serviceTask == nil {
 		return localVarReturnValue, nil, reportError("serviceTask is required and must be specified")
 	}
@@ -1857,7 +1843,9 @@ func (a *TicketTasksAPIService) PostServiceTicketsByParentIdTasksExecute(r ApiPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.serviceTask
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1902,19 +1890,19 @@ type ApiPutProjectTicketsByParentIdTasksByIdRequest struct {
 	ApiService *TicketTasksAPIService
 	id int32
 	parentId int32
-	clientId *string
 	ticketTask *TicketTask
-}
-
-// 
-func (r ApiPutProjectTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPutProjectTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ticketTask
 func (r ApiPutProjectTicketsByParentIdTasksByIdRequest) TicketTask(ticketTask TicketTask) ApiPutProjectTicketsByParentIdTasksByIdRequest {
 	r.ticketTask = &ticketTask
+	return r
+}
+
+// 
+func (r ApiPutProjectTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPutProjectTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1961,9 +1949,6 @@ func (a *TicketTasksAPIService) PutProjectTicketsByParentIdTasksByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ticketTask == nil {
 		return localVarReturnValue, nil, reportError("ticketTask is required and must be specified")
 	}
@@ -1985,7 +1970,9 @@ func (a *TicketTasksAPIService) PutProjectTicketsByParentIdTasksByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ticketTask
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -2030,19 +2017,19 @@ type ApiPutServiceTicketsByParentIdTasksByIdRequest struct {
 	ApiService *TicketTasksAPIService
 	id int32
 	parentId int32
-	clientId *string
 	serviceTask *ServiceTask
-}
-
-// 
-func (r ApiPutServiceTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPutServiceTicketsByParentIdTasksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // task
 func (r ApiPutServiceTicketsByParentIdTasksByIdRequest) ServiceTask(serviceTask ServiceTask) ApiPutServiceTicketsByParentIdTasksByIdRequest {
 	r.serviceTask = &serviceTask
+	return r
+}
+
+// 
+func (r ApiPutServiceTicketsByParentIdTasksByIdRequest) ClientId(clientId string) ApiPutServiceTicketsByParentIdTasksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -2089,9 +2076,6 @@ func (a *TicketTasksAPIService) PutServiceTicketsByParentIdTasksByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.serviceTask == nil {
 		return localVarReturnValue, nil, reportError("serviceTask is required and must be specified")
 	}
@@ -2113,7 +2097,9 @@ func (a *TicketTasksAPIService) PutServiceTicketsByParentIdTasksByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.serviceTask
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

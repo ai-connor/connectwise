@@ -26,7 +26,6 @@ type EmailTokensAPIService service
 type ApiGetSystemEmailTokensRequest struct {
 	ctx context.Context
 	ApiService *EmailTokensAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemEmailTokensRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailTokensRequest) ClientId(clientId string) ApiGetSystemEmailTokensRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemEmailTokensRequest) PageId(pageId int32) ApiGetSystemEmailTo
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailTokensRequest) ClientId(clientId string) ApiGetSystemEmailTokensRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailTokensRequest) Execute() ([]EmailToken, *http.Response, error) {
 	return r.ApiService.GetSystemEmailTokensExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *EmailTokensAPIService) GetSystemEmailTokensExecute(r ApiGetSystemEmailT
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *EmailTokensAPIService) GetSystemEmailTokensExecute(r ApiGetSystemEmailT
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemEmailTokensByIdRequest struct {
 	ctx context.Context
 	ApiService *EmailTokensAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemEmailTokensByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailTokensByIdRequest) ClientId(clientId string) ApiGetSystemEmailTokensByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemEmailTokensByIdRequest) PageId(pageId int32) ApiGetSystemEma
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailTokensByIdRequest) ClientId(clientId string) ApiGetSystemEmailTokensByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailTokensByIdRequest) Execute() (*EmailToken, *http.Response, error) {
 	return r.ApiService.GetSystemEmailTokensByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *EmailTokensAPIService) GetSystemEmailTokensByIdExecute(r ApiGetSystemEm
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *EmailTokensAPIService) GetSystemEmailTokensByIdExecute(r ApiGetSystemEm
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *EmailTokensAPIService) GetSystemEmailTokensByIdExecute(r ApiGetSystemEm
 type ApiGetSystemEmailTokensCountRequest struct {
 	ctx context.Context
 	ApiService *EmailTokensAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemEmailTokensCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailTokensCountRequest) ClientId(clientId string) ApiGetSystemEmailTokensCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemEmailTokensCountRequest) PageId(pageId int32) ApiGetSystemEm
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailTokensCountRequest) ClientId(clientId string) ApiGetSystemEmailTokensCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailTokensCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemEmailTokensCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *EmailTokensAPIService) GetSystemEmailTokensCountExecute(r ApiGetSystemE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *EmailTokensAPIService) GetSystemEmailTokensCountExecute(r ApiGetSystemE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

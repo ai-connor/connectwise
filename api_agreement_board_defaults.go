@@ -78,9 +78,6 @@ func (a *AgreementBoardDefaultsAPIService) DeleteFinanceAgreementsByParentIdBoar
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *AgreementBoardDefaultsAPIService) DeleteFinanceAgreementsByParentIdBoar
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetFinanceAgreementsByParentIdBoardDefaultsRequest struct {
 	ctx context.Context
 	ApiService *AgreementBoardDefaultsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetFinanceAgreementsByParentIdBoardDefaultsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdBoardDefaultsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdBoardDefaultsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsRequest) Execute() ([]BoardDefault, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsByParentIdBoardDefaultsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *AgreementBoardDefaultsAPIService) GetFinanceAgreementsByParentIdBoardDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *AgreementBoardDefaultsAPIService) GetFinanceAgreementsByParentIdBoardDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetFinanceAgreementsByParentIdBoardDefaultsByIdRequest struct {
 	ApiService *AgreementBoardDefaultsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetFinanceAgreementsByParentIdBoardDefaultsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsByIdRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdBoardDefaultsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsByIdRequest) PageId(pageId
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsByIdRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdBoardDefaultsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsByIdRequest) Execute() (*BoardDefault, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsByParentIdBoardDefaultsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *AgreementBoardDefaultsAPIService) GetFinanceAgreementsByParentIdBoardDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *AgreementBoardDefaultsAPIService) GetFinanceAgreementsByParentIdBoardDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetFinanceAgreementsByParentIdBoardDefaultsCountRequest struct {
 	ctx context.Context
 	ApiService *AgreementBoardDefaultsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetFinanceAgreementsByParentIdBoardDefaultsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsCountRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdBoardDefaultsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsCountRequest) PageId(pageI
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsCountRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdBoardDefaultsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsByParentIdBoardDefaultsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsByParentIdBoardDefaultsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *AgreementBoardDefaultsAPIService) GetFinanceAgreementsByParentIdBoardDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *AgreementBoardDefaultsAPIService) GetFinanceAgreementsByParentIdBoardDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchFinanceAgreementsByParentIdBoardDefaultsByIdRequest struct {
 	ApiService *AgreementBoardDefaultsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceAgreementsByParentIdBoardDefaultsByIdRequest) ClientId(clientId string) ApiPatchFinanceAgreementsByParentIdBoardDefaultsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceAgreementsByParentIdBoardDefaultsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceAgreementsByParentIdBoardDefaultsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceAgreementsByParentIdBoardDefaultsByIdRequest) ClientId(clientId string) ApiPatchFinanceAgreementsByParentIdBoardDefaultsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *AgreementBoardDefaultsAPIService) PatchFinanceAgreementsByParentIdBoard
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *AgreementBoardDefaultsAPIService) PatchFinanceAgreementsByParentIdBoard
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostFinanceAgreementsByParentIdBoardDefaultsRequest struct {
 	ctx context.Context
 	ApiService *AgreementBoardDefaultsAPIService
 	parentId int32
-	clientId *string
 	boardDefault *BoardDefault
-}
-
-// 
-func (r ApiPostFinanceAgreementsByParentIdBoardDefaultsRequest) ClientId(clientId string) ApiPostFinanceAgreementsByParentIdBoardDefaultsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardDefault
 func (r ApiPostFinanceAgreementsByParentIdBoardDefaultsRequest) BoardDefault(boardDefault BoardDefault) ApiPostFinanceAgreementsByParentIdBoardDefaultsRequest {
 	r.boardDefault = &boardDefault
+	return r
+}
+
+// 
+func (r ApiPostFinanceAgreementsByParentIdBoardDefaultsRequest) ClientId(clientId string) ApiPostFinanceAgreementsByParentIdBoardDefaultsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *AgreementBoardDefaultsAPIService) PostFinanceAgreementsByParentIdBoardD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardDefault == nil {
 		return localVarReturnValue, nil, reportError("boardDefault is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *AgreementBoardDefaultsAPIService) PostFinanceAgreementsByParentIdBoardD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardDefault
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutFinanceAgreementsByParentIdBoardDefaultsByIdRequest struct {
 	ApiService *AgreementBoardDefaultsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	boardDefault *BoardDefault
-}
-
-// 
-func (r ApiPutFinanceAgreementsByParentIdBoardDefaultsByIdRequest) ClientId(clientId string) ApiPutFinanceAgreementsByParentIdBoardDefaultsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardDefault
 func (r ApiPutFinanceAgreementsByParentIdBoardDefaultsByIdRequest) BoardDefault(boardDefault BoardDefault) ApiPutFinanceAgreementsByParentIdBoardDefaultsByIdRequest {
 	r.boardDefault = &boardDefault
+	return r
+}
+
+// 
+func (r ApiPutFinanceAgreementsByParentIdBoardDefaultsByIdRequest) ClientId(clientId string) ApiPutFinanceAgreementsByParentIdBoardDefaultsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *AgreementBoardDefaultsAPIService) PutFinanceAgreementsByParentIdBoardDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardDefault == nil {
 		return localVarReturnValue, nil, reportError("boardDefault is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *AgreementBoardDefaultsAPIService) PutFinanceAgreementsByParentIdBoardDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardDefault
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

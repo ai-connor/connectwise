@@ -27,7 +27,6 @@ type ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsRequest struc
 	ctx context.Context
 	ApiService *AccountingUnpostedInvoiceTaxableLevelsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsRequest struc
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsRequest) P
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsRequest) Execute() ([]UnpostedInvoiceTaxableLevel, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *AccountingUnpostedInvoiceTaxableLevelsAPIService) GetFinanceAccountingU
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *AccountingUnpostedInvoiceTaxableLevelsAPIService) GetFinanceAccountingU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdRequest s
 	ApiService *AccountingUnpostedInvoiceTaxableLevelsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdRequest s
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdReques
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdRequest) Execute() (*UnpostedInvoiceTaxableLevel, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *AccountingUnpostedInvoiceTaxableLevelsAPIService) GetFinanceAccountingU
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *AccountingUnpostedInvoiceTaxableLevelsAPIService) GetFinanceAccountingU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountRequest 
 	ctx context.Context
 	ApiService *AccountingUnpostedInvoiceTaxableLevelsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountRequest 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountReque
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedinvoicesByParentIdTaxableLevelsCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *AccountingUnpostedInvoiceTaxableLevelsAPIService) GetFinanceAccountingU
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *AccountingUnpostedInvoiceTaxableLevelsAPIService) GetFinanceAccountingU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

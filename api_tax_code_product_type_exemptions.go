@@ -78,9 +78,6 @@ func (a *TaxCodeProductTypeExemptionsAPIService) DeleteFinanceTaxCodesByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *TaxCodeProductTypeExemptionsAPIService) DeleteFinanceTaxCodesByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsRequest struct {
 	ctx context.Context
 	ApiService *TaxCodeProductTypeExemptionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsRequest) PageId(page
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsRequest) Execute() ([]ProductTypeExemption, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByParentIdProductTypeExemptionsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *TaxCodeProductTypeExemptionsAPIService) GetFinanceTaxCodesByParentIdPro
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *TaxCodeProductTypeExemptionsAPIService) GetFinanceTaxCodesByParentIdPro
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest struct {
 	ApiService *TaxCodeProductTypeExemptionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) PageId(
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) Execute() (*ProductTypeExemption, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByParentIdProductTypeExemptionsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *TaxCodeProductTypeExemptionsAPIService) GetFinanceTaxCodesByParentIdPro
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *TaxCodeProductTypeExemptionsAPIService) GetFinanceTaxCodesByParentIdPro
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsCountRequest struct {
 	ctx context.Context
 	ApiService *TaxCodeProductTypeExemptionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsCountRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsCountRequest) PageId
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsCountRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByParentIdProductTypeExemptionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByParentIdProductTypeExemptionsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *TaxCodeProductTypeExemptionsAPIService) GetFinanceTaxCodesByParentIdPro
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *TaxCodeProductTypeExemptionsAPIService) GetFinanceTaxCodesByParentIdPro
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest struct {
 	ApiService *TaxCodeProductTypeExemptionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) ClientId(clientId string) ApiPatchFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) ClientId(clientId string) ApiPatchFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *TaxCodeProductTypeExemptionsAPIService) PatchFinanceTaxCodesByParentIdP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *TaxCodeProductTypeExemptionsAPIService) PatchFinanceTaxCodesByParentIdP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostFinanceTaxCodesByParentIdProductTypeExemptionsRequest struct {
 	ctx context.Context
 	ApiService *TaxCodeProductTypeExemptionsAPIService
 	parentId int32
-	clientId *string
 	productTypeExemption *ProductTypeExemption
-}
-
-// 
-func (r ApiPostFinanceTaxCodesByParentIdProductTypeExemptionsRequest) ClientId(clientId string) ApiPostFinanceTaxCodesByParentIdProductTypeExemptionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // productTypeExemption
 func (r ApiPostFinanceTaxCodesByParentIdProductTypeExemptionsRequest) ProductTypeExemption(productTypeExemption ProductTypeExemption) ApiPostFinanceTaxCodesByParentIdProductTypeExemptionsRequest {
 	r.productTypeExemption = &productTypeExemption
+	return r
+}
+
+// 
+func (r ApiPostFinanceTaxCodesByParentIdProductTypeExemptionsRequest) ClientId(clientId string) ApiPostFinanceTaxCodesByParentIdProductTypeExemptionsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *TaxCodeProductTypeExemptionsAPIService) PostFinanceTaxCodesByParentIdPr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.productTypeExemption == nil {
 		return localVarReturnValue, nil, reportError("productTypeExemption is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *TaxCodeProductTypeExemptionsAPIService) PostFinanceTaxCodesByParentIdPr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.productTypeExemption
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest struct {
 	ApiService *TaxCodeProductTypeExemptionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	productTypeExemption *ProductTypeExemption
-}
-
-// 
-func (r ApiPutFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) ClientId(clientId string) ApiPutFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // productTypeExemption
 func (r ApiPutFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) ProductTypeExemption(productTypeExemption ProductTypeExemption) ApiPutFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest {
 	r.productTypeExemption = &productTypeExemption
+	return r
+}
+
+// 
+func (r ApiPutFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest) ClientId(clientId string) ApiPutFinanceTaxCodesByParentIdProductTypeExemptionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *TaxCodeProductTypeExemptionsAPIService) PutFinanceTaxCodesByParentIdPro
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.productTypeExemption == nil {
 		return localVarReturnValue, nil, reportError("productTypeExemption is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *TaxCodeProductTypeExemptionsAPIService) PutFinanceTaxCodesByParentIdPro
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.productTypeExemption
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

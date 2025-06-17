@@ -27,7 +27,6 @@ type ApiGetSystemSkillsByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *SkillInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSystemSkillsByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSkillsByIdInfoRequest) ClientId(clientId string) ApiGetSystemSkillsByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSystemSkillsByIdInfoRequest) PageId(pageId int32) ApiGetSystemSkil
 	return r
 }
 
+// 
+func (r ApiGetSystemSkillsByIdInfoRequest) ClientId(clientId string) ApiGetSystemSkillsByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSkillsByIdInfoRequest) Execute() (*SkillInfo, *http.Response, error) {
 	return r.ApiService.GetSystemSkillsByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *SkillInfosAPIService) GetSystemSkillsByIdInfoExecute(r ApiGetSystemSkil
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *SkillInfosAPIService) GetSystemSkillsByIdInfoExecute(r ApiGetSystemSkil
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *SkillInfosAPIService) GetSystemSkillsByIdInfoExecute(r ApiGetSystemSkil
 type ApiGetSystemSkillsInfoRequest struct {
 	ctx context.Context
 	ApiService *SkillInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetSystemSkillsInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSkillsInfoRequest) ClientId(clientId string) ApiGetSystemSkillsInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetSystemSkillsInfoRequest) PageId(pageId int32) ApiGetSystemSkillsIn
 	return r
 }
 
+// 
+func (r ApiGetSystemSkillsInfoRequest) ClientId(clientId string) ApiGetSystemSkillsInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSkillsInfoRequest) Execute() ([]SkillInfo, *http.Response, error) {
 	return r.ApiService.GetSystemSkillsInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *SkillInfosAPIService) GetSystemSkillsInfoExecute(r ApiGetSystemSkillsIn
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *SkillInfosAPIService) GetSystemSkillsInfoExecute(r ApiGetSystemSkillsIn
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *SkillInfosAPIService) GetSystemSkillsInfoExecute(r ApiGetSystemSkillsIn
 type ApiGetSystemSkillsInfoCountRequest struct {
 	ctx context.Context
 	ApiService *SkillInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemSkillsInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSkillsInfoCountRequest) ClientId(clientId string) ApiGetSystemSkillsInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemSkillsInfoCountRequest) PageId(pageId int32) ApiGetSystemSki
 	return r
 }
 
+// 
+func (r ApiGetSystemSkillsInfoCountRequest) ClientId(clientId string) ApiGetSystemSkillsInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSkillsInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSkillsInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *SkillInfosAPIService) GetSystemSkillsInfoCountExecute(r ApiGetSystemSki
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *SkillInfosAPIService) GetSystemSkillsInfoCountExecute(r ApiGetSystemSki
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

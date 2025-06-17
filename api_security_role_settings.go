@@ -27,7 +27,6 @@ type ApiGetSystemSecurityRolesByParentIdSettingsRequest struct {
 	ctx context.Context
 	ApiService *SecurityRoleSettingsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSystemSecurityRolesByParentIdSettingsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSecurityRolesByParentIdSettingsRequest) ClientId(clientId string) ApiGetSystemSecurityRolesByParentIdSettingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSystemSecurityRolesByParentIdSettingsRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetSystemSecurityRolesByParentIdSettingsRequest) ClientId(clientId string) ApiGetSystemSecurityRolesByParentIdSettingsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSecurityRolesByParentIdSettingsRequest) Execute() ([]SecurityRoleSetting, *http.Response, error) {
 	return r.ApiService.GetSystemSecurityRolesByParentIdSettingsExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *SecurityRoleSettingsAPIService) GetSystemSecurityRolesByParentIdSetting
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *SecurityRoleSettingsAPIService) GetSystemSecurityRolesByParentIdSetting
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetSystemSecurityRolesByParentIdSettingsByIdRequest struct {
 	ApiService *SecurityRoleSettingsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetSystemSecurityRolesByParentIdSettingsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSecurityRolesByParentIdSettingsByIdRequest) ClientId(clientId string) ApiGetSystemSecurityRolesByParentIdSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetSystemSecurityRolesByParentIdSettingsByIdRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetSystemSecurityRolesByParentIdSettingsByIdRequest) ClientId(clientId string) ApiGetSystemSecurityRolesByParentIdSettingsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSecurityRolesByParentIdSettingsByIdRequest) Execute() (*SecurityRoleSetting, *http.Response, error) {
 	return r.ApiService.GetSystemSecurityRolesByParentIdSettingsByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *SecurityRoleSettingsAPIService) GetSystemSecurityRolesByParentIdSetting
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *SecurityRoleSettingsAPIService) GetSystemSecurityRolesByParentIdSetting
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetSystemSecurityRolesByParentIdSettingsCountRequest struct {
 	ctx context.Context
 	ApiService *SecurityRoleSettingsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetSystemSecurityRolesByParentIdSettingsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSecurityRolesByParentIdSettingsCountRequest) ClientId(clientId string) ApiGetSystemSecurityRolesByParentIdSettingsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetSystemSecurityRolesByParentIdSettingsCountRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetSystemSecurityRolesByParentIdSettingsCountRequest) ClientId(clientId string) ApiGetSystemSecurityRolesByParentIdSettingsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSecurityRolesByParentIdSettingsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSecurityRolesByParentIdSettingsCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *SecurityRoleSettingsAPIService) GetSystemSecurityRolesByParentIdSetting
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *SecurityRoleSettingsAPIService) GetSystemSecurityRolesByParentIdSetting
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

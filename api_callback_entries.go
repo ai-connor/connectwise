@@ -74,9 +74,6 @@ func (a *CallbackEntriesAPIService) DeleteSystemCallbacksByIdExecute(r ApiDelete
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CallbackEntriesAPIService) DeleteSystemCallbacksByIdExecute(r ApiDelete
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CallbackEntriesAPIService) DeleteSystemCallbacksByIdExecute(r ApiDelete
 type ApiGetSystemCallbacksRequest struct {
 	ctx context.Context
 	ApiService *CallbackEntriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemCallbacksRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemCallbacksRequest) ClientId(clientId string) ApiGetSystemCallbacksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemCallbacksRequest) PageId(pageId int32) ApiGetSystemCallbacks
 	return r
 }
 
+// 
+func (r ApiGetSystemCallbacksRequest) ClientId(clientId string) ApiGetSystemCallbacksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemCallbacksRequest) Execute() ([]CallbackEntry, *http.Response, error) {
 	return r.ApiService.GetSystemCallbacksExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CallbackEntriesAPIService) GetSystemCallbacksExecute(r ApiGetSystemCall
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CallbackEntriesAPIService) GetSystemCallbacksExecute(r ApiGetSystemCall
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemCallbacksByIdRequest struct {
 	ctx context.Context
 	ApiService *CallbackEntriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemCallbacksByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemCallbacksByIdRequest) ClientId(clientId string) ApiGetSystemCallbacksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemCallbacksByIdRequest) PageId(pageId int32) ApiGetSystemCallb
 	return r
 }
 
+// 
+func (r ApiGetSystemCallbacksByIdRequest) ClientId(clientId string) ApiGetSystemCallbacksByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemCallbacksByIdRequest) Execute() (*CallbackEntry, *http.Response, error) {
 	return r.ApiService.GetSystemCallbacksByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CallbackEntriesAPIService) GetSystemCallbacksByIdExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CallbackEntriesAPIService) GetSystemCallbacksByIdExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *CallbackEntriesAPIService) GetSystemCallbacksByIdExecute(r ApiGetSystem
 type ApiGetSystemCallbacksCountRequest struct {
 	ctx context.Context
 	ApiService *CallbackEntriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemCallbacksCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemCallbacksCountRequest) ClientId(clientId string) ApiGetSystemCallbacksCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemCallbacksCountRequest) PageId(pageId int32) ApiGetSystemCall
 	return r
 }
 
+// 
+func (r ApiGetSystemCallbacksCountRequest) ClientId(clientId string) ApiGetSystemCallbacksCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemCallbacksCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemCallbacksCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *CallbackEntriesAPIService) GetSystemCallbacksCountExecute(r ApiGetSyste
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *CallbackEntriesAPIService) GetSystemCallbacksCountExecute(r ApiGetSyste
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemCallbacksByIdRequest struct {
 	ctx context.Context
 	ApiService *CallbackEntriesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemCallbacksByIdRequest) ClientId(clientId string) ApiPatchSystemCallbacksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemCallbacksByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemCallbacksByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemCallbacksByIdRequest) ClientId(clientId string) ApiPatchSystemCallbacksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *CallbackEntriesAPIService) PatchSystemCallbacksByIdExecute(r ApiPatchSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *CallbackEntriesAPIService) PatchSystemCallbacksByIdExecute(r ApiPatchSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *CallbackEntriesAPIService) PatchSystemCallbacksByIdExecute(r ApiPatchSy
 type ApiPostSystemCallbacksRequest struct {
 	ctx context.Context
 	ApiService *CallbackEntriesAPIService
-	clientId *string
 	callbackEntry *CallbackEntry
-}
-
-// 
-func (r ApiPostSystemCallbacksRequest) ClientId(clientId string) ApiPostSystemCallbacksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // callbackEntry
 func (r ApiPostSystemCallbacksRequest) CallbackEntry(callbackEntry CallbackEntry) ApiPostSystemCallbacksRequest {
 	r.callbackEntry = &callbackEntry
+	return r
+}
+
+// 
+func (r ApiPostSystemCallbacksRequest) ClientId(clientId string) ApiPostSystemCallbacksRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *CallbackEntriesAPIService) PostSystemCallbacksExecute(r ApiPostSystemCa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.callbackEntry == nil {
 		return localVarReturnValue, nil, reportError("callbackEntry is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *CallbackEntriesAPIService) PostSystemCallbacksExecute(r ApiPostSystemCa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.callbackEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemCallbacksByIdRequest struct {
 	ctx context.Context
 	ApiService *CallbackEntriesAPIService
 	id int32
-	clientId *string
 	callbackEntry *CallbackEntry
-}
-
-// 
-func (r ApiPutSystemCallbacksByIdRequest) ClientId(clientId string) ApiPutSystemCallbacksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // callbackEntry
 func (r ApiPutSystemCallbacksByIdRequest) CallbackEntry(callbackEntry CallbackEntry) ApiPutSystemCallbacksByIdRequest {
 	r.callbackEntry = &callbackEntry
+	return r
+}
+
+// 
+func (r ApiPutSystemCallbacksByIdRequest) ClientId(clientId string) ApiPutSystemCallbacksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *CallbackEntriesAPIService) PutSystemCallbacksByIdExecute(r ApiPutSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.callbackEntry == nil {
 		return localVarReturnValue, nil, reportError("callbackEntry is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *CallbackEntriesAPIService) PutSystemCallbacksByIdExecute(r ApiPutSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.callbackEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

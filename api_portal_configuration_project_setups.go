@@ -27,7 +27,6 @@ type ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsRequest struct {
 	ctx context.Context
 	ApiService *PortalConfigurationProjectSetupsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsRequest) PageId(
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsRequest) Execute() ([]PortalConfigurationProjectSetup, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsByParentIdProjectSetupsExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *PortalConfigurationProjectSetupsAPIService) GetCompanyPortalConfigurati
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *PortalConfigurationProjectSetupsAPIService) GetCompanyPortalConfigurati
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest struct 
 	ApiService *PortalConfigurationProjectSetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest struct 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) Pag
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) Execute() (*PortalConfigurationProjectSetup, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsByParentIdProjectSetupsByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *PortalConfigurationProjectSetupsAPIService) GetCompanyPortalConfigurati
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *PortalConfigurationProjectSetupsAPIService) GetCompanyPortalConfigurati
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsCountRequest struct
 	ctx context.Context
 	ApiService *PortalConfigurationProjectSetupsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsCountRequest struct
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsCountRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsCountRequest) Pa
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsCountRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsByParentIdProjectSetupsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsByParentIdProjectSetupsCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *PortalConfigurationProjectSetupsAPIService) GetCompanyPortalConfigurati
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *PortalConfigurationProjectSetupsAPIService) GetCompanyPortalConfigurati
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -608,19 +605,19 @@ type ApiPatchCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest struc
 	ApiService *PortalConfigurationProjectSetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) ClientId(clientId string) ApiPatchCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) ClientId(clientId string) ApiPatchCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -667,9 +664,6 @@ func (a *PortalConfigurationProjectSetupsAPIService) PatchCompanyPortalConfigura
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -691,7 +685,9 @@ func (a *PortalConfigurationProjectSetupsAPIService) PatchCompanyPortalConfigura
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -736,19 +732,19 @@ type ApiPutCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest struct 
 	ApiService *PortalConfigurationProjectSetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	portalConfigurationProjectSetup *PortalConfigurationProjectSetup
-}
-
-// 
-func (r ApiPutCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) ClientId(clientId string) ApiPutCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // portalConfigurationProjectSetup
 func (r ApiPutCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) PortalConfigurationProjectSetup(portalConfigurationProjectSetup PortalConfigurationProjectSetup) ApiPutCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest {
 	r.portalConfigurationProjectSetup = &portalConfigurationProjectSetup
+	return r
+}
+
+// 
+func (r ApiPutCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest) ClientId(clientId string) ApiPutCompanyPortalConfigurationsByParentIdProjectSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -795,9 +791,6 @@ func (a *PortalConfigurationProjectSetupsAPIService) PutCompanyPortalConfigurati
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.portalConfigurationProjectSetup == nil {
 		return localVarReturnValue, nil, reportError("portalConfigurationProjectSetup is required and must be specified")
 	}
@@ -819,7 +812,9 @@ func (a *PortalConfigurationProjectSetupsAPIService) PutCompanyPortalConfigurati
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.portalConfigurationProjectSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *EmailConnectorsAPIService) DeleteSystemEmailConnectorsByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *EmailConnectorsAPIService) DeleteSystemEmailConnectorsByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *EmailConnectorsAPIService) DeleteSystemEmailConnectorsByIdExecute(r Api
 type ApiGetSystemEmailConnectorsRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemEmailConnectorsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailConnectorsRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemEmailConnectorsRequest) PageId(pageId int32) ApiGetSystemEma
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailConnectorsRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailConnectorsRequest) Execute() ([]EmailConnector, *http.Response, error) {
 	return r.ApiService.GetSystemEmailConnectorsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *EmailConnectorsAPIService) GetSystemEmailConnectorsExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *EmailConnectorsAPIService) GetSystemEmailConnectorsExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemEmailConnectorsByIdRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemEmailConnectorsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailConnectorsByIdRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemEmailConnectorsByIdRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailConnectorsByIdRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailConnectorsByIdRequest) Execute() (*EmailConnector, *http.Response, error) {
 	return r.ApiService.GetSystemEmailConnectorsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *EmailConnectorsAPIService) GetSystemEmailConnectorsByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *EmailConnectorsAPIService) GetSystemEmailConnectorsByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *EmailConnectorsAPIService) GetSystemEmailConnectorsByIdExecute(r ApiGet
 type ApiGetSystemEmailConnectorsCountRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemEmailConnectorsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailConnectorsCountRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemEmailConnectorsCountRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailConnectorsCountRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailConnectorsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemEmailConnectorsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *EmailConnectorsAPIService) GetSystemEmailConnectorsCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *EmailConnectorsAPIService) GetSystemEmailConnectorsCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemEmailConnectorsByIdRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemEmailConnectorsByIdRequest) ClientId(clientId string) ApiPatchSystemEmailConnectorsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemEmailConnectorsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemEmailConnectorsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemEmailConnectorsByIdRequest) ClientId(clientId string) ApiPatchSystemEmailConnectorsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *EmailConnectorsAPIService) PatchSystemEmailConnectorsByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *EmailConnectorsAPIService) PatchSystemEmailConnectorsByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *EmailConnectorsAPIService) PatchSystemEmailConnectorsByIdExecute(r ApiP
 type ApiPostSystemEmailConnectorsRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorsAPIService
-	clientId *string
 	emailConnector *EmailConnector
-}
-
-// 
-func (r ApiPostSystemEmailConnectorsRequest) ClientId(clientId string) ApiPostSystemEmailConnectorsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // emailConnector
 func (r ApiPostSystemEmailConnectorsRequest) EmailConnector(emailConnector EmailConnector) ApiPostSystemEmailConnectorsRequest {
 	r.emailConnector = &emailConnector
+	return r
+}
+
+// 
+func (r ApiPostSystemEmailConnectorsRequest) ClientId(clientId string) ApiPostSystemEmailConnectorsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *EmailConnectorsAPIService) PostSystemEmailConnectorsExecute(r ApiPostSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.emailConnector == nil {
 		return localVarReturnValue, nil, reportError("emailConnector is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *EmailConnectorsAPIService) PostSystemEmailConnectorsExecute(r ApiPostSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.emailConnector
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemEmailConnectorsByIdRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorsAPIService
 	id int32
-	clientId *string
 	emailConnector *EmailConnector
-}
-
-// 
-func (r ApiPutSystemEmailConnectorsByIdRequest) ClientId(clientId string) ApiPutSystemEmailConnectorsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // emailConnector
 func (r ApiPutSystemEmailConnectorsByIdRequest) EmailConnector(emailConnector EmailConnector) ApiPutSystemEmailConnectorsByIdRequest {
 	r.emailConnector = &emailConnector
+	return r
+}
+
+// 
+func (r ApiPutSystemEmailConnectorsByIdRequest) ClientId(clientId string) ApiPutSystemEmailConnectorsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *EmailConnectorsAPIService) PutSystemEmailConnectorsByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.emailConnector == nil {
 		return localVarReturnValue, nil, reportError("emailConnector is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *EmailConnectorsAPIService) PutSystemEmailConnectorsByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.emailConnector
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

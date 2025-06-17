@@ -27,7 +27,6 @@ type ApiGetSystemWorkflowsByParentIdTriggersRequest struct {
 	ctx context.Context
 	ApiService *WorkflowTriggersAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSystemWorkflowsByParentIdTriggersRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdTriggersRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdTriggersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSystemWorkflowsByParentIdTriggersRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdTriggersRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdTriggersRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdTriggersRequest) Execute() ([]WorkflowTrigger, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdTriggersExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *WorkflowTriggersAPIService) GetSystemWorkflowsByParentIdTriggersExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *WorkflowTriggersAPIService) GetSystemWorkflowsByParentIdTriggersExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -219,7 +218,6 @@ type ApiGetSystemWorkflowsByParentIdTriggersCountRequest struct {
 	ctx context.Context
 	ApiService *WorkflowTriggersAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -228,12 +226,7 @@ type ApiGetSystemWorkflowsByParentIdTriggersCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdTriggersCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdTriggersCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -284,6 +277,12 @@ func (r ApiGetSystemWorkflowsByParentIdTriggersCountRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdTriggersCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdTriggersCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdTriggersCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdTriggersCountExecute(r)
 }
@@ -324,9 +323,6 @@ func (a *WorkflowTriggersAPIService) GetSystemWorkflowsByParentIdTriggersCountEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -369,7 +365,9 @@ func (a *WorkflowTriggersAPIService) GetSystemWorkflowsByParentIdTriggersCountEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -410,7 +408,6 @@ func (a *WorkflowTriggersAPIService) GetSystemWorkflowsByParentIdTriggersCountEx
 type ApiGetSystemWorkflowsTriggersRequest struct {
 	ctx context.Context
 	ApiService *WorkflowTriggersAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -419,12 +416,7 @@ type ApiGetSystemWorkflowsTriggersRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsTriggersRequest) ClientId(clientId string) ApiGetSystemWorkflowsTriggersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -475,6 +467,12 @@ func (r ApiGetSystemWorkflowsTriggersRequest) PageId(pageId int32) ApiGetSystemW
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsTriggersRequest) ClientId(clientId string) ApiGetSystemWorkflowsTriggersRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsTriggersRequest) Execute() ([]WorkflowTrigger, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsTriggersExecute(r)
 }
@@ -512,9 +510,6 @@ func (a *WorkflowTriggersAPIService) GetSystemWorkflowsTriggersExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -557,7 +552,9 @@ func (a *WorkflowTriggersAPIService) GetSystemWorkflowsTriggersExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

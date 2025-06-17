@@ -74,9 +74,6 @@ func (a *MenuEntriesAPIService) DeleteSystemMenuentriesByIdExecute(r ApiDeleteSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *MenuEntriesAPIService) DeleteSystemMenuentriesByIdExecute(r ApiDeleteSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *MenuEntriesAPIService) DeleteSystemMenuentriesByIdExecute(r ApiDeleteSy
 type ApiGetSystemMenuentriesRequest struct {
 	ctx context.Context
 	ApiService *MenuEntriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemMenuentriesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMenuentriesRequest) ClientId(clientId string) ApiGetSystemMenuentriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemMenuentriesRequest) PageId(pageId int32) ApiGetSystemMenuent
 	return r
 }
 
+// 
+func (r ApiGetSystemMenuentriesRequest) ClientId(clientId string) ApiGetSystemMenuentriesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMenuentriesRequest) Execute() ([]MenuEntry, *http.Response, error) {
 	return r.ApiService.GetSystemMenuentriesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesExecute(r ApiGetSystemMenuen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesExecute(r ApiGetSystemMenuen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemMenuentriesByIdRequest struct {
 	ctx context.Context
 	ApiService *MenuEntriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemMenuentriesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMenuentriesByIdRequest) ClientId(clientId string) ApiGetSystemMenuentriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemMenuentriesByIdRequest) PageId(pageId int32) ApiGetSystemMen
 	return r
 }
 
+// 
+func (r ApiGetSystemMenuentriesByIdRequest) ClientId(clientId string) ApiGetSystemMenuentriesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMenuentriesByIdRequest) Execute() (*MenuEntry, *http.Response, error) {
 	return r.ApiService.GetSystemMenuentriesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesByIdExecute(r ApiGetSystemMe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesByIdExecute(r ApiGetSystemMe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSystemMenuentriesByIdImageRequest struct {
 	ctx context.Context
 	ApiService *MenuEntriesAPIService
 	id int32
-	clientId *string
 	lastmodified string
 	largeFlag bool
 	conditions *string
@@ -519,12 +515,7 @@ type ApiGetSystemMenuentriesByIdImageRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMenuentriesByIdImageRequest) ClientId(clientId string) ApiGetSystemMenuentriesByIdImageRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -575,6 +566,12 @@ func (r ApiGetSystemMenuentriesByIdImageRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemMenuentriesByIdImageRequest) ClientId(clientId string) ApiGetSystemMenuentriesByIdImageRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMenuentriesByIdImageRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetSystemMenuentriesByIdImageExecute(r)
 }
@@ -619,9 +616,6 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesByIdImageExecute(r ApiGetSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -664,7 +658,9 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesByIdImageExecute(r ApiGetSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -696,7 +692,6 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesByIdImageExecute(r ApiGetSys
 type ApiGetSystemMenuentriesCountRequest struct {
 	ctx context.Context
 	ApiService *MenuEntriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -705,12 +700,7 @@ type ApiGetSystemMenuentriesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMenuentriesCountRequest) ClientId(clientId string) ApiGetSystemMenuentriesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -761,6 +751,12 @@ func (r ApiGetSystemMenuentriesCountRequest) PageId(pageId int32) ApiGetSystemMe
 	return r
 }
 
+// 
+func (r ApiGetSystemMenuentriesCountRequest) ClientId(clientId string) ApiGetSystemMenuentriesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMenuentriesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMenuentriesCountExecute(r)
 }
@@ -798,9 +794,6 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesCountExecute(r ApiGetSystemM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -843,7 +836,9 @@ func (a *MenuEntriesAPIService) GetSystemMenuentriesCountExecute(r ApiGetSystemM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -885,19 +880,19 @@ type ApiPatchSystemMenuentriesByIdRequest struct {
 	ctx context.Context
 	ApiService *MenuEntriesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemMenuentriesByIdRequest) ClientId(clientId string) ApiPatchSystemMenuentriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemMenuentriesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemMenuentriesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemMenuentriesByIdRequest) ClientId(clientId string) ApiPatchSystemMenuentriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -941,9 +936,6 @@ func (a *MenuEntriesAPIService) PatchSystemMenuentriesByIdExecute(r ApiPatchSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -965,7 +957,9 @@ func (a *MenuEntriesAPIService) PatchSystemMenuentriesByIdExecute(r ApiPatchSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1008,19 +1002,19 @@ func (a *MenuEntriesAPIService) PatchSystemMenuentriesByIdExecute(r ApiPatchSyst
 type ApiPostSystemMenuentriesRequest struct {
 	ctx context.Context
 	ApiService *MenuEntriesAPIService
-	clientId *string
 	menuEntry *MenuEntry
-}
-
-// 
-func (r ApiPostSystemMenuentriesRequest) ClientId(clientId string) ApiPostSystemMenuentriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // menuEntry
 func (r ApiPostSystemMenuentriesRequest) MenuEntry(menuEntry MenuEntry) ApiPostSystemMenuentriesRequest {
 	r.menuEntry = &menuEntry
+	return r
+}
+
+// 
+func (r ApiPostSystemMenuentriesRequest) ClientId(clientId string) ApiPostSystemMenuentriesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1061,9 +1055,6 @@ func (a *MenuEntriesAPIService) PostSystemMenuentriesExecute(r ApiPostSystemMenu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.menuEntry == nil {
 		return localVarReturnValue, nil, reportError("menuEntry is required and must be specified")
 	}
@@ -1085,7 +1076,9 @@ func (a *MenuEntriesAPIService) PostSystemMenuentriesExecute(r ApiPostSystemMenu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.menuEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1176,9 +1169,6 @@ func (a *MenuEntriesAPIService) PostSystemMenuentriesByIdImageExecute(r ApiPostS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1197,7 +1187,9 @@ func (a *MenuEntriesAPIService) PostSystemMenuentriesByIdImageExecute(r ApiPostS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -1230,19 +1222,19 @@ type ApiPutSystemMenuentriesByIdRequest struct {
 	ctx context.Context
 	ApiService *MenuEntriesAPIService
 	id int32
-	clientId *string
 	menuEntry *MenuEntry
-}
-
-// 
-func (r ApiPutSystemMenuentriesByIdRequest) ClientId(clientId string) ApiPutSystemMenuentriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // menuEntry
 func (r ApiPutSystemMenuentriesByIdRequest) MenuEntry(menuEntry MenuEntry) ApiPutSystemMenuentriesByIdRequest {
 	r.menuEntry = &menuEntry
+	return r
+}
+
+// 
+func (r ApiPutSystemMenuentriesByIdRequest) ClientId(clientId string) ApiPutSystemMenuentriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1286,9 +1278,6 @@ func (a *MenuEntriesAPIService) PutSystemMenuentriesByIdExecute(r ApiPutSystemMe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.menuEntry == nil {
 		return localVarReturnValue, nil, reportError("menuEntry is required and must be specified")
 	}
@@ -1310,7 +1299,9 @@ func (a *MenuEntriesAPIService) PutSystemMenuentriesByIdExecute(r ApiPutSystemMe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.menuEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

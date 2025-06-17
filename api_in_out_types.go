@@ -74,9 +74,6 @@ func (a *InOutTypesAPIService) DeleteSystemInOutTypesByIdExecute(r ApiDeleteSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *InOutTypesAPIService) DeleteSystemInOutTypesByIdExecute(r ApiDeleteSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *InOutTypesAPIService) DeleteSystemInOutTypesByIdExecute(r ApiDeleteSyst
 type ApiGetSystemInOutTypesRequest struct {
 	ctx context.Context
 	ApiService *InOutTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemInOutTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemInOutTypesRequest) ClientId(clientId string) ApiGetSystemInOutTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemInOutTypesRequest) PageId(pageId int32) ApiGetSystemInOutTyp
 	return r
 }
 
+// 
+func (r ApiGetSystemInOutTypesRequest) ClientId(clientId string) ApiGetSystemInOutTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemInOutTypesRequest) Execute() ([]InOutType, *http.Response, error) {
 	return r.ApiService.GetSystemInOutTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *InOutTypesAPIService) GetSystemInOutTypesExecute(r ApiGetSystemInOutTyp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *InOutTypesAPIService) GetSystemInOutTypesExecute(r ApiGetSystemInOutTyp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemInOutTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *InOutTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemInOutTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemInOutTypesByIdRequest) ClientId(clientId string) ApiGetSystemInOutTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemInOutTypesByIdRequest) PageId(pageId int32) ApiGetSystemInOu
 	return r
 }
 
+// 
+func (r ApiGetSystemInOutTypesByIdRequest) ClientId(clientId string) ApiGetSystemInOutTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemInOutTypesByIdRequest) Execute() (*InOutType, *http.Response, error) {
 	return r.ApiService.GetSystemInOutTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *InOutTypesAPIService) GetSystemInOutTypesByIdExecute(r ApiGetSystemInOu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *InOutTypesAPIService) GetSystemInOutTypesByIdExecute(r ApiGetSystemInOu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *InOutTypesAPIService) GetSystemInOutTypesByIdExecute(r ApiGetSystemInOu
 type ApiGetSystemInOutTypesCountRequest struct {
 	ctx context.Context
 	ApiService *InOutTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemInOutTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemInOutTypesCountRequest) ClientId(clientId string) ApiGetSystemInOutTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemInOutTypesCountRequest) PageId(pageId int32) ApiGetSystemInO
 	return r
 }
 
+// 
+func (r ApiGetSystemInOutTypesCountRequest) ClientId(clientId string) ApiGetSystemInOutTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemInOutTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemInOutTypesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *InOutTypesAPIService) GetSystemInOutTypesCountExecute(r ApiGetSystemInO
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *InOutTypesAPIService) GetSystemInOutTypesCountExecute(r ApiGetSystemInO
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemInOutTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *InOutTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemInOutTypesByIdRequest) ClientId(clientId string) ApiPatchSystemInOutTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemInOutTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemInOutTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemInOutTypesByIdRequest) ClientId(clientId string) ApiPatchSystemInOutTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *InOutTypesAPIService) PatchSystemInOutTypesByIdExecute(r ApiPatchSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *InOutTypesAPIService) PatchSystemInOutTypesByIdExecute(r ApiPatchSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *InOutTypesAPIService) PatchSystemInOutTypesByIdExecute(r ApiPatchSystem
 type ApiPostSystemInOutTypesRequest struct {
 	ctx context.Context
 	ApiService *InOutTypesAPIService
-	clientId *string
 	inOutType *InOutType
-}
-
-// 
-func (r ApiPostSystemInOutTypesRequest) ClientId(clientId string) ApiPostSystemInOutTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // inOutType
 func (r ApiPostSystemInOutTypesRequest) InOutType(inOutType InOutType) ApiPostSystemInOutTypesRequest {
 	r.inOutType = &inOutType
+	return r
+}
+
+// 
+func (r ApiPostSystemInOutTypesRequest) ClientId(clientId string) ApiPostSystemInOutTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *InOutTypesAPIService) PostSystemInOutTypesExecute(r ApiPostSystemInOutT
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.inOutType == nil {
 		return localVarReturnValue, nil, reportError("inOutType is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *InOutTypesAPIService) PostSystemInOutTypesExecute(r ApiPostSystemInOutT
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.inOutType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemInOutTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *InOutTypesAPIService
 	id int32
-	clientId *string
 	inOutType *InOutType
-}
-
-// 
-func (r ApiPutSystemInOutTypesByIdRequest) ClientId(clientId string) ApiPutSystemInOutTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // inOutType
 func (r ApiPutSystemInOutTypesByIdRequest) InOutType(inOutType InOutType) ApiPutSystemInOutTypesByIdRequest {
 	r.inOutType = &inOutType
+	return r
+}
+
+// 
+func (r ApiPutSystemInOutTypesByIdRequest) ClientId(clientId string) ApiPutSystemInOutTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *InOutTypesAPIService) PutSystemInOutTypesByIdExecute(r ApiPutSystemInOu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.inOutType == nil {
 		return localVarReturnValue, nil, reportError("inOutType is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *InOutTypesAPIService) PutSystemInOutTypesByIdExecute(r ApiPutSystemInOu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.inOutType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -78,9 +78,6 @@ func (a *TimeAccrualDetailsAPIService) DeleteTimeAccrualsByParentIdDetailsByIdEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *TimeAccrualDetailsAPIService) DeleteTimeAccrualsByParentIdDetailsByIdEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetTimeAccrualsByParentIdDetailsRequest struct {
 	ctx context.Context
 	ApiService *TimeAccrualDetailsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetTimeAccrualsByParentIdDetailsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeAccrualsByParentIdDetailsRequest) ClientId(clientId string) ApiGetTimeAccrualsByParentIdDetailsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetTimeAccrualsByParentIdDetailsRequest) PageId(pageId int32) ApiGetT
 	return r
 }
 
+// 
+func (r ApiGetTimeAccrualsByParentIdDetailsRequest) ClientId(clientId string) ApiGetTimeAccrualsByParentIdDetailsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeAccrualsByParentIdDetailsRequest) Execute() ([]TimeAccrualDetail, *http.Response, error) {
 	return r.ApiService.GetTimeAccrualsByParentIdDetailsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *TimeAccrualDetailsAPIService) GetTimeAccrualsByParentIdDetailsExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *TimeAccrualDetailsAPIService) GetTimeAccrualsByParentIdDetailsExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetTimeAccrualsByParentIdDetailsByIdRequest struct {
 	ApiService *TimeAccrualDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetTimeAccrualsByParentIdDetailsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeAccrualsByParentIdDetailsByIdRequest) ClientId(clientId string) ApiGetTimeAccrualsByParentIdDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetTimeAccrualsByParentIdDetailsByIdRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetTimeAccrualsByParentIdDetailsByIdRequest) ClientId(clientId string) ApiGetTimeAccrualsByParentIdDetailsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeAccrualsByParentIdDetailsByIdRequest) Execute() (*TimeAccrualDetail, *http.Response, error) {
 	return r.ApiService.GetTimeAccrualsByParentIdDetailsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *TimeAccrualDetailsAPIService) GetTimeAccrualsByParentIdDetailsByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *TimeAccrualDetailsAPIService) GetTimeAccrualsByParentIdDetailsByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetTimeAccrualsByParentIdDetailsCountRequest struct {
 	ctx context.Context
 	ApiService *TimeAccrualDetailsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetTimeAccrualsByParentIdDetailsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeAccrualsByParentIdDetailsCountRequest) ClientId(clientId string) ApiGetTimeAccrualsByParentIdDetailsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetTimeAccrualsByParentIdDetailsCountRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetTimeAccrualsByParentIdDetailsCountRequest) ClientId(clientId string) ApiGetTimeAccrualsByParentIdDetailsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeAccrualsByParentIdDetailsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeAccrualsByParentIdDetailsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *TimeAccrualDetailsAPIService) GetTimeAccrualsByParentIdDetailsCountExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *TimeAccrualDetailsAPIService) GetTimeAccrualsByParentIdDetailsCountExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchTimeAccrualsByParentIdDetailsByIdRequest struct {
 	ApiService *TimeAccrualDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchTimeAccrualsByParentIdDetailsByIdRequest) ClientId(clientId string) ApiPatchTimeAccrualsByParentIdDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchTimeAccrualsByParentIdDetailsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchTimeAccrualsByParentIdDetailsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchTimeAccrualsByParentIdDetailsByIdRequest) ClientId(clientId string) ApiPatchTimeAccrualsByParentIdDetailsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *TimeAccrualDetailsAPIService) PatchTimeAccrualsByParentIdDetailsByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *TimeAccrualDetailsAPIService) PatchTimeAccrualsByParentIdDetailsByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostTimeAccrualsByParentIdDetailsRequest struct {
 	ctx context.Context
 	ApiService *TimeAccrualDetailsAPIService
 	parentId int32
-	clientId *string
 	timeAccrualDetail *TimeAccrualDetail
-}
-
-// 
-func (r ApiPostTimeAccrualsByParentIdDetailsRequest) ClientId(clientId string) ApiPostTimeAccrualsByParentIdDetailsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timeAccrualDetail
 func (r ApiPostTimeAccrualsByParentIdDetailsRequest) TimeAccrualDetail(timeAccrualDetail TimeAccrualDetail) ApiPostTimeAccrualsByParentIdDetailsRequest {
 	r.timeAccrualDetail = &timeAccrualDetail
+	return r
+}
+
+// 
+func (r ApiPostTimeAccrualsByParentIdDetailsRequest) ClientId(clientId string) ApiPostTimeAccrualsByParentIdDetailsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *TimeAccrualDetailsAPIService) PostTimeAccrualsByParentIdDetailsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timeAccrualDetail == nil {
 		return localVarReturnValue, nil, reportError("timeAccrualDetail is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *TimeAccrualDetailsAPIService) PostTimeAccrualsByParentIdDetailsExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timeAccrualDetail
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutTimeAccrualsByParentIdDetailsByIdRequest struct {
 	ApiService *TimeAccrualDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	timeAccrualDetail *TimeAccrualDetail
-}
-
-// 
-func (r ApiPutTimeAccrualsByParentIdDetailsByIdRequest) ClientId(clientId string) ApiPutTimeAccrualsByParentIdDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // timeAccrualDetail
 func (r ApiPutTimeAccrualsByParentIdDetailsByIdRequest) TimeAccrualDetail(timeAccrualDetail TimeAccrualDetail) ApiPutTimeAccrualsByParentIdDetailsByIdRequest {
 	r.timeAccrualDetail = &timeAccrualDetail
+	return r
+}
+
+// 
+func (r ApiPutTimeAccrualsByParentIdDetailsByIdRequest) ClientId(clientId string) ApiPutTimeAccrualsByParentIdDetailsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *TimeAccrualDetailsAPIService) PutTimeAccrualsByParentIdDetailsByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.timeAccrualDetail == nil {
 		return localVarReturnValue, nil, reportError("timeAccrualDetail is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *TimeAccrualDetailsAPIService) PutTimeAccrualsByParentIdDetailsByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.timeAccrualDetail
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

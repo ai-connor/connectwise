@@ -26,7 +26,6 @@ type SsoUsersAPIService service
 type ApiGetSystemSsoUsersRequest struct {
 	ctx context.Context
 	ApiService *SsoUsersAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemSsoUsersRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSsoUsersRequest) ClientId(clientId string) ApiGetSystemSsoUsersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemSsoUsersRequest) PageId(pageId int32) ApiGetSystemSsoUsersRe
 	return r
 }
 
+// 
+func (r ApiGetSystemSsoUsersRequest) ClientId(clientId string) ApiGetSystemSsoUsersRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSsoUsersRequest) Execute() ([]SsoUser, *http.Response, error) {
 	return r.ApiService.GetSystemSsoUsersExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *SsoUsersAPIService) GetSystemSsoUsersExecute(r ApiGetSystemSsoUsersRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *SsoUsersAPIService) GetSystemSsoUsersExecute(r ApiGetSystemSsoUsersRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemSsoUsersByExternalIdRequest struct {
 	ctx context.Context
 	ApiService *SsoUsersAPIService
 	externalId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemSsoUsersByExternalIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSsoUsersByExternalIdRequest) ClientId(clientId string) ApiGetSystemSsoUsersByExternalIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemSsoUsersByExternalIdRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemSsoUsersByExternalIdRequest) ClientId(clientId string) ApiGetSystemSsoUsersByExternalIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSsoUsersByExternalIdRequest) Execute() (*SsoUser, *http.Response, error) {
 	return r.ApiService.GetSystemSsoUsersByExternalIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *SsoUsersAPIService) GetSystemSsoUsersByExternalIdExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *SsoUsersAPIService) GetSystemSsoUsersByExternalIdExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *SsoUsersAPIService) GetSystemSsoUsersByExternalIdExecute(r ApiGetSystem
 type ApiGetSystemSsoUsersCountRequest struct {
 	ctx context.Context
 	ApiService *SsoUsersAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemSsoUsersCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSsoUsersCountRequest) ClientId(clientId string) ApiGetSystemSsoUsersCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemSsoUsersCountRequest) PageId(pageId int32) ApiGetSystemSsoUs
 	return r
 }
 
+// 
+func (r ApiGetSystemSsoUsersCountRequest) ClientId(clientId string) ApiGetSystemSsoUsersCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSsoUsersCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSsoUsersCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *SsoUsersAPIService) GetSystemSsoUsersCountExecute(r ApiGetSystemSsoUser
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *SsoUsersAPIService) GetSystemSsoUsersCountExecute(r ApiGetSystemSsoUser
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

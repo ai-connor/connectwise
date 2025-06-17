@@ -74,9 +74,6 @@ func (a *RolesAPIService) DeleteSalesRolesByIdExecute(r ApiDeleteSalesRolesByIdR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *RolesAPIService) DeleteSalesRolesByIdExecute(r ApiDeleteSalesRolesByIdR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *RolesAPIService) DeleteSalesRolesByIdExecute(r ApiDeleteSalesRolesByIdR
 type ApiGetSalesRolesRequest struct {
 	ctx context.Context
 	ApiService *RolesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSalesRolesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesRolesRequest) ClientId(clientId string) ApiGetSalesRolesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSalesRolesRequest) PageId(pageId int32) ApiGetSalesRolesRequest {
 	return r
 }
 
+// 
+func (r ApiGetSalesRolesRequest) ClientId(clientId string) ApiGetSalesRolesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesRolesRequest) Execute() ([]Role, *http.Response, error) {
 	return r.ApiService.GetSalesRolesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *RolesAPIService) GetSalesRolesExecute(r ApiGetSalesRolesRequest) ([]Rol
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *RolesAPIService) GetSalesRolesExecute(r ApiGetSalesRolesRequest) ([]Rol
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSalesRolesByIdRequest struct {
 	ctx context.Context
 	ApiService *RolesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSalesRolesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesRolesByIdRequest) ClientId(clientId string) ApiGetSalesRolesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSalesRolesByIdRequest) PageId(pageId int32) ApiGetSalesRolesByIdRe
 	return r
 }
 
+// 
+func (r ApiGetSalesRolesByIdRequest) ClientId(clientId string) ApiGetSalesRolesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesRolesByIdRequest) Execute() (*Role, *http.Response, error) {
 	return r.ApiService.GetSalesRolesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *RolesAPIService) GetSalesRolesByIdExecute(r ApiGetSalesRolesByIdRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *RolesAPIService) GetSalesRolesByIdExecute(r ApiGetSalesRolesByIdRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *RolesAPIService) GetSalesRolesByIdExecute(r ApiGetSalesRolesByIdRequest
 type ApiGetSalesRolesCountRequest struct {
 	ctx context.Context
 	ApiService *RolesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSalesRolesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesRolesCountRequest) ClientId(clientId string) ApiGetSalesRolesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSalesRolesCountRequest) PageId(pageId int32) ApiGetSalesRolesCount
 	return r
 }
 
+// 
+func (r ApiGetSalesRolesCountRequest) ClientId(clientId string) ApiGetSalesRolesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesRolesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesRolesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *RolesAPIService) GetSalesRolesCountExecute(r ApiGetSalesRolesCountReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *RolesAPIService) GetSalesRolesCountExecute(r ApiGetSalesRolesCountReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSalesRolesByIdRequest struct {
 	ctx context.Context
 	ApiService *RolesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesRolesByIdRequest) ClientId(clientId string) ApiPatchSalesRolesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesRolesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesRolesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesRolesByIdRequest) ClientId(clientId string) ApiPatchSalesRolesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *RolesAPIService) PatchSalesRolesByIdExecute(r ApiPatchSalesRolesByIdReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *RolesAPIService) PatchSalesRolesByIdExecute(r ApiPatchSalesRolesByIdReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *RolesAPIService) PatchSalesRolesByIdExecute(r ApiPatchSalesRolesByIdReq
 type ApiPostSalesRolesRequest struct {
 	ctx context.Context
 	ApiService *RolesAPIService
-	clientId *string
 	role *Role
-}
-
-// 
-func (r ApiPostSalesRolesRequest) ClientId(clientId string) ApiPostSalesRolesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // role
 func (r ApiPostSalesRolesRequest) Role(role Role) ApiPostSalesRolesRequest {
 	r.role = &role
+	return r
+}
+
+// 
+func (r ApiPostSalesRolesRequest) ClientId(clientId string) ApiPostSalesRolesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *RolesAPIService) PostSalesRolesExecute(r ApiPostSalesRolesRequest) (*Ro
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.role == nil {
 		return localVarReturnValue, nil, reportError("role is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *RolesAPIService) PostSalesRolesExecute(r ApiPostSalesRolesRequest) (*Ro
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.role
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSalesRolesByIdRequest struct {
 	ctx context.Context
 	ApiService *RolesAPIService
 	id int32
-	clientId *string
 	role *Role
-}
-
-// 
-func (r ApiPutSalesRolesByIdRequest) ClientId(clientId string) ApiPutSalesRolesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // role
 func (r ApiPutSalesRolesByIdRequest) Role(role Role) ApiPutSalesRolesByIdRequest {
 	r.role = &role
+	return r
+}
+
+// 
+func (r ApiPutSalesRolesByIdRequest) ClientId(clientId string) ApiPutSalesRolesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *RolesAPIService) PutSalesRolesByIdExecute(r ApiPutSalesRolesByIdRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.role == nil {
 		return localVarReturnValue, nil, reportError("role is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *RolesAPIService) PutSalesRolesByIdExecute(r ApiPutSalesRolesByIdRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.role
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

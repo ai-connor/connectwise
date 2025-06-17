@@ -78,9 +78,6 @@ func (a *OrderStatusesEmailTemplateAPIService) DeleteSalesOrdersStatusesByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *OrderStatusesEmailTemplateAPIService) DeleteSalesOrdersStatusesByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetSalesOrdersStatusesByParentIdEmailtemplatesRequest struct {
 	ctx context.Context
 	ApiService *OrderStatusesEmailTemplateAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetSalesOrdersStatusesByParentIdEmailtemplatesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesRequest) ClientId(clientId string) ApiGetSalesOrdersStatusesByParentIdEmailtemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesRequest) PageId(pageId 
 	return r
 }
 
+// 
+func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesRequest) ClientId(clientId string) ApiGetSalesOrdersStatusesByParentIdEmailtemplatesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesRequest) Execute() ([]OrderStatusEmailTemplate, *http.Response, error) {
 	return r.ApiService.GetSalesOrdersStatusesByParentIdEmailtemplatesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *OrderStatusesEmailTemplateAPIService) GetSalesOrdersStatusesByParentIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *OrderStatusesEmailTemplateAPIService) GetSalesOrdersStatusesByParentIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest struct {
 	ApiService *OrderStatusesEmailTemplateAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiGetSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) PageId(pag
 	return r
 }
 
+// 
+func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiGetSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) Execute() (*OrderStatusEmailTemplate, *http.Response, error) {
 	return r.ApiService.GetSalesOrdersStatusesByParentIdEmailtemplatesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *OrderStatusesEmailTemplateAPIService) GetSalesOrdersStatusesByParentIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *OrderStatusesEmailTemplateAPIService) GetSalesOrdersStatusesByParentIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetSalesOrdersStatusesByParentIdEmailtemplatesCountRequest struct {
 	ctx context.Context
 	ApiService *OrderStatusesEmailTemplateAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetSalesOrdersStatusesByParentIdEmailtemplatesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesCountRequest) ClientId(clientId string) ApiGetSalesOrdersStatusesByParentIdEmailtemplatesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesCountRequest) PageId(pa
 	return r
 }
 
+// 
+func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesCountRequest) ClientId(clientId string) ApiGetSalesOrdersStatusesByParentIdEmailtemplatesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOrdersStatusesByParentIdEmailtemplatesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesOrdersStatusesByParentIdEmailtemplatesCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *OrderStatusesEmailTemplateAPIService) GetSalesOrdersStatusesByParentIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *OrderStatusesEmailTemplateAPIService) GetSalesOrdersStatusesByParentIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest struct {
 	ApiService *OrderStatusesEmailTemplateAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiPatchSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiPatchSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *OrderStatusesEmailTemplateAPIService) PatchSalesOrdersStatusesByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *OrderStatusesEmailTemplateAPIService) PatchSalesOrdersStatusesByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostSalesOrdersStatusesByParentIdEmailtemplatesRequest struct {
 	ctx context.Context
 	ApiService *OrderStatusesEmailTemplateAPIService
 	parentId int32
-	clientId *string
 	orderStatusEmailTemplate *OrderStatusEmailTemplate
-}
-
-// 
-func (r ApiPostSalesOrdersStatusesByParentIdEmailtemplatesRequest) ClientId(clientId string) ApiPostSalesOrdersStatusesByParentIdEmailtemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // orderStatusEmailTemplate
 func (r ApiPostSalesOrdersStatusesByParentIdEmailtemplatesRequest) OrderStatusEmailTemplate(orderStatusEmailTemplate OrderStatusEmailTemplate) ApiPostSalesOrdersStatusesByParentIdEmailtemplatesRequest {
 	r.orderStatusEmailTemplate = &orderStatusEmailTemplate
+	return r
+}
+
+// 
+func (r ApiPostSalesOrdersStatusesByParentIdEmailtemplatesRequest) ClientId(clientId string) ApiPostSalesOrdersStatusesByParentIdEmailtemplatesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *OrderStatusesEmailTemplateAPIService) PostSalesOrdersStatusesByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.orderStatusEmailTemplate == nil {
 		return localVarReturnValue, nil, reportError("orderStatusEmailTemplate is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *OrderStatusesEmailTemplateAPIService) PostSalesOrdersStatusesByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.orderStatusEmailTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest struct {
 	ApiService *OrderStatusesEmailTemplateAPIService
 	id int32
 	parentId int32
-	clientId *string
 	orderStatusEmailTemplate *OrderStatusEmailTemplate
-}
-
-// 
-func (r ApiPutSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiPutSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // orderStatusEmailTemplate
 func (r ApiPutSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) OrderStatusEmailTemplate(orderStatusEmailTemplate OrderStatusEmailTemplate) ApiPutSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest {
 	r.orderStatusEmailTemplate = &orderStatusEmailTemplate
+	return r
+}
+
+// 
+func (r ApiPutSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiPutSalesOrdersStatusesByParentIdEmailtemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *OrderStatusesEmailTemplateAPIService) PutSalesOrdersStatusesByParentIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.orderStatusEmailTemplate == nil {
 		return localVarReturnValue, nil, reportError("orderStatusEmailTemplate is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *OrderStatusesEmailTemplateAPIService) PutSalesOrdersStatusesByParentIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.orderStatusEmailTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

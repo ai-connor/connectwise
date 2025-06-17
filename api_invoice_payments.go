@@ -78,9 +78,6 @@ func (a *InvoicePaymentsAPIService) DeleteFinanceInvoicesByParentIdPaymentsByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *InvoicePaymentsAPIService) DeleteFinanceInvoicesByParentIdPaymentsByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetFinanceInvoicesByParentIdPaymentsRequest struct {
 	ctx context.Context
 	ApiService *InvoicePaymentsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetFinanceInvoicesByParentIdPaymentsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceInvoicesByParentIdPaymentsRequest) ClientId(clientId string) ApiGetFinanceInvoicesByParentIdPaymentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetFinanceInvoicesByParentIdPaymentsRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetFinanceInvoicesByParentIdPaymentsRequest) ClientId(clientId string) ApiGetFinanceInvoicesByParentIdPaymentsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceInvoicesByParentIdPaymentsRequest) Execute() ([]InvoicePayment, *http.Response, error) {
 	return r.ApiService.GetFinanceInvoicesByParentIdPaymentsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *InvoicePaymentsAPIService) GetFinanceInvoicesByParentIdPaymentsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *InvoicePaymentsAPIService) GetFinanceInvoicesByParentIdPaymentsExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetFinanceInvoicesByParentIdPaymentsByIdRequest struct {
 	ApiService *InvoicePaymentsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetFinanceInvoicesByParentIdPaymentsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceInvoicesByParentIdPaymentsByIdRequest) ClientId(clientId string) ApiGetFinanceInvoicesByParentIdPaymentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetFinanceInvoicesByParentIdPaymentsByIdRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetFinanceInvoicesByParentIdPaymentsByIdRequest) ClientId(clientId string) ApiGetFinanceInvoicesByParentIdPaymentsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceInvoicesByParentIdPaymentsByIdRequest) Execute() (*InvoicePayment, *http.Response, error) {
 	return r.ApiService.GetFinanceInvoicesByParentIdPaymentsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *InvoicePaymentsAPIService) GetFinanceInvoicesByParentIdPaymentsByIdExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *InvoicePaymentsAPIService) GetFinanceInvoicesByParentIdPaymentsByIdExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -521,19 +518,19 @@ type ApiPatchFinanceInvoicesByParentIdPaymentsByIdRequest struct {
 	ApiService *InvoicePaymentsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceInvoicesByParentIdPaymentsByIdRequest) ClientId(clientId string) ApiPatchFinanceInvoicesByParentIdPaymentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceInvoicesByParentIdPaymentsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceInvoicesByParentIdPaymentsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceInvoicesByParentIdPaymentsByIdRequest) ClientId(clientId string) ApiPatchFinanceInvoicesByParentIdPaymentsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -580,9 +577,6 @@ func (a *InvoicePaymentsAPIService) PatchFinanceInvoicesByParentIdPaymentsByIdEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -604,7 +598,9 @@ func (a *InvoicePaymentsAPIService) PatchFinanceInvoicesByParentIdPaymentsByIdEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -648,19 +644,19 @@ type ApiPostFinanceInvoicesByParentIdPaymentsRequest struct {
 	ctx context.Context
 	ApiService *InvoicePaymentsAPIService
 	parentId int32
-	clientId *string
 	invoicePayment *InvoicePayment
-}
-
-// 
-func (r ApiPostFinanceInvoicesByParentIdPaymentsRequest) ClientId(clientId string) ApiPostFinanceInvoicesByParentIdPaymentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // payment
 func (r ApiPostFinanceInvoicesByParentIdPaymentsRequest) InvoicePayment(invoicePayment InvoicePayment) ApiPostFinanceInvoicesByParentIdPaymentsRequest {
 	r.invoicePayment = &invoicePayment
+	return r
+}
+
+// 
+func (r ApiPostFinanceInvoicesByParentIdPaymentsRequest) ClientId(clientId string) ApiPostFinanceInvoicesByParentIdPaymentsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -704,9 +700,6 @@ func (a *InvoicePaymentsAPIService) PostFinanceInvoicesByParentIdPaymentsExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.invoicePayment == nil {
 		return localVarReturnValue, nil, reportError("invoicePayment is required and must be specified")
 	}
@@ -728,7 +721,9 @@ func (a *InvoicePaymentsAPIService) PostFinanceInvoicesByParentIdPaymentsExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.invoicePayment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -773,19 +768,19 @@ type ApiPutFinanceInvoicesByParentIdPaymentsByIdRequest struct {
 	ApiService *InvoicePaymentsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	invoicePayment *InvoicePayment
-}
-
-// 
-func (r ApiPutFinanceInvoicesByParentIdPaymentsByIdRequest) ClientId(clientId string) ApiPutFinanceInvoicesByParentIdPaymentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // payment
 func (r ApiPutFinanceInvoicesByParentIdPaymentsByIdRequest) InvoicePayment(invoicePayment InvoicePayment) ApiPutFinanceInvoicesByParentIdPaymentsByIdRequest {
 	r.invoicePayment = &invoicePayment
+	return r
+}
+
+// 
+func (r ApiPutFinanceInvoicesByParentIdPaymentsByIdRequest) ClientId(clientId string) ApiPutFinanceInvoicesByParentIdPaymentsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -832,9 +827,6 @@ func (a *InvoicePaymentsAPIService) PutFinanceInvoicesByParentIdPaymentsByIdExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.invoicePayment == nil {
 		return localVarReturnValue, nil, reportError("invoicePayment is required and must be specified")
 	}
@@ -856,7 +848,9 @@ func (a *InvoicePaymentsAPIService) PutFinanceInvoicesByParentIdPaymentsByIdExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.invoicePayment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -25,7 +25,6 @@ type CompanyInfosAPIService service
 type ApiGetCompanyCompaniesInfoRequest struct {
 	ctx context.Context
 	ApiService *CompanyInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -34,12 +33,7 @@ type ApiGetCompanyCompaniesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesInfoRequest) ClientId(clientId string) ApiGetCompanyCompaniesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -90,6 +84,12 @@ func (r ApiGetCompanyCompaniesInfoRequest) PageId(pageId int32) ApiGetCompanyCom
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesInfoRequest) ClientId(clientId string) ApiGetCompanyCompaniesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesInfoRequest) Execute() ([]CompanyInfo, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesInfoExecute(r)
 }
@@ -127,9 +127,6 @@ func (a *CompanyInfosAPIService) GetCompanyCompaniesInfoExecute(r ApiGetCompanyC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -172,7 +169,9 @@ func (a *CompanyInfosAPIService) GetCompanyCompaniesInfoExecute(r ApiGetCompanyC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -213,7 +212,6 @@ func (a *CompanyInfosAPIService) GetCompanyCompaniesInfoExecute(r ApiGetCompanyC
 type ApiGetCompanyCompaniesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *CompanyInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -222,12 +220,7 @@ type ApiGetCompanyCompaniesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesInfoCountRequest) ClientId(clientId string) ApiGetCompanyCompaniesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -278,6 +271,12 @@ func (r ApiGetCompanyCompaniesInfoCountRequest) PageId(pageId int32) ApiGetCompa
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesInfoCountRequest) ClientId(clientId string) ApiGetCompanyCompaniesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesInfoCountExecute(r)
 }
@@ -315,9 +314,6 @@ func (a *CompanyInfosAPIService) GetCompanyCompaniesInfoCountExecute(r ApiGetCom
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -360,7 +356,9 @@ func (a *CompanyInfosAPIService) GetCompanyCompaniesInfoCountExecute(r ApiGetCom
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

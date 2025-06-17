@@ -82,9 +82,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) DeleteCompanyConfigurationsT
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -103,7 +100,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) DeleteCompanyConfigurationsT
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -137,7 +136,6 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesReq
 	ApiService *ConfigurationTypeQuestionValuesAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -146,12 +144,7 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesReq
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -202,6 +195,12 @@ func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValues
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest) Execute() ([]ConfigurationTypeQuestionValue, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesExecute(r)
 }
@@ -245,9 +244,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -290,7 +286,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -334,7 +332,6 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByI
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -343,12 +340,7 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByI
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -399,6 +391,12 @@ func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValues
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) Execute() (*ConfigurationTypeQuestionValue, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdExecute(r)
 }
@@ -445,9 +443,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -490,7 +485,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -534,7 +531,6 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByI
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -543,12 +539,7 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByI
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -599,6 +590,12 @@ func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValues
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesExecute(r)
 }
@@ -645,9 +642,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -690,7 +684,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -734,7 +730,6 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByI
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -743,12 +738,7 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByI
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -799,6 +789,12 @@ func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValues
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdUsagesListExecute(r)
 }
@@ -845,9 +841,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -890,7 +883,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -933,7 +928,6 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesCou
 	ApiService *ConfigurationTypeQuestionValuesAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -942,12 +936,7 @@ type ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesCou
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesCountRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -998,6 +987,12 @@ func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValues
 	return r
 }
 
+// 
+func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesCountRequest) ClientId(clientId string) ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesCountExecute(r)
 }
@@ -1041,9 +1036,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1086,7 +1078,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) GetCompanyConfigurationsType
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1130,19 +1124,19 @@ type ApiPatchCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesB
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) ClientId(clientId string) ApiPatchCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) ClientId(clientId string) ApiPatchCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1192,9 +1186,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) PatchCompanyConfigurationsTy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1216,7 +1207,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) PatchCompanyConfigurationsTy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1261,19 +1254,19 @@ type ApiPostCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRe
 	ApiService *ConfigurationTypeQuestionValuesAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	configurationTypeQuestionValue *ConfigurationTypeQuestionValue
-}
-
-// 
-func (r ApiPostCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest) ClientId(clientId string) ApiPostCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // configurationTypeQuestionValue
 func (r ApiPostCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest) ConfigurationTypeQuestionValue(configurationTypeQuestionValue ConfigurationTypeQuestionValue) ApiPostCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest {
 	r.configurationTypeQuestionValue = &configurationTypeQuestionValue
+	return r
+}
+
+// 
+func (r ApiPostCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest) ClientId(clientId string) ApiPostCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1320,9 +1313,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) PostCompanyConfigurationsTyp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.configurationTypeQuestionValue == nil {
 		return localVarReturnValue, nil, reportError("configurationTypeQuestionValue is required and must be specified")
 	}
@@ -1344,7 +1334,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) PostCompanyConfigurationsTyp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.configurationTypeQuestionValue
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1390,19 +1382,19 @@ type ApiPutCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByI
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	configurationTypeQuestionValue *ConfigurationTypeQuestionValue
-}
-
-// 
-func (r ApiPutCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) ClientId(clientId string) ApiPutCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // configurationTypeQuestionValue
 func (r ApiPutCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) ConfigurationTypeQuestionValue(configurationTypeQuestionValue ConfigurationTypeQuestionValue) ApiPutCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest {
 	r.configurationTypeQuestionValue = &configurationTypeQuestionValue
+	return r
+}
+
+// 
+func (r ApiPutCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest) ClientId(clientId string) ApiPutCompanyConfigurationsTypesByGrandparentIdQuestionsByParentIdValuesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1452,9 +1444,6 @@ func (a *ConfigurationTypeQuestionValuesAPIService) PutCompanyConfigurationsType
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.configurationTypeQuestionValue == nil {
 		return localVarReturnValue, nil, reportError("configurationTypeQuestionValue is required and must be specified")
 	}
@@ -1476,7 +1465,9 @@ func (a *ConfigurationTypeQuestionValuesAPIService) PutCompanyConfigurationsType
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.configurationTypeQuestionValue
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

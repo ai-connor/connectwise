@@ -26,7 +26,6 @@ type ClassificationsAPIService service
 type ApiGetExpenseClassificationsRequest struct {
 	ctx context.Context
 	ApiService *ClassificationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetExpenseClassificationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpenseClassificationsRequest) ClientId(clientId string) ApiGetExpenseClassificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetExpenseClassificationsRequest) PageId(pageId int32) ApiGetExpenseC
 	return r
 }
 
+// 
+func (r ApiGetExpenseClassificationsRequest) ClientId(clientId string) ApiGetExpenseClassificationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpenseClassificationsRequest) Execute() ([]Classification, *http.Response, error) {
 	return r.ApiService.GetExpenseClassificationsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *ClassificationsAPIService) GetExpenseClassificationsExecute(r ApiGetExp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *ClassificationsAPIService) GetExpenseClassificationsExecute(r ApiGetExp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetExpenseClassificationsByIdRequest struct {
 	ctx context.Context
 	ApiService *ClassificationsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetExpenseClassificationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpenseClassificationsByIdRequest) ClientId(clientId string) ApiGetExpenseClassificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetExpenseClassificationsByIdRequest) PageId(pageId int32) ApiGetExpe
 	return r
 }
 
+// 
+func (r ApiGetExpenseClassificationsByIdRequest) ClientId(clientId string) ApiGetExpenseClassificationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpenseClassificationsByIdRequest) Execute() (*Classification, *http.Response, error) {
 	return r.ApiService.GetExpenseClassificationsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *ClassificationsAPIService) GetExpenseClassificationsByIdExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *ClassificationsAPIService) GetExpenseClassificationsByIdExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *ClassificationsAPIService) GetExpenseClassificationsByIdExecute(r ApiGe
 type ApiGetExpenseClassificationsCountRequest struct {
 	ctx context.Context
 	ApiService *ClassificationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetExpenseClassificationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpenseClassificationsCountRequest) ClientId(clientId string) ApiGetExpenseClassificationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetExpenseClassificationsCountRequest) PageId(pageId int32) ApiGetExp
 	return r
 }
 
+// 
+func (r ApiGetExpenseClassificationsCountRequest) ClientId(clientId string) ApiGetExpenseClassificationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpenseClassificationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetExpenseClassificationsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *ClassificationsAPIService) GetExpenseClassificationsCountExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *ClassificationsAPIService) GetExpenseClassificationsCountExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

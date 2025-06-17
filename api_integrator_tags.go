@@ -74,9 +74,6 @@ func (a *IntegratorTagsAPIService) DeleteSystemIntegratorTagsByIdExecute(r ApiDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *IntegratorTagsAPIService) DeleteSystemIntegratorTagsByIdExecute(r ApiDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *IntegratorTagsAPIService) DeleteSystemIntegratorTagsByIdExecute(r ApiDe
 type ApiGetSystemIntegratorTagsRequest struct {
 	ctx context.Context
 	ApiService *IntegratorTagsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemIntegratorTagsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemIntegratorTagsRequest) ClientId(clientId string) ApiGetSystemIntegratorTagsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemIntegratorTagsRequest) PageId(pageId int32) ApiGetSystemInte
 	return r
 }
 
+// 
+func (r ApiGetSystemIntegratorTagsRequest) ClientId(clientId string) ApiGetSystemIntegratorTagsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemIntegratorTagsRequest) Execute() ([]IntegratorTag, *http.Response, error) {
 	return r.ApiService.GetSystemIntegratorTagsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *IntegratorTagsAPIService) GetSystemIntegratorTagsExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *IntegratorTagsAPIService) GetSystemIntegratorTagsExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemIntegratorTagsByIdRequest struct {
 	ctx context.Context
 	ApiService *IntegratorTagsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemIntegratorTagsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemIntegratorTagsByIdRequest) ClientId(clientId string) ApiGetSystemIntegratorTagsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemIntegratorTagsByIdRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemIntegratorTagsByIdRequest) ClientId(clientId string) ApiGetSystemIntegratorTagsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemIntegratorTagsByIdRequest) Execute() (*IntegratorTag, *http.Response, error) {
 	return r.ApiService.GetSystemIntegratorTagsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *IntegratorTagsAPIService) GetSystemIntegratorTagsByIdExecute(r ApiGetSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *IntegratorTagsAPIService) GetSystemIntegratorTagsByIdExecute(r ApiGetSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *IntegratorTagsAPIService) GetSystemIntegratorTagsByIdExecute(r ApiGetSy
 type ApiGetSystemIntegratorTagsCountRequest struct {
 	ctx context.Context
 	ApiService *IntegratorTagsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemIntegratorTagsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemIntegratorTagsCountRequest) ClientId(clientId string) ApiGetSystemIntegratorTagsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemIntegratorTagsCountRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemIntegratorTagsCountRequest) ClientId(clientId string) ApiGetSystemIntegratorTagsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemIntegratorTagsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemIntegratorTagsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *IntegratorTagsAPIService) GetSystemIntegratorTagsCountExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *IntegratorTagsAPIService) GetSystemIntegratorTagsCountExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemIntegratorTagsByIdRequest struct {
 	ctx context.Context
 	ApiService *IntegratorTagsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemIntegratorTagsByIdRequest) ClientId(clientId string) ApiPatchSystemIntegratorTagsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemIntegratorTagsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemIntegratorTagsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemIntegratorTagsByIdRequest) ClientId(clientId string) ApiPatchSystemIntegratorTagsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *IntegratorTagsAPIService) PatchSystemIntegratorTagsByIdExecute(r ApiPat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *IntegratorTagsAPIService) PatchSystemIntegratorTagsByIdExecute(r ApiPat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *IntegratorTagsAPIService) PatchSystemIntegratorTagsByIdExecute(r ApiPat
 type ApiPostSystemIntegratorTagsRequest struct {
 	ctx context.Context
 	ApiService *IntegratorTagsAPIService
-	clientId *string
 	integratorTag *IntegratorTag
-}
-
-// 
-func (r ApiPostSystemIntegratorTagsRequest) ClientId(clientId string) ApiPostSystemIntegratorTagsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // tag
 func (r ApiPostSystemIntegratorTagsRequest) IntegratorTag(integratorTag IntegratorTag) ApiPostSystemIntegratorTagsRequest {
 	r.integratorTag = &integratorTag
+	return r
+}
+
+// 
+func (r ApiPostSystemIntegratorTagsRequest) ClientId(clientId string) ApiPostSystemIntegratorTagsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *IntegratorTagsAPIService) PostSystemIntegratorTagsExecute(r ApiPostSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.integratorTag == nil {
 		return localVarReturnValue, nil, reportError("integratorTag is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *IntegratorTagsAPIService) PostSystemIntegratorTagsExecute(r ApiPostSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.integratorTag
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemIntegratorTagsByIdRequest struct {
 	ctx context.Context
 	ApiService *IntegratorTagsAPIService
 	id int32
-	clientId *string
 	integratorTag *IntegratorTag
-}
-
-// 
-func (r ApiPutSystemIntegratorTagsByIdRequest) ClientId(clientId string) ApiPutSystemIntegratorTagsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // tag
 func (r ApiPutSystemIntegratorTagsByIdRequest) IntegratorTag(integratorTag IntegratorTag) ApiPutSystemIntegratorTagsByIdRequest {
 	r.integratorTag = &integratorTag
+	return r
+}
+
+// 
+func (r ApiPutSystemIntegratorTagsByIdRequest) ClientId(clientId string) ApiPutSystemIntegratorTagsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *IntegratorTagsAPIService) PutSystemIntegratorTagsByIdExecute(r ApiPutSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.integratorTag == nil {
 		return localVarReturnValue, nil, reportError("integratorTag is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *IntegratorTagsAPIService) PutSystemIntegratorTagsByIdExecute(r ApiPutSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.integratorTag
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

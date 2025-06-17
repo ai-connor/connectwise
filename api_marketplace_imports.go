@@ -27,7 +27,6 @@ type ApiGetSystemMarketplaceimportGetdefinitionByIdRequest struct {
 	ctx context.Context
 	ApiService *MarketplaceImportsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSystemMarketplaceimportGetdefinitionByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMarketplaceimportGetdefinitionByIdRequest) ClientId(clientId string) ApiGetSystemMarketplaceimportGetdefinitionByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSystemMarketplaceimportGetdefinitionByIdRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetSystemMarketplaceimportGetdefinitionByIdRequest) ClientId(clientId string) ApiGetSystemMarketplaceimportGetdefinitionByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMarketplaceimportGetdefinitionByIdRequest) Execute() (*MarketplaceImport, *http.Response, error) {
 	return r.ApiService.GetSystemMarketplaceimportGetdefinitionByIdExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *MarketplaceImportsAPIService) GetSystemMarketplaceimportGetdefinitionBy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *MarketplaceImportsAPIService) GetSystemMarketplaceimportGetdefinitionBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,19 +217,19 @@ func (a *MarketplaceImportsAPIService) GetSystemMarketplaceimportGetdefinitionBy
 type ApiPostSystemMarketplaceimportImportRequest struct {
 	ctx context.Context
 	ApiService *MarketplaceImportsAPIService
-	clientId *string
 	marketplaceImport *MarketplaceImport
-}
-
-// 
-func (r ApiPostSystemMarketplaceimportImportRequest) ClientId(clientId string) ApiPostSystemMarketplaceimportImportRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // marketplaceImport
 func (r ApiPostSystemMarketplaceimportImportRequest) MarketplaceImport(marketplaceImport MarketplaceImport) ApiPostSystemMarketplaceimportImportRequest {
 	r.marketplaceImport = &marketplaceImport
+	return r
+}
+
+// 
+func (r ApiPostSystemMarketplaceimportImportRequest) ClientId(clientId string) ApiPostSystemMarketplaceimportImportRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -271,9 +270,6 @@ func (a *MarketplaceImportsAPIService) PostSystemMarketplaceimportImportExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.marketplaceImport == nil {
 		return localVarReturnValue, nil, reportError("marketplaceImport is required and must be specified")
 	}
@@ -295,7 +291,9 @@ func (a *MarketplaceImportsAPIService) PostSystemMarketplaceimportImportExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.marketplaceImport
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

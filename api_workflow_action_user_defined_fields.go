@@ -74,9 +74,6 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) DeleteSystemWorkflowsUserdef
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) DeleteSystemWorkflowsUserdef
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) DeleteSystemWorkflowsUserdef
 type ApiGetSystemWorkflowsUserdefinedfieldsEventsActionsRequest struct {
 	ctx context.Context
 	ApiService *WorkflowActionUserDefinedFieldsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemWorkflowsUserdefinedfieldsEventsActionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsUserdefinedfieldsEventsActionsRequest) ClientId(clientId string) ApiGetSystemWorkflowsUserdefinedfieldsEventsActionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemWorkflowsUserdefinedfieldsEventsActionsRequest) PageId(pageI
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsUserdefinedfieldsEventsActionsRequest) ClientId(clientId string) ApiGetSystemWorkflowsUserdefinedfieldsEventsActionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsUserdefinedfieldsEventsActionsRequest) Execute() ([]WorkflowActionUserDefinedField, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsUserdefinedfieldsEventsActionsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) GetSystemWorkflowsUserdefine
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) GetSystemWorkflowsUserdefine
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -317,7 +315,6 @@ type ApiGetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByParentI
 	ApiService *WorkflowActionUserDefinedFieldsAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -326,12 +323,7 @@ type ApiGetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByParentI
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByParentIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByParentIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -382,6 +374,12 @@ func (r ApiGetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByPare
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByParentIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByParentIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByParentIdRequest) Execute() ([]WorkflowActionUserDefinedField, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdActionsByParentIdExecute(r)
 }
@@ -425,9 +423,6 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) GetSystemWorkflowsUserdefine
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -470,7 +465,9 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) GetSystemWorkflowsUserdefine
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -512,19 +509,19 @@ type ApiPatchSystemWorkflowsUserdefinedfieldsByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkflowActionUserDefinedFieldsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemWorkflowsUserdefinedfieldsByIdRequest) ClientId(clientId string) ApiPatchSystemWorkflowsUserdefinedfieldsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemWorkflowsUserdefinedfieldsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemWorkflowsUserdefinedfieldsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemWorkflowsUserdefinedfieldsByIdRequest) ClientId(clientId string) ApiPatchSystemWorkflowsUserdefinedfieldsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -568,9 +565,6 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) PatchSystemWorkflowsUserdefi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -592,7 +586,9 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) PatchSystemWorkflowsUserdefi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -636,19 +632,19 @@ type ApiPostSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdRequest struct 
 	ctx context.Context
 	ApiService *WorkflowActionUserDefinedFieldsAPIService
 	grandparentId int32
-	clientId *string
 	workflowActionUserDefinedField *WorkflowActionUserDefinedField
-}
-
-// 
-func (r ApiPostSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdRequest) ClientId(clientId string) ApiPostSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workflowActionUserDefinedField
 func (r ApiPostSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdRequest) WorkflowActionUserDefinedField(workflowActionUserDefinedField WorkflowActionUserDefinedField) ApiPostSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdRequest {
 	r.workflowActionUserDefinedField = &workflowActionUserDefinedField
+	return r
+}
+
+// 
+func (r ApiPostSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdRequest) ClientId(clientId string) ApiPostSystemWorkflowsUserdefinedfieldsEventsByGrandparentIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -692,9 +688,6 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) PostSystemWorkflowsUserdefin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.workflowActionUserDefinedField == nil {
 		return localVarReturnValue, nil, reportError("workflowActionUserDefinedField is required and must be specified")
 	}
@@ -716,7 +709,9 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) PostSystemWorkflowsUserdefin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.workflowActionUserDefinedField
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -760,19 +755,19 @@ type ApiPutSystemWorkflowsUserdefinedfieldsByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkflowActionUserDefinedFieldsAPIService
 	id int32
-	clientId *string
 	workflowActionUserDefinedField *WorkflowActionUserDefinedField
-}
-
-// 
-func (r ApiPutSystemWorkflowsUserdefinedfieldsByIdRequest) ClientId(clientId string) ApiPutSystemWorkflowsUserdefinedfieldsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workflowActionUserDefinedField
 func (r ApiPutSystemWorkflowsUserdefinedfieldsByIdRequest) WorkflowActionUserDefinedField(workflowActionUserDefinedField WorkflowActionUserDefinedField) ApiPutSystemWorkflowsUserdefinedfieldsByIdRequest {
 	r.workflowActionUserDefinedField = &workflowActionUserDefinedField
+	return r
+}
+
+// 
+func (r ApiPutSystemWorkflowsUserdefinedfieldsByIdRequest) ClientId(clientId string) ApiPutSystemWorkflowsUserdefinedfieldsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -816,9 +811,6 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) PutSystemWorkflowsUserdefine
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.workflowActionUserDefinedField == nil {
 		return localVarReturnValue, nil, reportError("workflowActionUserDefinedField is required and must be specified")
 	}
@@ -840,7 +832,9 @@ func (a *WorkflowActionUserDefinedFieldsAPIService) PutSystemWorkflowsUserdefine
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.workflowActionUserDefinedField
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *ScheduleStatusesAPIService) DeleteScheduleStatusesByIdExecute(r ApiDele
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ScheduleStatusesAPIService) DeleteScheduleStatusesByIdExecute(r ApiDele
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ScheduleStatusesAPIService) DeleteScheduleStatusesByIdExecute(r ApiDele
 type ApiGetScheduleStatusesRequest struct {
 	ctx context.Context
 	ApiService *ScheduleStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetScheduleStatusesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleStatusesRequest) ClientId(clientId string) ApiGetScheduleStatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetScheduleStatusesRequest) PageId(pageId int32) ApiGetScheduleStatus
 	return r
 }
 
+// 
+func (r ApiGetScheduleStatusesRequest) ClientId(clientId string) ApiGetScheduleStatusesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleStatusesRequest) Execute() ([]ScheduleStatus, *http.Response, error) {
 	return r.ApiService.GetScheduleStatusesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ScheduleStatusesAPIService) GetScheduleStatusesExecute(r ApiGetSchedule
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ScheduleStatusesAPIService) GetScheduleStatusesExecute(r ApiGetSchedule
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetScheduleStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetScheduleStatusesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleStatusesByIdRequest) ClientId(clientId string) ApiGetScheduleStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetScheduleStatusesByIdRequest) PageId(pageId int32) ApiGetScheduleSt
 	return r
 }
 
+// 
+func (r ApiGetScheduleStatusesByIdRequest) ClientId(clientId string) ApiGetScheduleStatusesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleStatusesByIdRequest) Execute() (*ScheduleStatus, *http.Response, error) {
 	return r.ApiService.GetScheduleStatusesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ScheduleStatusesAPIService) GetScheduleStatusesByIdExecute(r ApiGetSche
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ScheduleStatusesAPIService) GetScheduleStatusesByIdExecute(r ApiGetSche
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *ScheduleStatusesAPIService) GetScheduleStatusesByIdExecute(r ApiGetSche
 type ApiGetScheduleStatusesCountRequest struct {
 	ctx context.Context
 	ApiService *ScheduleStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetScheduleStatusesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleStatusesCountRequest) ClientId(clientId string) ApiGetScheduleStatusesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetScheduleStatusesCountRequest) PageId(pageId int32) ApiGetScheduleS
 	return r
 }
 
+// 
+func (r ApiGetScheduleStatusesCountRequest) ClientId(clientId string) ApiGetScheduleStatusesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleStatusesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetScheduleStatusesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *ScheduleStatusesAPIService) GetScheduleStatusesCountExecute(r ApiGetSch
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *ScheduleStatusesAPIService) GetScheduleStatusesCountExecute(r ApiGetSch
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchScheduleStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleStatusesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchScheduleStatusesByIdRequest) ClientId(clientId string) ApiPatchScheduleStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchScheduleStatusesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchScheduleStatusesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchScheduleStatusesByIdRequest) ClientId(clientId string) ApiPatchScheduleStatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *ScheduleStatusesAPIService) PatchScheduleStatusesByIdExecute(r ApiPatch
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *ScheduleStatusesAPIService) PatchScheduleStatusesByIdExecute(r ApiPatch
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *ScheduleStatusesAPIService) PatchScheduleStatusesByIdExecute(r ApiPatch
 type ApiPostScheduleStatusesRequest struct {
 	ctx context.Context
 	ApiService *ScheduleStatusesAPIService
-	clientId *string
 	scheduleStatus *ScheduleStatus
-}
-
-// 
-func (r ApiPostScheduleStatusesRequest) ClientId(clientId string) ApiPostScheduleStatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // scheduleStatus
 func (r ApiPostScheduleStatusesRequest) ScheduleStatus(scheduleStatus ScheduleStatus) ApiPostScheduleStatusesRequest {
 	r.scheduleStatus = &scheduleStatus
+	return r
+}
+
+// 
+func (r ApiPostScheduleStatusesRequest) ClientId(clientId string) ApiPostScheduleStatusesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *ScheduleStatusesAPIService) PostScheduleStatusesExecute(r ApiPostSchedu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.scheduleStatus == nil {
 		return localVarReturnValue, nil, reportError("scheduleStatus is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *ScheduleStatusesAPIService) PostScheduleStatusesExecute(r ApiPostSchedu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.scheduleStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutScheduleStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleStatusesAPIService
 	id int32
-	clientId *string
 	scheduleStatus *ScheduleStatus
-}
-
-// 
-func (r ApiPutScheduleStatusesByIdRequest) ClientId(clientId string) ApiPutScheduleStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // scheduleStatus
 func (r ApiPutScheduleStatusesByIdRequest) ScheduleStatus(scheduleStatus ScheduleStatus) ApiPutScheduleStatusesByIdRequest {
 	r.scheduleStatus = &scheduleStatus
+	return r
+}
+
+// 
+func (r ApiPutScheduleStatusesByIdRequest) ClientId(clientId string) ApiPutScheduleStatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *ScheduleStatusesAPIService) PutScheduleStatusesByIdExecute(r ApiPutSche
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.scheduleStatus == nil {
 		return localVarReturnValue, nil, reportError("scheduleStatus is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *ScheduleStatusesAPIService) PutScheduleStatusesByIdExecute(r ApiPutSche
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.scheduleStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

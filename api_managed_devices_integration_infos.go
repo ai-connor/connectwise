@@ -27,7 +27,6 @@ type ApiGetCompanyManagedDevicesIntegrationsByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *ManagedDevicesIntegrationInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetCompanyManagedDevicesIntegrationsByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagedDevicesIntegrationsByIdInfoRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetCompanyManagedDevicesIntegrationsByIdInfoRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagedDevicesIntegrationsByIdInfoRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagedDevicesIntegrationsByIdInfoRequest) Execute() (*ManagedDevicesIntegrationInfo, *http.Response, error) {
 	return r.ApiService.GetCompanyManagedDevicesIntegrationsByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *ManagedDevicesIntegrationInfosAPIService) GetCompanyManagedDevicesInteg
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *ManagedDevicesIntegrationInfosAPIService) GetCompanyManagedDevicesInteg
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *ManagedDevicesIntegrationInfosAPIService) GetCompanyManagedDevicesInteg
 type ApiGetCompanyManagedDevicesIntegrationsInfoRequest struct {
 	ctx context.Context
 	ApiService *ManagedDevicesIntegrationInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetCompanyManagedDevicesIntegrationsInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagedDevicesIntegrationsInfoRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetCompanyManagedDevicesIntegrationsInfoRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagedDevicesIntegrationsInfoRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagedDevicesIntegrationsInfoRequest) Execute() ([]ManagedDevicesIntegrationInfo, *http.Response, error) {
 	return r.ApiService.GetCompanyManagedDevicesIntegrationsInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *ManagedDevicesIntegrationInfosAPIService) GetCompanyManagedDevicesInteg
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *ManagedDevicesIntegrationInfosAPIService) GetCompanyManagedDevicesInteg
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *ManagedDevicesIntegrationInfosAPIService) GetCompanyManagedDevicesInteg
 type ApiGetCompanyManagedDevicesIntegrationsInfoCountRequest struct {
 	ctx context.Context
 	ApiService *ManagedDevicesIntegrationInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetCompanyManagedDevicesIntegrationsInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagedDevicesIntegrationsInfoCountRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetCompanyManagedDevicesIntegrationsInfoCountRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagedDevicesIntegrationsInfoCountRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagedDevicesIntegrationsInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyManagedDevicesIntegrationsInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *ManagedDevicesIntegrationInfosAPIService) GetCompanyManagedDevicesInteg
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *ManagedDevicesIntegrationInfosAPIService) GetCompanyManagedDevicesInteg
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -74,9 +74,6 @@ func (a *WarehousesAPIService) DeleteProcurementWarehousesByIdExecute(r ApiDelet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *WarehousesAPIService) DeleteProcurementWarehousesByIdExecute(r ApiDelet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *WarehousesAPIService) DeleteProcurementWarehousesByIdExecute(r ApiDelet
 type ApiGetProcurementWarehousesRequest struct {
 	ctx context.Context
 	ApiService *WarehousesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementWarehousesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementWarehousesRequest) ClientId(clientId string) ApiGetProcurementWarehousesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementWarehousesRequest) PageId(pageId int32) ApiGetProcureme
 	return r
 }
 
+// 
+func (r ApiGetProcurementWarehousesRequest) ClientId(clientId string) ApiGetProcurementWarehousesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementWarehousesRequest) Execute() ([]Warehouse, *http.Response, error) {
 	return r.ApiService.GetProcurementWarehousesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *WarehousesAPIService) GetProcurementWarehousesExecute(r ApiGetProcureme
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *WarehousesAPIService) GetProcurementWarehousesExecute(r ApiGetProcureme
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProcurementWarehousesByIdRequest struct {
 	ctx context.Context
 	ApiService *WarehousesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProcurementWarehousesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementWarehousesByIdRequest) ClientId(clientId string) ApiGetProcurementWarehousesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProcurementWarehousesByIdRequest) PageId(pageId int32) ApiGetProcu
 	return r
 }
 
+// 
+func (r ApiGetProcurementWarehousesByIdRequest) ClientId(clientId string) ApiGetProcurementWarehousesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementWarehousesByIdRequest) Execute() (*Warehouse, *http.Response, error) {
 	return r.ApiService.GetProcurementWarehousesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *WarehousesAPIService) GetProcurementWarehousesByIdExecute(r ApiGetProcu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *WarehousesAPIService) GetProcurementWarehousesByIdExecute(r ApiGetProcu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *WarehousesAPIService) GetProcurementWarehousesByIdExecute(r ApiGetProcu
 type ApiGetProcurementWarehousesCountRequest struct {
 	ctx context.Context
 	ApiService *WarehousesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetProcurementWarehousesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementWarehousesCountRequest) ClientId(clientId string) ApiGetProcurementWarehousesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetProcurementWarehousesCountRequest) PageId(pageId int32) ApiGetProc
 	return r
 }
 
+// 
+func (r ApiGetProcurementWarehousesCountRequest) ClientId(clientId string) ApiGetProcurementWarehousesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementWarehousesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementWarehousesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *WarehousesAPIService) GetProcurementWarehousesCountExecute(r ApiGetProc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *WarehousesAPIService) GetProcurementWarehousesCountExecute(r ApiGetProc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchProcurementWarehousesByIdRequest struct {
 	ctx context.Context
 	ApiService *WarehousesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementWarehousesByIdRequest) ClientId(clientId string) ApiPatchProcurementWarehousesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementWarehousesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementWarehousesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementWarehousesByIdRequest) ClientId(clientId string) ApiPatchProcurementWarehousesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *WarehousesAPIService) PatchProcurementWarehousesByIdExecute(r ApiPatchP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *WarehousesAPIService) PatchProcurementWarehousesByIdExecute(r ApiPatchP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *WarehousesAPIService) PatchProcurementWarehousesByIdExecute(r ApiPatchP
 type ApiPostProcurementWarehousesRequest struct {
 	ctx context.Context
 	ApiService *WarehousesAPIService
-	clientId *string
 	warehouse *Warehouse
-}
-
-// 
-func (r ApiPostProcurementWarehousesRequest) ClientId(clientId string) ApiPostProcurementWarehousesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // warehouse
 func (r ApiPostProcurementWarehousesRequest) Warehouse(warehouse Warehouse) ApiPostProcurementWarehousesRequest {
 	r.warehouse = &warehouse
+	return r
+}
+
+// 
+func (r ApiPostProcurementWarehousesRequest) ClientId(clientId string) ApiPostProcurementWarehousesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *WarehousesAPIService) PostProcurementWarehousesExecute(r ApiPostProcure
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.warehouse == nil {
 		return localVarReturnValue, nil, reportError("warehouse is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *WarehousesAPIService) PostProcurementWarehousesExecute(r ApiPostProcure
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.warehouse
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutProcurementWarehousesByIdRequest struct {
 	ctx context.Context
 	ApiService *WarehousesAPIService
 	id int32
-	clientId *string
 	warehouse *Warehouse
-}
-
-// 
-func (r ApiPutProcurementWarehousesByIdRequest) ClientId(clientId string) ApiPutProcurementWarehousesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // warehouse
 func (r ApiPutProcurementWarehousesByIdRequest) Warehouse(warehouse Warehouse) ApiPutProcurementWarehousesByIdRequest {
 	r.warehouse = &warehouse
+	return r
+}
+
+// 
+func (r ApiPutProcurementWarehousesByIdRequest) ClientId(clientId string) ApiPutProcurementWarehousesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *WarehousesAPIService) PutProcurementWarehousesByIdExecute(r ApiPutProcu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.warehouse == nil {
 		return localVarReturnValue, nil, reportError("warehouse is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *WarehousesAPIService) PutProcurementWarehousesByIdExecute(r ApiPutProcu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.warehouse
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

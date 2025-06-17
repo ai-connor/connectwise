@@ -82,9 +82,6 @@ func (a *TaxableXRefLevelsAPIService) DeleteFinanceTaxCodesByGrandparentIdTaxCod
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -103,7 +100,9 @@ func (a *TaxableXRefLevelsAPIService) DeleteFinanceTaxCodesByGrandparentIdTaxCod
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -137,7 +136,6 @@ type ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevels
 	ApiService *TaxableXRefLevelsAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -146,12 +144,7 @@ type ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevels
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -202,6 +195,12 @@ func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLev
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest) Execute() ([]TaxableXRefLevel, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsExecute(r)
 }
@@ -245,9 +244,6 @@ func (a *TaxableXRefLevelsAPIService) GetFinanceTaxCodesByGrandparentIdTaxCodeXR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -290,7 +286,9 @@ func (a *TaxableXRefLevelsAPIService) GetFinanceTaxCodesByGrandparentIdTaxCodeXR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -334,7 +332,6 @@ type ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevels
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -343,12 +340,7 @@ type ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevels
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -399,6 +391,12 @@ func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLev
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) Execute() (*TaxableXRefLevel, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdExecute(r)
 }
@@ -445,9 +443,6 @@ func (a *TaxableXRefLevelsAPIService) GetFinanceTaxCodesByGrandparentIdTaxCodeXR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -490,7 +485,9 @@ func (a *TaxableXRefLevelsAPIService) GetFinanceTaxCodesByGrandparentIdTaxCodeXR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -533,7 +530,6 @@ type ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevels
 	ApiService *TaxableXRefLevelsAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -542,12 +538,7 @@ type ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevels
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsCountRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -598,6 +589,12 @@ func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLev
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsCountRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsCountExecute(r)
 }
@@ -641,9 +638,6 @@ func (a *TaxableXRefLevelsAPIService) GetFinanceTaxCodesByGrandparentIdTaxCodeXR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -686,7 +680,9 @@ func (a *TaxableXRefLevelsAPIService) GetFinanceTaxCodesByGrandparentIdTaxCodeXR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -730,19 +726,19 @@ type ApiPatchFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLeve
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) ClientId(clientId string) ApiPatchFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) ClientId(clientId string) ApiPatchFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -792,9 +788,6 @@ func (a *TaxableXRefLevelsAPIService) PatchFinanceTaxCodesByGrandparentIdTaxCode
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -816,7 +809,9 @@ func (a *TaxableXRefLevelsAPIService) PatchFinanceTaxCodesByGrandparentIdTaxCode
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -861,19 +856,19 @@ type ApiPostFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevel
 	ApiService *TaxableXRefLevelsAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	taxableXRefLevel *TaxableXRefLevel
-}
-
-// 
-func (r ApiPostFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest) ClientId(clientId string) ApiPostFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // taxableXRefLevel
 func (r ApiPostFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest) TaxableXRefLevel(taxableXRefLevel TaxableXRefLevel) ApiPostFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest {
 	r.taxableXRefLevel = &taxableXRefLevel
+	return r
+}
+
+// 
+func (r ApiPostFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest) ClientId(clientId string) ApiPostFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -920,9 +915,6 @@ func (a *TaxableXRefLevelsAPIService) PostFinanceTaxCodesByGrandparentIdTaxCodeX
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.taxableXRefLevel == nil {
 		return localVarReturnValue, nil, reportError("taxableXRefLevel is required and must be specified")
 	}
@@ -944,7 +936,9 @@ func (a *TaxableXRefLevelsAPIService) PostFinanceTaxCodesByGrandparentIdTaxCodeX
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.taxableXRefLevel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -990,19 +984,19 @@ type ApiPutFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevels
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	taxableXRefLevel *TaxableXRefLevel
-}
-
-// 
-func (r ApiPutFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) ClientId(clientId string) ApiPutFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // taxableXRefLevel
 func (r ApiPutFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) TaxableXRefLevel(taxableXRefLevel TaxableXRefLevel) ApiPutFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest {
 	r.taxableXRefLevel = &taxableXRefLevel
+	return r
+}
+
+// 
+func (r ApiPutFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest) ClientId(clientId string) ApiPutFinanceTaxCodesByGrandparentIdTaxCodeXRefsByParentIdTaxableXRefLevelsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1052,9 +1046,6 @@ func (a *TaxableXRefLevelsAPIService) PutFinanceTaxCodesByGrandparentIdTaxCodeXR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.taxableXRefLevel == nil {
 		return localVarReturnValue, nil, reportError("taxableXRefLevel is required and must be specified")
 	}
@@ -1076,7 +1067,9 @@ func (a *TaxableXRefLevelsAPIService) PutFinanceTaxCodesByGrandparentIdTaxCodeXR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.taxableXRefLevel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

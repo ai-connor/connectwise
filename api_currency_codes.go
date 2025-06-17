@@ -26,7 +26,6 @@ type CurrencyCodesAPIService service
 type ApiGetFinanceInfoCurrencyCodesRequest struct {
 	ctx context.Context
 	ApiService *CurrencyCodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetFinanceInfoCurrencyCodesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceInfoCurrencyCodesRequest) ClientId(clientId string) ApiGetFinanceInfoCurrencyCodesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetFinanceInfoCurrencyCodesRequest) PageId(pageId int32) ApiGetFinanc
 	return r
 }
 
+// 
+func (r ApiGetFinanceInfoCurrencyCodesRequest) ClientId(clientId string) ApiGetFinanceInfoCurrencyCodesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceInfoCurrencyCodesRequest) Execute() ([]CurrencyCode, *http.Response, error) {
 	return r.ApiService.GetFinanceInfoCurrencyCodesExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *CurrencyCodesAPIService) GetFinanceInfoCurrencyCodesExecute(r ApiGetFin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *CurrencyCodesAPIService) GetFinanceInfoCurrencyCodesExecute(r ApiGetFin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetFinanceInfoCurrencyCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *CurrencyCodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetFinanceInfoCurrencyCodesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceInfoCurrencyCodesByIdRequest) ClientId(clientId string) ApiGetFinanceInfoCurrencyCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetFinanceInfoCurrencyCodesByIdRequest) PageId(pageId int32) ApiGetFi
 	return r
 }
 
+// 
+func (r ApiGetFinanceInfoCurrencyCodesByIdRequest) ClientId(clientId string) ApiGetFinanceInfoCurrencyCodesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceInfoCurrencyCodesByIdRequest) Execute() (*CurrencyCode, *http.Response, error) {
 	return r.ApiService.GetFinanceInfoCurrencyCodesByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *CurrencyCodesAPIService) GetFinanceInfoCurrencyCodesByIdExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *CurrencyCodesAPIService) GetFinanceInfoCurrencyCodesByIdExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *CurrencyCodesAPIService) GetFinanceInfoCurrencyCodesByIdExecute(r ApiGe
 type ApiGetFinanceInfoCurrencyCodesCountRequest struct {
 	ctx context.Context
 	ApiService *CurrencyCodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetFinanceInfoCurrencyCodesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceInfoCurrencyCodesCountRequest) ClientId(clientId string) ApiGetFinanceInfoCurrencyCodesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetFinanceInfoCurrencyCodesCountRequest) PageId(pageId int32) ApiGetF
 	return r
 }
 
+// 
+func (r ApiGetFinanceInfoCurrencyCodesCountRequest) ClientId(clientId string) ApiGetFinanceInfoCurrencyCodesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceInfoCurrencyCodesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceInfoCurrencyCodesCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *CurrencyCodesAPIService) GetFinanceInfoCurrencyCodesCountExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *CurrencyCodesAPIService) GetFinanceInfoCurrencyCodesCountExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

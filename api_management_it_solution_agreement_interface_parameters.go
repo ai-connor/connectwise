@@ -80,9 +80,6 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) DeleteCompa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -101,7 +98,9 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) DeleteCompa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -143,7 +142,6 @@ type ApiGetCompanyManagementItSolutionsByParentIdManagementProductsRequest struc
 	ctx context.Context
 	ApiService *ManagementItSolutionAgreementInterfaceParametersAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -152,12 +150,7 @@ type ApiGetCompanyManagementItSolutionsByParentIdManagementProductsRequest struc
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsRequest) ClientId(clientId string) ApiGetCompanyManagementItSolutionsByParentIdManagementProductsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -208,6 +201,12 @@ func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsRequest) P
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsRequest) ClientId(clientId string) ApiGetCompanyManagementItSolutionsByParentIdManagementProductsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsRequest) Execute() ([]ManagementItSolutionAgreementInterfaceParameter, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementItSolutionsByParentIdManagementProductsExecute(r)
 }
@@ -248,9 +247,6 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) GetCompanyM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -293,7 +289,9 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) GetCompanyM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -336,7 +334,6 @@ type ApiGetCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest s
 	ApiService *ManagementItSolutionAgreementInterfaceParametersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -345,12 +342,7 @@ type ApiGetCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest s
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) ClientId(clientId string) ApiGetCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -401,6 +393,12 @@ func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsByIdReques
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) ClientId(clientId string) ApiGetCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) Execute() (*ManagementItSolutionAgreementInterfaceParameter, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementItSolutionsByParentIdManagementProductsByIdExecute(r)
 }
@@ -444,9 +442,6 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) GetCompanyM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -489,7 +484,9 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) GetCompanyM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -531,7 +528,6 @@ type ApiGetCompanyManagementItSolutionsByParentIdManagementProductsCountRequest 
 	ctx context.Context
 	ApiService *ManagementItSolutionAgreementInterfaceParametersAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -540,12 +536,7 @@ type ApiGetCompanyManagementItSolutionsByParentIdManagementProductsCountRequest 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsCountRequest) ClientId(clientId string) ApiGetCompanyManagementItSolutionsByParentIdManagementProductsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -596,6 +587,12 @@ func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsCountReque
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsCountRequest) ClientId(clientId string) ApiGetCompanyManagementItSolutionsByParentIdManagementProductsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementItSolutionsByParentIdManagementProductsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementItSolutionsByParentIdManagementProductsCountExecute(r)
 }
@@ -636,9 +633,6 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) GetCompanyM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -681,7 +675,9 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) GetCompanyM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -724,19 +720,19 @@ type ApiPatchCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest
 	ApiService *ManagementItSolutionAgreementInterfaceParametersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) ClientId(clientId string) ApiPatchCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) ClientId(clientId string) ApiPatchCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -783,9 +779,6 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) PatchCompan
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -807,7 +800,9 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) PatchCompan
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -851,19 +846,19 @@ type ApiPostCompanyManagementItSolutionsByParentIdManagementProductsRequest stru
 	ctx context.Context
 	ApiService *ManagementItSolutionAgreementInterfaceParametersAPIService
 	parentId int32
-	clientId *string
 	managementItSolutionAgreementInterfaceParameter *ManagementItSolutionAgreementInterfaceParameter
-}
-
-// 
-func (r ApiPostCompanyManagementItSolutionsByParentIdManagementProductsRequest) ClientId(clientId string) ApiPostCompanyManagementItSolutionsByParentIdManagementProductsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementProduct
 func (r ApiPostCompanyManagementItSolutionsByParentIdManagementProductsRequest) ManagementItSolutionAgreementInterfaceParameter(managementItSolutionAgreementInterfaceParameter ManagementItSolutionAgreementInterfaceParameter) ApiPostCompanyManagementItSolutionsByParentIdManagementProductsRequest {
 	r.managementItSolutionAgreementInterfaceParameter = &managementItSolutionAgreementInterfaceParameter
+	return r
+}
+
+// 
+func (r ApiPostCompanyManagementItSolutionsByParentIdManagementProductsRequest) ClientId(clientId string) ApiPostCompanyManagementItSolutionsByParentIdManagementProductsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -907,9 +902,6 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) PostCompany
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementItSolutionAgreementInterfaceParameter == nil {
 		return localVarReturnValue, nil, reportError("managementItSolutionAgreementInterfaceParameter is required and must be specified")
 	}
@@ -931,7 +923,9 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) PostCompany
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementItSolutionAgreementInterfaceParameter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -976,19 +970,19 @@ type ApiPutCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest s
 	ApiService *ManagementItSolutionAgreementInterfaceParametersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	managementItSolutionAgreementInterfaceParameter *ManagementItSolutionAgreementInterfaceParameter
-}
-
-// 
-func (r ApiPutCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) ClientId(clientId string) ApiPutCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementProduct
 func (r ApiPutCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) ManagementItSolutionAgreementInterfaceParameter(managementItSolutionAgreementInterfaceParameter ManagementItSolutionAgreementInterfaceParameter) ApiPutCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest {
 	r.managementItSolutionAgreementInterfaceParameter = &managementItSolutionAgreementInterfaceParameter
+	return r
+}
+
+// 
+func (r ApiPutCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest) ClientId(clientId string) ApiPutCompanyManagementItSolutionsByParentIdManagementProductsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1035,9 +1029,6 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) PutCompanyM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementItSolutionAgreementInterfaceParameter == nil {
 		return localVarReturnValue, nil, reportError("managementItSolutionAgreementInterfaceParameter is required and must be specified")
 	}
@@ -1059,7 +1050,9 @@ func (a *ManagementItSolutionAgreementInterfaceParametersAPIService) PutCompanyM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementItSolutionAgreementInterfaceParameter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

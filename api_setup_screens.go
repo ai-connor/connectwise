@@ -26,7 +26,6 @@ type SetupScreensAPIService service
 type ApiGetSystemSetupScreensRequest struct {
 	ctx context.Context
 	ApiService *SetupScreensAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemSetupScreensRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSetupScreensRequest) ClientId(clientId string) ApiGetSystemSetupScreensRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemSetupScreensRequest) PageId(pageId int32) ApiGetSystemSetupS
 	return r
 }
 
+// 
+func (r ApiGetSystemSetupScreensRequest) ClientId(clientId string) ApiGetSystemSetupScreensRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSetupScreensRequest) Execute() ([]SetupScreen, *http.Response, error) {
 	return r.ApiService.GetSystemSetupScreensExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *SetupScreensAPIService) GetSystemSetupScreensExecute(r ApiGetSystemSetu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *SetupScreensAPIService) GetSystemSetupScreensExecute(r ApiGetSystemSetu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemSetupScreensByIdRequest struct {
 	ctx context.Context
 	ApiService *SetupScreensAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemSetupScreensByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSetupScreensByIdRequest) ClientId(clientId string) ApiGetSystemSetupScreensByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemSetupScreensByIdRequest) PageId(pageId int32) ApiGetSystemSe
 	return r
 }
 
+// 
+func (r ApiGetSystemSetupScreensByIdRequest) ClientId(clientId string) ApiGetSystemSetupScreensByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSetupScreensByIdRequest) Execute() (*SetupScreen, *http.Response, error) {
 	return r.ApiService.GetSystemSetupScreensByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *SetupScreensAPIService) GetSystemSetupScreensByIdExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *SetupScreensAPIService) GetSystemSetupScreensByIdExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *SetupScreensAPIService) GetSystemSetupScreensByIdExecute(r ApiGetSystem
 type ApiGetSystemSetupScreensCountRequest struct {
 	ctx context.Context
 	ApiService *SetupScreensAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemSetupScreensCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSetupScreensCountRequest) ClientId(clientId string) ApiGetSystemSetupScreensCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemSetupScreensCountRequest) PageId(pageId int32) ApiGetSystemS
 	return r
 }
 
+// 
+func (r ApiGetSystemSetupScreensCountRequest) ClientId(clientId string) ApiGetSystemSetupScreensCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSetupScreensCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSetupScreensCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *SetupScreensAPIService) GetSystemSetupScreensCountExecute(r ApiGetSyste
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *SetupScreensAPIService) GetSystemSetupScreensCountExecute(r ApiGetSyste
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

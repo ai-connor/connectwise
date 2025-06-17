@@ -74,9 +74,6 @@ func (a *ChargeCodesAPIService) DeleteTimeChargeCodesByIdExecute(r ApiDeleteTime
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ChargeCodesAPIService) DeleteTimeChargeCodesByIdExecute(r ApiDeleteTime
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ChargeCodesAPIService) DeleteTimeChargeCodesByIdExecute(r ApiDeleteTime
 type ApiGetTimeChargeCodesRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetTimeChargeCodesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeChargeCodesRequest) ClientId(clientId string) ApiGetTimeChargeCodesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetTimeChargeCodesRequest) PageId(pageId int32) ApiGetTimeChargeCodes
 	return r
 }
 
+// 
+func (r ApiGetTimeChargeCodesRequest) ClientId(clientId string) ApiGetTimeChargeCodesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeChargeCodesRequest) Execute() ([]ChargeCode, *http.Response, error) {
 	return r.ApiService.GetTimeChargeCodesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesExecute(r ApiGetTimeChargeCode
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesExecute(r ApiGetTimeChargeCode
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetTimeChargeCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetTimeChargeCodesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeChargeCodesByIdRequest) ClientId(clientId string) ApiGetTimeChargeCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetTimeChargeCodesByIdRequest) PageId(pageId int32) ApiGetTimeChargeC
 	return r
 }
 
+// 
+func (r ApiGetTimeChargeCodesByIdRequest) ClientId(clientId string) ApiGetTimeChargeCodesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeChargeCodesByIdRequest) Execute() (*ChargeCode, *http.Response, error) {
 	return r.ApiService.GetTimeChargeCodesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdExecute(r ApiGetTimeCharge
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdExecute(r ApiGetTimeCharge
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetTimeChargeCodesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetTimeChargeCodesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeChargeCodesByIdInfoRequest) ClientId(clientId string) ApiGetTimeChargeCodesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetTimeChargeCodesByIdInfoRequest) PageId(pageId int32) ApiGetTimeCha
 	return r
 }
 
+// 
+func (r ApiGetTimeChargeCodesByIdInfoRequest) ClientId(clientId string) ApiGetTimeChargeCodesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeChargeCodesByIdInfoRequest) Execute() (*ChargeCodeInfo, *http.Response, error) {
 	return r.ApiService.GetTimeChargeCodesByIdInfoExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdInfoExecute(r ApiGetTimeCh
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdInfoExecute(r ApiGetTimeCh
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetTimeChargeCodesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetTimeChargeCodesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeChargeCodesByIdUsagesRequest) ClientId(clientId string) ApiGetTimeChargeCodesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetTimeChargeCodesByIdUsagesRequest) PageId(pageId int32) ApiGetTimeC
 	return r
 }
 
+// 
+func (r ApiGetTimeChargeCodesByIdUsagesRequest) ClientId(clientId string) ApiGetTimeChargeCodesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeChargeCodesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetTimeChargeCodesByIdUsagesExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdUsagesExecute(r ApiGetTime
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdUsagesExecute(r ApiGetTime
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -892,7 +887,6 @@ type ApiGetTimeChargeCodesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -901,12 +895,7 @@ type ApiGetTimeChargeCodesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeChargeCodesByIdUsagesListRequest) ClientId(clientId string) ApiGetTimeChargeCodesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -957,6 +946,12 @@ func (r ApiGetTimeChargeCodesByIdUsagesListRequest) PageId(pageId int32) ApiGetT
 	return r
 }
 
+// 
+func (r ApiGetTimeChargeCodesByIdUsagesListRequest) ClientId(clientId string) ApiGetTimeChargeCodesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeChargeCodesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetTimeChargeCodesByIdUsagesListExecute(r)
 }
@@ -997,9 +992,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdUsagesListExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1042,7 +1034,9 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdUsagesListExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1083,7 +1077,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesByIdUsagesListExecute(r ApiGet
 type ApiGetTimeChargeCodesCountRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1092,12 +1085,7 @@ type ApiGetTimeChargeCodesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeChargeCodesCountRequest) ClientId(clientId string) ApiGetTimeChargeCodesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1148,6 +1136,12 @@ func (r ApiGetTimeChargeCodesCountRequest) PageId(pageId int32) ApiGetTimeCharge
 	return r
 }
 
+// 
+func (r ApiGetTimeChargeCodesCountRequest) ClientId(clientId string) ApiGetTimeChargeCodesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeChargeCodesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeChargeCodesCountExecute(r)
 }
@@ -1185,9 +1179,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesCountExecute(r ApiGetTimeCharg
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1230,7 +1221,9 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesCountExecute(r ApiGetTimeCharg
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1271,7 +1264,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesCountExecute(r ApiGetTimeCharg
 type ApiGetTimeChargeCodesInfoRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1280,12 +1272,7 @@ type ApiGetTimeChargeCodesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeChargeCodesInfoRequest) ClientId(clientId string) ApiGetTimeChargeCodesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1336,6 +1323,12 @@ func (r ApiGetTimeChargeCodesInfoRequest) PageId(pageId int32) ApiGetTimeChargeC
 	return r
 }
 
+// 
+func (r ApiGetTimeChargeCodesInfoRequest) ClientId(clientId string) ApiGetTimeChargeCodesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeChargeCodesInfoRequest) Execute() ([]ChargeCodeInfo, *http.Response, error) {
 	return r.ApiService.GetTimeChargeCodesInfoExecute(r)
 }
@@ -1373,9 +1366,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesInfoExecute(r ApiGetTimeCharge
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1418,7 +1408,9 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesInfoExecute(r ApiGetTimeCharge
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1459,7 +1451,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesInfoExecute(r ApiGetTimeCharge
 type ApiGetTimeChargeCodesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1468,12 +1459,7 @@ type ApiGetTimeChargeCodesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeChargeCodesInfoCountRequest) ClientId(clientId string) ApiGetTimeChargeCodesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1524,6 +1510,12 @@ func (r ApiGetTimeChargeCodesInfoCountRequest) PageId(pageId int32) ApiGetTimeCh
 	return r
 }
 
+// 
+func (r ApiGetTimeChargeCodesInfoCountRequest) ClientId(clientId string) ApiGetTimeChargeCodesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeChargeCodesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeChargeCodesInfoCountExecute(r)
 }
@@ -1561,9 +1553,6 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesInfoCountExecute(r ApiGetTimeC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1606,7 +1595,9 @@ func (a *ChargeCodesAPIService) GetTimeChargeCodesInfoCountExecute(r ApiGetTimeC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1648,19 +1639,19 @@ type ApiPatchTimeChargeCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchTimeChargeCodesByIdRequest) ClientId(clientId string) ApiPatchTimeChargeCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchTimeChargeCodesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchTimeChargeCodesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchTimeChargeCodesByIdRequest) ClientId(clientId string) ApiPatchTimeChargeCodesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1704,9 +1695,6 @@ func (a *ChargeCodesAPIService) PatchTimeChargeCodesByIdExecute(r ApiPatchTimeCh
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1728,7 +1716,9 @@ func (a *ChargeCodesAPIService) PatchTimeChargeCodesByIdExecute(r ApiPatchTimeCh
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1771,19 +1761,19 @@ func (a *ChargeCodesAPIService) PatchTimeChargeCodesByIdExecute(r ApiPatchTimeCh
 type ApiPostTimeChargeCodesRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
-	clientId *string
 	chargeCode *ChargeCode
-}
-
-// 
-func (r ApiPostTimeChargeCodesRequest) ClientId(clientId string) ApiPostTimeChargeCodesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // chargeCode
 func (r ApiPostTimeChargeCodesRequest) ChargeCode(chargeCode ChargeCode) ApiPostTimeChargeCodesRequest {
 	r.chargeCode = &chargeCode
+	return r
+}
+
+// 
+func (r ApiPostTimeChargeCodesRequest) ClientId(clientId string) ApiPostTimeChargeCodesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1824,9 +1814,6 @@ func (a *ChargeCodesAPIService) PostTimeChargeCodesExecute(r ApiPostTimeChargeCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.chargeCode == nil {
 		return localVarReturnValue, nil, reportError("chargeCode is required and must be specified")
 	}
@@ -1848,7 +1835,9 @@ func (a *ChargeCodesAPIService) PostTimeChargeCodesExecute(r ApiPostTimeChargeCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.chargeCode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1892,19 +1881,19 @@ type ApiPutTimeChargeCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *ChargeCodesAPIService
 	id int32
-	clientId *string
 	chargeCode *ChargeCode
-}
-
-// 
-func (r ApiPutTimeChargeCodesByIdRequest) ClientId(clientId string) ApiPutTimeChargeCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // chargeCode
 func (r ApiPutTimeChargeCodesByIdRequest) ChargeCode(chargeCode ChargeCode) ApiPutTimeChargeCodesByIdRequest {
 	r.chargeCode = &chargeCode
+	return r
+}
+
+// 
+func (r ApiPutTimeChargeCodesByIdRequest) ClientId(clientId string) ApiPutTimeChargeCodesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1948,9 +1937,6 @@ func (a *ChargeCodesAPIService) PutTimeChargeCodesByIdExecute(r ApiPutTimeCharge
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.chargeCode == nil {
 		return localVarReturnValue, nil, reportError("chargeCode is required and must be specified")
 	}
@@ -1972,7 +1958,9 @@ func (a *ChargeCodesAPIService) PutTimeChargeCodesByIdExecute(r ApiPutTimeCharge
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.chargeCode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

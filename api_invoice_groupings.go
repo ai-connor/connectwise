@@ -74,9 +74,6 @@ func (a *InvoiceGroupingsAPIService) DeleteProcurementInvoicegroupingByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *InvoiceGroupingsAPIService) DeleteProcurementInvoicegroupingByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *InvoiceGroupingsAPIService) DeleteProcurementInvoicegroupingByIdExecute
 type ApiGetProcurementInvoicegroupingRequest struct {
 	ctx context.Context
 	ApiService *InvoiceGroupingsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementInvoicegroupingRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementInvoicegroupingRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementInvoicegroupingRequest) PageId(pageId int32) ApiGetProc
 	return r
 }
 
+// 
+func (r ApiGetProcurementInvoicegroupingRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementInvoicegroupingRequest) Execute() ([]InvoiceGrouping, *http.Response, error) {
 	return r.ApiService.GetProcurementInvoicegroupingExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProcurementInvoicegroupingByIdRequest struct {
 	ctx context.Context
 	ApiService *InvoiceGroupingsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProcurementInvoicegroupingByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementInvoicegroupingByIdRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProcurementInvoicegroupingByIdRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetProcurementInvoicegroupingByIdRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementInvoicegroupingByIdRequest) Execute() (*InvoiceGrouping, *http.Response, error) {
 	return r.ApiService.GetProcurementInvoicegroupingByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetProcurementInvoicegroupingByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *InvoiceGroupingsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetProcurementInvoicegroupingByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementInvoicegroupingByIdUsagesRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetProcurementInvoicegroupingByIdUsagesRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetProcurementInvoicegroupingByIdUsagesRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementInvoicegroupingByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetProcurementInvoicegroupingByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingByIdUsagesExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingByIdUsagesExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetProcurementInvoicegroupingByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *InvoiceGroupingsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetProcurementInvoicegroupingByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementInvoicegroupingByIdUsagesListRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetProcurementInvoicegroupingByIdUsagesListRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetProcurementInvoicegroupingByIdUsagesListRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementInvoicegroupingByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetProcurementInvoicegroupingByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingByIdUsagesList
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingByIdUsagesList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingByIdUsagesList
 type ApiGetProcurementInvoicegroupingCountRequest struct {
 	ctx context.Context
 	ApiService *InvoiceGroupingsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetProcurementInvoicegroupingCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementInvoicegroupingCountRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetProcurementInvoicegroupingCountRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetProcurementInvoicegroupingCountRequest) ClientId(clientId string) ApiGetProcurementInvoicegroupingCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementInvoicegroupingCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementInvoicegroupingCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingCountExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *InvoiceGroupingsAPIService) GetProcurementInvoicegroupingCountExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchProcurementInvoicegroupingByIdRequest struct {
 	ctx context.Context
 	ApiService *InvoiceGroupingsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementInvoicegroupingByIdRequest) ClientId(clientId string) ApiPatchProcurementInvoicegroupingByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementInvoicegroupingByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementInvoicegroupingByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementInvoicegroupingByIdRequest) ClientId(clientId string) ApiPatchProcurementInvoicegroupingByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *InvoiceGroupingsAPIService) PatchProcurementInvoicegroupingByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *InvoiceGroupingsAPIService) PatchProcurementInvoicegroupingByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *InvoiceGroupingsAPIService) PatchProcurementInvoicegroupingByIdExecute(
 type ApiPostProcurementInvoicegroupingCountRequest struct {
 	ctx context.Context
 	ApiService *InvoiceGroupingsAPIService
-	clientId *string
 	invoiceGrouping *InvoiceGrouping
-}
-
-// 
-func (r ApiPostProcurementInvoicegroupingCountRequest) ClientId(clientId string) ApiPostProcurementInvoicegroupingCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // invoiceGrouping
 func (r ApiPostProcurementInvoicegroupingCountRequest) InvoiceGrouping(invoiceGrouping InvoiceGrouping) ApiPostProcurementInvoicegroupingCountRequest {
 	r.invoiceGrouping = &invoiceGrouping
+	return r
+}
+
+// 
+func (r ApiPostProcurementInvoicegroupingCountRequest) ClientId(clientId string) ApiPostProcurementInvoicegroupingCountRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *InvoiceGroupingsAPIService) PostProcurementInvoicegroupingCountExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.invoiceGrouping == nil {
 		return localVarReturnValue, nil, reportError("invoiceGrouping is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *InvoiceGroupingsAPIService) PostProcurementInvoicegroupingCountExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.invoiceGrouping
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutProcurementInvoicegroupingByIdRequest struct {
 	ctx context.Context
 	ApiService *InvoiceGroupingsAPIService
 	id int32
-	clientId *string
 	invoiceGrouping *InvoiceGrouping
-}
-
-// 
-func (r ApiPutProcurementInvoicegroupingByIdRequest) ClientId(clientId string) ApiPutProcurementInvoicegroupingByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // invoiceGrouping
 func (r ApiPutProcurementInvoicegroupingByIdRequest) InvoiceGrouping(invoiceGrouping InvoiceGrouping) ApiPutProcurementInvoicegroupingByIdRequest {
 	r.invoiceGrouping = &invoiceGrouping
+	return r
+}
+
+// 
+func (r ApiPutProcurementInvoicegroupingByIdRequest) ClientId(clientId string) ApiPutProcurementInvoicegroupingByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *InvoiceGroupingsAPIService) PutProcurementInvoicegroupingByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.invoiceGrouping == nil {
 		return localVarReturnValue, nil, reportError("invoiceGrouping is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *InvoiceGroupingsAPIService) PutProcurementInvoicegroupingByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.invoiceGrouping
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -78,9 +78,6 @@ func (a *WorkRoleLocationsAPIService) DeleteTimeWorkRolesByParentIdLocationsById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *WorkRoleLocationsAPIService) DeleteTimeWorkRolesByParentIdLocationsById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetTimeWorkRolesByParentIdLocationsRequest struct {
 	ctx context.Context
 	ApiService *WorkRoleLocationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetTimeWorkRolesByParentIdLocationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeWorkRolesByParentIdLocationsRequest) ClientId(clientId string) ApiGetTimeWorkRolesByParentIdLocationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetTimeWorkRolesByParentIdLocationsRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetTimeWorkRolesByParentIdLocationsRequest) ClientId(clientId string) ApiGetTimeWorkRolesByParentIdLocationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeWorkRolesByParentIdLocationsRequest) Execute() ([]WorkRoleLocation, *http.Response, error) {
 	return r.ApiService.GetTimeWorkRolesByParentIdLocationsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *WorkRoleLocationsAPIService) GetTimeWorkRolesByParentIdLocationsExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *WorkRoleLocationsAPIService) GetTimeWorkRolesByParentIdLocationsExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetTimeWorkRolesByParentIdLocationsByIdRequest struct {
 	ApiService *WorkRoleLocationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetTimeWorkRolesByParentIdLocationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeWorkRolesByParentIdLocationsByIdRequest) ClientId(clientId string) ApiGetTimeWorkRolesByParentIdLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetTimeWorkRolesByParentIdLocationsByIdRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetTimeWorkRolesByParentIdLocationsByIdRequest) ClientId(clientId string) ApiGetTimeWorkRolesByParentIdLocationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeWorkRolesByParentIdLocationsByIdRequest) Execute() (*WorkRoleLocation, *http.Response, error) {
 	return r.ApiService.GetTimeWorkRolesByParentIdLocationsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *WorkRoleLocationsAPIService) GetTimeWorkRolesByParentIdLocationsByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *WorkRoleLocationsAPIService) GetTimeWorkRolesByParentIdLocationsByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetTimeWorkRolesByParentIdLocationsCountRequest struct {
 	ctx context.Context
 	ApiService *WorkRoleLocationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetTimeWorkRolesByParentIdLocationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeWorkRolesByParentIdLocationsCountRequest) ClientId(clientId string) ApiGetTimeWorkRolesByParentIdLocationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetTimeWorkRolesByParentIdLocationsCountRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetTimeWorkRolesByParentIdLocationsCountRequest) ClientId(clientId string) ApiGetTimeWorkRolesByParentIdLocationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeWorkRolesByParentIdLocationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeWorkRolesByParentIdLocationsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *WorkRoleLocationsAPIService) GetTimeWorkRolesByParentIdLocationsCountEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *WorkRoleLocationsAPIService) GetTimeWorkRolesByParentIdLocationsCountEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchTimeWorkRolesByParentIdLocationsByIdRequest struct {
 	ApiService *WorkRoleLocationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchTimeWorkRolesByParentIdLocationsByIdRequest) ClientId(clientId string) ApiPatchTimeWorkRolesByParentIdLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchTimeWorkRolesByParentIdLocationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchTimeWorkRolesByParentIdLocationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchTimeWorkRolesByParentIdLocationsByIdRequest) ClientId(clientId string) ApiPatchTimeWorkRolesByParentIdLocationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *WorkRoleLocationsAPIService) PatchTimeWorkRolesByParentIdLocationsByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *WorkRoleLocationsAPIService) PatchTimeWorkRolesByParentIdLocationsByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostTimeWorkRolesByParentIdLocationsRequest struct {
 	ctx context.Context
 	ApiService *WorkRoleLocationsAPIService
 	parentId int32
-	clientId *string
 	workRoleLocation *WorkRoleLocation
-}
-
-// 
-func (r ApiPostTimeWorkRolesByParentIdLocationsRequest) ClientId(clientId string) ApiPostTimeWorkRolesByParentIdLocationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workRoleLocation
 func (r ApiPostTimeWorkRolesByParentIdLocationsRequest) WorkRoleLocation(workRoleLocation WorkRoleLocation) ApiPostTimeWorkRolesByParentIdLocationsRequest {
 	r.workRoleLocation = &workRoleLocation
+	return r
+}
+
+// 
+func (r ApiPostTimeWorkRolesByParentIdLocationsRequest) ClientId(clientId string) ApiPostTimeWorkRolesByParentIdLocationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *WorkRoleLocationsAPIService) PostTimeWorkRolesByParentIdLocationsExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.workRoleLocation == nil {
 		return localVarReturnValue, nil, reportError("workRoleLocation is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *WorkRoleLocationsAPIService) PostTimeWorkRolesByParentIdLocationsExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.workRoleLocation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutTimeWorkRolesByParentIdLocationsByIdRequest struct {
 	ApiService *WorkRoleLocationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	workRoleLocation *WorkRoleLocation
-}
-
-// 
-func (r ApiPutTimeWorkRolesByParentIdLocationsByIdRequest) ClientId(clientId string) ApiPutTimeWorkRolesByParentIdLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workRoleLocation
 func (r ApiPutTimeWorkRolesByParentIdLocationsByIdRequest) WorkRoleLocation(workRoleLocation WorkRoleLocation) ApiPutTimeWorkRolesByParentIdLocationsByIdRequest {
 	r.workRoleLocation = &workRoleLocation
+	return r
+}
+
+// 
+func (r ApiPutTimeWorkRolesByParentIdLocationsByIdRequest) ClientId(clientId string) ApiPutTimeWorkRolesByParentIdLocationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *WorkRoleLocationsAPIService) PutTimeWorkRolesByParentIdLocationsByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.workRoleLocation == nil {
 		return localVarReturnValue, nil, reportError("workRoleLocation is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *WorkRoleLocationsAPIService) PutTimeWorkRolesByParentIdLocationsByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.workRoleLocation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *OpportunityForecastsAPIService) DeleteSalesOpportunitiesByParentIdForec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *OpportunityForecastsAPIService) DeleteSalesOpportunitiesByParentIdForec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -128,7 +127,6 @@ type ApiGetSalesOpportunitiesByParentIdForecastRequest struct {
 	ctx context.Context
 	ApiService *OpportunityForecastsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -137,12 +135,7 @@ type ApiGetSalesOpportunitiesByParentIdForecastRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesByParentIdForecastRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdForecastRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -193,6 +186,12 @@ func (r ApiGetSalesOpportunitiesByParentIdForecastRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesByParentIdForecastRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdForecastRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesByParentIdForecastRequest) Execute() ([]Forecast, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesByParentIdForecastExecute(r)
 }
@@ -233,9 +232,6 @@ func (a *OpportunityForecastsAPIService) GetSalesOpportunitiesByParentIdForecast
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -278,7 +274,9 @@ func (a *OpportunityForecastsAPIService) GetSalesOpportunitiesByParentIdForecast
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -320,7 +318,6 @@ type ApiGetSalesOpportunitiesByParentIdForecastCountRequest struct {
 	ctx context.Context
 	ApiService *OpportunityForecastsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -329,12 +326,7 @@ type ApiGetSalesOpportunitiesByParentIdForecastCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesByParentIdForecastCountRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdForecastCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -385,6 +377,12 @@ func (r ApiGetSalesOpportunitiesByParentIdForecastCountRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesByParentIdForecastCountRequest) ClientId(clientId string) ApiGetSalesOpportunitiesByParentIdForecastCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesByParentIdForecastCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesByParentIdForecastCountExecute(r)
 }
@@ -425,9 +423,6 @@ func (a *OpportunityForecastsAPIService) GetSalesOpportunitiesByParentIdForecast
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -470,7 +465,9 @@ func (a *OpportunityForecastsAPIService) GetSalesOpportunitiesByParentIdForecast
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -512,19 +509,19 @@ type ApiPatchSalesOpportunitiesByParentIdForecastRequest struct {
 	ctx context.Context
 	ApiService *OpportunityForecastsAPIService
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesOpportunitiesByParentIdForecastRequest) ClientId(clientId string) ApiPatchSalesOpportunitiesByParentIdForecastRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesOpportunitiesByParentIdForecastRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesOpportunitiesByParentIdForecastRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesOpportunitiesByParentIdForecastRequest) ClientId(clientId string) ApiPatchSalesOpportunitiesByParentIdForecastRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -568,9 +565,6 @@ func (a *OpportunityForecastsAPIService) PatchSalesOpportunitiesByParentIdForeca
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -592,7 +586,9 @@ func (a *OpportunityForecastsAPIService) PatchSalesOpportunitiesByParentIdForeca
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -636,19 +632,19 @@ type ApiPostSalesOpportunitiesByParentIdForecastRequest struct {
 	ctx context.Context
 	ApiService *OpportunityForecastsAPIService
 	parentId int32
-	clientId *string
 	forecast *Forecast
-}
-
-// 
-func (r ApiPostSalesOpportunitiesByParentIdForecastRequest) ClientId(clientId string) ApiPostSalesOpportunitiesByParentIdForecastRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // forecast
 func (r ApiPostSalesOpportunitiesByParentIdForecastRequest) Forecast(forecast Forecast) ApiPostSalesOpportunitiesByParentIdForecastRequest {
 	r.forecast = &forecast
+	return r
+}
+
+// 
+func (r ApiPostSalesOpportunitiesByParentIdForecastRequest) ClientId(clientId string) ApiPostSalesOpportunitiesByParentIdForecastRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -692,9 +688,6 @@ func (a *OpportunityForecastsAPIService) PostSalesOpportunitiesByParentIdForecas
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.forecast == nil {
 		return localVarReturnValue, nil, reportError("forecast is required and must be specified")
 	}
@@ -716,7 +709,9 @@ func (a *OpportunityForecastsAPIService) PostSalesOpportunitiesByParentIdForecas
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.forecast
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -813,9 +808,6 @@ func (a *OpportunityForecastsAPIService) PostSalesOpportunitiesByParentIdForecas
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -834,7 +826,9 @@ func (a *OpportunityForecastsAPIService) PostSalesOpportunitiesByParentIdForecas
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -876,19 +870,19 @@ type ApiPutSalesOpportunitiesByParentIdForecastRequest struct {
 	ctx context.Context
 	ApiService *OpportunityForecastsAPIService
 	parentId int32
-	clientId *string
 	forecast *Forecast
-}
-
-// 
-func (r ApiPutSalesOpportunitiesByParentIdForecastRequest) ClientId(clientId string) ApiPutSalesOpportunitiesByParentIdForecastRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // forecast
 func (r ApiPutSalesOpportunitiesByParentIdForecastRequest) Forecast(forecast Forecast) ApiPutSalesOpportunitiesByParentIdForecastRequest {
 	r.forecast = &forecast
+	return r
+}
+
+// 
+func (r ApiPutSalesOpportunitiesByParentIdForecastRequest) ClientId(clientId string) ApiPutSalesOpportunitiesByParentIdForecastRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -932,9 +926,6 @@ func (a *OpportunityForecastsAPIService) PutSalesOpportunitiesByParentIdForecast
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.forecast == nil {
 		return localVarReturnValue, nil, reportError("forecast is required and must be specified")
 	}
@@ -956,7 +947,9 @@ func (a *OpportunityForecastsAPIService) PutSalesOpportunitiesByParentIdForecast
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.forecast
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

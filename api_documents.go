@@ -75,9 +75,6 @@ func (a *DocumentsAPIService) DeleteSystemDocumentsByIdExecute(r ApiDeleteSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -96,7 +93,9 @@ func (a *DocumentsAPIService) DeleteSystemDocumentsByIdExecute(r ApiDeleteSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -128,7 +127,6 @@ func (a *DocumentsAPIService) DeleteSystemDocumentsByIdExecute(r ApiDeleteSystem
 type ApiGetSystemDocumentsRequest struct {
 	ctx context.Context
 	ApiService *DocumentsAPIService
-	clientId *string
 	recordType *string
 	recordId *int32
 	conditions *string
@@ -139,12 +137,7 @@ type ApiGetSystemDocumentsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDocumentsRequest) ClientId(clientId string) ApiGetSystemDocumentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // recordType
@@ -207,6 +200,12 @@ func (r ApiGetSystemDocumentsRequest) PageId(pageId int32) ApiGetSystemDocuments
 	return r
 }
 
+// 
+func (r ApiGetSystemDocumentsRequest) ClientId(clientId string) ApiGetSystemDocumentsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDocumentsRequest) Execute() ([]DocumentInfo, *http.Response, error) {
 	return r.ApiService.GetSystemDocumentsExecute(r)
 }
@@ -244,9 +243,6 @@ func (a *DocumentsAPIService) GetSystemDocumentsExecute(r ApiGetSystemDocumentsR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.recordType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "recordType", r.recordType, "form", "")
@@ -295,7 +291,9 @@ func (a *DocumentsAPIService) GetSystemDocumentsExecute(r ApiGetSystemDocumentsR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -337,7 +335,6 @@ type ApiGetSystemDocumentsByIdRequest struct {
 	ctx context.Context
 	ApiService *DocumentsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -346,12 +343,7 @@ type ApiGetSystemDocumentsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDocumentsByIdRequest) ClientId(clientId string) ApiGetSystemDocumentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -402,6 +394,12 @@ func (r ApiGetSystemDocumentsByIdRequest) PageId(pageId int32) ApiGetSystemDocum
 	return r
 }
 
+// 
+func (r ApiGetSystemDocumentsByIdRequest) ClientId(clientId string) ApiGetSystemDocumentsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDocumentsByIdRequest) Execute() (*DocumentInfo, *http.Response, error) {
 	return r.ApiService.GetSystemDocumentsByIdExecute(r)
 }
@@ -442,9 +440,6 @@ func (a *DocumentsAPIService) GetSystemDocumentsByIdExecute(r ApiGetSystemDocume
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -487,7 +482,9 @@ func (a *DocumentsAPIService) GetSystemDocumentsByIdExecute(r ApiGetSystemDocume
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -529,7 +526,6 @@ type ApiGetSystemDocumentsByIdDownloadRequest struct {
 	ctx context.Context
 	ApiService *DocumentsAPIService
 	id int32
-	clientId *string
 	lastModified *string
 	conditions *string
 	childConditions *string
@@ -539,12 +535,7 @@ type ApiGetSystemDocumentsByIdDownloadRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDocumentsByIdDownloadRequest) ClientId(clientId string) ApiGetSystemDocumentsByIdDownloadRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // lastModified
@@ -601,6 +592,12 @@ func (r ApiGetSystemDocumentsByIdDownloadRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemDocumentsByIdDownloadRequest) ClientId(clientId string) ApiGetSystemDocumentsByIdDownloadRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDocumentsByIdDownloadRequest) Execute() (*os.File, *http.Response, error) {
 	return r.ApiService.GetSystemDocumentsByIdDownloadExecute(r)
 }
@@ -641,9 +638,6 @@ func (a *DocumentsAPIService) GetSystemDocumentsByIdDownloadExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.lastModified != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "lastModified", r.lastModified, "form", "")
@@ -689,7 +683,9 @@ func (a *DocumentsAPIService) GetSystemDocumentsByIdDownloadExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -731,7 +727,6 @@ type ApiGetSystemDocumentsByIdThumbnailRequest struct {
 	ctx context.Context
 	ApiService *DocumentsAPIService
 	id int32
-	clientId *string
 	lastModified *string
 	conditions *string
 	childConditions *string
@@ -741,12 +736,7 @@ type ApiGetSystemDocumentsByIdThumbnailRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDocumentsByIdThumbnailRequest) ClientId(clientId string) ApiGetSystemDocumentsByIdThumbnailRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // lastModified
@@ -803,6 +793,12 @@ func (r ApiGetSystemDocumentsByIdThumbnailRequest) PageId(pageId int32) ApiGetSy
 	return r
 }
 
+// 
+func (r ApiGetSystemDocumentsByIdThumbnailRequest) ClientId(clientId string) ApiGetSystemDocumentsByIdThumbnailRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDocumentsByIdThumbnailRequest) Execute() (*os.File, *http.Response, error) {
 	return r.ApiService.GetSystemDocumentsByIdThumbnailExecute(r)
 }
@@ -843,9 +839,6 @@ func (a *DocumentsAPIService) GetSystemDocumentsByIdThumbnailExecute(r ApiGetSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.lastModified != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "lastModified", r.lastModified, "form", "")
@@ -891,7 +884,9 @@ func (a *DocumentsAPIService) GetSystemDocumentsByIdThumbnailExecute(r ApiGetSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -932,7 +927,6 @@ func (a *DocumentsAPIService) GetSystemDocumentsByIdThumbnailExecute(r ApiGetSys
 type ApiGetSystemDocumentsCountRequest struct {
 	ctx context.Context
 	ApiService *DocumentsAPIService
-	clientId *string
 	recordType *string
 	recordId *int32
 	conditions *string
@@ -943,12 +937,7 @@ type ApiGetSystemDocumentsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDocumentsCountRequest) ClientId(clientId string) ApiGetSystemDocumentsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // recordType
@@ -1011,6 +1000,12 @@ func (r ApiGetSystemDocumentsCountRequest) PageId(pageId int32) ApiGetSystemDocu
 	return r
 }
 
+// 
+func (r ApiGetSystemDocumentsCountRequest) ClientId(clientId string) ApiGetSystemDocumentsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDocumentsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemDocumentsCountExecute(r)
 }
@@ -1048,9 +1043,6 @@ func (a *DocumentsAPIService) GetSystemDocumentsCountExecute(r ApiGetSystemDocum
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.recordType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "recordType", r.recordType, "form", "")
@@ -1099,7 +1091,9 @@ func (a *DocumentsAPIService) GetSystemDocumentsCountExecute(r ApiGetSystemDocum
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1140,7 +1134,6 @@ func (a *DocumentsAPIService) GetSystemDocumentsCountExecute(r ApiGetSystemDocum
 type ApiGetSystemDocumentsUploadsampleRequest struct {
 	ctx context.Context
 	ApiService *DocumentsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1149,12 +1142,7 @@ type ApiGetSystemDocumentsUploadsampleRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDocumentsUploadsampleRequest) ClientId(clientId string) ApiGetSystemDocumentsUploadsampleRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1205,6 +1193,12 @@ func (r ApiGetSystemDocumentsUploadsampleRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemDocumentsUploadsampleRequest) ClientId(clientId string) ApiGetSystemDocumentsUploadsampleRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDocumentsUploadsampleRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetSystemDocumentsUploadsampleExecute(r)
 }
@@ -1240,9 +1234,6 @@ func (a *DocumentsAPIService) GetSystemDocumentsUploadsampleExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1285,7 +1276,9 @@ func (a *DocumentsAPIService) GetSystemDocumentsUploadsampleExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -1411,9 +1404,6 @@ func (a *DocumentsAPIService) PostSystemDocumentsExecute(r ApiPostSystemDocument
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -1432,7 +1422,9 @@ func (a *DocumentsAPIService) PostSystemDocumentsExecute(r ApiPostSystemDocument
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	var fileLocalVarFormFileName string
 	var fileLocalVarFileName     string
 	var fileLocalVarFileBytes    []byte
@@ -1559,9 +1551,6 @@ func (a *DocumentsAPIService) PostSystemDocumentsByIdExecute(r ApiPostSystemDocu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1580,7 +1569,9 @@ func (a *DocumentsAPIService) PostSystemDocumentsByIdExecute(r ApiPostSystemDocu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

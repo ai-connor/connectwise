@@ -74,9 +74,6 @@ func (a *IntegratorLoginsAPIService) DeleteSystemIntegratorloginsByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *IntegratorLoginsAPIService) DeleteSystemIntegratorloginsByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *IntegratorLoginsAPIService) DeleteSystemIntegratorloginsByIdExecute(r A
 type ApiGetSystemIntegratorloginsRequest struct {
 	ctx context.Context
 	ApiService *IntegratorLoginsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemIntegratorloginsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemIntegratorloginsRequest) ClientId(clientId string) ApiGetSystemIntegratorloginsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemIntegratorloginsRequest) PageId(pageId int32) ApiGetSystemIn
 	return r
 }
 
+// 
+func (r ApiGetSystemIntegratorloginsRequest) ClientId(clientId string) ApiGetSystemIntegratorloginsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemIntegratorloginsRequest) Execute() ([]IntegratorLogin, *http.Response, error) {
 	return r.ApiService.GetSystemIntegratorloginsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *IntegratorLoginsAPIService) GetSystemIntegratorloginsExecute(r ApiGetSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *IntegratorLoginsAPIService) GetSystemIntegratorloginsExecute(r ApiGetSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemIntegratorloginsByIdRequest struct {
 	ctx context.Context
 	ApiService *IntegratorLoginsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemIntegratorloginsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemIntegratorloginsByIdRequest) ClientId(clientId string) ApiGetSystemIntegratorloginsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemIntegratorloginsByIdRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemIntegratorloginsByIdRequest) ClientId(clientId string) ApiGetSystemIntegratorloginsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemIntegratorloginsByIdRequest) Execute() (*IntegratorLogin, *http.Response, error) {
 	return r.ApiService.GetSystemIntegratorloginsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *IntegratorLoginsAPIService) GetSystemIntegratorloginsByIdExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *IntegratorLoginsAPIService) GetSystemIntegratorloginsByIdExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *IntegratorLoginsAPIService) GetSystemIntegratorloginsByIdExecute(r ApiG
 type ApiGetSystemIntegratorloginsCountRequest struct {
 	ctx context.Context
 	ApiService *IntegratorLoginsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemIntegratorloginsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemIntegratorloginsCountRequest) ClientId(clientId string) ApiGetSystemIntegratorloginsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemIntegratorloginsCountRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemIntegratorloginsCountRequest) ClientId(clientId string) ApiGetSystemIntegratorloginsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemIntegratorloginsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemIntegratorloginsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *IntegratorLoginsAPIService) GetSystemIntegratorloginsCountExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *IntegratorLoginsAPIService) GetSystemIntegratorloginsCountExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemIntegratorloginsByIdRequest struct {
 	ctx context.Context
 	ApiService *IntegratorLoginsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemIntegratorloginsByIdRequest) ClientId(clientId string) ApiPatchSystemIntegratorloginsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemIntegratorloginsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemIntegratorloginsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemIntegratorloginsByIdRequest) ClientId(clientId string) ApiPatchSystemIntegratorloginsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *IntegratorLoginsAPIService) PatchSystemIntegratorloginsByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *IntegratorLoginsAPIService) PatchSystemIntegratorloginsByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *IntegratorLoginsAPIService) PatchSystemIntegratorloginsByIdExecute(r Ap
 type ApiPostSystemIntegratorloginsRequest struct {
 	ctx context.Context
 	ApiService *IntegratorLoginsAPIService
-	clientId *string
 	integratorLogin *IntegratorLogin
-}
-
-// 
-func (r ApiPostSystemIntegratorloginsRequest) ClientId(clientId string) ApiPostSystemIntegratorloginsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // integratorLogin
 func (r ApiPostSystemIntegratorloginsRequest) IntegratorLogin(integratorLogin IntegratorLogin) ApiPostSystemIntegratorloginsRequest {
 	r.integratorLogin = &integratorLogin
+	return r
+}
+
+// 
+func (r ApiPostSystemIntegratorloginsRequest) ClientId(clientId string) ApiPostSystemIntegratorloginsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *IntegratorLoginsAPIService) PostSystemIntegratorloginsExecute(r ApiPost
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.integratorLogin == nil {
 		return localVarReturnValue, nil, reportError("integratorLogin is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *IntegratorLoginsAPIService) PostSystemIntegratorloginsExecute(r ApiPost
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.integratorLogin
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemIntegratorloginsByIdRequest struct {
 	ctx context.Context
 	ApiService *IntegratorLoginsAPIService
 	id int32
-	clientId *string
 	integratorLogin *IntegratorLogin
-}
-
-// 
-func (r ApiPutSystemIntegratorloginsByIdRequest) ClientId(clientId string) ApiPutSystemIntegratorloginsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // integratorLogin
 func (r ApiPutSystemIntegratorloginsByIdRequest) IntegratorLogin(integratorLogin IntegratorLogin) ApiPutSystemIntegratorloginsByIdRequest {
 	r.integratorLogin = &integratorLogin
+	return r
+}
+
+// 
+func (r ApiPutSystemIntegratorloginsByIdRequest) ClientId(clientId string) ApiPutSystemIntegratorloginsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *IntegratorLoginsAPIService) PutSystemIntegratorloginsByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.integratorLogin == nil {
 		return localVarReturnValue, nil, reportError("integratorLogin is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *IntegratorLoginsAPIService) PutSystemIntegratorloginsByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.integratorLogin
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -27,7 +27,6 @@ type ApiGetExpenseEntriesByParentIdAuditsRequest struct {
 	ctx context.Context
 	ApiService *ExpenseEntryAuditsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetExpenseEntriesByParentIdAuditsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpenseEntriesByParentIdAuditsRequest) ClientId(clientId string) ApiGetExpenseEntriesByParentIdAuditsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetExpenseEntriesByParentIdAuditsRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetExpenseEntriesByParentIdAuditsRequest) ClientId(clientId string) ApiGetExpenseEntriesByParentIdAuditsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpenseEntriesByParentIdAuditsRequest) Execute() ([]ExpenseEntryAudit, *http.Response, error) {
 	return r.ApiService.GetExpenseEntriesByParentIdAuditsExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *ExpenseEntryAuditsAPIService) GetExpenseEntriesByParentIdAuditsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *ExpenseEntryAuditsAPIService) GetExpenseEntriesByParentIdAuditsExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetExpenseEntriesByParentIdAuditsByIdRequest struct {
 	ApiService *ExpenseEntryAuditsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetExpenseEntriesByParentIdAuditsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpenseEntriesByParentIdAuditsByIdRequest) ClientId(clientId string) ApiGetExpenseEntriesByParentIdAuditsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetExpenseEntriesByParentIdAuditsByIdRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetExpenseEntriesByParentIdAuditsByIdRequest) ClientId(clientId string) ApiGetExpenseEntriesByParentIdAuditsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpenseEntriesByParentIdAuditsByIdRequest) Execute() (*ExpenseEntryAudit, *http.Response, error) {
 	return r.ApiService.GetExpenseEntriesByParentIdAuditsByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *ExpenseEntryAuditsAPIService) GetExpenseEntriesByParentIdAuditsByIdExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *ExpenseEntryAuditsAPIService) GetExpenseEntriesByParentIdAuditsByIdExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetExpenseEntriesByParentIdAuditsCountRequest struct {
 	ctx context.Context
 	ApiService *ExpenseEntryAuditsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetExpenseEntriesByParentIdAuditsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpenseEntriesByParentIdAuditsCountRequest) ClientId(clientId string) ApiGetExpenseEntriesByParentIdAuditsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetExpenseEntriesByParentIdAuditsCountRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetExpenseEntriesByParentIdAuditsCountRequest) ClientId(clientId string) ApiGetExpenseEntriesByParentIdAuditsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpenseEntriesByParentIdAuditsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetExpenseEntriesByParentIdAuditsCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *ExpenseEntryAuditsAPIService) GetExpenseEntriesByParentIdAuditsCountExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *ExpenseEntryAuditsAPIService) GetExpenseEntriesByParentIdAuditsCountExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

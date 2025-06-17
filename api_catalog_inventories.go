@@ -27,7 +27,6 @@ type ApiGetProcurementCatalogByParentIdInventoryRequest struct {
 	ctx context.Context
 	ApiService *CatalogInventoriesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetProcurementCatalogByParentIdInventoryRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCatalogByParentIdInventoryRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdInventoryRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetProcurementCatalogByParentIdInventoryRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetProcurementCatalogByParentIdInventoryRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdInventoryRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCatalogByParentIdInventoryRequest) Execute() ([]CatalogInventory, *http.Response, error) {
 	return r.ApiService.GetProcurementCatalogByParentIdInventoryExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *CatalogInventoriesAPIService) GetProcurementCatalogByParentIdInventoryE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *CatalogInventoriesAPIService) GetProcurementCatalogByParentIdInventoryE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetProcurementCatalogByParentIdInventoryByIdRequest struct {
 	ApiService *CatalogInventoriesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetProcurementCatalogByParentIdInventoryByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCatalogByParentIdInventoryByIdRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdInventoryByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetProcurementCatalogByParentIdInventoryByIdRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetProcurementCatalogByParentIdInventoryByIdRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdInventoryByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCatalogByParentIdInventoryByIdRequest) Execute() (*CatalogInventory, *http.Response, error) {
 	return r.ApiService.GetProcurementCatalogByParentIdInventoryByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *CatalogInventoriesAPIService) GetProcurementCatalogByParentIdInventoryB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *CatalogInventoriesAPIService) GetProcurementCatalogByParentIdInventoryB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetProcurementCatalogByParentIdInventoryCountRequest struct {
 	ctx context.Context
 	ApiService *CatalogInventoriesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetProcurementCatalogByParentIdInventoryCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCatalogByParentIdInventoryCountRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdInventoryCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetProcurementCatalogByParentIdInventoryCountRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetProcurementCatalogByParentIdInventoryCountRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdInventoryCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCatalogByParentIdInventoryCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementCatalogByParentIdInventoryCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *CatalogInventoriesAPIService) GetProcurementCatalogByParentIdInventoryC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *CatalogInventoriesAPIService) GetProcurementCatalogByParentIdInventoryC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -26,7 +26,6 @@ type ScheduleColorsAPIService service
 type ApiGetScheduleColorsRequest struct {
 	ctx context.Context
 	ApiService *ScheduleColorsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetScheduleColorsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleColorsRequest) ClientId(clientId string) ApiGetScheduleColorsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetScheduleColorsRequest) PageId(pageId int32) ApiGetScheduleColorsRe
 	return r
 }
 
+// 
+func (r ApiGetScheduleColorsRequest) ClientId(clientId string) ApiGetScheduleColorsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleColorsRequest) Execute() ([]ScheduleColor, *http.Response, error) {
 	return r.ApiService.GetScheduleColorsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *ScheduleColorsAPIService) GetScheduleColorsExecute(r ApiGetScheduleColo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *ScheduleColorsAPIService) GetScheduleColorsExecute(r ApiGetScheduleColo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetScheduleColorsByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleColorsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetScheduleColorsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleColorsByIdRequest) ClientId(clientId string) ApiGetScheduleColorsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetScheduleColorsByIdRequest) PageId(pageId int32) ApiGetScheduleColo
 	return r
 }
 
+// 
+func (r ApiGetScheduleColorsByIdRequest) ClientId(clientId string) ApiGetScheduleColorsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleColorsByIdRequest) Execute() (*ScheduleColor, *http.Response, error) {
 	return r.ApiService.GetScheduleColorsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *ScheduleColorsAPIService) GetScheduleColorsByIdExecute(r ApiGetSchedule
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *ScheduleColorsAPIService) GetScheduleColorsByIdExecute(r ApiGetSchedule
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *ScheduleColorsAPIService) GetScheduleColorsByIdExecute(r ApiGetSchedule
 type ApiGetScheduleColorsCountRequest struct {
 	ctx context.Context
 	ApiService *ScheduleColorsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetScheduleColorsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetScheduleColorsCountRequest) ClientId(clientId string) ApiGetScheduleColorsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetScheduleColorsCountRequest) PageId(pageId int32) ApiGetScheduleCol
 	return r
 }
 
+// 
+func (r ApiGetScheduleColorsCountRequest) ClientId(clientId string) ApiGetScheduleColorsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetScheduleColorsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetScheduleColorsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *ScheduleColorsAPIService) GetScheduleColorsCountExecute(r ApiGetSchedul
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *ScheduleColorsAPIService) GetScheduleColorsCountExecute(r ApiGetSchedul
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchScheduleColorsByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleColorsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchScheduleColorsByIdRequest) ClientId(clientId string) ApiPatchScheduleColorsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchScheduleColorsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchScheduleColorsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchScheduleColorsByIdRequest) ClientId(clientId string) ApiPatchScheduleColorsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *ScheduleColorsAPIService) PatchScheduleColorsByIdExecute(r ApiPatchSche
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *ScheduleColorsAPIService) PatchScheduleColorsByIdExecute(r ApiPatchSche
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -768,9 +764,6 @@ func (a *ScheduleColorsAPIService) PostScheduleColorsByIdClearExecute(r ApiPostS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -789,7 +782,9 @@ func (a *ScheduleColorsAPIService) PostScheduleColorsByIdClearExecute(r ApiPostS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -876,9 +871,6 @@ func (a *ScheduleColorsAPIService) PostScheduleColorsResetExecute(r ApiPostSched
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -897,7 +889,9 @@ func (a *ScheduleColorsAPIService) PostScheduleColorsResetExecute(r ApiPostSched
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -939,19 +933,19 @@ type ApiPutScheduleColorsByIdRequest struct {
 	ctx context.Context
 	ApiService *ScheduleColorsAPIService
 	id int32
-	clientId *string
 	scheduleColor *ScheduleColor
-}
-
-// 
-func (r ApiPutScheduleColorsByIdRequest) ClientId(clientId string) ApiPutScheduleColorsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // scheduleColor
 func (r ApiPutScheduleColorsByIdRequest) ScheduleColor(scheduleColor ScheduleColor) ApiPutScheduleColorsByIdRequest {
 	r.scheduleColor = &scheduleColor
+	return r
+}
+
+// 
+func (r ApiPutScheduleColorsByIdRequest) ClientId(clientId string) ApiPutScheduleColorsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -995,9 +989,6 @@ func (a *ScheduleColorsAPIService) PutScheduleColorsByIdExecute(r ApiPutSchedule
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.scheduleColor == nil {
 		return localVarReturnValue, nil, reportError("scheduleColor is required and must be specified")
 	}
@@ -1019,7 +1010,9 @@ func (a *ScheduleColorsAPIService) PutScheduleColorsByIdExecute(r ApiPutSchedule
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.scheduleColor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

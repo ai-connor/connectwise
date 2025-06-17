@@ -74,9 +74,6 @@ func (a *AgreementTypesAPIService) DeleteFinanceAgreementsTypesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *AgreementTypesAPIService) DeleteFinanceAgreementsTypesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *AgreementTypesAPIService) DeleteFinanceAgreementsTypesByIdExecute(r Api
 type ApiGetFinanceAgreementsTypesRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetFinanceAgreementsTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsTypesRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetFinanceAgreementsTypesRequest) PageId(pageId int32) ApiGetFinanceA
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsTypesRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsTypesRequest) Execute() ([]AgreementType, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesExecute(r ApiGetFina
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesExecute(r ApiGetFina
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetFinanceAgreementsTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetFinanceAgreementsTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsTypesByIdRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetFinanceAgreementsTypesByIdRequest) PageId(pageId int32) ApiGetFina
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsTypesByIdRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsTypesByIdRequest) Execute() (*AgreementType, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetFinanceAgreementsTypesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetFinanceAgreementsTypesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsTypesByIdInfoRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetFinanceAgreementsTypesByIdInfoRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsTypesByIdInfoRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsTypesByIdInfoRequest) Execute() (*AgreementTypeInfo, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsTypesByIdInfoExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdInfoExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdInfoExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetFinanceAgreementsTypesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetFinanceAgreementsTypesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsTypesByIdUsagesRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetFinanceAgreementsTypesByIdUsagesRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsTypesByIdUsagesRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsTypesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsTypesByIdUsagesExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdUsagesExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdUsagesExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -892,7 +887,6 @@ type ApiGetFinanceAgreementsTypesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -901,12 +895,7 @@ type ApiGetFinanceAgreementsTypesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsTypesByIdUsagesListRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -957,6 +946,12 @@ func (r ApiGetFinanceAgreementsTypesByIdUsagesListRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsTypesByIdUsagesListRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsTypesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsTypesByIdUsagesListExecute(r)
 }
@@ -997,9 +992,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdUsagesListExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1042,7 +1034,9 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdUsagesListExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1083,7 +1077,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesByIdUsagesListExecut
 type ApiGetFinanceAgreementsTypesCountRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1092,12 +1085,7 @@ type ApiGetFinanceAgreementsTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsTypesCountRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1148,6 +1136,12 @@ func (r ApiGetFinanceAgreementsTypesCountRequest) PageId(pageId int32) ApiGetFin
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsTypesCountRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsTypesCountExecute(r)
 }
@@ -1185,9 +1179,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1230,7 +1221,9 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1271,7 +1264,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesCountExecute(r ApiGe
 type ApiGetFinanceAgreementsTypesInfoRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1280,12 +1272,7 @@ type ApiGetFinanceAgreementsTypesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsTypesInfoRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1336,6 +1323,12 @@ func (r ApiGetFinanceAgreementsTypesInfoRequest) PageId(pageId int32) ApiGetFina
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsTypesInfoRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsTypesInfoRequest) Execute() ([]AgreementTypeInfo, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsTypesInfoExecute(r)
 }
@@ -1373,9 +1366,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesInfoExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1418,7 +1408,9 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesInfoExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1459,7 +1451,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesInfoExecute(r ApiGet
 type ApiGetFinanceAgreementsTypesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1468,12 +1459,7 @@ type ApiGetFinanceAgreementsTypesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsTypesInfoCountRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1524,6 +1510,12 @@ func (r ApiGetFinanceAgreementsTypesInfoCountRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsTypesInfoCountRequest) ClientId(clientId string) ApiGetFinanceAgreementsTypesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsTypesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsTypesInfoCountExecute(r)
 }
@@ -1561,9 +1553,6 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesInfoCountExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1606,7 +1595,9 @@ func (a *AgreementTypesAPIService) GetFinanceAgreementsTypesInfoCountExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1648,19 +1639,19 @@ type ApiPatchFinanceAgreementsTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceAgreementsTypesByIdRequest) ClientId(clientId string) ApiPatchFinanceAgreementsTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceAgreementsTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceAgreementsTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceAgreementsTypesByIdRequest) ClientId(clientId string) ApiPatchFinanceAgreementsTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1704,9 +1695,6 @@ func (a *AgreementTypesAPIService) PatchFinanceAgreementsTypesByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1728,7 +1716,9 @@ func (a *AgreementTypesAPIService) PatchFinanceAgreementsTypesByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1771,19 +1761,19 @@ func (a *AgreementTypesAPIService) PatchFinanceAgreementsTypesByIdExecute(r ApiP
 type ApiPostFinanceAgreementsTypesRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
-	clientId *string
 	agreementType *AgreementType
-}
-
-// 
-func (r ApiPostFinanceAgreementsTypesRequest) ClientId(clientId string) ApiPostFinanceAgreementsTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // agreementType
 func (r ApiPostFinanceAgreementsTypesRequest) AgreementType(agreementType AgreementType) ApiPostFinanceAgreementsTypesRequest {
 	r.agreementType = &agreementType
+	return r
+}
+
+// 
+func (r ApiPostFinanceAgreementsTypesRequest) ClientId(clientId string) ApiPostFinanceAgreementsTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1824,9 +1814,6 @@ func (a *AgreementTypesAPIService) PostFinanceAgreementsTypesExecute(r ApiPostFi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.agreementType == nil {
 		return localVarReturnValue, nil, reportError("agreementType is required and must be specified")
 	}
@@ -1848,7 +1835,9 @@ func (a *AgreementTypesAPIService) PostFinanceAgreementsTypesExecute(r ApiPostFi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.agreementType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1892,19 +1881,19 @@ type ApiPutFinanceAgreementsTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypesAPIService
 	id int32
-	clientId *string
 	agreementType *AgreementType
-}
-
-// 
-func (r ApiPutFinanceAgreementsTypesByIdRequest) ClientId(clientId string) ApiPutFinanceAgreementsTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // agreementType
 func (r ApiPutFinanceAgreementsTypesByIdRequest) AgreementType(agreementType AgreementType) ApiPutFinanceAgreementsTypesByIdRequest {
 	r.agreementType = &agreementType
+	return r
+}
+
+// 
+func (r ApiPutFinanceAgreementsTypesByIdRequest) ClientId(clientId string) ApiPutFinanceAgreementsTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1948,9 +1937,6 @@ func (a *AgreementTypesAPIService) PutFinanceAgreementsTypesByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.agreementType == nil {
 		return localVarReturnValue, nil, reportError("agreementType is required and must be specified")
 	}
@@ -1972,7 +1958,9 @@ func (a *AgreementTypesAPIService) PutFinanceAgreementsTypesByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.agreementType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *TodayPageCategoriesAPIService) DeleteSystemTodayPageCategoriesByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *TodayPageCategoriesAPIService) DeleteSystemTodayPageCategoriesByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *TodayPageCategoriesAPIService) DeleteSystemTodayPageCategoriesByIdExecu
 type ApiGetSystemTodayPageCategoriesRequest struct {
 	ctx context.Context
 	ApiService *TodayPageCategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemTodayPageCategoriesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTodayPageCategoriesRequest) ClientId(clientId string) ApiGetSystemTodayPageCategoriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemTodayPageCategoriesRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemTodayPageCategoriesRequest) ClientId(clientId string) ApiGetSystemTodayPageCategoriesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTodayPageCategoriesRequest) Execute() ([]TodayPageCategory, *http.Response, error) {
 	return r.ApiService.GetSystemTodayPageCategoriesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *TodayPageCategoriesAPIService) GetSystemTodayPageCategoriesExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *TodayPageCategoriesAPIService) GetSystemTodayPageCategoriesExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemTodayPageCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *TodayPageCategoriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemTodayPageCategoriesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTodayPageCategoriesByIdRequest) ClientId(clientId string) ApiGetSystemTodayPageCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemTodayPageCategoriesByIdRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSystemTodayPageCategoriesByIdRequest) ClientId(clientId string) ApiGetSystemTodayPageCategoriesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTodayPageCategoriesByIdRequest) Execute() (*TodayPageCategory, *http.Response, error) {
 	return r.ApiService.GetSystemTodayPageCategoriesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *TodayPageCategoriesAPIService) GetSystemTodayPageCategoriesByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *TodayPageCategoriesAPIService) GetSystemTodayPageCategoriesByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *TodayPageCategoriesAPIService) GetSystemTodayPageCategoriesByIdExecute(
 type ApiGetSystemTodayPageCategoriesCountRequest struct {
 	ctx context.Context
 	ApiService *TodayPageCategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemTodayPageCategoriesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemTodayPageCategoriesCountRequest) ClientId(clientId string) ApiGetSystemTodayPageCategoriesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemTodayPageCategoriesCountRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetSystemTodayPageCategoriesCountRequest) ClientId(clientId string) ApiGetSystemTodayPageCategoriesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemTodayPageCategoriesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemTodayPageCategoriesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *TodayPageCategoriesAPIService) GetSystemTodayPageCategoriesCountExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *TodayPageCategoriesAPIService) GetSystemTodayPageCategoriesCountExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemTodayPageCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *TodayPageCategoriesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemTodayPageCategoriesByIdRequest) ClientId(clientId string) ApiPatchSystemTodayPageCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemTodayPageCategoriesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemTodayPageCategoriesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemTodayPageCategoriesByIdRequest) ClientId(clientId string) ApiPatchSystemTodayPageCategoriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *TodayPageCategoriesAPIService) PatchSystemTodayPageCategoriesByIdExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *TodayPageCategoriesAPIService) PatchSystemTodayPageCategoriesByIdExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *TodayPageCategoriesAPIService) PatchSystemTodayPageCategoriesByIdExecut
 type ApiPostSystemTodayPageCategoriesRequest struct {
 	ctx context.Context
 	ApiService *TodayPageCategoriesAPIService
-	clientId *string
 	todayPageCategory *TodayPageCategory
-}
-
-// 
-func (r ApiPostSystemTodayPageCategoriesRequest) ClientId(clientId string) ApiPostSystemTodayPageCategoriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // todayPageCategory
 func (r ApiPostSystemTodayPageCategoriesRequest) TodayPageCategory(todayPageCategory TodayPageCategory) ApiPostSystemTodayPageCategoriesRequest {
 	r.todayPageCategory = &todayPageCategory
+	return r
+}
+
+// 
+func (r ApiPostSystemTodayPageCategoriesRequest) ClientId(clientId string) ApiPostSystemTodayPageCategoriesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *TodayPageCategoriesAPIService) PostSystemTodayPageCategoriesExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.todayPageCategory == nil {
 		return localVarReturnValue, nil, reportError("todayPageCategory is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *TodayPageCategoriesAPIService) PostSystemTodayPageCategoriesExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.todayPageCategory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemTodayPageCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *TodayPageCategoriesAPIService
 	id int32
-	clientId *string
 	todayPageCategory *TodayPageCategory
-}
-
-// 
-func (r ApiPutSystemTodayPageCategoriesByIdRequest) ClientId(clientId string) ApiPutSystemTodayPageCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // todayPageCategory
 func (r ApiPutSystemTodayPageCategoriesByIdRequest) TodayPageCategory(todayPageCategory TodayPageCategory) ApiPutSystemTodayPageCategoriesByIdRequest {
 	r.todayPageCategory = &todayPageCategory
+	return r
+}
+
+// 
+func (r ApiPutSystemTodayPageCategoriesByIdRequest) ClientId(clientId string) ApiPutSystemTodayPageCategoriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *TodayPageCategoriesAPIService) PutSystemTodayPageCategoriesByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.todayPageCategory == nil {
 		return localVarReturnValue, nil, reportError("todayPageCategory is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *TodayPageCategoriesAPIService) PutSystemTodayPageCategoriesByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.todayPageCategory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

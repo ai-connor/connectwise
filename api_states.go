@@ -74,9 +74,6 @@ func (a *StatesAPIService) DeleteCompanyStatesByIdExecute(r ApiDeleteCompanyStat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *StatesAPIService) DeleteCompanyStatesByIdExecute(r ApiDeleteCompanyStat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *StatesAPIService) DeleteCompanyStatesByIdExecute(r ApiDeleteCompanyStat
 type ApiGetCompanyStatesRequest struct {
 	ctx context.Context
 	ApiService *StatesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyStatesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyStatesRequest) ClientId(clientId string) ApiGetCompanyStatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyStatesRequest) PageId(pageId int32) ApiGetCompanyStatesRequ
 	return r
 }
 
+// 
+func (r ApiGetCompanyStatesRequest) ClientId(clientId string) ApiGetCompanyStatesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyStatesRequest) Execute() ([]State, *http.Response, error) {
 	return r.ApiService.GetCompanyStatesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *StatesAPIService) GetCompanyStatesExecute(r ApiGetCompanyStatesRequest)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *StatesAPIService) GetCompanyStatesExecute(r ApiGetCompanyStatesRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyStatesByIdRequest struct {
 	ctx context.Context
 	ApiService *StatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyStatesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyStatesByIdRequest) ClientId(clientId string) ApiGetCompanyStatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyStatesByIdRequest) PageId(pageId int32) ApiGetCompanyStates
 	return r
 }
 
+// 
+func (r ApiGetCompanyStatesByIdRequest) ClientId(clientId string) ApiGetCompanyStatesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyStatesByIdRequest) Execute() (*State, *http.Response, error) {
 	return r.ApiService.GetCompanyStatesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *StatesAPIService) GetCompanyStatesByIdExecute(r ApiGetCompanyStatesById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *StatesAPIService) GetCompanyStatesByIdExecute(r ApiGetCompanyStatesById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetCompanyStatesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *StatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetCompanyStatesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyStatesByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyStatesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetCompanyStatesByIdUsagesRequest) PageId(pageId int32) ApiGetCompany
 	return r
 }
 
+// 
+func (r ApiGetCompanyStatesByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyStatesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyStatesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyStatesByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *StatesAPIService) GetCompanyStatesByIdUsagesExecute(r ApiGetCompanyStat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *StatesAPIService) GetCompanyStatesByIdUsagesExecute(r ApiGetCompanyStat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetCompanyStatesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *StatesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetCompanyStatesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyStatesByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyStatesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetCompanyStatesByIdUsagesListRequest) PageId(pageId int32) ApiGetCom
 	return r
 }
 
+// 
+func (r ApiGetCompanyStatesByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyStatesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyStatesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyStatesByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *StatesAPIService) GetCompanyStatesByIdUsagesListExecute(r ApiGetCompany
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *StatesAPIService) GetCompanyStatesByIdUsagesListExecute(r ApiGetCompany
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *StatesAPIService) GetCompanyStatesByIdUsagesListExecute(r ApiGetCompany
 type ApiGetCompanyStatesCountRequest struct {
 	ctx context.Context
 	ApiService *StatesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetCompanyStatesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyStatesCountRequest) ClientId(clientId string) ApiGetCompanyStatesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetCompanyStatesCountRequest) PageId(pageId int32) ApiGetCompanyState
 	return r
 }
 
+// 
+func (r ApiGetCompanyStatesCountRequest) ClientId(clientId string) ApiGetCompanyStatesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyStatesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyStatesCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *StatesAPIService) GetCompanyStatesCountExecute(r ApiGetCompanyStatesCou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *StatesAPIService) GetCompanyStatesCountExecute(r ApiGetCompanyStatesCou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchCompanyStatesByIdRequest struct {
 	ctx context.Context
 	ApiService *StatesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyStatesByIdRequest) ClientId(clientId string) ApiPatchCompanyStatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyStatesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyStatesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyStatesByIdRequest) ClientId(clientId string) ApiPatchCompanyStatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *StatesAPIService) PatchCompanyStatesByIdExecute(r ApiPatchCompanyStates
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *StatesAPIService) PatchCompanyStatesByIdExecute(r ApiPatchCompanyStates
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *StatesAPIService) PatchCompanyStatesByIdExecute(r ApiPatchCompanyStates
 type ApiPostCompanyStatesRequest struct {
 	ctx context.Context
 	ApiService *StatesAPIService
-	clientId *string
 	state *State
-}
-
-// 
-func (r ApiPostCompanyStatesRequest) ClientId(clientId string) ApiPostCompanyStatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // state
 func (r ApiPostCompanyStatesRequest) State(state State) ApiPostCompanyStatesRequest {
 	r.state = &state
+	return r
+}
+
+// 
+func (r ApiPostCompanyStatesRequest) ClientId(clientId string) ApiPostCompanyStatesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *StatesAPIService) PostCompanyStatesExecute(r ApiPostCompanyStatesReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.state == nil {
 		return localVarReturnValue, nil, reportError("state is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *StatesAPIService) PostCompanyStatesExecute(r ApiPostCompanyStatesReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.state
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutCompanyStatesByIdRequest struct {
 	ctx context.Context
 	ApiService *StatesAPIService
 	id int32
-	clientId *string
 	state *State
-}
-
-// 
-func (r ApiPutCompanyStatesByIdRequest) ClientId(clientId string) ApiPutCompanyStatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // state
 func (r ApiPutCompanyStatesByIdRequest) State(state State) ApiPutCompanyStatesByIdRequest {
 	r.state = &state
+	return r
+}
+
+// 
+func (r ApiPutCompanyStatesByIdRequest) ClientId(clientId string) ApiPutCompanyStatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *StatesAPIService) PutCompanyStatesByIdExecute(r ApiPutCompanyStatesById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.state == nil {
 		return localVarReturnValue, nil, reportError("state is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *StatesAPIService) PutCompanyStatesByIdExecute(r ApiPutCompanyStatesById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.state
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

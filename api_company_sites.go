@@ -78,9 +78,6 @@ func (a *CompanySitesAPIService) DeleteCompanyCompaniesByParentIdSitesByIdExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *CompanySitesAPIService) DeleteCompanyCompaniesByParentIdSitesByIdExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetCompanyCompaniesByParentIdSitesRequest struct {
 	ctx context.Context
 	ApiService *CompanySitesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetCompanyCompaniesByParentIdSitesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesByParentIdSitesRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetCompanyCompaniesByParentIdSitesRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesByParentIdSitesRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesByParentIdSitesRequest) Execute() ([]CompanySite, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesByParentIdSitesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetCompanyCompaniesByParentIdSitesByIdRequest struct {
 	ApiService *CompanySitesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetCompanyCompaniesByParentIdSitesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesByParentIdSitesByIdRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetCompanyCompaniesByParentIdSitesByIdRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesByParentIdSitesByIdRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesByParentIdSitesByIdRequest) Execute() (*CompanySite, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesByParentIdSitesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -521,7 +518,6 @@ type ApiGetCompanyCompaniesByParentIdSitesByIdUsagesRequest struct {
 	ApiService *CompanySitesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -530,12 +526,7 @@ type ApiGetCompanyCompaniesByParentIdSitesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesByParentIdSitesByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -586,6 +577,12 @@ func (r ApiGetCompanyCompaniesByParentIdSitesByIdUsagesRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesByParentIdSitesByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesByParentIdSitesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesByParentIdSitesByIdUsagesExecute(r)
 }
@@ -629,9 +626,6 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesByIdUsagesExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -674,7 +668,9 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesByIdUsagesExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -717,7 +713,6 @@ type ApiGetCompanyCompaniesByParentIdSitesByIdUsagesListRequest struct {
 	ApiService *CompanySitesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -726,12 +721,7 @@ type ApiGetCompanyCompaniesByParentIdSitesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesByParentIdSitesByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -782,6 +772,12 @@ func (r ApiGetCompanyCompaniesByParentIdSitesByIdUsagesListRequest) PageId(pageI
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesByParentIdSitesByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesByParentIdSitesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesByParentIdSitesByIdUsagesListExecute(r)
 }
@@ -825,9 +821,6 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesByIdUsagesLis
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -870,7 +863,9 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesByIdUsagesLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -912,7 +907,6 @@ type ApiGetCompanyCompaniesByParentIdSitesCountRequest struct {
 	ctx context.Context
 	ApiService *CompanySitesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -921,12 +915,7 @@ type ApiGetCompanyCompaniesByParentIdSitesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesByParentIdSitesCountRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -977,6 +966,12 @@ func (r ApiGetCompanyCompaniesByParentIdSitesCountRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesByParentIdSitesCountRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdSitesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesByParentIdSitesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesByParentIdSitesCountExecute(r)
 }
@@ -1017,9 +1012,6 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesCountExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1062,7 +1054,9 @@ func (a *CompanySitesAPIService) GetCompanyCompaniesByParentIdSitesCountExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1105,19 +1099,19 @@ type ApiPatchCompanyCompaniesByParentIdSitesByIdRequest struct {
 	ApiService *CompanySitesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyCompaniesByParentIdSitesByIdRequest) ClientId(clientId string) ApiPatchCompanyCompaniesByParentIdSitesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyCompaniesByParentIdSitesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyCompaniesByParentIdSitesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyCompaniesByParentIdSitesByIdRequest) ClientId(clientId string) ApiPatchCompanyCompaniesByParentIdSitesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1164,9 +1158,6 @@ func (a *CompanySitesAPIService) PatchCompanyCompaniesByParentIdSitesByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1188,7 +1179,9 @@ func (a *CompanySitesAPIService) PatchCompanyCompaniesByParentIdSitesByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1232,19 +1225,19 @@ type ApiPostCompanyCompaniesByParentIdSitesRequest struct {
 	ctx context.Context
 	ApiService *CompanySitesAPIService
 	parentId int32
-	clientId *string
 	companySite *CompanySite
-}
-
-// 
-func (r ApiPostCompanyCompaniesByParentIdSitesRequest) ClientId(clientId string) ApiPostCompanyCompaniesByParentIdSitesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // site
 func (r ApiPostCompanyCompaniesByParentIdSitesRequest) CompanySite(companySite CompanySite) ApiPostCompanyCompaniesByParentIdSitesRequest {
 	r.companySite = &companySite
+	return r
+}
+
+// 
+func (r ApiPostCompanyCompaniesByParentIdSitesRequest) ClientId(clientId string) ApiPostCompanyCompaniesByParentIdSitesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1288,9 +1281,6 @@ func (a *CompanySitesAPIService) PostCompanyCompaniesByParentIdSitesExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.companySite == nil {
 		return localVarReturnValue, nil, reportError("companySite is required and must be specified")
 	}
@@ -1312,7 +1302,9 @@ func (a *CompanySitesAPIService) PostCompanyCompaniesByParentIdSitesExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.companySite
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1357,19 +1349,19 @@ type ApiPutCompanyCompaniesByParentIdSitesByIdRequest struct {
 	ApiService *CompanySitesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	companySite *CompanySite
-}
-
-// 
-func (r ApiPutCompanyCompaniesByParentIdSitesByIdRequest) ClientId(clientId string) ApiPutCompanyCompaniesByParentIdSitesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // site
 func (r ApiPutCompanyCompaniesByParentIdSitesByIdRequest) CompanySite(companySite CompanySite) ApiPutCompanyCompaniesByParentIdSitesByIdRequest {
 	r.companySite = &companySite
+	return r
+}
+
+// 
+func (r ApiPutCompanyCompaniesByParentIdSitesByIdRequest) ClientId(clientId string) ApiPutCompanyCompaniesByParentIdSitesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1416,9 +1408,6 @@ func (a *CompanySitesAPIService) PutCompanyCompaniesByParentIdSitesByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.companySite == nil {
 		return localVarReturnValue, nil, reportError("companySite is required and must be specified")
 	}
@@ -1440,7 +1429,9 @@ func (a *CompanySitesAPIService) PutCompanyCompaniesByParentIdSitesByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.companySite
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

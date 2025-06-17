@@ -26,7 +26,6 @@ type SystemSettingsAPIService service
 type ApiGetSystemSettingsRequest struct {
 	ctx context.Context
 	ApiService *SystemSettingsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemSettingsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSettingsRequest) ClientId(clientId string) ApiGetSystemSettingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemSettingsRequest) PageId(pageId int32) ApiGetSystemSettingsRe
 	return r
 }
 
+// 
+func (r ApiGetSystemSettingsRequest) ClientId(clientId string) ApiGetSystemSettingsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSettingsRequest) Execute() ([]SystemSetting, *http.Response, error) {
 	return r.ApiService.GetSystemSettingsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *SystemSettingsAPIService) GetSystemSettingsExecute(r ApiGetSystemSettin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *SystemSettingsAPIService) GetSystemSettingsExecute(r ApiGetSystemSettin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemSettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *SystemSettingsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemSettingsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSettingsByIdRequest) ClientId(clientId string) ApiGetSystemSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemSettingsByIdRequest) PageId(pageId int32) ApiGetSystemSettin
 	return r
 }
 
+// 
+func (r ApiGetSystemSettingsByIdRequest) ClientId(clientId string) ApiGetSystemSettingsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSettingsByIdRequest) Execute() (*SystemSetting, *http.Response, error) {
 	return r.ApiService.GetSystemSettingsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *SystemSettingsAPIService) GetSystemSettingsByIdExecute(r ApiGetSystemSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *SystemSettingsAPIService) GetSystemSettingsByIdExecute(r ApiGetSystemSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *SystemSettingsAPIService) GetSystemSettingsByIdExecute(r ApiGetSystemSe
 type ApiGetSystemSettingsCountRequest struct {
 	ctx context.Context
 	ApiService *SystemSettingsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemSettingsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSettingsCountRequest) ClientId(clientId string) ApiGetSystemSettingsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemSettingsCountRequest) PageId(pageId int32) ApiGetSystemSetti
 	return r
 }
 
+// 
+func (r ApiGetSystemSettingsCountRequest) ClientId(clientId string) ApiGetSystemSettingsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSettingsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSettingsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *SystemSettingsAPIService) GetSystemSettingsCountExecute(r ApiGetSystemS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *SystemSettingsAPIService) GetSystemSettingsCountExecute(r ApiGetSystemS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchSystemSettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *SystemSettingsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemSettingsByIdRequest) ClientId(clientId string) ApiPatchSystemSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemSettingsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemSettingsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemSettingsByIdRequest) ClientId(clientId string) ApiPatchSystemSettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *SystemSettingsAPIService) PatchSystemSettingsByIdExecute(r ApiPatchSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *SystemSettingsAPIService) PatchSystemSettingsByIdExecute(r ApiPatchSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutSystemSettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *SystemSettingsAPIService
 	id int32
-	clientId *string
 	systemSetting *SystemSetting
-}
-
-// 
-func (r ApiPutSystemSettingsByIdRequest) ClientId(clientId string) ApiPutSystemSettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // systemSetting
 func (r ApiPutSystemSettingsByIdRequest) SystemSetting(systemSetting SystemSetting) ApiPutSystemSettingsByIdRequest {
 	r.systemSetting = &systemSetting
+	return r
+}
+
+// 
+func (r ApiPutSystemSettingsByIdRequest) ClientId(clientId string) ApiPutSystemSettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *SystemSettingsAPIService) PutSystemSettingsByIdExecute(r ApiPutSystemSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.systemSetting == nil {
 		return localVarReturnValue, nil, reportError("systemSetting is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *SystemSettingsAPIService) PutSystemSettingsByIdExecute(r ApiPutSystemSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.systemSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

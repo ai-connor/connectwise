@@ -74,9 +74,6 @@ func (a *ActivityStopwatchesAPIService) DeleteTimeActivitystopwatchesByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ActivityStopwatchesAPIService) DeleteTimeActivitystopwatchesByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ActivityStopwatchesAPIService) DeleteTimeActivitystopwatchesByIdExecute
 type ApiGetTimeActivitystopwatchesRequest struct {
 	ctx context.Context
 	ApiService *ActivityStopwatchesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetTimeActivitystopwatchesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeActivitystopwatchesRequest) ClientId(clientId string) ApiGetTimeActivitystopwatchesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetTimeActivitystopwatchesRequest) PageId(pageId int32) ApiGetTimeAct
 	return r
 }
 
+// 
+func (r ApiGetTimeActivitystopwatchesRequest) ClientId(clientId string) ApiGetTimeActivitystopwatchesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeActivitystopwatchesRequest) Execute() ([]ActivityStopwatch, *http.Response, error) {
 	return r.ApiService.GetTimeActivitystopwatchesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ActivityStopwatchesAPIService) GetTimeActivitystopwatchesExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ActivityStopwatchesAPIService) GetTimeActivitystopwatchesExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetTimeActivitystopwatchesByIdRequest struct {
 	ctx context.Context
 	ApiService *ActivityStopwatchesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetTimeActivitystopwatchesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeActivitystopwatchesByIdRequest) ClientId(clientId string) ApiGetTimeActivitystopwatchesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetTimeActivitystopwatchesByIdRequest) PageId(pageId int32) ApiGetTim
 	return r
 }
 
+// 
+func (r ApiGetTimeActivitystopwatchesByIdRequest) ClientId(clientId string) ApiGetTimeActivitystopwatchesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeActivitystopwatchesByIdRequest) Execute() (*ActivityStopwatch, *http.Response, error) {
 	return r.ApiService.GetTimeActivitystopwatchesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ActivityStopwatchesAPIService) GetTimeActivitystopwatchesByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ActivityStopwatchesAPIService) GetTimeActivitystopwatchesByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *ActivityStopwatchesAPIService) GetTimeActivitystopwatchesByIdExecute(r 
 type ApiGetTimeActivitystopwatchesCountRequest struct {
 	ctx context.Context
 	ApiService *ActivityStopwatchesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetTimeActivitystopwatchesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeActivitystopwatchesCountRequest) ClientId(clientId string) ApiGetTimeActivitystopwatchesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetTimeActivitystopwatchesCountRequest) PageId(pageId int32) ApiGetTi
 	return r
 }
 
+// 
+func (r ApiGetTimeActivitystopwatchesCountRequest) ClientId(clientId string) ApiGetTimeActivitystopwatchesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeActivitystopwatchesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeActivitystopwatchesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *ActivityStopwatchesAPIService) GetTimeActivitystopwatchesCountExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *ActivityStopwatchesAPIService) GetTimeActivitystopwatchesCountExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchTimeActivitystopwatchesByIdRequest struct {
 	ctx context.Context
 	ApiService *ActivityStopwatchesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchTimeActivitystopwatchesByIdRequest) ClientId(clientId string) ApiPatchTimeActivitystopwatchesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchTimeActivitystopwatchesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchTimeActivitystopwatchesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchTimeActivitystopwatchesByIdRequest) ClientId(clientId string) ApiPatchTimeActivitystopwatchesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *ActivityStopwatchesAPIService) PatchTimeActivitystopwatchesByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *ActivityStopwatchesAPIService) PatchTimeActivitystopwatchesByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *ActivityStopwatchesAPIService) PatchTimeActivitystopwatchesByIdExecute(
 type ApiPostTimeActivitystopwatchesRequest struct {
 	ctx context.Context
 	ApiService *ActivityStopwatchesAPIService
-	clientId *string
 	activityStopwatch *ActivityStopwatch
-}
-
-// 
-func (r ApiPostTimeActivitystopwatchesRequest) ClientId(clientId string) ApiPostTimeActivitystopwatchesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // activityStopwatch
 func (r ApiPostTimeActivitystopwatchesRequest) ActivityStopwatch(activityStopwatch ActivityStopwatch) ApiPostTimeActivitystopwatchesRequest {
 	r.activityStopwatch = &activityStopwatch
+	return r
+}
+
+// 
+func (r ApiPostTimeActivitystopwatchesRequest) ClientId(clientId string) ApiPostTimeActivitystopwatchesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *ActivityStopwatchesAPIService) PostTimeActivitystopwatchesExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.activityStopwatch == nil {
 		return localVarReturnValue, nil, reportError("activityStopwatch is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *ActivityStopwatchesAPIService) PostTimeActivitystopwatchesExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.activityStopwatch
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutTimeActivitystopwatchesByIdRequest struct {
 	ctx context.Context
 	ApiService *ActivityStopwatchesAPIService
 	id int32
-	clientId *string
 	activityStopwatch *ActivityStopwatch
-}
-
-// 
-func (r ApiPutTimeActivitystopwatchesByIdRequest) ClientId(clientId string) ApiPutTimeActivitystopwatchesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // activityStopwatch
 func (r ApiPutTimeActivitystopwatchesByIdRequest) ActivityStopwatch(activityStopwatch ActivityStopwatch) ApiPutTimeActivitystopwatchesByIdRequest {
 	r.activityStopwatch = &activityStopwatch
+	return r
+}
+
+// 
+func (r ApiPutTimeActivitystopwatchesByIdRequest) ClientId(clientId string) ApiPutTimeActivitystopwatchesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *ActivityStopwatchesAPIService) PutTimeActivitystopwatchesByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.activityStopwatch == nil {
 		return localVarReturnValue, nil, reportError("activityStopwatch is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *ActivityStopwatchesAPIService) PutTimeActivitystopwatchesByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.activityStopwatch
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

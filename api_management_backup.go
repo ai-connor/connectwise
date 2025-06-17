@@ -74,9 +74,6 @@ func (a *ManagementBackupAPIService) DeleteCompanyManagementBackupsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ManagementBackupAPIService) DeleteCompanyManagementBackupsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ManagementBackupAPIService) DeleteCompanyManagementBackupsByIdExecute(r
 type ApiGetCompanyManagementBackupsRequest struct {
 	ctx context.Context
 	ApiService *ManagementBackupAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyManagementBackupsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementBackupsRequest) ClientId(clientId string) ApiGetCompanyManagementBackupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyManagementBackupsRequest) PageId(pageId int32) ApiGetCompan
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementBackupsRequest) ClientId(clientId string) ApiGetCompanyManagementBackupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementBackupsRequest) Execute() ([]ManagementBackup, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementBackupsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ManagementBackupAPIService) GetCompanyManagementBackupsExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ManagementBackupAPIService) GetCompanyManagementBackupsExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyManagementBackupsByIdRequest struct {
 	ctx context.Context
 	ApiService *ManagementBackupAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyManagementBackupsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementBackupsByIdRequest) ClientId(clientId string) ApiGetCompanyManagementBackupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyManagementBackupsByIdRequest) PageId(pageId int32) ApiGetCo
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementBackupsByIdRequest) ClientId(clientId string) ApiGetCompanyManagementBackupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementBackupsByIdRequest) Execute() (*ManagementBackup, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementBackupsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ManagementBackupAPIService) GetCompanyManagementBackupsByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ManagementBackupAPIService) GetCompanyManagementBackupsByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *ManagementBackupAPIService) GetCompanyManagementBackupsByIdExecute(r Ap
 type ApiGetCompanyManagementBackupsCountRequest struct {
 	ctx context.Context
 	ApiService *ManagementBackupAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetCompanyManagementBackupsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementBackupsCountRequest) ClientId(clientId string) ApiGetCompanyManagementBackupsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetCompanyManagementBackupsCountRequest) PageId(pageId int32) ApiGetC
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementBackupsCountRequest) ClientId(clientId string) ApiGetCompanyManagementBackupsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementBackupsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementBackupsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *ManagementBackupAPIService) GetCompanyManagementBackupsCountExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *ManagementBackupAPIService) GetCompanyManagementBackupsCountExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchCompanyManagementBackupsByIdRequest struct {
 	ctx context.Context
 	ApiService *ManagementBackupAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyManagementBackupsByIdRequest) ClientId(clientId string) ApiPatchCompanyManagementBackupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyManagementBackupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyManagementBackupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyManagementBackupsByIdRequest) ClientId(clientId string) ApiPatchCompanyManagementBackupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *ManagementBackupAPIService) PatchCompanyManagementBackupsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *ManagementBackupAPIService) PatchCompanyManagementBackupsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *ManagementBackupAPIService) PatchCompanyManagementBackupsByIdExecute(r 
 type ApiPostCompanyManagementBackupsRequest struct {
 	ctx context.Context
 	ApiService *ManagementBackupAPIService
-	clientId *string
 	managementBackup *ManagementBackup
-}
-
-// 
-func (r ApiPostCompanyManagementBackupsRequest) ClientId(clientId string) ApiPostCompanyManagementBackupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementBackup
 func (r ApiPostCompanyManagementBackupsRequest) ManagementBackup(managementBackup ManagementBackup) ApiPostCompanyManagementBackupsRequest {
 	r.managementBackup = &managementBackup
+	return r
+}
+
+// 
+func (r ApiPostCompanyManagementBackupsRequest) ClientId(clientId string) ApiPostCompanyManagementBackupsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *ManagementBackupAPIService) PostCompanyManagementBackupsExecute(r ApiPo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementBackup == nil {
 		return localVarReturnValue, nil, reportError("managementBackup is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *ManagementBackupAPIService) PostCompanyManagementBackupsExecute(r ApiPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementBackup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutCompanyManagementBackupsByIdRequest struct {
 	ctx context.Context
 	ApiService *ManagementBackupAPIService
 	id int32
-	clientId *string
 	managementBackup *ManagementBackup
-}
-
-// 
-func (r ApiPutCompanyManagementBackupsByIdRequest) ClientId(clientId string) ApiPutCompanyManagementBackupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementBackup
 func (r ApiPutCompanyManagementBackupsByIdRequest) ManagementBackup(managementBackup ManagementBackup) ApiPutCompanyManagementBackupsByIdRequest {
 	r.managementBackup = &managementBackup
+	return r
+}
+
+// 
+func (r ApiPutCompanyManagementBackupsByIdRequest) ClientId(clientId string) ApiPutCompanyManagementBackupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *ManagementBackupAPIService) PutCompanyManagementBackupsByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementBackup == nil {
 		return localVarReturnValue, nil, reportError("managementBackup is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *ManagementBackupAPIService) PutCompanyManagementBackupsByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementBackup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

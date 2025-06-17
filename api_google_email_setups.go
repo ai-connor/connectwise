@@ -74,9 +74,6 @@ func (a *GoogleEmailSetupsAPIService) DeleteSystemGoogleemailsetupByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *GoogleEmailSetupsAPIService) DeleteSystemGoogleemailsetupByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *GoogleEmailSetupsAPIService) DeleteSystemGoogleemailsetupByIdExecute(r 
 type ApiGetSystemGoogleemailsetupRequest struct {
 	ctx context.Context
 	ApiService *GoogleEmailSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemGoogleemailsetupRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemGoogleemailsetupRequest) ClientId(clientId string) ApiGetSystemGoogleemailsetupRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemGoogleemailsetupRequest) PageId(pageId int32) ApiGetSystemGo
 	return r
 }
 
+// 
+func (r ApiGetSystemGoogleemailsetupRequest) ClientId(clientId string) ApiGetSystemGoogleemailsetupRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemGoogleemailsetupRequest) Execute() ([]GoogleEmailSetup, *http.Response, error) {
 	return r.ApiService.GetSystemGoogleemailsetupExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *GoogleEmailSetupsAPIService) GetSystemGoogleemailsetupExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *GoogleEmailSetupsAPIService) GetSystemGoogleemailsetupExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemGoogleemailsetupByIdRequest struct {
 	ctx context.Context
 	ApiService *GoogleEmailSetupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemGoogleemailsetupByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemGoogleemailsetupByIdRequest) ClientId(clientId string) ApiGetSystemGoogleemailsetupByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemGoogleemailsetupByIdRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemGoogleemailsetupByIdRequest) ClientId(clientId string) ApiGetSystemGoogleemailsetupByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemGoogleemailsetupByIdRequest) Execute() (*GoogleEmailSetup, *http.Response, error) {
 	return r.ApiService.GetSystemGoogleemailsetupByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *GoogleEmailSetupsAPIService) GetSystemGoogleemailsetupByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *GoogleEmailSetupsAPIService) GetSystemGoogleemailsetupByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *GoogleEmailSetupsAPIService) GetSystemGoogleemailsetupByIdExecute(r Api
 type ApiGetSystemGoogleemailsetupCountRequest struct {
 	ctx context.Context
 	ApiService *GoogleEmailSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemGoogleemailsetupCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemGoogleemailsetupCountRequest) ClientId(clientId string) ApiGetSystemGoogleemailsetupCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemGoogleemailsetupCountRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemGoogleemailsetupCountRequest) ClientId(clientId string) ApiGetSystemGoogleemailsetupCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemGoogleemailsetupCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemGoogleemailsetupCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *GoogleEmailSetupsAPIService) GetSystemGoogleemailsetupCountExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *GoogleEmailSetupsAPIService) GetSystemGoogleemailsetupCountExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemGoogleemailsetupByIdRequest struct {
 	ctx context.Context
 	ApiService *GoogleEmailSetupsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemGoogleemailsetupByIdRequest) ClientId(clientId string) ApiPatchSystemGoogleemailsetupByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemGoogleemailsetupByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemGoogleemailsetupByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemGoogleemailsetupByIdRequest) ClientId(clientId string) ApiPatchSystemGoogleemailsetupByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *GoogleEmailSetupsAPIService) PatchSystemGoogleemailsetupByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *GoogleEmailSetupsAPIService) PatchSystemGoogleemailsetupByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *GoogleEmailSetupsAPIService) PatchSystemGoogleemailsetupByIdExecute(r A
 type ApiPostSystemGoogleemailsetupRequest struct {
 	ctx context.Context
 	ApiService *GoogleEmailSetupsAPIService
-	clientId *string
 	googleEmailSetup *GoogleEmailSetup
-}
-
-// 
-func (r ApiPostSystemGoogleemailsetupRequest) ClientId(clientId string) ApiPostSystemGoogleemailsetupRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // GoogleEmailSetup
 func (r ApiPostSystemGoogleemailsetupRequest) GoogleEmailSetup(googleEmailSetup GoogleEmailSetup) ApiPostSystemGoogleemailsetupRequest {
 	r.googleEmailSetup = &googleEmailSetup
+	return r
+}
+
+// 
+func (r ApiPostSystemGoogleemailsetupRequest) ClientId(clientId string) ApiPostSystemGoogleemailsetupRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *GoogleEmailSetupsAPIService) PostSystemGoogleemailsetupExecute(r ApiPos
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.googleEmailSetup == nil {
 		return localVarReturnValue, nil, reportError("googleEmailSetup is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *GoogleEmailSetupsAPIService) PostSystemGoogleemailsetupExecute(r ApiPos
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.googleEmailSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -989,9 +983,6 @@ func (a *GoogleEmailSetupsAPIService) PostSystemGoogleemailsetupByIdTestConnecti
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1010,7 +1001,9 @@ func (a *GoogleEmailSetupsAPIService) PostSystemGoogleemailsetupByIdTestConnecti
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1052,19 +1045,19 @@ type ApiPutSystemGoogleemailsetupByIdRequest struct {
 	ctx context.Context
 	ApiService *GoogleEmailSetupsAPIService
 	id int32
-	clientId *string
 	googleEmailSetup *GoogleEmailSetup
-}
-
-// 
-func (r ApiPutSystemGoogleemailsetupByIdRequest) ClientId(clientId string) ApiPutSystemGoogleemailsetupByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // companyTypeAssociation
 func (r ApiPutSystemGoogleemailsetupByIdRequest) GoogleEmailSetup(googleEmailSetup GoogleEmailSetup) ApiPutSystemGoogleemailsetupByIdRequest {
 	r.googleEmailSetup = &googleEmailSetup
+	return r
+}
+
+// 
+func (r ApiPutSystemGoogleemailsetupByIdRequest) ClientId(clientId string) ApiPutSystemGoogleemailsetupByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1108,9 +1101,6 @@ func (a *GoogleEmailSetupsAPIService) PutSystemGoogleemailsetupByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.googleEmailSetup == nil {
 		return localVarReturnValue, nil, reportError("googleEmailSetup is required and must be specified")
 	}
@@ -1132,7 +1122,9 @@ func (a *GoogleEmailSetupsAPIService) PutSystemGoogleemailsetupByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.googleEmailSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

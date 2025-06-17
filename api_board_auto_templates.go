@@ -78,9 +78,6 @@ func (a *BoardAutoTemplatesAPIService) DeleteServiceBoardsByParentIdAutoTemplate
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *BoardAutoTemplatesAPIService) DeleteServiceBoardsByParentIdAutoTemplate
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetServiceBoardsByParentIdAutoTemplatesRequest struct {
 	ctx context.Context
 	ApiService *BoardAutoTemplatesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetServiceBoardsByParentIdAutoTemplatesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdAutoTemplatesRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoTemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetServiceBoardsByParentIdAutoTemplatesRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdAutoTemplatesRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoTemplatesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdAutoTemplatesRequest) Execute() ([]BoardAutoTemplate, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdAutoTemplatesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *BoardAutoTemplatesAPIService) GetServiceBoardsByParentIdAutoTemplatesEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *BoardAutoTemplatesAPIService) GetServiceBoardsByParentIdAutoTemplatesEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetServiceBoardsByParentIdAutoTemplatesByIdRequest struct {
 	ApiService *BoardAutoTemplatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetServiceBoardsByParentIdAutoTemplatesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdAutoTemplatesByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetServiceBoardsByParentIdAutoTemplatesByIdRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdAutoTemplatesByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoTemplatesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdAutoTemplatesByIdRequest) Execute() (*BoardAutoTemplate, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdAutoTemplatesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *BoardAutoTemplatesAPIService) GetServiceBoardsByParentIdAutoTemplatesBy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *BoardAutoTemplatesAPIService) GetServiceBoardsByParentIdAutoTemplatesBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetServiceBoardsByParentIdAutoTemplatesCountRequest struct {
 	ctx context.Context
 	ApiService *BoardAutoTemplatesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetServiceBoardsByParentIdAutoTemplatesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdAutoTemplatesCountRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoTemplatesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetServiceBoardsByParentIdAutoTemplatesCountRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdAutoTemplatesCountRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdAutoTemplatesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdAutoTemplatesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdAutoTemplatesCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *BoardAutoTemplatesAPIService) GetServiceBoardsByParentIdAutoTemplatesCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *BoardAutoTemplatesAPIService) GetServiceBoardsByParentIdAutoTemplatesCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchServiceBoardsByParentIdAutoTemplatesByIdRequest struct {
 	ApiService *BoardAutoTemplatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceBoardsByParentIdAutoTemplatesByIdRequest) ClientId(clientId string) ApiPatchServiceBoardsByParentIdAutoTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceBoardsByParentIdAutoTemplatesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceBoardsByParentIdAutoTemplatesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceBoardsByParentIdAutoTemplatesByIdRequest) ClientId(clientId string) ApiPatchServiceBoardsByParentIdAutoTemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *BoardAutoTemplatesAPIService) PatchServiceBoardsByParentIdAutoTemplates
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *BoardAutoTemplatesAPIService) PatchServiceBoardsByParentIdAutoTemplates
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostServiceBoardsByParentIdAutoTemplatesRequest struct {
 	ctx context.Context
 	ApiService *BoardAutoTemplatesAPIService
 	parentId int32
-	clientId *string
 	boardAutoTemplate *BoardAutoTemplate
-}
-
-// 
-func (r ApiPostServiceBoardsByParentIdAutoTemplatesRequest) ClientId(clientId string) ApiPostServiceBoardsByParentIdAutoTemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardAutoTemplate
 func (r ApiPostServiceBoardsByParentIdAutoTemplatesRequest) BoardAutoTemplate(boardAutoTemplate BoardAutoTemplate) ApiPostServiceBoardsByParentIdAutoTemplatesRequest {
 	r.boardAutoTemplate = &boardAutoTemplate
+	return r
+}
+
+// 
+func (r ApiPostServiceBoardsByParentIdAutoTemplatesRequest) ClientId(clientId string) ApiPostServiceBoardsByParentIdAutoTemplatesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *BoardAutoTemplatesAPIService) PostServiceBoardsByParentIdAutoTemplatesE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardAutoTemplate == nil {
 		return localVarReturnValue, nil, reportError("boardAutoTemplate is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *BoardAutoTemplatesAPIService) PostServiceBoardsByParentIdAutoTemplatesE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardAutoTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutServiceBoardsByParentIdAutoTemplatesByIdRequest struct {
 	ApiService *BoardAutoTemplatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	boardAutoTemplate *BoardAutoTemplate
-}
-
-// 
-func (r ApiPutServiceBoardsByParentIdAutoTemplatesByIdRequest) ClientId(clientId string) ApiPutServiceBoardsByParentIdAutoTemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardAutoTemplate
 func (r ApiPutServiceBoardsByParentIdAutoTemplatesByIdRequest) BoardAutoTemplate(boardAutoTemplate BoardAutoTemplate) ApiPutServiceBoardsByParentIdAutoTemplatesByIdRequest {
 	r.boardAutoTemplate = &boardAutoTemplate
+	return r
+}
+
+// 
+func (r ApiPutServiceBoardsByParentIdAutoTemplatesByIdRequest) ClientId(clientId string) ApiPutServiceBoardsByParentIdAutoTemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *BoardAutoTemplatesAPIService) PutServiceBoardsByParentIdAutoTemplatesBy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardAutoTemplate == nil {
 		return localVarReturnValue, nil, reportError("boardAutoTemplate is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *BoardAutoTemplatesAPIService) PutServiceBoardsByParentIdAutoTemplatesBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardAutoTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

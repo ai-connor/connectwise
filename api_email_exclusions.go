@@ -74,9 +74,6 @@ func (a *EmailExclusionsAPIService) DeleteSystemEmailExclusionsByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *EmailExclusionsAPIService) DeleteSystemEmailExclusionsByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *EmailExclusionsAPIService) DeleteSystemEmailExclusionsByIdExecute(r Api
 type ApiGetSystemEmailExclusionsRequest struct {
 	ctx context.Context
 	ApiService *EmailExclusionsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemEmailExclusionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailExclusionsRequest) ClientId(clientId string) ApiGetSystemEmailExclusionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemEmailExclusionsRequest) PageId(pageId int32) ApiGetSystemEma
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailExclusionsRequest) ClientId(clientId string) ApiGetSystemEmailExclusionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailExclusionsRequest) Execute() ([]EmailExclusion, *http.Response, error) {
 	return r.ApiService.GetSystemEmailExclusionsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *EmailExclusionsAPIService) GetSystemEmailExclusionsExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *EmailExclusionsAPIService) GetSystemEmailExclusionsExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemEmailExclusionsByIdRequest struct {
 	ctx context.Context
 	ApiService *EmailExclusionsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemEmailExclusionsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailExclusionsByIdRequest) ClientId(clientId string) ApiGetSystemEmailExclusionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemEmailExclusionsByIdRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailExclusionsByIdRequest) ClientId(clientId string) ApiGetSystemEmailExclusionsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailExclusionsByIdRequest) Execute() (*EmailExclusion, *http.Response, error) {
 	return r.ApiService.GetSystemEmailExclusionsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *EmailExclusionsAPIService) GetSystemEmailExclusionsByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *EmailExclusionsAPIService) GetSystemEmailExclusionsByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *EmailExclusionsAPIService) GetSystemEmailExclusionsByIdExecute(r ApiGet
 type ApiGetSystemEmailExclusionsCountRequest struct {
 	ctx context.Context
 	ApiService *EmailExclusionsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemEmailExclusionsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailExclusionsCountRequest) ClientId(clientId string) ApiGetSystemEmailExclusionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemEmailExclusionsCountRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailExclusionsCountRequest) ClientId(clientId string) ApiGetSystemEmailExclusionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailExclusionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemEmailExclusionsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *EmailExclusionsAPIService) GetSystemEmailExclusionsCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *EmailExclusionsAPIService) GetSystemEmailExclusionsCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemEmailExclusionsByIdRequest struct {
 	ctx context.Context
 	ApiService *EmailExclusionsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemEmailExclusionsByIdRequest) ClientId(clientId string) ApiPatchSystemEmailExclusionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemEmailExclusionsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemEmailExclusionsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemEmailExclusionsByIdRequest) ClientId(clientId string) ApiPatchSystemEmailExclusionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *EmailExclusionsAPIService) PatchSystemEmailExclusionsByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *EmailExclusionsAPIService) PatchSystemEmailExclusionsByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *EmailExclusionsAPIService) PatchSystemEmailExclusionsByIdExecute(r ApiP
 type ApiPostSystemEmailExclusionsRequest struct {
 	ctx context.Context
 	ApiService *EmailExclusionsAPIService
-	clientId *string
 	emailExclusion *EmailExclusion
-}
-
-// 
-func (r ApiPostSystemEmailExclusionsRequest) ClientId(clientId string) ApiPostSystemEmailExclusionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // emailExclusion
 func (r ApiPostSystemEmailExclusionsRequest) EmailExclusion(emailExclusion EmailExclusion) ApiPostSystemEmailExclusionsRequest {
 	r.emailExclusion = &emailExclusion
+	return r
+}
+
+// 
+func (r ApiPostSystemEmailExclusionsRequest) ClientId(clientId string) ApiPostSystemEmailExclusionsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *EmailExclusionsAPIService) PostSystemEmailExclusionsExecute(r ApiPostSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.emailExclusion == nil {
 		return localVarReturnValue, nil, reportError("emailExclusion is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *EmailExclusionsAPIService) PostSystemEmailExclusionsExecute(r ApiPostSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.emailExclusion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemEmailExclusionsByIdRequest struct {
 	ctx context.Context
 	ApiService *EmailExclusionsAPIService
 	id int32
-	clientId *string
 	emailExclusion *EmailExclusion
-}
-
-// 
-func (r ApiPutSystemEmailExclusionsByIdRequest) ClientId(clientId string) ApiPutSystemEmailExclusionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // emailExclusion
 func (r ApiPutSystemEmailExclusionsByIdRequest) EmailExclusion(emailExclusion EmailExclusion) ApiPutSystemEmailExclusionsByIdRequest {
 	r.emailExclusion = &emailExclusion
+	return r
+}
+
+// 
+func (r ApiPutSystemEmailExclusionsByIdRequest) ClientId(clientId string) ApiPutSystemEmailExclusionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *EmailExclusionsAPIService) PutSystemEmailExclusionsByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.emailExclusion == nil {
 		return localVarReturnValue, nil, reportError("emailExclusion is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *EmailExclusionsAPIService) PutSystemEmailExclusionsByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.emailExclusion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

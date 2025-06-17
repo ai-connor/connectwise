@@ -26,7 +26,6 @@ type PortalSecurityLevelsAPIService service
 type ApiGetCompanyPortalSecurityLevelsRequest struct {
 	ctx context.Context
 	ApiService *PortalSecurityLevelsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetCompanyPortalSecurityLevelsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalSecurityLevelsRequest) ClientId(clientId string) ApiGetCompanyPortalSecurityLevelsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetCompanyPortalSecurityLevelsRequest) PageId(pageId int32) ApiGetCom
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalSecurityLevelsRequest) ClientId(clientId string) ApiGetCompanyPortalSecurityLevelsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalSecurityLevelsRequest) Execute() ([]PortalSecurityLevel, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalSecurityLevelsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *PortalSecurityLevelsAPIService) GetCompanyPortalSecurityLevelsExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *PortalSecurityLevelsAPIService) GetCompanyPortalSecurityLevelsExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetCompanyPortalSecurityLevelsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalSecurityLevelsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetCompanyPortalSecurityLevelsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalSecurityLevelsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalSecurityLevelsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetCompanyPortalSecurityLevelsByIdRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalSecurityLevelsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalSecurityLevelsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalSecurityLevelsByIdRequest) Execute() (*PortalSecurityLevel, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalSecurityLevelsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *PortalSecurityLevelsAPIService) GetCompanyPortalSecurityLevelsByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *PortalSecurityLevelsAPIService) GetCompanyPortalSecurityLevelsByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *PortalSecurityLevelsAPIService) GetCompanyPortalSecurityLevelsByIdExecu
 type ApiGetCompanyPortalSecurityLevelsCountRequest struct {
 	ctx context.Context
 	ApiService *PortalSecurityLevelsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetCompanyPortalSecurityLevelsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalSecurityLevelsCountRequest) ClientId(clientId string) ApiGetCompanyPortalSecurityLevelsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetCompanyPortalSecurityLevelsCountRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalSecurityLevelsCountRequest) ClientId(clientId string) ApiGetCompanyPortalSecurityLevelsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalSecurityLevelsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalSecurityLevelsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *PortalSecurityLevelsAPIService) GetCompanyPortalSecurityLevelsCountExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *PortalSecurityLevelsAPIService) GetCompanyPortalSecurityLevelsCountExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchCompanyPortalSecurityLevelsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalSecurityLevelsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyPortalSecurityLevelsByIdRequest) ClientId(clientId string) ApiPatchCompanyPortalSecurityLevelsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyPortalSecurityLevelsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyPortalSecurityLevelsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyPortalSecurityLevelsByIdRequest) ClientId(clientId string) ApiPatchCompanyPortalSecurityLevelsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *PortalSecurityLevelsAPIService) PatchCompanyPortalSecurityLevelsByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *PortalSecurityLevelsAPIService) PatchCompanyPortalSecurityLevelsByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutCompanyPortalSecurityLevelsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalSecurityLevelsAPIService
 	id int32
-	clientId *string
 	portalSecurityLevel *PortalSecurityLevel
-}
-
-// 
-func (r ApiPutCompanyPortalSecurityLevelsByIdRequest) ClientId(clientId string) ApiPutCompanyPortalSecurityLevelsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // _portalSecurityLevel
 func (r ApiPutCompanyPortalSecurityLevelsByIdRequest) PortalSecurityLevel(portalSecurityLevel PortalSecurityLevel) ApiPutCompanyPortalSecurityLevelsByIdRequest {
 	r.portalSecurityLevel = &portalSecurityLevel
+	return r
+}
+
+// 
+func (r ApiPutCompanyPortalSecurityLevelsByIdRequest) ClientId(clientId string) ApiPutCompanyPortalSecurityLevelsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *PortalSecurityLevelsAPIService) PutCompanyPortalSecurityLevelsByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.portalSecurityLevel == nil {
 		return localVarReturnValue, nil, reportError("portalSecurityLevel is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *PortalSecurityLevelsAPIService) PutCompanyPortalSecurityLevelsByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.portalSecurityLevel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

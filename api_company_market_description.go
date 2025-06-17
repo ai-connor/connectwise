@@ -74,9 +74,6 @@ func (a *CompanyMarketDescriptionAPIService) DeleteCompanyMarketDescriptionsById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CompanyMarketDescriptionAPIService) DeleteCompanyMarketDescriptionsById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CompanyMarketDescriptionAPIService) DeleteCompanyMarketDescriptionsById
 type ApiGetCompanyMarketDescriptionsRequest struct {
 	ctx context.Context
 	ApiService *CompanyMarketDescriptionAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyMarketDescriptionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyMarketDescriptionsRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyMarketDescriptionsRequest) PageId(pageId int32) ApiGetCompa
 	return r
 }
 
+// 
+func (r ApiGetCompanyMarketDescriptionsRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyMarketDescriptionsRequest) Execute() ([]MarketDescription, *http.Response, error) {
 	return r.ApiService.GetCompanyMarketDescriptionsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyMarketDescriptionsByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyMarketDescriptionAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyMarketDescriptionsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyMarketDescriptionsByIdRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyMarketDescriptionsByIdRequest) PageId(pageId int32) ApiGetC
 	return r
 }
 
+// 
+func (r ApiGetCompanyMarketDescriptionsByIdRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyMarketDescriptionsByIdRequest) Execute() (*MarketDescription, *http.Response, error) {
 	return r.ApiService.GetCompanyMarketDescriptionsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetCompanyMarketDescriptionsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *CompanyMarketDescriptionAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetCompanyMarketDescriptionsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyMarketDescriptionsByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetCompanyMarketDescriptionsByIdUsagesRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetCompanyMarketDescriptionsByIdUsagesRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyMarketDescriptionsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyMarketDescriptionsByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsByIdUsa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsByIdUsa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetCompanyMarketDescriptionsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *CompanyMarketDescriptionAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetCompanyMarketDescriptionsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyMarketDescriptionsByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetCompanyMarketDescriptionsByIdUsagesListRequest) PageId(pageId int3
 	return r
 }
 
+// 
+func (r ApiGetCompanyMarketDescriptionsByIdUsagesListRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyMarketDescriptionsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetCompanyMarketDescriptionsByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsByIdUsa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsByIdUsa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsByIdUsa
 type ApiGetCompanyMarketDescriptionsCountRequest struct {
 	ctx context.Context
 	ApiService *CompanyMarketDescriptionAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetCompanyMarketDescriptionsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyMarketDescriptionsCountRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetCompanyMarketDescriptionsCountRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetCompanyMarketDescriptionsCountRequest) ClientId(clientId string) ApiGetCompanyMarketDescriptionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyMarketDescriptionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyMarketDescriptionsCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsCountEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *CompanyMarketDescriptionAPIService) GetCompanyMarketDescriptionsCountEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchCompanyMarketDescriptionsByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyMarketDescriptionAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyMarketDescriptionsByIdRequest) ClientId(clientId string) ApiPatchCompanyMarketDescriptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyMarketDescriptionsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyMarketDescriptionsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyMarketDescriptionsByIdRequest) ClientId(clientId string) ApiPatchCompanyMarketDescriptionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *CompanyMarketDescriptionAPIService) PatchCompanyMarketDescriptionsByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *CompanyMarketDescriptionAPIService) PatchCompanyMarketDescriptionsByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *CompanyMarketDescriptionAPIService) PatchCompanyMarketDescriptionsByIdE
 type ApiPostCompanyMarketDescriptionsRequest struct {
 	ctx context.Context
 	ApiService *CompanyMarketDescriptionAPIService
-	clientId *string
 	marketDescription *MarketDescription
-}
-
-// 
-func (r ApiPostCompanyMarketDescriptionsRequest) ClientId(clientId string) ApiPostCompanyMarketDescriptionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // marketDescription
 func (r ApiPostCompanyMarketDescriptionsRequest) MarketDescription(marketDescription MarketDescription) ApiPostCompanyMarketDescriptionsRequest {
 	r.marketDescription = &marketDescription
+	return r
+}
+
+// 
+func (r ApiPostCompanyMarketDescriptionsRequest) ClientId(clientId string) ApiPostCompanyMarketDescriptionsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *CompanyMarketDescriptionAPIService) PostCompanyMarketDescriptionsExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.marketDescription == nil {
 		return localVarReturnValue, nil, reportError("marketDescription is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *CompanyMarketDescriptionAPIService) PostCompanyMarketDescriptionsExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.marketDescription
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutCompanyMarketDescriptionsByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyMarketDescriptionAPIService
 	id int32
-	clientId *string
 	marketDescription *MarketDescription
-}
-
-// 
-func (r ApiPutCompanyMarketDescriptionsByIdRequest) ClientId(clientId string) ApiPutCompanyMarketDescriptionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // marketDescription
 func (r ApiPutCompanyMarketDescriptionsByIdRequest) MarketDescription(marketDescription MarketDescription) ApiPutCompanyMarketDescriptionsByIdRequest {
 	r.marketDescription = &marketDescription
+	return r
+}
+
+// 
+func (r ApiPutCompanyMarketDescriptionsByIdRequest) ClientId(clientId string) ApiPutCompanyMarketDescriptionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *CompanyMarketDescriptionAPIService) PutCompanyMarketDescriptionsByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.marketDescription == nil {
 		return localVarReturnValue, nil, reportError("marketDescription is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *CompanyMarketDescriptionAPIService) PutCompanyMarketDescriptionsByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.marketDescription
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

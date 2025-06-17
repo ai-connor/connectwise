@@ -74,9 +74,6 @@ func (a *Office365EmailSetupsAPIService) DeleteSystemOffice365EmailSetupsByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *Office365EmailSetupsAPIService) DeleteSystemOffice365EmailSetupsByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *Office365EmailSetupsAPIService) DeleteSystemOffice365EmailSetupsByIdExe
 type ApiGetSystemOffice365EmailSetupsRequest struct {
 	ctx context.Context
 	ApiService *Office365EmailSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemOffice365EmailSetupsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOffice365EmailSetupsRequest) ClientId(clientId string) ApiGetSystemOffice365EmailSetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemOffice365EmailSetupsRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemOffice365EmailSetupsRequest) ClientId(clientId string) ApiGetSystemOffice365EmailSetupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOffice365EmailSetupsRequest) Execute() ([]Office365EmailSetup, *http.Response, error) {
 	return r.ApiService.GetSystemOffice365EmailSetupsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemOffice365EmailSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *Office365EmailSetupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemOffice365EmailSetupsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOffice365EmailSetupsByIdRequest) ClientId(clientId string) ApiGetSystemOffice365EmailSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemOffice365EmailSetupsByIdRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetSystemOffice365EmailSetupsByIdRequest) ClientId(clientId string) ApiGetSystemOffice365EmailSetupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOffice365EmailSetupsByIdRequest) Execute() (*Office365EmailSetup, *http.Response, error) {
 	return r.ApiService.GetSystemOffice365EmailSetupsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsByIdExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsByIdExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSystemOffice365EmailSetupsByIdGetEmailsRequest struct {
 	ctx context.Context
 	ApiService *Office365EmailSetupsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetSystemOffice365EmailSetupsByIdGetEmailsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOffice365EmailSetupsByIdGetEmailsRequest) ClientId(clientId string) ApiGetSystemOffice365EmailSetupsByIdGetEmailsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetSystemOffice365EmailSetupsByIdGetEmailsRequest) PageId(pageId int3
 	return r
 }
 
+// 
+func (r ApiGetSystemOffice365EmailSetupsByIdGetEmailsRequest) ClientId(clientId string) ApiGetSystemOffice365EmailSetupsByIdGetEmailsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOffice365EmailSetupsByIdGetEmailsRequest) Execute() ([]UserEmail, *http.Response, error) {
 	return r.ApiService.GetSystemOffice365EmailSetupsByIdGetEmailsExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsByIdGetEma
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsByIdGetEma
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -699,7 +695,6 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsByIdGetEma
 type ApiGetSystemOffice365EmailSetupsCountRequest struct {
 	ctx context.Context
 	ApiService *Office365EmailSetupsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -708,12 +703,7 @@ type ApiGetSystemOffice365EmailSetupsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOffice365EmailSetupsCountRequest) ClientId(clientId string) ApiGetSystemOffice365EmailSetupsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -764,6 +754,12 @@ func (r ApiGetSystemOffice365EmailSetupsCountRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetSystemOffice365EmailSetupsCountRequest) ClientId(clientId string) ApiGetSystemOffice365EmailSetupsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOffice365EmailSetupsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemOffice365EmailSetupsCountExecute(r)
 }
@@ -801,9 +797,6 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsCountExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -846,7 +839,9 @@ func (a *Office365EmailSetupsAPIService) GetSystemOffice365EmailSetupsCountExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -888,19 +883,19 @@ type ApiPatchSystemOffice365EmailSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *Office365EmailSetupsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemOffice365EmailSetupsByIdRequest) ClientId(clientId string) ApiPatchSystemOffice365EmailSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemOffice365EmailSetupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemOffice365EmailSetupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemOffice365EmailSetupsByIdRequest) ClientId(clientId string) ApiPatchSystemOffice365EmailSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -944,9 +939,6 @@ func (a *Office365EmailSetupsAPIService) PatchSystemOffice365EmailSetupsByIdExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -968,7 +960,9 @@ func (a *Office365EmailSetupsAPIService) PatchSystemOffice365EmailSetupsByIdExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1011,19 +1005,19 @@ func (a *Office365EmailSetupsAPIService) PatchSystemOffice365EmailSetupsByIdExec
 type ApiPostSystemOffice365EmailSetupsRequest struct {
 	ctx context.Context
 	ApiService *Office365EmailSetupsAPIService
-	clientId *string
 	office365EmailSetup *Office365EmailSetup
-}
-
-// 
-func (r ApiPostSystemOffice365EmailSetupsRequest) ClientId(clientId string) ApiPostSystemOffice365EmailSetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // entity
 func (r ApiPostSystemOffice365EmailSetupsRequest) Office365EmailSetup(office365EmailSetup Office365EmailSetup) ApiPostSystemOffice365EmailSetupsRequest {
 	r.office365EmailSetup = &office365EmailSetup
+	return r
+}
+
+// 
+func (r ApiPostSystemOffice365EmailSetupsRequest) ClientId(clientId string) ApiPostSystemOffice365EmailSetupsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1064,9 +1058,6 @@ func (a *Office365EmailSetupsAPIService) PostSystemOffice365EmailSetupsExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.office365EmailSetup == nil {
 		return localVarReturnValue, nil, reportError("office365EmailSetup is required and must be specified")
 	}
@@ -1088,7 +1079,9 @@ func (a *Office365EmailSetupsAPIService) PostSystemOffice365EmailSetupsExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.office365EmailSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1181,9 +1174,6 @@ func (a *Office365EmailSetupsAPIService) PostSystemOffice365EmailSetupsByIdAutho
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1202,7 +1192,9 @@ func (a *Office365EmailSetupsAPIService) PostSystemOffice365EmailSetupsByIdAutho
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1293,9 +1285,6 @@ func (a *Office365EmailSetupsAPIService) PostSystemOffice365EmailSetupsByIdTestC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1314,7 +1303,9 @@ func (a *Office365EmailSetupsAPIService) PostSystemOffice365EmailSetupsByIdTestC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1356,19 +1347,19 @@ type ApiPutSystemOffice365EmailSetupsByIdRequest struct {
 	ctx context.Context
 	ApiService *Office365EmailSetupsAPIService
 	id int32
-	clientId *string
 	office365EmailSetup *Office365EmailSetup
-}
-
-// 
-func (r ApiPutSystemOffice365EmailSetupsByIdRequest) ClientId(clientId string) ApiPutSystemOffice365EmailSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // entity
 func (r ApiPutSystemOffice365EmailSetupsByIdRequest) Office365EmailSetup(office365EmailSetup Office365EmailSetup) ApiPutSystemOffice365EmailSetupsByIdRequest {
 	r.office365EmailSetup = &office365EmailSetup
+	return r
+}
+
+// 
+func (r ApiPutSystemOffice365EmailSetupsByIdRequest) ClientId(clientId string) ApiPutSystemOffice365EmailSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1412,9 +1403,6 @@ func (a *Office365EmailSetupsAPIService) PutSystemOffice365EmailSetupsByIdExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.office365EmailSetup == nil {
 		return localVarReturnValue, nil, reportError("office365EmailSetup is required and must be specified")
 	}
@@ -1436,7 +1424,9 @@ func (a *Office365EmailSetupsAPIService) PutSystemOffice365EmailSetupsByIdExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.office365EmailSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *CampaignTypesAPIService) DeleteMarketingCampaignsTypesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CampaignTypesAPIService) DeleteMarketingCampaignsTypesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CampaignTypesAPIService) DeleteMarketingCampaignsTypesByIdExecute(r Api
 type ApiGetMarketingCampaignsTypesRequest struct {
 	ctx context.Context
 	ApiService *CampaignTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetMarketingCampaignsTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetMarketingCampaignsTypesRequest) ClientId(clientId string) ApiGetMarketingCampaignsTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetMarketingCampaignsTypesRequest) PageId(pageId int32) ApiGetMarketi
 	return r
 }
 
+// 
+func (r ApiGetMarketingCampaignsTypesRequest) ClientId(clientId string) ApiGetMarketingCampaignsTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetMarketingCampaignsTypesRequest) Execute() ([]CampaignType, *http.Response, error) {
 	return r.ApiService.GetMarketingCampaignsTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CampaignTypesAPIService) GetMarketingCampaignsTypesExecute(r ApiGetMark
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CampaignTypesAPIService) GetMarketingCampaignsTypesExecute(r ApiGetMark
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetMarketingCampaignsTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CampaignTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetMarketingCampaignsTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetMarketingCampaignsTypesByIdRequest) ClientId(clientId string) ApiGetMarketingCampaignsTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetMarketingCampaignsTypesByIdRequest) PageId(pageId int32) ApiGetMar
 	return r
 }
 
+// 
+func (r ApiGetMarketingCampaignsTypesByIdRequest) ClientId(clientId string) ApiGetMarketingCampaignsTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetMarketingCampaignsTypesByIdRequest) Execute() (*CampaignType, *http.Response, error) {
 	return r.ApiService.GetMarketingCampaignsTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CampaignTypesAPIService) GetMarketingCampaignsTypesByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CampaignTypesAPIService) GetMarketingCampaignsTypesByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *CampaignTypesAPIService) GetMarketingCampaignsTypesByIdExecute(r ApiGet
 type ApiGetMarketingCampaignsTypesCountRequest struct {
 	ctx context.Context
 	ApiService *CampaignTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetMarketingCampaignsTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetMarketingCampaignsTypesCountRequest) ClientId(clientId string) ApiGetMarketingCampaignsTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetMarketingCampaignsTypesCountRequest) PageId(pageId int32) ApiGetMa
 	return r
 }
 
+// 
+func (r ApiGetMarketingCampaignsTypesCountRequest) ClientId(clientId string) ApiGetMarketingCampaignsTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetMarketingCampaignsTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetMarketingCampaignsTypesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *CampaignTypesAPIService) GetMarketingCampaignsTypesCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *CampaignTypesAPIService) GetMarketingCampaignsTypesCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchMarketingCampaignsTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CampaignTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchMarketingCampaignsTypesByIdRequest) ClientId(clientId string) ApiPatchMarketingCampaignsTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchMarketingCampaignsTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchMarketingCampaignsTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchMarketingCampaignsTypesByIdRequest) ClientId(clientId string) ApiPatchMarketingCampaignsTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *CampaignTypesAPIService) PatchMarketingCampaignsTypesByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *CampaignTypesAPIService) PatchMarketingCampaignsTypesByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *CampaignTypesAPIService) PatchMarketingCampaignsTypesByIdExecute(r ApiP
 type ApiPostMarketingCampaignsTypesRequest struct {
 	ctx context.Context
 	ApiService *CampaignTypesAPIService
-	clientId *string
 	campaignType *CampaignType
-}
-
-// 
-func (r ApiPostMarketingCampaignsTypesRequest) ClientId(clientId string) ApiPostMarketingCampaignsTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // campaignType
 func (r ApiPostMarketingCampaignsTypesRequest) CampaignType(campaignType CampaignType) ApiPostMarketingCampaignsTypesRequest {
 	r.campaignType = &campaignType
+	return r
+}
+
+// 
+func (r ApiPostMarketingCampaignsTypesRequest) ClientId(clientId string) ApiPostMarketingCampaignsTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *CampaignTypesAPIService) PostMarketingCampaignsTypesExecute(r ApiPostMa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.campaignType == nil {
 		return localVarReturnValue, nil, reportError("campaignType is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *CampaignTypesAPIService) PostMarketingCampaignsTypesExecute(r ApiPostMa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.campaignType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutMarketingCampaignsTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CampaignTypesAPIService
 	id int32
-	clientId *string
 	campaignType *CampaignType
-}
-
-// 
-func (r ApiPutMarketingCampaignsTypesByIdRequest) ClientId(clientId string) ApiPutMarketingCampaignsTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // campaignType
 func (r ApiPutMarketingCampaignsTypesByIdRequest) CampaignType(campaignType CampaignType) ApiPutMarketingCampaignsTypesByIdRequest {
 	r.campaignType = &campaignType
+	return r
+}
+
+// 
+func (r ApiPutMarketingCampaignsTypesByIdRequest) ClientId(clientId string) ApiPutMarketingCampaignsTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *CampaignTypesAPIService) PutMarketingCampaignsTypesByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.campaignType == nil {
 		return localVarReturnValue, nil, reportError("campaignType is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *CampaignTypesAPIService) PutMarketingCampaignsTypesByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.campaignType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

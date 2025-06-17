@@ -78,9 +78,6 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) DeleteFinanceAgreementTypesB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) DeleteFinanceAgreementTypesB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypeWorkTypeExclusionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest) ClientId(clientId string) ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest) PageId(p
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest) ClientId(clientId string) ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest) Execute() ([]AgreementTypeWorkTypeExclusion, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementTypesByParentIdWorkTypeExclusionsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) GetFinanceAgreementTypesByPa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) GetFinanceAgreementTypesByPa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdRequest struct {
 	ApiService *AgreementTypeWorkTypeExclusionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdRequest) ClientId(clientId string) ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdRequest) Page
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdRequest) ClientId(clientId string) ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdRequest) Execute() (*AgreementTypeWorkTypeExclusion, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementTypesByParentIdWorkTypeExclusionsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) GetFinanceAgreementTypesByPa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) GetFinanceAgreementTypesByPa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountRequest struct 
 	ctx context.Context
 	ApiService *AgreementTypeWorkTypeExclusionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountRequest struct 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountRequest) ClientId(clientId string) ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountRequest) Pag
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountRequest) ClientId(clientId string) ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementTypesByParentIdWorkTypeExclusionsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) GetFinanceAgreementTypesByPa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) GetFinanceAgreementTypesByPa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -712,19 +708,19 @@ type ApiPostFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest struct {
 	ctx context.Context
 	ApiService *AgreementTypeWorkTypeExclusionsAPIService
 	parentId int32
-	clientId *string
 	agreementTypeWorkTypeExclusion *AgreementTypeWorkTypeExclusion
-}
-
-// 
-func (r ApiPostFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest) ClientId(clientId string) ApiPostFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workTypeExclusion
 func (r ApiPostFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest) AgreementTypeWorkTypeExclusion(agreementTypeWorkTypeExclusion AgreementTypeWorkTypeExclusion) ApiPostFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest {
 	r.agreementTypeWorkTypeExclusion = &agreementTypeWorkTypeExclusion
+	return r
+}
+
+// 
+func (r ApiPostFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest) ClientId(clientId string) ApiPostFinanceAgreementTypesByParentIdWorkTypeExclusionsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -768,9 +764,6 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) PostFinanceAgreementTypesByP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.agreementTypeWorkTypeExclusion == nil {
 		return localVarReturnValue, nil, reportError("agreementTypeWorkTypeExclusion is required and must be specified")
 	}
@@ -792,7 +785,9 @@ func (a *AgreementTypeWorkTypeExclusionsAPIService) PostFinanceAgreementTypesByP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.agreementTypeWorkTypeExclusion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -26,7 +26,6 @@ type AccountingUnpostedExpensesAPIService service
 type ApiGetFinanceAccountingUnpostedexpensesRequest struct {
 	ctx context.Context
 	ApiService *AccountingUnpostedExpensesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetFinanceAccountingUnpostedexpensesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedexpensesRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedexpensesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetFinanceAccountingUnpostedexpensesRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedexpensesRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedexpensesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedexpensesRequest) Execute() ([]UnpostedExpense, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedexpensesExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *AccountingUnpostedExpensesAPIService) GetFinanceAccountingUnpostedexpen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *AccountingUnpostedExpensesAPIService) GetFinanceAccountingUnpostedexpen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetFinanceAccountingUnpostedexpensesByIdRequest struct {
 	ctx context.Context
 	ApiService *AccountingUnpostedExpensesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetFinanceAccountingUnpostedexpensesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedexpensesByIdRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedexpensesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetFinanceAccountingUnpostedexpensesByIdRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedexpensesByIdRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedexpensesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedexpensesByIdRequest) Execute() (*UnpostedExpense, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedexpensesByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *AccountingUnpostedExpensesAPIService) GetFinanceAccountingUnpostedexpen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *AccountingUnpostedExpensesAPIService) GetFinanceAccountingUnpostedexpen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *AccountingUnpostedExpensesAPIService) GetFinanceAccountingUnpostedexpen
 type ApiGetFinanceAccountingUnpostedexpensesCountRequest struct {
 	ctx context.Context
 	ApiService *AccountingUnpostedExpensesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetFinanceAccountingUnpostedexpensesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingUnpostedexpensesCountRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedexpensesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetFinanceAccountingUnpostedexpensesCountRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingUnpostedexpensesCountRequest) ClientId(clientId string) ApiGetFinanceAccountingUnpostedexpensesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingUnpostedexpensesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingUnpostedexpensesCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *AccountingUnpostedExpensesAPIService) GetFinanceAccountingUnpostedexpen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *AccountingUnpostedExpensesAPIService) GetFinanceAccountingUnpostedexpen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

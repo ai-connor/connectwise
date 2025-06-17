@@ -27,7 +27,6 @@ type ApiGetCompanyManagementByIdLogDownloadRequest struct {
 	ctx context.Context
 	ApiService *ManagementLogsAPIService
 	id int32
-	clientId *string
 	filePath string
 	conditions *string
 	childConditions *string
@@ -37,12 +36,7 @@ type ApiGetCompanyManagementByIdLogDownloadRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementByIdLogDownloadRequest) ClientId(clientId string) ApiGetCompanyManagementByIdLogDownloadRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -93,6 +87,12 @@ func (r ApiGetCompanyManagementByIdLogDownloadRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementByIdLogDownloadRequest) ClientId(clientId string) ApiGetCompanyManagementByIdLogDownloadRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementByIdLogDownloadRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetCompanyManagementByIdLogDownloadExecute(r)
 }
@@ -134,9 +134,6 @@ func (a *ManagementLogsAPIService) GetCompanyManagementByIdLogDownloadExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -179,7 +176,9 @@ func (a *ManagementLogsAPIService) GetCompanyManagementByIdLogDownloadExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -212,7 +211,6 @@ type ApiGetCompanyManagementByIdLogsRequest struct {
 	ctx context.Context
 	ApiService *ManagementLogsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -221,12 +219,7 @@ type ApiGetCompanyManagementByIdLogsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementByIdLogsRequest) ClientId(clientId string) ApiGetCompanyManagementByIdLogsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -277,6 +270,12 @@ func (r ApiGetCompanyManagementByIdLogsRequest) PageId(pageId int32) ApiGetCompa
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementByIdLogsRequest) ClientId(clientId string) ApiGetCompanyManagementByIdLogsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementByIdLogsRequest) Execute() ([]ManagementLogDocumentInfo, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementByIdLogsExecute(r)
 }
@@ -317,9 +316,6 @@ func (a *ManagementLogsAPIService) GetCompanyManagementByIdLogsExecute(r ApiGetC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -362,7 +358,9 @@ func (a *ManagementLogsAPIService) GetCompanyManagementByIdLogsExecute(r ApiGetC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

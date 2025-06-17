@@ -26,7 +26,6 @@ type M365ContactsAPIService service
 type ApiGetCompanyM365contactRequest struct {
 	ctx context.Context
 	ApiService *M365ContactsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetCompanyM365contactRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyM365contactRequest) ClientId(clientId string) ApiGetCompanyM365contactRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetCompanyM365contactRequest) PageId(pageId int32) ApiGetCompanyM365c
 	return r
 }
 
+// 
+func (r ApiGetCompanyM365contactRequest) ClientId(clientId string) ApiGetCompanyM365contactRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyM365contactRequest) Execute() ([]M365Contact, *http.Response, error) {
 	return r.ApiService.GetCompanyM365contactExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *M365ContactsAPIService) GetCompanyM365contactExecute(r ApiGetCompanyM36
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *M365ContactsAPIService) GetCompanyM365contactExecute(r ApiGetCompanyM36
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetCompanyM365contactByIdRequest struct {
 	ctx context.Context
 	ApiService *M365ContactsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetCompanyM365contactByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyM365contactByIdRequest) ClientId(clientId string) ApiGetCompanyM365contactByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetCompanyM365contactByIdRequest) PageId(pageId int32) ApiGetCompanyM
 	return r
 }
 
+// 
+func (r ApiGetCompanyM365contactByIdRequest) ClientId(clientId string) ApiGetCompanyM365contactByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyM365contactByIdRequest) Execute() (*M365Contact, *http.Response, error) {
 	return r.ApiService.GetCompanyM365contactByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *M365ContactsAPIService) GetCompanyM365contactByIdExecute(r ApiGetCompan
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *M365ContactsAPIService) GetCompanyM365contactByIdExecute(r ApiGetCompan
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *M365ContactsAPIService) GetCompanyM365contactByIdExecute(r ApiGetCompan
 type ApiGetCompanyM365contactCountRequest struct {
 	ctx context.Context
 	ApiService *M365ContactsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetCompanyM365contactCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyM365contactCountRequest) ClientId(clientId string) ApiGetCompanyM365contactCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetCompanyM365contactCountRequest) PageId(pageId int32) ApiGetCompany
 	return r
 }
 
+// 
+func (r ApiGetCompanyM365contactCountRequest) ClientId(clientId string) ApiGetCompanyM365contactCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyM365contactCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyM365contactCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *M365ContactsAPIService) GetCompanyM365contactCountExecute(r ApiGetCompa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *M365ContactsAPIService) GetCompanyM365contactCountExecute(r ApiGetCompa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

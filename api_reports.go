@@ -26,7 +26,6 @@ type ReportsAPIService service
 type ApiGetSystemReportsRequest struct {
 	ctx context.Context
 	ApiService *ReportsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemReportsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemReportsRequest) ClientId(clientId string) ApiGetSystemReportsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemReportsRequest) PageId(pageId int32) ApiGetSystemReportsRequ
 	return r
 }
 
+// 
+func (r ApiGetSystemReportsRequest) ClientId(clientId string) ApiGetSystemReportsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemReportsRequest) Execute() ([]Report, *http.Response, error) {
 	return r.ApiService.GetSystemReportsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *ReportsAPIService) GetSystemReportsExecute(r ApiGetSystemReportsRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *ReportsAPIService) GetSystemReportsExecute(r ApiGetSystemReportsRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemReportsByReportNameRequest struct {
 	ctx context.Context
 	ApiService *ReportsAPIService
 	reportName string
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemReportsByReportNameRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemReportsByReportNameRequest) ClientId(clientId string) ApiGetSystemReportsByReportNameRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemReportsByReportNameRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemReportsByReportNameRequest) ClientId(clientId string) ApiGetSystemReportsByReportNameRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemReportsByReportNameRequest) Execute() (*ReportDataResponse, *http.Response, error) {
 	return r.ApiService.GetSystemReportsByReportNameExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *ReportsAPIService) GetSystemReportsByReportNameExecute(r ApiGetSystemRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *ReportsAPIService) GetSystemReportsByReportNameExecute(r ApiGetSystemRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -407,7 +405,6 @@ type ApiGetSystemReportsByReportNameColumnsRequest struct {
 	ctx context.Context
 	ApiService *ReportsAPIService
 	reportName string
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -416,12 +413,7 @@ type ApiGetSystemReportsByReportNameColumnsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemReportsByReportNameColumnsRequest) ClientId(clientId string) ApiGetSystemReportsByReportNameColumnsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -472,6 +464,12 @@ func (r ApiGetSystemReportsByReportNameColumnsRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetSystemReportsByReportNameColumnsRequest) ClientId(clientId string) ApiGetSystemReportsByReportNameColumnsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemReportsByReportNameColumnsRequest) Execute() ([]map[string]ReportColumnDefinition, *http.Response, error) {
 	return r.ApiService.GetSystemReportsByReportNameColumnsExecute(r)
 }
@@ -512,9 +510,6 @@ func (a *ReportsAPIService) GetSystemReportsByReportNameColumnsExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -557,7 +552,9 @@ func (a *ReportsAPIService) GetSystemReportsByReportNameColumnsExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -599,7 +596,6 @@ type ApiGetSystemReportsByReportNameCountRequest struct {
 	ctx context.Context
 	ApiService *ReportsAPIService
 	reportName string
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -608,12 +604,7 @@ type ApiGetSystemReportsByReportNameCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemReportsByReportNameCountRequest) ClientId(clientId string) ApiGetSystemReportsByReportNameCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -664,6 +655,12 @@ func (r ApiGetSystemReportsByReportNameCountRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetSystemReportsByReportNameCountRequest) ClientId(clientId string) ApiGetSystemReportsByReportNameCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemReportsByReportNameCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemReportsByReportNameCountExecute(r)
 }
@@ -704,9 +701,6 @@ func (a *ReportsAPIService) GetSystemReportsByReportNameCountExecute(r ApiGetSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -749,7 +743,9 @@ func (a *ReportsAPIService) GetSystemReportsByReportNameCountExecute(r ApiGetSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -74,9 +74,6 @@ func (a *CompanyPickerItemsAPIService) DeleteCompanyCompanyPickerItemsByIdExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CompanyPickerItemsAPIService) DeleteCompanyCompanyPickerItemsByIdExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CompanyPickerItemsAPIService) DeleteCompanyCompanyPickerItemsByIdExecut
 type ApiGetCompanyCompanyPickerItemsRequest struct {
 	ctx context.Context
 	ApiService *CompanyPickerItemsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyCompanyPickerItemsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompanyPickerItemsRequest) ClientId(clientId string) ApiGetCompanyCompanyPickerItemsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyCompanyPickerItemsRequest) PageId(pageId int32) ApiGetCompa
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompanyPickerItemsRequest) ClientId(clientId string) ApiGetCompanyCompanyPickerItemsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompanyPickerItemsRequest) Execute() ([]CompanyPickerItem, *http.Response, error) {
 	return r.ApiService.GetCompanyCompanyPickerItemsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CompanyPickerItemsAPIService) GetCompanyCompanyPickerItemsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CompanyPickerItemsAPIService) GetCompanyCompanyPickerItemsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyCompanyPickerItemsByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyPickerItemsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyCompanyPickerItemsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompanyPickerItemsByIdRequest) ClientId(clientId string) ApiGetCompanyCompanyPickerItemsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyCompanyPickerItemsByIdRequest) PageId(pageId int32) ApiGetC
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompanyPickerItemsByIdRequest) ClientId(clientId string) ApiGetCompanyCompanyPickerItemsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompanyPickerItemsByIdRequest) Execute() (*CompanyPickerItem, *http.Response, error) {
 	return r.ApiService.GetCompanyCompanyPickerItemsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CompanyPickerItemsAPIService) GetCompanyCompanyPickerItemsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CompanyPickerItemsAPIService) GetCompanyCompanyPickerItemsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *CompanyPickerItemsAPIService) GetCompanyCompanyPickerItemsByIdExecute(r
 type ApiGetCompanyCompanyPickerItemsCountRequest struct {
 	ctx context.Context
 	ApiService *CompanyPickerItemsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetCompanyCompanyPickerItemsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompanyPickerItemsCountRequest) ClientId(clientId string) ApiGetCompanyCompanyPickerItemsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetCompanyCompanyPickerItemsCountRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompanyPickerItemsCountRequest) ClientId(clientId string) ApiGetCompanyCompanyPickerItemsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompanyPickerItemsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyCompanyPickerItemsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *CompanyPickerItemsAPIService) GetCompanyCompanyPickerItemsCountExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *CompanyPickerItemsAPIService) GetCompanyCompanyPickerItemsCountExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -695,19 +691,19 @@ func (a *CompanyPickerItemsAPIService) GetCompanyCompanyPickerItemsCountExecute(
 type ApiPostCompanyCompanyPickerItemsRequest struct {
 	ctx context.Context
 	ApiService *CompanyPickerItemsAPIService
-	clientId *string
 	companyPickerItem *CompanyPickerItem
-}
-
-// 
-func (r ApiPostCompanyCompanyPickerItemsRequest) ClientId(clientId string) ApiPostCompanyCompanyPickerItemsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // companyPickerItem
 func (r ApiPostCompanyCompanyPickerItemsRequest) CompanyPickerItem(companyPickerItem CompanyPickerItem) ApiPostCompanyCompanyPickerItemsRequest {
 	r.companyPickerItem = &companyPickerItem
+	return r
+}
+
+// 
+func (r ApiPostCompanyCompanyPickerItemsRequest) ClientId(clientId string) ApiPostCompanyCompanyPickerItemsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -748,9 +744,6 @@ func (a *CompanyPickerItemsAPIService) PostCompanyCompanyPickerItemsExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.companyPickerItem == nil {
 		return localVarReturnValue, nil, reportError("companyPickerItem is required and must be specified")
 	}
@@ -772,7 +765,9 @@ func (a *CompanyPickerItemsAPIService) PostCompanyCompanyPickerItemsExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.companyPickerItem
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -815,8 +810,8 @@ func (a *CompanyPickerItemsAPIService) PostCompanyCompanyPickerItemsExecute(r Ap
 type ApiPostCompanyCompanyPickerItemsClearRequest struct {
 	ctx context.Context
 	ApiService *CompanyPickerItemsAPIService
-	clientId *string
 	clearPickerRequest ClearPickerRequest
+	clientId *string
 }
 
 // 
@@ -865,9 +860,6 @@ func (a *CompanyPickerItemsAPIService) PostCompanyCompanyPickerItemsClearExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -886,7 +878,9 @@ func (a *CompanyPickerItemsAPIService) PostCompanyCompanyPickerItemsClearExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

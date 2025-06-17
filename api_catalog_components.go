@@ -78,9 +78,6 @@ func (a *CatalogComponentsAPIService) DeleteProcurementCatalogByParentIdComponen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *CatalogComponentsAPIService) DeleteProcurementCatalogByParentIdComponen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetProcurementCatalogByParentIdComponentsRequest struct {
 	ctx context.Context
 	ApiService *CatalogComponentsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetProcurementCatalogByParentIdComponentsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCatalogByParentIdComponentsRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdComponentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetProcurementCatalogByParentIdComponentsRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetProcurementCatalogByParentIdComponentsRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdComponentsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCatalogByParentIdComponentsRequest) Execute() ([]CatalogComponent, *http.Response, error) {
 	return r.ApiService.GetProcurementCatalogByParentIdComponentsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *CatalogComponentsAPIService) GetProcurementCatalogByParentIdComponentsE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *CatalogComponentsAPIService) GetProcurementCatalogByParentIdComponentsE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetProcurementCatalogByParentIdComponentsByIdRequest struct {
 	ApiService *CatalogComponentsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetProcurementCatalogByParentIdComponentsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCatalogByParentIdComponentsByIdRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdComponentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetProcurementCatalogByParentIdComponentsByIdRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetProcurementCatalogByParentIdComponentsByIdRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdComponentsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCatalogByParentIdComponentsByIdRequest) Execute() (*CatalogComponent, *http.Response, error) {
 	return r.ApiService.GetProcurementCatalogByParentIdComponentsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *CatalogComponentsAPIService) GetProcurementCatalogByParentIdComponentsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *CatalogComponentsAPIService) GetProcurementCatalogByParentIdComponentsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetProcurementCatalogByParentIdComponentsCountRequest struct {
 	ctx context.Context
 	ApiService *CatalogComponentsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetProcurementCatalogByParentIdComponentsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementCatalogByParentIdComponentsCountRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdComponentsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetProcurementCatalogByParentIdComponentsCountRequest) PageId(pageId 
 	return r
 }
 
+// 
+func (r ApiGetProcurementCatalogByParentIdComponentsCountRequest) ClientId(clientId string) ApiGetProcurementCatalogByParentIdComponentsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementCatalogByParentIdComponentsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementCatalogByParentIdComponentsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *CatalogComponentsAPIService) GetProcurementCatalogByParentIdComponentsC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *CatalogComponentsAPIService) GetProcurementCatalogByParentIdComponentsC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchProcurementCatalogByParentIdComponentsByIdRequest struct {
 	ApiService *CatalogComponentsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementCatalogByParentIdComponentsByIdRequest) ClientId(clientId string) ApiPatchProcurementCatalogByParentIdComponentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementCatalogByParentIdComponentsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementCatalogByParentIdComponentsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementCatalogByParentIdComponentsByIdRequest) ClientId(clientId string) ApiPatchProcurementCatalogByParentIdComponentsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *CatalogComponentsAPIService) PatchProcurementCatalogByParentIdComponent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *CatalogComponentsAPIService) PatchProcurementCatalogByParentIdComponent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostProcurementCatalogByParentIdComponentsRequest struct {
 	ctx context.Context
 	ApiService *CatalogComponentsAPIService
 	parentId int32
-	clientId *string
 	catalogComponent *CatalogComponent
-}
-
-// 
-func (r ApiPostProcurementCatalogByParentIdComponentsRequest) ClientId(clientId string) ApiPostProcurementCatalogByParentIdComponentsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // catalogComponent
 func (r ApiPostProcurementCatalogByParentIdComponentsRequest) CatalogComponent(catalogComponent CatalogComponent) ApiPostProcurementCatalogByParentIdComponentsRequest {
 	r.catalogComponent = &catalogComponent
+	return r
+}
+
+// 
+func (r ApiPostProcurementCatalogByParentIdComponentsRequest) ClientId(clientId string) ApiPostProcurementCatalogByParentIdComponentsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *CatalogComponentsAPIService) PostProcurementCatalogByParentIdComponents
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.catalogComponent == nil {
 		return localVarReturnValue, nil, reportError("catalogComponent is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *CatalogComponentsAPIService) PostProcurementCatalogByParentIdComponents
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.catalogComponent
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutProcurementCatalogByParentIdComponentsByIdRequest struct {
 	ApiService *CatalogComponentsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	catalogComponent *CatalogComponent
-}
-
-// 
-func (r ApiPutProcurementCatalogByParentIdComponentsByIdRequest) ClientId(clientId string) ApiPutProcurementCatalogByParentIdComponentsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // catalogComponent
 func (r ApiPutProcurementCatalogByParentIdComponentsByIdRequest) CatalogComponent(catalogComponent CatalogComponent) ApiPutProcurementCatalogByParentIdComponentsByIdRequest {
 	r.catalogComponent = &catalogComponent
+	return r
+}
+
+// 
+func (r ApiPutProcurementCatalogByParentIdComponentsByIdRequest) ClientId(clientId string) ApiPutProcurementCatalogByParentIdComponentsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *CatalogComponentsAPIService) PutProcurementCatalogByParentIdComponentsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.catalogComponent == nil {
 		return localVarReturnValue, nil, reportError("catalogComponent is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *CatalogComponentsAPIService) PutProcurementCatalogByParentIdComponentsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.catalogComponent
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

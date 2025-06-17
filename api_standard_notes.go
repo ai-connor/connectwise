@@ -74,9 +74,6 @@ func (a *StandardNotesAPIService) DeleteSystemStandardNotesByIdExecute(r ApiDele
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *StandardNotesAPIService) DeleteSystemStandardNotesByIdExecute(r ApiDele
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *StandardNotesAPIService) DeleteSystemStandardNotesByIdExecute(r ApiDele
 type ApiGetSystemStandardNotesRequest struct {
 	ctx context.Context
 	ApiService *StandardNotesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemStandardNotesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemStandardNotesRequest) ClientId(clientId string) ApiGetSystemStandardNotesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemStandardNotesRequest) PageId(pageId int32) ApiGetSystemStand
 	return r
 }
 
+// 
+func (r ApiGetSystemStandardNotesRequest) ClientId(clientId string) ApiGetSystemStandardNotesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemStandardNotesRequest) Execute() ([]StandardNote, *http.Response, error) {
 	return r.ApiService.GetSystemStandardNotesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *StandardNotesAPIService) GetSystemStandardNotesExecute(r ApiGetSystemSt
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *StandardNotesAPIService) GetSystemStandardNotesExecute(r ApiGetSystemSt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemStandardNotesByIdRequest struct {
 	ctx context.Context
 	ApiService *StandardNotesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemStandardNotesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemStandardNotesByIdRequest) ClientId(clientId string) ApiGetSystemStandardNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemStandardNotesByIdRequest) PageId(pageId int32) ApiGetSystemS
 	return r
 }
 
+// 
+func (r ApiGetSystemStandardNotesByIdRequest) ClientId(clientId string) ApiGetSystemStandardNotesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemStandardNotesByIdRequest) Execute() (*StandardNote, *http.Response, error) {
 	return r.ApiService.GetSystemStandardNotesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *StandardNotesAPIService) GetSystemStandardNotesByIdExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *StandardNotesAPIService) GetSystemStandardNotesByIdExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *StandardNotesAPIService) GetSystemStandardNotesByIdExecute(r ApiGetSyst
 type ApiGetSystemStandardNotesCountRequest struct {
 	ctx context.Context
 	ApiService *StandardNotesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemStandardNotesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemStandardNotesCountRequest) ClientId(clientId string) ApiGetSystemStandardNotesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemStandardNotesCountRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemStandardNotesCountRequest) ClientId(clientId string) ApiGetSystemStandardNotesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemStandardNotesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemStandardNotesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *StandardNotesAPIService) GetSystemStandardNotesCountExecute(r ApiGetSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *StandardNotesAPIService) GetSystemStandardNotesCountExecute(r ApiGetSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemStandardNotesByIdRequest struct {
 	ctx context.Context
 	ApiService *StandardNotesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemStandardNotesByIdRequest) ClientId(clientId string) ApiPatchSystemStandardNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemStandardNotesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemStandardNotesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemStandardNotesByIdRequest) ClientId(clientId string) ApiPatchSystemStandardNotesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *StandardNotesAPIService) PatchSystemStandardNotesByIdExecute(r ApiPatch
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *StandardNotesAPIService) PatchSystemStandardNotesByIdExecute(r ApiPatch
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *StandardNotesAPIService) PatchSystemStandardNotesByIdExecute(r ApiPatch
 type ApiPostSystemStandardNotesRequest struct {
 	ctx context.Context
 	ApiService *StandardNotesAPIService
-	clientId *string
 	standardNote *StandardNote
-}
-
-// 
-func (r ApiPostSystemStandardNotesRequest) ClientId(clientId string) ApiPostSystemStandardNotesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // standardNote
 func (r ApiPostSystemStandardNotesRequest) StandardNote(standardNote StandardNote) ApiPostSystemStandardNotesRequest {
 	r.standardNote = &standardNote
+	return r
+}
+
+// 
+func (r ApiPostSystemStandardNotesRequest) ClientId(clientId string) ApiPostSystemStandardNotesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *StandardNotesAPIService) PostSystemStandardNotesExecute(r ApiPostSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.standardNote == nil {
 		return localVarReturnValue, nil, reportError("standardNote is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *StandardNotesAPIService) PostSystemStandardNotesExecute(r ApiPostSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.standardNote
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemStandardNotesByIdRequest struct {
 	ctx context.Context
 	ApiService *StandardNotesAPIService
 	id int32
-	clientId *string
 	standardNote *StandardNote
-}
-
-// 
-func (r ApiPutSystemStandardNotesByIdRequest) ClientId(clientId string) ApiPutSystemStandardNotesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // standardNote
 func (r ApiPutSystemStandardNotesByIdRequest) StandardNote(standardNote StandardNote) ApiPutSystemStandardNotesByIdRequest {
 	r.standardNote = &standardNote
+	return r
+}
+
+// 
+func (r ApiPutSystemStandardNotesByIdRequest) ClientId(clientId string) ApiPutSystemStandardNotesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *StandardNotesAPIService) PutSystemStandardNotesByIdExecute(r ApiPutSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.standardNote == nil {
 		return localVarReturnValue, nil, reportError("standardNote is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *StandardNotesAPIService) PutSystemStandardNotesByIdExecute(r ApiPutSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.standardNote
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

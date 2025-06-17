@@ -74,9 +74,6 @@ func (a *AllowedOriginsAPIService) DeleteSystemAllowedoriginsByIdExecute(r ApiDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *AllowedOriginsAPIService) DeleteSystemAllowedoriginsByIdExecute(r ApiDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *AllowedOriginsAPIService) DeleteSystemAllowedoriginsByIdExecute(r ApiDe
 type ApiGetSystemAllowedoriginsRequest struct {
 	ctx context.Context
 	ApiService *AllowedOriginsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemAllowedoriginsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAllowedoriginsRequest) ClientId(clientId string) ApiGetSystemAllowedoriginsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemAllowedoriginsRequest) PageId(pageId int32) ApiGetSystemAllo
 	return r
 }
 
+// 
+func (r ApiGetSystemAllowedoriginsRequest) ClientId(clientId string) ApiGetSystemAllowedoriginsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAllowedoriginsRequest) Execute() ([]AllowedOrigin, *http.Response, error) {
 	return r.ApiService.GetSystemAllowedoriginsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *AllowedOriginsAPIService) GetSystemAllowedoriginsExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *AllowedOriginsAPIService) GetSystemAllowedoriginsExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemAllowedoriginsByIdRequest struct {
 	ctx context.Context
 	ApiService *AllowedOriginsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemAllowedoriginsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAllowedoriginsByIdRequest) ClientId(clientId string) ApiGetSystemAllowedoriginsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemAllowedoriginsByIdRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemAllowedoriginsByIdRequest) ClientId(clientId string) ApiGetSystemAllowedoriginsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAllowedoriginsByIdRequest) Execute() (*AllowedOrigin, *http.Response, error) {
 	return r.ApiService.GetSystemAllowedoriginsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *AllowedOriginsAPIService) GetSystemAllowedoriginsByIdExecute(r ApiGetSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *AllowedOriginsAPIService) GetSystemAllowedoriginsByIdExecute(r ApiGetSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *AllowedOriginsAPIService) GetSystemAllowedoriginsByIdExecute(r ApiGetSy
 type ApiGetSystemAllowedoriginsCountRequest struct {
 	ctx context.Context
 	ApiService *AllowedOriginsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemAllowedoriginsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAllowedoriginsCountRequest) ClientId(clientId string) ApiGetSystemAllowedoriginsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemAllowedoriginsCountRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemAllowedoriginsCountRequest) ClientId(clientId string) ApiGetSystemAllowedoriginsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAllowedoriginsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemAllowedoriginsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *AllowedOriginsAPIService) GetSystemAllowedoriginsCountExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *AllowedOriginsAPIService) GetSystemAllowedoriginsCountExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemAllowedoriginsByIdRequest struct {
 	ctx context.Context
 	ApiService *AllowedOriginsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemAllowedoriginsByIdRequest) ClientId(clientId string) ApiPatchSystemAllowedoriginsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemAllowedoriginsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemAllowedoriginsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemAllowedoriginsByIdRequest) ClientId(clientId string) ApiPatchSystemAllowedoriginsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *AllowedOriginsAPIService) PatchSystemAllowedoriginsByIdExecute(r ApiPat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *AllowedOriginsAPIService) PatchSystemAllowedoriginsByIdExecute(r ApiPat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *AllowedOriginsAPIService) PatchSystemAllowedoriginsByIdExecute(r ApiPat
 type ApiPostSystemAllowedoriginsRequest struct {
 	ctx context.Context
 	ApiService *AllowedOriginsAPIService
-	clientId *string
 	allowedOrigin *AllowedOrigin
-}
-
-// 
-func (r ApiPostSystemAllowedoriginsRequest) ClientId(clientId string) ApiPostSystemAllowedoriginsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // origin
 func (r ApiPostSystemAllowedoriginsRequest) AllowedOrigin(allowedOrigin AllowedOrigin) ApiPostSystemAllowedoriginsRequest {
 	r.allowedOrigin = &allowedOrigin
+	return r
+}
+
+// 
+func (r ApiPostSystemAllowedoriginsRequest) ClientId(clientId string) ApiPostSystemAllowedoriginsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *AllowedOriginsAPIService) PostSystemAllowedoriginsExecute(r ApiPostSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.allowedOrigin == nil {
 		return localVarReturnValue, nil, reportError("allowedOrigin is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *AllowedOriginsAPIService) PostSystemAllowedoriginsExecute(r ApiPostSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.allowedOrigin
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemAllowedoriginsByIdRequest struct {
 	ctx context.Context
 	ApiService *AllowedOriginsAPIService
 	id int32
-	clientId *string
 	allowedOrigin *AllowedOrigin
-}
-
-// 
-func (r ApiPutSystemAllowedoriginsByIdRequest) ClientId(clientId string) ApiPutSystemAllowedoriginsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // origin
 func (r ApiPutSystemAllowedoriginsByIdRequest) AllowedOrigin(allowedOrigin AllowedOrigin) ApiPutSystemAllowedoriginsByIdRequest {
 	r.allowedOrigin = &allowedOrigin
+	return r
+}
+
+// 
+func (r ApiPutSystemAllowedoriginsByIdRequest) ClientId(clientId string) ApiPutSystemAllowedoriginsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *AllowedOriginsAPIService) PutSystemAllowedoriginsByIdExecute(r ApiPutSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.allowedOrigin == nil {
 		return localVarReturnValue, nil, reportError("allowedOrigin is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *AllowedOriginsAPIService) PutSystemAllowedoriginsByIdExecute(r ApiPutSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.allowedOrigin
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

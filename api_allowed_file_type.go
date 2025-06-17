@@ -74,9 +74,6 @@ func (a *AllowedFileTypeAPIService) DeleteSystemAllowedfiletypesByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *AllowedFileTypeAPIService) DeleteSystemAllowedfiletypesByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *AllowedFileTypeAPIService) DeleteSystemAllowedfiletypesByIdExecute(r Ap
 type ApiGetSystemAllowedfiletypesRequest struct {
 	ctx context.Context
 	ApiService *AllowedFileTypeAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemAllowedfiletypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAllowedfiletypesRequest) ClientId(clientId string) ApiGetSystemAllowedfiletypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemAllowedfiletypesRequest) PageId(pageId int32) ApiGetSystemAl
 	return r
 }
 
+// 
+func (r ApiGetSystemAllowedfiletypesRequest) ClientId(clientId string) ApiGetSystemAllowedfiletypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAllowedfiletypesRequest) Execute() ([]AllowedFileType, *http.Response, error) {
 	return r.ApiService.GetSystemAllowedfiletypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *AllowedFileTypeAPIService) GetSystemAllowedfiletypesExecute(r ApiGetSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *AllowedFileTypeAPIService) GetSystemAllowedfiletypesExecute(r ApiGetSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemAllowedfiletypesByIdRequest struct {
 	ctx context.Context
 	ApiService *AllowedFileTypeAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemAllowedfiletypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAllowedfiletypesByIdRequest) ClientId(clientId string) ApiGetSystemAllowedfiletypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemAllowedfiletypesByIdRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemAllowedfiletypesByIdRequest) ClientId(clientId string) ApiGetSystemAllowedfiletypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAllowedfiletypesByIdRequest) Execute() (*AllowedFileType, *http.Response, error) {
 	return r.ApiService.GetSystemAllowedfiletypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *AllowedFileTypeAPIService) GetSystemAllowedfiletypesByIdExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *AllowedFileTypeAPIService) GetSystemAllowedfiletypesByIdExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *AllowedFileTypeAPIService) GetSystemAllowedfiletypesByIdExecute(r ApiGe
 type ApiGetSystemAllowedfiletypesCountRequest struct {
 	ctx context.Context
 	ApiService *AllowedFileTypeAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemAllowedfiletypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAllowedfiletypesCountRequest) ClientId(clientId string) ApiGetSystemAllowedfiletypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemAllowedfiletypesCountRequest) PageId(pageId int32) ApiGetSys
 	return r
 }
 
+// 
+func (r ApiGetSystemAllowedfiletypesCountRequest) ClientId(clientId string) ApiGetSystemAllowedfiletypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAllowedfiletypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemAllowedfiletypesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *AllowedFileTypeAPIService) GetSystemAllowedfiletypesCountExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *AllowedFileTypeAPIService) GetSystemAllowedfiletypesCountExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemAllowedfiletypesByIdRequest struct {
 	ctx context.Context
 	ApiService *AllowedFileTypeAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemAllowedfiletypesByIdRequest) ClientId(clientId string) ApiPatchSystemAllowedfiletypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemAllowedfiletypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemAllowedfiletypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemAllowedfiletypesByIdRequest) ClientId(clientId string) ApiPatchSystemAllowedfiletypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *AllowedFileTypeAPIService) PatchSystemAllowedfiletypesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *AllowedFileTypeAPIService) PatchSystemAllowedfiletypesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *AllowedFileTypeAPIService) PatchSystemAllowedfiletypesByIdExecute(r Api
 type ApiPostSystemAllowedFileTypesRequest struct {
 	ctx context.Context
 	ApiService *AllowedFileTypeAPIService
-	clientId *string
 	allowedFileType *AllowedFileType
-}
-
-// 
-func (r ApiPostSystemAllowedFileTypesRequest) ClientId(clientId string) ApiPostSystemAllowedFileTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // allowedFileType
 func (r ApiPostSystemAllowedFileTypesRequest) AllowedFileType(allowedFileType AllowedFileType) ApiPostSystemAllowedFileTypesRequest {
 	r.allowedFileType = &allowedFileType
+	return r
+}
+
+// 
+func (r ApiPostSystemAllowedFileTypesRequest) ClientId(clientId string) ApiPostSystemAllowedFileTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *AllowedFileTypeAPIService) PostSystemAllowedFileTypesExecute(r ApiPostS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.allowedFileType == nil {
 		return localVarReturnValue, nil, reportError("allowedFileType is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *AllowedFileTypeAPIService) PostSystemAllowedFileTypesExecute(r ApiPostS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.allowedFileType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemAllowedfiletypesByIdRequest struct {
 	ctx context.Context
 	ApiService *AllowedFileTypeAPIService
 	id int32
-	clientId *string
 	allowedFileType *AllowedFileType
-}
-
-// 
-func (r ApiPutSystemAllowedfiletypesByIdRequest) ClientId(clientId string) ApiPutSystemAllowedfiletypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // AllowedFileType
 func (r ApiPutSystemAllowedfiletypesByIdRequest) AllowedFileType(allowedFileType AllowedFileType) ApiPutSystemAllowedfiletypesByIdRequest {
 	r.allowedFileType = &allowedFileType
+	return r
+}
+
+// 
+func (r ApiPutSystemAllowedfiletypesByIdRequest) ClientId(clientId string) ApiPutSystemAllowedfiletypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *AllowedFileTypeAPIService) PutSystemAllowedfiletypesByIdExecute(r ApiPu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.allowedFileType == nil {
 		return localVarReturnValue, nil, reportError("allowedFileType is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *AllowedFileTypeAPIService) PutSystemAllowedfiletypesByIdExecute(r ApiPu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.allowedFileType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

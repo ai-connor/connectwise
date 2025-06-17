@@ -74,9 +74,6 @@ func (a *CompanyOwnershipTypeAPIService) DeleteCompanyOwnershipTypesByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CompanyOwnershipTypeAPIService) DeleteCompanyOwnershipTypesByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CompanyOwnershipTypeAPIService) DeleteCompanyOwnershipTypesByIdExecute(
 type ApiGetCompanyOwnershipTypesRequest struct {
 	ctx context.Context
 	ApiService *CompanyOwnershipTypeAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyOwnershipTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyOwnershipTypesRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyOwnershipTypesRequest) PageId(pageId int32) ApiGetCompanyOw
 	return r
 }
 
+// 
+func (r ApiGetCompanyOwnershipTypesRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyOwnershipTypesRequest) Execute() ([]OwnershipType, *http.Response, error) {
 	return r.ApiService.GetCompanyOwnershipTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CompanyOwnershipTypeAPIService) GetCompanyOwnershipTypesExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CompanyOwnershipTypeAPIService) GetCompanyOwnershipTypesExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyOwnershipTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyOwnershipTypeAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyOwnershipTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyOwnershipTypesByIdRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyOwnershipTypesByIdRequest) PageId(pageId int32) ApiGetCompa
 	return r
 }
 
+// 
+func (r ApiGetCompanyOwnershipTypesByIdRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyOwnershipTypesByIdRequest) Execute() (*OwnershipType, *http.Response, error) {
 	return r.ApiService.GetCompanyOwnershipTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CompanyOwnershipTypeAPIService) GetCompanyOwnershipTypesByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CompanyOwnershipTypeAPIService) GetCompanyOwnershipTypesByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *CompanyOwnershipTypeAPIService) GetCompanyOwnershipTypesByIdExecute(r A
 type ApiGetCompanyOwnershipTypesCountRequest struct {
 	ctx context.Context
 	ApiService *CompanyOwnershipTypeAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetCompanyOwnershipTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyOwnershipTypesCountRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetCompanyOwnershipTypesCountRequest) PageId(pageId int32) ApiGetComp
 	return r
 }
 
+// 
+func (r ApiGetCompanyOwnershipTypesCountRequest) ClientId(clientId string) ApiGetCompanyOwnershipTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyOwnershipTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyOwnershipTypesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *CompanyOwnershipTypeAPIService) GetCompanyOwnershipTypesCountExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *CompanyOwnershipTypeAPIService) GetCompanyOwnershipTypesCountExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchCompanyOwnershipTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyOwnershipTypeAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyOwnershipTypesByIdRequest) ClientId(clientId string) ApiPatchCompanyOwnershipTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyOwnershipTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyOwnershipTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyOwnershipTypesByIdRequest) ClientId(clientId string) ApiPatchCompanyOwnershipTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *CompanyOwnershipTypeAPIService) PatchCompanyOwnershipTypesByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *CompanyOwnershipTypeAPIService) PatchCompanyOwnershipTypesByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *CompanyOwnershipTypeAPIService) PatchCompanyOwnershipTypesByIdExecute(r
 type ApiPostCompanyOwnershipTypesRequest struct {
 	ctx context.Context
 	ApiService *CompanyOwnershipTypeAPIService
-	clientId *string
 	ownershipType *OwnershipType
-}
-
-// 
-func (r ApiPostCompanyOwnershipTypesRequest) ClientId(clientId string) ApiPostCompanyOwnershipTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ownershipType
 func (r ApiPostCompanyOwnershipTypesRequest) OwnershipType(ownershipType OwnershipType) ApiPostCompanyOwnershipTypesRequest {
 	r.ownershipType = &ownershipType
+	return r
+}
+
+// 
+func (r ApiPostCompanyOwnershipTypesRequest) ClientId(clientId string) ApiPostCompanyOwnershipTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *CompanyOwnershipTypeAPIService) PostCompanyOwnershipTypesExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ownershipType == nil {
 		return localVarReturnValue, nil, reportError("ownershipType is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *CompanyOwnershipTypeAPIService) PostCompanyOwnershipTypesExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ownershipType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutCompanyOwnershipTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *CompanyOwnershipTypeAPIService
 	id int32
-	clientId *string
 	ownershipType *OwnershipType
-}
-
-// 
-func (r ApiPutCompanyOwnershipTypesByIdRequest) ClientId(clientId string) ApiPutCompanyOwnershipTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ownershipType
 func (r ApiPutCompanyOwnershipTypesByIdRequest) OwnershipType(ownershipType OwnershipType) ApiPutCompanyOwnershipTypesByIdRequest {
 	r.ownershipType = &ownershipType
+	return r
+}
+
+// 
+func (r ApiPutCompanyOwnershipTypesByIdRequest) ClientId(clientId string) ApiPutCompanyOwnershipTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *CompanyOwnershipTypeAPIService) PutCompanyOwnershipTypesByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ownershipType == nil {
 		return localVarReturnValue, nil, reportError("ownershipType is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *CompanyOwnershipTypeAPIService) PutCompanyOwnershipTypesByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ownershipType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

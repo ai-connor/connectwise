@@ -82,9 +82,6 @@ func (a *BoardStatusNotificationsAPIService) DeleteServiceBoardsByGrandparentIdS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -103,7 +100,9 @@ func (a *BoardStatusNotificationsAPIService) DeleteServiceBoardsByGrandparentIdS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -137,7 +136,6 @@ type ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest st
 	ApiService *BoardStatusNotificationsAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -146,12 +144,7 @@ type ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest st
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest) ClientId(clientId string) ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -202,6 +195,12 @@ func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest) ClientId(clientId string) ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest) Execute() ([]BoardStatusNotification, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsExecute(r)
 }
@@ -245,9 +244,6 @@ func (a *BoardStatusNotificationsAPIService) GetServiceBoardsByGrandparentIdStat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -290,7 +286,9 @@ func (a *BoardStatusNotificationsAPIService) GetServiceBoardsByGrandparentIdStat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -334,7 +332,6 @@ type ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdReques
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -343,12 +340,7 @@ type ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdReques
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -399,6 +391,12 @@ func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdReq
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) Execute() (*BoardStatusNotification, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdExecute(r)
 }
@@ -445,9 +443,6 @@ func (a *BoardStatusNotificationsAPIService) GetServiceBoardsByGrandparentIdStat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -490,7 +485,9 @@ func (a *BoardStatusNotificationsAPIService) GetServiceBoardsByGrandparentIdStat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -533,7 +530,6 @@ type ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountReque
 	ApiService *BoardStatusNotificationsAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -542,12 +538,7 @@ type ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountReque
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountRequest) ClientId(clientId string) ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -598,6 +589,12 @@ func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountRe
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountRequest) ClientId(clientId string) ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByGrandparentIdStatusesByParentIdNotificationsCountExecute(r)
 }
@@ -641,9 +638,6 @@ func (a *BoardStatusNotificationsAPIService) GetServiceBoardsByGrandparentIdStat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -686,7 +680,9 @@ func (a *BoardStatusNotificationsAPIService) GetServiceBoardsByGrandparentIdStat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -730,19 +726,19 @@ type ApiPatchServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequ
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPatchServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPatchServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -792,9 +788,6 @@ func (a *BoardStatusNotificationsAPIService) PatchServiceBoardsByGrandparentIdSt
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -816,7 +809,9 @@ func (a *BoardStatusNotificationsAPIService) PatchServiceBoardsByGrandparentIdSt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -861,19 +856,19 @@ type ApiPostServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest s
 	ApiService *BoardStatusNotificationsAPIService
 	parentId int32
 	grandparentId int32
-	clientId *string
 	boardStatusNotification *BoardStatusNotification
-}
-
-// 
-func (r ApiPostServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest) ClientId(clientId string) ApiPostServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardStatusNotification
 func (r ApiPostServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest) BoardStatusNotification(boardStatusNotification BoardStatusNotification) ApiPostServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest {
 	r.boardStatusNotification = &boardStatusNotification
+	return r
+}
+
+// 
+func (r ApiPostServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest) ClientId(clientId string) ApiPostServiceBoardsByGrandparentIdStatusesByParentIdNotificationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -920,9 +915,6 @@ func (a *BoardStatusNotificationsAPIService) PostServiceBoardsByGrandparentIdSta
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardStatusNotification == nil {
 		return localVarReturnValue, nil, reportError("boardStatusNotification is required and must be specified")
 	}
@@ -944,7 +936,9 @@ func (a *BoardStatusNotificationsAPIService) PostServiceBoardsByGrandparentIdSta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardStatusNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -990,19 +984,19 @@ type ApiPutServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdReques
 	id int32
 	parentId int32
 	grandparentId int32
-	clientId *string
 	boardStatusNotification *BoardStatusNotification
-}
-
-// 
-func (r ApiPutServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPutServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardStatusNotification
 func (r ApiPutServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) BoardStatusNotification(boardStatusNotification BoardStatusNotification) ApiPutServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest {
 	r.boardStatusNotification = &boardStatusNotification
+	return r
+}
+
+// 
+func (r ApiPutServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPutServiceBoardsByGrandparentIdStatusesByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1052,9 +1046,6 @@ func (a *BoardStatusNotificationsAPIService) PutServiceBoardsByGrandparentIdStat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardStatusNotification == nil {
 		return localVarReturnValue, nil, reportError("boardStatusNotification is required and must be specified")
 	}
@@ -1076,7 +1067,9 @@ func (a *BoardStatusNotificationsAPIService) PutServiceBoardsByGrandparentIdStat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardStatusNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

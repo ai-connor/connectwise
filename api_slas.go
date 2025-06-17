@@ -74,9 +74,6 @@ func (a *SLAsAPIService) DeleteServiceSLAsByIdExecute(r ApiDeleteServiceSLAsById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *SLAsAPIService) DeleteServiceSLAsByIdExecute(r ApiDeleteServiceSLAsById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *SLAsAPIService) DeleteServiceSLAsByIdExecute(r ApiDeleteServiceSLAsById
 type ApiGetServiceSLAsRequest struct {
 	ctx context.Context
 	ApiService *SLAsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetServiceSLAsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSLAsRequest) ClientId(clientId string) ApiGetServiceSLAsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetServiceSLAsRequest) PageId(pageId int32) ApiGetServiceSLAsRequest 
 	return r
 }
 
+// 
+func (r ApiGetServiceSLAsRequest) ClientId(clientId string) ApiGetServiceSLAsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSLAsRequest) Execute() ([]SLA, *http.Response, error) {
 	return r.ApiService.GetServiceSLAsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *SLAsAPIService) GetServiceSLAsExecute(r ApiGetServiceSLAsRequest) ([]SL
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *SLAsAPIService) GetServiceSLAsExecute(r ApiGetServiceSLAsRequest) ([]SL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetServiceSLAsByIdRequest struct {
 	ctx context.Context
 	ApiService *SLAsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetServiceSLAsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSLAsByIdRequest) ClientId(clientId string) ApiGetServiceSLAsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetServiceSLAsByIdRequest) PageId(pageId int32) ApiGetServiceSLAsById
 	return r
 }
 
+// 
+func (r ApiGetServiceSLAsByIdRequest) ClientId(clientId string) ApiGetServiceSLAsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSLAsByIdRequest) Execute() (*SLA, *http.Response, error) {
 	return r.ApiService.GetServiceSLAsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *SLAsAPIService) GetServiceSLAsByIdExecute(r ApiGetServiceSLAsByIdReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *SLAsAPIService) GetServiceSLAsByIdExecute(r ApiGetServiceSLAsByIdReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetServiceSLAsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *SLAsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetServiceSLAsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSLAsByIdUsagesRequest) ClientId(clientId string) ApiGetServiceSLAsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetServiceSLAsByIdUsagesRequest) PageId(pageId int32) ApiGetServiceSL
 	return r
 }
 
+// 
+func (r ApiGetServiceSLAsByIdUsagesRequest) ClientId(clientId string) ApiGetServiceSLAsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSLAsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetServiceSLAsByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *SLAsAPIService) GetServiceSLAsByIdUsagesExecute(r ApiGetServiceSLAsById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *SLAsAPIService) GetServiceSLAsByIdUsagesExecute(r ApiGetServiceSLAsById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetServiceSLAsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *SLAsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetServiceSLAsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSLAsByIdUsagesListRequest) ClientId(clientId string) ApiGetServiceSLAsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetServiceSLAsByIdUsagesListRequest) PageId(pageId int32) ApiGetServi
 	return r
 }
 
+// 
+func (r ApiGetServiceSLAsByIdUsagesListRequest) ClientId(clientId string) ApiGetServiceSLAsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSLAsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetServiceSLAsByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *SLAsAPIService) GetServiceSLAsByIdUsagesListExecute(r ApiGetServiceSLAs
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *SLAsAPIService) GetServiceSLAsByIdUsagesListExecute(r ApiGetServiceSLAs
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *SLAsAPIService) GetServiceSLAsByIdUsagesListExecute(r ApiGetServiceSLAs
 type ApiGetServiceSLAsCountRequest struct {
 	ctx context.Context
 	ApiService *SLAsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetServiceSLAsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSLAsCountRequest) ClientId(clientId string) ApiGetServiceSLAsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetServiceSLAsCountRequest) PageId(pageId int32) ApiGetServiceSLAsCou
 	return r
 }
 
+// 
+func (r ApiGetServiceSLAsCountRequest) ClientId(clientId string) ApiGetServiceSLAsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSLAsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceSLAsCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *SLAsAPIService) GetServiceSLAsCountExecute(r ApiGetServiceSLAsCountRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *SLAsAPIService) GetServiceSLAsCountExecute(r ApiGetServiceSLAsCountRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchServiceSLAsByIdRequest struct {
 	ctx context.Context
 	ApiService *SLAsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceSLAsByIdRequest) ClientId(clientId string) ApiPatchServiceSLAsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceSLAsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceSLAsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceSLAsByIdRequest) ClientId(clientId string) ApiPatchServiceSLAsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *SLAsAPIService) PatchServiceSLAsByIdExecute(r ApiPatchServiceSLAsByIdRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *SLAsAPIService) PatchServiceSLAsByIdExecute(r ApiPatchServiceSLAsByIdRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *SLAsAPIService) PatchServiceSLAsByIdExecute(r ApiPatchServiceSLAsByIdRe
 type ApiPostServiceSLAsRequest struct {
 	ctx context.Context
 	ApiService *SLAsAPIService
-	clientId *string
 	sLA *SLA
-}
-
-// 
-func (r ApiPostServiceSLAsRequest) ClientId(clientId string) ApiPostServiceSLAsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // sLA
 func (r ApiPostServiceSLAsRequest) SLA(sLA SLA) ApiPostServiceSLAsRequest {
 	r.sLA = &sLA
+	return r
+}
+
+// 
+func (r ApiPostServiceSLAsRequest) ClientId(clientId string) ApiPostServiceSLAsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *SLAsAPIService) PostServiceSLAsExecute(r ApiPostServiceSLAsRequest) (*S
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.sLA == nil {
 		return localVarReturnValue, nil, reportError("sLA is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *SLAsAPIService) PostServiceSLAsExecute(r ApiPostServiceSLAsRequest) (*S
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.sLA
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutServiceSLAsByIdRequest struct {
 	ctx context.Context
 	ApiService *SLAsAPIService
 	id int32
-	clientId *string
 	sLA *SLA
-}
-
-// 
-func (r ApiPutServiceSLAsByIdRequest) ClientId(clientId string) ApiPutServiceSLAsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // sLA
 func (r ApiPutServiceSLAsByIdRequest) SLA(sLA SLA) ApiPutServiceSLAsByIdRequest {
 	r.sLA = &sLA
+	return r
+}
+
+// 
+func (r ApiPutServiceSLAsByIdRequest) ClientId(clientId string) ApiPutServiceSLAsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *SLAsAPIService) PutServiceSLAsByIdExecute(r ApiPutServiceSLAsByIdReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.sLA == nil {
 		return localVarReturnValue, nil, reportError("sLA is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *SLAsAPIService) PutServiceSLAsByIdExecute(r ApiPutServiceSLAsByIdReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.sLA
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

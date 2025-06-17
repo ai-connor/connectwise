@@ -74,9 +74,6 @@ func (a *SecurityRolesAPIService) DeleteSystemSecurityrolesByIdExecute(r ApiDele
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *SecurityRolesAPIService) DeleteSystemSecurityrolesByIdExecute(r ApiDele
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *SecurityRolesAPIService) DeleteSystemSecurityrolesByIdExecute(r ApiDele
 type ApiGetSystemSecurityrolesRequest struct {
 	ctx context.Context
 	ApiService *SecurityRolesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemSecurityrolesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSecurityrolesRequest) ClientId(clientId string) ApiGetSystemSecurityrolesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemSecurityrolesRequest) PageId(pageId int32) ApiGetSystemSecur
 	return r
 }
 
+// 
+func (r ApiGetSystemSecurityrolesRequest) ClientId(clientId string) ApiGetSystemSecurityrolesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSecurityrolesRequest) Execute() ([]SecurityRole, *http.Response, error) {
 	return r.ApiService.GetSystemSecurityrolesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *SecurityRolesAPIService) GetSystemSecurityrolesExecute(r ApiGetSystemSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *SecurityRolesAPIService) GetSystemSecurityrolesExecute(r ApiGetSystemSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemSecurityrolesByIdRequest struct {
 	ctx context.Context
 	ApiService *SecurityRolesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemSecurityrolesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSecurityrolesByIdRequest) ClientId(clientId string) ApiGetSystemSecurityrolesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemSecurityrolesByIdRequest) PageId(pageId int32) ApiGetSystemS
 	return r
 }
 
+// 
+func (r ApiGetSystemSecurityrolesByIdRequest) ClientId(clientId string) ApiGetSystemSecurityrolesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSecurityrolesByIdRequest) Execute() (*SecurityRole, *http.Response, error) {
 	return r.ApiService.GetSystemSecurityrolesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *SecurityRolesAPIService) GetSystemSecurityrolesByIdExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *SecurityRolesAPIService) GetSystemSecurityrolesByIdExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *SecurityRolesAPIService) GetSystemSecurityrolesByIdExecute(r ApiGetSyst
 type ApiGetSystemSecurityrolesCountRequest struct {
 	ctx context.Context
 	ApiService *SecurityRolesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemSecurityrolesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSecurityrolesCountRequest) ClientId(clientId string) ApiGetSystemSecurityrolesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemSecurityrolesCountRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemSecurityrolesCountRequest) ClientId(clientId string) ApiGetSystemSecurityrolesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSecurityrolesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSecurityrolesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *SecurityRolesAPIService) GetSystemSecurityrolesCountExecute(r ApiGetSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *SecurityRolesAPIService) GetSystemSecurityrolesCountExecute(r ApiGetSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -695,19 +691,19 @@ func (a *SecurityRolesAPIService) GetSystemSecurityrolesCountExecute(r ApiGetSys
 type ApiPostSystemSecurityrolesRequest struct {
 	ctx context.Context
 	ApiService *SecurityRolesAPIService
-	clientId *string
 	securityRole *SecurityRole
-}
-
-// 
-func (r ApiPostSystemSecurityrolesRequest) ClientId(clientId string) ApiPostSystemSecurityrolesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // securityRole
 func (r ApiPostSystemSecurityrolesRequest) SecurityRole(securityRole SecurityRole) ApiPostSystemSecurityrolesRequest {
 	r.securityRole = &securityRole
+	return r
+}
+
+// 
+func (r ApiPostSystemSecurityrolesRequest) ClientId(clientId string) ApiPostSystemSecurityrolesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -748,9 +744,6 @@ func (a *SecurityRolesAPIService) PostSystemSecurityrolesExecute(r ApiPostSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.securityRole == nil {
 		return localVarReturnValue, nil, reportError("securityRole is required and must be specified")
 	}
@@ -772,7 +765,9 @@ func (a *SecurityRolesAPIService) PostSystemSecurityrolesExecute(r ApiPostSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.securityRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

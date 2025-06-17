@@ -27,7 +27,6 @@ type ApiGetSystemLocationsByParentIdWorkRolesRequest struct {
 	ctx context.Context
 	ApiService *LocationWorkRolesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSystemLocationsByParentIdWorkRolesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLocationsByParentIdWorkRolesRequest) ClientId(clientId string) ApiGetSystemLocationsByParentIdWorkRolesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSystemLocationsByParentIdWorkRolesRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetSystemLocationsByParentIdWorkRolesRequest) ClientId(clientId string) ApiGetSystemLocationsByParentIdWorkRolesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLocationsByParentIdWorkRolesRequest) Execute() ([]LocationWorkRole, *http.Response, error) {
 	return r.ApiService.GetSystemLocationsByParentIdWorkRolesExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *LocationWorkRolesAPIService) GetSystemLocationsByParentIdWorkRolesExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *LocationWorkRolesAPIService) GetSystemLocationsByParentIdWorkRolesExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetSystemLocationsByParentIdWorkRolesByIdRequest struct {
 	ApiService *LocationWorkRolesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetSystemLocationsByParentIdWorkRolesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLocationsByParentIdWorkRolesByIdRequest) ClientId(clientId string) ApiGetSystemLocationsByParentIdWorkRolesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetSystemLocationsByParentIdWorkRolesByIdRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetSystemLocationsByParentIdWorkRolesByIdRequest) ClientId(clientId string) ApiGetSystemLocationsByParentIdWorkRolesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLocationsByParentIdWorkRolesByIdRequest) Execute() (*LocationWorkRole, *http.Response, error) {
 	return r.ApiService.GetSystemLocationsByParentIdWorkRolesByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *LocationWorkRolesAPIService) GetSystemLocationsByParentIdWorkRolesByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *LocationWorkRolesAPIService) GetSystemLocationsByParentIdWorkRolesByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,7 +413,6 @@ type ApiGetSystemLocationsByParentIdWorkRolesCountRequest struct {
 	ctx context.Context
 	ApiService *LocationWorkRolesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -424,12 +421,7 @@ type ApiGetSystemLocationsByParentIdWorkRolesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemLocationsByParentIdWorkRolesCountRequest) ClientId(clientId string) ApiGetSystemLocationsByParentIdWorkRolesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -480,6 +472,12 @@ func (r ApiGetSystemLocationsByParentIdWorkRolesCountRequest) PageId(pageId int3
 	return r
 }
 
+// 
+func (r ApiGetSystemLocationsByParentIdWorkRolesCountRequest) ClientId(clientId string) ApiGetSystemLocationsByParentIdWorkRolesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemLocationsByParentIdWorkRolesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemLocationsByParentIdWorkRolesCountExecute(r)
 }
@@ -520,9 +518,6 @@ func (a *LocationWorkRolesAPIService) GetSystemLocationsByParentIdWorkRolesCount
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -565,7 +560,9 @@ func (a *LocationWorkRolesAPIService) GetSystemLocationsByParentIdWorkRolesCount
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

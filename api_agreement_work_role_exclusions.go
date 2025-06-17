@@ -78,9 +78,6 @@ func (a *AgreementWorkRoleExclusionsAPIService) DeleteFinanceAgreementsByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *AgreementWorkRoleExclusionsAPIService) DeleteFinanceAgreementsByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsRequest struct {
 	ctx context.Context
 	ApiService *AgreementWorkRoleExclusionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsRequest) PageId(pageI
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsRequest) Execute() ([]AgreementWorkRoleExclusion, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsByParentIdWorkRoleExclusionsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *AgreementWorkRoleExclusionsAPIService) GetFinanceAgreementsByParentIdWo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *AgreementWorkRoleExclusionsAPIService) GetFinanceAgreementsByParentIdWo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -324,7 +322,6 @@ type ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsCountRequest struct {
 	ctx context.Context
 	ApiService *AgreementWorkRoleExclusionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -333,12 +330,7 @@ type ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsCountRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -389,6 +381,12 @@ func (r ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsCountRequest) PageId(
 	return r
 }
 
+// 
+func (r ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsCountRequest) ClientId(clientId string) ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAgreementsByParentIdWorkRoleExclusionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAgreementsByParentIdWorkRoleExclusionsCountExecute(r)
 }
@@ -429,9 +427,6 @@ func (a *AgreementWorkRoleExclusionsAPIService) GetFinanceAgreementsByParentIdWo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -474,7 +469,9 @@ func (a *AgreementWorkRoleExclusionsAPIService) GetFinanceAgreementsByParentIdWo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -516,19 +513,19 @@ type ApiPostFinanceAgreementsByParentIdWorkRoleExclusionsRequest struct {
 	ctx context.Context
 	ApiService *AgreementWorkRoleExclusionsAPIService
 	parentId int32
-	clientId *string
 	agreementWorkRoleExclusion *AgreementWorkRoleExclusion
-}
-
-// 
-func (r ApiPostFinanceAgreementsByParentIdWorkRoleExclusionsRequest) ClientId(clientId string) ApiPostFinanceAgreementsByParentIdWorkRoleExclusionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workRoleExclusion
 func (r ApiPostFinanceAgreementsByParentIdWorkRoleExclusionsRequest) AgreementWorkRoleExclusion(agreementWorkRoleExclusion AgreementWorkRoleExclusion) ApiPostFinanceAgreementsByParentIdWorkRoleExclusionsRequest {
 	r.agreementWorkRoleExclusion = &agreementWorkRoleExclusion
+	return r
+}
+
+// 
+func (r ApiPostFinanceAgreementsByParentIdWorkRoleExclusionsRequest) ClientId(clientId string) ApiPostFinanceAgreementsByParentIdWorkRoleExclusionsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -572,9 +569,6 @@ func (a *AgreementWorkRoleExclusionsAPIService) PostFinanceAgreementsByParentIdW
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.agreementWorkRoleExclusion == nil {
 		return localVarReturnValue, nil, reportError("agreementWorkRoleExclusion is required and must be specified")
 	}
@@ -596,7 +590,9 @@ func (a *AgreementWorkRoleExclusionsAPIService) PostFinanceAgreementsByParentIdW
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.agreementWorkRoleExclusion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

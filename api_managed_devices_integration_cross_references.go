@@ -80,9 +80,6 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) DeleteCompanyManage
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -101,7 +98,9 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) DeleteCompanyManage
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -143,7 +142,6 @@ type ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest str
 	ctx context.Context
 	ApiService *ManagedDevicesIntegrationCrossReferencesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -152,12 +150,7 @@ type ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest str
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -208,6 +201,12 @@ func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest)
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest) Execute() ([]ManagedDevicesIntegrationCrossReference, *http.Response, error) {
 	return r.ApiService.GetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesExecute(r)
 }
@@ -248,9 +247,6 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) GetCompanyManagedDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -293,7 +289,9 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) GetCompanyManagedDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -336,7 +334,6 @@ type ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest
 	ApiService *ManagedDevicesIntegrationCrossReferencesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -345,12 +342,7 @@ type ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -401,6 +393,12 @@ func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequ
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) Execute() (*ManagedDevicesIntegrationCrossReference, *http.Response, error) {
 	return r.ApiService.GetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdExecute(r)
 }
@@ -444,9 +442,6 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) GetCompanyManagedDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -489,7 +484,9 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) GetCompanyManagedDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -531,7 +528,6 @@ type ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountReques
 	ctx context.Context
 	ApiService *ManagedDevicesIntegrationCrossReferencesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -540,12 +536,7 @@ type ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountReques
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -596,6 +587,12 @@ func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountReq
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountRequest) ClientId(clientId string) ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyManagedDevicesIntegrationsByParentIdCrossReferencesCountExecute(r)
 }
@@ -636,9 +633,6 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) GetCompanyManagedDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -681,7 +675,9 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) GetCompanyManagedDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -724,19 +720,19 @@ type ApiPatchCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdReque
 	ApiService *ManagedDevicesIntegrationCrossReferencesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) ClientId(clientId string) ApiPatchCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) ClientId(clientId string) ApiPatchCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -783,9 +779,6 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) PatchCompanyManaged
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -807,7 +800,9 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) PatchCompanyManaged
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -851,19 +846,19 @@ type ApiPostCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest st
 	ctx context.Context
 	ApiService *ManagedDevicesIntegrationCrossReferencesAPIService
 	parentId int32
-	clientId *string
 	managedDevicesIntegrationCrossReference *ManagedDevicesIntegrationCrossReference
-}
-
-// 
-func (r ApiPostCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest) ClientId(clientId string) ApiPostCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // crossReference
 func (r ApiPostCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest) ManagedDevicesIntegrationCrossReference(managedDevicesIntegrationCrossReference ManagedDevicesIntegrationCrossReference) ApiPostCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest {
 	r.managedDevicesIntegrationCrossReference = &managedDevicesIntegrationCrossReference
+	return r
+}
+
+// 
+func (r ApiPostCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest) ClientId(clientId string) ApiPostCompanyManagedDevicesIntegrationsByParentIdCrossReferencesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -907,9 +902,6 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) PostCompanyManagedD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managedDevicesIntegrationCrossReference == nil {
 		return localVarReturnValue, nil, reportError("managedDevicesIntegrationCrossReference is required and must be specified")
 	}
@@ -931,7 +923,9 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) PostCompanyManagedD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managedDevicesIntegrationCrossReference
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -976,19 +970,19 @@ type ApiPutCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest
 	ApiService *ManagedDevicesIntegrationCrossReferencesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	managedDevicesIntegrationCrossReference *ManagedDevicesIntegrationCrossReference
-}
-
-// 
-func (r ApiPutCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) ClientId(clientId string) ApiPutCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // crossReference
 func (r ApiPutCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) ManagedDevicesIntegrationCrossReference(managedDevicesIntegrationCrossReference ManagedDevicesIntegrationCrossReference) ApiPutCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest {
 	r.managedDevicesIntegrationCrossReference = &managedDevicesIntegrationCrossReference
+	return r
+}
+
+// 
+func (r ApiPutCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest) ClientId(clientId string) ApiPutCompanyManagedDevicesIntegrationsByParentIdCrossReferencesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1035,9 +1029,6 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) PutCompanyManagedDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managedDevicesIntegrationCrossReference == nil {
 		return localVarReturnValue, nil, reportError("managedDevicesIntegrationCrossReference is required and must be specified")
 	}
@@ -1059,7 +1050,9 @@ func (a *ManagedDevicesIntegrationCrossReferencesAPIService) PutCompanyManagedDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managedDevicesIntegrationCrossReference
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

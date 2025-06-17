@@ -74,9 +74,6 @@ func (a *CodesAPIService) DeleteServiceCodesByIdExecute(r ApiDeleteServiceCodesB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *CodesAPIService) DeleteServiceCodesByIdExecute(r ApiDeleteServiceCodesB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *CodesAPIService) DeleteServiceCodesByIdExecute(r ApiDeleteServiceCodesB
 type ApiGetServiceCodesRequest struct {
 	ctx context.Context
 	ApiService *CodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetServiceCodesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceCodesRequest) ClientId(clientId string) ApiGetServiceCodesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetServiceCodesRequest) PageId(pageId int32) ApiGetServiceCodesReques
 	return r
 }
 
+// 
+func (r ApiGetServiceCodesRequest) ClientId(clientId string) ApiGetServiceCodesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceCodesRequest) Execute() ([]Code, *http.Response, error) {
 	return r.ApiService.GetServiceCodesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *CodesAPIService) GetServiceCodesExecute(r ApiGetServiceCodesRequest) ([
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *CodesAPIService) GetServiceCodesExecute(r ApiGetServiceCodesRequest) ([
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetServiceCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *CodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetServiceCodesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceCodesByIdRequest) ClientId(clientId string) ApiGetServiceCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetServiceCodesByIdRequest) PageId(pageId int32) ApiGetServiceCodesBy
 	return r
 }
 
+// 
+func (r ApiGetServiceCodesByIdRequest) ClientId(clientId string) ApiGetServiceCodesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceCodesByIdRequest) Execute() (*Code, *http.Response, error) {
 	return r.ApiService.GetServiceCodesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *CodesAPIService) GetServiceCodesByIdExecute(r ApiGetServiceCodesByIdReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *CodesAPIService) GetServiceCodesByIdExecute(r ApiGetServiceCodesByIdReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *CodesAPIService) GetServiceCodesByIdExecute(r ApiGetServiceCodesByIdReq
 type ApiGetServiceCodesCountRequest struct {
 	ctx context.Context
 	ApiService *CodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetServiceCodesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceCodesCountRequest) ClientId(clientId string) ApiGetServiceCodesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetServiceCodesCountRequest) PageId(pageId int32) ApiGetServiceCodesC
 	return r
 }
 
+// 
+func (r ApiGetServiceCodesCountRequest) ClientId(clientId string) ApiGetServiceCodesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceCodesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceCodesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *CodesAPIService) GetServiceCodesCountExecute(r ApiGetServiceCodesCountR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *CodesAPIService) GetServiceCodesCountExecute(r ApiGetServiceCodesCountR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchServiceCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *CodesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceCodesByIdRequest) ClientId(clientId string) ApiPatchServiceCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceCodesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceCodesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceCodesByIdRequest) ClientId(clientId string) ApiPatchServiceCodesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *CodesAPIService) PatchServiceCodesByIdExecute(r ApiPatchServiceCodesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *CodesAPIService) PatchServiceCodesByIdExecute(r ApiPatchServiceCodesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *CodesAPIService) PatchServiceCodesByIdExecute(r ApiPatchServiceCodesByI
 type ApiPostServiceCodesRequest struct {
 	ctx context.Context
 	ApiService *CodesAPIService
-	clientId *string
 	code *Code
-}
-
-// 
-func (r ApiPostServiceCodesRequest) ClientId(clientId string) ApiPostServiceCodesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // code
 func (r ApiPostServiceCodesRequest) Code(code Code) ApiPostServiceCodesRequest {
 	r.code = &code
+	return r
+}
+
+// 
+func (r ApiPostServiceCodesRequest) ClientId(clientId string) ApiPostServiceCodesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *CodesAPIService) PostServiceCodesExecute(r ApiPostServiceCodesRequest) 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.code == nil {
 		return localVarReturnValue, nil, reportError("code is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *CodesAPIService) PostServiceCodesExecute(r ApiPostServiceCodesRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.code
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutServiceCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *CodesAPIService
 	id int32
-	clientId *string
 	code *Code
-}
-
-// 
-func (r ApiPutServiceCodesByIdRequest) ClientId(clientId string) ApiPutServiceCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // code
 func (r ApiPutServiceCodesByIdRequest) Code(code Code) ApiPutServiceCodesByIdRequest {
 	r.code = &code
+	return r
+}
+
+// 
+func (r ApiPutServiceCodesByIdRequest) ClientId(clientId string) ApiPutServiceCodesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *CodesAPIService) PutServiceCodesByIdExecute(r ApiPutServiceCodesByIdReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.code == nil {
 		return localVarReturnValue, nil, reportError("code is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *CodesAPIService) PutServiceCodesByIdExecute(r ApiPutServiceCodesByIdReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.code
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

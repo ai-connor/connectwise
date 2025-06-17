@@ -74,9 +74,6 @@ func (a *PaymentTypesAPIService) DeleteExpensePaymentTypesByIdExecute(r ApiDelet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *PaymentTypesAPIService) DeleteExpensePaymentTypesByIdExecute(r ApiDelet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *PaymentTypesAPIService) DeleteExpensePaymentTypesByIdExecute(r ApiDelet
 type ApiGetExpensePaymentTypesRequest struct {
 	ctx context.Context
 	ApiService *PaymentTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetExpensePaymentTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpensePaymentTypesRequest) ClientId(clientId string) ApiGetExpensePaymentTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetExpensePaymentTypesRequest) PageId(pageId int32) ApiGetExpensePaym
 	return r
 }
 
+// 
+func (r ApiGetExpensePaymentTypesRequest) ClientId(clientId string) ApiGetExpensePaymentTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpensePaymentTypesRequest) Execute() ([]PaymentType, *http.Response, error) {
 	return r.ApiService.GetExpensePaymentTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *PaymentTypesAPIService) GetExpensePaymentTypesExecute(r ApiGetExpensePa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *PaymentTypesAPIService) GetExpensePaymentTypesExecute(r ApiGetExpensePa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetExpensePaymentTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *PaymentTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetExpensePaymentTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpensePaymentTypesByIdRequest) ClientId(clientId string) ApiGetExpensePaymentTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetExpensePaymentTypesByIdRequest) PageId(pageId int32) ApiGetExpense
 	return r
 }
 
+// 
+func (r ApiGetExpensePaymentTypesByIdRequest) ClientId(clientId string) ApiGetExpensePaymentTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpensePaymentTypesByIdRequest) Execute() (*PaymentType, *http.Response, error) {
 	return r.ApiService.GetExpensePaymentTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *PaymentTypesAPIService) GetExpensePaymentTypesByIdExecute(r ApiGetExpen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *PaymentTypesAPIService) GetExpensePaymentTypesByIdExecute(r ApiGetExpen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *PaymentTypesAPIService) GetExpensePaymentTypesByIdExecute(r ApiGetExpen
 type ApiGetExpensePaymentTypesCountRequest struct {
 	ctx context.Context
 	ApiService *PaymentTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetExpensePaymentTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetExpensePaymentTypesCountRequest) ClientId(clientId string) ApiGetExpensePaymentTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetExpensePaymentTypesCountRequest) PageId(pageId int32) ApiGetExpens
 	return r
 }
 
+// 
+func (r ApiGetExpensePaymentTypesCountRequest) ClientId(clientId string) ApiGetExpensePaymentTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetExpensePaymentTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetExpensePaymentTypesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *PaymentTypesAPIService) GetExpensePaymentTypesCountExecute(r ApiGetExpe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *PaymentTypesAPIService) GetExpensePaymentTypesCountExecute(r ApiGetExpe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchExpensePaymentTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *PaymentTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchExpensePaymentTypesByIdRequest) ClientId(clientId string) ApiPatchExpensePaymentTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchExpensePaymentTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchExpensePaymentTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchExpensePaymentTypesByIdRequest) ClientId(clientId string) ApiPatchExpensePaymentTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *PaymentTypesAPIService) PatchExpensePaymentTypesByIdExecute(r ApiPatchE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *PaymentTypesAPIService) PatchExpensePaymentTypesByIdExecute(r ApiPatchE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *PaymentTypesAPIService) PatchExpensePaymentTypesByIdExecute(r ApiPatchE
 type ApiPostExpensePaymentTypesRequest struct {
 	ctx context.Context
 	ApiService *PaymentTypesAPIService
-	clientId *string
 	paymentType *PaymentType
-}
-
-// 
-func (r ApiPostExpensePaymentTypesRequest) ClientId(clientId string) ApiPostExpensePaymentTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // paymentType
 func (r ApiPostExpensePaymentTypesRequest) PaymentType(paymentType PaymentType) ApiPostExpensePaymentTypesRequest {
 	r.paymentType = &paymentType
+	return r
+}
+
+// 
+func (r ApiPostExpensePaymentTypesRequest) ClientId(clientId string) ApiPostExpensePaymentTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *PaymentTypesAPIService) PostExpensePaymentTypesExecute(r ApiPostExpense
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.paymentType == nil {
 		return localVarReturnValue, nil, reportError("paymentType is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *PaymentTypesAPIService) PostExpensePaymentTypesExecute(r ApiPostExpense
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.paymentType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutExpensePaymentTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *PaymentTypesAPIService
 	id int32
-	clientId *string
 	paymentType *PaymentType
-}
-
-// 
-func (r ApiPutExpensePaymentTypesByIdRequest) ClientId(clientId string) ApiPutExpensePaymentTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // paymentType
 func (r ApiPutExpensePaymentTypesByIdRequest) PaymentType(paymentType PaymentType) ApiPutExpensePaymentTypesByIdRequest {
 	r.paymentType = &paymentType
+	return r
+}
+
+// 
+func (r ApiPutExpensePaymentTypesByIdRequest) ClientId(clientId string) ApiPutExpensePaymentTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *PaymentTypesAPIService) PutExpensePaymentTypesByIdExecute(r ApiPutExpen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.paymentType == nil {
 		return localVarReturnValue, nil, reportError("paymentType is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *PaymentTypesAPIService) PutExpensePaymentTypesByIdExecute(r ApiPutExpen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.paymentType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

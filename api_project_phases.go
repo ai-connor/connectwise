@@ -78,9 +78,6 @@ func (a *ProjectPhasesAPIService) DeleteProjectProjectsByParentIdPhasesByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *ProjectPhasesAPIService) DeleteProjectProjectsByParentIdPhasesByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetProjectProjectsByParentIdPhasesRequest struct {
 	ctx context.Context
 	ApiService *ProjectPhasesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetProjectProjectsByParentIdPhasesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectsByParentIdPhasesRequest) ClientId(clientId string) ApiGetProjectProjectsByParentIdPhasesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetProjectProjectsByParentIdPhasesRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectsByParentIdPhasesRequest) ClientId(clientId string) ApiGetProjectProjectsByParentIdPhasesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectsByParentIdPhasesRequest) Execute() ([]ProjectPhase, *http.Response, error) {
 	return r.ApiService.GetProjectProjectsByParentIdPhasesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *ProjectPhasesAPIService) GetProjectProjectsByParentIdPhasesExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *ProjectPhasesAPIService) GetProjectProjectsByParentIdPhasesExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetProjectProjectsByParentIdPhasesByIdRequest struct {
 	ApiService *ProjectPhasesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetProjectProjectsByParentIdPhasesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectsByParentIdPhasesByIdRequest) ClientId(clientId string) ApiGetProjectProjectsByParentIdPhasesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetProjectProjectsByParentIdPhasesByIdRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectsByParentIdPhasesByIdRequest) ClientId(clientId string) ApiGetProjectProjectsByParentIdPhasesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectsByParentIdPhasesByIdRequest) Execute() (*ProjectPhase, *http.Response, error) {
 	return r.ApiService.GetProjectProjectsByParentIdPhasesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *ProjectPhasesAPIService) GetProjectProjectsByParentIdPhasesByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *ProjectPhasesAPIService) GetProjectProjectsByParentIdPhasesByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetProjectProjectsByParentIdPhasesCountRequest struct {
 	ctx context.Context
 	ApiService *ProjectPhasesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetProjectProjectsByParentIdPhasesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProjectProjectsByParentIdPhasesCountRequest) ClientId(clientId string) ApiGetProjectProjectsByParentIdPhasesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetProjectProjectsByParentIdPhasesCountRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetProjectProjectsByParentIdPhasesCountRequest) ClientId(clientId string) ApiGetProjectProjectsByParentIdPhasesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProjectProjectsByParentIdPhasesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProjectProjectsByParentIdPhasesCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *ProjectPhasesAPIService) GetProjectProjectsByParentIdPhasesCountExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *ProjectPhasesAPIService) GetProjectProjectsByParentIdPhasesCountExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchProjectProjectsByParentIdPhasesByIdRequest struct {
 	ApiService *ProjectPhasesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProjectProjectsByParentIdPhasesByIdRequest) ClientId(clientId string) ApiPatchProjectProjectsByParentIdPhasesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProjectProjectsByParentIdPhasesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProjectProjectsByParentIdPhasesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProjectProjectsByParentIdPhasesByIdRequest) ClientId(clientId string) ApiPatchProjectProjectsByParentIdPhasesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *ProjectPhasesAPIService) PatchProjectProjectsByParentIdPhasesByIdExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *ProjectPhasesAPIService) PatchProjectProjectsByParentIdPhasesByIdExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostProjectProjectsByParentIdPhasesRequest struct {
 	ctx context.Context
 	ApiService *ProjectPhasesAPIService
 	parentId int32
-	clientId *string
 	projectPhase *ProjectPhase
-}
-
-// 
-func (r ApiPostProjectProjectsByParentIdPhasesRequest) ClientId(clientId string) ApiPostProjectProjectsByParentIdPhasesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // projectPhase
 func (r ApiPostProjectProjectsByParentIdPhasesRequest) ProjectPhase(projectPhase ProjectPhase) ApiPostProjectProjectsByParentIdPhasesRequest {
 	r.projectPhase = &projectPhase
+	return r
+}
+
+// 
+func (r ApiPostProjectProjectsByParentIdPhasesRequest) ClientId(clientId string) ApiPostProjectProjectsByParentIdPhasesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *ProjectPhasesAPIService) PostProjectProjectsByParentIdPhasesExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectPhase == nil {
 		return localVarReturnValue, nil, reportError("projectPhase is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *ProjectPhasesAPIService) PostProjectProjectsByParentIdPhasesExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectPhase
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutProjectProjectsByParentIdPhasesByIdRequest struct {
 	ApiService *ProjectPhasesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	projectPhase *ProjectPhase
-}
-
-// 
-func (r ApiPutProjectProjectsByParentIdPhasesByIdRequest) ClientId(clientId string) ApiPutProjectProjectsByParentIdPhasesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // projectPhase
 func (r ApiPutProjectProjectsByParentIdPhasesByIdRequest) ProjectPhase(projectPhase ProjectPhase) ApiPutProjectProjectsByParentIdPhasesByIdRequest {
 	r.projectPhase = &projectPhase
+	return r
+}
+
+// 
+func (r ApiPutProjectProjectsByParentIdPhasesByIdRequest) ClientId(clientId string) ApiPutProjectProjectsByParentIdPhasesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *ProjectPhasesAPIService) PutProjectProjectsByParentIdPhasesByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.projectPhase == nil {
 		return localVarReturnValue, nil, reportError("projectPhase is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *ProjectPhasesAPIService) PutProjectProjectsByParentIdPhasesByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.projectPhase
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

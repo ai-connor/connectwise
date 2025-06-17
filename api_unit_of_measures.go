@@ -74,9 +74,6 @@ func (a *UnitOfMeasuresAPIService) DeleteProcurementUnitOfMeasuresByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *UnitOfMeasuresAPIService) DeleteProcurementUnitOfMeasuresByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *UnitOfMeasuresAPIService) DeleteProcurementUnitOfMeasuresByIdExecute(r 
 type ApiGetProcurementUnitOfMeasuresRequest struct {
 	ctx context.Context
 	ApiService *UnitOfMeasuresAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementUnitOfMeasuresRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementUnitOfMeasuresRequest) ClientId(clientId string) ApiGetProcurementUnitOfMeasuresRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementUnitOfMeasuresRequest) PageId(pageId int32) ApiGetProcu
 	return r
 }
 
+// 
+func (r ApiGetProcurementUnitOfMeasuresRequest) ClientId(clientId string) ApiGetProcurementUnitOfMeasuresRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementUnitOfMeasuresRequest) Execute() ([]UnitOfMeasure, *http.Response, error) {
 	return r.ApiService.GetProcurementUnitOfMeasuresExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *UnitOfMeasuresAPIService) GetProcurementUnitOfMeasuresExecute(r ApiGetP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *UnitOfMeasuresAPIService) GetProcurementUnitOfMeasuresExecute(r ApiGetP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProcurementUnitOfMeasuresByIdRequest struct {
 	ctx context.Context
 	ApiService *UnitOfMeasuresAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProcurementUnitOfMeasuresByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementUnitOfMeasuresByIdRequest) ClientId(clientId string) ApiGetProcurementUnitOfMeasuresByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProcurementUnitOfMeasuresByIdRequest) PageId(pageId int32) ApiGetP
 	return r
 }
 
+// 
+func (r ApiGetProcurementUnitOfMeasuresByIdRequest) ClientId(clientId string) ApiGetProcurementUnitOfMeasuresByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementUnitOfMeasuresByIdRequest) Execute() (*UnitOfMeasure, *http.Response, error) {
 	return r.ApiService.GetProcurementUnitOfMeasuresByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *UnitOfMeasuresAPIService) GetProcurementUnitOfMeasuresByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *UnitOfMeasuresAPIService) GetProcurementUnitOfMeasuresByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *UnitOfMeasuresAPIService) GetProcurementUnitOfMeasuresByIdExecute(r Api
 type ApiGetProcurementUnitOfMeasuresCountRequest struct {
 	ctx context.Context
 	ApiService *UnitOfMeasuresAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetProcurementUnitOfMeasuresCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementUnitOfMeasuresCountRequest) ClientId(clientId string) ApiGetProcurementUnitOfMeasuresCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetProcurementUnitOfMeasuresCountRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetProcurementUnitOfMeasuresCountRequest) ClientId(clientId string) ApiGetProcurementUnitOfMeasuresCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementUnitOfMeasuresCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementUnitOfMeasuresCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *UnitOfMeasuresAPIService) GetProcurementUnitOfMeasuresCountExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *UnitOfMeasuresAPIService) GetProcurementUnitOfMeasuresCountExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchProcurementUnitOfMeasuresByIdRequest struct {
 	ctx context.Context
 	ApiService *UnitOfMeasuresAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementUnitOfMeasuresByIdRequest) ClientId(clientId string) ApiPatchProcurementUnitOfMeasuresByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementUnitOfMeasuresByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementUnitOfMeasuresByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementUnitOfMeasuresByIdRequest) ClientId(clientId string) ApiPatchProcurementUnitOfMeasuresByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *UnitOfMeasuresAPIService) PatchProcurementUnitOfMeasuresByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *UnitOfMeasuresAPIService) PatchProcurementUnitOfMeasuresByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *UnitOfMeasuresAPIService) PatchProcurementUnitOfMeasuresByIdExecute(r A
 type ApiPostProcurementUnitOfMeasuresRequest struct {
 	ctx context.Context
 	ApiService *UnitOfMeasuresAPIService
-	clientId *string
 	unitOfMeasure *UnitOfMeasure
-}
-
-// 
-func (r ApiPostProcurementUnitOfMeasuresRequest) ClientId(clientId string) ApiPostProcurementUnitOfMeasuresRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // unitOfMeasure
 func (r ApiPostProcurementUnitOfMeasuresRequest) UnitOfMeasure(unitOfMeasure UnitOfMeasure) ApiPostProcurementUnitOfMeasuresRequest {
 	r.unitOfMeasure = &unitOfMeasure
+	return r
+}
+
+// 
+func (r ApiPostProcurementUnitOfMeasuresRequest) ClientId(clientId string) ApiPostProcurementUnitOfMeasuresRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *UnitOfMeasuresAPIService) PostProcurementUnitOfMeasuresExecute(r ApiPos
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.unitOfMeasure == nil {
 		return localVarReturnValue, nil, reportError("unitOfMeasure is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *UnitOfMeasuresAPIService) PostProcurementUnitOfMeasuresExecute(r ApiPos
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.unitOfMeasure
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutProcurementUnitOfMeasuresByIdRequest struct {
 	ctx context.Context
 	ApiService *UnitOfMeasuresAPIService
 	id int32
-	clientId *string
 	unitOfMeasure *UnitOfMeasure
-}
-
-// 
-func (r ApiPutProcurementUnitOfMeasuresByIdRequest) ClientId(clientId string) ApiPutProcurementUnitOfMeasuresByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // unitOfMeasure
 func (r ApiPutProcurementUnitOfMeasuresByIdRequest) UnitOfMeasure(unitOfMeasure UnitOfMeasure) ApiPutProcurementUnitOfMeasuresByIdRequest {
 	r.unitOfMeasure = &unitOfMeasure
+	return r
+}
+
+// 
+func (r ApiPutProcurementUnitOfMeasuresByIdRequest) ClientId(clientId string) ApiPutProcurementUnitOfMeasuresByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *UnitOfMeasuresAPIService) PutProcurementUnitOfMeasuresByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.unitOfMeasure == nil {
 		return localVarReturnValue, nil, reportError("unitOfMeasure is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *UnitOfMeasuresAPIService) PutProcurementUnitOfMeasuresByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.unitOfMeasure
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

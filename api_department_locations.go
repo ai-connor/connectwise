@@ -78,9 +78,6 @@ func (a *DepartmentLocationsAPIService) DeleteSystemDepartmentsByParentIdLocatio
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *DepartmentLocationsAPIService) DeleteSystemDepartmentsByParentIdLocatio
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetSystemDepartmentsByParentIdLocationsRequest struct {
 	ctx context.Context
 	ApiService *DepartmentLocationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetSystemDepartmentsByParentIdLocationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDepartmentsByParentIdLocationsRequest) ClientId(clientId string) ApiGetSystemDepartmentsByParentIdLocationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetSystemDepartmentsByParentIdLocationsRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetSystemDepartmentsByParentIdLocationsRequest) ClientId(clientId string) ApiGetSystemDepartmentsByParentIdLocationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDepartmentsByParentIdLocationsRequest) Execute() ([]DepartmentLocation, *http.Response, error) {
 	return r.ApiService.GetSystemDepartmentsByParentIdLocationsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *DepartmentLocationsAPIService) GetSystemDepartmentsByParentIdLocationsE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *DepartmentLocationsAPIService) GetSystemDepartmentsByParentIdLocationsE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetSystemDepartmentsByParentIdLocationsByIdRequest struct {
 	ApiService *DepartmentLocationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetSystemDepartmentsByParentIdLocationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDepartmentsByParentIdLocationsByIdRequest) ClientId(clientId string) ApiGetSystemDepartmentsByParentIdLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetSystemDepartmentsByParentIdLocationsByIdRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetSystemDepartmentsByParentIdLocationsByIdRequest) ClientId(clientId string) ApiGetSystemDepartmentsByParentIdLocationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDepartmentsByParentIdLocationsByIdRequest) Execute() (*DepartmentLocation, *http.Response, error) {
 	return r.ApiService.GetSystemDepartmentsByParentIdLocationsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *DepartmentLocationsAPIService) GetSystemDepartmentsByParentIdLocationsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *DepartmentLocationsAPIService) GetSystemDepartmentsByParentIdLocationsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetSystemDepartmentsByParentIdLocationsCountRequest struct {
 	ctx context.Context
 	ApiService *DepartmentLocationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetSystemDepartmentsByParentIdLocationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemDepartmentsByParentIdLocationsCountRequest) ClientId(clientId string) ApiGetSystemDepartmentsByParentIdLocationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetSystemDepartmentsByParentIdLocationsCountRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetSystemDepartmentsByParentIdLocationsCountRequest) ClientId(clientId string) ApiGetSystemDepartmentsByParentIdLocationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemDepartmentsByParentIdLocationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemDepartmentsByParentIdLocationsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *DepartmentLocationsAPIService) GetSystemDepartmentsByParentIdLocationsC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *DepartmentLocationsAPIService) GetSystemDepartmentsByParentIdLocationsC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchSystemDepartmentsByParentIdLocationsByIdRequest struct {
 	ApiService *DepartmentLocationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemDepartmentsByParentIdLocationsByIdRequest) ClientId(clientId string) ApiPatchSystemDepartmentsByParentIdLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemDepartmentsByParentIdLocationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemDepartmentsByParentIdLocationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemDepartmentsByParentIdLocationsByIdRequest) ClientId(clientId string) ApiPatchSystemDepartmentsByParentIdLocationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *DepartmentLocationsAPIService) PatchSystemDepartmentsByParentIdLocation
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *DepartmentLocationsAPIService) PatchSystemDepartmentsByParentIdLocation
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostSystemDepartmentsByParentIdLocationsRequest struct {
 	ctx context.Context
 	ApiService *DepartmentLocationsAPIService
 	parentId int32
-	clientId *string
 	departmentLocation *DepartmentLocation
-}
-
-// 
-func (r ApiPostSystemDepartmentsByParentIdLocationsRequest) ClientId(clientId string) ApiPostSystemDepartmentsByParentIdLocationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // departmentLocation
 func (r ApiPostSystemDepartmentsByParentIdLocationsRequest) DepartmentLocation(departmentLocation DepartmentLocation) ApiPostSystemDepartmentsByParentIdLocationsRequest {
 	r.departmentLocation = &departmentLocation
+	return r
+}
+
+// 
+func (r ApiPostSystemDepartmentsByParentIdLocationsRequest) ClientId(clientId string) ApiPostSystemDepartmentsByParentIdLocationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *DepartmentLocationsAPIService) PostSystemDepartmentsByParentIdLocations
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.departmentLocation == nil {
 		return localVarReturnValue, nil, reportError("departmentLocation is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *DepartmentLocationsAPIService) PostSystemDepartmentsByParentIdLocations
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.departmentLocation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutSystemDepartmentsByParentIdLocationsByIdRequest struct {
 	ApiService *DepartmentLocationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	departmentLocation *DepartmentLocation
-}
-
-// 
-func (r ApiPutSystemDepartmentsByParentIdLocationsByIdRequest) ClientId(clientId string) ApiPutSystemDepartmentsByParentIdLocationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // departmentLocation
 func (r ApiPutSystemDepartmentsByParentIdLocationsByIdRequest) DepartmentLocation(departmentLocation DepartmentLocation) ApiPutSystemDepartmentsByParentIdLocationsByIdRequest {
 	r.departmentLocation = &departmentLocation
+	return r
+}
+
+// 
+func (r ApiPutSystemDepartmentsByParentIdLocationsByIdRequest) ClientId(clientId string) ApiPutSystemDepartmentsByParentIdLocationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *DepartmentLocationsAPIService) PutSystemDepartmentsByParentIdLocationsB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.departmentLocation == nil {
 		return localVarReturnValue, nil, reportError("departmentLocation is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *DepartmentLocationsAPIService) PutSystemDepartmentsByParentIdLocationsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.departmentLocation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

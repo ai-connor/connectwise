@@ -74,9 +74,6 @@ func (a *TaxCodesAPIService) DeleteFinanceTaxCodesByIdExecute(r ApiDeleteFinance
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *TaxCodesAPIService) DeleteFinanceTaxCodesByIdExecute(r ApiDeleteFinance
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *TaxCodesAPIService) DeleteFinanceTaxCodesByIdExecute(r ApiDeleteFinance
 type ApiGetFinanceTaxCodesRequest struct {
 	ctx context.Context
 	ApiService *TaxCodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetFinanceTaxCodesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesRequest) ClientId(clientId string) ApiGetFinanceTaxCodesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetFinanceTaxCodesRequest) PageId(pageId int32) ApiGetFinanceTaxCodes
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesRequest) ClientId(clientId string) ApiGetFinanceTaxCodesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesRequest) Execute() ([]TaxCode, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesExecute(r ApiGetFinanceTaxCodesRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesExecute(r ApiGetFinanceTaxCodesRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetFinanceTaxCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *TaxCodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetFinanceTaxCodesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByIdRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetFinanceTaxCodesByIdRequest) PageId(pageId int32) ApiGetFinanceTaxC
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByIdRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByIdRequest) Execute() (*TaxCode, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesByIdExecute(r ApiGetFinanceTaxCod
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesByIdExecute(r ApiGetFinanceTaxCod
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetFinanceTaxCodesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *TaxCodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetFinanceTaxCodesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByIdUsagesRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetFinanceTaxCodesByIdUsagesRequest) PageId(pageId int32) ApiGetFinan
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByIdUsagesRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesByIdUsagesExecute(r ApiGetFinance
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesByIdUsagesExecute(r ApiGetFinance
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetFinanceTaxCodesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *TaxCodesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetFinanceTaxCodesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesByIdUsagesListRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetFinanceTaxCodesByIdUsagesListRequest) PageId(pageId int32) ApiGetF
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesByIdUsagesListRequest) ClientId(clientId string) ApiGetFinanceTaxCodesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesByIdUsagesListExecute(r ApiGetFin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesByIdUsagesListExecute(r ApiGetFin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesByIdUsagesListExecute(r ApiGetFin
 type ApiGetFinanceTaxCodesCountRequest struct {
 	ctx context.Context
 	ApiService *TaxCodesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetFinanceTaxCodesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceTaxCodesCountRequest) ClientId(clientId string) ApiGetFinanceTaxCodesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetFinanceTaxCodesCountRequest) PageId(pageId int32) ApiGetFinanceTax
 	return r
 }
 
+// 
+func (r ApiGetFinanceTaxCodesCountRequest) ClientId(clientId string) ApiGetFinanceTaxCodesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceTaxCodesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceTaxCodesCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesCountExecute(r ApiGetFinanceTaxCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *TaxCodesAPIService) GetFinanceTaxCodesCountExecute(r ApiGetFinanceTaxCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchFinanceTaxCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *TaxCodesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceTaxCodesByIdRequest) ClientId(clientId string) ApiPatchFinanceTaxCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceTaxCodesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceTaxCodesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceTaxCodesByIdRequest) ClientId(clientId string) ApiPatchFinanceTaxCodesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *TaxCodesAPIService) PatchFinanceTaxCodesByIdExecute(r ApiPatchFinanceTa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *TaxCodesAPIService) PatchFinanceTaxCodesByIdExecute(r ApiPatchFinanceTa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *TaxCodesAPIService) PatchFinanceTaxCodesByIdExecute(r ApiPatchFinanceTa
 type ApiPostFinanceTaxCodesRequest struct {
 	ctx context.Context
 	ApiService *TaxCodesAPIService
-	clientId *string
 	taxCode *TaxCode
-}
-
-// 
-func (r ApiPostFinanceTaxCodesRequest) ClientId(clientId string) ApiPostFinanceTaxCodesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // taxCode
 func (r ApiPostFinanceTaxCodesRequest) TaxCode(taxCode TaxCode) ApiPostFinanceTaxCodesRequest {
 	r.taxCode = &taxCode
+	return r
+}
+
+// 
+func (r ApiPostFinanceTaxCodesRequest) ClientId(clientId string) ApiPostFinanceTaxCodesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *TaxCodesAPIService) PostFinanceTaxCodesExecute(r ApiPostFinanceTaxCodes
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.taxCode == nil {
 		return localVarReturnValue, nil, reportError("taxCode is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *TaxCodesAPIService) PostFinanceTaxCodesExecute(r ApiPostFinanceTaxCodes
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.taxCode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1373,9 +1365,6 @@ func (a *TaxCodesAPIService) PostFinanceTaxCodesByIdCopyExecute(r ApiPostFinance
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1394,7 +1383,9 @@ func (a *TaxCodesAPIService) PostFinanceTaxCodesByIdCopyExecute(r ApiPostFinance
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1436,19 +1427,19 @@ type ApiPutFinanceTaxCodesByIdRequest struct {
 	ctx context.Context
 	ApiService *TaxCodesAPIService
 	id int32
-	clientId *string
 	taxCode *TaxCode
-}
-
-// 
-func (r ApiPutFinanceTaxCodesByIdRequest) ClientId(clientId string) ApiPutFinanceTaxCodesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // taxCode
 func (r ApiPutFinanceTaxCodesByIdRequest) TaxCode(taxCode TaxCode) ApiPutFinanceTaxCodesByIdRequest {
 	r.taxCode = &taxCode
+	return r
+}
+
+// 
+func (r ApiPutFinanceTaxCodesByIdRequest) ClientId(clientId string) ApiPutFinanceTaxCodesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1492,9 +1483,6 @@ func (a *TaxCodesAPIService) PutFinanceTaxCodesByIdExecute(r ApiPutFinanceTaxCod
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.taxCode == nil {
 		return localVarReturnValue, nil, reportError("taxCode is required and must be specified")
 	}
@@ -1516,7 +1504,9 @@ func (a *TaxCodesAPIService) PutFinanceTaxCodesByIdExecute(r ApiPutFinanceTaxCod
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.taxCode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

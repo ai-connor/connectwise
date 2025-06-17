@@ -26,7 +26,6 @@ type FileUploadSettingsAPIService service
 type ApiGetSystemFileuploadsettingsRequest struct {
 	ctx context.Context
 	ApiService *FileUploadSettingsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemFileuploadsettingsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemFileuploadsettingsRequest) ClientId(clientId string) ApiGetSystemFileuploadsettingsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemFileuploadsettingsRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemFileuploadsettingsRequest) ClientId(clientId string) ApiGetSystemFileuploadsettingsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemFileuploadsettingsRequest) Execute() ([]FileUploadSetting, *http.Response, error) {
 	return r.ApiService.GetSystemFileuploadsettingsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *FileUploadSettingsAPIService) GetSystemFileuploadsettingsExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *FileUploadSettingsAPIService) GetSystemFileuploadsettingsExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemFileuploadsettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *FileUploadSettingsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemFileuploadsettingsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemFileuploadsettingsByIdRequest) ClientId(clientId string) ApiGetSystemFileuploadsettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemFileuploadsettingsByIdRequest) PageId(pageId int32) ApiGetSy
 	return r
 }
 
+// 
+func (r ApiGetSystemFileuploadsettingsByIdRequest) ClientId(clientId string) ApiGetSystemFileuploadsettingsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemFileuploadsettingsByIdRequest) Execute() (*FileUploadSetting, *http.Response, error) {
 	return r.ApiService.GetSystemFileuploadsettingsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *FileUploadSettingsAPIService) GetSystemFileuploadsettingsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *FileUploadSettingsAPIService) GetSystemFileuploadsettingsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *FileUploadSettingsAPIService) GetSystemFileuploadsettingsByIdExecute(r 
 type ApiGetSystemFileuploadsettingsCountRequest struct {
 	ctx context.Context
 	ApiService *FileUploadSettingsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemFileuploadsettingsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemFileuploadsettingsCountRequest) ClientId(clientId string) ApiGetSystemFileuploadsettingsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemFileuploadsettingsCountRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSystemFileuploadsettingsCountRequest) ClientId(clientId string) ApiGetSystemFileuploadsettingsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemFileuploadsettingsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemFileuploadsettingsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *FileUploadSettingsAPIService) GetSystemFileuploadsettingsCountExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *FileUploadSettingsAPIService) GetSystemFileuploadsettingsCountExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchSystemFileuploadsettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *FileUploadSettingsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemFileuploadsettingsByIdRequest) ClientId(clientId string) ApiPatchSystemFileuploadsettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemFileuploadsettingsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemFileuploadsettingsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemFileuploadsettingsByIdRequest) ClientId(clientId string) ApiPatchSystemFileuploadsettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *FileUploadSettingsAPIService) PatchSystemFileuploadsettingsByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *FileUploadSettingsAPIService) PatchSystemFileuploadsettingsByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutSystemFileuploadsettingsByIdRequest struct {
 	ctx context.Context
 	ApiService *FileUploadSettingsAPIService
 	id int32
-	clientId *string
 	fileUploadSetting *FileUploadSetting
-}
-
-// 
-func (r ApiPutSystemFileuploadsettingsByIdRequest) ClientId(clientId string) ApiPutSystemFileuploadsettingsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // companyTypeAssociation
 func (r ApiPutSystemFileuploadsettingsByIdRequest) FileUploadSetting(fileUploadSetting FileUploadSetting) ApiPutSystemFileuploadsettingsByIdRequest {
 	r.fileUploadSetting = &fileUploadSetting
+	return r
+}
+
+// 
+func (r ApiPutSystemFileuploadsettingsByIdRequest) ClientId(clientId string) ApiPutSystemFileuploadsettingsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *FileUploadSettingsAPIService) PutSystemFileuploadsettingsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.fileUploadSetting == nil {
 		return localVarReturnValue, nil, reportError("fileUploadSetting is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *FileUploadSettingsAPIService) PutSystemFileuploadsettingsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.fileUploadSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -26,7 +26,6 @@ type SLAInfosAPIService service
 type ApiGetServiceSLAsInfoCountRequest struct {
 	ctx context.Context
 	ApiService *SLAInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetServiceSLAsInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSLAsInfoCountRequest) ClientId(clientId string) ApiGetServiceSLAsInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetServiceSLAsInfoCountRequest) PageId(pageId int32) ApiGetServiceSLA
 	return r
 }
 
+// 
+func (r ApiGetServiceSLAsInfoCountRequest) ClientId(clientId string) ApiGetServiceSLAsInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSLAsInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceSLAsInfoCountExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *SLAInfosAPIService) GetServiceSLAsInfoCountExecute(r ApiGetServiceSLAsI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *SLAInfosAPIService) GetServiceSLAsInfoCountExecute(r ApiGetServiceSLAsI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetServiceSlasByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *SLAInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetServiceSlasByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSlasByIdInfoRequest) ClientId(clientId string) ApiGetServiceSlasByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetServiceSlasByIdInfoRequest) PageId(pageId int32) ApiGetServiceSlas
 	return r
 }
 
+// 
+func (r ApiGetServiceSlasByIdInfoRequest) ClientId(clientId string) ApiGetServiceSlasByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSlasByIdInfoRequest) Execute() (*SLAInfo, *http.Response, error) {
 	return r.ApiService.GetServiceSlasByIdInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *SLAInfosAPIService) GetServiceSlasByIdInfoExecute(r ApiGetServiceSlasBy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *SLAInfosAPIService) GetServiceSlasByIdInfoExecute(r ApiGetServiceSlasBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *SLAInfosAPIService) GetServiceSlasByIdInfoExecute(r ApiGetServiceSlasBy
 type ApiGetServiceSlasInfoRequest struct {
 	ctx context.Context
 	ApiService *SLAInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetServiceSlasInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceSlasInfoRequest) ClientId(clientId string) ApiGetServiceSlasInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetServiceSlasInfoRequest) PageId(pageId int32) ApiGetServiceSlasInfo
 	return r
 }
 
+// 
+func (r ApiGetServiceSlasInfoRequest) ClientId(clientId string) ApiGetServiceSlasInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceSlasInfoRequest) Execute() ([]SLAInfo, *http.Response, error) {
 	return r.ApiService.GetServiceSlasInfoExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *SLAInfosAPIService) GetServiceSlasInfoExecute(r ApiGetServiceSlasInfoRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *SLAInfosAPIService) GetServiceSlasInfoExecute(r ApiGetServiceSlasInfoRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

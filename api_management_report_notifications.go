@@ -78,9 +78,6 @@ func (a *ManagementReportNotificationsAPIService) DeleteCompanyCompaniesByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *ManagementReportNotificationsAPIService) DeleteCompanyCompaniesByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -183,9 +182,6 @@ func (a *ManagementReportNotificationsAPIService) DeleteCompanyManagementByParen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -204,7 +200,9 @@ func (a *ManagementReportNotificationsAPIService) DeleteCompanyManagementByParen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -237,7 +235,6 @@ type ApiGetCompanyCompaniesByParentIdManagementReportNotificationsRequest struct
 	ctx context.Context
 	ApiService *ManagementReportNotificationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -246,12 +243,7 @@ type ApiGetCompanyCompaniesByParentIdManagementReportNotificationsRequest struct
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdManagementReportNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -302,6 +294,12 @@ func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsRequest) Pa
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdManagementReportNotificationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsRequest) Execute() ([]ManagementReportNotification, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesByParentIdManagementReportNotificationsExecute(r)
 }
@@ -342,9 +340,6 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyCompaniesByParentIdM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -387,7 +382,9 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyCompaniesByParentIdM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -430,7 +427,6 @@ type ApiGetCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest st
 	ApiService *ManagementReportNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -439,12 +435,7 @@ type ApiGetCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest st
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -495,6 +486,12 @@ func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) Execute() (*ManagementReportNotification, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesByParentIdManagementReportNotificationsByIdExecute(r)
 }
@@ -538,9 +535,6 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyCompaniesByParentIdM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -583,7 +577,9 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyCompaniesByParentIdM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -625,7 +621,6 @@ type ApiGetCompanyCompaniesByParentIdManagementReportNotificationsCountRequest s
 	ctx context.Context
 	ApiService *ManagementReportNotificationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -634,12 +629,7 @@ type ApiGetCompanyCompaniesByParentIdManagementReportNotificationsCountRequest s
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsCountRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdManagementReportNotificationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -690,6 +680,12 @@ func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsCountReques
 	return r
 }
 
+// 
+func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsCountRequest) ClientId(clientId string) ApiGetCompanyCompaniesByParentIdManagementReportNotificationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyCompaniesByParentIdManagementReportNotificationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyCompaniesByParentIdManagementReportNotificationsCountExecute(r)
 }
@@ -730,9 +726,6 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyCompaniesByParentIdM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -775,7 +768,9 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyCompaniesByParentIdM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -817,7 +812,6 @@ type ApiGetCompanyManagementByParentIdManagementReportNotificationsRequest struc
 	ctx context.Context
 	ApiService *ManagementReportNotificationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -826,12 +820,7 @@ type ApiGetCompanyManagementByParentIdManagementReportNotificationsRequest struc
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsRequest) ClientId(clientId string) ApiGetCompanyManagementByParentIdManagementReportNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -882,6 +871,12 @@ func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsRequest) P
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsRequest) ClientId(clientId string) ApiGetCompanyManagementByParentIdManagementReportNotificationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsRequest) Execute() ([]ManagementReportNotification, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementByParentIdManagementReportNotificationsExecute(r)
 }
@@ -922,9 +917,6 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyManagementByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -967,7 +959,9 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyManagementByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1010,7 +1004,6 @@ type ApiGetCompanyManagementByParentIdManagementReportNotificationsByIdRequest s
 	ApiService *ManagementReportNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1019,12 +1012,7 @@ type ApiGetCompanyManagementByParentIdManagementReportNotificationsByIdRequest s
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiGetCompanyManagementByParentIdManagementReportNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1075,6 +1063,12 @@ func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsByIdReques
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiGetCompanyManagementByParentIdManagementReportNotificationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsByIdRequest) Execute() (*ManagementReportNotification, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementByParentIdManagementReportNotificationsByIdExecute(r)
 }
@@ -1118,9 +1112,6 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyManagementByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1163,7 +1154,9 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyManagementByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1205,7 +1198,6 @@ type ApiGetCompanyManagementByParentIdManagementReportNotificationsCountRequest 
 	ctx context.Context
 	ApiService *ManagementReportNotificationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1214,12 +1206,7 @@ type ApiGetCompanyManagementByParentIdManagementReportNotificationsCountRequest 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsCountRequest) ClientId(clientId string) ApiGetCompanyManagementByParentIdManagementReportNotificationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1270,6 +1257,12 @@ func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsCountReque
 	return r
 }
 
+// 
+func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsCountRequest) ClientId(clientId string) ApiGetCompanyManagementByParentIdManagementReportNotificationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyManagementByParentIdManagementReportNotificationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyManagementByParentIdManagementReportNotificationsCountExecute(r)
 }
@@ -1310,9 +1303,6 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyManagementByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1355,7 +1345,9 @@ func (a *ManagementReportNotificationsAPIService) GetCompanyManagementByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1398,19 +1390,19 @@ type ApiPatchCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest 
 	ApiService *ManagementReportNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiPatchCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiPatchCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1457,9 +1449,6 @@ func (a *ManagementReportNotificationsAPIService) PatchCompanyCompaniesByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1481,7 +1470,9 @@ func (a *ManagementReportNotificationsAPIService) PatchCompanyCompaniesByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1526,19 +1517,19 @@ type ApiPatchCompanyManagementByParentIdManagementReportNotificationsByIdRequest
 	ApiService *ManagementReportNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyManagementByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiPatchCompanyManagementByParentIdManagementReportNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyManagementByParentIdManagementReportNotificationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyManagementByParentIdManagementReportNotificationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyManagementByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiPatchCompanyManagementByParentIdManagementReportNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1585,9 +1576,6 @@ func (a *ManagementReportNotificationsAPIService) PatchCompanyManagementByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1609,7 +1597,9 @@ func (a *ManagementReportNotificationsAPIService) PatchCompanyManagementByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1653,19 +1643,19 @@ type ApiPostCompanyCompaniesByParentIdManagementReportNotificationsRequest struc
 	ctx context.Context
 	ApiService *ManagementReportNotificationsAPIService
 	parentId int32
-	clientId *string
 	managementReportNotification *ManagementReportNotification
-}
-
-// 
-func (r ApiPostCompanyCompaniesByParentIdManagementReportNotificationsRequest) ClientId(clientId string) ApiPostCompanyCompaniesByParentIdManagementReportNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementReportNotification
 func (r ApiPostCompanyCompaniesByParentIdManagementReportNotificationsRequest) ManagementReportNotification(managementReportNotification ManagementReportNotification) ApiPostCompanyCompaniesByParentIdManagementReportNotificationsRequest {
 	r.managementReportNotification = &managementReportNotification
+	return r
+}
+
+// 
+func (r ApiPostCompanyCompaniesByParentIdManagementReportNotificationsRequest) ClientId(clientId string) ApiPostCompanyCompaniesByParentIdManagementReportNotificationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1709,9 +1699,6 @@ func (a *ManagementReportNotificationsAPIService) PostCompanyCompaniesByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementReportNotification == nil {
 		return localVarReturnValue, nil, reportError("managementReportNotification is required and must be specified")
 	}
@@ -1733,7 +1720,9 @@ func (a *ManagementReportNotificationsAPIService) PostCompanyCompaniesByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementReportNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1777,19 +1766,19 @@ type ApiPostCompanyManagementByParentIdManagementReportNotificationsRequest stru
 	ctx context.Context
 	ApiService *ManagementReportNotificationsAPIService
 	parentId int32
-	clientId *string
 	managementReportNotification *ManagementReportNotification
-}
-
-// 
-func (r ApiPostCompanyManagementByParentIdManagementReportNotificationsRequest) ClientId(clientId string) ApiPostCompanyManagementByParentIdManagementReportNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementReportNotification
 func (r ApiPostCompanyManagementByParentIdManagementReportNotificationsRequest) ManagementReportNotification(managementReportNotification ManagementReportNotification) ApiPostCompanyManagementByParentIdManagementReportNotificationsRequest {
 	r.managementReportNotification = &managementReportNotification
+	return r
+}
+
+// 
+func (r ApiPostCompanyManagementByParentIdManagementReportNotificationsRequest) ClientId(clientId string) ApiPostCompanyManagementByParentIdManagementReportNotificationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1833,9 +1822,6 @@ func (a *ManagementReportNotificationsAPIService) PostCompanyManagementByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementReportNotification == nil {
 		return localVarReturnValue, nil, reportError("managementReportNotification is required and must be specified")
 	}
@@ -1857,7 +1843,9 @@ func (a *ManagementReportNotificationsAPIService) PostCompanyManagementByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementReportNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1902,19 +1890,19 @@ type ApiPutCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest st
 	ApiService *ManagementReportNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	managementReportNotification *ManagementReportNotification
-}
-
-// 
-func (r ApiPutCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiPutCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementReportNotification
 func (r ApiPutCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) ManagementReportNotification(managementReportNotification ManagementReportNotification) ApiPutCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest {
 	r.managementReportNotification = &managementReportNotification
+	return r
+}
+
+// 
+func (r ApiPutCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiPutCompanyCompaniesByParentIdManagementReportNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1961,9 +1949,6 @@ func (a *ManagementReportNotificationsAPIService) PutCompanyCompaniesByParentIdM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementReportNotification == nil {
 		return localVarReturnValue, nil, reportError("managementReportNotification is required and must be specified")
 	}
@@ -1985,7 +1970,9 @@ func (a *ManagementReportNotificationsAPIService) PutCompanyCompaniesByParentIdM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementReportNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -2030,19 +2017,19 @@ type ApiPutCompanyManagementByParentIdManagementReportNotificationsByIdRequest s
 	ApiService *ManagementReportNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	managementReportNotification *ManagementReportNotification
-}
-
-// 
-func (r ApiPutCompanyManagementByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiPutCompanyManagementByParentIdManagementReportNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementReportNotification
 func (r ApiPutCompanyManagementByParentIdManagementReportNotificationsByIdRequest) ManagementReportNotification(managementReportNotification ManagementReportNotification) ApiPutCompanyManagementByParentIdManagementReportNotificationsByIdRequest {
 	r.managementReportNotification = &managementReportNotification
+	return r
+}
+
+// 
+func (r ApiPutCompanyManagementByParentIdManagementReportNotificationsByIdRequest) ClientId(clientId string) ApiPutCompanyManagementByParentIdManagementReportNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -2089,9 +2076,6 @@ func (a *ManagementReportNotificationsAPIService) PutCompanyManagementByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementReportNotification == nil {
 		return localVarReturnValue, nil, reportError("managementReportNotification is required and must be specified")
 	}
@@ -2113,7 +2097,9 @@ func (a *ManagementReportNotificationsAPIService) PutCompanyManagementByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementReportNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -78,9 +78,6 @@ func (a *RmaStatusEmailTemplatesAPIService) DeleteProcurementRmaStatusesByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *RmaStatusEmailTemplatesAPIService) DeleteProcurementRmaStatusesByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetProcurementRmaStatusesByParentIdEmailTemplatesRequest struct {
 	ctx context.Context
 	ApiService *RmaStatusEmailTemplatesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetProcurementRmaStatusesByParentIdEmailTemplatesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaStatusesByParentIdEmailTemplatesRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdEmailTemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetProcurementRmaStatusesByParentIdEmailTemplatesRequest) PageId(page
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaStatusesByParentIdEmailTemplatesRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdEmailTemplatesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaStatusesByParentIdEmailTemplatesRequest) Execute() ([]RmaStatusEmailTemplate, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaStatusesByParentIdEmailTemplatesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *RmaStatusEmailTemplatesAPIService) GetProcurementRmaStatusesByParentIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *RmaStatusEmailTemplatesAPIService) GetProcurementRmaStatusesByParentIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest struct {
 	ApiService *RmaStatusEmailTemplatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) PageId(
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) Execute() (*RmaStatusEmailTemplate, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaStatusesByParentIdEmailtemplatesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *RmaStatusEmailTemplatesAPIService) GetProcurementRmaStatusesByParentIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *RmaStatusEmailTemplatesAPIService) GetProcurementRmaStatusesByParentIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetProcurementRmaStatusesByParentIdEmailtemplatesCountRequest struct {
 	ctx context.Context
 	ApiService *RmaStatusEmailTemplatesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetProcurementRmaStatusesByParentIdEmailtemplatesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaStatusesByParentIdEmailtemplatesCountRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdEmailtemplatesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetProcurementRmaStatusesByParentIdEmailtemplatesCountRequest) PageId
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaStatusesByParentIdEmailtemplatesCountRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdEmailtemplatesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaStatusesByParentIdEmailtemplatesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaStatusesByParentIdEmailtemplatesCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *RmaStatusEmailTemplatesAPIService) GetProcurementRmaStatusesByParentIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *RmaStatusEmailTemplatesAPIService) GetProcurementRmaStatusesByParentIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest struct {
 	ApiService *RmaStatusEmailTemplatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiPatchProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiPatchProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *RmaStatusEmailTemplatesAPIService) PatchProcurementRmaStatusesByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *RmaStatusEmailTemplatesAPIService) PatchProcurementRmaStatusesByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostProcurementRmaStatusesByParentIdEmailtemplatesRequest struct {
 	ctx context.Context
 	ApiService *RmaStatusEmailTemplatesAPIService
 	parentId int32
-	clientId *string
 	rmaStatusEmailTemplate *RmaStatusEmailTemplate
-}
-
-// 
-func (r ApiPostProcurementRmaStatusesByParentIdEmailtemplatesRequest) ClientId(clientId string) ApiPostProcurementRmaStatusesByParentIdEmailtemplatesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // rmaStatusEmailTemplate
 func (r ApiPostProcurementRmaStatusesByParentIdEmailtemplatesRequest) RmaStatusEmailTemplate(rmaStatusEmailTemplate RmaStatusEmailTemplate) ApiPostProcurementRmaStatusesByParentIdEmailtemplatesRequest {
 	r.rmaStatusEmailTemplate = &rmaStatusEmailTemplate
+	return r
+}
+
+// 
+func (r ApiPostProcurementRmaStatusesByParentIdEmailtemplatesRequest) ClientId(clientId string) ApiPostProcurementRmaStatusesByParentIdEmailtemplatesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *RmaStatusEmailTemplatesAPIService) PostProcurementRmaStatusesByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.rmaStatusEmailTemplate == nil {
 		return localVarReturnValue, nil, reportError("rmaStatusEmailTemplate is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *RmaStatusEmailTemplatesAPIService) PostProcurementRmaStatusesByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.rmaStatusEmailTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest struct {
 	ApiService *RmaStatusEmailTemplatesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	rmaStatusEmailTemplate *RmaStatusEmailTemplate
-}
-
-// 
-func (r ApiPutProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiPutProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // rmaStatusEmailTemplate
 func (r ApiPutProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) RmaStatusEmailTemplate(rmaStatusEmailTemplate RmaStatusEmailTemplate) ApiPutProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest {
 	r.rmaStatusEmailTemplate = &rmaStatusEmailTemplate
+	return r
+}
+
+// 
+func (r ApiPutProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest) ClientId(clientId string) ApiPutProcurementRmaStatusesByParentIdEmailtemplatesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *RmaStatusEmailTemplatesAPIService) PutProcurementRmaStatusesByParentIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.rmaStatusEmailTemplate == nil {
 		return localVarReturnValue, nil, reportError("rmaStatusEmailTemplate is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *RmaStatusEmailTemplatesAPIService) PutProcurementRmaStatusesByParentIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.rmaStatusEmailTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

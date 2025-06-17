@@ -74,9 +74,6 @@ func (a *ManagementNetworksSecurityAPIService) DeleteSystemManagementNetworkSecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ManagementNetworksSecurityAPIService) DeleteSystemManagementNetworkSecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ManagementNetworksSecurityAPIService) DeleteSystemManagementNetworkSecu
 type ApiGetSystemManagementNetworkSecuritiesRequest struct {
 	ctx context.Context
 	ApiService *ManagementNetworksSecurityAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemManagementNetworkSecuritiesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemManagementNetworkSecuritiesRequest) ClientId(clientId string) ApiGetSystemManagementNetworkSecuritiesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemManagementNetworkSecuritiesRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetSystemManagementNetworkSecuritiesRequest) ClientId(clientId string) ApiGetSystemManagementNetworkSecuritiesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemManagementNetworkSecuritiesRequest) Execute() ([]ManagementNetworkSecurity, *http.Response, error) {
 	return r.ApiService.GetSystemManagementNetworkSecuritiesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemManagementNetworkSecuritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *ManagementNetworksSecurityAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemManagementNetworkSecuritiesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemManagementNetworkSecuritiesByIdRequest) ClientId(clientId string) ApiGetSystemManagementNetworkSecuritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemManagementNetworkSecuritiesByIdRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetSystemManagementNetworkSecuritiesByIdRequest) ClientId(clientId string) ApiGetSystemManagementNetworkSecuritiesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemManagementNetworkSecuritiesByIdRequest) Execute() (*ManagementNetworkSecurity, *http.Response, error) {
 	return r.ApiService.GetSystemManagementNetworkSecuritiesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSystemManagementNetworkSecuritiesByIdTestCredentialsRequest struct {
 	ctx context.Context
 	ApiService *ManagementNetworksSecurityAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetSystemManagementNetworkSecuritiesByIdTestCredentialsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemManagementNetworkSecuritiesByIdTestCredentialsRequest) ClientId(clientId string) ApiGetSystemManagementNetworkSecuritiesByIdTestCredentialsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetSystemManagementNetworkSecuritiesByIdTestCredentialsRequest) PageI
 	return r
 }
 
+// 
+func (r ApiGetSystemManagementNetworkSecuritiesByIdTestCredentialsRequest) ClientId(clientId string) ApiGetSystemManagementNetworkSecuritiesByIdTestCredentialsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemManagementNetworkSecuritiesByIdTestCredentialsRequest) Execute() (*SuccessResponse, *http.Response, error) {
 	return r.ApiService.GetSystemManagementNetworkSecuritiesByIdTestCredentialsExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -699,7 +695,6 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 type ApiGetSystemManagementNetworkSecuritiesCountRequest struct {
 	ctx context.Context
 	ApiService *ManagementNetworksSecurityAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -708,12 +703,7 @@ type ApiGetSystemManagementNetworkSecuritiesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemManagementNetworkSecuritiesCountRequest) ClientId(clientId string) ApiGetSystemManagementNetworkSecuritiesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -764,6 +754,12 @@ func (r ApiGetSystemManagementNetworkSecuritiesCountRequest) PageId(pageId int32
 	return r
 }
 
+// 
+func (r ApiGetSystemManagementNetworkSecuritiesCountRequest) ClientId(clientId string) ApiGetSystemManagementNetworkSecuritiesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemManagementNetworkSecuritiesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemManagementNetworkSecuritiesCountExecute(r)
 }
@@ -801,9 +797,6 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -846,7 +839,9 @@ func (a *ManagementNetworksSecurityAPIService) GetSystemManagementNetworkSecurit
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -888,19 +883,19 @@ type ApiPatchSystemManagementNetworkSecuritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *ManagementNetworksSecurityAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemManagementNetworkSecuritiesByIdRequest) ClientId(clientId string) ApiPatchSystemManagementNetworkSecuritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemManagementNetworkSecuritiesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemManagementNetworkSecuritiesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemManagementNetworkSecuritiesByIdRequest) ClientId(clientId string) ApiPatchSystemManagementNetworkSecuritiesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -944,9 +939,6 @@ func (a *ManagementNetworksSecurityAPIService) PatchSystemManagementNetworkSecur
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -968,7 +960,9 @@ func (a *ManagementNetworksSecurityAPIService) PatchSystemManagementNetworkSecur
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1011,19 +1005,19 @@ func (a *ManagementNetworksSecurityAPIService) PatchSystemManagementNetworkSecur
 type ApiPostSystemManagementNetworkSecuritiesRequest struct {
 	ctx context.Context
 	ApiService *ManagementNetworksSecurityAPIService
-	clientId *string
 	managementNetworkSecurity *ManagementNetworkSecurity
-}
-
-// 
-func (r ApiPostSystemManagementNetworkSecuritiesRequest) ClientId(clientId string) ApiPostSystemManagementNetworkSecuritiesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementNetworkSecurity
 func (r ApiPostSystemManagementNetworkSecuritiesRequest) ManagementNetworkSecurity(managementNetworkSecurity ManagementNetworkSecurity) ApiPostSystemManagementNetworkSecuritiesRequest {
 	r.managementNetworkSecurity = &managementNetworkSecurity
+	return r
+}
+
+// 
+func (r ApiPostSystemManagementNetworkSecuritiesRequest) ClientId(clientId string) ApiPostSystemManagementNetworkSecuritiesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1064,9 +1058,6 @@ func (a *ManagementNetworksSecurityAPIService) PostSystemManagementNetworkSecuri
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementNetworkSecurity == nil {
 		return localVarReturnValue, nil, reportError("managementNetworkSecurity is required and must be specified")
 	}
@@ -1088,7 +1079,9 @@ func (a *ManagementNetworksSecurityAPIService) PostSystemManagementNetworkSecuri
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementNetworkSecurity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1132,19 +1125,19 @@ type ApiPutSystemManagementNetworkSecuritiesByIdRequest struct {
 	ctx context.Context
 	ApiService *ManagementNetworksSecurityAPIService
 	id int32
-	clientId *string
 	managementNetworkSecurity *ManagementNetworkSecurity
-}
-
-// 
-func (r ApiPutSystemManagementNetworkSecuritiesByIdRequest) ClientId(clientId string) ApiPutSystemManagementNetworkSecuritiesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // managementNetworkSecurity
 func (r ApiPutSystemManagementNetworkSecuritiesByIdRequest) ManagementNetworkSecurity(managementNetworkSecurity ManagementNetworkSecurity) ApiPutSystemManagementNetworkSecuritiesByIdRequest {
 	r.managementNetworkSecurity = &managementNetworkSecurity
+	return r
+}
+
+// 
+func (r ApiPutSystemManagementNetworkSecuritiesByIdRequest) ClientId(clientId string) ApiPutSystemManagementNetworkSecuritiesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1188,9 +1181,6 @@ func (a *ManagementNetworksSecurityAPIService) PutSystemManagementNetworkSecurit
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.managementNetworkSecurity == nil {
 		return localVarReturnValue, nil, reportError("managementNetworkSecurity is required and must be specified")
 	}
@@ -1212,7 +1202,9 @@ func (a *ManagementNetworksSecurityAPIService) PutSystemManagementNetworkSecurit
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.managementNetworkSecurity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

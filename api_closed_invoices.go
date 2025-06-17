@@ -27,19 +27,19 @@ type ApiPatchFinanceClosedInvoicesByIdRequest struct {
 	ctx context.Context
 	ApiService *ClosedInvoicesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchFinanceClosedInvoicesByIdRequest) ClientId(clientId string) ApiPatchFinanceClosedInvoicesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchFinanceClosedInvoicesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchFinanceClosedInvoicesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchFinanceClosedInvoicesByIdRequest) ClientId(clientId string) ApiPatchFinanceClosedInvoicesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -83,9 +83,6 @@ func (a *ClosedInvoicesAPIService) PatchFinanceClosedInvoicesByIdExecute(r ApiPa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -107,7 +104,9 @@ func (a *ClosedInvoicesAPIService) PatchFinanceClosedInvoicesByIdExecute(r ApiPa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -151,19 +150,19 @@ type ApiPutFinanceClosedInvoicesByIdRequest struct {
 	ctx context.Context
 	ApiService *ClosedInvoicesAPIService
 	id int32
-	clientId *string
 	closedInvoice *ClosedInvoice
-}
-
-// 
-func (r ApiPutFinanceClosedInvoicesByIdRequest) ClientId(clientId string) ApiPutFinanceClosedInvoicesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // closedInvoice
 func (r ApiPutFinanceClosedInvoicesByIdRequest) ClosedInvoice(closedInvoice ClosedInvoice) ApiPutFinanceClosedInvoicesByIdRequest {
 	r.closedInvoice = &closedInvoice
+	return r
+}
+
+// 
+func (r ApiPutFinanceClosedInvoicesByIdRequest) ClientId(clientId string) ApiPutFinanceClosedInvoicesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -207,9 +206,6 @@ func (a *ClosedInvoicesAPIService) PutFinanceClosedInvoicesByIdExecute(r ApiPutF
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.closedInvoice == nil {
 		return localVarReturnValue, nil, reportError("closedInvoice is required and must be specified")
 	}
@@ -231,7 +227,9 @@ func (a *ClosedInvoicesAPIService) PutFinanceClosedInvoicesByIdExecute(r ApiPutF
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.closedInvoice
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

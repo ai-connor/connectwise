@@ -78,9 +78,6 @@ func (a *BoardNotificationsAPIService) DeleteServiceBoardsByParentIdNotification
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *BoardNotificationsAPIService) DeleteServiceBoardsByParentIdNotification
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetServiceBoardsByParentIdNotificationsRequest struct {
 	ctx context.Context
 	ApiService *BoardNotificationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetServiceBoardsByParentIdNotificationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdNotificationsRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetServiceBoardsByParentIdNotificationsRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdNotificationsRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdNotificationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdNotificationsRequest) Execute() ([]BoardNotification, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdNotificationsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *BoardNotificationsAPIService) GetServiceBoardsByParentIdNotificationsEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *BoardNotificationsAPIService) GetServiceBoardsByParentIdNotificationsEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetServiceBoardsByParentIdNotificationsByIdRequest struct {
 	ApiService *BoardNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetServiceBoardsByParentIdNotificationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetServiceBoardsByParentIdNotificationsByIdRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdNotificationsByIdRequest) Execute() (*BoardNotification, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdNotificationsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *BoardNotificationsAPIService) GetServiceBoardsByParentIdNotificationsBy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *BoardNotificationsAPIService) GetServiceBoardsByParentIdNotificationsBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetServiceBoardsByParentIdNotificationsCountRequest struct {
 	ctx context.Context
 	ApiService *BoardNotificationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetServiceBoardsByParentIdNotificationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceBoardsByParentIdNotificationsCountRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdNotificationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetServiceBoardsByParentIdNotificationsCountRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetServiceBoardsByParentIdNotificationsCountRequest) ClientId(clientId string) ApiGetServiceBoardsByParentIdNotificationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceBoardsByParentIdNotificationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceBoardsByParentIdNotificationsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *BoardNotificationsAPIService) GetServiceBoardsByParentIdNotificationsCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *BoardNotificationsAPIService) GetServiceBoardsByParentIdNotificationsCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchServiceBoardsByParentIdNotificationsByIdRequest struct {
 	ApiService *BoardNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceBoardsByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPatchServiceBoardsByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceBoardsByParentIdNotificationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceBoardsByParentIdNotificationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceBoardsByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPatchServiceBoardsByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *BoardNotificationsAPIService) PatchServiceBoardsByParentIdNotifications
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *BoardNotificationsAPIService) PatchServiceBoardsByParentIdNotifications
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostServiceBoardsByParentIdNotificationsRequest struct {
 	ctx context.Context
 	ApiService *BoardNotificationsAPIService
 	parentId int32
-	clientId *string
 	boardNotification *BoardNotification
-}
-
-// 
-func (r ApiPostServiceBoardsByParentIdNotificationsRequest) ClientId(clientId string) ApiPostServiceBoardsByParentIdNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardNotification
 func (r ApiPostServiceBoardsByParentIdNotificationsRequest) BoardNotification(boardNotification BoardNotification) ApiPostServiceBoardsByParentIdNotificationsRequest {
 	r.boardNotification = &boardNotification
+	return r
+}
+
+// 
+func (r ApiPostServiceBoardsByParentIdNotificationsRequest) ClientId(clientId string) ApiPostServiceBoardsByParentIdNotificationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *BoardNotificationsAPIService) PostServiceBoardsByParentIdNotificationsE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardNotification == nil {
 		return localVarReturnValue, nil, reportError("boardNotification is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *BoardNotificationsAPIService) PostServiceBoardsByParentIdNotificationsE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutServiceBoardsByParentIdNotificationsByIdRequest struct {
 	ApiService *BoardNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	boardNotification *BoardNotification
-}
-
-// 
-func (r ApiPutServiceBoardsByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPutServiceBoardsByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // boardNotification
 func (r ApiPutServiceBoardsByParentIdNotificationsByIdRequest) BoardNotification(boardNotification BoardNotification) ApiPutServiceBoardsByParentIdNotificationsByIdRequest {
 	r.boardNotification = &boardNotification
+	return r
+}
+
+// 
+func (r ApiPutServiceBoardsByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPutServiceBoardsByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *BoardNotificationsAPIService) PutServiceBoardsByParentIdNotificationsBy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.boardNotification == nil {
 		return localVarReturnValue, nil, reportError("boardNotification is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *BoardNotificationsAPIService) PutServiceBoardsByParentIdNotificationsBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.boardNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -27,7 +27,6 @@ type ApiGetProcurementWarehouseBinsByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *WarehouseBinInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetProcurementWarehouseBinsByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementWarehouseBinsByIdInfoRequest) ClientId(clientId string) ApiGetProcurementWarehouseBinsByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetProcurementWarehouseBinsByIdInfoRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetProcurementWarehouseBinsByIdInfoRequest) ClientId(clientId string) ApiGetProcurementWarehouseBinsByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementWarehouseBinsByIdInfoRequest) Execute() (*WarehouseBinInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementWarehouseBinsByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *WarehouseBinInfosAPIService) GetProcurementWarehouseBinsByIdInfoExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *WarehouseBinInfosAPIService) GetProcurementWarehouseBinsByIdInfoExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *WarehouseBinInfosAPIService) GetProcurementWarehouseBinsByIdInfoExecute
 type ApiGetProcurementWarehouseBinsInfoRequest struct {
 	ctx context.Context
 	ApiService *WarehouseBinInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetProcurementWarehouseBinsInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementWarehouseBinsInfoRequest) ClientId(clientId string) ApiGetProcurementWarehouseBinsInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetProcurementWarehouseBinsInfoRequest) PageId(pageId int32) ApiGetPr
 	return r
 }
 
+// 
+func (r ApiGetProcurementWarehouseBinsInfoRequest) ClientId(clientId string) ApiGetProcurementWarehouseBinsInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementWarehouseBinsInfoRequest) Execute() ([]WarehouseBinInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementWarehouseBinsInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *WarehouseBinInfosAPIService) GetProcurementWarehouseBinsInfoExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *WarehouseBinInfosAPIService) GetProcurementWarehouseBinsInfoExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *WarehouseBinInfosAPIService) GetProcurementWarehouseBinsInfoExecute(r A
 type ApiGetProcurementWarehouseBinsInfoCountRequest struct {
 	ctx context.Context
 	ApiService *WarehouseBinInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetProcurementWarehouseBinsInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementWarehouseBinsInfoCountRequest) ClientId(clientId string) ApiGetProcurementWarehouseBinsInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetProcurementWarehouseBinsInfoCountRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetProcurementWarehouseBinsInfoCountRequest) ClientId(clientId string) ApiGetProcurementWarehouseBinsInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementWarehouseBinsInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementWarehouseBinsInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *WarehouseBinInfosAPIService) GetProcurementWarehouseBinsInfoCountExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *WarehouseBinInfosAPIService) GetProcurementWarehouseBinsInfoCountExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

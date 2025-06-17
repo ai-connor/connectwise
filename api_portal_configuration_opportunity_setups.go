@@ -27,7 +27,6 @@ type ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest struct 
 	ctx context.Context
 	ApiService *PortalConfigurationOpportunitySetupsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest struct 
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) Pag
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) Execute() ([]PortalConfigurationOpportunitySetup, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsByParentIdOpportunitySetupsExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) GetCompanyPortalConfigu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) GetCompanyPortalConfigu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest str
 	ApiService *PortalConfigurationOpportunitySetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest str
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest)
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) Execute() (*PortalConfigurationOpportunitySetup, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) GetCompanyPortalConfigu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) GetCompanyPortalConfigu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -415,19 +413,19 @@ type ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest struc
 	ctx context.Context
 	ApiService *PortalConfigurationOpportunitySetupsAPIService
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) ClientId(clientId string) ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) ClientId(clientId string) ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -471,9 +469,6 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) PatchCompanyPortalConfi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -495,7 +490,9 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) PatchCompanyPortalConfi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -540,19 +537,19 @@ type ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest s
 	ApiService *PortalConfigurationOpportunitySetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) ClientId(clientId string) ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) ClientId(clientId string) ApiPatchCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -599,9 +596,6 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) PatchCompanyPortalConfi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -623,7 +617,9 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) PatchCompanyPortalConfi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -667,19 +663,19 @@ type ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest struct 
 	ctx context.Context
 	ApiService *PortalConfigurationOpportunitySetupsAPIService
 	parentId int32
-	clientId *string
 	portalConfigurationOpportunitySetup *PortalConfigurationOpportunitySetup
-}
-
-// 
-func (r ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) ClientId(clientId string) ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // opportunitySetup
 func (r ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) PortalConfigurationOpportunitySetup(portalConfigurationOpportunitySetup PortalConfigurationOpportunitySetup) ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest {
 	r.portalConfigurationOpportunitySetup = &portalConfigurationOpportunitySetup
+	return r
+}
+
+// 
+func (r ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest) ClientId(clientId string) ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -723,9 +719,6 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) PutCompanyPortalConfigu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.portalConfigurationOpportunitySetup == nil {
 		return localVarReturnValue, nil, reportError("portalConfigurationOpportunitySetup is required and must be specified")
 	}
@@ -747,7 +740,9 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) PutCompanyPortalConfigu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.portalConfigurationOpportunitySetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -792,19 +787,19 @@ type ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest str
 	ApiService *PortalConfigurationOpportunitySetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	portalConfigurationOpportunitySetup *PortalConfigurationOpportunitySetup
-}
-
-// 
-func (r ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) ClientId(clientId string) ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // opportunitySetup
 func (r ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) PortalConfigurationOpportunitySetup(portalConfigurationOpportunitySetup PortalConfigurationOpportunitySetup) ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest {
 	r.portalConfigurationOpportunitySetup = &portalConfigurationOpportunitySetup
+	return r
+}
+
+// 
+func (r ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest) ClientId(clientId string) ApiPutCompanyPortalConfigurationsByParentIdOpportunitySetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -851,9 +846,6 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) PutCompanyPortalConfigu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.portalConfigurationOpportunitySetup == nil {
 		return localVarReturnValue, nil, reportError("portalConfigurationOpportunitySetup is required and must be specified")
 	}
@@ -875,7 +867,9 @@ func (a *PortalConfigurationOpportunitySetupsAPIService) PutCompanyPortalConfigu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.portalConfigurationOpportunitySetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

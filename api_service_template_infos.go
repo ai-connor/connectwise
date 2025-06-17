@@ -27,7 +27,6 @@ type ApiGetServiceTemplatesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *ServiceTemplateInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetServiceTemplatesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTemplatesByIdInfoRequest) ClientId(clientId string) ApiGetServiceTemplatesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetServiceTemplatesByIdInfoRequest) PageId(pageId int32) ApiGetServic
 	return r
 }
 
+// 
+func (r ApiGetServiceTemplatesByIdInfoRequest) ClientId(clientId string) ApiGetServiceTemplatesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTemplatesByIdInfoRequest) Execute() (*ServiceTemplateInfo, *http.Response, error) {
 	return r.ApiService.GetServiceTemplatesByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *ServiceTemplateInfosAPIService) GetServiceTemplatesByIdInfoExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *ServiceTemplateInfosAPIService) GetServiceTemplatesByIdInfoExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *ServiceTemplateInfosAPIService) GetServiceTemplatesByIdInfoExecute(r Ap
 type ApiGetServiceTemplatesInfoRequest struct {
 	ctx context.Context
 	ApiService *ServiceTemplateInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetServiceTemplatesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTemplatesInfoRequest) ClientId(clientId string) ApiGetServiceTemplatesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetServiceTemplatesInfoRequest) PageId(pageId int32) ApiGetServiceTem
 	return r
 }
 
+// 
+func (r ApiGetServiceTemplatesInfoRequest) ClientId(clientId string) ApiGetServiceTemplatesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTemplatesInfoRequest) Execute() ([]ServiceTemplateInfo, *http.Response, error) {
 	return r.ApiService.GetServiceTemplatesInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *ServiceTemplateInfosAPIService) GetServiceTemplatesInfoExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *ServiceTemplateInfosAPIService) GetServiceTemplatesInfoExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *ServiceTemplateInfosAPIService) GetServiceTemplatesInfoExecute(r ApiGet
 type ApiGetServiceTemplatesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *ServiceTemplateInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetServiceTemplatesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTemplatesInfoCountRequest) ClientId(clientId string) ApiGetServiceTemplatesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetServiceTemplatesInfoCountRequest) PageId(pageId int32) ApiGetServi
 	return r
 }
 
+// 
+func (r ApiGetServiceTemplatesInfoCountRequest) ClientId(clientId string) ApiGetServiceTemplatesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTemplatesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceTemplatesInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *ServiceTemplateInfosAPIService) GetServiceTemplatesInfoCountExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *ServiceTemplateInfosAPIService) GetServiceTemplatesInfoCountExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

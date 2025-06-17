@@ -27,7 +27,6 @@ type ApiGetFinanceBillingTermsByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *BillingTermInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetFinanceBillingTermsByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceBillingTermsByIdInfoRequest) ClientId(clientId string) ApiGetFinanceBillingTermsByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetFinanceBillingTermsByIdInfoRequest) PageId(pageId int32) ApiGetFin
 	return r
 }
 
+// 
+func (r ApiGetFinanceBillingTermsByIdInfoRequest) ClientId(clientId string) ApiGetFinanceBillingTermsByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceBillingTermsByIdInfoRequest) Execute() (*BillingTermInfo, *http.Response, error) {
 	return r.ApiService.GetFinanceBillingTermsByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *BillingTermInfosAPIService) GetFinanceBillingTermsByIdInfoExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *BillingTermInfosAPIService) GetFinanceBillingTermsByIdInfoExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *BillingTermInfosAPIService) GetFinanceBillingTermsByIdInfoExecute(r Api
 type ApiGetFinanceBillingTermsInfoRequest struct {
 	ctx context.Context
 	ApiService *BillingTermInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetFinanceBillingTermsInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceBillingTermsInfoRequest) ClientId(clientId string) ApiGetFinanceBillingTermsInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetFinanceBillingTermsInfoRequest) PageId(pageId int32) ApiGetFinance
 	return r
 }
 
+// 
+func (r ApiGetFinanceBillingTermsInfoRequest) ClientId(clientId string) ApiGetFinanceBillingTermsInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceBillingTermsInfoRequest) Execute() ([]BillingTermInfo, *http.Response, error) {
 	return r.ApiService.GetFinanceBillingTermsInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *BillingTermInfosAPIService) GetFinanceBillingTermsInfoExecute(r ApiGetF
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *BillingTermInfosAPIService) GetFinanceBillingTermsInfoExecute(r ApiGetF
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *BillingTermInfosAPIService) GetFinanceBillingTermsInfoExecute(r ApiGetF
 type ApiGetFinanceBillingTermsInfoCountRequest struct {
 	ctx context.Context
 	ApiService *BillingTermInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetFinanceBillingTermsInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceBillingTermsInfoCountRequest) ClientId(clientId string) ApiGetFinanceBillingTermsInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetFinanceBillingTermsInfoCountRequest) PageId(pageId int32) ApiGetFi
 	return r
 }
 
+// 
+func (r ApiGetFinanceBillingTermsInfoCountRequest) ClientId(clientId string) ApiGetFinanceBillingTermsInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceBillingTermsInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceBillingTermsInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *BillingTermInfosAPIService) GetFinanceBillingTermsInfoCountExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *BillingTermInfosAPIService) GetFinanceBillingTermsInfoCountExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -27,7 +27,6 @@ type ApiGetSalesOrdersByIdFinancialrecapRequest struct {
 	ctx context.Context
 	ApiService *SalesOrderRecapsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSalesOrdersByIdFinancialrecapRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOrdersByIdFinancialrecapRequest) ClientId(clientId string) ApiGetSalesOrdersByIdFinancialrecapRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSalesOrdersByIdFinancialrecapRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSalesOrdersByIdFinancialrecapRequest) ClientId(clientId string) ApiGetSalesOrdersByIdFinancialrecapRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOrdersByIdFinancialrecapRequest) Execute() ([]SalesOrderRecap, *http.Response, error) {
 	return r.ApiService.GetSalesOrdersByIdFinancialrecapExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *SalesOrderRecapsAPIService) GetSalesOrdersByIdFinancialrecapExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *SalesOrderRecapsAPIService) GetSalesOrdersByIdFinancialrecapExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

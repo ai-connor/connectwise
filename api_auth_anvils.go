@@ -26,7 +26,6 @@ type AuthAnvilsAPIService service
 type ApiGetSystemAuthAnvilsRequest struct {
 	ctx context.Context
 	ApiService *AuthAnvilsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemAuthAnvilsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAuthAnvilsRequest) ClientId(clientId string) ApiGetSystemAuthAnvilsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemAuthAnvilsRequest) PageId(pageId int32) ApiGetSystemAuthAnvi
 	return r
 }
 
+// 
+func (r ApiGetSystemAuthAnvilsRequest) ClientId(clientId string) ApiGetSystemAuthAnvilsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAuthAnvilsRequest) Execute() ([]AuthAnvil, *http.Response, error) {
 	return r.ApiService.GetSystemAuthAnvilsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsExecute(r ApiGetSystemAuthAnvi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsExecute(r ApiGetSystemAuthAnvi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemAuthAnvilsByIdRequest struct {
 	ctx context.Context
 	ApiService *AuthAnvilsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemAuthAnvilsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAuthAnvilsByIdRequest) ClientId(clientId string) ApiGetSystemAuthAnvilsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemAuthAnvilsByIdRequest) PageId(pageId int32) ApiGetSystemAuth
 	return r
 }
 
+// 
+func (r ApiGetSystemAuthAnvilsByIdRequest) ClientId(clientId string) ApiGetSystemAuthAnvilsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAuthAnvilsByIdRequest) Execute() (*AuthAnvil, *http.Response, error) {
 	return r.ApiService.GetSystemAuthAnvilsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsByIdExecute(r ApiGetSystemAuth
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsByIdExecute(r ApiGetSystemAuth
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsByIdExecute(r ApiGetSystemAuth
 type ApiGetSystemAuthAnvilsCountRequest struct {
 	ctx context.Context
 	ApiService *AuthAnvilsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemAuthAnvilsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAuthAnvilsCountRequest) ClientId(clientId string) ApiGetSystemAuthAnvilsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemAuthAnvilsCountRequest) PageId(pageId int32) ApiGetSystemAut
 	return r
 }
 
+// 
+func (r ApiGetSystemAuthAnvilsCountRequest) ClientId(clientId string) ApiGetSystemAuthAnvilsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAuthAnvilsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemAuthAnvilsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsCountExecute(r ApiGetSystemAut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsCountExecute(r ApiGetSystemAut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -594,7 +591,6 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsCountExecute(r ApiGetSystemAut
 type ApiGetSystemAuthAnvilsTestConnectionRequest struct {
 	ctx context.Context
 	ApiService *AuthAnvilsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -603,12 +599,7 @@ type ApiGetSystemAuthAnvilsTestConnectionRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAuthAnvilsTestConnectionRequest) ClientId(clientId string) ApiGetSystemAuthAnvilsTestConnectionRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -659,6 +650,12 @@ func (r ApiGetSystemAuthAnvilsTestConnectionRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetSystemAuthAnvilsTestConnectionRequest) ClientId(clientId string) ApiGetSystemAuthAnvilsTestConnectionRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAuthAnvilsTestConnectionRequest) Execute() (*SuccessResponse, *http.Response, error) {
 	return r.ApiService.GetSystemAuthAnvilsTestConnectionExecute(r)
 }
@@ -696,9 +693,6 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsTestConnectionExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -741,7 +735,9 @@ func (a *AuthAnvilsAPIService) GetSystemAuthAnvilsTestConnectionExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -783,19 +779,19 @@ type ApiPatchSystemAuthAnvilsByIdRequest struct {
 	ctx context.Context
 	ApiService *AuthAnvilsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemAuthAnvilsByIdRequest) ClientId(clientId string) ApiPatchSystemAuthAnvilsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemAuthAnvilsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemAuthAnvilsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemAuthAnvilsByIdRequest) ClientId(clientId string) ApiPatchSystemAuthAnvilsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -839,9 +835,6 @@ func (a *AuthAnvilsAPIService) PatchSystemAuthAnvilsByIdExecute(r ApiPatchSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -863,7 +856,9 @@ func (a *AuthAnvilsAPIService) PatchSystemAuthAnvilsByIdExecute(r ApiPatchSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -907,19 +902,19 @@ type ApiPutSystemAuthAnvilsByIdRequest struct {
 	ctx context.Context
 	ApiService *AuthAnvilsAPIService
 	id int32
-	clientId *string
 	authAnvil *AuthAnvil
-}
-
-// 
-func (r ApiPutSystemAuthAnvilsByIdRequest) ClientId(clientId string) ApiPutSystemAuthAnvilsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // authAnvil
 func (r ApiPutSystemAuthAnvilsByIdRequest) AuthAnvil(authAnvil AuthAnvil) ApiPutSystemAuthAnvilsByIdRequest {
 	r.authAnvil = &authAnvil
+	return r
+}
+
+// 
+func (r ApiPutSystemAuthAnvilsByIdRequest) ClientId(clientId string) ApiPutSystemAuthAnvilsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -963,9 +958,6 @@ func (a *AuthAnvilsAPIService) PutSystemAuthAnvilsByIdExecute(r ApiPutSystemAuth
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.authAnvil == nil {
 		return localVarReturnValue, nil, reportError("authAnvil is required and must be specified")
 	}
@@ -987,7 +979,9 @@ func (a *AuthAnvilsAPIService) PutSystemAuthAnvilsByIdExecute(r ApiPutSystemAuth
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.authAnvil
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

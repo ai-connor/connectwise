@@ -74,9 +74,6 @@ func (a *SkillCategoriesAPIService) DeleteSystemSkillCategoriesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *SkillCategoriesAPIService) DeleteSystemSkillCategoriesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *SkillCategoriesAPIService) DeleteSystemSkillCategoriesByIdExecute(r Api
 type ApiGetSystemSkillCategoriesRequest struct {
 	ctx context.Context
 	ApiService *SkillCategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemSkillCategoriesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSkillCategoriesRequest) ClientId(clientId string) ApiGetSystemSkillCategoriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemSkillCategoriesRequest) PageId(pageId int32) ApiGetSystemSki
 	return r
 }
 
+// 
+func (r ApiGetSystemSkillCategoriesRequest) ClientId(clientId string) ApiGetSystemSkillCategoriesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSkillCategoriesRequest) Execute() ([]SkillCategory, *http.Response, error) {
 	return r.ApiService.GetSystemSkillCategoriesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *SkillCategoriesAPIService) GetSystemSkillCategoriesExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *SkillCategoriesAPIService) GetSystemSkillCategoriesExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemSkillCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *SkillCategoriesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemSkillCategoriesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSkillCategoriesByIdRequest) ClientId(clientId string) ApiGetSystemSkillCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemSkillCategoriesByIdRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemSkillCategoriesByIdRequest) ClientId(clientId string) ApiGetSystemSkillCategoriesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSkillCategoriesByIdRequest) Execute() (*SkillCategory, *http.Response, error) {
 	return r.ApiService.GetSystemSkillCategoriesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *SkillCategoriesAPIService) GetSystemSkillCategoriesByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *SkillCategoriesAPIService) GetSystemSkillCategoriesByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *SkillCategoriesAPIService) GetSystemSkillCategoriesByIdExecute(r ApiGet
 type ApiGetSystemSkillCategoriesCountRequest struct {
 	ctx context.Context
 	ApiService *SkillCategoriesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemSkillCategoriesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemSkillCategoriesCountRequest) ClientId(clientId string) ApiGetSystemSkillCategoriesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemSkillCategoriesCountRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemSkillCategoriesCountRequest) ClientId(clientId string) ApiGetSystemSkillCategoriesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemSkillCategoriesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemSkillCategoriesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *SkillCategoriesAPIService) GetSystemSkillCategoriesCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *SkillCategoriesAPIService) GetSystemSkillCategoriesCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemSkillCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *SkillCategoriesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemSkillCategoriesByIdRequest) ClientId(clientId string) ApiPatchSystemSkillCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemSkillCategoriesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemSkillCategoriesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemSkillCategoriesByIdRequest) ClientId(clientId string) ApiPatchSystemSkillCategoriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *SkillCategoriesAPIService) PatchSystemSkillCategoriesByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *SkillCategoriesAPIService) PatchSystemSkillCategoriesByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *SkillCategoriesAPIService) PatchSystemSkillCategoriesByIdExecute(r ApiP
 type ApiPostSystemSkillCategoriesRequest struct {
 	ctx context.Context
 	ApiService *SkillCategoriesAPIService
-	clientId *string
 	skillCategory *SkillCategory
-}
-
-// 
-func (r ApiPostSystemSkillCategoriesRequest) ClientId(clientId string) ApiPostSystemSkillCategoriesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // skillCategory
 func (r ApiPostSystemSkillCategoriesRequest) SkillCategory(skillCategory SkillCategory) ApiPostSystemSkillCategoriesRequest {
 	r.skillCategory = &skillCategory
+	return r
+}
+
+// 
+func (r ApiPostSystemSkillCategoriesRequest) ClientId(clientId string) ApiPostSystemSkillCategoriesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *SkillCategoriesAPIService) PostSystemSkillCategoriesExecute(r ApiPostSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.skillCategory == nil {
 		return localVarReturnValue, nil, reportError("skillCategory is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *SkillCategoriesAPIService) PostSystemSkillCategoriesExecute(r ApiPostSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.skillCategory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemSkillCategoriesByIdRequest struct {
 	ctx context.Context
 	ApiService *SkillCategoriesAPIService
 	id int32
-	clientId *string
 	skillCategory *SkillCategory
-}
-
-// 
-func (r ApiPutSystemSkillCategoriesByIdRequest) ClientId(clientId string) ApiPutSystemSkillCategoriesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // skillCategory
 func (r ApiPutSystemSkillCategoriesByIdRequest) SkillCategory(skillCategory SkillCategory) ApiPutSystemSkillCategoriesByIdRequest {
 	r.skillCategory = &skillCategory
+	return r
+}
+
+// 
+func (r ApiPutSystemSkillCategoriesByIdRequest) ClientId(clientId string) ApiPutSystemSkillCategoriesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *SkillCategoriesAPIService) PutSystemSkillCategoriesByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.skillCategory == nil {
 		return localVarReturnValue, nil, reportError("skillCategory is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *SkillCategoriesAPIService) PutSystemSkillCategoriesByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.skillCategory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

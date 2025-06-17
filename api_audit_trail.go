@@ -25,7 +25,6 @@ type AuditTrailAPIService service
 type ApiGetSystemAudittrailRequest struct {
 	ctx context.Context
 	ApiService *AuditTrailAPIService
-	clientId *string
 	type_ *string
 	id *int32
 	deviceIdentifier *string
@@ -38,12 +37,7 @@ type ApiGetSystemAudittrailRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAudittrailRequest) ClientId(clientId string) ApiGetSystemAudittrailRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // type
@@ -118,6 +112,12 @@ func (r ApiGetSystemAudittrailRequest) PageId(pageId int32) ApiGetSystemAudittra
 	return r
 }
 
+// 
+func (r ApiGetSystemAudittrailRequest) ClientId(clientId string) ApiGetSystemAudittrailRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAudittrailRequest) Execute() ([]AuditTrailEntry, *http.Response, error) {
 	return r.ApiService.GetSystemAudittrailExecute(r)
 }
@@ -155,9 +155,6 @@ func (a *AuditTrailAPIService) GetSystemAudittrailExecute(r ApiGetSystemAudittra
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.type_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
@@ -212,7 +209,9 @@ func (a *AuditTrailAPIService) GetSystemAudittrailExecute(r ApiGetSystemAudittra
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -253,7 +252,6 @@ func (a *AuditTrailAPIService) GetSystemAudittrailExecute(r ApiGetSystemAudittra
 type ApiGetSystemAudittrailCountRequest struct {
 	ctx context.Context
 	ApiService *AuditTrailAPIService
-	clientId *string
 	type_ *string
 	id *int32
 	deviceIdentifier *string
@@ -266,12 +264,7 @@ type ApiGetSystemAudittrailCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemAudittrailCountRequest) ClientId(clientId string) ApiGetSystemAudittrailCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // type
@@ -346,6 +339,12 @@ func (r ApiGetSystemAudittrailCountRequest) PageId(pageId int32) ApiGetSystemAud
 	return r
 }
 
+// 
+func (r ApiGetSystemAudittrailCountRequest) ClientId(clientId string) ApiGetSystemAudittrailCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemAudittrailCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemAudittrailCountExecute(r)
 }
@@ -383,9 +382,6 @@ func (a *AuditTrailAPIService) GetSystemAudittrailCountExecute(r ApiGetSystemAud
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.type_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
@@ -440,7 +436,9 @@ func (a *AuditTrailAPIService) GetSystemAudittrailCountExecute(r ApiGetSystemAud
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

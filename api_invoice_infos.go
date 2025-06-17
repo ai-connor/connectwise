@@ -27,7 +27,6 @@ type ApiGetFinanceInfoInvoiceByIdRequest struct {
 	ctx context.Context
 	ApiService *InvoiceInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetFinanceInfoInvoiceByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceInfoInvoiceByIdRequest) ClientId(clientId string) ApiGetFinanceInfoInvoiceByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetFinanceInfoInvoiceByIdRequest) PageId(pageId int32) ApiGetFinanceI
 	return r
 }
 
+// 
+func (r ApiGetFinanceInfoInvoiceByIdRequest) ClientId(clientId string) ApiGetFinanceInfoInvoiceByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceInfoInvoiceByIdRequest) Execute() (*InvoiceInfo, *http.Response, error) {
 	return r.ApiService.GetFinanceInfoInvoiceByIdExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *InvoiceInfosAPIService) GetFinanceInfoInvoiceByIdExecute(r ApiGetFinanc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *InvoiceInfosAPIService) GetFinanceInfoInvoiceByIdExecute(r ApiGetFinanc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

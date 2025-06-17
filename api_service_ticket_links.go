@@ -74,9 +74,6 @@ func (a *ServiceTicketLinksAPIService) DeleteServiceTicketLinksByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ServiceTicketLinksAPIService) DeleteServiceTicketLinksByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ServiceTicketLinksAPIService) DeleteServiceTicketLinksByIdExecute(r Api
 type ApiGetServiceTicketLinksRequest struct {
 	ctx context.Context
 	ApiService *ServiceTicketLinksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetServiceTicketLinksRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketLinksRequest) ClientId(clientId string) ApiGetServiceTicketLinksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetServiceTicketLinksRequest) PageId(pageId int32) ApiGetServiceTicke
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketLinksRequest) ClientId(clientId string) ApiGetServiceTicketLinksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketLinksRequest) Execute() ([]ServiceTicketLink, *http.Response, error) {
 	return r.ApiService.GetServiceTicketLinksExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ServiceTicketLinksAPIService) GetServiceTicketLinksExecute(r ApiGetServ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ServiceTicketLinksAPIService) GetServiceTicketLinksExecute(r ApiGetServ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetServiceTicketLinksByIdRequest struct {
 	ctx context.Context
 	ApiService *ServiceTicketLinksAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetServiceTicketLinksByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketLinksByIdRequest) ClientId(clientId string) ApiGetServiceTicketLinksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetServiceTicketLinksByIdRequest) PageId(pageId int32) ApiGetServiceT
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketLinksByIdRequest) ClientId(clientId string) ApiGetServiceTicketLinksByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketLinksByIdRequest) Execute() (*ServiceTicketLink, *http.Response, error) {
 	return r.ApiService.GetServiceTicketLinksByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ServiceTicketLinksAPIService) GetServiceTicketLinksByIdExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ServiceTicketLinksAPIService) GetServiceTicketLinksByIdExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *ServiceTicketLinksAPIService) GetServiceTicketLinksByIdExecute(r ApiGet
 type ApiGetServiceTicketLinksCountRequest struct {
 	ctx context.Context
 	ApiService *ServiceTicketLinksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetServiceTicketLinksCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceTicketLinksCountRequest) ClientId(clientId string) ApiGetServiceTicketLinksCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetServiceTicketLinksCountRequest) PageId(pageId int32) ApiGetService
 	return r
 }
 
+// 
+func (r ApiGetServiceTicketLinksCountRequest) ClientId(clientId string) ApiGetServiceTicketLinksCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceTicketLinksCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceTicketLinksCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *ServiceTicketLinksAPIService) GetServiceTicketLinksCountExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *ServiceTicketLinksAPIService) GetServiceTicketLinksCountExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchServiceTicketLinksByIdRequest struct {
 	ctx context.Context
 	ApiService *ServiceTicketLinksAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceTicketLinksByIdRequest) ClientId(clientId string) ApiPatchServiceTicketLinksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceTicketLinksByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceTicketLinksByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceTicketLinksByIdRequest) ClientId(clientId string) ApiPatchServiceTicketLinksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *ServiceTicketLinksAPIService) PatchServiceTicketLinksByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *ServiceTicketLinksAPIService) PatchServiceTicketLinksByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *ServiceTicketLinksAPIService) PatchServiceTicketLinksByIdExecute(r ApiP
 type ApiPostServiceTicketLinksRequest struct {
 	ctx context.Context
 	ApiService *ServiceTicketLinksAPIService
-	clientId *string
 	serviceTicketLink *ServiceTicketLink
-}
-
-// 
-func (r ApiPostServiceTicketLinksRequest) ClientId(clientId string) ApiPostServiceTicketLinksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // serviceTicketLink
 func (r ApiPostServiceTicketLinksRequest) ServiceTicketLink(serviceTicketLink ServiceTicketLink) ApiPostServiceTicketLinksRequest {
 	r.serviceTicketLink = &serviceTicketLink
+	return r
+}
+
+// 
+func (r ApiPostServiceTicketLinksRequest) ClientId(clientId string) ApiPostServiceTicketLinksRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *ServiceTicketLinksAPIService) PostServiceTicketLinksExecute(r ApiPostSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.serviceTicketLink == nil {
 		return localVarReturnValue, nil, reportError("serviceTicketLink is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *ServiceTicketLinksAPIService) PostServiceTicketLinksExecute(r ApiPostSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.serviceTicketLink
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutServiceTicketLinksByIdRequest struct {
 	ctx context.Context
 	ApiService *ServiceTicketLinksAPIService
 	id int32
-	clientId *string
 	serviceTicketLink *ServiceTicketLink
-}
-
-// 
-func (r ApiPutServiceTicketLinksByIdRequest) ClientId(clientId string) ApiPutServiceTicketLinksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // serviceTicketLink
 func (r ApiPutServiceTicketLinksByIdRequest) ServiceTicketLink(serviceTicketLink ServiceTicketLink) ApiPutServiceTicketLinksByIdRequest {
 	r.serviceTicketLink = &serviceTicketLink
+	return r
+}
+
+// 
+func (r ApiPutServiceTicketLinksByIdRequest) ClientId(clientId string) ApiPutServiceTicketLinksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *ServiceTicketLinksAPIService) PutServiceTicketLinksByIdExecute(r ApiPut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.serviceTicketLink == nil {
 		return localVarReturnValue, nil, reportError("serviceTicketLink is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *ServiceTicketLinksAPIService) PutServiceTicketLinksByIdExecute(r ApiPut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.serviceTicketLink
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

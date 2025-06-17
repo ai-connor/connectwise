@@ -74,9 +74,6 @@ func (a *ShipmentMethodsAPIService) DeleteProcurementShipmentmethodsByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ShipmentMethodsAPIService) DeleteProcurementShipmentmethodsByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ShipmentMethodsAPIService) DeleteProcurementShipmentmethodsByIdExecute(
 type ApiGetProcurementShipmentmethodsRequest struct {
 	ctx context.Context
 	ApiService *ShipmentMethodsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementShipmentmethodsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementShipmentmethodsRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementShipmentmethodsRequest) PageId(pageId int32) ApiGetProc
 	return r
 }
 
+// 
+func (r ApiGetProcurementShipmentmethodsRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementShipmentmethodsRequest) Execute() ([]ShipmentMethod, *http.Response, error) {
 	return r.ApiService.GetProcurementShipmentmethodsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProcurementShipmentmethodsByIdRequest struct {
 	ctx context.Context
 	ApiService *ShipmentMethodsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProcurementShipmentmethodsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementShipmentmethodsByIdRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProcurementShipmentmethodsByIdRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetProcurementShipmentmethodsByIdRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementShipmentmethodsByIdRequest) Execute() (*ShipmentMethod, *http.Response, error) {
 	return r.ApiService.GetProcurementShipmentmethodsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetProcurementShipmentmethodsByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *ShipmentMethodsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetProcurementShipmentmethodsByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementShipmentmethodsByIdUsagesRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetProcurementShipmentmethodsByIdUsagesRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetProcurementShipmentmethodsByIdUsagesRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementShipmentmethodsByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetProcurementShipmentmethodsByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsByIdUsagesExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsByIdUsagesExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetProcurementShipmentmethodsByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *ShipmentMethodsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetProcurementShipmentmethodsByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementShipmentmethodsByIdUsagesListRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetProcurementShipmentmethodsByIdUsagesListRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetProcurementShipmentmethodsByIdUsagesListRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementShipmentmethodsByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetProcurementShipmentmethodsByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsByIdUsagesListE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsByIdUsagesListE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsByIdUsagesListE
 type ApiGetProcurementShipmentmethodsCountRequest struct {
 	ctx context.Context
 	ApiService *ShipmentMethodsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetProcurementShipmentmethodsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementShipmentmethodsCountRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetProcurementShipmentmethodsCountRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetProcurementShipmentmethodsCountRequest) ClientId(clientId string) ApiGetProcurementShipmentmethodsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementShipmentmethodsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementShipmentmethodsCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsCountExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *ShipmentMethodsAPIService) GetProcurementShipmentmethodsCountExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchProcurementShipmentmethodsByIdRequest struct {
 	ctx context.Context
 	ApiService *ShipmentMethodsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementShipmentmethodsByIdRequest) ClientId(clientId string) ApiPatchProcurementShipmentmethodsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementShipmentmethodsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementShipmentmethodsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementShipmentmethodsByIdRequest) ClientId(clientId string) ApiPatchProcurementShipmentmethodsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *ShipmentMethodsAPIService) PatchProcurementShipmentmethodsByIdExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *ShipmentMethodsAPIService) PatchProcurementShipmentmethodsByIdExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *ShipmentMethodsAPIService) PatchProcurementShipmentmethodsByIdExecute(r
 type ApiPostProcurementShipmentmethodsRequest struct {
 	ctx context.Context
 	ApiService *ShipmentMethodsAPIService
-	clientId *string
 	shipmentMethod *ShipmentMethod
-}
-
-// 
-func (r ApiPostProcurementShipmentmethodsRequest) ClientId(clientId string) ApiPostProcurementShipmentmethodsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // shipmentMethod
 func (r ApiPostProcurementShipmentmethodsRequest) ShipmentMethod(shipmentMethod ShipmentMethod) ApiPostProcurementShipmentmethodsRequest {
 	r.shipmentMethod = &shipmentMethod
+	return r
+}
+
+// 
+func (r ApiPostProcurementShipmentmethodsRequest) ClientId(clientId string) ApiPostProcurementShipmentmethodsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *ShipmentMethodsAPIService) PostProcurementShipmentmethodsExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.shipmentMethod == nil {
 		return localVarReturnValue, nil, reportError("shipmentMethod is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *ShipmentMethodsAPIService) PostProcurementShipmentmethodsExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.shipmentMethod
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutProcurementShipmentmethodsByIdRequest struct {
 	ctx context.Context
 	ApiService *ShipmentMethodsAPIService
 	id int32
-	clientId *string
 	shipmentMethod *ShipmentMethod
-}
-
-// 
-func (r ApiPutProcurementShipmentmethodsByIdRequest) ClientId(clientId string) ApiPutProcurementShipmentmethodsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // shipmentMethod
 func (r ApiPutProcurementShipmentmethodsByIdRequest) ShipmentMethod(shipmentMethod ShipmentMethod) ApiPutProcurementShipmentmethodsByIdRequest {
 	r.shipmentMethod = &shipmentMethod
+	return r
+}
+
+// 
+func (r ApiPutProcurementShipmentmethodsByIdRequest) ClientId(clientId string) ApiPutProcurementShipmentmethodsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *ShipmentMethodsAPIService) PutProcurementShipmentmethodsByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.shipmentMethod == nil {
 		return localVarReturnValue, nil, reportError("shipmentMethod is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *ShipmentMethodsAPIService) PutProcurementShipmentmethodsByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.shipmentMethod
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

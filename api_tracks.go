@@ -74,9 +74,6 @@ func (a *TracksAPIService) DeleteCompanyTracksByIdExecute(r ApiDeleteCompanyTrac
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *TracksAPIService) DeleteCompanyTracksByIdExecute(r ApiDeleteCompanyTrac
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *TracksAPIService) DeleteCompanyTracksByIdExecute(r ApiDeleteCompanyTrac
 type ApiGetCompanyTracksRequest struct {
 	ctx context.Context
 	ApiService *TracksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetCompanyTracksRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyTracksRequest) ClientId(clientId string) ApiGetCompanyTracksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetCompanyTracksRequest) PageId(pageId int32) ApiGetCompanyTracksRequ
 	return r
 }
 
+// 
+func (r ApiGetCompanyTracksRequest) ClientId(clientId string) ApiGetCompanyTracksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyTracksRequest) Execute() ([]Track, *http.Response, error) {
 	return r.ApiService.GetCompanyTracksExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *TracksAPIService) GetCompanyTracksExecute(r ApiGetCompanyTracksRequest)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *TracksAPIService) GetCompanyTracksExecute(r ApiGetCompanyTracksRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetCompanyTracksByIdRequest struct {
 	ctx context.Context
 	ApiService *TracksAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetCompanyTracksByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyTracksByIdRequest) ClientId(clientId string) ApiGetCompanyTracksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetCompanyTracksByIdRequest) PageId(pageId int32) ApiGetCompanyTracks
 	return r
 }
 
+// 
+func (r ApiGetCompanyTracksByIdRequest) ClientId(clientId string) ApiGetCompanyTracksByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyTracksByIdRequest) Execute() (*Track, *http.Response, error) {
 	return r.ApiService.GetCompanyTracksByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *TracksAPIService) GetCompanyTracksByIdExecute(r ApiGetCompanyTracksById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *TracksAPIService) GetCompanyTracksByIdExecute(r ApiGetCompanyTracksById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *TracksAPIService) GetCompanyTracksByIdExecute(r ApiGetCompanyTracksById
 type ApiGetCompanyTracksCountRequest struct {
 	ctx context.Context
 	ApiService *TracksAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetCompanyTracksCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyTracksCountRequest) ClientId(clientId string) ApiGetCompanyTracksCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetCompanyTracksCountRequest) PageId(pageId int32) ApiGetCompanyTrack
 	return r
 }
 
+// 
+func (r ApiGetCompanyTracksCountRequest) ClientId(clientId string) ApiGetCompanyTracksCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyTracksCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyTracksCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *TracksAPIService) GetCompanyTracksCountExecute(r ApiGetCompanyTracksCou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *TracksAPIService) GetCompanyTracksCountExecute(r ApiGetCompanyTracksCou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchCompanyTracksByIdRequest struct {
 	ctx context.Context
 	ApiService *TracksAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyTracksByIdRequest) ClientId(clientId string) ApiPatchCompanyTracksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyTracksByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyTracksByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyTracksByIdRequest) ClientId(clientId string) ApiPatchCompanyTracksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *TracksAPIService) PatchCompanyTracksByIdExecute(r ApiPatchCompanyTracks
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *TracksAPIService) PatchCompanyTracksByIdExecute(r ApiPatchCompanyTracks
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *TracksAPIService) PatchCompanyTracksByIdExecute(r ApiPatchCompanyTracks
 type ApiPostCompanyTracksRequest struct {
 	ctx context.Context
 	ApiService *TracksAPIService
-	clientId *string
 	track *Track
-}
-
-// 
-func (r ApiPostCompanyTracksRequest) ClientId(clientId string) ApiPostCompanyTracksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // track
 func (r ApiPostCompanyTracksRequest) Track(track Track) ApiPostCompanyTracksRequest {
 	r.track = &track
+	return r
+}
+
+// 
+func (r ApiPostCompanyTracksRequest) ClientId(clientId string) ApiPostCompanyTracksRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *TracksAPIService) PostCompanyTracksExecute(r ApiPostCompanyTracksReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.track == nil {
 		return localVarReturnValue, nil, reportError("track is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *TracksAPIService) PostCompanyTracksExecute(r ApiPostCompanyTracksReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.track
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutCompanyTracksByIdRequest struct {
 	ctx context.Context
 	ApiService *TracksAPIService
 	id int32
-	clientId *string
 	track *Track
-}
-
-// 
-func (r ApiPutCompanyTracksByIdRequest) ClientId(clientId string) ApiPutCompanyTracksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // track
 func (r ApiPutCompanyTracksByIdRequest) Track(track Track) ApiPutCompanyTracksByIdRequest {
 	r.track = &track
+	return r
+}
+
+// 
+func (r ApiPutCompanyTracksByIdRequest) ClientId(clientId string) ApiPutCompanyTracksByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *TracksAPIService) PutCompanyTracksByIdExecute(r ApiPutCompanyTracksById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.track == nil {
 		return localVarReturnValue, nil, reportError("track is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *TracksAPIService) PutCompanyTracksByIdExecute(r ApiPutCompanyTracksById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.track
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

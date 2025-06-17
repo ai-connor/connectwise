@@ -74,9 +74,6 @@ func (a *KnowledgeBaseArticlesAPIService) DeleteServiceKnowledgeBaseArticlesById
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *KnowledgeBaseArticlesAPIService) DeleteServiceKnowledgeBaseArticlesById
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *KnowledgeBaseArticlesAPIService) DeleteServiceKnowledgeBaseArticlesById
 type ApiGetServiceKnowledgeBaseArticlesRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseArticlesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetServiceKnowledgeBaseArticlesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceKnowledgeBaseArticlesRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseArticlesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetServiceKnowledgeBaseArticlesRequest) PageId(pageId int32) ApiGetSe
 	return r
 }
 
+// 
+func (r ApiGetServiceKnowledgeBaseArticlesRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseArticlesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceKnowledgeBaseArticlesRequest) Execute() ([]KnowledgeBaseArticle, *http.Response, error) {
 	return r.ApiService.GetServiceKnowledgeBaseArticlesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *KnowledgeBaseArticlesAPIService) GetServiceKnowledgeBaseArticlesExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *KnowledgeBaseArticlesAPIService) GetServiceKnowledgeBaseArticlesExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetServiceKnowledgeBaseArticlesByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseArticlesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetServiceKnowledgeBaseArticlesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceKnowledgeBaseArticlesByIdRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseArticlesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetServiceKnowledgeBaseArticlesByIdRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetServiceKnowledgeBaseArticlesByIdRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseArticlesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceKnowledgeBaseArticlesByIdRequest) Execute() (*KnowledgeBaseArticle, *http.Response, error) {
 	return r.ApiService.GetServiceKnowledgeBaseArticlesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *KnowledgeBaseArticlesAPIService) GetServiceKnowledgeBaseArticlesByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *KnowledgeBaseArticlesAPIService) GetServiceKnowledgeBaseArticlesByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *KnowledgeBaseArticlesAPIService) GetServiceKnowledgeBaseArticlesByIdExe
 type ApiGetServiceKnowledgeBaseArticlesCountRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseArticlesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetServiceKnowledgeBaseArticlesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetServiceKnowledgeBaseArticlesCountRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseArticlesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetServiceKnowledgeBaseArticlesCountRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetServiceKnowledgeBaseArticlesCountRequest) ClientId(clientId string) ApiGetServiceKnowledgeBaseArticlesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetServiceKnowledgeBaseArticlesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetServiceKnowledgeBaseArticlesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *KnowledgeBaseArticlesAPIService) GetServiceKnowledgeBaseArticlesCountEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *KnowledgeBaseArticlesAPIService) GetServiceKnowledgeBaseArticlesCountEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchServiceKnowledgeBaseArticlesByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseArticlesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchServiceKnowledgeBaseArticlesByIdRequest) ClientId(clientId string) ApiPatchServiceKnowledgeBaseArticlesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchServiceKnowledgeBaseArticlesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchServiceKnowledgeBaseArticlesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchServiceKnowledgeBaseArticlesByIdRequest) ClientId(clientId string) ApiPatchServiceKnowledgeBaseArticlesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *KnowledgeBaseArticlesAPIService) PatchServiceKnowledgeBaseArticlesByIdE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *KnowledgeBaseArticlesAPIService) PatchServiceKnowledgeBaseArticlesByIdE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *KnowledgeBaseArticlesAPIService) PatchServiceKnowledgeBaseArticlesByIdE
 type ApiPostServiceKnowledgeBaseArticlesRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseArticlesAPIService
-	clientId *string
 	knowledgeBaseArticle *KnowledgeBaseArticle
-}
-
-// 
-func (r ApiPostServiceKnowledgeBaseArticlesRequest) ClientId(clientId string) ApiPostServiceKnowledgeBaseArticlesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // knowledgeBaseArticle
 func (r ApiPostServiceKnowledgeBaseArticlesRequest) KnowledgeBaseArticle(knowledgeBaseArticle KnowledgeBaseArticle) ApiPostServiceKnowledgeBaseArticlesRequest {
 	r.knowledgeBaseArticle = &knowledgeBaseArticle
+	return r
+}
+
+// 
+func (r ApiPostServiceKnowledgeBaseArticlesRequest) ClientId(clientId string) ApiPostServiceKnowledgeBaseArticlesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *KnowledgeBaseArticlesAPIService) PostServiceKnowledgeBaseArticlesExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.knowledgeBaseArticle == nil {
 		return localVarReturnValue, nil, reportError("knowledgeBaseArticle is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *KnowledgeBaseArticlesAPIService) PostServiceKnowledgeBaseArticlesExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.knowledgeBaseArticle
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutServiceKnowledgeBaseArticlesByIdRequest struct {
 	ctx context.Context
 	ApiService *KnowledgeBaseArticlesAPIService
 	id int32
-	clientId *string
 	knowledgeBaseArticle *KnowledgeBaseArticle
-}
-
-// 
-func (r ApiPutServiceKnowledgeBaseArticlesByIdRequest) ClientId(clientId string) ApiPutServiceKnowledgeBaseArticlesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // knowledgeBaseArticle
 func (r ApiPutServiceKnowledgeBaseArticlesByIdRequest) KnowledgeBaseArticle(knowledgeBaseArticle KnowledgeBaseArticle) ApiPutServiceKnowledgeBaseArticlesByIdRequest {
 	r.knowledgeBaseArticle = &knowledgeBaseArticle
+	return r
+}
+
+// 
+func (r ApiPutServiceKnowledgeBaseArticlesByIdRequest) ClientId(clientId string) ApiPutServiceKnowledgeBaseArticlesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *KnowledgeBaseArticlesAPIService) PutServiceKnowledgeBaseArticlesByIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.knowledgeBaseArticle == nil {
 		return localVarReturnValue, nil, reportError("knowledgeBaseArticle is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *KnowledgeBaseArticlesAPIService) PutServiceKnowledgeBaseArticlesByIdExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.knowledgeBaseArticle
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

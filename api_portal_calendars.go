@@ -26,7 +26,6 @@ type PortalCalendarsAPIService service
 type ApiGetSchedulePortalcalendarsRequest struct {
 	ctx context.Context
 	ApiService *PortalCalendarsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSchedulePortalcalendarsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSchedulePortalcalendarsRequest) ClientId(clientId string) ApiGetSchedulePortalcalendarsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSchedulePortalcalendarsRequest) PageId(pageId int32) ApiGetSchedul
 	return r
 }
 
+// 
+func (r ApiGetSchedulePortalcalendarsRequest) ClientId(clientId string) ApiGetSchedulePortalcalendarsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSchedulePortalcalendarsRequest) Execute() ([]PortalCalendar, *http.Response, error) {
 	return r.ApiService.GetSchedulePortalcalendarsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *PortalCalendarsAPIService) GetSchedulePortalcalendarsExecute(r ApiGetSc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *PortalCalendarsAPIService) GetSchedulePortalcalendarsExecute(r ApiGetSc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSchedulePortalcalendarsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalCalendarsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSchedulePortalcalendarsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSchedulePortalcalendarsByIdRequest) ClientId(clientId string) ApiGetSchedulePortalcalendarsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSchedulePortalcalendarsByIdRequest) PageId(pageId int32) ApiGetSch
 	return r
 }
 
+// 
+func (r ApiGetSchedulePortalcalendarsByIdRequest) ClientId(clientId string) ApiGetSchedulePortalcalendarsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSchedulePortalcalendarsByIdRequest) Execute() (*PortalCalendar, *http.Response, error) {
 	return r.ApiService.GetSchedulePortalcalendarsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *PortalCalendarsAPIService) GetSchedulePortalcalendarsByIdExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *PortalCalendarsAPIService) GetSchedulePortalcalendarsByIdExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *PortalCalendarsAPIService) GetSchedulePortalcalendarsByIdExecute(r ApiG
 type ApiGetSchedulePortalcalendarsCountRequest struct {
 	ctx context.Context
 	ApiService *PortalCalendarsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSchedulePortalcalendarsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSchedulePortalcalendarsCountRequest) ClientId(clientId string) ApiGetSchedulePortalcalendarsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSchedulePortalcalendarsCountRequest) PageId(pageId int32) ApiGetSc
 	return r
 }
 
+// 
+func (r ApiGetSchedulePortalcalendarsCountRequest) ClientId(clientId string) ApiGetSchedulePortalcalendarsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSchedulePortalcalendarsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSchedulePortalcalendarsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *PortalCalendarsAPIService) GetSchedulePortalcalendarsCountExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *PortalCalendarsAPIService) GetSchedulePortalcalendarsCountExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchSchedulePortalcalendarsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalCalendarsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSchedulePortalcalendarsByIdRequest) ClientId(clientId string) ApiPatchSchedulePortalcalendarsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSchedulePortalcalendarsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSchedulePortalcalendarsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSchedulePortalcalendarsByIdRequest) ClientId(clientId string) ApiPatchSchedulePortalcalendarsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *PortalCalendarsAPIService) PatchSchedulePortalcalendarsByIdExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *PortalCalendarsAPIService) PatchSchedulePortalcalendarsByIdExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutSchedulePortalcalendarsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalCalendarsAPIService
 	id int32
-	clientId *string
 	portalCalendar *PortalCalendar
-}
-
-// 
-func (r ApiPutSchedulePortalcalendarsByIdRequest) ClientId(clientId string) ApiPutSchedulePortalcalendarsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // portalCalendar
 func (r ApiPutSchedulePortalcalendarsByIdRequest) PortalCalendar(portalCalendar PortalCalendar) ApiPutSchedulePortalcalendarsByIdRequest {
 	r.portalCalendar = &portalCalendar
+	return r
+}
+
+// 
+func (r ApiPutSchedulePortalcalendarsByIdRequest) ClientId(clientId string) ApiPutSchedulePortalcalendarsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *PortalCalendarsAPIService) PutSchedulePortalcalendarsByIdExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.portalCalendar == nil {
 		return localVarReturnValue, nil, reportError("portalCalendar is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *PortalCalendarsAPIService) PutSchedulePortalcalendarsByIdExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.portalCalendar
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

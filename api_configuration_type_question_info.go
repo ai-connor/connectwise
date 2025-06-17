@@ -28,7 +28,6 @@ type ApiGetConfigurationsTypesByParentIdQuestionsByIdInfoRequest struct {
 	ApiService *ConfigurationTypeQuestionInfoAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -37,12 +36,7 @@ type ApiGetConfigurationsTypesByParentIdQuestionsByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetConfigurationsTypesByParentIdQuestionsByIdInfoRequest) ClientId(clientId string) ApiGetConfigurationsTypesByParentIdQuestionsByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -93,6 +87,12 @@ func (r ApiGetConfigurationsTypesByParentIdQuestionsByIdInfoRequest) PageId(page
 	return r
 }
 
+// 
+func (r ApiGetConfigurationsTypesByParentIdQuestionsByIdInfoRequest) ClientId(clientId string) ApiGetConfigurationsTypesByParentIdQuestionsByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetConfigurationsTypesByParentIdQuestionsByIdInfoRequest) Execute() (*ConfigurationTypeQuestionInfo, *http.Response, error) {
 	return r.ApiService.GetConfigurationsTypesByParentIdQuestionsByIdInfoExecute(r)
 }
@@ -136,9 +136,6 @@ func (a *ConfigurationTypeQuestionInfoAPIService) GetConfigurationsTypesByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -181,7 +178,9 @@ func (a *ConfigurationTypeQuestionInfoAPIService) GetConfigurationsTypesByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -27,7 +27,6 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesRequest struct {
 	ctx context.Context
 	ApiService *WorkflowNotifyTypesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdNotifyTypesRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSystemWorkflowsByParentIdNotifyTypesRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdNotifyTypesRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdNotifyTypesRequest) Execute() ([]WorkflowNotifyType, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdNotifyTypesExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesByIdRequest struct {
 	ApiService *WorkflowNotifyTypesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdNotifyTypesByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetSystemWorkflowsByParentIdNotifyTypesByIdRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdNotifyTypesByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdNotifyTypesByIdRequest) Execute() (*WorkflowNotifyType, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdNotifyTypesByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -416,7 +414,6 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesByIdInfoRequest struct {
 	ApiService *WorkflowNotifyTypesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -425,12 +422,7 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdNotifyTypesByIdInfoRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -481,6 +473,12 @@ func (r ApiGetSystemWorkflowsByParentIdNotifyTypesByIdInfoRequest) PageId(pageId
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdNotifyTypesByIdInfoRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdNotifyTypesByIdInfoRequest) Execute() (*WorkflowNotifyTypeInfo, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdNotifyTypesByIdInfoExecute(r)
 }
@@ -524,9 +522,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -569,7 +564,9 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -611,7 +608,6 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesCountRequest struct {
 	ctx context.Context
 	ApiService *WorkflowNotifyTypesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -620,12 +616,7 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdNotifyTypesCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -676,6 +667,12 @@ func (r ApiGetSystemWorkflowsByParentIdNotifyTypesCountRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdNotifyTypesCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdNotifyTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdNotifyTypesCountExecute(r)
 }
@@ -716,9 +713,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -761,7 +755,9 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -803,7 +799,6 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesInfoRequest struct {
 	ctx context.Context
 	ApiService *WorkflowNotifyTypesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -812,12 +807,7 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdNotifyTypesInfoRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -868,6 +858,12 @@ func (r ApiGetSystemWorkflowsByParentIdNotifyTypesInfoRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdNotifyTypesInfoRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdNotifyTypesInfoRequest) Execute() ([]WorkflowNotifyTypeInfo, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdNotifyTypesInfoExecute(r)
 }
@@ -908,9 +904,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -953,7 +946,9 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -995,7 +990,6 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *WorkflowNotifyTypesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1004,12 +998,7 @@ type ApiGetSystemWorkflowsByParentIdNotifyTypesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsByParentIdNotifyTypesInfoCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1060,6 +1049,12 @@ func (r ApiGetSystemWorkflowsByParentIdNotifyTypesInfoCountRequest) PageId(pageI
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsByParentIdNotifyTypesInfoCountRequest) ClientId(clientId string) ApiGetSystemWorkflowsByParentIdNotifyTypesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsByParentIdNotifyTypesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsByParentIdNotifyTypesInfoCountExecute(r)
 }
@@ -1100,9 +1095,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1145,7 +1137,9 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1186,7 +1180,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsByParentIdNotifyTypesI
 type ApiGetSystemWorkflowsNotifyTypesRequest struct {
 	ctx context.Context
 	ApiService *WorkflowNotifyTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1195,12 +1188,7 @@ type ApiGetSystemWorkflowsNotifyTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsNotifyTypesRequest) ClientId(clientId string) ApiGetSystemWorkflowsNotifyTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1251,6 +1239,12 @@ func (r ApiGetSystemWorkflowsNotifyTypesRequest) PageId(pageId int32) ApiGetSyst
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsNotifyTypesRequest) ClientId(clientId string) ApiGetSystemWorkflowsNotifyTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsNotifyTypesRequest) Execute() ([]WorkflowNotifyType, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsNotifyTypesExecute(r)
 }
@@ -1288,9 +1282,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsNotifyTypesExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1333,7 +1324,9 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsNotifyTypesExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1375,7 +1368,6 @@ type ApiGetSystemWorkflowsNotifyTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkflowNotifyTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1384,12 +1376,7 @@ type ApiGetSystemWorkflowsNotifyTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemWorkflowsNotifyTypesByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsNotifyTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1440,6 +1427,12 @@ func (r ApiGetSystemWorkflowsNotifyTypesByIdRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetSystemWorkflowsNotifyTypesByIdRequest) ClientId(clientId string) ApiGetSystemWorkflowsNotifyTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemWorkflowsNotifyTypesByIdRequest) Execute() ([]WorkflowNotifyType, *http.Response, error) {
 	return r.ApiService.GetSystemWorkflowsNotifyTypesByIdExecute(r)
 }
@@ -1480,9 +1473,6 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsNotifyTypesByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1525,7 +1515,9 @@ func (a *WorkflowNotifyTypesAPIService) GetSystemWorkflowsNotifyTypesByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

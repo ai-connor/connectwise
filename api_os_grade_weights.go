@@ -26,7 +26,6 @@ type OsGradeWeightsAPIService service
 type ApiGetSystemOsgradeweightsRequest struct {
 	ctx context.Context
 	ApiService *OsGradeWeightsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -35,12 +34,7 @@ type ApiGetSystemOsgradeweightsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOsgradeweightsRequest) ClientId(clientId string) ApiGetSystemOsgradeweightsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -91,6 +85,12 @@ func (r ApiGetSystemOsgradeweightsRequest) PageId(pageId int32) ApiGetSystemOsgr
 	return r
 }
 
+// 
+func (r ApiGetSystemOsgradeweightsRequest) ClientId(clientId string) ApiGetSystemOsgradeweightsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOsgradeweightsRequest) Execute() ([]OsGradeWeight, *http.Response, error) {
 	return r.ApiService.GetSystemOsgradeweightsExecute(r)
 }
@@ -128,9 +128,6 @@ func (a *OsGradeWeightsAPIService) GetSystemOsgradeweightsExecute(r ApiGetSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -173,7 +170,9 @@ func (a *OsGradeWeightsAPIService) GetSystemOsgradeweightsExecute(r ApiGetSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,7 +214,6 @@ type ApiGetSystemOsgradeweightsByIdRequest struct {
 	ctx context.Context
 	ApiService *OsGradeWeightsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -224,12 +222,7 @@ type ApiGetSystemOsgradeweightsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOsgradeweightsByIdRequest) ClientId(clientId string) ApiGetSystemOsgradeweightsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -280,6 +273,12 @@ func (r ApiGetSystemOsgradeweightsByIdRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemOsgradeweightsByIdRequest) ClientId(clientId string) ApiGetSystemOsgradeweightsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOsgradeweightsByIdRequest) Execute() (*OsGradeWeight, *http.Response, error) {
 	return r.ApiService.GetSystemOsgradeweightsByIdExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *OsGradeWeightsAPIService) GetSystemOsgradeweightsByIdExecute(r ApiGetSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *OsGradeWeightsAPIService) GetSystemOsgradeweightsByIdExecute(r ApiGetSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *OsGradeWeightsAPIService) GetSystemOsgradeweightsByIdExecute(r ApiGetSy
 type ApiGetSystemOsgradeweightsCountRequest struct {
 	ctx context.Context
 	ApiService *OsGradeWeightsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemOsgradeweightsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemOsgradeweightsCountRequest) ClientId(clientId string) ApiGetSystemOsgradeweightsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemOsgradeweightsCountRequest) PageId(pageId int32) ApiGetSyste
 	return r
 }
 
+// 
+func (r ApiGetSystemOsgradeweightsCountRequest) ClientId(clientId string) ApiGetSystemOsgradeweightsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemOsgradeweightsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemOsgradeweightsCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *OsGradeWeightsAPIService) GetSystemOsgradeweightsCountExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *OsGradeWeightsAPIService) GetSystemOsgradeweightsCountExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,19 +592,19 @@ type ApiPatchSystemOsgradeweightsByIdRequest struct {
 	ctx context.Context
 	ApiService *OsGradeWeightsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemOsgradeweightsByIdRequest) ClientId(clientId string) ApiPatchSystemOsgradeweightsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemOsgradeweightsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemOsgradeweightsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemOsgradeweightsByIdRequest) ClientId(clientId string) ApiPatchSystemOsgradeweightsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -651,9 +648,6 @@ func (a *OsGradeWeightsAPIService) PatchSystemOsgradeweightsByIdExecute(r ApiPat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -675,7 +669,9 @@ func (a *OsGradeWeightsAPIService) PatchSystemOsgradeweightsByIdExecute(r ApiPat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -719,19 +715,19 @@ type ApiPutSystemOsgradeweightsByIdRequest struct {
 	ctx context.Context
 	ApiService *OsGradeWeightsAPIService
 	id int32
-	clientId *string
 	osGradeWeight *OsGradeWeight
-}
-
-// 
-func (r ApiPutSystemOsgradeweightsByIdRequest) ClientId(clientId string) ApiPutSystemOsgradeweightsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // osGradeWeight
 func (r ApiPutSystemOsgradeweightsByIdRequest) OsGradeWeight(osGradeWeight OsGradeWeight) ApiPutSystemOsgradeweightsByIdRequest {
 	r.osGradeWeight = &osGradeWeight
+	return r
+}
+
+// 
+func (r ApiPutSystemOsgradeweightsByIdRequest) ClientId(clientId string) ApiPutSystemOsgradeweightsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -775,9 +771,6 @@ func (a *OsGradeWeightsAPIService) PutSystemOsgradeweightsByIdExecute(r ApiPutSy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.osGradeWeight == nil {
 		return localVarReturnValue, nil, reportError("osGradeWeight is required and must be specified")
 	}
@@ -799,7 +792,9 @@ func (a *OsGradeWeightsAPIService) PutSystemOsgradeweightsByIdExecute(r ApiPutSy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.osGradeWeight
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

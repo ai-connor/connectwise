@@ -78,9 +78,6 @@ func (a *RmaStatusNotificationsAPIService) DeleteProcurementRmaStatusesByParentI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *RmaStatusNotificationsAPIService) DeleteProcurementRmaStatusesByParentI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetProcurementRmaStatusesByParentIdNotificationsRequest struct {
 	ctx context.Context
 	ApiService *RmaStatusNotificationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetProcurementRmaStatusesByParentIdNotificationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaStatusesByParentIdNotificationsRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetProcurementRmaStatusesByParentIdNotificationsRequest) PageId(pageI
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaStatusesByParentIdNotificationsRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdNotificationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaStatusesByParentIdNotificationsRequest) Execute() ([]RmaStatusNotification, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaStatusesByParentIdNotificationsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *RmaStatusNotificationsAPIService) GetProcurementRmaStatusesByParentIdNo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *RmaStatusNotificationsAPIService) GetProcurementRmaStatusesByParentIdNo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetProcurementRmaStatusesByParentIdNotificationsByIdRequest struct {
 	ApiService *RmaStatusNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetProcurementRmaStatusesByParentIdNotificationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetProcurementRmaStatusesByParentIdNotificationsByIdRequest) PageId(p
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaStatusesByParentIdNotificationsByIdRequest) Execute() (*RmaStatusNotification, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaStatusesByParentIdNotificationsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *RmaStatusNotificationsAPIService) GetProcurementRmaStatusesByParentIdNo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *RmaStatusNotificationsAPIService) GetProcurementRmaStatusesByParentIdNo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetProcurementRmaStatusesByParentIdNotificationsCountRequest struct {
 	ctx context.Context
 	ApiService *RmaStatusNotificationsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetProcurementRmaStatusesByParentIdNotificationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementRmaStatusesByParentIdNotificationsCountRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdNotificationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetProcurementRmaStatusesByParentIdNotificationsCountRequest) PageId(
 	return r
 }
 
+// 
+func (r ApiGetProcurementRmaStatusesByParentIdNotificationsCountRequest) ClientId(clientId string) ApiGetProcurementRmaStatusesByParentIdNotificationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementRmaStatusesByParentIdNotificationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementRmaStatusesByParentIdNotificationsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *RmaStatusNotificationsAPIService) GetProcurementRmaStatusesByParentIdNo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *RmaStatusNotificationsAPIService) GetProcurementRmaStatusesByParentIdNo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchProcurementRmaStatusesByParentIdNotificationsByIdRequest struct {
 	ApiService *RmaStatusNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementRmaStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPatchProcurementRmaStatusesByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementRmaStatusesByParentIdNotificationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementRmaStatusesByParentIdNotificationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementRmaStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPatchProcurementRmaStatusesByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *RmaStatusNotificationsAPIService) PatchProcurementRmaStatusesByParentId
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *RmaStatusNotificationsAPIService) PatchProcurementRmaStatusesByParentId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostProcurementRmaStatusesByParentIdNotificationsRequest struct {
 	ctx context.Context
 	ApiService *RmaStatusNotificationsAPIService
 	parentId int32
-	clientId *string
 	rmaStatusNotification *RmaStatusNotification
-}
-
-// 
-func (r ApiPostProcurementRmaStatusesByParentIdNotificationsRequest) ClientId(clientId string) ApiPostProcurementRmaStatusesByParentIdNotificationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // rmaStatusNotification
 func (r ApiPostProcurementRmaStatusesByParentIdNotificationsRequest) RmaStatusNotification(rmaStatusNotification RmaStatusNotification) ApiPostProcurementRmaStatusesByParentIdNotificationsRequest {
 	r.rmaStatusNotification = &rmaStatusNotification
+	return r
+}
+
+// 
+func (r ApiPostProcurementRmaStatusesByParentIdNotificationsRequest) ClientId(clientId string) ApiPostProcurementRmaStatusesByParentIdNotificationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *RmaStatusNotificationsAPIService) PostProcurementRmaStatusesByParentIdN
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.rmaStatusNotification == nil {
 		return localVarReturnValue, nil, reportError("rmaStatusNotification is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *RmaStatusNotificationsAPIService) PostProcurementRmaStatusesByParentIdN
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.rmaStatusNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutProcurementRmaStatusesByParentIdNotificationsByIdRequest struct {
 	ApiService *RmaStatusNotificationsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	rmaStatusNotification *RmaStatusNotification
-}
-
-// 
-func (r ApiPutProcurementRmaStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPutProcurementRmaStatusesByParentIdNotificationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // rmaStatusNotification
 func (r ApiPutProcurementRmaStatusesByParentIdNotificationsByIdRequest) RmaStatusNotification(rmaStatusNotification RmaStatusNotification) ApiPutProcurementRmaStatusesByParentIdNotificationsByIdRequest {
 	r.rmaStatusNotification = &rmaStatusNotification
+	return r
+}
+
+// 
+func (r ApiPutProcurementRmaStatusesByParentIdNotificationsByIdRequest) ClientId(clientId string) ApiPutProcurementRmaStatusesByParentIdNotificationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *RmaStatusNotificationsAPIService) PutProcurementRmaStatusesByParentIdNo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.rmaStatusNotification == nil {
 		return localVarReturnValue, nil, reportError("rmaStatusNotification is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *RmaStatusNotificationsAPIService) PutProcurementRmaStatusesByParentIdNo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.rmaStatusNotification
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

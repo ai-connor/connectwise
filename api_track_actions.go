@@ -78,9 +78,6 @@ func (a *TrackActionsAPIService) DeleteCompanyTracksByParentIdActionsByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *TrackActionsAPIService) DeleteCompanyTracksByParentIdActionsByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetCompanyTracksByParentIdActionsRequest struct {
 	ctx context.Context
 	ApiService *TrackActionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetCompanyTracksByParentIdActionsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyTracksByParentIdActionsRequest) ClientId(clientId string) ApiGetCompanyTracksByParentIdActionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetCompanyTracksByParentIdActionsRequest) PageId(pageId int32) ApiGet
 	return r
 }
 
+// 
+func (r ApiGetCompanyTracksByParentIdActionsRequest) ClientId(clientId string) ApiGetCompanyTracksByParentIdActionsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyTracksByParentIdActionsRequest) Execute() ([]TrackAction, *http.Response, error) {
 	return r.ApiService.GetCompanyTracksByParentIdActionsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *TrackActionsAPIService) GetCompanyTracksByParentIdActionsExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *TrackActionsAPIService) GetCompanyTracksByParentIdActionsExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetCompanyTracksByParentIdActionsByIdRequest struct {
 	ApiService *TrackActionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetCompanyTracksByParentIdActionsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyTracksByParentIdActionsByIdRequest) ClientId(clientId string) ApiGetCompanyTracksByParentIdActionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetCompanyTracksByParentIdActionsByIdRequest) PageId(pageId int32) Ap
 	return r
 }
 
+// 
+func (r ApiGetCompanyTracksByParentIdActionsByIdRequest) ClientId(clientId string) ApiGetCompanyTracksByParentIdActionsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyTracksByParentIdActionsByIdRequest) Execute() (*TrackAction, *http.Response, error) {
 	return r.ApiService.GetCompanyTracksByParentIdActionsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *TrackActionsAPIService) GetCompanyTracksByParentIdActionsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *TrackActionsAPIService) GetCompanyTracksByParentIdActionsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetCompanyTracksByParentIdActionsCountRequest struct {
 	ctx context.Context
 	ApiService *TrackActionsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetCompanyTracksByParentIdActionsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyTracksByParentIdActionsCountRequest) ClientId(clientId string) ApiGetCompanyTracksByParentIdActionsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetCompanyTracksByParentIdActionsCountRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetCompanyTracksByParentIdActionsCountRequest) ClientId(clientId string) ApiGetCompanyTracksByParentIdActionsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyTracksByParentIdActionsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyTracksByParentIdActionsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *TrackActionsAPIService) GetCompanyTracksByParentIdActionsCountExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *TrackActionsAPIService) GetCompanyTracksByParentIdActionsCountExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -765,9 +761,6 @@ func (a *TrackActionsAPIService) PatchCompanyTracksByParentIdActionsByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -786,7 +779,9 @@ func (a *TrackActionsAPIService) PatchCompanyTracksByParentIdActionsByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -828,19 +823,19 @@ type ApiPostCompanyTracksByParentIdActionsRequest struct {
 	ctx context.Context
 	ApiService *TrackActionsAPIService
 	parentId int32
-	clientId *string
 	trackAction *TrackAction
-}
-
-// 
-func (r ApiPostCompanyTracksByParentIdActionsRequest) ClientId(clientId string) ApiPostCompanyTracksByParentIdActionsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // trackAction
 func (r ApiPostCompanyTracksByParentIdActionsRequest) TrackAction(trackAction TrackAction) ApiPostCompanyTracksByParentIdActionsRequest {
 	r.trackAction = &trackAction
+	return r
+}
+
+// 
+func (r ApiPostCompanyTracksByParentIdActionsRequest) ClientId(clientId string) ApiPostCompanyTracksByParentIdActionsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -884,9 +879,6 @@ func (a *TrackActionsAPIService) PostCompanyTracksByParentIdActionsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.trackAction == nil {
 		return localVarReturnValue, nil, reportError("trackAction is required and must be specified")
 	}
@@ -908,7 +900,9 @@ func (a *TrackActionsAPIService) PostCompanyTracksByParentIdActionsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.trackAction
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -953,19 +947,19 @@ type ApiPutCompanyTracksByParentIdActionsByIdRequest struct {
 	ApiService *TrackActionsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	trackAction *TrackAction
-}
-
-// 
-func (r ApiPutCompanyTracksByParentIdActionsByIdRequest) ClientId(clientId string) ApiPutCompanyTracksByParentIdActionsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // trackAction
 func (r ApiPutCompanyTracksByParentIdActionsByIdRequest) TrackAction(trackAction TrackAction) ApiPutCompanyTracksByParentIdActionsByIdRequest {
 	r.trackAction = &trackAction
+	return r
+}
+
+// 
+func (r ApiPutCompanyTracksByParentIdActionsByIdRequest) ClientId(clientId string) ApiPutCompanyTracksByParentIdActionsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1012,9 +1006,6 @@ func (a *TrackActionsAPIService) PutCompanyTracksByParentIdActionsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.trackAction == nil {
 		return localVarReturnValue, nil, reportError("trackAction is required and must be specified")
 	}
@@ -1036,7 +1027,9 @@ func (a *TrackActionsAPIService) PutCompanyTracksByParentIdActionsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.trackAction
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

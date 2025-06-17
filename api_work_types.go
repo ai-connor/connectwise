@@ -74,9 +74,6 @@ func (a *WorkTypesAPIService) DeleteTimeWorkTypesByIdExecute(r ApiDeleteTimeWork
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *WorkTypesAPIService) DeleteTimeWorkTypesByIdExecute(r ApiDeleteTimeWork
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *WorkTypesAPIService) DeleteTimeWorkTypesByIdExecute(r ApiDeleteTimeWork
 type ApiGetTimeWorkTypesRequest struct {
 	ctx context.Context
 	ApiService *WorkTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetTimeWorkTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeWorkTypesRequest) ClientId(clientId string) ApiGetTimeWorkTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetTimeWorkTypesRequest) PageId(pageId int32) ApiGetTimeWorkTypesRequ
 	return r
 }
 
+// 
+func (r ApiGetTimeWorkTypesRequest) ClientId(clientId string) ApiGetTimeWorkTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeWorkTypesRequest) Execute() ([]WorkType, *http.Response, error) {
 	return r.ApiService.GetTimeWorkTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesExecute(r ApiGetTimeWorkTypesReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesExecute(r ApiGetTimeWorkTypesReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetTimeWorkTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetTimeWorkTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeWorkTypesByIdRequest) ClientId(clientId string) ApiGetTimeWorkTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetTimeWorkTypesByIdRequest) PageId(pageId int32) ApiGetTimeWorkTypes
 	return r
 }
 
+// 
+func (r ApiGetTimeWorkTypesByIdRequest) ClientId(clientId string) ApiGetTimeWorkTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeWorkTypesByIdRequest) Execute() (*WorkType, *http.Response, error) {
 	return r.ApiService.GetTimeWorkTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesByIdExecute(r ApiGetTimeWorkTypesB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesByIdExecute(r ApiGetTimeWorkTypesB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetTimeWorkTypesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *WorkTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetTimeWorkTypesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeWorkTypesByIdUsagesRequest) ClientId(clientId string) ApiGetTimeWorkTypesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetTimeWorkTypesByIdUsagesRequest) PageId(pageId int32) ApiGetTimeWor
 	return r
 }
 
+// 
+func (r ApiGetTimeWorkTypesByIdUsagesRequest) ClientId(clientId string) ApiGetTimeWorkTypesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeWorkTypesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetTimeWorkTypesByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesByIdUsagesExecute(r ApiGetTimeWork
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesByIdUsagesExecute(r ApiGetTimeWork
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetTimeWorkTypesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *WorkTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetTimeWorkTypesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeWorkTypesByIdUsagesListRequest) ClientId(clientId string) ApiGetTimeWorkTypesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetTimeWorkTypesByIdUsagesListRequest) PageId(pageId int32) ApiGetTim
 	return r
 }
 
+// 
+func (r ApiGetTimeWorkTypesByIdUsagesListRequest) ClientId(clientId string) ApiGetTimeWorkTypesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeWorkTypesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetTimeWorkTypesByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesByIdUsagesListExecute(r ApiGetTime
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesByIdUsagesListExecute(r ApiGetTime
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesByIdUsagesListExecute(r ApiGetTime
 type ApiGetTimeWorkTypesCountRequest struct {
 	ctx context.Context
 	ApiService *WorkTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetTimeWorkTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetTimeWorkTypesCountRequest) ClientId(clientId string) ApiGetTimeWorkTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetTimeWorkTypesCountRequest) PageId(pageId int32) ApiGetTimeWorkType
 	return r
 }
 
+// 
+func (r ApiGetTimeWorkTypesCountRequest) ClientId(clientId string) ApiGetTimeWorkTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetTimeWorkTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetTimeWorkTypesCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesCountExecute(r ApiGetTimeWorkTypes
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *WorkTypesAPIService) GetTimeWorkTypesCountExecute(r ApiGetTimeWorkTypes
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchTimeWorkTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchTimeWorkTypesByIdRequest) ClientId(clientId string) ApiPatchTimeWorkTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchTimeWorkTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchTimeWorkTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchTimeWorkTypesByIdRequest) ClientId(clientId string) ApiPatchTimeWorkTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *WorkTypesAPIService) PatchTimeWorkTypesByIdExecute(r ApiPatchTimeWorkTy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *WorkTypesAPIService) PatchTimeWorkTypesByIdExecute(r ApiPatchTimeWorkTy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *WorkTypesAPIService) PatchTimeWorkTypesByIdExecute(r ApiPatchTimeWorkTy
 type ApiPostTimeWorkTypesRequest struct {
 	ctx context.Context
 	ApiService *WorkTypesAPIService
-	clientId *string
 	workType *WorkType
-}
-
-// 
-func (r ApiPostTimeWorkTypesRequest) ClientId(clientId string) ApiPostTimeWorkTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workType
 func (r ApiPostTimeWorkTypesRequest) WorkType(workType WorkType) ApiPostTimeWorkTypesRequest {
 	r.workType = &workType
+	return r
+}
+
+// 
+func (r ApiPostTimeWorkTypesRequest) ClientId(clientId string) ApiPostTimeWorkTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *WorkTypesAPIService) PostTimeWorkTypesExecute(r ApiPostTimeWorkTypesReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.workType == nil {
 		return localVarReturnValue, nil, reportError("workType is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *WorkTypesAPIService) PostTimeWorkTypesExecute(r ApiPostTimeWorkTypesReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.workType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutTimeWorkTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *WorkTypesAPIService
 	id int32
-	clientId *string
 	workType *WorkType
-}
-
-// 
-func (r ApiPutTimeWorkTypesByIdRequest) ClientId(clientId string) ApiPutTimeWorkTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // workType
 func (r ApiPutTimeWorkTypesByIdRequest) WorkType(workType WorkType) ApiPutTimeWorkTypesByIdRequest {
 	r.workType = &workType
+	return r
+}
+
+// 
+func (r ApiPutTimeWorkTypesByIdRequest) ClientId(clientId string) ApiPutTimeWorkTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *WorkTypesAPIService) PutTimeWorkTypesByIdExecute(r ApiPutTimeWorkTypesB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.workType == nil {
 		return localVarReturnValue, nil, reportError("workType is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *WorkTypesAPIService) PutTimeWorkTypesByIdExecute(r ApiPutTimeWorkTypesB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.workType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

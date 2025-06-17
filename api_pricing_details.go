@@ -78,9 +78,6 @@ func (a *PricingDetailsAPIService) DeleteProcurementPricingschedulesByParentIdDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *PricingDetailsAPIService) DeleteProcurementPricingschedulesByParentIdDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetProcurementPricingschedulesByParentIdDetailsRequest struct {
 	ctx context.Context
 	ApiService *PricingDetailsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetProcurementPricingschedulesByParentIdDetailsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPricingschedulesByParentIdDetailsRequest) ClientId(clientId string) ApiGetProcurementPricingschedulesByParentIdDetailsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetProcurementPricingschedulesByParentIdDetailsRequest) PageId(pageId
 	return r
 }
 
+// 
+func (r ApiGetProcurementPricingschedulesByParentIdDetailsRequest) ClientId(clientId string) ApiGetProcurementPricingschedulesByParentIdDetailsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPricingschedulesByParentIdDetailsRequest) Execute() ([]PricingDetail, *http.Response, error) {
 	return r.ApiService.GetProcurementPricingschedulesByParentIdDetailsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *PricingDetailsAPIService) GetProcurementPricingschedulesByParentIdDetai
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *PricingDetailsAPIService) GetProcurementPricingschedulesByParentIdDetai
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetProcurementPricingschedulesByParentIdDetailsByIdRequest struct {
 	ApiService *PricingDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetProcurementPricingschedulesByParentIdDetailsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPricingschedulesByParentIdDetailsByIdRequest) ClientId(clientId string) ApiGetProcurementPricingschedulesByParentIdDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetProcurementPricingschedulesByParentIdDetailsByIdRequest) PageId(pa
 	return r
 }
 
+// 
+func (r ApiGetProcurementPricingschedulesByParentIdDetailsByIdRequest) ClientId(clientId string) ApiGetProcurementPricingschedulesByParentIdDetailsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPricingschedulesByParentIdDetailsByIdRequest) Execute() (*PricingDetail, *http.Response, error) {
 	return r.ApiService.GetProcurementPricingschedulesByParentIdDetailsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *PricingDetailsAPIService) GetProcurementPricingschedulesByParentIdDetai
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *PricingDetailsAPIService) GetProcurementPricingschedulesByParentIdDetai
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetProcurementPricingschedulesByParentIdDetailsCountRequest struct {
 	ctx context.Context
 	ApiService *PricingDetailsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetProcurementPricingschedulesByParentIdDetailsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPricingschedulesByParentIdDetailsCountRequest) ClientId(clientId string) ApiGetProcurementPricingschedulesByParentIdDetailsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetProcurementPricingschedulesByParentIdDetailsCountRequest) PageId(p
 	return r
 }
 
+// 
+func (r ApiGetProcurementPricingschedulesByParentIdDetailsCountRequest) ClientId(clientId string) ApiGetProcurementPricingschedulesByParentIdDetailsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPricingschedulesByParentIdDetailsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementPricingschedulesByParentIdDetailsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *PricingDetailsAPIService) GetProcurementPricingschedulesByParentIdDetai
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *PricingDetailsAPIService) GetProcurementPricingschedulesByParentIdDetai
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchProcurementPricingschedulesByParentIdDetailsByIdRequest struct {
 	ApiService *PricingDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementPricingschedulesByParentIdDetailsByIdRequest) ClientId(clientId string) ApiPatchProcurementPricingschedulesByParentIdDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementPricingschedulesByParentIdDetailsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementPricingschedulesByParentIdDetailsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementPricingschedulesByParentIdDetailsByIdRequest) ClientId(clientId string) ApiPatchProcurementPricingschedulesByParentIdDetailsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *PricingDetailsAPIService) PatchProcurementPricingschedulesByParentIdDet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *PricingDetailsAPIService) PatchProcurementPricingschedulesByParentIdDet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostProcurementPricingschedulesByParentIdDetailsRequest struct {
 	ctx context.Context
 	ApiService *PricingDetailsAPIService
 	parentId int32
-	clientId *string
 	pricingDetail *PricingDetail
-}
-
-// 
-func (r ApiPostProcurementPricingschedulesByParentIdDetailsRequest) ClientId(clientId string) ApiPostProcurementPricingschedulesByParentIdDetailsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // pricingDetail
 func (r ApiPostProcurementPricingschedulesByParentIdDetailsRequest) PricingDetail(pricingDetail PricingDetail) ApiPostProcurementPricingschedulesByParentIdDetailsRequest {
 	r.pricingDetail = &pricingDetail
+	return r
+}
+
+// 
+func (r ApiPostProcurementPricingschedulesByParentIdDetailsRequest) ClientId(clientId string) ApiPostProcurementPricingschedulesByParentIdDetailsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *PricingDetailsAPIService) PostProcurementPricingschedulesByParentIdDeta
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.pricingDetail == nil {
 		return localVarReturnValue, nil, reportError("pricingDetail is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *PricingDetailsAPIService) PostProcurementPricingschedulesByParentIdDeta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.pricingDetail
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutProcurementPricingschedulesByParentIdDetailsByIdRequest struct {
 	ApiService *PricingDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	pricingDetail *PricingDetail
-}
-
-// 
-func (r ApiPutProcurementPricingschedulesByParentIdDetailsByIdRequest) ClientId(clientId string) ApiPutProcurementPricingschedulesByParentIdDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // pricingDetail
 func (r ApiPutProcurementPricingschedulesByParentIdDetailsByIdRequest) PricingDetail(pricingDetail PricingDetail) ApiPutProcurementPricingschedulesByParentIdDetailsByIdRequest {
 	r.pricingDetail = &pricingDetail
+	return r
+}
+
+// 
+func (r ApiPutProcurementPricingschedulesByParentIdDetailsByIdRequest) ClientId(clientId string) ApiPutProcurementPricingschedulesByParentIdDetailsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *PricingDetailsAPIService) PutProcurementPricingschedulesByParentIdDetai
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.pricingDetail == nil {
 		return localVarReturnValue, nil, reportError("pricingDetail is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *PricingDetailsAPIService) PutProcurementPricingschedulesByParentIdDetai
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.pricingDetail
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

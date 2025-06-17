@@ -78,9 +78,6 @@ func (a *ProductPickingShippingDetailsAPIService) DeleteProcurementProductsByPar
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *ProductPickingShippingDetailsAPIService) DeleteProcurementProductsByPar
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetProcurementProductsByParentIdPickingShippingDetailsRequest struct {
 	ctx context.Context
 	ApiService *ProductPickingShippingDetailsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetProcurementProductsByParentIdPickingShippingDetailsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsRequest) ClientId(clientId string) ApiGetProcurementProductsByParentIdPickingShippingDetailsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsRequest) PageId
 	return r
 }
 
+// 
+func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsRequest) ClientId(clientId string) ApiGetProcurementProductsByParentIdPickingShippingDetailsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsRequest) Execute() ([]ProductPickingShippingDetail, *http.Response, error) {
 	return r.ApiService.GetProcurementProductsByParentIdPickingShippingDetailsExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *ProductPickingShippingDetailsAPIService) GetProcurementProductsByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *ProductPickingShippingDetailsAPIService) GetProcurementProductsByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetProcurementProductsByParentIdPickingShippingDetailsByIdRequest struct
 	ApiService *ProductPickingShippingDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetProcurementProductsByParentIdPickingShippingDetailsByIdRequest struct
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsByIdRequest) ClientId(clientId string) ApiGetProcurementProductsByParentIdPickingShippingDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsByIdRequest) Pa
 	return r
 }
 
+// 
+func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsByIdRequest) ClientId(clientId string) ApiGetProcurementProductsByParentIdPickingShippingDetailsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsByIdRequest) Execute() ([]ProductPickingShippingDetail, *http.Response, error) {
 	return r.ApiService.GetProcurementProductsByParentIdPickingShippingDetailsByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *ProductPickingShippingDetailsAPIService) GetProcurementProductsByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *ProductPickingShippingDetailsAPIService) GetProcurementProductsByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetProcurementProductsByParentIdPickingShippingDetailsCountRequest struc
 	ctx context.Context
 	ApiService *ProductPickingShippingDetailsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetProcurementProductsByParentIdPickingShippingDetailsCountRequest struc
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsCountRequest) ClientId(clientId string) ApiGetProcurementProductsByParentIdPickingShippingDetailsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsCountRequest) P
 	return r
 }
 
+// 
+func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsCountRequest) ClientId(clientId string) ApiGetProcurementProductsByParentIdPickingShippingDetailsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementProductsByParentIdPickingShippingDetailsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementProductsByParentIdPickingShippingDetailsCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *ProductPickingShippingDetailsAPIService) GetProcurementProductsByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *ProductPickingShippingDetailsAPIService) GetProcurementProductsByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchProcurementProductsByParentIdPickingShippingDetailsByIdRequest stru
 	ApiService *ProductPickingShippingDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementProductsByParentIdPickingShippingDetailsByIdRequest) ClientId(clientId string) ApiPatchProcurementProductsByParentIdPickingShippingDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementProductsByParentIdPickingShippingDetailsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementProductsByParentIdPickingShippingDetailsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementProductsByParentIdPickingShippingDetailsByIdRequest) ClientId(clientId string) ApiPatchProcurementProductsByParentIdPickingShippingDetailsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *ProductPickingShippingDetailsAPIService) PatchProcurementProductsByPare
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *ProductPickingShippingDetailsAPIService) PatchProcurementProductsByPare
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostProcurementProductsByParentIdPickingShippingDetailsRequest struct {
 	ctx context.Context
 	ApiService *ProductPickingShippingDetailsAPIService
 	parentId int32
-	clientId *string
 	productPickingShippingDetail *ProductPickingShippingDetail
-}
-
-// 
-func (r ApiPostProcurementProductsByParentIdPickingShippingDetailsRequest) ClientId(clientId string) ApiPostProcurementProductsByParentIdPickingShippingDetailsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // productPickingShippingDetails
 func (r ApiPostProcurementProductsByParentIdPickingShippingDetailsRequest) ProductPickingShippingDetail(productPickingShippingDetail ProductPickingShippingDetail) ApiPostProcurementProductsByParentIdPickingShippingDetailsRequest {
 	r.productPickingShippingDetail = &productPickingShippingDetail
+	return r
+}
+
+// 
+func (r ApiPostProcurementProductsByParentIdPickingShippingDetailsRequest) ClientId(clientId string) ApiPostProcurementProductsByParentIdPickingShippingDetailsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *ProductPickingShippingDetailsAPIService) PostProcurementProductsByParen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.productPickingShippingDetail == nil {
 		return localVarReturnValue, nil, reportError("productPickingShippingDetail is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *ProductPickingShippingDetailsAPIService) PostProcurementProductsByParen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.productPickingShippingDetail
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutProcurementProductsByParentIdPickingShippingDetailsByIdRequest struct
 	ApiService *ProductPickingShippingDetailsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	productPickingShippingDetail *ProductPickingShippingDetail
-}
-
-// 
-func (r ApiPutProcurementProductsByParentIdPickingShippingDetailsByIdRequest) ClientId(clientId string) ApiPutProcurementProductsByParentIdPickingShippingDetailsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // productPickingShippingDetails
 func (r ApiPutProcurementProductsByParentIdPickingShippingDetailsByIdRequest) ProductPickingShippingDetail(productPickingShippingDetail ProductPickingShippingDetail) ApiPutProcurementProductsByParentIdPickingShippingDetailsByIdRequest {
 	r.productPickingShippingDetail = &productPickingShippingDetail
+	return r
+}
+
+// 
+func (r ApiPutProcurementProductsByParentIdPickingShippingDetailsByIdRequest) ClientId(clientId string) ApiPutProcurementProductsByParentIdPickingShippingDetailsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *ProductPickingShippingDetailsAPIService) PutProcurementProductsByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.productPickingShippingDetail == nil {
 		return localVarReturnValue, nil, reportError("productPickingShippingDetail is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *ProductPickingShippingDetailsAPIService) PutProcurementProductsByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.productPickingShippingDetail
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

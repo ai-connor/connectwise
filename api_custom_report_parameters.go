@@ -78,9 +78,6 @@ func (a *CustomReportParametersAPIService) DeleteSystemCustomReportsByParentIdPa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *CustomReportParametersAPIService) DeleteSystemCustomReportsByParentIdPa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetSystemCustomReportsByParentIdParametersRequest struct {
 	ctx context.Context
 	ApiService *CustomReportParametersAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetSystemCustomReportsByParentIdParametersRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemCustomReportsByParentIdParametersRequest) ClientId(clientId string) ApiGetSystemCustomReportsByParentIdParametersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetSystemCustomReportsByParentIdParametersRequest) PageId(pageId int3
 	return r
 }
 
+// 
+func (r ApiGetSystemCustomReportsByParentIdParametersRequest) ClientId(clientId string) ApiGetSystemCustomReportsByParentIdParametersRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemCustomReportsByParentIdParametersRequest) Execute() ([]CustomReportParameter, *http.Response, error) {
 	return r.ApiService.GetSystemCustomReportsByParentIdParametersExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *CustomReportParametersAPIService) GetSystemCustomReportsByParentIdParam
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *CustomReportParametersAPIService) GetSystemCustomReportsByParentIdParam
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetSystemCustomReportsByParentIdParametersByIdRequest struct {
 	ApiService *CustomReportParametersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetSystemCustomReportsByParentIdParametersByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemCustomReportsByParentIdParametersByIdRequest) ClientId(clientId string) ApiGetSystemCustomReportsByParentIdParametersByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetSystemCustomReportsByParentIdParametersByIdRequest) PageId(pageId 
 	return r
 }
 
+// 
+func (r ApiGetSystemCustomReportsByParentIdParametersByIdRequest) ClientId(clientId string) ApiGetSystemCustomReportsByParentIdParametersByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemCustomReportsByParentIdParametersByIdRequest) Execute() (*CustomReportParameter, *http.Response, error) {
 	return r.ApiService.GetSystemCustomReportsByParentIdParametersByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *CustomReportParametersAPIService) GetSystemCustomReportsByParentIdParam
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *CustomReportParametersAPIService) GetSystemCustomReportsByParentIdParam
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetSystemCustomReportsByParentIdParametersCountRequest struct {
 	ctx context.Context
 	ApiService *CustomReportParametersAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetSystemCustomReportsByParentIdParametersCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemCustomReportsByParentIdParametersCountRequest) ClientId(clientId string) ApiGetSystemCustomReportsByParentIdParametersCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetSystemCustomReportsByParentIdParametersCountRequest) PageId(pageId
 	return r
 }
 
+// 
+func (r ApiGetSystemCustomReportsByParentIdParametersCountRequest) ClientId(clientId string) ApiGetSystemCustomReportsByParentIdParametersCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemCustomReportsByParentIdParametersCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemCustomReportsByParentIdParametersCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *CustomReportParametersAPIService) GetSystemCustomReportsByParentIdParam
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *CustomReportParametersAPIService) GetSystemCustomReportsByParentIdParam
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchSystemCustomReportsByParentIdParametersByIdRequest struct {
 	ApiService *CustomReportParametersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemCustomReportsByParentIdParametersByIdRequest) ClientId(clientId string) ApiPatchSystemCustomReportsByParentIdParametersByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemCustomReportsByParentIdParametersByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemCustomReportsByParentIdParametersByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemCustomReportsByParentIdParametersByIdRequest) ClientId(clientId string) ApiPatchSystemCustomReportsByParentIdParametersByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *CustomReportParametersAPIService) PatchSystemCustomReportsByParentIdPar
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *CustomReportParametersAPIService) PatchSystemCustomReportsByParentIdPar
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostSystemCustomReportsByParentIdParametersRequest struct {
 	ctx context.Context
 	ApiService *CustomReportParametersAPIService
 	parentId int32
-	clientId *string
 	customReportParameter *CustomReportParameter
-}
-
-// 
-func (r ApiPostSystemCustomReportsByParentIdParametersRequest) ClientId(clientId string) ApiPostSystemCustomReportsByParentIdParametersRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // customReportParameter
 func (r ApiPostSystemCustomReportsByParentIdParametersRequest) CustomReportParameter(customReportParameter CustomReportParameter) ApiPostSystemCustomReportsByParentIdParametersRequest {
 	r.customReportParameter = &customReportParameter
+	return r
+}
+
+// 
+func (r ApiPostSystemCustomReportsByParentIdParametersRequest) ClientId(clientId string) ApiPostSystemCustomReportsByParentIdParametersRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *CustomReportParametersAPIService) PostSystemCustomReportsByParentIdPara
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.customReportParameter == nil {
 		return localVarReturnValue, nil, reportError("customReportParameter is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *CustomReportParametersAPIService) PostSystemCustomReportsByParentIdPara
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.customReportParameter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutSystemCustomReportsByParentIdParametersByIdRequest struct {
 	ApiService *CustomReportParametersAPIService
 	id int32
 	parentId int32
-	clientId *string
 	customReportParameter *CustomReportParameter
-}
-
-// 
-func (r ApiPutSystemCustomReportsByParentIdParametersByIdRequest) ClientId(clientId string) ApiPutSystemCustomReportsByParentIdParametersByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // customReportParameter
 func (r ApiPutSystemCustomReportsByParentIdParametersByIdRequest) CustomReportParameter(customReportParameter CustomReportParameter) ApiPutSystemCustomReportsByParentIdParametersByIdRequest {
 	r.customReportParameter = &customReportParameter
+	return r
+}
+
+// 
+func (r ApiPutSystemCustomReportsByParentIdParametersByIdRequest) ClientId(clientId string) ApiPutSystemCustomReportsByParentIdParametersByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *CustomReportParametersAPIService) PutSystemCustomReportsByParentIdParam
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.customReportParameter == nil {
 		return localVarReturnValue, nil, reportError("customReportParameter is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *CustomReportParametersAPIService) PutSystemCustomReportsByParentIdParam
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.customReportParameter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

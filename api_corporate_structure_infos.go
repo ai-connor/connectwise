@@ -27,7 +27,6 @@ type ApiGetSystemMyCompanyCorporateStructureByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *CorporateStructureInfosAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetSystemMyCompanyCorporateStructureByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyCompanyCorporateStructureByIdInfoRequest) ClientId(clientId string) ApiGetSystemMyCompanyCorporateStructureByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetSystemMyCompanyCorporateStructureByIdInfoRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetSystemMyCompanyCorporateStructureByIdInfoRequest) ClientId(clientId string) ApiGetSystemMyCompanyCorporateStructureByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyCompanyCorporateStructureByIdInfoRequest) Execute() (*CorporateStructureInfo, *http.Response, error) {
 	return r.ApiService.GetSystemMyCompanyCorporateStructureByIdInfoExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *CorporateStructureInfosAPIService) GetSystemMyCompanyCorporateStructure
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *CorporateStructureInfosAPIService) GetSystemMyCompanyCorporateStructure
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -218,7 +217,6 @@ func (a *CorporateStructureInfosAPIService) GetSystemMyCompanyCorporateStructure
 type ApiGetSystemMyCompanyCorporateStructureInfoRequest struct {
 	ctx context.Context
 	ApiService *CorporateStructureInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -227,12 +225,7 @@ type ApiGetSystemMyCompanyCorporateStructureInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyCompanyCorporateStructureInfoRequest) ClientId(clientId string) ApiGetSystemMyCompanyCorporateStructureInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -283,6 +276,12 @@ func (r ApiGetSystemMyCompanyCorporateStructureInfoRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetSystemMyCompanyCorporateStructureInfoRequest) ClientId(clientId string) ApiGetSystemMyCompanyCorporateStructureInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyCompanyCorporateStructureInfoRequest) Execute() ([]CorporateStructureInfo, *http.Response, error) {
 	return r.ApiService.GetSystemMyCompanyCorporateStructureInfoExecute(r)
 }
@@ -320,9 +319,6 @@ func (a *CorporateStructureInfosAPIService) GetSystemMyCompanyCorporateStructure
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -365,7 +361,9 @@ func (a *CorporateStructureInfosAPIService) GetSystemMyCompanyCorporateStructure
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -406,7 +404,6 @@ func (a *CorporateStructureInfosAPIService) GetSystemMyCompanyCorporateStructure
 type ApiGetSystemMyCompanyCorporateStructureInfoCountRequest struct {
 	ctx context.Context
 	ApiService *CorporateStructureInfosAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -415,12 +412,7 @@ type ApiGetSystemMyCompanyCorporateStructureInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemMyCompanyCorporateStructureInfoCountRequest) ClientId(clientId string) ApiGetSystemMyCompanyCorporateStructureInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -471,6 +463,12 @@ func (r ApiGetSystemMyCompanyCorporateStructureInfoCountRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetSystemMyCompanyCorporateStructureInfoCountRequest) ClientId(clientId string) ApiGetSystemMyCompanyCorporateStructureInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemMyCompanyCorporateStructureInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemMyCompanyCorporateStructureInfoCountExecute(r)
 }
@@ -508,9 +506,6 @@ func (a *CorporateStructureInfosAPIService) GetSystemMyCompanyCorporateStructure
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -553,7 +548,9 @@ func (a *CorporateStructureInfosAPIService) GetSystemMyCompanyCorporateStructure
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

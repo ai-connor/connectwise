@@ -74,9 +74,6 @@ func (a *OpportunityTypesAPIService) DeleteSalesOpportunitiesTypesByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *OpportunityTypesAPIService) DeleteSalesOpportunitiesTypesByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *OpportunityTypesAPIService) DeleteSalesOpportunitiesTypesByIdExecute(r 
 type ApiGetSalesOpportunitiesTypesRequest struct {
 	ctx context.Context
 	ApiService *OpportunityTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSalesOpportunitiesTypesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesTypesRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSalesOpportunitiesTypesRequest) PageId(pageId int32) ApiGetSalesOp
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesTypesRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesTypesRequest) Execute() ([]OpportunityType, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesTypesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSalesOpportunitiesTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *OpportunityTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSalesOpportunitiesTypesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesTypesByIdRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSalesOpportunitiesTypesByIdRequest) PageId(pageId int32) ApiGetSal
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesTypesByIdRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesTypesByIdRequest) Execute() (*OpportunityType, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesTypesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetSalesOpportunitiesTypesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *OpportunityTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetSalesOpportunitiesTypesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesTypesByIdUsagesRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetSalesOpportunitiesTypesByIdUsagesRequest) PageId(pageId int32) Api
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesTypesByIdUsagesRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesTypesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesTypesByIdUsagesExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesByIdUsagesExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesByIdUsagesExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetSalesOpportunitiesTypesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *OpportunityTypesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetSalesOpportunitiesTypesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesTypesByIdUsagesListRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetSalesOpportunitiesTypesByIdUsagesListRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesTypesByIdUsagesListRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesTypesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesTypesByIdUsagesListExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesByIdUsagesListExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesByIdUsagesListExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -891,7 +886,6 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesByIdUsagesListExe
 type ApiGetSalesOpportunitiesTypesCountRequest struct {
 	ctx context.Context
 	ApiService *OpportunityTypesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -900,12 +894,7 @@ type ApiGetSalesOpportunitiesTypesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesOpportunitiesTypesCountRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -956,6 +945,12 @@ func (r ApiGetSalesOpportunitiesTypesCountRequest) PageId(pageId int32) ApiGetSa
 	return r
 }
 
+// 
+func (r ApiGetSalesOpportunitiesTypesCountRequest) ClientId(clientId string) ApiGetSalesOpportunitiesTypesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesOpportunitiesTypesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesOpportunitiesTypesCountExecute(r)
 }
@@ -993,9 +988,6 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesCountExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1038,7 +1030,9 @@ func (a *OpportunityTypesAPIService) GetSalesOpportunitiesTypesCountExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1080,19 +1074,19 @@ type ApiPatchSalesOpportunitiesTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *OpportunityTypesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesOpportunitiesTypesByIdRequest) ClientId(clientId string) ApiPatchSalesOpportunitiesTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesOpportunitiesTypesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesOpportunitiesTypesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesOpportunitiesTypesByIdRequest) ClientId(clientId string) ApiPatchSalesOpportunitiesTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1136,9 +1130,6 @@ func (a *OpportunityTypesAPIService) PatchSalesOpportunitiesTypesByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1160,7 +1151,9 @@ func (a *OpportunityTypesAPIService) PatchSalesOpportunitiesTypesByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1203,19 +1196,19 @@ func (a *OpportunityTypesAPIService) PatchSalesOpportunitiesTypesByIdExecute(r A
 type ApiPostSalesOpportunitiesTypesRequest struct {
 	ctx context.Context
 	ApiService *OpportunityTypesAPIService
-	clientId *string
 	opportunityType *OpportunityType
-}
-
-// 
-func (r ApiPostSalesOpportunitiesTypesRequest) ClientId(clientId string) ApiPostSalesOpportunitiesTypesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // opportunityType
 func (r ApiPostSalesOpportunitiesTypesRequest) OpportunityType(opportunityType OpportunityType) ApiPostSalesOpportunitiesTypesRequest {
 	r.opportunityType = &opportunityType
+	return r
+}
+
+// 
+func (r ApiPostSalesOpportunitiesTypesRequest) ClientId(clientId string) ApiPostSalesOpportunitiesTypesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1256,9 +1249,6 @@ func (a *OpportunityTypesAPIService) PostSalesOpportunitiesTypesExecute(r ApiPos
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.opportunityType == nil {
 		return localVarReturnValue, nil, reportError("opportunityType is required and must be specified")
 	}
@@ -1280,7 +1270,9 @@ func (a *OpportunityTypesAPIService) PostSalesOpportunitiesTypesExecute(r ApiPos
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.opportunityType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1324,19 +1316,19 @@ type ApiPutSalesOpportunitiesTypesByIdRequest struct {
 	ctx context.Context
 	ApiService *OpportunityTypesAPIService
 	id int32
-	clientId *string
 	opportunityType *OpportunityType
-}
-
-// 
-func (r ApiPutSalesOpportunitiesTypesByIdRequest) ClientId(clientId string) ApiPutSalesOpportunitiesTypesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // opportunityType
 func (r ApiPutSalesOpportunitiesTypesByIdRequest) OpportunityType(opportunityType OpportunityType) ApiPutSalesOpportunitiesTypesByIdRequest {
 	r.opportunityType = &opportunityType
+	return r
+}
+
+// 
+func (r ApiPutSalesOpportunitiesTypesByIdRequest) ClientId(clientId string) ApiPutSalesOpportunitiesTypesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1380,9 +1372,6 @@ func (a *OpportunityTypesAPIService) PutSalesOpportunitiesTypesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.opportunityType == nil {
 		return localVarReturnValue, nil, reportError("opportunityType is required and must be specified")
 	}
@@ -1404,7 +1393,9 @@ func (a *OpportunityTypesAPIService) PutSalesOpportunitiesTypesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.opportunityType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -27,7 +27,6 @@ type ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsRequest struc
 	ctx context.Context
 	ApiService *PortalConfigurationPasswordEmailSetupsAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -36,12 +35,7 @@ type ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsRequest struc
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -92,6 +86,12 @@ func (r ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsRequest) P
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsRequest) Execute() ([]PortalConfigurationPasswordEmailSetup, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsExecute(r)
 }
@@ -132,9 +132,6 @@ func (a *PortalConfigurationPasswordEmailSetupsAPIService) GetCompanyPortalConfi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -177,7 +174,9 @@ func (a *PortalConfigurationPasswordEmailSetupsAPIService) GetCompanyPortalConfi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +219,6 @@ type ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest s
 	ApiService *PortalConfigurationPasswordEmailSetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -229,12 +227,7 @@ type ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest s
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -285,6 +278,12 @@ func (r ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdReques
 	return r
 }
 
+// 
+func (r ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) ClientId(clientId string) ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) Execute() (*PortalConfigurationPasswordEmailSetup, *http.Response, error) {
 	return r.ApiService.GetCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdExecute(r)
 }
@@ -328,9 +327,6 @@ func (a *PortalConfigurationPasswordEmailSetupsAPIService) GetCompanyPortalConfi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -373,7 +369,9 @@ func (a *PortalConfigurationPasswordEmailSetupsAPIService) GetCompanyPortalConfi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -416,19 +414,19 @@ type ApiPatchCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest
 	ApiService *PortalConfigurationPasswordEmailSetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) ClientId(clientId string) ApiPatchCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) ClientId(clientId string) ApiPatchCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -475,9 +473,6 @@ func (a *PortalConfigurationPasswordEmailSetupsAPIService) PatchCompanyPortalCon
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -499,7 +494,9 @@ func (a *PortalConfigurationPasswordEmailSetupsAPIService) PatchCompanyPortalCon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -544,19 +541,19 @@ type ApiPutCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest s
 	ApiService *PortalConfigurationPasswordEmailSetupsAPIService
 	id int32
 	parentId int32
-	clientId *string
 	portalConfigurationPasswordEmailSetup *PortalConfigurationPasswordEmailSetup
-}
-
-// 
-func (r ApiPutCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) ClientId(clientId string) ApiPutCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // passwordEmailSetup
 func (r ApiPutCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) PortalConfigurationPasswordEmailSetup(portalConfigurationPasswordEmailSetup PortalConfigurationPasswordEmailSetup) ApiPutCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest {
 	r.portalConfigurationPasswordEmailSetup = &portalConfigurationPasswordEmailSetup
+	return r
+}
+
+// 
+func (r ApiPutCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest) ClientId(clientId string) ApiPutCompanyPortalConfigurationsByParentIdPasswordEmailSetupsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -603,9 +600,6 @@ func (a *PortalConfigurationPasswordEmailSetupsAPIService) PutCompanyPortalConfi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.portalConfigurationPasswordEmailSetup == nil {
 		return localVarReturnValue, nil, reportError("portalConfigurationPasswordEmailSetup is required and must be specified")
 	}
@@ -627,7 +621,9 @@ func (a *PortalConfigurationPasswordEmailSetupsAPIService) PutCompanyPortalConfi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.portalConfigurationPasswordEmailSetup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

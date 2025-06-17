@@ -74,9 +74,6 @@ func (a *ActivityStatusesAPIService) DeleteSalesActivitiesStatusesByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *ActivityStatusesAPIService) DeleteSalesActivitiesStatusesByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *ActivityStatusesAPIService) DeleteSalesActivitiesStatusesByIdExecute(r 
 type ApiGetSalesActivitiesStatusesRequest struct {
 	ctx context.Context
 	ApiService *ActivityStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSalesActivitiesStatusesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesActivitiesStatusesRequest) ClientId(clientId string) ApiGetSalesActivitiesStatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSalesActivitiesStatusesRequest) PageId(pageId int32) ApiGetSalesAc
 	return r
 }
 
+// 
+func (r ApiGetSalesActivitiesStatusesRequest) ClientId(clientId string) ApiGetSalesActivitiesStatusesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesActivitiesStatusesRequest) Execute() ([]ActivityStatus, *http.Response, error) {
 	return r.ApiService.GetSalesActivitiesStatusesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *ActivityStatusesAPIService) GetSalesActivitiesStatusesExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *ActivityStatusesAPIService) GetSalesActivitiesStatusesExecute(r ApiGetS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSalesActivitiesStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ActivityStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSalesActivitiesStatusesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesActivitiesStatusesByIdRequest) ClientId(clientId string) ApiGetSalesActivitiesStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSalesActivitiesStatusesByIdRequest) PageId(pageId int32) ApiGetSal
 	return r
 }
 
+// 
+func (r ApiGetSalesActivitiesStatusesByIdRequest) ClientId(clientId string) ApiGetSalesActivitiesStatusesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesActivitiesStatusesByIdRequest) Execute() (*ActivityStatus, *http.Response, error) {
 	return r.ApiService.GetSalesActivitiesStatusesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *ActivityStatusesAPIService) GetSalesActivitiesStatusesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *ActivityStatusesAPIService) GetSalesActivitiesStatusesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *ActivityStatusesAPIService) GetSalesActivitiesStatusesByIdExecute(r Api
 type ApiGetSalesActivitiesStatusesCountRequest struct {
 	ctx context.Context
 	ApiService *ActivityStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSalesActivitiesStatusesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSalesActivitiesStatusesCountRequest) ClientId(clientId string) ApiGetSalesActivitiesStatusesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSalesActivitiesStatusesCountRequest) PageId(pageId int32) ApiGetSa
 	return r
 }
 
+// 
+func (r ApiGetSalesActivitiesStatusesCountRequest) ClientId(clientId string) ApiGetSalesActivitiesStatusesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSalesActivitiesStatusesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSalesActivitiesStatusesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *ActivityStatusesAPIService) GetSalesActivitiesStatusesCountExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *ActivityStatusesAPIService) GetSalesActivitiesStatusesCountExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSalesActivitiesStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ActivityStatusesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSalesActivitiesStatusesByIdRequest) ClientId(clientId string) ApiPatchSalesActivitiesStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSalesActivitiesStatusesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSalesActivitiesStatusesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSalesActivitiesStatusesByIdRequest) ClientId(clientId string) ApiPatchSalesActivitiesStatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *ActivityStatusesAPIService) PatchSalesActivitiesStatusesByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *ActivityStatusesAPIService) PatchSalesActivitiesStatusesByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *ActivityStatusesAPIService) PatchSalesActivitiesStatusesByIdExecute(r A
 type ApiPostSalesActivitiesStatusesRequest struct {
 	ctx context.Context
 	ApiService *ActivityStatusesAPIService
-	clientId *string
 	activityStatus *ActivityStatus
-}
-
-// 
-func (r ApiPostSalesActivitiesStatusesRequest) ClientId(clientId string) ApiPostSalesActivitiesStatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // activityStatus
 func (r ApiPostSalesActivitiesStatusesRequest) ActivityStatus(activityStatus ActivityStatus) ApiPostSalesActivitiesStatusesRequest {
 	r.activityStatus = &activityStatus
+	return r
+}
+
+// 
+func (r ApiPostSalesActivitiesStatusesRequest) ClientId(clientId string) ApiPostSalesActivitiesStatusesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *ActivityStatusesAPIService) PostSalesActivitiesStatusesExecute(r ApiPos
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.activityStatus == nil {
 		return localVarReturnValue, nil, reportError("activityStatus is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *ActivityStatusesAPIService) PostSalesActivitiesStatusesExecute(r ApiPos
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.activityStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSalesActivitiesStatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *ActivityStatusesAPIService
 	id int32
-	clientId *string
 	activityStatus *ActivityStatus
-}
-
-// 
-func (r ApiPutSalesActivitiesStatusesByIdRequest) ClientId(clientId string) ApiPutSalesActivitiesStatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // activityStatus
 func (r ApiPutSalesActivitiesStatusesByIdRequest) ActivityStatus(activityStatus ActivityStatus) ApiPutSalesActivitiesStatusesByIdRequest {
 	r.activityStatus = &activityStatus
+	return r
+}
+
+// 
+func (r ApiPutSalesActivitiesStatusesByIdRequest) ClientId(clientId string) ApiPutSalesActivitiesStatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *ActivityStatusesAPIService) PutSalesActivitiesStatusesByIdExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.activityStatus == nil {
 		return localVarReturnValue, nil, reportError("activityStatus is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *ActivityStatusesAPIService) PutSalesActivitiesStatusesByIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.activityStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

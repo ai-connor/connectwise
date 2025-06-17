@@ -78,9 +78,6 @@ func (a *ContactTracksAPIService) DeleteCompanyContactsByParentIdTracksByIdExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *ContactTracksAPIService) DeleteCompanyContactsByParentIdTracksByIdExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetCompanyContactsByParentIdTracksRequest struct {
 	ctx context.Context
 	ApiService *ContactTracksAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetCompanyContactsByParentIdTracksRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsByParentIdTracksRequest) ClientId(clientId string) ApiGetCompanyContactsByParentIdTracksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetCompanyContactsByParentIdTracksRequest) PageId(pageId int32) ApiGe
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsByParentIdTracksRequest) ClientId(clientId string) ApiGetCompanyContactsByParentIdTracksRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsByParentIdTracksRequest) Execute() ([]ContactTrack, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsByParentIdTracksExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *ContactTracksAPIService) GetCompanyContactsByParentIdTracksExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *ContactTracksAPIService) GetCompanyContactsByParentIdTracksExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetCompanyContactsByParentIdTracksByIdRequest struct {
 	ApiService *ContactTracksAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetCompanyContactsByParentIdTracksByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsByParentIdTracksByIdRequest) ClientId(clientId string) ApiGetCompanyContactsByParentIdTracksByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetCompanyContactsByParentIdTracksByIdRequest) PageId(pageId int32) A
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsByParentIdTracksByIdRequest) ClientId(clientId string) ApiGetCompanyContactsByParentIdTracksByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsByParentIdTracksByIdRequest) Execute() (*ContactTrack, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsByParentIdTracksByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *ContactTracksAPIService) GetCompanyContactsByParentIdTracksByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *ContactTracksAPIService) GetCompanyContactsByParentIdTracksByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetCompanyContactsByParentIdTracksCountRequest struct {
 	ctx context.Context
 	ApiService *ContactTracksAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetCompanyContactsByParentIdTracksCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetCompanyContactsByParentIdTracksCountRequest) ClientId(clientId string) ApiGetCompanyContactsByParentIdTracksCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetCompanyContactsByParentIdTracksCountRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetCompanyContactsByParentIdTracksCountRequest) ClientId(clientId string) ApiGetCompanyContactsByParentIdTracksCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetCompanyContactsByParentIdTracksCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetCompanyContactsByParentIdTracksCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *ContactTracksAPIService) GetCompanyContactsByParentIdTracksCountExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *ContactTracksAPIService) GetCompanyContactsByParentIdTracksCountExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -712,19 +708,19 @@ type ApiPostCompanyContactsByParentIdTracksRequest struct {
 	ctx context.Context
 	ApiService *ContactTracksAPIService
 	parentId int32
-	clientId *string
 	contactTrack *ContactTrack
-}
-
-// 
-func (r ApiPostCompanyContactsByParentIdTracksRequest) ClientId(clientId string) ApiPostCompanyContactsByParentIdTracksRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // track
 func (r ApiPostCompanyContactsByParentIdTracksRequest) ContactTrack(contactTrack ContactTrack) ApiPostCompanyContactsByParentIdTracksRequest {
 	r.contactTrack = &contactTrack
+	return r
+}
+
+// 
+func (r ApiPostCompanyContactsByParentIdTracksRequest) ClientId(clientId string) ApiPostCompanyContactsByParentIdTracksRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -768,9 +764,6 @@ func (a *ContactTracksAPIService) PostCompanyContactsByParentIdTracksExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.contactTrack == nil {
 		return localVarReturnValue, nil, reportError("contactTrack is required and must be specified")
 	}
@@ -792,7 +785,9 @@ func (a *ContactTracksAPIService) PostCompanyContactsByParentIdTracksExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.contactTrack
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

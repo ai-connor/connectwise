@@ -74,9 +74,6 @@ func (a *PortalReportsAPIService) DeleteSystemPortalReportsByIdExecute(r ApiDele
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *PortalReportsAPIService) DeleteSystemPortalReportsByIdExecute(r ApiDele
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *PortalReportsAPIService) DeleteSystemPortalReportsByIdExecute(r ApiDele
 type ApiGetSystemPortalReportsRequest struct {
 	ctx context.Context
 	ApiService *PortalReportsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemPortalReportsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemPortalReportsRequest) ClientId(clientId string) ApiGetSystemPortalReportsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemPortalReportsRequest) PageId(pageId int32) ApiGetSystemPorta
 	return r
 }
 
+// 
+func (r ApiGetSystemPortalReportsRequest) ClientId(clientId string) ApiGetSystemPortalReportsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemPortalReportsRequest) Execute() ([]PortalReport, *http.Response, error) {
 	return r.ApiService.GetSystemPortalReportsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *PortalReportsAPIService) GetSystemPortalReportsExecute(r ApiGetSystemPo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *PortalReportsAPIService) GetSystemPortalReportsExecute(r ApiGetSystemPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemPortalReportsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalReportsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemPortalReportsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemPortalReportsByIdRequest) ClientId(clientId string) ApiGetSystemPortalReportsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemPortalReportsByIdRequest) PageId(pageId int32) ApiGetSystemP
 	return r
 }
 
+// 
+func (r ApiGetSystemPortalReportsByIdRequest) ClientId(clientId string) ApiGetSystemPortalReportsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemPortalReportsByIdRequest) Execute() (*PortalReport, *http.Response, error) {
 	return r.ApiService.GetSystemPortalReportsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *PortalReportsAPIService) GetSystemPortalReportsByIdExecute(r ApiGetSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *PortalReportsAPIService) GetSystemPortalReportsByIdExecute(r ApiGetSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *PortalReportsAPIService) GetSystemPortalReportsByIdExecute(r ApiGetSyst
 type ApiGetSystemPortalReportsCountRequest struct {
 	ctx context.Context
 	ApiService *PortalReportsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemPortalReportsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemPortalReportsCountRequest) ClientId(clientId string) ApiGetSystemPortalReportsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemPortalReportsCountRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemPortalReportsCountRequest) ClientId(clientId string) ApiGetSystemPortalReportsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemPortalReportsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemPortalReportsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *PortalReportsAPIService) GetSystemPortalReportsCountExecute(r ApiGetSys
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *PortalReportsAPIService) GetSystemPortalReportsCountExecute(r ApiGetSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemPortalReportsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalReportsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemPortalReportsByIdRequest) ClientId(clientId string) ApiPatchSystemPortalReportsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemPortalReportsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemPortalReportsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemPortalReportsByIdRequest) ClientId(clientId string) ApiPatchSystemPortalReportsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *PortalReportsAPIService) PatchSystemPortalReportsByIdExecute(r ApiPatch
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *PortalReportsAPIService) PatchSystemPortalReportsByIdExecute(r ApiPatch
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *PortalReportsAPIService) PatchSystemPortalReportsByIdExecute(r ApiPatch
 type ApiPostSystemPortalReportsRequest struct {
 	ctx context.Context
 	ApiService *PortalReportsAPIService
-	clientId *string
 	portalReport *PortalReport
-}
-
-// 
-func (r ApiPostSystemPortalReportsRequest) ClientId(clientId string) ApiPostSystemPortalReportsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // portalReport
 func (r ApiPostSystemPortalReportsRequest) PortalReport(portalReport PortalReport) ApiPostSystemPortalReportsRequest {
 	r.portalReport = &portalReport
+	return r
+}
+
+// 
+func (r ApiPostSystemPortalReportsRequest) ClientId(clientId string) ApiPostSystemPortalReportsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *PortalReportsAPIService) PostSystemPortalReportsExecute(r ApiPostSystem
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.portalReport == nil {
 		return localVarReturnValue, nil, reportError("portalReport is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *PortalReportsAPIService) PostSystemPortalReportsExecute(r ApiPostSystem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.portalReport
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemPortalReportsByIdRequest struct {
 	ctx context.Context
 	ApiService *PortalReportsAPIService
 	id int32
-	clientId *string
 	portalReport *PortalReport
-}
-
-// 
-func (r ApiPutSystemPortalReportsByIdRequest) ClientId(clientId string) ApiPutSystemPortalReportsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // portalReport
 func (r ApiPutSystemPortalReportsByIdRequest) PortalReport(portalReport PortalReport) ApiPutSystemPortalReportsByIdRequest {
 	r.portalReport = &portalReport
+	return r
+}
+
+// 
+func (r ApiPutSystemPortalReportsByIdRequest) ClientId(clientId string) ApiPutSystemPortalReportsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *PortalReportsAPIService) PutSystemPortalReportsByIdExecute(r ApiPutSyst
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.portalReport == nil {
 		return localVarReturnValue, nil, reportError("portalReport is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *PortalReportsAPIService) PutSystemPortalReportsByIdExecute(r ApiPutSyst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.portalReport
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

@@ -74,9 +74,6 @@ func (a *PurchaseOrderStatusesAPIService) DeleteProcurementPurchaseorderstatuses
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *PurchaseOrderStatusesAPIService) DeleteProcurementPurchaseorderstatuses
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *PurchaseOrderStatusesAPIService) DeleteProcurementPurchaseorderstatuses
 type ApiGetProcurementPurchaseorderstatusesRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetProcurementPurchaseorderstatusesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseorderstatusesRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetProcurementPurchaseorderstatusesRequest) PageId(pageId int32) ApiG
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseorderstatusesRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseorderstatusesRequest) Execute() ([]PurchaseOrderStatus, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseorderstatusesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetProcurementPurchaseorderstatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetProcurementPurchaseorderstatusesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseorderstatusesByIdRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetProcurementPurchaseorderstatusesByIdRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseorderstatusesByIdRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseorderstatusesByIdRequest) Execute() (*PurchaseOrderStatus, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseorderstatusesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,7 +505,6 @@ type ApiGetProcurementPurchaseorderstatusesByIdInfoRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -517,12 +513,7 @@ type ApiGetProcurementPurchaseorderstatusesByIdInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseorderstatusesByIdInfoRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesByIdInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -573,6 +564,12 @@ func (r ApiGetProcurementPurchaseorderstatusesByIdInfoRequest) PageId(pageId int
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseorderstatusesByIdInfoRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesByIdInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseorderstatusesByIdInfoRequest) Execute() (*PurchaseOrderStatusInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseorderstatusesByIdInfoExecute(r)
 }
@@ -613,9 +610,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -658,7 +652,9 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -700,7 +696,6 @@ type ApiGetProcurementPurchaseorderstatusesByIdUsagesRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -709,12 +704,7 @@ type ApiGetProcurementPurchaseorderstatusesByIdUsagesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseorderstatusesByIdUsagesRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesByIdUsagesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -765,6 +755,12 @@ func (r ApiGetProcurementPurchaseorderstatusesByIdUsagesRequest) PageId(pageId i
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseorderstatusesByIdUsagesRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesByIdUsagesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseorderstatusesByIdUsagesRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseorderstatusesByIdUsagesExecute(r)
 }
@@ -805,9 +801,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -850,7 +843,9 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -892,7 +887,6 @@ type ApiGetProcurementPurchaseorderstatusesByIdUsagesListRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -901,12 +895,7 @@ type ApiGetProcurementPurchaseorderstatusesByIdUsagesListRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseorderstatusesByIdUsagesListRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesByIdUsagesListRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -957,6 +946,12 @@ func (r ApiGetProcurementPurchaseorderstatusesByIdUsagesListRequest) PageId(page
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseorderstatusesByIdUsagesListRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesByIdUsagesListRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseorderstatusesByIdUsagesListRequest) Execute() ([]Usage, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseorderstatusesByIdUsagesListExecute(r)
 }
@@ -997,9 +992,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1042,7 +1034,9 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1083,7 +1077,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesByI
 type ApiGetProcurementPurchaseorderstatusesCountRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1092,12 +1085,7 @@ type ApiGetProcurementPurchaseorderstatusesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseorderstatusesCountRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1148,6 +1136,12 @@ func (r ApiGetProcurementPurchaseorderstatusesCountRequest) PageId(pageId int32)
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseorderstatusesCountRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseorderstatusesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseorderstatusesCountExecute(r)
 }
@@ -1185,9 +1179,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesCou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1230,7 +1221,9 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesCou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1271,7 +1264,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesCou
 type ApiGetProcurementPurchaseorderstatusesInfoRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1280,12 +1272,7 @@ type ApiGetProcurementPurchaseorderstatusesInfoRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseorderstatusesInfoRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesInfoRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1336,6 +1323,12 @@ func (r ApiGetProcurementPurchaseorderstatusesInfoRequest) PageId(pageId int32) 
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseorderstatusesInfoRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesInfoRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseorderstatusesInfoRequest) Execute() ([]PurchaseOrderStatusInfo, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseorderstatusesInfoExecute(r)
 }
@@ -1373,9 +1366,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesInf
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1418,7 +1408,9 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesInf
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1459,7 +1451,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesInf
 type ApiGetProcurementPurchaseorderstatusesInfoCountRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -1468,12 +1459,7 @@ type ApiGetProcurementPurchaseorderstatusesInfoCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetProcurementPurchaseorderstatusesInfoCountRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesInfoCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -1524,6 +1510,12 @@ func (r ApiGetProcurementPurchaseorderstatusesInfoCountRequest) PageId(pageId in
 	return r
 }
 
+// 
+func (r ApiGetProcurementPurchaseorderstatusesInfoCountRequest) ClientId(clientId string) ApiGetProcurementPurchaseorderstatusesInfoCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetProcurementPurchaseorderstatusesInfoCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetProcurementPurchaseorderstatusesInfoCountExecute(r)
 }
@@ -1561,9 +1553,6 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesInf
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -1606,7 +1595,9 @@ func (a *PurchaseOrderStatusesAPIService) GetProcurementPurchaseorderstatusesInf
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1648,19 +1639,19 @@ type ApiPatchProcurementPurchaseorderstatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchProcurementPurchaseorderstatusesByIdRequest) ClientId(clientId string) ApiPatchProcurementPurchaseorderstatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchProcurementPurchaseorderstatusesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchProcurementPurchaseorderstatusesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchProcurementPurchaseorderstatusesByIdRequest) ClientId(clientId string) ApiPatchProcurementPurchaseorderstatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1704,9 +1695,6 @@ func (a *PurchaseOrderStatusesAPIService) PatchProcurementPurchaseorderstatusesB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -1728,7 +1716,9 @@ func (a *PurchaseOrderStatusesAPIService) PatchProcurementPurchaseorderstatusesB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1771,19 +1761,19 @@ func (a *PurchaseOrderStatusesAPIService) PatchProcurementPurchaseorderstatusesB
 type ApiPostProcurementPurchaseorderstatusesRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
-	clientId *string
 	purchaseOrderStatus *PurchaseOrderStatus
-}
-
-// 
-func (r ApiPostProcurementPurchaseorderstatusesRequest) ClientId(clientId string) ApiPostProcurementPurchaseorderstatusesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // poStatus
 func (r ApiPostProcurementPurchaseorderstatusesRequest) PurchaseOrderStatus(purchaseOrderStatus PurchaseOrderStatus) ApiPostProcurementPurchaseorderstatusesRequest {
 	r.purchaseOrderStatus = &purchaseOrderStatus
+	return r
+}
+
+// 
+func (r ApiPostProcurementPurchaseorderstatusesRequest) ClientId(clientId string) ApiPostProcurementPurchaseorderstatusesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1824,9 +1814,6 @@ func (a *PurchaseOrderStatusesAPIService) PostProcurementPurchaseorderstatusesEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.purchaseOrderStatus == nil {
 		return localVarReturnValue, nil, reportError("purchaseOrderStatus is required and must be specified")
 	}
@@ -1848,7 +1835,9 @@ func (a *PurchaseOrderStatusesAPIService) PostProcurementPurchaseorderstatusesEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.purchaseOrderStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1892,19 +1881,19 @@ type ApiPutProcurementPurchaseorderstatusesByIdRequest struct {
 	ctx context.Context
 	ApiService *PurchaseOrderStatusesAPIService
 	id int32
-	clientId *string
 	purchaseOrderStatus *PurchaseOrderStatus
-}
-
-// 
-func (r ApiPutProcurementPurchaseorderstatusesByIdRequest) ClientId(clientId string) ApiPutProcurementPurchaseorderstatusesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // purchaseOrderStatus
 func (r ApiPutProcurementPurchaseorderstatusesByIdRequest) PurchaseOrderStatus(purchaseOrderStatus PurchaseOrderStatus) ApiPutProcurementPurchaseorderstatusesByIdRequest {
 	r.purchaseOrderStatus = &purchaseOrderStatus
+	return r
+}
+
+// 
+func (r ApiPutProcurementPurchaseorderstatusesByIdRequest) ClientId(clientId string) ApiPutProcurementPurchaseorderstatusesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1948,9 +1937,6 @@ func (a *PurchaseOrderStatusesAPIService) PutProcurementPurchaseorderstatusesByI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.purchaseOrderStatus == nil {
 		return localVarReturnValue, nil, reportError("purchaseOrderStatus is required and must be specified")
 	}
@@ -1972,7 +1958,9 @@ func (a *PurchaseOrderStatusesAPIService) PutProcurementPurchaseorderstatusesByI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.purchaseOrderStatus
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

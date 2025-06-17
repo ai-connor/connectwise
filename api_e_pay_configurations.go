@@ -74,9 +74,6 @@ func (a *EPayConfigurationsAPIService) DeleteSystemEPayConfigurationsByIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *EPayConfigurationsAPIService) DeleteSystemEPayConfigurationsByIdExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *EPayConfigurationsAPIService) DeleteSystemEPayConfigurationsByIdExecute
 type ApiGetSystemEPayConfigurationsRequest struct {
 	ctx context.Context
 	ApiService *EPayConfigurationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetSystemEPayConfigurationsRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEPayConfigurationsRequest) ClientId(clientId string) ApiGetSystemEPayConfigurationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetSystemEPayConfigurationsRequest) PageId(pageId int32) ApiGetSystem
 	return r
 }
 
+// 
+func (r ApiGetSystemEPayConfigurationsRequest) ClientId(clientId string) ApiGetSystemEPayConfigurationsRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEPayConfigurationsRequest) Execute() ([]EPayConfiguration, *http.Response, error) {
 	return r.ApiService.GetSystemEPayConfigurationsExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *EPayConfigurationsAPIService) GetSystemEPayConfigurationsExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *EPayConfigurationsAPIService) GetSystemEPayConfigurationsExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetSystemEPayConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *EPayConfigurationsAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetSystemEPayConfigurationsByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEPayConfigurationsByIdRequest) ClientId(clientId string) ApiGetSystemEPayConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetSystemEPayConfigurationsByIdRequest) PageId(pageId int32) ApiGetSy
 	return r
 }
 
+// 
+func (r ApiGetSystemEPayConfigurationsByIdRequest) ClientId(clientId string) ApiGetSystemEPayConfigurationsByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEPayConfigurationsByIdRequest) Execute() (*EPayConfiguration, *http.Response, error) {
 	return r.ApiService.GetSystemEPayConfigurationsByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *EPayConfigurationsAPIService) GetSystemEPayConfigurationsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *EPayConfigurationsAPIService) GetSystemEPayConfigurationsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *EPayConfigurationsAPIService) GetSystemEPayConfigurationsByIdExecute(r 
 type ApiGetSystemEPayConfigurationsCountRequest struct {
 	ctx context.Context
 	ApiService *EPayConfigurationsAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetSystemEPayConfigurationsCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEPayConfigurationsCountRequest) ClientId(clientId string) ApiGetSystemEPayConfigurationsCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetSystemEPayConfigurationsCountRequest) PageId(pageId int32) ApiGetS
 	return r
 }
 
+// 
+func (r ApiGetSystemEPayConfigurationsCountRequest) ClientId(clientId string) ApiGetSystemEPayConfigurationsCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEPayConfigurationsCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemEPayConfigurationsCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *EPayConfigurationsAPIService) GetSystemEPayConfigurationsCountExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *EPayConfigurationsAPIService) GetSystemEPayConfigurationsCountExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -696,19 +692,19 @@ type ApiPatchSystemEPayConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *EPayConfigurationsAPIService
 	id int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemEPayConfigurationsByIdRequest) ClientId(clientId string) ApiPatchSystemEPayConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemEPayConfigurationsByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemEPayConfigurationsByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemEPayConfigurationsByIdRequest) ClientId(clientId string) ApiPatchSystemEPayConfigurationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -752,9 +748,6 @@ func (a *EPayConfigurationsAPIService) PatchSystemEPayConfigurationsByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -776,7 +769,9 @@ func (a *EPayConfigurationsAPIService) PatchSystemEPayConfigurationsByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -819,19 +814,19 @@ func (a *EPayConfigurationsAPIService) PatchSystemEPayConfigurationsByIdExecute(
 type ApiPostSystemEPayConfigurationsRequest struct {
 	ctx context.Context
 	ApiService *EPayConfigurationsAPIService
-	clientId *string
 	ePayConfiguration *EPayConfiguration
-}
-
-// 
-func (r ApiPostSystemEPayConfigurationsRequest) ClientId(clientId string) ApiPostSystemEPayConfigurationsRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ePayConfiguration
 func (r ApiPostSystemEPayConfigurationsRequest) EPayConfiguration(ePayConfiguration EPayConfiguration) ApiPostSystemEPayConfigurationsRequest {
 	r.ePayConfiguration = &ePayConfiguration
+	return r
+}
+
+// 
+func (r ApiPostSystemEPayConfigurationsRequest) ClientId(clientId string) ApiPostSystemEPayConfigurationsRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *EPayConfigurationsAPIService) PostSystemEPayConfigurationsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ePayConfiguration == nil {
 		return localVarReturnValue, nil, reportError("ePayConfiguration is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *EPayConfigurationsAPIService) PostSystemEPayConfigurationsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ePayConfiguration
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -940,19 +934,19 @@ type ApiPutSystemEPayConfigurationsByIdRequest struct {
 	ctx context.Context
 	ApiService *EPayConfigurationsAPIService
 	id int32
-	clientId *string
 	ePayConfiguration *EPayConfiguration
-}
-
-// 
-func (r ApiPutSystemEPayConfigurationsByIdRequest) ClientId(clientId string) ApiPutSystemEPayConfigurationsByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // ePayConfiguration
 func (r ApiPutSystemEPayConfigurationsByIdRequest) EPayConfiguration(ePayConfiguration EPayConfiguration) ApiPutSystemEPayConfigurationsByIdRequest {
 	r.ePayConfiguration = &ePayConfiguration
+	return r
+}
+
+// 
+func (r ApiPutSystemEPayConfigurationsByIdRequest) ClientId(clientId string) ApiPutSystemEPayConfigurationsByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -996,9 +990,6 @@ func (a *EPayConfigurationsAPIService) PutSystemEPayConfigurationsByIdExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.ePayConfiguration == nil {
 		return localVarReturnValue, nil, reportError("ePayConfiguration is required and must be specified")
 	}
@@ -1020,7 +1011,9 @@ func (a *EPayConfigurationsAPIService) PutSystemEPayConfigurationsByIdExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.ePayConfiguration
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

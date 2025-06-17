@@ -78,9 +78,6 @@ func (a *EmailConnectorParsingStylesAPIService) DeleteSystemEmailConnectorsByPar
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +96,9 @@ func (a *EmailConnectorParsingStylesAPIService) DeleteSystemEmailConnectorsByPar
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -132,7 +131,6 @@ type ApiGetSystemEmailConnectorsByParentIdParsingStylesRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorParsingStylesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -141,12 +139,7 @@ type ApiGetSystemEmailConnectorsByParentIdParsingStylesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsByParentIdParsingStylesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -197,6 +190,12 @@ func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesRequest) PageId(pageId
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsByParentIdParsingStylesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesRequest) Execute() ([]EmailConnectorParsingStyle, *http.Response, error) {
 	return r.ApiService.GetSystemEmailConnectorsByParentIdParsingStylesExecute(r)
 }
@@ -237,9 +236,6 @@ func (a *EmailConnectorParsingStylesAPIService) GetSystemEmailConnectorsByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -282,7 +278,9 @@ func (a *EmailConnectorParsingStylesAPIService) GetSystemEmailConnectorsByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -325,7 +323,6 @@ type ApiGetSystemEmailConnectorsByParentIdParsingStylesByIdRequest struct {
 	ApiService *EmailConnectorParsingStylesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -334,12 +331,7 @@ type ApiGetSystemEmailConnectorsByParentIdParsingStylesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesByIdRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsByParentIdParsingStylesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -390,6 +382,12 @@ func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesByIdRequest) PageId(pa
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesByIdRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsByParentIdParsingStylesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesByIdRequest) Execute() (*EmailConnectorParsingStyle, *http.Response, error) {
 	return r.ApiService.GetSystemEmailConnectorsByParentIdParsingStylesByIdExecute(r)
 }
@@ -433,9 +431,6 @@ func (a *EmailConnectorParsingStylesAPIService) GetSystemEmailConnectorsByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -478,7 +473,9 @@ func (a *EmailConnectorParsingStylesAPIService) GetSystemEmailConnectorsByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -520,7 +517,6 @@ type ApiGetSystemEmailConnectorsByParentIdParsingStylesCountRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorParsingStylesAPIService
 	parentId int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -529,12 +525,7 @@ type ApiGetSystemEmailConnectorsByParentIdParsingStylesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesCountRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsByParentIdParsingStylesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -585,6 +576,12 @@ func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesCountRequest) PageId(p
 	return r
 }
 
+// 
+func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesCountRequest) ClientId(clientId string) ApiGetSystemEmailConnectorsByParentIdParsingStylesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetSystemEmailConnectorsByParentIdParsingStylesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetSystemEmailConnectorsByParentIdParsingStylesCountExecute(r)
 }
@@ -625,9 +622,6 @@ func (a *EmailConnectorParsingStylesAPIService) GetSystemEmailConnectorsByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -670,7 +664,9 @@ func (a *EmailConnectorParsingStylesAPIService) GetSystemEmailConnectorsByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -713,19 +709,19 @@ type ApiPatchSystemEmailConnectorsByParentIdParsingStylesByIdRequest struct {
 	ApiService *EmailConnectorParsingStylesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	patchOperation *[]PatchOperation
-}
-
-// 
-func (r ApiPatchSystemEmailConnectorsByParentIdParsingStylesByIdRequest) ClientId(clientId string) ApiPatchSystemEmailConnectorsByParentIdParsingStylesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // List of PatchOperation
 func (r ApiPatchSystemEmailConnectorsByParentIdParsingStylesByIdRequest) PatchOperation(patchOperation []PatchOperation) ApiPatchSystemEmailConnectorsByParentIdParsingStylesByIdRequest {
 	r.patchOperation = &patchOperation
+	return r
+}
+
+// 
+func (r ApiPatchSystemEmailConnectorsByParentIdParsingStylesByIdRequest) ClientId(clientId string) ApiPatchSystemEmailConnectorsByParentIdParsingStylesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -772,9 +768,6 @@ func (a *EmailConnectorParsingStylesAPIService) PatchSystemEmailConnectorsByPare
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.patchOperation == nil {
 		return localVarReturnValue, nil, reportError("patchOperation is required and must be specified")
 	}
@@ -796,7 +789,9 @@ func (a *EmailConnectorParsingStylesAPIService) PatchSystemEmailConnectorsByPare
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.patchOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -840,19 +835,19 @@ type ApiPostSystemEmailConnectorsByParentIdParsingStylesRequest struct {
 	ctx context.Context
 	ApiService *EmailConnectorParsingStylesAPIService
 	parentId int32
-	clientId *string
 	emailConnectorParsingStyle *EmailConnectorParsingStyle
-}
-
-// 
-func (r ApiPostSystemEmailConnectorsByParentIdParsingStylesRequest) ClientId(clientId string) ApiPostSystemEmailConnectorsByParentIdParsingStylesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // emailConnectorParsingStyle
 func (r ApiPostSystemEmailConnectorsByParentIdParsingStylesRequest) EmailConnectorParsingStyle(emailConnectorParsingStyle EmailConnectorParsingStyle) ApiPostSystemEmailConnectorsByParentIdParsingStylesRequest {
 	r.emailConnectorParsingStyle = &emailConnectorParsingStyle
+	return r
+}
+
+// 
+func (r ApiPostSystemEmailConnectorsByParentIdParsingStylesRequest) ClientId(clientId string) ApiPostSystemEmailConnectorsByParentIdParsingStylesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -896,9 +891,6 @@ func (a *EmailConnectorParsingStylesAPIService) PostSystemEmailConnectorsByParen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.emailConnectorParsingStyle == nil {
 		return localVarReturnValue, nil, reportError("emailConnectorParsingStyle is required and must be specified")
 	}
@@ -920,7 +912,9 @@ func (a *EmailConnectorParsingStylesAPIService) PostSystemEmailConnectorsByParen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.emailConnectorParsingStyle
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -965,19 +959,19 @@ type ApiPutSystemEmailConnectorsByParentIdParsingStylesByIdRequest struct {
 	ApiService *EmailConnectorParsingStylesAPIService
 	id int32
 	parentId int32
-	clientId *string
 	emailConnectorParsingStyle *EmailConnectorParsingStyle
-}
-
-// 
-func (r ApiPutSystemEmailConnectorsByParentIdParsingStylesByIdRequest) ClientId(clientId string) ApiPutSystemEmailConnectorsByParentIdParsingStylesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // emailConnectorParsingStyle
 func (r ApiPutSystemEmailConnectorsByParentIdParsingStylesByIdRequest) EmailConnectorParsingStyle(emailConnectorParsingStyle EmailConnectorParsingStyle) ApiPutSystemEmailConnectorsByParentIdParsingStylesByIdRequest {
 	r.emailConnectorParsingStyle = &emailConnectorParsingStyle
+	return r
+}
+
+// 
+func (r ApiPutSystemEmailConnectorsByParentIdParsingStylesByIdRequest) ClientId(clientId string) ApiPutSystemEmailConnectorsByParentIdParsingStylesByIdRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -1024,9 +1018,6 @@ func (a *EmailConnectorParsingStylesAPIService) PutSystemEmailConnectorsByParent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.emailConnectorParsingStyle == nil {
 		return localVarReturnValue, nil, reportError("emailConnectorParsingStyle is required and must be specified")
 	}
@@ -1048,7 +1039,9 @@ func (a *EmailConnectorParsingStylesAPIService) PutSystemEmailConnectorsByParent
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.emailConnectorParsingStyle
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

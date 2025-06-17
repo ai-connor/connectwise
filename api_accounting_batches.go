@@ -74,9 +74,6 @@ func (a *AccountingBatchesAPIService) DeleteFinanceAccountingBatchesByIdExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return nil, reportError("clientId is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +92,9 @@ func (a *AccountingBatchesAPIService) DeleteFinanceAccountingBatchesByIdExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -127,7 +126,6 @@ func (a *AccountingBatchesAPIService) DeleteFinanceAccountingBatchesByIdExecute(
 type ApiGetFinanceAccountingBatchesRequest struct {
 	ctx context.Context
 	ApiService *AccountingBatchesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -136,12 +134,7 @@ type ApiGetFinanceAccountingBatchesRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingBatchesRequest) ClientId(clientId string) ApiGetFinanceAccountingBatchesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -192,6 +185,12 @@ func (r ApiGetFinanceAccountingBatchesRequest) PageId(pageId int32) ApiGetFinanc
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingBatchesRequest) ClientId(clientId string) ApiGetFinanceAccountingBatchesRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingBatchesRequest) Execute() ([]AccountingBatch, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingBatchesExecute(r)
 }
@@ -229,9 +228,6 @@ func (a *AccountingBatchesAPIService) GetFinanceAccountingBatchesExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -274,7 +270,9 @@ func (a *AccountingBatchesAPIService) GetFinanceAccountingBatchesExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -316,7 +314,6 @@ type ApiGetFinanceAccountingBatchesByIdRequest struct {
 	ctx context.Context
 	ApiService *AccountingBatchesAPIService
 	id int32
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -325,12 +322,7 @@ type ApiGetFinanceAccountingBatchesByIdRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingBatchesByIdRequest) ClientId(clientId string) ApiGetFinanceAccountingBatchesByIdRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -381,6 +373,12 @@ func (r ApiGetFinanceAccountingBatchesByIdRequest) PageId(pageId int32) ApiGetFi
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingBatchesByIdRequest) ClientId(clientId string) ApiGetFinanceAccountingBatchesByIdRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingBatchesByIdRequest) Execute() (*AccountingBatch, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingBatchesByIdExecute(r)
 }
@@ -421,9 +419,6 @@ func (a *AccountingBatchesAPIService) GetFinanceAccountingBatchesByIdExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -466,7 +461,9 @@ func (a *AccountingBatchesAPIService) GetFinanceAccountingBatchesByIdExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -507,7 +504,6 @@ func (a *AccountingBatchesAPIService) GetFinanceAccountingBatchesByIdExecute(r A
 type ApiGetFinanceAccountingBatchesCountRequest struct {
 	ctx context.Context
 	ApiService *AccountingBatchesAPIService
-	clientId *string
 	conditions *string
 	childConditions *string
 	customFieldConditions *string
@@ -516,12 +512,7 @@ type ApiGetFinanceAccountingBatchesCountRequest struct {
 	page *int32
 	pageSize *int32
 	pageId *int32
-}
-
-// 
-func (r ApiGetFinanceAccountingBatchesCountRequest) ClientId(clientId string) ApiGetFinanceAccountingBatchesCountRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // 
@@ -572,6 +563,12 @@ func (r ApiGetFinanceAccountingBatchesCountRequest) PageId(pageId int32) ApiGetF
 	return r
 }
 
+// 
+func (r ApiGetFinanceAccountingBatchesCountRequest) ClientId(clientId string) ApiGetFinanceAccountingBatchesCountRequest {
+	r.clientId = &clientId
+	return r
+}
+
 func (r ApiGetFinanceAccountingBatchesCountRequest) Execute() (*Count, *http.Response, error) {
 	return r.ApiService.GetFinanceAccountingBatchesCountExecute(r)
 }
@@ -609,9 +606,6 @@ func (a *AccountingBatchesAPIService) GetFinanceAccountingBatchesCountExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 
 	if r.conditions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "conditions", r.conditions, "form", "")
@@ -654,7 +648,9 @@ func (a *AccountingBatchesAPIService) GetFinanceAccountingBatchesCountExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -695,19 +691,19 @@ func (a *AccountingBatchesAPIService) GetFinanceAccountingBatchesCountExecute(r 
 type ApiPostFinanceAccountingBatchesRequest struct {
 	ctx context.Context
 	ApiService *AccountingBatchesAPIService
-	clientId *string
 	createAccountingBatchRequest *CreateAccountingBatchRequest
-}
-
-// 
-func (r ApiPostFinanceAccountingBatchesRequest) ClientId(clientId string) ApiPostFinanceAccountingBatchesRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // accountingBatchParameters
 func (r ApiPostFinanceAccountingBatchesRequest) CreateAccountingBatchRequest(createAccountingBatchRequest CreateAccountingBatchRequest) ApiPostFinanceAccountingBatchesRequest {
 	r.createAccountingBatchRequest = &createAccountingBatchRequest
+	return r
+}
+
+// 
+func (r ApiPostFinanceAccountingBatchesRequest) ClientId(clientId string) ApiPostFinanceAccountingBatchesRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -748,9 +744,6 @@ func (a *AccountingBatchesAPIService) PostFinanceAccountingBatchesExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.createAccountingBatchRequest == nil {
 		return localVarReturnValue, nil, reportError("createAccountingBatchRequest is required and must be specified")
 	}
@@ -772,7 +765,9 @@ func (a *AccountingBatchesAPIService) PostFinanceAccountingBatchesExecute(r ApiP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.createAccountingBatchRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -816,19 +811,19 @@ type ApiPostFinanceAccountingBatchesByIdExportRequest struct {
 	ctx context.Context
 	ApiService *AccountingBatchesAPIService
 	id int32
-	clientId *string
 	exportAccountingBatchRequest *ExportAccountingBatchRequest
-}
-
-// 
-func (r ApiPostFinanceAccountingBatchesByIdExportRequest) ClientId(clientId string) ApiPostFinanceAccountingBatchesByIdExportRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // batchExportParameters
 func (r ApiPostFinanceAccountingBatchesByIdExportRequest) ExportAccountingBatchRequest(exportAccountingBatchRequest ExportAccountingBatchRequest) ApiPostFinanceAccountingBatchesByIdExportRequest {
 	r.exportAccountingBatchRequest = &exportAccountingBatchRequest
+	return r
+}
+
+// 
+func (r ApiPostFinanceAccountingBatchesByIdExportRequest) ClientId(clientId string) ApiPostFinanceAccountingBatchesByIdExportRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -872,9 +867,6 @@ func (a *AccountingBatchesAPIService) PostFinanceAccountingBatchesByIdExportExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.exportAccountingBatchRequest == nil {
 		return localVarReturnValue, nil, reportError("exportAccountingBatchRequest is required and must be specified")
 	}
@@ -896,7 +888,9 @@ func (a *AccountingBatchesAPIService) PostFinanceAccountingBatchesByIdExportExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.exportAccountingBatchRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -939,19 +933,19 @@ func (a *AccountingBatchesAPIService) PostFinanceAccountingBatchesByIdExportExec
 type ApiPostFinanceAccountingExportRequest struct {
 	ctx context.Context
 	ApiService *AccountingBatchesAPIService
-	clientId *string
 	exportAccountingBatchRequest *ExportAccountingBatchRequest
-}
-
-// 
-func (r ApiPostFinanceAccountingExportRequest) ClientId(clientId string) ApiPostFinanceAccountingExportRequest {
-	r.clientId = &clientId
-	return r
+	clientId *string
 }
 
 // batchExportParameters
 func (r ApiPostFinanceAccountingExportRequest) ExportAccountingBatchRequest(exportAccountingBatchRequest ExportAccountingBatchRequest) ApiPostFinanceAccountingExportRequest {
 	r.exportAccountingBatchRequest = &exportAccountingBatchRequest
+	return r
+}
+
+// 
+func (r ApiPostFinanceAccountingExportRequest) ClientId(clientId string) ApiPostFinanceAccountingExportRequest {
+	r.clientId = &clientId
 	return r
 }
 
@@ -992,9 +986,6 @@ func (a *AccountingBatchesAPIService) PostFinanceAccountingExportExecute(r ApiPo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clientId == nil {
-		return localVarReturnValue, nil, reportError("clientId is required and must be specified")
-	}
 	if r.exportAccountingBatchRequest == nil {
 		return localVarReturnValue, nil, reportError("exportAccountingBatchRequest is required and must be specified")
 	}
@@ -1016,7 +1007,9 @@ func (a *AccountingBatchesAPIService) PostFinanceAccountingExportExecute(r ApiPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	if r.clientId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "clientId", r.clientId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.exportAccountingBatchRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
