@@ -424,7 +424,9 @@ api_service_survey_questions.go
 api_service_surveys.go
 api_service_teams.go
 api_service_template_infos.go
+api_service_template_tasks.go
 api_service_templates.go
+api_service_templates_tasks.go
 api_service_ticket_link_infos.go
 api_service_ticket_links.go
 api_service_ticket_notes.go
@@ -1004,6 +1006,7 @@ model_order_status_email_template_reference.go
 model_order_status_info.go
 model_order_status_notification.go
 model_order_status_reference.go
+model_order_to_project_conversion.go
 model_os_grade_weight.go
 model_other.go
 model_other1_revenue_reference.go
@@ -1192,6 +1195,8 @@ model_service_team_reference.go
 model_service_template.go
 model_service_template_info.go
 model_service_template_reference.go
+model_service_template_task.go
+model_service_template_task_reference.go
 model_service_ticket_link.go
 model_service_ticket_link_info.go
 model_service_ticket_note.go
