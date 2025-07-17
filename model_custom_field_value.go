@@ -24,7 +24,7 @@ type CustomFieldValue struct {
 	Type NullableString `json:"type,omitempty"`
 	EntryMethod NullableString `json:"entryMethod,omitempty"`
 	NumberOfDecimals NullableInt32 `json:"numberOfDecimals,omitempty"`
-	Value map[string]interface{} `json:"value,omitempty"`
+	Value any `json:"value,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
 }
 
@@ -246,7 +246,7 @@ func (o *CustomFieldValue) UnsetNumberOfDecimals() {
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *CustomFieldValue) GetValue() map[string]interface{} {
+func (o *CustomFieldValue) GetValue() any {
 	if o == nil || IsNil(o.Value) {
 		var ret map[string]interface{}
 		return ret
@@ -256,7 +256,7 @@ func (o *CustomFieldValue) GetValue() map[string]interface{} {
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomFieldValue) GetValueOk() (map[string]interface{}, bool) {
+func (o *CustomFieldValue) GetValueOk() (any, bool) {
 	if o == nil || IsNil(o.Value) {
 		return map[string]interface{}{}, false
 	}
@@ -272,8 +272,8 @@ func (o *CustomFieldValue) HasValue() bool {
 	return false
 }
 
-// SetValue gets a reference to the given map[string]interface{} and assigns it to the Value field.
-func (o *CustomFieldValue) SetValue(v map[string]interface{}) {
+// SetValue gets a reference to the given any and assigns it to the Value field.
+func (o *CustomFieldValue) SetValue(v any) {
 	o.Value = v
 }
 
