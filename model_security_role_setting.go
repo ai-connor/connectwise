@@ -36,7 +36,10 @@ type SecurityRoleSetting struct {
 	ModuleName *string `json:"moduleName,omitempty"`
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SecurityRoleSetting SecurityRoleSetting
 
 // NewSecurityRoleSetting instantiates a new SecurityRoleSetting object
 // This constructor will assign default values to properties that have it defined,
@@ -750,7 +753,49 @@ func (o SecurityRoleSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SecurityRoleSetting) UnmarshalJSON(data []byte) (err error) {
+	varSecurityRoleSetting := _SecurityRoleSetting{}
+
+	err = json.Unmarshal(data, &varSecurityRoleSetting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SecurityRoleSetting(varSecurityRoleSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "addLevel")
+		delete(additionalProperties, "editLevel")
+		delete(additionalProperties, "deleteLevel")
+		delete(additionalProperties, "inquireLevel")
+		delete(additionalProperties, "moduleFunctionName")
+		delete(additionalProperties, "moduleFunctionDescription")
+		delete(additionalProperties, "myAllFlag")
+		delete(additionalProperties, "moduleFunctionIdentifier")
+		delete(additionalProperties, "reportFlag")
+		delete(additionalProperties, "restrictFlag")
+		delete(additionalProperties, "customFlag")
+		delete(additionalProperties, "moduleDescription")
+		delete(additionalProperties, "moduleIdentifier")
+		delete(additionalProperties, "moduleName")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSecurityRoleSetting struct {

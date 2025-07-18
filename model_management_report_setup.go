@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ManagementReportSetup struct {
 	Id *int32 `json:"id,omitempty"`
 	ScheduledReportDisabledFlag bool `json:"scheduledReportDisabledFlag"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagementReportSetup ManagementReportSetup
@@ -151,6 +151,11 @@ func (o ManagementReportSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,15 +183,22 @@ func (o *ManagementReportSetup) UnmarshalJSON(data []byte) (err error) {
 
 	varManagementReportSetup := _ManagementReportSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagementReportSetup)
+	err = json.Unmarshal(data, &varManagementReportSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagementReportSetup(varManagementReportSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "scheduledReportDisabledFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

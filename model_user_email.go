@@ -22,7 +22,10 @@ type UserEmail struct {
 	Id *string `json:"id,omitempty"`
 	DisplayName *string `json:"displayName,omitempty"`
 	UserPrincipalName *string `json:"userPrincipalName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserEmail UserEmail
 
 // NewUserEmail instantiates a new UserEmail object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o UserEmail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserPrincipalName) {
 		toSerialize["userPrincipalName"] = o.UserPrincipalName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserEmail) UnmarshalJSON(data []byte) (err error) {
+	varUserEmail := _UserEmail{}
+
+	err = json.Unmarshal(data, &varUserEmail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserEmail(varUserEmail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "displayName")
+		delete(additionalProperties, "userPrincipalName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserEmail struct {

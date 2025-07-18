@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type ContactCommunication struct {
 	CommunicationType NullableString `json:"communicationType,omitempty"`
 	Domain *string `json:"domain,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ContactCommunication ContactCommunication
@@ -436,6 +436,11 @@ func (o ContactCommunication) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -464,15 +469,29 @@ func (o *ContactCommunication) UnmarshalJSON(data []byte) (err error) {
 
 	varContactCommunication := _ContactCommunication{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varContactCommunication)
+	err = json.Unmarshal(data, &varContactCommunication)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ContactCommunication(varContactCommunication)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "contactId")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "extension")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "communicationType")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

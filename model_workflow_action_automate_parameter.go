@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type WorkflowActionAutomateParameter struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	ParentConnectWiseId *string `json:"parentConnectWiseId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WorkflowActionAutomateParameter WorkflowActionAutomateParameter
@@ -306,6 +306,11 @@ func (o WorkflowActionAutomateParameter) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -333,15 +338,26 @@ func (o *WorkflowActionAutomateParameter) UnmarshalJSON(data []byte) (err error)
 
 	varWorkflowActionAutomateParameter := _WorkflowActionAutomateParameter{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWorkflowActionAutomateParameter)
+	err = json.Unmarshal(data, &varWorkflowActionAutomateParameter)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WorkflowActionAutomateParameter(varWorkflowActionAutomateParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -48,7 +48,10 @@ type UserDefinedFieldInfo struct {
 	// Date in UTC the custom field was created
 	DateCreated *string `json:"dateCreated,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserDefinedFieldInfo UserDefinedFieldInfo
 
 // NewUserDefinedFieldInfo instantiates a new UserDefinedFieldInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -797,7 +800,50 @@ func (o UserDefinedFieldInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserDefinedFieldInfo) UnmarshalJSON(data []byte) (err error) {
+	varUserDefinedFieldInfo := _UserDefinedFieldInfo{}
+
+	err = json.Unmarshal(data, &varUserDefinedFieldInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserDefinedFieldInfo(varUserDefinedFieldInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "podId")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "helpText")
+		delete(additionalProperties, "fieldTypeIdentifier")
+		delete(additionalProperties, "numberDecimals")
+		delete(additionalProperties, "entryTypeIdentifier")
+		delete(additionalProperties, "requiredFlag")
+		delete(additionalProperties, "displayOnScreenFlag")
+		delete(additionalProperties, "readOnlyFlag")
+		delete(additionalProperties, "listViewFlag")
+		delete(additionalProperties, "buttonUrl")
+		delete(additionalProperties, "options")
+		delete(additionalProperties, "businessUnitIds")
+		delete(additionalProperties, "locationIds")
+		delete(additionalProperties, "dateCreated")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserDefinedFieldInfo struct {

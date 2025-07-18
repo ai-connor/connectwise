@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -58,6 +57,7 @@ type CompanyManagementSummary struct {
 	MemoryUtilization NullableFloat64 `json:"memoryUtilization,omitempty"`
 	Company *CompanyReference `json:"company,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyManagementSummary CompanyManagementSummary
@@ -1575,6 +1575,11 @@ func (o CompanyManagementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1602,15 +1607,54 @@ func (o *CompanyManagementSummary) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanyManagementSummary := _CompanyManagementSummary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyManagementSummary)
+	err = json.Unmarshal(data, &varCompanyManagementSummary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyManagementSummary(varCompanyManagementSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "managementSolution")
+		delete(additionalProperties, "groupIdentifier")
+		delete(additionalProperties, "deviceType")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "snmpMachines")
+		delete(additionalProperties, "totalWorkstations")
+		delete(additionalProperties, "totalServers")
+		delete(additionalProperties, "totalWindowsServers")
+		delete(additionalProperties, "totalWindowsWorkstations")
+		delete(additionalProperties, "totalManagedMachines")
+		delete(additionalProperties, "serversOffline")
+		delete(additionalProperties, "serversDiskSpaceLow")
+		delete(additionalProperties, "failedBackupJobs")
+		delete(additionalProperties, "totalNotifications")
+		delete(additionalProperties, "successfulBackupJobs")
+		delete(additionalProperties, "serverAvailability")
+		delete(additionalProperties, "virusesRemoved")
+		delete(additionalProperties, "spywareItemsRemoved")
+		delete(additionalProperties, "windowsPatchesInstalled")
+		delete(additionalProperties, "diskCleanups")
+		delete(additionalProperties, "diskDefragmentations")
+		delete(additionalProperties, "fullyPatchedMachines")
+		delete(additionalProperties, "missingOneTwoPatchesMachines")
+		delete(additionalProperties, "missingThreeFivePatchesMachines")
+		delete(additionalProperties, "missingMoreFivePatchesMachines")
+		delete(additionalProperties, "missingUnscannedPatchesMachines")
+		delete(additionalProperties, "alertsGenerated")
+		delete(additionalProperties, "internetConnectivity")
+		delete(additionalProperties, "diskSpaceCleanedMb")
+		delete(additionalProperties, "missingSecurityPatches")
+		delete(additionalProperties, "cpuUtilization")
+		delete(additionalProperties, "memoryUtilization")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

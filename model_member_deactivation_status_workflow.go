@@ -23,7 +23,10 @@ type MemberDeactivationStatusWorkflow struct {
 	Name *string `json:"name,omitempty"`
 	Count *int32 `json:"count,omitempty"`
 	ReAssignToMember *MemberReference `json:"reAssignToMember,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberDeactivationStatusWorkflow MemberDeactivationStatusWorkflow
 
 // NewMemberDeactivationStatusWorkflow instantiates a new MemberDeactivationStatusWorkflow object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o MemberDeactivationStatusWorkflow) ToMap() (map[string]interface{}, error
 	if !IsNil(o.ReAssignToMember) {
 		toSerialize["reAssignToMember"] = o.ReAssignToMember
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberDeactivationStatusWorkflow) UnmarshalJSON(data []byte) (err error) {
+	varMemberDeactivationStatusWorkflow := _MemberDeactivationStatusWorkflow{}
+
+	err = json.Unmarshal(data, &varMemberDeactivationStatusWorkflow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberDeactivationStatusWorkflow(varMemberDeactivationStatusWorkflow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "reAssignToMember")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberDeactivationStatusWorkflow struct {

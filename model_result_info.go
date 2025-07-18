@@ -24,7 +24,10 @@ type ResultInfo struct {
 	StatusCode *int32 `json:"statusCode,omitempty"`
 	Data *IRestIdentifiedItem `json:"data,omitempty"`
 	Error *ErrorResponseMessage `json:"error,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ResultInfo ResultInfo
 
 // NewResultInfo instantiates a new ResultInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o ResultInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ResultInfo) UnmarshalJSON(data []byte) (err error) {
+	varResultInfo := _ResultInfo{}
+
+	err = json.Unmarshal(data, &varResultInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResultInfo(varResultInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "success")
+		delete(additionalProperties, "originalIndex")
+		delete(additionalProperties, "statusCode")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "error")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableResultInfo struct {

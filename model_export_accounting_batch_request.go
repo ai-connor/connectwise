@@ -41,7 +41,10 @@ type ExportAccountingBatchRequest struct {
 	ExportProductsFlag NullableBool `json:"exportProductsFlag,omitempty"`
 	IncludedProductIds []string `json:"includedProductIds,omitempty"`
 	ExcludedProductIds []string `json:"excludedProductIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExportAccountingBatchRequest ExportAccountingBatchRequest
 
 // NewExportAccountingBatchRequest instantiates a new ExportAccountingBatchRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -680,7 +683,48 @@ func (o ExportAccountingBatchRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExcludedProductIds) {
 		toSerialize["excludedProductIds"] = o.ExcludedProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExportAccountingBatchRequest) UnmarshalJSON(data []byte) (err error) {
+	varExportAccountingBatchRequest := _ExportAccountingBatchRequest{}
+
+	err = json.Unmarshal(data, &varExportAccountingBatchRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExportAccountingBatchRequest(varExportAccountingBatchRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "batchIdentifier")
+		delete(additionalProperties, "glInterfaceIdentifier")
+		delete(additionalProperties, "thruDate")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "summarizeInvoices")
+		delete(additionalProperties, "exportInvoicesFlag")
+		delete(additionalProperties, "includedInvoiceIds")
+		delete(additionalProperties, "excludedInvoiceIds")
+		delete(additionalProperties, "exportExpensesFlag")
+		delete(additionalProperties, "includedExpenseIds")
+		delete(additionalProperties, "excludedExpenseIds")
+		delete(additionalProperties, "exportPaymentsFlag")
+		delete(additionalProperties, "includedPaymentIds")
+		delete(additionalProperties, "exportProductsFlag")
+		delete(additionalProperties, "includedProductIds")
+		delete(additionalProperties, "excludedProductIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExportAccountingBatchRequest struct {

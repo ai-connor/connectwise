@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -98,6 +97,7 @@ type BillingSetup struct {
 	ExcludeAvalaraFlag NullableBool `json:"excludeAvalaraFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BillingSetup BillingSetup
@@ -2480,6 +2480,11 @@ func (o BillingSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2512,15 +2517,80 @@ func (o *BillingSetup) UnmarshalJSON(data []byte) (err error) {
 
 	varBillingSetup := _BillingSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBillingSetup)
+	err = json.Unmarshal(data, &varBillingSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BillingSetup(varBillingSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "remitName")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "addressOne")
+		delete(additionalProperties, "addressTwo")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "phone")
+		delete(additionalProperties, "invoiceTitle")
+		delete(additionalProperties, "payableName")
+		delete(additionalProperties, "topcomment")
+		delete(additionalProperties, "invoiceFooter")
+		delete(additionalProperties, "quoteFooter")
+		delete(additionalProperties, "overallInvoiceDefault")
+		delete(additionalProperties, "standardInvoiceActual")
+		delete(additionalProperties, "standardInvoiceFixed")
+		delete(additionalProperties, "progressInvoice")
+		delete(additionalProperties, "agreementInvoice")
+		delete(additionalProperties, "creditMemoInvoice")
+		delete(additionalProperties, "downPaymentInvoice")
+		delete(additionalProperties, "miscInvoice")
+		delete(additionalProperties, "salesOrderInvoice")
+		delete(additionalProperties, "excludeDoNotBillTimeFlag")
+		delete(additionalProperties, "excludeDoNotBillExpenseFlag")
+		delete(additionalProperties, "excludeDoNotBillProductFlag")
+		delete(additionalProperties, "prefixSuffixFlag")
+		delete(additionalProperties, "prefixSuffixText")
+		delete(additionalProperties, "chargeAdjToFirmFlag")
+		delete(additionalProperties, "noWatermarkFlag")
+		delete(additionalProperties, "displayTaxFlag")
+		delete(additionalProperties, "allowRestrictedDeptOnRoutingFlag")
+		delete(additionalProperties, "billTicketSeparatelyFlag")
+		delete(additionalProperties, "billTicketCompleteFlag")
+		delete(additionalProperties, "billTicketUnapprovedFlag")
+		delete(additionalProperties, "billProjectCompleteFlag")
+		delete(additionalProperties, "billProjectUnapprovedFlag")
+		delete(additionalProperties, "progressTimeFlag")
+		delete(additionalProperties, "restrictProjectDownpaymentFlag")
+		delete(additionalProperties, "billSalesOrderCompleteFlag")
+		delete(additionalProperties, "billProductAfterShipFlag")
+		delete(additionalProperties, "restrictDownpaymentFlag")
+		delete(additionalProperties, "copyNonServiceProductsFlag")
+		delete(additionalProperties, "copyServiceProductsFlag")
+		delete(additionalProperties, "copyAgreementProductsFlag")
+		delete(additionalProperties, "printLogoFlag")
+		delete(additionalProperties, "readReceiptFlag")
+		delete(additionalProperties, "deliveryReceiptFlag")
+		delete(additionalProperties, "attachXmlInvoiceFlag")
+		delete(additionalProperties, "disableRoutingEmailFlag")
+		delete(additionalProperties, "emailTemplate")
+		delete(additionalProperties, "localizedCountry")
+		delete(additionalProperties, "businessNumber")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "customLabel")
+		delete(additionalProperties, "customText")
+		delete(additionalProperties, "companyCode")
+		delete(additionalProperties, "excludeAvalaraFlag")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

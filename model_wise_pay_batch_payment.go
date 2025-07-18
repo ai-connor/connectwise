@@ -21,7 +21,10 @@ var _ MappedNullable = &WisePayBatchPayment{}
 type WisePayBatchPayment struct {
 	Amount NullableFloat64 `json:"amount,omitempty"`
 	WisePayHref *string `json:"wisePayHref,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WisePayBatchPayment WisePayBatchPayment
 
 // NewWisePayBatchPayment instantiates a new WisePayBatchPayment object
 // This constructor will assign default values to properties that have it defined,
@@ -130,7 +133,34 @@ func (o WisePayBatchPayment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WisePayHref) {
 		toSerialize["wisePayHref"] = o.WisePayHref
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WisePayBatchPayment) UnmarshalJSON(data []byte) (err error) {
+	varWisePayBatchPayment := _WisePayBatchPayment{}
+
+	err = json.Unmarshal(data, &varWisePayBatchPayment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WisePayBatchPayment(varWisePayBatchPayment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "wisePayHref")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWisePayBatchPayment struct {

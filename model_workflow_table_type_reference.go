@@ -23,7 +23,10 @@ type WorkflowTableTypeReference struct {
 	Identifier *string `json:"identifier,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WorkflowTableTypeReference WorkflowTableTypeReference
 
 // NewWorkflowTableTypeReference instantiates a new WorkflowTableTypeReference object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o WorkflowTableTypeReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WorkflowTableTypeReference) UnmarshalJSON(data []byte) (err error) {
+	varWorkflowTableTypeReference := _WorkflowTableTypeReference{}
+
+	err = json.Unmarshal(data, &varWorkflowTableTypeReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WorkflowTableTypeReference(varWorkflowTableTypeReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWorkflowTableTypeReference struct {

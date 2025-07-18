@@ -23,7 +23,10 @@ type BillingCycleInfo struct {
 	Name *string `json:"name,omitempty"`
 	DefaultFlag *bool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BillingCycleInfo BillingCycleInfo
 
 // NewBillingCycleInfo instantiates a new BillingCycleInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o BillingCycleInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BillingCycleInfo) UnmarshalJSON(data []byte) (err error) {
+	varBillingCycleInfo := _BillingCycleInfo{}
+
+	err = json.Unmarshal(data, &varBillingCycleInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BillingCycleInfo(varBillingCycleInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBillingCycleInfo struct {

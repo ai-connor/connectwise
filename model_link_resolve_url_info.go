@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &LinkResolveUrlInfo{}
 type LinkResolveUrlInfo struct {
 	ReferenceId NullableInt32 `json:"referenceId"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LinkResolveUrlInfo LinkResolveUrlInfo
@@ -117,6 +117,11 @@ func (o LinkResolveUrlInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *LinkResolveUrlInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varLinkResolveUrlInfo := _LinkResolveUrlInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLinkResolveUrlInfo)
+	err = json.Unmarshal(data, &varLinkResolveUrlInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LinkResolveUrlInfo(varLinkResolveUrlInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "referenceId")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

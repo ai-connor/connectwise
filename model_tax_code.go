@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -138,6 +137,7 @@ type TaxCode struct {
 	AddAllProductTypes NullableBool `json:"addAllProductTypes,omitempty"`
 	RemoveAllProductTypes NullableBool `json:"removeAllProductTypes,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TaxCode TaxCode
@@ -3983,6 +3983,11 @@ func (o TaxCode) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -4013,15 +4018,111 @@ func (o *TaxCode) UnmarshalJSON(data []byte) (err error) {
 
 	varTaxCode := _TaxCode{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTaxCode)
+	err = json.Unmarshal(data, &varTaxCode)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TaxCode(varTaxCode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "invoiceCaption")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "effectiveDate")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "displayOnInvoiceFlag")
+		delete(additionalProperties, "canadaCalculateGSTFlag")
+		delete(additionalProperties, "cancelDate")
+		delete(additionalProperties, "levelOneRate")
+		delete(additionalProperties, "levelOneRateType")
+		delete(additionalProperties, "levelOneTaxableMax")
+		delete(additionalProperties, "levelOneCaption")
+		delete(additionalProperties, "levelOneTaxCodeXref")
+		delete(additionalProperties, "levelOneAgencyXref")
+		delete(additionalProperties, "levelOneServicesFlag")
+		delete(additionalProperties, "levelOneExpensesFlag")
+		delete(additionalProperties, "levelOneProductsFlag")
+		delete(additionalProperties, "levelOneApplySingleUnitFlag")
+		delete(additionalProperties, "levelOneApplySingleUnitMin")
+		delete(additionalProperties, "levelOneApplySingleUnitMax")
+		delete(additionalProperties, "levelTwoRate")
+		delete(additionalProperties, "levelTwoRateType")
+		delete(additionalProperties, "levelTwoTaxableMax")
+		delete(additionalProperties, "levelTwoCaption")
+		delete(additionalProperties, "levelTwoTaxCodeXref")
+		delete(additionalProperties, "levelTwoAgencyXref")
+		delete(additionalProperties, "levelTwoServicesFlag")
+		delete(additionalProperties, "levelTwoExpensesFlag")
+		delete(additionalProperties, "levelTwoProductsFlag")
+		delete(additionalProperties, "levelTwoApplySingleUnitFlag")
+		delete(additionalProperties, "levelTwoApplySingleUnitMin")
+		delete(additionalProperties, "levelTwoApplySingleUnitMax")
+		delete(additionalProperties, "levelThreeRate")
+		delete(additionalProperties, "levelThreeRateType")
+		delete(additionalProperties, "levelThreeTaxableMax")
+		delete(additionalProperties, "levelThreeCaption")
+		delete(additionalProperties, "levelThreeTaxCodeXref")
+		delete(additionalProperties, "levelThreeAgencyXref")
+		delete(additionalProperties, "levelThreeServicesFlag")
+		delete(additionalProperties, "levelThreeExpensesFlag")
+		delete(additionalProperties, "levelThreeProductsFlag")
+		delete(additionalProperties, "levelThreeApplySingleUnitFlag")
+		delete(additionalProperties, "levelThreeApplySingleUnitMin")
+		delete(additionalProperties, "levelThreeApplySingleUnitMax")
+		delete(additionalProperties, "levelFourRate")
+		delete(additionalProperties, "levelFourRateType")
+		delete(additionalProperties, "levelFourTaxableMax")
+		delete(additionalProperties, "levelFourCaption")
+		delete(additionalProperties, "levelFourTaxCodeXref")
+		delete(additionalProperties, "levelFourAgencyXref")
+		delete(additionalProperties, "levelFourServicesFlag")
+		delete(additionalProperties, "levelFourExpensesFlag")
+		delete(additionalProperties, "levelFourProductsFlag")
+		delete(additionalProperties, "levelFourApplySingleUnitFlag")
+		delete(additionalProperties, "levelFourApplySingleUnitMin")
+		delete(additionalProperties, "levelFourApplySingleUnitMax")
+		delete(additionalProperties, "levelFiveRate")
+		delete(additionalProperties, "levelFiveRateType")
+		delete(additionalProperties, "levelFiveTaxableMax")
+		delete(additionalProperties, "levelFiveCaption")
+		delete(additionalProperties, "levelFiveTaxCodeXref")
+		delete(additionalProperties, "levelFiveAgencyXref")
+		delete(additionalProperties, "levelFiveServicesFlag")
+		delete(additionalProperties, "levelFiveExpensesFlag")
+		delete(additionalProperties, "levelFiveProductsFlag")
+		delete(additionalProperties, "levelFiveApplySingleUnitFlag")
+		delete(additionalProperties, "levelFiveApplySingleUnitMin")
+		delete(additionalProperties, "levelFiveApplySingleUnitMax")
+		delete(additionalProperties, "levelSixRate")
+		delete(additionalProperties, "levelSixRateType")
+		delete(additionalProperties, "levelSixTaxableMax")
+		delete(additionalProperties, "levelSixCaption")
+		delete(additionalProperties, "levelSixTaxCodeXref")
+		delete(additionalProperties, "levelSixAgencyXref")
+		delete(additionalProperties, "levelSixServicesFlag")
+		delete(additionalProperties, "levelSixExpensesFlag")
+		delete(additionalProperties, "levelSixProductsFlag")
+		delete(additionalProperties, "levelSixApplySingleUnitFlag")
+		delete(additionalProperties, "levelSixApplySingleUnitMin")
+		delete(additionalProperties, "levelSixApplySingleUnitMax")
+		delete(additionalProperties, "workRoleIds")
+		delete(additionalProperties, "addAllWorkRoles")
+		delete(additionalProperties, "removeAllWorkRoles")
+		delete(additionalProperties, "expenseTypeIds")
+		delete(additionalProperties, "addAllExpenseTypes")
+		delete(additionalProperties, "removeAllExpenseTypes")
+		delete(additionalProperties, "productTypeIds")
+		delete(additionalProperties, "addAllProductTypes")
+		delete(additionalProperties, "removeAllProductTypes")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

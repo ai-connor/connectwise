@@ -23,7 +23,10 @@ type WisePayFeeInvoice struct {
 	InvoiceNumber *string `json:"invoiceNumber,omitempty"`
 	Amount NullableFloat64 `json:"amount,omitempty"`
 	InvoiceHref *string `json:"invoiceHref,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WisePayFeeInvoice WisePayFeeInvoice
 
 // NewWisePayFeeInvoice instantiates a new WisePayFeeInvoice object
 // This constructor will assign default values to properties that have it defined,
@@ -212,7 +215,36 @@ func (o WisePayFeeInvoice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InvoiceHref) {
 		toSerialize["invoiceHref"] = o.InvoiceHref
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WisePayFeeInvoice) UnmarshalJSON(data []byte) (err error) {
+	varWisePayFeeInvoice := _WisePayFeeInvoice{}
+
+	err = json.Unmarshal(data, &varWisePayFeeInvoice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WisePayFeeInvoice(varWisePayFeeInvoice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "invoiceNumber")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "invoiceHref")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWisePayFeeInvoice struct {

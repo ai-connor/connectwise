@@ -21,7 +21,10 @@ var _ MappedNullable = &TemplateGeneratedCountsModel{}
 type TemplateGeneratedCountsModel struct {
 	ServiceCount *int32 `json:"serviceCount,omitempty"`
 	ScheduleCount *int32 `json:"scheduleCount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TemplateGeneratedCountsModel TemplateGeneratedCountsModel
 
 // NewTemplateGeneratedCountsModel instantiates a new TemplateGeneratedCountsModel object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o TemplateGeneratedCountsModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScheduleCount) {
 		toSerialize["scheduleCount"] = o.ScheduleCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TemplateGeneratedCountsModel) UnmarshalJSON(data []byte) (err error) {
+	varTemplateGeneratedCountsModel := _TemplateGeneratedCountsModel{}
+
+	err = json.Unmarshal(data, &varTemplateGeneratedCountsModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TemplateGeneratedCountsModel(varTemplateGeneratedCountsModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "serviceCount")
+		delete(additionalProperties, "scheduleCount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTemplateGeneratedCountsModel struct {

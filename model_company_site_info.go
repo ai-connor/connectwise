@@ -36,7 +36,10 @@ type CompanySiteInfo struct {
 	TaxCode *TaxCodeReference `json:"taxCode,omitempty"`
 	PhoneNumberExt *string `json:"phoneNumberExt,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CompanySiteInfo CompanySiteInfo
 
 // NewCompanySiteInfo instantiates a new CompanySiteInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -700,7 +703,49 @@ func (o CompanySiteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CompanySiteInfo) UnmarshalJSON(data []byte) (err error) {
+	varCompanySiteInfo := _CompanySiteInfo{}
+
+	err = json.Unmarshal(data, &varCompanySiteInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CompanySiteInfo(varCompanySiteInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "addressLine1")
+		delete(additionalProperties, "addressLine2")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "stateReference")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "addressFormat")
+		delete(additionalProperties, "phoneNumber")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "defaultShippingFlag")
+		delete(additionalProperties, "defaultBillingFlag")
+		delete(additionalProperties, "primaryAddressFlag")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "phoneNumberExt")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCompanySiteInfo struct {

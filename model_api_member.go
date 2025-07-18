@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -44,6 +43,7 @@ type ApiMember struct {
 	BlockPriceFlag NullableBool `json:"blockPriceFlag,omitempty"`
 	BlockCostFlag NullableBool `json:"blockCostFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ApiMember ApiMember
@@ -761,6 +761,11 @@ func (o ApiMember) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -788,15 +793,38 @@ func (o *ApiMember) UnmarshalJSON(data []byte) (err error) {
 
 	varApiMember := _ApiMember{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApiMember)
+	err = json.Unmarshal(data, &varApiMember)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ApiMember(varApiMember)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "emailAddress")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "inactiveDate")
+		delete(additionalProperties, "timeZone")
+		delete(additionalProperties, "securityRole")
+		delete(additionalProperties, "structureLevel")
+		delete(additionalProperties, "securityLocation")
+		delete(additionalProperties, "defaultLocation")
+		delete(additionalProperties, "defaultDepartment")
+		delete(additionalProperties, "salesDefaultLocation")
+		delete(additionalProperties, "serviceDefaultBoard")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "excludedServiceBoardIds")
+		delete(additionalProperties, "blockPriceFlag")
+		delete(additionalProperties, "blockCostFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

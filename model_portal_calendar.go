@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type PortalCalendar struct {
 	Adjust3End *string `json:"adjust3End,omitempty"`
 	Adjust3Hours NullableFloat64 `json:"adjust3Hours,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PortalCalendar PortalCalendar
@@ -507,6 +507,11 @@ func (o PortalCalendar) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -534,15 +539,31 @@ func (o *PortalCalendar) UnmarshalJSON(data []byte) (err error) {
 
 	varPortalCalendar := _PortalCalendar{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPortalCalendar)
+	err = json.Unmarshal(data, &varPortalCalendar)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PortalCalendar(varPortalCalendar)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "weekStart")
+		delete(additionalProperties, "adjust1Start")
+		delete(additionalProperties, "adjust1End")
+		delete(additionalProperties, "adjust1Hours")
+		delete(additionalProperties, "adjust2Start")
+		delete(additionalProperties, "adjust2End")
+		delete(additionalProperties, "adjust2Hours")
+		delete(additionalProperties, "adjust3Start")
+		delete(additionalProperties, "adjust3End")
+		delete(additionalProperties, "adjust3Hours")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

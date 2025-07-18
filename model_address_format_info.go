@@ -23,7 +23,10 @@ type AddressFormatInfo struct {
 	Name *string `json:"name,omitempty"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AddressFormatInfo AddressFormatInfo
 
 // NewAddressFormatInfo instantiates a new AddressFormatInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o AddressFormatInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AddressFormatInfo) UnmarshalJSON(data []byte) (err error) {
+	varAddressFormatInfo := _AddressFormatInfo{}
+
+	err = json.Unmarshal(data, &varAddressFormatInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AddressFormatInfo(varAddressFormatInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAddressFormatInfo struct {

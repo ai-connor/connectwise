@@ -21,7 +21,10 @@ var _ MappedNullable = &TimePeriodSetupReference{}
 type TimePeriodSetupReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimePeriodSetupReference TimePeriodSetupReference
 
 // NewTimePeriodSetupReference instantiates a new TimePeriodSetupReference object
 // This constructor will assign default values to properties that have it defined,
@@ -130,7 +133,34 @@ func (o TimePeriodSetupReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimePeriodSetupReference) UnmarshalJSON(data []byte) (err error) {
+	varTimePeriodSetupReference := _TimePeriodSetupReference{}
+
+	err = json.Unmarshal(data, &varTimePeriodSetupReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimePeriodSetupReference(varTimePeriodSetupReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimePeriodSetupReference struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -45,6 +44,7 @@ type Other struct {
 	// If true, all Members time zone will also be set to serverTimeZone. Otherwise, only My Company time zone will be updated.
 	UpdateMemberTimeZonesFlag NullableBool `json:"updateMemberTimeZonesFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Other Other
@@ -758,6 +758,11 @@ func (o Other) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -791,15 +796,38 @@ func (o *Other) UnmarshalJSON(data []byte) (err error) {
 
 	varOther := _Other{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOther)
+	err = json.Unmarshal(data, &varOther)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Other(varOther)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "defaultLdap")
+		delete(additionalProperties, "defaultFromAddress")
+		delete(additionalProperties, "portalUrlOverride")
+		delete(additionalProperties, "siteUrl")
+		delete(additionalProperties, "logoPath")
+		delete(additionalProperties, "contactSync")
+		delete(additionalProperties, "serverTimeZone")
+		delete(additionalProperties, "defaultCalendar")
+		delete(additionalProperties, "defaultAddressFormat")
+		delete(additionalProperties, "useSslFlag")
+		delete(additionalProperties, "syncLeadsFlag")
+		delete(additionalProperties, "includePortalLinkFlag")
+		delete(additionalProperties, "useExpandedFormatTimeFlag")
+		delete(additionalProperties, "useExpandedFormatActivityFlag")
+		delete(additionalProperties, "disableZAdminLoginFlag")
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "updateMemberTimeZonesFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

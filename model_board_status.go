@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -47,6 +46,7 @@ type BoardStatus struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	GrandParentId NullableInt32 `json:"grandParentId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BoardStatus BoardStatus
@@ -994,6 +994,11 @@ func (o BoardStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GrandParentConnectWiseId) {
 		toSerialize["grandParentConnectWiseId"] = o.GrandParentConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1021,15 +1026,42 @@ func (o *BoardStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varBoardStatus := _BoardStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBoardStatus)
+	err = json.Unmarshal(data, &varBoardStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BoardStatus(varBoardStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "displayOnBoard")
+		delete(additionalProperties, "inactive")
+		delete(additionalProperties, "closedStatus")
+		delete(additionalProperties, "timeEntryNotAllowed")
+		delete(additionalProperties, "roundRobinCatchall")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "escalationStatus")
+		delete(additionalProperties, "customerPortalDescription")
+		delete(additionalProperties, "customerPortalFlag")
+		delete(additionalProperties, "emailTemplate")
+		delete(additionalProperties, "statusIndicator")
+		delete(additionalProperties, "customStatusIndicatorName")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "saveTimeAsNote")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -128,7 +128,10 @@ type MyMember struct {
 	SsoSessionFlag NullableBool `json:"ssoSessionFlag,omitempty"`
 	SsoClientId *string `json:"ssoClientId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MyMember MyMember
 
 // NewMyMember instantiates a new MyMember object
 // This constructor will assign default values to properties that have it defined,
@@ -4352,7 +4355,139 @@ func (o MyMember) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MyMember) UnmarshalJSON(data []byte) (err error) {
+	varMyMember := _MyMember{}
+
+	err = json.Unmarshal(data, &varMyMember)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MyMember(varMyMember)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "middleInitial")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "reportCard")
+		delete(additionalProperties, "licenseClass")
+		delete(additionalProperties, "disableOnlineFlag")
+		delete(additionalProperties, "enableMobileFlag")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "employeeIdentifer")
+		delete(additionalProperties, "vendorNumber")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "timeZone")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "serviceBoardTeamIds")
+		delete(additionalProperties, "enableMobileGpsFlag")
+		delete(additionalProperties, "inactiveDate")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "lastLogin")
+		delete(additionalProperties, "photo")
+		delete(additionalProperties, "toastNotificationFlag")
+		delete(additionalProperties, "officeEmail")
+		delete(additionalProperties, "officePhone")
+		delete(additionalProperties, "officeExtension")
+		delete(additionalProperties, "mobileEmail")
+		delete(additionalProperties, "mobilePhone")
+		delete(additionalProperties, "mobileExtension")
+		delete(additionalProperties, "homeEmail")
+		delete(additionalProperties, "homePhone")
+		delete(additionalProperties, "homeExtension")
+		delete(additionalProperties, "defaultEmail")
+		delete(additionalProperties, "defaultPhone")
+		delete(additionalProperties, "securityRole")
+		delete(additionalProperties, "adminFlag")
+		delete(additionalProperties, "structureLevel")
+		delete(additionalProperties, "securityLocation")
+		delete(additionalProperties, "defaultLocation")
+		delete(additionalProperties, "defaultDepartment")
+		delete(additionalProperties, "reportsTo")
+		delete(additionalProperties, "restrictLocationFlag")
+		delete(additionalProperties, "restrictDepartmentFlag")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "timeApprover")
+		delete(additionalProperties, "expenseApprover")
+		delete(additionalProperties, "billableForecast")
+		delete(additionalProperties, "dailyCapacity")
+		delete(additionalProperties, "hourlyCost")
+		delete(additionalProperties, "hourlyRate")
+		delete(additionalProperties, "includeInUtilizationReportingFlag")
+		delete(additionalProperties, "requireExpenseEntryFlag")
+		delete(additionalProperties, "requireTimeSheetEntryFlag")
+		delete(additionalProperties, "requireStartAndEndTimeOnTimeEntryFlag")
+		delete(additionalProperties, "allowInCellEntryOnTimeSheet")
+		delete(additionalProperties, "enterTimeAgainstCompanyFlag")
+		delete(additionalProperties, "allowExpensesEnteredAgainstCompaniesFlag")
+		delete(additionalProperties, "timeReminderEmailFlag")
+		delete(additionalProperties, "daysTolerance")
+		delete(additionalProperties, "minimumHours")
+		delete(additionalProperties, "timeSheetStartDate")
+		delete(additionalProperties, "hireDate")
+		delete(additionalProperties, "serviceDefaultLocation")
+		delete(additionalProperties, "serviceDefaultDepartment")
+		delete(additionalProperties, "serviceDefaultBoard")
+		delete(additionalProperties, "restrictServiceDefaultLocationFlag")
+		delete(additionalProperties, "restrictServiceDefaultDepartmentFlag")
+		delete(additionalProperties, "excludedServiceBoardIds")
+		delete(additionalProperties, "projectDefaultLocation")
+		delete(additionalProperties, "projectDefaultDepartment")
+		delete(additionalProperties, "projectDefaultBoard")
+		delete(additionalProperties, "restrictProjectDefaultLocationFlag")
+		delete(additionalProperties, "restrictProjectDefaultDepartmentFlag")
+		delete(additionalProperties, "excludedProjectBoardIds")
+		delete(additionalProperties, "scheduleDefaultLocation")
+		delete(additionalProperties, "scheduleDefaultDepartment")
+		delete(additionalProperties, "scheduleCapacity")
+		delete(additionalProperties, "serviceLocation")
+		delete(additionalProperties, "restrictScheduleFlag")
+		delete(additionalProperties, "hideMemberInDispatchPortalFlag")
+		delete(additionalProperties, "calendar")
+		delete(additionalProperties, "salesDefaultLocation")
+		delete(additionalProperties, "restrictDefaultSalesTerritoryFlag")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "restrictDefaultWarehouseFlag")
+		delete(additionalProperties, "restrictDefaultWarehouseBinFlag")
+		delete(additionalProperties, "mapiName")
+		delete(additionalProperties, "calendarSyncIntegrationFlag")
+		delete(additionalProperties, "enableLdapAuthenticationFlag")
+		delete(additionalProperties, "ldapConfiguration")
+		delete(additionalProperties, "ldapUserName")
+		delete(additionalProperties, "companyActivityTabFormat")
+		delete(additionalProperties, "invoiceTimeTabFormat")
+		delete(additionalProperties, "invoiceScreenDefaultTabFormat")
+		delete(additionalProperties, "invoicingDisplayOptions")
+		delete(additionalProperties, "agreementInvoicingDisplayOptions")
+		delete(additionalProperties, "corelyticsUsername")
+		delete(additionalProperties, "corelyticsPassword")
+		delete(additionalProperties, "authenticationServiceType")
+		delete(additionalProperties, "timebasedOneTimePasswordActivated")
+		delete(additionalProperties, "directionalSync")
+		delete(additionalProperties, "ssoSessionFlag")
+		delete(additionalProperties, "ssoClientId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMyMember struct {

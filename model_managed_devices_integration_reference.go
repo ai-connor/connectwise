@@ -22,7 +22,10 @@ type ManagedDevicesIntegrationReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManagedDevicesIntegrationReference ManagedDevicesIntegrationReference
 
 // NewManagedDevicesIntegrationReference instantiates a new ManagedDevicesIntegrationReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o ManagedDevicesIntegrationReference) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManagedDevicesIntegrationReference) UnmarshalJSON(data []byte) (err error) {
+	varManagedDevicesIntegrationReference := _ManagedDevicesIntegrationReference{}
+
+	err = json.Unmarshal(data, &varManagedDevicesIntegrationReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManagedDevicesIntegrationReference(varManagedDevicesIntegrationReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManagedDevicesIntegrationReference struct {

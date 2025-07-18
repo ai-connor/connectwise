@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type AgreementWorkRole struct {
 	AgreementId NullableInt32 `json:"agreementId,omitempty"`
 	Agreement *AgreementReference `json:"agreement,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AgreementWorkRole AgreementWorkRole
@@ -518,6 +518,11 @@ func (o AgreementWorkRole) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -545,15 +550,31 @@ func (o *AgreementWorkRole) UnmarshalJSON(data []byte) (err error) {
 
 	varAgreementWorkRole := _AgreementWorkRole{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAgreementWorkRole)
+	err = json.Unmarshal(data, &varAgreementWorkRole)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AgreementWorkRole(varAgreementWorkRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "rateType")
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "limitTo")
+		delete(additionalProperties, "effectiveDate")
+		delete(additionalProperties, "endingDate")
+		delete(additionalProperties, "agreementId")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

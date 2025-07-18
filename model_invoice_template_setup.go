@@ -23,7 +23,10 @@ type InvoiceTemplateSetup struct {
 	Name *string `json:"name,omitempty"`
 	CustomFlag NullableBool `json:"customFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvoiceTemplateSetup InvoiceTemplateSetup
 
 // NewInvoiceTemplateSetup instantiates a new InvoiceTemplateSetup object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o InvoiceTemplateSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvoiceTemplateSetup) UnmarshalJSON(data []byte) (err error) {
+	varInvoiceTemplateSetup := _InvoiceTemplateSetup{}
+
+	err = json.Unmarshal(data, &varInvoiceTemplateSetup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvoiceTemplateSetup(varInvoiceTemplateSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "customFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvoiceTemplateSetup struct {

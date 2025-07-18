@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type ServiceSurvey struct {
 	NotifyMember *MemberReference `json:"notifyMember,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ServiceSurvey ServiceSurvey
@@ -601,6 +601,11 @@ func (o ServiceSurvey) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -628,15 +633,33 @@ func (o *ServiceSurvey) UnmarshalJSON(data []byte) (err error) {
 
 	varServiceSurvey := _ServiceSurvey{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varServiceSurvey)
+	err = json.Unmarshal(data, &varServiceSurvey)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ServiceSurvey(varServiceSurvey)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "headerIncludeLogoFlag")
+		delete(additionalProperties, "headerText")
+		delete(additionalProperties, "headerTextVisibleFlag")
+		delete(additionalProperties, "footerText")
+		delete(additionalProperties, "footerTextVisibleFlag")
+		delete(additionalProperties, "thankYouText")
+		delete(additionalProperties, "notifyWho")
+		delete(additionalProperties, "notifyWhoVisibleFlag")
+		delete(additionalProperties, "notifyMember")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

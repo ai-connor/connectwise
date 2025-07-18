@@ -26,7 +26,10 @@ type ConfigurationTypeQuestionValueInfo struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigurationTypeQuestionValueInfo ConfigurationTypeQuestionValueInfo
 
 // NewConfigurationTypeQuestionValueInfo instantiates a new ConfigurationTypeQuestionValueInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -320,7 +323,39 @@ func (o ConfigurationTypeQuestionValueInfo) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigurationTypeQuestionValueInfo) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationTypeQuestionValueInfo := _ConfigurationTypeQuestionValueInfo{}
+
+	err = json.Unmarshal(data, &varConfigurationTypeQuestionValueInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigurationTypeQuestionValueInfo(varConfigurationTypeQuestionValueInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "configurationType")
+		delete(additionalProperties, "question")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigurationTypeQuestionValueInfo struct {

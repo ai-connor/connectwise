@@ -29,7 +29,10 @@ type ExpenseReport struct {
 	Total NullableFloat64 `json:"total,omitempty"`
 	DueDate *string `json:"dueDate,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExpenseReport ExpenseReport
 
 // NewExpenseReport instantiates a new ExpenseReport object
 // This constructor will assign default values to properties that have it defined,
@@ -448,7 +451,42 @@ func (o ExpenseReport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExpenseReport) UnmarshalJSON(data []byte) (err error) {
+	varExpenseReport := _ExpenseReport{}
+
+	err = json.Unmarshal(data, &varExpenseReport)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExpenseReport(varExpenseReport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "year")
+		delete(additionalProperties, "period")
+		delete(additionalProperties, "dateStart")
+		delete(additionalProperties, "dateEnd")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "dueDate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExpenseReport struct {

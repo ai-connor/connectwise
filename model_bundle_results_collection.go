@@ -21,7 +21,10 @@ var _ MappedNullable = &BundleResultsCollection{}
 type BundleResultsCollection struct {
 	Results []BundleResult `json:"results,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BundleResultsCollection BundleResultsCollection
 
 // NewBundleResultsCollection instantiates a new BundleResultsCollection object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o BundleResultsCollection) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BundleResultsCollection) UnmarshalJSON(data []byte) (err error) {
+	varBundleResultsCollection := _BundleResultsCollection{}
+
+	err = json.Unmarshal(data, &varBundleResultsCollection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BundleResultsCollection(varBundleResultsCollection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "results")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBundleResultsCollection struct {

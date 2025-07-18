@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -42,6 +41,7 @@ type AccountingPackageSetup struct {
 	IncludeCogsEntriesFlag NullableBool `json:"includeCogsEntriesFlag,omitempty"`
 	IncludeCogsDropShipFlag NullableBool `json:"includeCogsDropShipFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AccountingPackageSetup AccountingPackageSetup
@@ -979,6 +979,11 @@ func (o AccountingPackageSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1006,15 +1011,40 @@ func (o *AccountingPackageSetup) UnmarshalJSON(data []byte) (err error) {
 
 	varAccountingPackageSetup := _AccountingPackageSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAccountingPackageSetup)
+	err = json.Unmarshal(data, &varAccountingPackageSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccountingPackageSetup(varAccountingPackageSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "accountingPackage")
+		delete(additionalProperties, "directTransferFlag")
+		delete(additionalProperties, "includeInvoicesFlag")
+		delete(additionalProperties, "invoiceFormat")
+		delete(additionalProperties, "includeExpensesFlag")
+		delete(additionalProperties, "transferExpensesAsBillFlag")
+		delete(additionalProperties, "expenseFormat")
+		delete(additionalProperties, "suppressMemoFlag")
+		delete(additionalProperties, "syncPaymentInfoFlag")
+		delete(additionalProperties, "syncWisePayPaymentInfoFlag")
+		delete(additionalProperties, "includeSalesTaxFlag")
+		delete(additionalProperties, "enableTaxGroupsFlag")
+		delete(additionalProperties, "zeroDollarTaxAmountsFlag")
+		delete(additionalProperties, "includeItemsFlag")
+		delete(additionalProperties, "inventorySOHFlag")
+		delete(additionalProperties, "sendComponentAmountFlag")
+		delete(additionalProperties, "sendUomFlag")
+		delete(additionalProperties, "includeCogsEntriesFlag")
+		delete(additionalProperties, "includeCogsDropShipFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

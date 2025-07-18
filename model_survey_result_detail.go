@@ -22,7 +22,10 @@ type SurveyResultDetail struct {
 	QuestionId NullableInt32 `json:"questionId,omitempty"`
 	// If question type is Selection, this should be the option array index.
 	Answer map[string]interface{} `json:"answer,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SurveyResultDetail SurveyResultDetail
 
 // NewSurveyResultDetail instantiates a new SurveyResultDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -131,7 +134,34 @@ func (o SurveyResultDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Answer) {
 		toSerialize["answer"] = o.Answer
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SurveyResultDetail) UnmarshalJSON(data []byte) (err error) {
+	varSurveyResultDetail := _SurveyResultDetail{}
+
+	err = json.Unmarshal(data, &varSurveyResultDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SurveyResultDetail(varSurveyResultDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "questionId")
+		delete(additionalProperties, "answer")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSurveyResultDetail struct {

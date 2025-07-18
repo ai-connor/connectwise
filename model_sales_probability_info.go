@@ -22,7 +22,10 @@ type SalesProbabilityInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Probability *int32 `json:"probability,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SalesProbabilityInfo SalesProbabilityInfo
 
 // NewSalesProbabilityInfo instantiates a new SalesProbabilityInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o SalesProbabilityInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SalesProbabilityInfo) UnmarshalJSON(data []byte) (err error) {
+	varSalesProbabilityInfo := _SalesProbabilityInfo{}
+
+	err = json.Unmarshal(data, &varSalesProbabilityInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SalesProbabilityInfo(varSalesProbabilityInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "probability")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSalesProbabilityInfo struct {

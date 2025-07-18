@@ -24,7 +24,10 @@ type ManagedDeviceAccount struct {
 	Password *string `json:"password,omitempty"`
 	ManagedDevicesIntegration *ManagedDevicesIntegrationReference `json:"managedDevicesIntegration,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManagedDeviceAccount ManagedDeviceAccount
 
 // NewManagedDeviceAccount instantiates a new ManagedDeviceAccount object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o ManagedDeviceAccount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManagedDeviceAccount) UnmarshalJSON(data []byte) (err error) {
+	varManagedDeviceAccount := _ManagedDeviceAccount{}
+
+	err = json.Unmarshal(data, &varManagedDeviceAccount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManagedDeviceAccount(varManagedDeviceAccount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "managedDevicesIntegration")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManagedDeviceAccount struct {

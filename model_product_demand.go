@@ -22,7 +22,10 @@ type ProductDemand struct {
 	ProductRecId *int32 `json:"productRecId,omitempty"`
 	Quantity *int32 `json:"quantity,omitempty"`
 	Cost NullableFloat64 `json:"cost,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductDemand ProductDemand
 
 // NewProductDemand instantiates a new ProductDemand object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o ProductDemand) ToMap() (map[string]interface{}, error) {
 	if o.Cost.IsSet() {
 		toSerialize["cost"] = o.Cost.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductDemand) UnmarshalJSON(data []byte) (err error) {
+	varProductDemand := _ProductDemand{}
+
+	err = json.Unmarshal(data, &varProductDemand)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductDemand(varProductDemand)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "productRecId")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "cost")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductDemand struct {

@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -56,6 +55,7 @@ type Addition struct {
 	InvoiceGrouping *InvoiceGroupingReference `json:"invoiceGrouping,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Addition Addition
@@ -1381,6 +1381,11 @@ func (o Addition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1409,15 +1414,51 @@ func (o *Addition) UnmarshalJSON(data []byte) (err error) {
 
 	varAddition := _Addition{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddition)
+	err = json.Unmarshal(data, &varAddition)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Addition(varAddition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "lessIncluded")
+		delete(additionalProperties, "unitPrice")
+		delete(additionalProperties, "unitCost")
+		delete(additionalProperties, "billCustomer")
+		delete(additionalProperties, "effectiveDate")
+		delete(additionalProperties, "cancelledDate")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "serialNumber")
+		delete(additionalProperties, "invoiceDescription")
+		delete(additionalProperties, "purchaseItemFlag")
+		delete(additionalProperties, "specialOrderFlag")
+		delete(additionalProperties, "agreementId")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "billedQuantity")
+		delete(additionalProperties, "uom")
+		delete(additionalProperties, "extPrice")
+		delete(additionalProperties, "extCost")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "margin")
+		delete(additionalProperties, "prorateCost")
+		delete(additionalProperties, "proratePrice")
+		delete(additionalProperties, "extendedProrateCost")
+		delete(additionalProperties, "extendedProratePrice")
+		delete(additionalProperties, "prorateCurrentPeriodFlag")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "agreementStatus")
+		delete(additionalProperties, "invoiceGrouping")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

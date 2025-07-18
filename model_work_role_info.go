@@ -23,7 +23,10 @@ type WorkRoleInfo struct {
 	Name *string `json:"name,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WorkRoleInfo WorkRoleInfo
 
 // NewWorkRoleInfo instantiates a new WorkRoleInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o WorkRoleInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WorkRoleInfo) UnmarshalJSON(data []byte) (err error) {
+	varWorkRoleInfo := _WorkRoleInfo{}
+
+	err = json.Unmarshal(data, &varWorkRoleInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WorkRoleInfo(varWorkRoleInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWorkRoleInfo struct {

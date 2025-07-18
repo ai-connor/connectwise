@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &BundleRequestsCollection{}
 // BundleRequestsCollection struct for BundleRequestsCollection
 type BundleRequestsCollection struct {
 	Requests []BundleRequest `json:"requests"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BundleRequestsCollection BundleRequestsCollection
@@ -79,6 +79,11 @@ func (o BundleRequestsCollection) MarshalJSON() ([]byte, error) {
 func (o BundleRequestsCollection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["requests"] = o.Requests
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *BundleRequestsCollection) UnmarshalJSON(data []byte) (err error) {
 
 	varBundleRequestsCollection := _BundleRequestsCollection{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBundleRequestsCollection)
+	err = json.Unmarshal(data, &varBundleRequestsCollection)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BundleRequestsCollection(varBundleRequestsCollection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requests")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

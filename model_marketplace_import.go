@@ -23,7 +23,10 @@ type MarketplaceImport struct {
 	MarketplaceImportType *string `json:"marketplaceImportType,omitempty"`
 	MarketplaceObject []interface{} `json:"marketplaceObject,omitempty"`
 	RequiredFields []string `json:"requiredFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MarketplaceImport MarketplaceImport
 
 // NewMarketplaceImport instantiates a new MarketplaceImport object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o MarketplaceImport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RequiredFields) {
 		toSerialize["requiredFields"] = o.RequiredFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MarketplaceImport) UnmarshalJSON(data []byte) (err error) {
+	varMarketplaceImport := _MarketplaceImport{}
+
+	err = json.Unmarshal(data, &varMarketplaceImport)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MarketplaceImport(varMarketplaceImport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "marketplaceImportType")
+		delete(additionalProperties, "marketplaceObject")
+		delete(additionalProperties, "requiredFields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMarketplaceImport struct {

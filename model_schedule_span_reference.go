@@ -22,7 +22,10 @@ type ScheduleSpanReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Identifier *string `json:"identifier,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScheduleSpanReference ScheduleSpanReference
 
 // NewScheduleSpanReference instantiates a new ScheduleSpanReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o ScheduleSpanReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduleSpanReference) UnmarshalJSON(data []byte) (err error) {
+	varScheduleSpanReference := _ScheduleSpanReference{}
+
+	err = json.Unmarshal(data, &varScheduleSpanReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduleSpanReference(varScheduleSpanReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduleSpanReference struct {

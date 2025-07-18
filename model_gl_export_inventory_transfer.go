@@ -59,7 +59,10 @@ type GLExportInventoryTransfer struct {
 	CogsXref *string `json:"cogsXref,omitempty"`
 	TaxNote *string `json:"taxNote,omitempty"`
 	Offset *GLExportInventoryTransferOffset `json:"offset,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportInventoryTransfer GLExportInventoryTransfer
 
 // NewGLExportInventoryTransfer instantiates a new GLExportInventoryTransfer object
 // This constructor will assign default values to properties that have it defined,
@@ -1558,7 +1561,72 @@ func (o GLExportInventoryTransfer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Offset) {
 		toSerialize["offset"] = o.Offset
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportInventoryTransfer) UnmarshalJSON(data []byte) (err error) {
+	varGLExportInventoryTransfer := _GLExportInventoryTransfer{}
+
+	err = json.Unmarshal(data, &varGLExportInventoryTransfer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportInventoryTransfer(varGLExportInventoryTransfer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "documentType")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "glTypeId")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "salesCode")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "costAccountNumber")
+		delete(additionalProperties, "inventoryAccountNumber")
+		delete(additionalProperties, "transferId")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "glItemId")
+		delete(additionalProperties, "salesDescription")
+		delete(additionalProperties, "itemDescription")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "itemPrice")
+		delete(additionalProperties, "taxable")
+		delete(additionalProperties, "unitOfMeasure")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "subCategory")
+		delete(additionalProperties, "serializedFlag")
+		delete(additionalProperties, "serialNumbers")
+		delete(additionalProperties, "bin")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "transferFromBin")
+		delete(additionalProperties, "transferFromLocationXref")
+		delete(additionalProperties, "transferToBin")
+		delete(additionalProperties, "transferToLocationXref")
+		delete(additionalProperties, "locationXref")
+		delete(additionalProperties, "priceLevelXref")
+		delete(additionalProperties, "uomScheduleXref")
+		delete(additionalProperties, "itemTypeXref")
+		delete(additionalProperties, "inventoryXref")
+		delete(additionalProperties, "cogsXref")
+		delete(additionalProperties, "taxNote")
+		delete(additionalProperties, "offset")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportInventoryTransfer struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -41,6 +40,7 @@ type WarehouseBin struct {
 	Company *CompanyReference `json:"company,omitempty"`
 	TransferBin *WarehouseBinReference `json:"transferBin,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WarehouseBin WarehouseBin
@@ -809,6 +809,11 @@ func (o WarehouseBin) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -837,15 +842,38 @@ func (o *WarehouseBin) UnmarshalJSON(data []byte) (err error) {
 
 	varWarehouseBin := _WarehouseBin{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWarehouseBin)
+	err = json.Unmarshal(data, &varWarehouseBin)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WarehouseBin(varWarehouseBin)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "minQuantity")
+		delete(additionalProperties, "maxQuantity")
+		delete(additionalProperties, "overflowBin")
+		delete(additionalProperties, "manager")
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "quantityOnHand")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "transferBin")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

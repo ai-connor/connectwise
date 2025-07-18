@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -46,6 +45,7 @@ type Country struct {
 	Disabled *bool `json:"disabled,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Country Country
@@ -684,6 +684,11 @@ func (o Country) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -712,15 +717,36 @@ func (o *Country) UnmarshalJSON(data []byte) (err error) {
 
 	varCountry := _Country{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCountry)
+	err = json.Unmarshal(data, &varCountry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Country(varCountry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "cityCaption")
+		delete(additionalProperties, "stateCaption")
+		delete(additionalProperties, "zipCaption")
+		delete(additionalProperties, "zipMinimumLength")
+		delete(additionalProperties, "dialingPrefix")
+		delete(additionalProperties, "addressFormat")
+		delete(additionalProperties, "countryCode")
+		delete(additionalProperties, "coreEntityCountryCode")
+		delete(additionalProperties, "localizationCaptionOne")
+		delete(additionalProperties, "localizationValueOne")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

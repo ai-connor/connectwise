@@ -23,7 +23,10 @@ type RmaStatusInfo struct {
 	Name *string `json:"name,omitempty"`
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RmaStatusInfo RmaStatusInfo
 
 // NewRmaStatusInfo instantiates a new RmaStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o RmaStatusInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RmaStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varRmaStatusInfo := _RmaStatusInfo{}
+
+	err = json.Unmarshal(data, &varRmaStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RmaStatusInfo(varRmaStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRmaStatusInfo struct {

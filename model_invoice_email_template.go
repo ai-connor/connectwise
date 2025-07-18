@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type InvoiceEmailTemplate struct {
 	AttachInvoiceFlag NullableBool `json:"attachInvoiceFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InvoiceEmailTemplate InvoiceEmailTemplate
@@ -573,6 +573,11 @@ func (o InvoiceEmailTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -601,15 +606,33 @@ func (o *InvoiceEmailTemplate) UnmarshalJSON(data []byte) (err error) {
 
 	varInvoiceEmailTemplate := _InvoiceEmailTemplate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInvoiceEmailTemplate)
+	err = json.Unmarshal(data, &varInvoiceEmailTemplate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InvoiceEmailTemplate(varInvoiceEmailTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "serviceSurvey")
+		delete(additionalProperties, "useSenderFlag")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "emailAddress")
+		delete(additionalProperties, "subject")
+		delete(additionalProperties, "body")
+		delete(additionalProperties, "copySenderFlag")
+		delete(additionalProperties, "invoiceStatus")
+		delete(additionalProperties, "attachInvoiceFlag")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

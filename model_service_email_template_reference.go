@@ -24,7 +24,10 @@ type ServiceEmailTemplateReference struct {
 	Name *string `json:"name,omitempty"`
 	Type *string `json:"type,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceEmailTemplateReference ServiceEmailTemplateReference
 
 // NewServiceEmailTemplateReference instantiates a new ServiceEmailTemplateReference object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o ServiceEmailTemplateReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceEmailTemplateReference) UnmarshalJSON(data []byte) (err error) {
+	varServiceEmailTemplateReference := _ServiceEmailTemplateReference{}
+
+	err = json.Unmarshal(data, &varServiceEmailTemplateReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceEmailTemplateReference(varServiceEmailTemplateReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceEmailTemplateReference struct {

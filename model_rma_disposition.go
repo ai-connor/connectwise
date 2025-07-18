@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type RmaDisposition struct {
 	Name string `json:"name"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RmaDisposition RmaDisposition
@@ -198,6 +198,11 @@ func (o RmaDisposition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -225,15 +230,23 @@ func (o *RmaDisposition) UnmarshalJSON(data []byte) (err error) {
 
 	varRmaDisposition := _RmaDisposition{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRmaDisposition)
+	err = json.Unmarshal(data, &varRmaDisposition)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RmaDisposition(varRmaDisposition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

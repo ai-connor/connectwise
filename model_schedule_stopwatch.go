@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -42,6 +41,7 @@ type ScheduleStopwatch struct {
 	TotalPauseTime NullableInt32 `json:"totalPauseTime,omitempty"`
 	WorkRole *WorkRoleReference `json:"workRole,omitempty"`
 	WorkType *WorkTypeReference `json:"workType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleStopwatch ScheduleStopwatch
@@ -775,6 +775,11 @@ func (o ScheduleStopwatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WorkType) {
 		toSerialize["workType"] = o.WorkType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -804,15 +809,38 @@ func (o *ScheduleStopwatch) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleStopwatch := _ScheduleStopwatch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleStopwatch)
+	err = json.Unmarshal(data, &varScheduleStopwatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleStopwatch(varScheduleStopwatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "dateEntered")
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "scheduleId")
+		delete(additionalProperties, "scheduleMobileGuid")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "totalPauseTime")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

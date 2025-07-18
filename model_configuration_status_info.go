@@ -24,7 +24,10 @@ type ConfigurationStatusInfo struct {
 	ClosedFlag NullableBool `json:"closedFlag,omitempty"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigurationStatusInfo ConfigurationStatusInfo
 
 // NewConfigurationStatusInfo instantiates a new ConfigurationStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -248,7 +251,37 @@ func (o ConfigurationStatusInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigurationStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationStatusInfo := _ConfigurationStatusInfo{}
+
+	err = json.Unmarshal(data, &varConfigurationStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigurationStatusInfo(varConfigurationStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigurationStatusInfo struct {

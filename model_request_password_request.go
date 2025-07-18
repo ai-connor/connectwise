@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &RequestPasswordRequest{}
 // RequestPasswordRequest struct for RequestPasswordRequest
 type RequestPasswordRequest struct {
 	Email string `json:"email"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestPasswordRequest RequestPasswordRequest
@@ -79,6 +79,11 @@ func (o RequestPasswordRequest) MarshalJSON() ([]byte, error) {
 func (o RequestPasswordRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["email"] = o.Email
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *RequestPasswordRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestPasswordRequest := _RequestPasswordRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestPasswordRequest)
+	err = json.Unmarshal(data, &varRequestPasswordRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestPasswordRequest(varRequestPasswordRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

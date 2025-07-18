@@ -24,7 +24,10 @@ type MemberDeactivationCompanyTeam struct {
 	ReAssignToContact *ContactReference `json:"reAssignToContact,omitempty"`
 	Count *int32 `json:"count,omitempty"`
 	ReAssignToMember *MemberReference `json:"reAssignToMember,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberDeactivationCompanyTeam MemberDeactivationCompanyTeam
 
 // NewMemberDeactivationCompanyTeam instantiates a new MemberDeactivationCompanyTeam object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o MemberDeactivationCompanyTeam) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReAssignToMember) {
 		toSerialize["reAssignToMember"] = o.ReAssignToMember
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberDeactivationCompanyTeam) UnmarshalJSON(data []byte) (err error) {
+	varMemberDeactivationCompanyTeam := _MemberDeactivationCompanyTeam{}
+
+	err = json.Unmarshal(data, &varMemberDeactivationCompanyTeam)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberDeactivationCompanyTeam(varMemberDeactivationCompanyTeam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "reAssignToContact")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "reAssignToMember")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberDeactivationCompanyTeam struct {

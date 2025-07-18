@@ -23,7 +23,10 @@ type FilterValues struct {
 	OrderBy *string `json:"orderBy,omitempty"`
 	Childconditions *string `json:"childconditions,omitempty"`
 	Customfieldconditions *string `json:"customfieldconditions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FilterValues FilterValues
 
 // NewFilterValues instantiates a new FilterValues object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o FilterValues) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Customfieldconditions) {
 		toSerialize["customfieldconditions"] = o.Customfieldconditions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FilterValues) UnmarshalJSON(data []byte) (err error) {
+	varFilterValues := _FilterValues{}
+
+	err = json.Unmarshal(data, &varFilterValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterValues(varFilterValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conditions")
+		delete(additionalProperties, "orderBy")
+		delete(additionalProperties, "childconditions")
+		delete(additionalProperties, "customfieldconditions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFilterValues struct {

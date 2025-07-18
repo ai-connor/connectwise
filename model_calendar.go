@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type Calendar struct {
 	SundayStartTime *string `json:"sundayStartTime,omitempty"`
 	SundayEndTime *string `json:"sundayEndTime,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Calendar Calendar
@@ -691,6 +691,11 @@ func (o Calendar) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -718,15 +723,37 @@ func (o *Calendar) UnmarshalJSON(data []byte) (err error) {
 
 	varCalendar := _Calendar{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCalendar)
+	err = json.Unmarshal(data, &varCalendar)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Calendar(varCalendar)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "holidayList")
+		delete(additionalProperties, "mondayStartTime")
+		delete(additionalProperties, "mondayEndTime")
+		delete(additionalProperties, "tuesdayStartTime")
+		delete(additionalProperties, "tuesdayEndTime")
+		delete(additionalProperties, "wednesdayStartTime")
+		delete(additionalProperties, "wednesdayEndTime")
+		delete(additionalProperties, "thursdayStartTime")
+		delete(additionalProperties, "thursdayEndTime")
+		delete(additionalProperties, "fridayStartTime")
+		delete(additionalProperties, "fridayEndTime")
+		delete(additionalProperties, "saturdayStartTime")
+		delete(additionalProperties, "saturdayEndTime")
+		delete(additionalProperties, "sundayStartTime")
+		delete(additionalProperties, "sundayEndTime")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

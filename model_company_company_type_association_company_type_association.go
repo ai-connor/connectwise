@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CompanyCompanyTypeAssociationCompanyTypeAssociation struct {
 	Type CompanyTypeReference `json:"type"`
 	Company CompanyReference `json:"company"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyCompanyTypeAssociationCompanyTypeAssociation CompanyCompanyTypeAssociationCompanyTypeAssociation
@@ -178,6 +178,11 @@ func (o CompanyCompanyTypeAssociationCompanyTypeAssociation) ToMap() (map[string
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -206,15 +211,23 @@ func (o *CompanyCompanyTypeAssociationCompanyTypeAssociation) UnmarshalJSON(data
 
 	varCompanyCompanyTypeAssociationCompanyTypeAssociation := _CompanyCompanyTypeAssociationCompanyTypeAssociation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyCompanyTypeAssociationCompanyTypeAssociation)
+	err = json.Unmarshal(data, &varCompanyCompanyTypeAssociationCompanyTypeAssociation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyCompanyTypeAssociationCompanyTypeAssociation(varCompanyCompanyTypeAssociationCompanyTypeAssociation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

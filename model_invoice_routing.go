@@ -27,7 +27,10 @@ type InvoiceRouting struct {
 	ReviewedFlag *bool `json:"reviewedFlag,omitempty"`
 	DateReviewedUTC *time.Time `json:"dateReviewedUTC,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvoiceRouting InvoiceRouting
 
 // NewInvoiceRouting instantiates a new InvoiceRouting object
 // This constructor will assign default values to properties that have it defined,
@@ -311,7 +314,39 @@ func (o InvoiceRouting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvoiceRouting) UnmarshalJSON(data []byte) (err error) {
+	varInvoiceRouting := _InvoiceRouting{}
+
+	err = json.Unmarshal(data, &varInvoiceRouting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvoiceRouting(varInvoiceRouting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "reviewedFlag")
+		delete(additionalProperties, "dateReviewedUTC")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvoiceRouting struct {

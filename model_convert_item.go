@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ConvertItem struct {
 	Project *ProjectReference `json:"project,omitempty"`
 	Phase *ProjectPhaseReference `json:"phase,omitempty"`
 	WbsCode *string `json:"wbsCode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConvertItem ConvertItem
@@ -225,6 +225,11 @@ func (o ConvertItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WbsCode) {
 		toSerialize["wbsCode"] = o.WbsCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,24 @@ func (o *ConvertItem) UnmarshalJSON(data []byte) (err error) {
 
 	varConvertItem := _ConvertItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConvertItem)
+	err = json.Unmarshal(data, &varConvertItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConvertItem(varConvertItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "recordType")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "phase")
+		delete(additionalProperties, "wbsCode")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

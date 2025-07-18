@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PricingBreak struct {
 	Unlimited *bool `json:"unlimited,omitempty"`
 	PriceMethod NullableString `json:"priceMethod"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PricingBreak PricingBreak
@@ -356,6 +356,11 @@ func (o PricingBreak) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -384,15 +389,27 @@ func (o *PricingBreak) UnmarshalJSON(data []byte) (err error) {
 
 	varPricingBreak := _PricingBreak{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPricingBreak)
+	err = json.Unmarshal(data, &varPricingBreak)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PricingBreak(varPricingBreak)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "detailId")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "quantityStart")
+		delete(additionalProperties, "quantityEnd")
+		delete(additionalProperties, "unlimited")
+		delete(additionalProperties, "priceMethod")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

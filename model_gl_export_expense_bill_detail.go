@@ -31,7 +31,10 @@ type GLExportExpenseBillDetail struct {
 	Billable NullableBool `json:"billable,omitempty"`
 	Reimbursable NullableBool `json:"reimbursable,omitempty"`
 	CompanyAdvance NullableBool `json:"companyAdvance,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportExpenseBillDetail GLExportExpenseBillDetail
 
 // NewGLExportExpenseBillDetail instantiates a new GLExportExpenseBillDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -520,7 +523,44 @@ func (o GLExportExpenseBillDetail) ToMap() (map[string]interface{}, error) {
 	if o.CompanyAdvance.IsSet() {
 		toSerialize["companyAdvance"] = o.CompanyAdvance.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportExpenseBillDetail) UnmarshalJSON(data []byte) (err error) {
+	varGLExportExpenseBillDetail := _GLExportExpenseBillDetail{}
+
+	err = json.Unmarshal(data, &varGLExportExpenseBillDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportExpenseBillDetail(varGLExportExpenseBillDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "glTypeId")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "expenseClass")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "billable")
+		delete(additionalProperties, "reimbursable")
+		delete(additionalProperties, "companyAdvance")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportExpenseBillDetail struct {

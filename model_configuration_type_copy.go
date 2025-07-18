@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ConfigurationTypeCopy struct {
 	Id int32 `json:"id"`
 	//  Max length: 50;
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfigurationTypeCopy ConfigurationTypeCopy
@@ -107,6 +107,11 @@ func (o ConfigurationTypeCopy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *ConfigurationTypeCopy) UnmarshalJSON(data []byte) (err error) {
 
 	varConfigurationTypeCopy := _ConfigurationTypeCopy{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfigurationTypeCopy)
+	err = json.Unmarshal(data, &varConfigurationTypeCopy)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfigurationTypeCopy(varConfigurationTypeCopy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

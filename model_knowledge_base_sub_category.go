@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type KnowledgeBaseSubCategory struct {
 	Location *SystemLocationReference `json:"location,omitempty"`
 	Department *SystemDepartmentReference `json:"department,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _KnowledgeBaseSubCategory KnowledgeBaseSubCategory
@@ -251,6 +251,11 @@ func (o KnowledgeBaseSubCategory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -279,15 +284,25 @@ func (o *KnowledgeBaseSubCategory) UnmarshalJSON(data []byte) (err error) {
 
 	varKnowledgeBaseSubCategory := _KnowledgeBaseSubCategory{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varKnowledgeBaseSubCategory)
+	err = json.Unmarshal(data, &varKnowledgeBaseSubCategory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = KnowledgeBaseSubCategory(varKnowledgeBaseSubCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

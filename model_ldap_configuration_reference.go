@@ -23,7 +23,10 @@ type LdapConfigurationReference struct {
 	Name *string `json:"name,omitempty"`
 	Server *string `json:"server,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LdapConfigurationReference LdapConfigurationReference
 
 // NewLdapConfigurationReference instantiates a new LdapConfigurationReference object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o LdapConfigurationReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LdapConfigurationReference) UnmarshalJSON(data []byte) (err error) {
+	varLdapConfigurationReference := _LdapConfigurationReference{}
+
+	err = json.Unmarshal(data, &varLdapConfigurationReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LdapConfigurationReference(varLdapConfigurationReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "server")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLdapConfigurationReference struct {

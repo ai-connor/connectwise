@@ -39,7 +39,10 @@ type WorkflowActionUserDefinedField struct {
 	ParentConnectWiseId *string `json:"parentConnectWiseId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WorkflowActionUserDefinedField WorkflowActionUserDefinedField
 
 // NewWorkflowActionUserDefinedField instantiates a new WorkflowActionUserDefinedField object
 // This constructor will assign default values to properties that have it defined,
@@ -748,7 +751,50 @@ func (o WorkflowActionUserDefinedField) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WorkflowActionUserDefinedField) UnmarshalJSON(data []byte) (err error) {
+	varWorkflowActionUserDefinedField := _WorkflowActionUserDefinedField{}
+
+	err = json.Unmarshal(data, &varWorkflowActionUserDefinedField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WorkflowActionUserDefinedField(varWorkflowActionUserDefinedField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "eventId")
+		delete(additionalProperties, "actionId")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "userDefinedFieldId")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "overwriteFlag")
+		delete(additionalProperties, "podDescription")
+		delete(additionalProperties, "fieldTypeId")
+		delete(additionalProperties, "entryTypeId")
+		delete(additionalProperties, "requiredFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWorkflowActionUserDefinedField struct {

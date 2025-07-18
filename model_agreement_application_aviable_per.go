@@ -22,7 +22,10 @@ type AgreementApplicationAviablePer struct {
 	Id *int32 `json:"id,omitempty"`
 	Tag *string `json:"tag,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementApplicationAviablePer AgreementApplicationAviablePer
 
 // NewAgreementApplicationAviablePer instantiates a new AgreementApplicationAviablePer object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o AgreementApplicationAviablePer) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementApplicationAviablePer) UnmarshalJSON(data []byte) (err error) {
+	varAgreementApplicationAviablePer := _AgreementApplicationAviablePer{}
+
+	err = json.Unmarshal(data, &varAgreementApplicationAviablePer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementApplicationAviablePer(varAgreementApplicationAviablePer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "tag")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementApplicationAviablePer struct {

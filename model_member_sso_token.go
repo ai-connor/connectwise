@@ -20,7 +20,10 @@ var _ MappedNullable = &MemberSsoToken{}
 // MemberSsoToken struct for MemberSsoToken
 type MemberSsoToken struct {
 	Token *string `json:"token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberSsoToken MemberSsoToken
 
 // NewMemberSsoToken instantiates a new MemberSsoToken object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o MemberSsoToken) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberSsoToken) UnmarshalJSON(data []byte) (err error) {
+	varMemberSsoToken := _MemberSsoToken{}
+
+	err = json.Unmarshal(data, &varMemberSsoToken)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberSsoToken(varMemberSsoToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberSsoToken struct {

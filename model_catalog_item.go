@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -75,6 +74,7 @@ type CatalogItem struct {
 	AutoUpdateUnitPriceFlag NullableBool `json:"autoUpdateUnitPriceFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CatalogItem CatalogItem
@@ -1966,6 +1966,11 @@ func (o CatalogItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1997,15 +2002,66 @@ func (o *CatalogItem) UnmarshalJSON(data []byte) (err error) {
 
 	varCatalogItem := _CatalogItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCatalogItem)
+	err = json.Unmarshal(data, &varCatalogItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CatalogItem(varCatalogItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "subcategory")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "productClass")
+		delete(additionalProperties, "serializedFlag")
+		delete(additionalProperties, "serializedCostFlag")
+		delete(additionalProperties, "phaseProductFlag")
+		delete(additionalProperties, "unitOfMeasure")
+		delete(additionalProperties, "minStockLevel")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "priceAttribute")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "dropShipFlag")
+		delete(additionalProperties, "specialOrderFlag")
+		delete(additionalProperties, "customerDescription")
+		delete(additionalProperties, "manufacturer")
+		delete(additionalProperties, "manufacturerPartNumber")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "vendorSku")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "integrationXRef")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "recurringFlag")
+		delete(additionalProperties, "recurringRevenue")
+		delete(additionalProperties, "recurringCost")
+		delete(additionalProperties, "recurringOneTimeFlag")
+		delete(additionalProperties, "recurringBillCycle")
+		delete(additionalProperties, "recurringCycleType")
+		delete(additionalProperties, "calculatedPriceFlag")
+		delete(additionalProperties, "calculatedCostFlag")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "calculatedPrice")
+		delete(additionalProperties, "calculatedCost")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "markupPercentage")
+		delete(additionalProperties, "markupFlag")
+		delete(additionalProperties, "autoUpdateUnitCostFlag")
+		delete(additionalProperties, "autoUpdateUnitPriceFlag")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

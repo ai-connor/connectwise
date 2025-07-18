@@ -71,7 +71,10 @@ type UnpostedProcurement struct {
 	FreightCost NullableFloat64 `json:"freightCost,omitempty"`
 	DateClosed *string `json:"dateClosed,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UnpostedProcurement UnpostedProcurement
 
 // NewUnpostedProcurement instantiates a new UnpostedProcurement object
 // This constructor will assign default values to properties that have it defined,
@@ -1905,7 +1908,77 @@ func (o UnpostedProcurement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UnpostedProcurement) UnmarshalJSON(data []byte) (err error) {
+	varUnpostedProcurement := _UnpostedProcurement{}
+
+	err = json.Unmarshal(data, &varUnpostedProcurement)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnpostedProcurement(varUnpostedProcurement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "unpostedProductId")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "departmentId")
+		delete(additionalProperties, "procurementType")
+		delete(additionalProperties, "purchaseOrder")
+		delete(additionalProperties, "purchaseDate")
+		delete(additionalProperties, "trackingNumber")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "avalaraTaxFlag")
+		delete(additionalProperties, "itemTaxableFlag")
+		delete(additionalProperties, "purchaseOrderTaxableFlag")
+		delete(additionalProperties, "stateTaxFlag")
+		delete(additionalProperties, "stateTaxXref")
+		delete(additionalProperties, "stateTaxAmount")
+		delete(additionalProperties, "countyTaxFlag")
+		delete(additionalProperties, "countyTaxXref")
+		delete(additionalProperties, "countyTaxAmount")
+		delete(additionalProperties, "cityTaxFlag")
+		delete(additionalProperties, "cityTaxXref")
+		delete(additionalProperties, "cityTaxAmount")
+		delete(additionalProperties, "countryTaxFlag")
+		delete(additionalProperties, "countryTaxXref")
+		delete(additionalProperties, "countryTaxAmount")
+		delete(additionalProperties, "compositeTaxFlag")
+		delete(additionalProperties, "compositeTaxXref")
+		delete(additionalProperties, "compositeTaxAmount")
+		delete(additionalProperties, "levelSixTaxFlag")
+		delete(additionalProperties, "levelSixTaxXref")
+		delete(additionalProperties, "levelSixTaxAmount")
+		delete(additionalProperties, "taxTotal")
+		delete(additionalProperties, "customer")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "vendorAccountNumber")
+		delete(additionalProperties, "vendorInvoiceNumber")
+		delete(additionalProperties, "vendorInvoiceDate")
+		delete(additionalProperties, "taxFreightFlag")
+		delete(additionalProperties, "freightTaxTotal")
+		delete(additionalProperties, "freightCost")
+		delete(additionalProperties, "dateClosed")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnpostedProcurement struct {

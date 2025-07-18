@@ -28,7 +28,10 @@ type HolidayInfo struct {
 	TimeEnd *string `json:"timeEnd,omitempty"`
 	HolidayList *HolidayListReference `json:"holidayList,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HolidayInfo HolidayInfo
 
 // NewHolidayInfo instantiates a new HolidayInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -347,7 +350,40 @@ func (o HolidayInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HolidayInfo) UnmarshalJSON(data []byte) (err error) {
+	varHolidayInfo := _HolidayInfo{}
+
+	err = json.Unmarshal(data, &varHolidayInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HolidayInfo(varHolidayInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "allDayFlag")
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "timeStart")
+		delete(additionalProperties, "timeEnd")
+		delete(additionalProperties, "holidayList")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHolidayInfo struct {

@@ -23,7 +23,10 @@ type ImportMassMaintenance struct {
 	DeletedCompanyCount *int32 `json:"deletedCompanyCount,omitempty"`
 	Message *string `json:"message,omitempty"`
 	Success *bool `json:"success,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ImportMassMaintenance ImportMassMaintenance
 
 // NewImportMassMaintenance instantiates a new ImportMassMaintenance object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o ImportMassMaintenance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Success) {
 		toSerialize["success"] = o.Success
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ImportMassMaintenance) UnmarshalJSON(data []byte) (err error) {
+	varImportMassMaintenance := _ImportMassMaintenance{}
+
+	err = json.Unmarshal(data, &varImportMassMaintenance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ImportMassMaintenance(varImportMassMaintenance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deletedContactCount")
+		delete(additionalProperties, "deletedCompanyCount")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "success")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableImportMassMaintenance struct {

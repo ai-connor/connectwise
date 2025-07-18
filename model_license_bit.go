@@ -21,7 +21,10 @@ var _ MappedNullable = &LicenseBit{}
 type LicenseBit struct {
 	Name *string `json:"name,omitempty"`
 	ActiveFlag *bool `json:"activeFlag,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LicenseBit LicenseBit
 
 // NewLicenseBit instantiates a new LicenseBit object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o LicenseBit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ActiveFlag) {
 		toSerialize["activeFlag"] = o.ActiveFlag
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LicenseBit) UnmarshalJSON(data []byte) (err error) {
+	varLicenseBit := _LicenseBit{}
+
+	err = json.Unmarshal(data, &varLicenseBit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LicenseBit(varLicenseBit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "activeFlag")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLicenseBit struct {

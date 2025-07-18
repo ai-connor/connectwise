@@ -30,7 +30,10 @@ type ChargeCodeInfo struct {
 	WorkRole *WorkRoleReference `json:"workRole,omitempty"`
 	ExpenseTypeIds []int32 `json:"expenseTypeIds,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ChargeCodeInfo ChargeCodeInfo
 
 // NewChargeCodeInfo instantiates a new ChargeCodeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -474,7 +477,43 @@ func (o ChargeCodeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ChargeCodeInfo) UnmarshalJSON(data []byte) (err error) {
+	varChargeCodeInfo := _ChargeCodeInfo{}
+
+	err = json.Unmarshal(data, &varChargeCodeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ChargeCodeInfo(varChargeCodeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "expenseEntryFlag")
+		delete(additionalProperties, "allowAllExpenseTypeFlag")
+		delete(additionalProperties, "timeEntryFlag")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "expenseTypeIds")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableChargeCodeInfo struct {

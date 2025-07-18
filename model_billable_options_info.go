@@ -30,7 +30,10 @@ type BillableOptionsInfo struct {
 	IncludeNoDefaultFlag *bool `json:"includeNoDefaultFlag,omitempty"`
 	Name *string `json:"name,omitempty"`
 	EnumId *string `json:"enumId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BillableOptionsInfo BillableOptionsInfo
 
 // NewBillableOptionsInfo instantiates a new BillableOptionsInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -444,7 +447,43 @@ func (o BillableOptionsInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EnumId) {
 		toSerialize["enumId"] = o.EnumId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BillableOptionsInfo) UnmarshalJSON(data []byte) (err error) {
+	varBillableOptionsInfo := _BillableOptionsInfo{}
+
+	err = json.Unmarshal(data, &varBillableOptionsInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BillableOptionsInfo(varBillableOptionsInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "optionId")
+		delete(additionalProperties, "billableFlag")
+		delete(additionalProperties, "invoiceFlag")
+		delete(additionalProperties, "timeFlag")
+		delete(additionalProperties, "expenseFlag")
+		delete(additionalProperties, "productFlag")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "includeNoDefaultFlag")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "enumId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBillableOptionsInfo struct {

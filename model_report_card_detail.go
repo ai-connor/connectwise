@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ReportCardDetail struct {
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
 	ReportCard *ReportCardReference `json:"reportCard,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReportCardDetail ReportCardDetail
@@ -233,6 +233,11 @@ func (o ReportCardDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -260,15 +265,24 @@ func (o *ReportCardDetail) UnmarshalJSON(data []byte) (err error) {
 
 	varReportCardDetail := _ReportCardDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReportCardDetail)
+	err = json.Unmarshal(data, &varReportCardDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReportCardDetail(varReportCardDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "kpi")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "reportCard")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

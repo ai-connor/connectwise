@@ -20,7 +20,10 @@ var _ MappedNullable = &HttpContent{}
 // HttpContent struct for HttpContent
 type HttpContent struct {
 	Headers []interface{} `json:"headers,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HttpContent HttpContent
 
 // NewHttpContent instantiates a new HttpContent object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o HttpContent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Headers) {
 		toSerialize["headers"] = o.Headers
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HttpContent) UnmarshalJSON(data []byte) (err error) {
+	varHttpContent := _HttpContent{}
+
+	err = json.Unmarshal(data, &varHttpContent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HttpContent(varHttpContent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "headers")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHttpContent struct {

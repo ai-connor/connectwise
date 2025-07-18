@@ -29,7 +29,10 @@ type PortalSecuritySetting struct {
 	LevelFive NullableBool `json:"levelFive,omitempty"`
 	LevelSix NullableBool `json:"levelSix,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PortalSecuritySetting PortalSecuritySetting
 
 // NewPortalSecuritySetting instantiates a new PortalSecuritySetting object
 // This constructor will assign default values to properties that have it defined,
@@ -468,7 +471,42 @@ func (o PortalSecuritySetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PortalSecuritySetting) UnmarshalJSON(data []byte) (err error) {
+	varPortalSecuritySetting := _PortalSecuritySetting{}
+
+	err = json.Unmarshal(data, &varPortalSecuritySetting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PortalSecuritySetting(varPortalSecuritySetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "functionIdentifier")
+		delete(additionalProperties, "functionDescription")
+		delete(additionalProperties, "levelOne")
+		delete(additionalProperties, "levelTwo")
+		delete(additionalProperties, "levelThree")
+		delete(additionalProperties, "levelFour")
+		delete(additionalProperties, "levelFive")
+		delete(additionalProperties, "levelSix")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePortalSecuritySetting struct {

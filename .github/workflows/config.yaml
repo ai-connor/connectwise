@@ -6,3 +6,4 @@ globalProperties:
 additionalProperties:
   hideGenerationTimestamp: true
   packageName: cwapi
+  disallowAdditionalPropertiesIfNotPresent: false

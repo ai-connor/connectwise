@@ -22,7 +22,10 @@ type PurchaseOrderInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PurchaseOrderInfo PurchaseOrderInfo
 
 // NewPurchaseOrderInfo instantiates a new PurchaseOrderInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o PurchaseOrderInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PurchaseOrderInfo) UnmarshalJSON(data []byte) (err error) {
+	varPurchaseOrderInfo := _PurchaseOrderInfo{}
+
+	err = json.Unmarshal(data, &varPurchaseOrderInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PurchaseOrderInfo(varPurchaseOrderInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePurchaseOrderInfo struct {

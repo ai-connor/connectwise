@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -51,6 +50,7 @@ type ScheduleEntry struct {
 	StartTimeSet NullableBool `json:"startTimeSet,omitempty"`
 	EndTimeSet NullableBool `json:"endTimeSet,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleEntry ScheduleEntry
@@ -1193,6 +1193,11 @@ func (o ScheduleEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1220,15 +1225,47 @@ func (o *ScheduleEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleEntry := _ScheduleEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleEntry)
+	err = json.Unmarshal(data, &varScheduleEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleEntry(varScheduleEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "objectId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "where")
+		delete(additionalProperties, "dateStart")
+		delete(additionalProperties, "dateEnd")
+		delete(additionalProperties, "reminder")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "span")
+		delete(additionalProperties, "doneFlag")
+		delete(additionalProperties, "acknowledgedFlag")
+		delete(additionalProperties, "ownerFlag")
+		delete(additionalProperties, "meetingFlag")
+		delete(additionalProperties, "allowScheduleConflictsFlag")
+		delete(additionalProperties, "addMemberToProjectFlag")
+		delete(additionalProperties, "projectRoleId")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "acknowledgedDate")
+		delete(additionalProperties, "closeDate")
+		delete(additionalProperties, "notifyResource")
+		delete(additionalProperties, "notificationSent")
+		delete(additionalProperties, "notificationResponse")
+		delete(additionalProperties, "hours")
+		delete(additionalProperties, "startTimeSet")
+		delete(additionalProperties, "endTimeSet")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

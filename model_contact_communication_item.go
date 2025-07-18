@@ -26,7 +26,10 @@ type ContactCommunicationItem struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Domain *string `json:"domain,omitempty"`
 	CommunicationType NullableString `json:"communicationType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ContactCommunicationItem ContactCommunicationItem
 
 // NewContactCommunicationItem instantiates a new ContactCommunicationItem object
 // This constructor will assign default values to properties that have it defined,
@@ -320,7 +323,39 @@ func (o ContactCommunicationItem) ToMap() (map[string]interface{}, error) {
 	if o.CommunicationType.IsSet() {
 		toSerialize["communicationType"] = o.CommunicationType.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ContactCommunicationItem) UnmarshalJSON(data []byte) (err error) {
+	varContactCommunicationItem := _ContactCommunicationItem{}
+
+	err = json.Unmarshal(data, &varContactCommunicationItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContactCommunicationItem(varContactCommunicationItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "extension")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "communicationType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContactCommunicationItem struct {

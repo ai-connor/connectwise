@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -45,6 +44,7 @@ type Office365EmailSetup struct {
 	ExistingTenant *ExistingTenantReference `json:"existingTenant,omitempty"`
 	EmailConnector *EmailConnectorReference `json:"emailConnector,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Office365EmailSetup Office365EmailSetup
@@ -630,6 +630,11 @@ func (o Office365EmailSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -660,15 +665,35 @@ func (o *Office365EmailSetup) UnmarshalJSON(data []byte) (err error) {
 
 	varOffice365EmailSetup := _Office365EmailSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOffice365EmailSetup)
+	err = json.Unmarshal(data, &varOffice365EmailSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Office365EmailSetup(varOffice365EmailSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "inboxFolder")
+		delete(additionalProperties, "processedFolder")
+		delete(additionalProperties, "failedFolder")
+		delete(additionalProperties, "tenantId")
+		delete(additionalProperties, "clientId")
+		delete(additionalProperties, "clientSecret")
+		delete(additionalProperties, "authorizedFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "useExistingTenantFlag")
+		delete(additionalProperties, "existingTenant")
+		delete(additionalProperties, "emailConnector")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

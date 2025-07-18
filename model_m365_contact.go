@@ -34,7 +34,10 @@ type M365Contact struct {
 	DirectoryRoles *string `json:"directoryRoles,omitempty"`
 	AssignedLicenses *string `json:"assignedLicenses,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _M365Contact M365Contact
 
 // NewM365Contact instantiates a new M365Contact object
 // This constructor will assign default values to properties that have it defined,
@@ -588,7 +591,47 @@ func (o M365Contact) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *M365Contact) UnmarshalJSON(data []byte) (err error) {
+	varM365Contact := _M365Contact{}
+
+	err = json.Unmarshal(data, &varM365Contact)
+
+	if err != nil {
+		return err
+	}
+
+	*o = M365Contact(varM365Contact)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "userPrincipalName")
+		delete(additionalProperties, "displayName")
+		delete(additionalProperties, "contactRecId")
+		delete(additionalProperties, "tenantId")
+		delete(additionalProperties, "m365ContactId")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "employeeType")
+		delete(additionalProperties, "managerId")
+		delete(additionalProperties, "proxyAddresses")
+		delete(additionalProperties, "proxyAddressesPlain")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "directoryRoles")
+		delete(additionalProperties, "assignedLicenses")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableM365Contact struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type WorkRoleExemption struct {
 	WorkRole WorkRoleReference `json:"workRole"`
 	TaxableLevels []int32 `json:"taxableLevels,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WorkRoleExemption WorkRoleExemption
@@ -187,6 +187,11 @@ func (o WorkRoleExemption) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *WorkRoleExemption) UnmarshalJSON(data []byte) (err error) {
 
 	varWorkRoleExemption := _WorkRoleExemption{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWorkRoleExemption)
+	err = json.Unmarshal(data, &varWorkRoleExemption)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WorkRoleExemption(varWorkRoleExemption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "taxableLevels")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

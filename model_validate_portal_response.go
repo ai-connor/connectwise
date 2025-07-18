@@ -21,7 +21,10 @@ var _ MappedNullable = &ValidatePortalResponse{}
 type ValidatePortalResponse struct {
 	Success *bool `json:"success,omitempty"`
 	ContactId *int32 `json:"contactId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ValidatePortalResponse ValidatePortalResponse
 
 // NewValidatePortalResponse instantiates a new ValidatePortalResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o ValidatePortalResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ContactId) {
 		toSerialize["contactId"] = o.ContactId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ValidatePortalResponse) UnmarshalJSON(data []byte) (err error) {
+	varValidatePortalResponse := _ValidatePortalResponse{}
+
+	err = json.Unmarshal(data, &varValidatePortalResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ValidatePortalResponse(varValidatePortalResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "success")
+		delete(additionalProperties, "contactId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableValidatePortalResponse struct {

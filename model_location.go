@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -56,6 +55,7 @@ type Location struct {
 	WorkRoleIds []int32 `json:"workRoleIds,omitempty"`
 	DepartmentIds []int32 `json:"departmentIds,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Location Location
@@ -939,6 +939,11 @@ func (o Location) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -967,15 +972,43 @@ func (o *Location) UnmarshalJSON(data []byte) (err error) {
 
 	varLocation := _Location{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLocation)
+	err = json.Unmarshal(data, &varLocation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Location(varLocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "ownerLevelId")
+		delete(additionalProperties, "structureLevel")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "manager")
+		delete(additionalProperties, "reportsTo")
+		delete(additionalProperties, "salesRep")
+		delete(additionalProperties, "timeZoneSetup")
+		delete(additionalProperties, "calendar")
+		delete(additionalProperties, "overrideAddressLine1")
+		delete(additionalProperties, "overrideAddressLine2")
+		delete(additionalProperties, "overrideCity")
+		delete(additionalProperties, "overrideState")
+		delete(additionalProperties, "overrideZip")
+		delete(additionalProperties, "overrideCountry")
+		delete(additionalProperties, "overridePhoneNumber")
+		delete(additionalProperties, "overrideFaxNumber")
+		delete(additionalProperties, "owaUrl")
+		delete(additionalProperties, "payrollXref")
+		delete(additionalProperties, "locationFlag")
+		delete(additionalProperties, "clientFlag")
+		delete(additionalProperties, "workRoleIds")
+		delete(additionalProperties, "departmentIds")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

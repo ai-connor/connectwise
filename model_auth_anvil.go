@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type AuthAnvil struct {
 	ServerLocationUrl string `json:"serverLocationUrl"`
 	SiteId NullableInt32 `json:"siteId"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AuthAnvil AuthAnvil
@@ -180,6 +180,11 @@ func (o AuthAnvil) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -208,15 +213,23 @@ func (o *AuthAnvil) UnmarshalJSON(data []byte) (err error) {
 
 	varAuthAnvil := _AuthAnvil{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAuthAnvil)
+	err = json.Unmarshal(data, &varAuthAnvil)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AuthAnvil(varAuthAnvil)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "serverLocationUrl")
+		delete(additionalProperties, "siteId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

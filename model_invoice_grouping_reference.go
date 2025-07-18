@@ -26,7 +26,10 @@ type InvoiceGroupingReference struct {
 	ShowSubItemsFlag *bool `json:"showSubItemsFlag,omitempty"`
 	GroupParentChildAdditionsFlag *bool `json:"groupParentChildAdditionsFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvoiceGroupingReference InvoiceGroupingReference
 
 // NewInvoiceGroupingReference instantiates a new InvoiceGroupingReference object
 // This constructor will assign default values to properties that have it defined,
@@ -310,7 +313,39 @@ func (o InvoiceGroupingReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvoiceGroupingReference) UnmarshalJSON(data []byte) (err error) {
+	varInvoiceGroupingReference := _InvoiceGroupingReference{}
+
+	err = json.Unmarshal(data, &varInvoiceGroupingReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvoiceGroupingReference(varInvoiceGroupingReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "showPriceFlag")
+		delete(additionalProperties, "showSubItemsFlag")
+		delete(additionalProperties, "groupParentChildAdditionsFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvoiceGroupingReference struct {

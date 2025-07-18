@@ -21,7 +21,10 @@ var _ MappedNullable = &BulkResult{}
 type BulkResult struct {
 	Payload []ResultInfo `json:"payload,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BulkResult BulkResult
 
 // NewBulkResult instantiates a new BulkResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o BulkResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BulkResult) UnmarshalJSON(data []byte) (err error) {
+	varBulkResult := _BulkResult{}
+
+	err = json.Unmarshal(data, &varBulkResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BulkResult(varBulkResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "payload")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBulkResult struct {

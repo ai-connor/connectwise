@@ -25,7 +25,10 @@ type WorkTypeInfo struct {
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	ActivityDefaultFlag NullableBool `json:"activityDefaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WorkTypeInfo WorkTypeInfo
 
 // NewWorkTypeInfo instantiates a new WorkTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -294,7 +297,38 @@ func (o WorkTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WorkTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varWorkTypeInfo := _WorkTypeInfo{}
+
+	err = json.Unmarshal(data, &varWorkTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WorkTypeInfo(varWorkTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "activityDefaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWorkTypeInfo struct {

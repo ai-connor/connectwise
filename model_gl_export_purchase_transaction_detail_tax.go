@@ -62,7 +62,10 @@ type GLExportPurchaseTransactionDetailTax struct {
 	TaxAgencyXref *string `json:"taxAgencyXref,omitempty"`
 	TaxNote *string `json:"taxNote,omitempty"`
 	PurchaseHeaderTaxGroup *string `json:"purchaseHeaderTaxGroup,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportPurchaseTransactionDetailTax GLExportPurchaseTransactionDetailTax
 
 // NewGLExportPurchaseTransactionDetailTax instantiates a new GLExportPurchaseTransactionDetailTax object
 // This constructor will assign default values to properties that have it defined,
@@ -1706,7 +1709,75 @@ func (o GLExportPurchaseTransactionDetailTax) ToMap() (map[string]interface{}, e
 	if !IsNil(o.PurchaseHeaderTaxGroup) {
 		toSerialize["purchaseHeaderTaxGroup"] = o.PurchaseHeaderTaxGroup
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportPurchaseTransactionDetailTax) UnmarshalJSON(data []byte) (err error) {
+	varGLExportPurchaseTransactionDetailTax := _GLExportPurchaseTransactionDetailTax{}
+
+	err = json.Unmarshal(data, &varGLExportPurchaseTransactionDetailTax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportPurchaseTransactionDetailTax(varGLExportPurchaseTransactionDetailTax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "salesCode")
+		delete(additionalProperties, "glTypeId")
+		delete(additionalProperties, "glItemId")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "vendorNumber")
+		delete(additionalProperties, "vendorAccountNumber")
+		delete(additionalProperties, "costAccountNumber")
+		delete(additionalProperties, "inventoryAccountNumber")
+		delete(additionalProperties, "itemTypeXref")
+		delete(additionalProperties, "inventoryXref")
+		delete(additionalProperties, "cogsXref")
+		delete(additionalProperties, "uomScheduleXref")
+		delete(additionalProperties, "priceLevelXref")
+		delete(additionalProperties, "locationXref")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "salesDescription")
+		delete(additionalProperties, "itemDescription")
+		delete(additionalProperties, "itemPrice")
+		delete(additionalProperties, "itemCost")
+		delete(additionalProperties, "unitOfMeasure")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "serializedFlag")
+		delete(additionalProperties, "serialNumbers")
+		delete(additionalProperties, "dropShippedFlag")
+		delete(additionalProperties, "lineNumber")
+		delete(additionalProperties, "warehouseSite")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "shipmentMethod")
+		delete(additionalProperties, "subCategory")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "taxRate")
+		delete(additionalProperties, "taxRatePercent")
+		delete(additionalProperties, "taxAgencyXref")
+		delete(additionalProperties, "taxNote")
+		delete(additionalProperties, "purchaseHeaderTaxGroup")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportPurchaseTransactionDetailTax struct {

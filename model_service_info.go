@@ -25,7 +25,10 @@ type ServiceInfo struct {
 	ContactColor *string `json:"contactColor,omitempty"`
 	UnknownColor *string `json:"unknownColor,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceInfo ServiceInfo
 
 // NewServiceInfo instantiates a new ServiceInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o ServiceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceInfo) UnmarshalJSON(data []byte) (err error) {
+	varServiceInfo := _ServiceInfo{}
+
+	err = json.Unmarshal(data, &varServiceInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceInfo(varServiceInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "headerColor")
+		delete(additionalProperties, "memberColor")
+		delete(additionalProperties, "contactColor")
+		delete(additionalProperties, "unknownColor")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceInfo struct {

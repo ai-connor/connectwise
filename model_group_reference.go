@@ -22,7 +22,10 @@ type GroupReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GroupReference GroupReference
 
 // NewGroupReference instantiates a new GroupReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o GroupReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GroupReference) UnmarshalJSON(data []byte) (err error) {
+	varGroupReference := _GroupReference{}
+
+	err = json.Unmarshal(data, &varGroupReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GroupReference(varGroupReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGroupReference struct {

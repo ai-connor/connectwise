@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type BillingSetupRouting struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	GrandParentId NullableInt32 `json:"grandParentId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BillingSetupRouting BillingSetupRouting
@@ -447,6 +447,11 @@ func (o BillingSetupRouting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GrandParentConnectWiseId) {
 		toSerialize["grandParentConnectWiseId"] = o.GrandParentConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -476,15 +481,30 @@ func (o *BillingSetupRouting) UnmarshalJSON(data []byte) (err error) {
 
 	varBillingSetupRouting := _BillingSetupRouting{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBillingSetupRouting)
+	err = json.Unmarshal(data, &varBillingSetupRouting)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BillingSetupRouting(varBillingSetupRouting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "invoiceRule")
+		delete(additionalProperties, "routingRule")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

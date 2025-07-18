@@ -22,7 +22,10 @@ type Token struct {
 	PublicKey *string `json:"publicKey,omitempty"`
 	PrivateKey *string `json:"privateKey,omitempty"`
 	Expiration *string `json:"expiration,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Token Token
 
 // NewToken instantiates a new Token object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o Token) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Expiration) {
 		toSerialize["expiration"] = o.Expiration
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Token) UnmarshalJSON(data []byte) (err error) {
+	varToken := _Token{}
+
+	err = json.Unmarshal(data, &varToken)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Token(varToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "publicKey")
+		delete(additionalProperties, "privateKey")
+		delete(additionalProperties, "expiration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableToken struct {

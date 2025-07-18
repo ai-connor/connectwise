@@ -25,7 +25,10 @@ type MarketingContact struct {
 	Note *string `json:"note,omitempty"`
 	UnsubscribeFlag NullableBool `json:"unsubscribeFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MarketingContact MarketingContact
 
 // NewMarketingContact instantiates a new MarketingContact object
 // This constructor will assign default values to properties that have it defined,
@@ -249,7 +252,37 @@ func (o MarketingContact) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MarketingContact) UnmarshalJSON(data []byte) (err error) {
+	varMarketingContact := _MarketingContact{}
+
+	err = json.Unmarshal(data, &varMarketingContact)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MarketingContact(varMarketingContact)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "groupId")
+		delete(additionalProperties, "note")
+		delete(additionalProperties, "unsubscribeFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMarketingContact struct {

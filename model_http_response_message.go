@@ -26,7 +26,10 @@ type HttpResponseMessage struct {
 	Headers []interface{} `json:"headers,omitempty"`
 	RequestMessage *HttpRequestMessage `json:"requestMessage,omitempty"`
 	IsSuccessStatusCode *bool `json:"isSuccessStatusCode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HttpResponseMessage HttpResponseMessage
 
 // NewHttpResponseMessage instantiates a new HttpResponseMessage object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +303,39 @@ func (o HttpResponseMessage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsSuccessStatusCode) {
 		toSerialize["isSuccessStatusCode"] = o.IsSuccessStatusCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HttpResponseMessage) UnmarshalJSON(data []byte) (err error) {
+	varHttpResponseMessage := _HttpResponseMessage{}
+
+	err = json.Unmarshal(data, &varHttpResponseMessage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HttpResponseMessage(varHttpResponseMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "statusCode")
+		delete(additionalProperties, "reasonPhrase")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "requestMessage")
+		delete(additionalProperties, "isSuccessStatusCode")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHttpResponseMessage struct {

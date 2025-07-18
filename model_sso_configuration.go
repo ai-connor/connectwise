@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -59,6 +58,7 @@ type SsoConfiguration struct {
 	AllMembersSubmitted *bool `json:"allMembersSubmitted,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	IsSsoOnByDefault *bool `json:"isSsoOnByDefault,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SsoConfiguration SsoConfiguration
@@ -810,6 +810,11 @@ func (o SsoConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsSsoOnByDefault) {
 		toSerialize["isSsoOnByDefault"] = o.IsSsoOnByDefault
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -839,15 +844,40 @@ func (o *SsoConfiguration) UnmarshalJSON(data []byte) (err error) {
 
 	varSsoConfiguration := _SsoConfiguration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSsoConfiguration)
+	err = json.Unmarshal(data, &varSsoConfiguration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SsoConfiguration(varSsoConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "ssoType")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "samlEntityId")
+		delete(additionalProperties, "samlSignInUrl")
+		delete(additionalProperties, "samlIdpCertificate")
+		delete(additionalProperties, "samlCertificateName")
+		delete(additionalProperties, "samlCertificateIssuedTo")
+		delete(additionalProperties, "samlCertificateThumbprint")
+		delete(additionalProperties, "samlCertificateValidFrom")
+		delete(additionalProperties, "samlCertificateValidTo")
+		delete(additionalProperties, "locationIds")
+		delete(additionalProperties, "clientId")
+		delete(additionalProperties, "stsBaseUrl")
+		delete(additionalProperties, "stsUserAdminUrl")
+		delete(additionalProperties, "token")
+		delete(additionalProperties, "submittedMemberCount")
+		delete(additionalProperties, "allMembersSubmitted")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "isSsoOnByDefault")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

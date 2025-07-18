@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CampaignAudit struct {
 	CampaignId NullableInt32 `json:"campaignId,omitempty"`
 	CreatedBy *string `json:"createdBy,omitempty"`
 	DateCreated *string `json:"dateCreated,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CampaignAudit CampaignAudit
@@ -400,6 +400,11 @@ func (o CampaignAudit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DateCreated) {
 		toSerialize["dateCreated"] = o.DateCreated
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -427,15 +432,28 @@ func (o *CampaignAudit) UnmarshalJSON(data []byte) (err error) {
 
 	varCampaignAudit := _CampaignAudit{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCampaignAudit)
+	err = json.Unmarshal(data, &varCampaignAudit)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CampaignAudit(varCampaignAudit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "emailsSent")
+		delete(additionalProperties, "emailsUnsent")
+		delete(additionalProperties, "documentsCreated")
+		delete(additionalProperties, "emailSubject")
+		delete(additionalProperties, "group")
+		delete(additionalProperties, "campaignId")
+		delete(additionalProperties, "createdBy")
+		delete(additionalProperties, "dateCreated")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

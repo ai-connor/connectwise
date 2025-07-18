@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type TicketSync struct {
 	InternalAnalysisFlag NullableBool `json:"internalAnalysisFlag,omitempty"`
 	ResolutionFlag NullableBool `json:"resolutionFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TicketSync TicketSync
@@ -508,6 +508,11 @@ func (o TicketSync) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -539,15 +544,32 @@ func (o *TicketSync) UnmarshalJSON(data []byte) (err error) {
 
 	varTicketSync := _TicketSync{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTicketSync)
+	err = json.Unmarshal(data, &varTicketSync)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TicketSync(varTicketSync)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "vendorType")
+		delete(additionalProperties, "integratorLogin")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "userName")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "psg")
+		delete(additionalProperties, "problemDescriptionFlag")
+		delete(additionalProperties, "internalAnalysisFlag")
+		delete(additionalProperties, "resolutionFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

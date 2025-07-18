@@ -26,7 +26,10 @@ type ScheduleReminderTime struct {
 	Name *string `json:"name,omitempty"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScheduleReminderTime ScheduleReminderTime
 
 // NewScheduleReminderTime instantiates a new ScheduleReminderTime object
 // This constructor will assign default values to properties that have it defined,
@@ -250,7 +253,37 @@ func (o ScheduleReminderTime) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduleReminderTime) UnmarshalJSON(data []byte) (err error) {
+	varScheduleReminderTime := _ScheduleReminderTime{}
+
+	err = json.Unmarshal(data, &varScheduleReminderTime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduleReminderTime(varScheduleReminderTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "time")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduleReminderTime struct {

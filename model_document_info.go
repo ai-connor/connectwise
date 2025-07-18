@@ -36,7 +36,10 @@ type DocumentInfo struct {
 	Guid *string `json:"guid,omitempty"`
 	GuidSecondary *string `json:"guidSecondary,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DocumentInfo DocumentInfo
 
 // NewDocumentInfo instantiates a new DocumentInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -730,7 +733,49 @@ func (o DocumentInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DocumentInfo) UnmarshalJSON(data []byte) (err error) {
+	varDocumentInfo := _DocumentInfo{}
+
+	err = json.Unmarshal(data, &varDocumentInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DocumentInfo(varDocumentInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "fileName")
+		delete(additionalProperties, "serverFileName")
+		delete(additionalProperties, "owner")
+		delete(additionalProperties, "linkFlag")
+		delete(additionalProperties, "imageFlag")
+		delete(additionalProperties, "publicFlag")
+		delete(additionalProperties, "htmlTemplateFlag")
+		delete(additionalProperties, "readOnlyFlag")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "urlFlag")
+		delete(additionalProperties, "createdOnDate")
+		delete(additionalProperties, "documentType")
+		delete(additionalProperties, "guid")
+		delete(additionalProperties, "guidSecondary")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDocumentInfo struct {

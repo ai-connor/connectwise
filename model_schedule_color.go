@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ScheduleColor struct {
 	// Must be a valid Hexadecimal Color Code.
 	Color string `json:"color"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleColor ScheduleColor
@@ -246,6 +246,11 @@ func (o ScheduleColor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -273,15 +278,24 @@ func (o *ScheduleColor) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleColor := _ScheduleColor{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleColor)
+	err = json.Unmarshal(data, &varScheduleColor)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleColor(varScheduleColor)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "startPercent")
+		delete(additionalProperties, "endPercent")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

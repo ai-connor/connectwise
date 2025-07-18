@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -44,6 +43,7 @@ type PortalConfigurationServiceSetup struct {
 	TimeMaterialsTicketTemplate ServiceSignoffReference `json:"timeMaterialsTicketTemplate"`
 	FixedFeeTicketTemplate ServiceSignoffReference `json:"fixedFeeTicketTemplate"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PortalConfigurationServiceSetup PortalConfigurationServiceSetup
@@ -1035,6 +1035,11 @@ func (o PortalConfigurationServiceSetup) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1064,15 +1069,42 @@ func (o *PortalConfigurationServiceSetup) UnmarshalJSON(data []byte) (err error)
 
 	varPortalConfigurationServiceSetup := _PortalConfigurationServiceSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPortalConfigurationServiceSetup)
+	err = json.Unmarshal(data, &varPortalConfigurationServiceSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PortalConfigurationServiceSetup(varPortalConfigurationServiceSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "serviceTypeFlag")
+		delete(additionalProperties, "serviceSubTypeFlag")
+		delete(additionalProperties, "serviceSubTypeItemFlag")
+		delete(additionalProperties, "statusFlag")
+		delete(additionalProperties, "siteNameFlag")
+		delete(additionalProperties, "enteredDateFlag")
+		delete(additionalProperties, "lastUpdateFlag")
+		delete(additionalProperties, "requiredDateFlag")
+		delete(additionalProperties, "contactFlag")
+		delete(additionalProperties, "assignedResourcesFlag")
+		delete(additionalProperties, "slaInfoFlag")
+		delete(additionalProperties, "serviceBoardFlag")
+		delete(additionalProperties, "budgetHoursFlag")
+		delete(additionalProperties, "actualHoursFlag")
+		delete(additionalProperties, "approvalStatusFlag")
+		delete(additionalProperties, "openTasksFlag")
+		delete(additionalProperties, "closedTasksFlag")
+		delete(additionalProperties, "enableChatAssistFlag")
+		delete(additionalProperties, "displayClosedTicketsOption")
+		delete(additionalProperties, "timeMaterialsTicketTemplate")
+		delete(additionalProperties, "fixedFeeTicketTemplate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

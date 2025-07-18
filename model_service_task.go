@@ -32,7 +32,10 @@ type ServiceTask struct {
 	ChildTicketId NullableInt32 `json:"childTicketId,omitempty"`
 	Summary *string `json:"summary,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceTask ServiceTask
 
 // NewServiceTask instantiates a new ServiceTask object
 // This constructor will assign default values to properties that have it defined,
@@ -566,7 +569,45 @@ func (o ServiceTask) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceTask) UnmarshalJSON(data []byte) (err error) {
+	varServiceTask := _ServiceTask{}
+
+	err = json.Unmarshal(data, &varServiceTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceTask(varServiceTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "ticketId")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "schedule")
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "resolution")
+		delete(additionalProperties, "childScheduleAction")
+		delete(additionalProperties, "childTicketId")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceTask struct {

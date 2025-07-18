@@ -25,7 +25,10 @@ type WarehouseBinInfo struct {
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WarehouseBinInfo WarehouseBinInfo
 
 // NewWarehouseBinInfo instantiates a new WarehouseBinInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -284,7 +287,38 @@ func (o WarehouseBinInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WarehouseBinInfo) UnmarshalJSON(data []byte) (err error) {
+	varWarehouseBinInfo := _WarehouseBinInfo{}
+
+	err = json.Unmarshal(data, &varWarehouseBinInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WarehouseBinInfo(varWarehouseBinInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWarehouseBinInfo struct {

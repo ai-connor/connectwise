@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -66,6 +65,7 @@ type Opportunity struct {
 	TechnicalContact *ContactReference `json:"technicalContact,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Opportunity Opportunity
@@ -1431,6 +1431,11 @@ func (o Opportunity) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1461,15 +1466,57 @@ func (o *Opportunity) UnmarshalJSON(data []byte) (err error) {
 
 	varOpportunity := _Opportunity{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOpportunity)
+	err = json.Unmarshal(data, &varOpportunity)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Opportunity(varOpportunity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "expectedCloseDate")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "stage")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "probability")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "rating")
+		delete(additionalProperties, "campaign")
+		delete(additionalProperties, "primarySalesRep")
+		delete(additionalProperties, "secondarySalesRep")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "customerPO")
+		delete(additionalProperties, "pipelineChangeDate")
+		delete(additionalProperties, "dateBecameLead")
+		delete(additionalProperties, "closedDate")
+		delete(additionalProperties, "closedBy")
+		delete(additionalProperties, "totalSalesTax")
+		delete(additionalProperties, "shipToCompany")
+		delete(additionalProperties, "shipToContact")
+		delete(additionalProperties, "shipToSite")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "billToContact")
+		delete(additionalProperties, "billToSite")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "companyLocationId")
+		delete(additionalProperties, "technicalContact")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

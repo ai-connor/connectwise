@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ProjectContact struct {
 	ProjectId *int32 `json:"projectId,omitempty"`
 	Contact ContactReference `json:"contact"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectContact ProjectContact
@@ -187,6 +187,11 @@ func (o ProjectContact) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *ProjectContact) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectContact := _ProjectContact{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectContact)
+	err = json.Unmarshal(data, &varProjectContact)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectContact(varProjectContact)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "projectId")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type ChargeCode struct {
 	IntegrationXref *string `json:"integrationXref,omitempty"`
 	ExpenseTypeIds []int32 `json:"expenseTypeIds,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ChargeCode ChargeCode
@@ -580,6 +580,11 @@ func (o ChargeCode) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -608,15 +613,33 @@ func (o *ChargeCode) UnmarshalJSON(data []byte) (err error) {
 
 	varChargeCode := _ChargeCode{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChargeCode)
+	err = json.Unmarshal(data, &varChargeCode)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ChargeCode(varChargeCode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "expenseEntryFlag")
+		delete(additionalProperties, "allowAllExpenseTypeFlag")
+		delete(additionalProperties, "timeEntryFlag")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "integrationXref")
+		delete(additionalProperties, "expenseTypeIds")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

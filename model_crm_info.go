@@ -36,7 +36,10 @@ type CrmInfo struct {
 	PrimaryRepCaption *string `json:"primaryRepCaption,omitempty"`
 	SecondaryRepCaption *string `json:"secondaryRepCaption,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CrmInfo CrmInfo
 
 // NewCrmInfo instantiates a new CrmInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -660,7 +663,49 @@ func (o CrmInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CrmInfo) UnmarshalJSON(data []byte) (err error) {
+	varCrmInfo := _CrmInfo{}
+
+	err = json.Unmarshal(data, &varCrmInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CrmInfo(varCrmInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "accountManagerRole")
+		delete(additionalProperties, "technicalContactRole")
+		delete(additionalProperties, "salesRepRole")
+		delete(additionalProperties, "field1Caption")
+		delete(additionalProperties, "field2Caption")
+		delete(additionalProperties, "field3Caption")
+		delete(additionalProperties, "field4Caption")
+		delete(additionalProperties, "field5Caption")
+		delete(additionalProperties, "field6Caption")
+		delete(additionalProperties, "field7Caption")
+		delete(additionalProperties, "field8Caption")
+		delete(additionalProperties, "field9Caption")
+		delete(additionalProperties, "field10Caption")
+		delete(additionalProperties, "primaryRepCaption")
+		delete(additionalProperties, "secondaryRepCaption")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCrmInfo struct {

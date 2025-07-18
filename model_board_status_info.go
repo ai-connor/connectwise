@@ -26,7 +26,10 @@ type BoardStatusInfo struct {
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	ClosedFlag NullableBool `json:"closedFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BoardStatusInfo BoardStatusInfo
 
 // NewBoardStatusInfo instantiates a new BoardStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -340,7 +343,39 @@ func (o BoardStatusInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BoardStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varBoardStatusInfo := _BoardStatusInfo{}
+
+	err = json.Unmarshal(data, &varBoardStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BoardStatusInfo(varBoardStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBoardStatusInfo struct {

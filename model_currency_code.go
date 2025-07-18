@@ -22,7 +22,10 @@ type CurrencyCode struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CurrencyCode CurrencyCode
 
 // NewCurrencyCode instantiates a new CurrencyCode object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o CurrencyCode) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CurrencyCode) UnmarshalJSON(data []byte) (err error) {
+	varCurrencyCode := _CurrencyCode{}
+
+	err = json.Unmarshal(data, &varCurrencyCode)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CurrencyCode(varCurrencyCode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCurrencyCode struct {

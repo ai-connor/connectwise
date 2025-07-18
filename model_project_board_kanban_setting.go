@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type ProjectBoardKanbanSetting struct {
 	//  Max length: 15;
 	UpdatedBy *string `json:"updatedBy,omitempty"`
 	LastUpdated *string `json:"lastUpdated,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectBoardKanbanSetting ProjectBoardKanbanSetting
@@ -298,6 +298,11 @@ func (o ProjectBoardKanbanSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastUpdated) {
 		toSerialize["lastUpdated"] = o.LastUpdated
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -325,15 +330,26 @@ func (o *ProjectBoardKanbanSetting) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectBoardKanbanSetting := _ProjectBoardKanbanSetting{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectBoardKanbanSetting)
+	err = json.Unmarshal(data, &varProjectBoardKanbanSetting)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectBoardKanbanSetting(varProjectBoardKanbanSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "statuses")
+		delete(additionalProperties, "updatedBy")
+		delete(additionalProperties, "lastUpdated")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

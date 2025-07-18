@@ -24,7 +24,10 @@ type ScheduleStatusInfo struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	ShowAsTentativeFlag NullableBool `json:"showAsTentativeFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScheduleStatusInfo ScheduleStatusInfo
 
 // NewScheduleStatusInfo instantiates a new ScheduleStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -248,7 +251,37 @@ func (o ScheduleStatusInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduleStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varScheduleStatusInfo := _ScheduleStatusInfo{}
+
+	err = json.Unmarshal(data, &varScheduleStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduleStatusInfo(varScheduleStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "showAsTentativeFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduleStatusInfo struct {

@@ -25,7 +25,10 @@ type CatalogPricing struct {
 	Quantity *int32 `json:"quantity,omitempty"`
 	Date *string `json:"date,omitempty"`
 	Price NullableFloat64 `json:"price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CatalogPricing CatalogPricing
 
 // NewCatalogPricing instantiates a new CatalogPricing object
 // This constructor will assign default values to properties that have it defined,
@@ -274,7 +277,38 @@ func (o CatalogPricing) ToMap() (map[string]interface{}, error) {
 	if o.Price.IsSet() {
 		toSerialize["price"] = o.Price.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CatalogPricing) UnmarshalJSON(data []byte) (err error) {
+	varCatalogPricing := _CatalogPricing{}
+
+	err = json.Unmarshal(data, &varCatalogPricing)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CatalogPricing(varCatalogPricing)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "catalogItem")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCatalogPricing struct {

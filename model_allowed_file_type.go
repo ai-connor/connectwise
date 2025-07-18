@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type AllowedFileType struct {
 	FileType string `json:"fileType"`
 	SizeLimit NullableInt32 `json:"sizeLimit,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AllowedFileType AllowedFileType
@@ -197,6 +197,11 @@ func (o AllowedFileType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -224,15 +229,23 @@ func (o *AllowedFileType) UnmarshalJSON(data []byte) (err error) {
 
 	varAllowedFileType := _AllowedFileType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAllowedFileType)
+	err = json.Unmarshal(data, &varAllowedFileType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AllowedFileType(varAllowedFileType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fileType")
+		delete(additionalProperties, "sizeLimit")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

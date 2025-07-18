@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ContactContactTypeAssociationContactTypeAssociation struct {
 	Type ContactTypeReference `json:"type"`
 	Contact ContactReference `json:"contact"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ContactContactTypeAssociationContactTypeAssociation ContactContactTypeAssociationContactTypeAssociation
@@ -178,6 +178,11 @@ func (o ContactContactTypeAssociationContactTypeAssociation) ToMap() (map[string
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -206,15 +211,23 @@ func (o *ContactContactTypeAssociationContactTypeAssociation) UnmarshalJSON(data
 
 	varContactContactTypeAssociationContactTypeAssociation := _ContactContactTypeAssociationContactTypeAssociation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varContactContactTypeAssociationContactTypeAssociation)
+	err = json.Unmarshal(data, &varContactContactTypeAssociationContactTypeAssociation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ContactContactTypeAssociationContactTypeAssociation(varContactContactTypeAssociationContactTypeAssociation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

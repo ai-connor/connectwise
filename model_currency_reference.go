@@ -32,7 +32,10 @@ type CurrencyReference struct {
 	RightAlign *bool `json:"rightAlign,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CurrencyReference CurrencyReference
 
 // NewCurrencyReference instantiates a new CurrencyReference object
 // This constructor will assign default values to properties that have it defined,
@@ -526,7 +529,45 @@ func (o CurrencyReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CurrencyReference) UnmarshalJSON(data []byte) (err error) {
+	varCurrencyReference := _CurrencyReference{}
+
+	err = json.Unmarshal(data, &varCurrencyReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CurrencyReference(varCurrencyReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "currencyCode")
+		delete(additionalProperties, "decimalSeparator")
+		delete(additionalProperties, "numberOfDecimals")
+		delete(additionalProperties, "thousandsSeparator")
+		delete(additionalProperties, "negativeParenthesesFlag")
+		delete(additionalProperties, "displaySymbolFlag")
+		delete(additionalProperties, "currencyIdentifier")
+		delete(additionalProperties, "displayIdFlag")
+		delete(additionalProperties, "rightAlign")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCurrencyReference struct {

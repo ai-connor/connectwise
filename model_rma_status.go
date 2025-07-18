@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type RmaStatus struct {
 	ClosedFlag NullableBool `json:"closedFlag,omitempty"`
 	EmailTemplate *RmaStatusEmailTemplateReference `json:"emailTemplate,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RmaStatus RmaStatus
@@ -326,6 +326,11 @@ func (o RmaStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -353,15 +358,26 @@ func (o *RmaStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varRmaStatus := _RmaStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRmaStatus)
+	err = json.Unmarshal(data, &varRmaStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RmaStatus(varRmaStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "emailTemplate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

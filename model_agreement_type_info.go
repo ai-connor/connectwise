@@ -25,7 +25,10 @@ type AgreementTypeInfo struct {
 	ApplicationUnits NullableString `json:"applicationUnits,omitempty"`
 	BillingTerms *BillingTermsReference `json:"billingTerms,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementTypeInfo AgreementTypeInfo
 
 // NewAgreementTypeInfo instantiates a new AgreementTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -284,7 +287,38 @@ func (o AgreementTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varAgreementTypeInfo := _AgreementTypeInfo{}
+
+	err = json.Unmarshal(data, &varAgreementTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementTypeInfo(varAgreementTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "applicationUnits")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementTypeInfo struct {

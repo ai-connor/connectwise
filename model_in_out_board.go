@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type InOutBoard struct {
 	AdditionalInfo *string `json:"additionalInfo,omitempty"`
 	DateBack time.Time `json:"dateBack"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InOutBoard InOutBoard
@@ -243,6 +243,11 @@ func (o InOutBoard) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -272,15 +277,25 @@ func (o *InOutBoard) UnmarshalJSON(data []byte) (err error) {
 
 	varInOutBoard := _InOutBoard{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInOutBoard)
+	err = json.Unmarshal(data, &varInOutBoard)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InOutBoard(varInOutBoard)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "inOutType")
+		delete(additionalProperties, "additionalInfo")
+		delete(additionalProperties, "dateBack")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

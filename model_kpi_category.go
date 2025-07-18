@@ -22,7 +22,10 @@ type KPICategory struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _KPICategory KPICategory
 
 // NewKPICategory instantiates a new KPICategory object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o KPICategory) ToMap() (map[string]interface{}, error) {
 	if o.SortOrder.IsSet() {
 		toSerialize["sortOrder"] = o.SortOrder.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *KPICategory) UnmarshalJSON(data []byte) (err error) {
+	varKPICategory := _KPICategory{}
+
+	err = json.Unmarshal(data, &varKPICategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = KPICategory(varKPICategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sortOrder")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableKPICategory struct {

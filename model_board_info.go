@@ -40,7 +40,10 @@ type BoardInfo struct {
 	ResolutionSort NullableString `json:"resolutionSort,omitempty"`
 	AllSort NullableString `json:"allSort,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BoardInfo BoardInfo
 
 // NewBoardInfo instantiates a new BoardInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -964,7 +967,53 @@ func (o BoardInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BoardInfo) UnmarshalJSON(data []byte) (err error) {
+	varBoardInfo := _BoardInfo{}
+
+	err = json.Unmarshal(data, &varBoardInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BoardInfo(varBoardInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "projectFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "closedLoopDiscussionsFlag")
+		delete(additionalProperties, "closedLoopInternalAnalysisFlag")
+		delete(additionalProperties, "closedLoopResolutionFlag")
+		delete(additionalProperties, "closedLoopAllFlag")
+		delete(additionalProperties, "overrideBillingSetupFlag")
+		delete(additionalProperties, "billTicketsAfterClosedFlag")
+		delete(additionalProperties, "billUnapprovedTimeExpenseFlag")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "billExpense")
+		delete(additionalProperties, "billProduct")
+		delete(additionalProperties, "problemSort")
+		delete(additionalProperties, "internalAnalysisSort")
+		delete(additionalProperties, "resolutionSort")
+		delete(additionalProperties, "allSort")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBoardInfo struct {

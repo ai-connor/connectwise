@@ -42,7 +42,10 @@ type TimeAccrual struct {
 	HolidayCarryoverAllowedFlag NullableBool `json:"holidayCarryoverAllowedFlag,omitempty"`
 	HolidayCarryoverLimit NullableFloat64 `json:"holidayCarryoverLimit,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeAccrual TimeAccrual
 
 // NewTimeAccrual instantiates a new TimeAccrual object
 // This constructor will assign default values to properties that have it defined,
@@ -896,7 +899,51 @@ func (o TimeAccrual) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeAccrual) UnmarshalJSON(data []byte) (err error) {
+	varTimeAccrual := _TimeAccrual{}
+
+	err = json.Unmarshal(data, &varTimeAccrual)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeAccrual(varTimeAccrual)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "vacationFlag")
+		delete(additionalProperties, "vacationAvailableType")
+		delete(additionalProperties, "vacationCarryoverAllowedFlag")
+		delete(additionalProperties, "vacationCarryoverLimit")
+		delete(additionalProperties, "sickFlag")
+		delete(additionalProperties, "sickAvailableType")
+		delete(additionalProperties, "sickCarryoverAllowedFlag")
+		delete(additionalProperties, "sickCarryoverLimit")
+		delete(additionalProperties, "ptoFlag")
+		delete(additionalProperties, "ptoAvailableType")
+		delete(additionalProperties, "ptoCarryoverAllowedFlag")
+		delete(additionalProperties, "ptoCarryoverLimit")
+		delete(additionalProperties, "holidayFlag")
+		delete(additionalProperties, "holidayAvailableType")
+		delete(additionalProperties, "holidayCarryoverAllowedFlag")
+		delete(additionalProperties, "holidayCarryoverLimit")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeAccrual struct {

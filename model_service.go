@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -41,6 +40,7 @@ type Service struct {
 	ContactColorDisableFlag NullableBool `json:"contactColorDisableFlag,omitempty"`
 	UnknownColorDisableFlag NullableBool `json:"unknownColorDisableFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Service Service
@@ -686,6 +686,11 @@ func (o Service) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -714,15 +719,35 @@ func (o *Service) UnmarshalJSON(data []byte) (err error) {
 
 	varService := _Service{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varService)
+	err = json.Unmarshal(data, &varService)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Service(varService)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "srNotify")
+		delete(additionalProperties, "scheduleSpan")
+		delete(additionalProperties, "hideDelimiterFlag")
+		delete(additionalProperties, "allowCCFlag")
+		delete(additionalProperties, "allowTOFlag")
+		delete(additionalProperties, "headerColor")
+		delete(additionalProperties, "memberColor")
+		delete(additionalProperties, "contactColor")
+		delete(additionalProperties, "unknownColor")
+		delete(additionalProperties, "calendarSetup")
+		delete(additionalProperties, "headerColorDisableFlag")
+		delete(additionalProperties, "memberColorDisableFlag")
+		delete(additionalProperties, "contactColorDisableFlag")
+		delete(additionalProperties, "unknownColorDisableFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

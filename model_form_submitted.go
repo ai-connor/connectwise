@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type FormSubmitted struct {
 	Topic *string `json:"topic,omitempty"`
 	Version *string `json:"version,omitempty"`
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FormSubmitted FormSubmitted
@@ -444,6 +444,11 @@ func (o FormSubmitted) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -472,15 +477,30 @@ func (o *FormSubmitted) UnmarshalJSON(data []byte) (err error) {
 
 	varFormSubmitted := _FormSubmitted{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFormSubmitted)
+	err = json.Unmarshal(data, &varFormSubmitted)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FormSubmitted(varFormSubmitted)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "campaignId")
+		delete(additionalProperties, "contactId")
+		delete(additionalProperties, "dateSubmitted")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "queryString")
+		delete(additionalProperties, "pageType")
+		delete(additionalProperties, "pageSubType")
+		delete(additionalProperties, "topic")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

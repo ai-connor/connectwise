@@ -28,7 +28,10 @@ type PriorityInfo struct {
 	UrgencySortOrder *string `json:"urgencySortOrder,omitempty"`
 	Level NullableString `json:"level,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PriorityInfo PriorityInfo
 
 // NewPriorityInfo instantiates a new PriorityInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -412,7 +415,41 @@ func (o PriorityInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PriorityInfo) UnmarshalJSON(data []byte) (err error) {
+	varPriorityInfo := _PriorityInfo{}
+
+	err = json.Unmarshal(data, &varPriorityInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PriorityInfo(varPriorityInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "imageLink")
+		delete(additionalProperties, "urgencySortOrder")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePriorityInfo struct {

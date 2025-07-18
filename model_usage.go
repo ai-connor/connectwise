@@ -25,7 +25,10 @@ type Usage struct {
 	Description *string `json:"description,omitempty"`
 	Hyperlink *string `json:"hyperlink,omitempty"`
 	TypeKey *string `json:"typeKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Usage Usage
 
 // NewUsage instantiates a new Usage object
 // This constructor will assign default values to properties that have it defined,
@@ -284,7 +287,38 @@ func (o Usage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TypeKey) {
 		toSerialize["typeKey"] = o.TypeKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Usage) UnmarshalJSON(data []byte) (err error) {
+	varUsage := _Usage{}
+
+	err = json.Unmarshal(data, &varUsage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Usage(varUsage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "hyperlink")
+		delete(additionalProperties, "typeKey")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUsage struct {

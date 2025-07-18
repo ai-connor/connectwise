@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -97,6 +96,7 @@ type CompanyConfiguration struct {
 	ManufacturerPartNumber *string `json:"manufacturerPartNumber,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyConfiguration CompanyConfiguration
@@ -2311,6 +2311,11 @@ func (o CompanyConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2340,15 +2345,77 @@ func (o *CompanyConfiguration) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanyConfiguration := _CompanyConfiguration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyConfiguration)
+	err = json.Unmarshal(data, &varCompanyConfiguration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyConfiguration(varCompanyConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "deviceIdentifier")
+		delete(additionalProperties, "serialNumber")
+		delete(additionalProperties, "modelNumber")
+		delete(additionalProperties, "tagNumber")
+		delete(additionalProperties, "purchaseDate")
+		delete(additionalProperties, "installationDate")
+		delete(additionalProperties, "installedBy")
+		delete(additionalProperties, "warrantyExpirationDate")
+		delete(additionalProperties, "vendorNotes")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "macAddress")
+		delete(additionalProperties, "lastLoginName")
+		delete(additionalProperties, "billFlag")
+		delete(additionalProperties, "backupSuccesses")
+		delete(additionalProperties, "backupIncomplete")
+		delete(additionalProperties, "backupFailed")
+		delete(additionalProperties, "backupRestores")
+		delete(additionalProperties, "lastBackupDate")
+		delete(additionalProperties, "backupServerName")
+		delete(additionalProperties, "backupBillableSpaceGb")
+		delete(additionalProperties, "backupProtectedDeviceList")
+		delete(additionalProperties, "backupYear")
+		delete(additionalProperties, "backupMonth")
+		delete(additionalProperties, "ipAddress")
+		delete(additionalProperties, "defaultGateway")
+		delete(additionalProperties, "osType")
+		delete(additionalProperties, "osInfo")
+		delete(additionalProperties, "cpuSpeed")
+		delete(additionalProperties, "ram")
+		delete(additionalProperties, "localHardDrives")
+		delete(additionalProperties, "parentConfigurationId")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "manufacturer")
+		delete(additionalProperties, "questions")
+		delete(additionalProperties, "activeFlag")
+		delete(additionalProperties, "managementLink")
+		delete(additionalProperties, "remoteLink")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "displayVendorFlag")
+		delete(additionalProperties, "companyLocationId")
+		delete(additionalProperties, "showRemoteFlag")
+		delete(additionalProperties, "showAutomateFlag")
+		delete(additionalProperties, "needsRenewalFlag")
+		delete(additionalProperties, "manufacturerPartNumber")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

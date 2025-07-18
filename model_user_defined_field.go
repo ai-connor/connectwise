@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -56,6 +55,7 @@ type UserDefinedField struct {
 	// Date in UTC the custom field was created
 	DateCreated *time.Time `json:"dateCreated,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UserDefinedField UserDefinedField
@@ -997,6 +997,11 @@ func (o UserDefinedField) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1027,15 +1032,43 @@ func (o *UserDefinedField) UnmarshalJSON(data []byte) (err error) {
 
 	varUserDefinedField := _UserDefinedField{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUserDefinedField)
+	err = json.Unmarshal(data, &varUserDefinedField)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UserDefinedField(varUserDefinedField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "podId")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "screenId")
+		delete(additionalProperties, "helpText")
+		delete(additionalProperties, "fieldTypeIdentifier")
+		delete(additionalProperties, "numberDecimals")
+		delete(additionalProperties, "entryTypeIdentifier")
+		delete(additionalProperties, "requiredFlag")
+		delete(additionalProperties, "displayOnScreenFlag")
+		delete(additionalProperties, "readOnlyFlag")
+		delete(additionalProperties, "listViewFlag")
+		delete(additionalProperties, "buttonUrl")
+		delete(additionalProperties, "options")
+		delete(additionalProperties, "businessUnitIds")
+		delete(additionalProperties, "locationIds")
+		delete(additionalProperties, "addAllBusinessUnits")
+		delete(additionalProperties, "removeAllBusinessUnits")
+		delete(additionalProperties, "addAllLocations")
+		delete(additionalProperties, "removeAllLocations")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "dateCreated")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

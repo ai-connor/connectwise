@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type OwnershipType struct {
 	Name string `json:"name"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OwnershipType OwnershipType
@@ -188,6 +188,11 @@ func (o OwnershipType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -215,15 +220,23 @@ func (o *OwnershipType) UnmarshalJSON(data []byte) (err error) {
 
 	varOwnershipType := _OwnershipType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOwnershipType)
+	err = json.Unmarshal(data, &varOwnershipType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OwnershipType(varOwnershipType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

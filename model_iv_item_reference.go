@@ -23,7 +23,10 @@ type IvItemReference struct {
 	Identifier *string `json:"identifier,omitempty"`
 	SerializedFlag NullableBool `json:"serializedFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IvItemReference IvItemReference
 
 // NewIvItemReference instantiates a new IvItemReference object
 // This constructor will assign default values to properties that have it defined,
@@ -212,7 +215,36 @@ func (o IvItemReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IvItemReference) UnmarshalJSON(data []byte) (err error) {
+	varIvItemReference := _IvItemReference{}
+
+	err = json.Unmarshal(data, &varIvItemReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IvItemReference(varIvItemReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "serializedFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIvItemReference struct {

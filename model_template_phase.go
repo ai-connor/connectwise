@@ -28,7 +28,10 @@ type TemplatePhase struct {
 	BillPhaseSeparately NullableBool `json:"billPhaseSeparately,omitempty"`
 	WbsCode *string `json:"wbsCode,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TemplatePhase TemplatePhase
 
 // NewTemplatePhase instantiates a new TemplatePhase object
 // This constructor will assign default values to properties that have it defined,
@@ -402,7 +405,41 @@ func (o TemplatePhase) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TemplatePhase) UnmarshalJSON(data []byte) (err error) {
+	varTemplatePhase := _TemplatePhase{}
+
+	err = json.Unmarshal(data, &varTemplatePhase)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TemplatePhase(varTemplatePhase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "parentPhase")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "templateId")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "markAsMilestoneFlag")
+		delete(additionalProperties, "billPhaseSeparately")
+		delete(additionalProperties, "wbsCode")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTemplatePhase struct {

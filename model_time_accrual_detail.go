@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type TimeAccrualDetail struct {
 	Hours NullableFloat64 `json:"hours"`
 	TimeAccrual *TimeAccrualReference `json:"timeAccrual,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TimeAccrualDetail TimeAccrualDetail
@@ -277,6 +277,11 @@ func (o TimeAccrualDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -307,15 +312,26 @@ func (o *TimeAccrualDetail) UnmarshalJSON(data []byte) (err error) {
 
 	varTimeAccrualDetail := _TimeAccrualDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTimeAccrualDetail)
+	err = json.Unmarshal(data, &varTimeAccrualDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TimeAccrualDetail(varTimeAccrualDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "accrualType")
+		delete(additionalProperties, "startYear")
+		delete(additionalProperties, "endYear")
+		delete(additionalProperties, "hours")
+		delete(additionalProperties, "timeAccrual")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

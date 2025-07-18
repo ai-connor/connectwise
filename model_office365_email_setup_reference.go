@@ -22,7 +22,10 @@ type Office365EmailSetupReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Office365EmailSetupReference Office365EmailSetupReference
 
 // NewOffice365EmailSetupReference instantiates a new Office365EmailSetupReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o Office365EmailSetupReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Office365EmailSetupReference) UnmarshalJSON(data []byte) (err error) {
+	varOffice365EmailSetupReference := _Office365EmailSetupReference{}
+
+	err = json.Unmarshal(data, &varOffice365EmailSetupReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Office365EmailSetupReference(varOffice365EmailSetupReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOffice365EmailSetupReference struct {

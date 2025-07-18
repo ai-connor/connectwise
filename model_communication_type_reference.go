@@ -23,7 +23,10 @@ type CommunicationTypeReference struct {
 	Name *string `json:"name,omitempty"`
 	CoreEntityId *string `json:"coreEntityId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CommunicationTypeReference CommunicationTypeReference
 
 // NewCommunicationTypeReference instantiates a new CommunicationTypeReference object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o CommunicationTypeReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CommunicationTypeReference) UnmarshalJSON(data []byte) (err error) {
+	varCommunicationTypeReference := _CommunicationTypeReference{}
+
+	err = json.Unmarshal(data, &varCommunicationTypeReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CommunicationTypeReference(varCommunicationTypeReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "coreEntityId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCommunicationTypeReference struct {

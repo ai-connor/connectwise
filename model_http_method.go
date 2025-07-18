@@ -27,7 +27,10 @@ type HttpMethod struct {
 	Options *HttpMethod `json:"options,omitempty"`
 	Trace *HttpMethod `json:"trace,omitempty"`
 	Method *string `json:"method,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HttpMethod HttpMethod
 
 // NewHttpMethod instantiates a new HttpMethod object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +339,40 @@ func (o HttpMethod) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Method) {
 		toSerialize["method"] = o.Method
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HttpMethod) UnmarshalJSON(data []byte) (err error) {
+	varHttpMethod := _HttpMethod{}
+
+	err = json.Unmarshal(data, &varHttpMethod)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HttpMethod(varHttpMethod)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "get")
+		delete(additionalProperties, "put")
+		delete(additionalProperties, "post")
+		delete(additionalProperties, "delete")
+		delete(additionalProperties, "head")
+		delete(additionalProperties, "options")
+		delete(additionalProperties, "trace")
+		delete(additionalProperties, "method")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHttpMethod struct {

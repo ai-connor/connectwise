@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -72,6 +71,7 @@ type PurchaseOrderLineItem struct {
 	UnbatchedRecId NullableInt32 `json:"unbatchedRecId,omitempty"`
 	SalesOrder []SalesOrderReference `json:"salesOrder,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PurchaseOrderLineItem PurchaseOrderLineItem
@@ -1597,6 +1597,11 @@ func (o PurchaseOrderLineItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1628,15 +1633,60 @@ func (o *PurchaseOrderLineItem) UnmarshalJSON(data []byte) (err error) {
 
 	varPurchaseOrderLineItem := _PurchaseOrderLineItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPurchaseOrderLineItem)
+	err = json.Unmarshal(data, &varPurchaseOrderLineItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PurchaseOrderLineItem(varPurchaseOrderLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "backorderedFlag")
+		delete(additionalProperties, "canceledBy")
+		delete(additionalProperties, "canceledFlag")
+		delete(additionalProperties, "canceledReason")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "dateCanceled")
+		delete(additionalProperties, "dateCanceledUtc")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "displayInternalNotesFlag")
+		delete(additionalProperties, "expectedShipDate")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "lineNumber")
+		delete(additionalProperties, "packingSlip")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "purchaseOrderId")
+		delete(additionalProperties, "purchaseOrderNumber")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "receivedQuantity")
+		delete(additionalProperties, "serialNumbers")
+		delete(additionalProperties, "shipDate")
+		delete(additionalProperties, "shipmentMethod")
+		delete(additionalProperties, "tax")
+		delete(additionalProperties, "trackingNumber")
+		delete(additionalProperties, "unitCost")
+		delete(additionalProperties, "unitOfMeasure")
+		delete(additionalProperties, "vendorOrderNumber")
+		delete(additionalProperties, "vendorSku")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "shipSet")
+		delete(additionalProperties, "dateReceived")
+		delete(additionalProperties, "receivedStatus")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "extCost")
+		delete(additionalProperties, "expectedArrivalDate")
+		delete(additionalProperties, "isDetachAvailable")
+		delete(additionalProperties, "batchedFlag")
+		delete(additionalProperties, "unbatchedRecId")
+		delete(additionalProperties, "salesOrder")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -22,7 +22,10 @@ type ProjectTemplatePhaseReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectTemplatePhaseReference ProjectTemplatePhaseReference
 
 // NewProjectTemplatePhaseReference instantiates a new ProjectTemplatePhaseReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o ProjectTemplatePhaseReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectTemplatePhaseReference) UnmarshalJSON(data []byte) (err error) {
+	varProjectTemplatePhaseReference := _ProjectTemplatePhaseReference{}
+
+	err = json.Unmarshal(data, &varProjectTemplatePhaseReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectTemplatePhaseReference(varProjectTemplatePhaseReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectTemplatePhaseReference struct {

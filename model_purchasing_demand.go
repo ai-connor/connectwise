@@ -23,7 +23,10 @@ type PurchasingDemand struct {
 	Vendor *CompanyReference `json:"vendor,omitempty"`
 	Products []ProductDemand `json:"products,omitempty"`
 	PurchaseOrder *PurchaseOrder `json:"purchaseOrder,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PurchasingDemand PurchasingDemand
 
 // NewPurchasingDemand instantiates a new PurchasingDemand object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o PurchasingDemand) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PurchaseOrder) {
 		toSerialize["purchaseOrder"] = o.PurchaseOrder
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PurchasingDemand) UnmarshalJSON(data []byte) (err error) {
+	varPurchasingDemand := _PurchasingDemand{}
+
+	err = json.Unmarshal(data, &varPurchasingDemand)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PurchasingDemand(varPurchasingDemand)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "purchaseOrder")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePurchasingDemand struct {

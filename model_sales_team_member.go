@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SalesTeamMember struct {
 	Department *SystemDepartmentReference `json:"department,omitempty"`
 	AllowAccessFlag NullableBool `json:"allowAccessFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SalesTeamMember SalesTeamMember
@@ -269,6 +269,11 @@ func (o SalesTeamMember) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -296,15 +301,25 @@ func (o *SalesTeamMember) UnmarshalJSON(data []byte) (err error) {
 
 	varSalesTeamMember := _SalesTeamMember{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSalesTeamMember)
+	err = json.Unmarshal(data, &varSalesTeamMember)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SalesTeamMember(varSalesTeamMember)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "allowAccessFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

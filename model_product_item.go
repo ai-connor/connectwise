@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -108,6 +107,7 @@ type ProductItem struct {
 	Info *map[string]string `json:"_info,omitempty"`
 	BypassForecastUpdate NullableBool `json:"bypassForecastUpdate,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductItem ProductItem
@@ -3243,6 +3243,11 @@ func (o ProductItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -3271,15 +3276,97 @@ func (o *ProductItem) UnmarshalJSON(data []byte) (err error) {
 
 	varProductItem := _ProductItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductItem)
+	err = json.Unmarshal(data, &varProductItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductItem(varProductItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "catalogItem")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "unitOfMeasure")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "extPrice")
+		delete(additionalProperties, "extCost")
+		delete(additionalProperties, "discount")
+		delete(additionalProperties, "margin")
+		delete(additionalProperties, "agreementAmount")
+		delete(additionalProperties, "priceMethod")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "businessUnit")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "vendorSku")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "dropshipFlag")
+		delete(additionalProperties, "specialOrderFlag")
+		delete(additionalProperties, "phaseProductFlag")
+		delete(additionalProperties, "cancelledFlag")
+		delete(additionalProperties, "quantityCancelled")
+		delete(additionalProperties, "cancelledReason")
+		delete(additionalProperties, "customerDescription")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "productSuppliedFlag")
+		delete(additionalProperties, "subContractorShipToId")
+		delete(additionalProperties, "subContractorAmountLimit")
+		delete(additionalProperties, "recurring")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "phase")
+		delete(additionalProperties, "salesOrder")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "warehouseId")
+		delete(additionalProperties, "warehouseIdObject")
+		delete(additionalProperties, "warehouseBinId")
+		delete(additionalProperties, "warehouseBinIdObject")
+		delete(additionalProperties, "calculatedPriceFlag")
+		delete(additionalProperties, "calculatedCostFlag")
+		delete(additionalProperties, "forecastDetailId")
+		delete(additionalProperties, "cancelledBy")
+		delete(additionalProperties, "cancelledDate")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "purchaseDate")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "integrationXRef")
+		delete(additionalProperties, "listPrice")
+		delete(additionalProperties, "serialNumberIds")
+		delete(additionalProperties, "serialNumbers")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "forecastStatus")
+		delete(additionalProperties, "productClass")
+		delete(additionalProperties, "needToPurchaseFlag")
+		delete(additionalProperties, "needToOrderQuantity")
+		delete(additionalProperties, "minimumStockFlag")
+		delete(additionalProperties, "shipSet")
+		delete(additionalProperties, "calculatedPrice")
+		delete(additionalProperties, "calculatedCost")
+		delete(additionalProperties, "invoiceGrouping")
+		delete(additionalProperties, "poApprovedFlag")
+		delete(additionalProperties, "uom")
+		delete(additionalProperties, "addComponentsFlag")
+		delete(additionalProperties, "ignorePricingSchedulesFlag")
+		delete(additionalProperties, "asioSubscriptionsID")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "bypassForecastUpdate")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

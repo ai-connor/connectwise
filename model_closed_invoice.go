@@ -23,7 +23,10 @@ type ClosedInvoice struct {
 	Status *BillingStatusReference `json:"status,omitempty"`
 	InternalNotes *string `json:"internalNotes,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ClosedInvoice ClosedInvoice
 
 // NewClosedInvoice instantiates a new ClosedInvoice object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o ClosedInvoice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ClosedInvoice) UnmarshalJSON(data []byte) (err error) {
+	varClosedInvoice := _ClosedInvoice{}
+
+	err = json.Unmarshal(data, &varClosedInvoice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ClosedInvoice(varClosedInvoice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableClosedInvoice struct {

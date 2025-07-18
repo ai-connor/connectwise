@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -84,6 +83,7 @@ type ProjectPhase struct {
 	TaxCode *TaxCodeReference `json:"taxCode,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectPhase ProjectPhase
@@ -2191,6 +2191,11 @@ func (o ProjectPhase) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2218,15 +2223,72 @@ func (o *ProjectPhase) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectPhase := _ProjectPhase{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectPhase)
+	err = json.Unmarshal(data, &varProjectPhase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectPhase(varProjectPhase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "projectId")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "parentPhase")
+		delete(additionalProperties, "wbsCode")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "billExpenses")
+		delete(additionalProperties, "billProducts")
+		delete(additionalProperties, "markAsMilestoneFlag")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "deadlineDate")
+		delete(additionalProperties, "billSeparatelyFlag")
+		delete(additionalProperties, "billingMethod")
+		delete(additionalProperties, "scheduledHours")
+		delete(additionalProperties, "scheduledStart")
+		delete(additionalProperties, "scheduledEnd")
+		delete(additionalProperties, "actualHours")
+		delete(additionalProperties, "actualStart")
+		delete(additionalProperties, "actualEnd")
+		delete(additionalProperties, "budgetHours")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "hourlyRate")
+		delete(additionalProperties, "billingStartDate")
+		delete(additionalProperties, "billPhaseClosedFlag")
+		delete(additionalProperties, "billProjectClosedFlag")
+		delete(additionalProperties, "downpayment")
+		delete(additionalProperties, "poNumber")
+		delete(additionalProperties, "poAmount")
+		delete(additionalProperties, "estimatedTimeCost")
+		delete(additionalProperties, "estimatedExpenseCost")
+		delete(additionalProperties, "estimatedProductCost")
+		delete(additionalProperties, "estimatedTimeRevenue")
+		delete(additionalProperties, "estimatedExpenseRevenue")
+		delete(additionalProperties, "estimatedProductRevenue")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "billToContact")
+		delete(additionalProperties, "billToSite")
+		delete(additionalProperties, "shipToCompany")
+		delete(additionalProperties, "shipToContact")
+		delete(additionalProperties, "shipToSite")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

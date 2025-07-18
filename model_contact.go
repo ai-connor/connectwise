@@ -92,7 +92,10 @@ type Contact struct {
 	Info *map[string]string `json:"_info,omitempty"`
 	// Gets or sets integrer array of Contact_Type_Recids to be assigned to contact that can be passed in only during new contact creation (post)             To update existing contacts type, use the /company/contactTypeAssociations or /company/contacts/{ID}/typeAssociations endpoints.
 	TypeIds []int32 `json:"typeIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Contact Contact
 
 // NewContact instantiates a new Contact object
 // This constructor will assign default values to properties that have it defined,
@@ -2411,7 +2414,94 @@ func (o Contact) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TypeIds) {
 		toSerialize["typeIds"] = o.TypeIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Contact) UnmarshalJSON(data []byte) (err error) {
+	varContact := _Contact{}
+
+	err = json.Unmarshal(data, &varContact)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Contact(varContact)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "addressLine1")
+		delete(additionalProperties, "addressLine2")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "relationship")
+		delete(additionalProperties, "relationshipOverride")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "defaultMergeContactId")
+		delete(additionalProperties, "securityIdentifier")
+		delete(additionalProperties, "managerContact")
+		delete(additionalProperties, "assistantContact")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "school")
+		delete(additionalProperties, "nickName")
+		delete(additionalProperties, "marriedFlag")
+		delete(additionalProperties, "childrenFlag")
+		delete(additionalProperties, "children")
+		delete(additionalProperties, "significantOther")
+		delete(additionalProperties, "portalPassword")
+		delete(additionalProperties, "portalSecurityLevel")
+		delete(additionalProperties, "disablePortalLoginFlag")
+		delete(additionalProperties, "unsubscribeFlag")
+		delete(additionalProperties, "gender")
+		delete(additionalProperties, "birthDay")
+		delete(additionalProperties, "anniversary")
+		delete(additionalProperties, "presence")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "facebookUrl")
+		delete(additionalProperties, "twitterUrl")
+		delete(additionalProperties, "linkedInUrl")
+		delete(additionalProperties, "defaultPhoneType")
+		delete(additionalProperties, "defaultPhoneNbr")
+		delete(additionalProperties, "defaultPhoneExtension")
+		delete(additionalProperties, "defaultBillingFlag")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "userDefinedField1")
+		delete(additionalProperties, "userDefinedField2")
+		delete(additionalProperties, "userDefinedField3")
+		delete(additionalProperties, "userDefinedField4")
+		delete(additionalProperties, "userDefinedField5")
+		delete(additionalProperties, "userDefinedField6")
+		delete(additionalProperties, "userDefinedField7")
+		delete(additionalProperties, "userDefinedField8")
+		delete(additionalProperties, "userDefinedField9")
+		delete(additionalProperties, "userDefinedField10")
+		delete(additionalProperties, "companyLocation")
+		delete(additionalProperties, "communicationItems")
+		delete(additionalProperties, "types")
+		delete(additionalProperties, "integratorTags")
+		delete(additionalProperties, "customFields")
+		delete(additionalProperties, "photo")
+		delete(additionalProperties, "ignoreDuplicates")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "typeIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContact struct {

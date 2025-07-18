@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ServiceTemplateTask struct {
 	Code *ServiceCodeReference `json:"code,omitempty"`
 	Notes string `json:"notes"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ServiceTemplateTask ServiceTemplateTask
@@ -288,6 +288,11 @@ func (o ServiceTemplateTask) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -316,15 +321,26 @@ func (o *ServiceTemplateTask) UnmarshalJSON(data []byte) (err error) {
 
 	varServiceTemplateTask := _ServiceTemplateTask{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varServiceTemplateTask)
+	err = json.Unmarshal(data, &varServiceTemplateTask)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ServiceTemplateTask(varServiceTemplateTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "serviceTemplate")
+		delete(additionalProperties, "linkedServiceTemplateTask")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

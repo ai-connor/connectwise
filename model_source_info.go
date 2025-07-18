@@ -23,7 +23,10 @@ type SourceInfo struct {
 	Name *string `json:"name,omitempty"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SourceInfo SourceInfo
 
 // NewSourceInfo instantiates a new SourceInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o SourceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SourceInfo) UnmarshalJSON(data []byte) (err error) {
+	varSourceInfo := _SourceInfo{}
+
+	err = json.Unmarshal(data, &varSourceInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SourceInfo(varSourceInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSourceInfo struct {

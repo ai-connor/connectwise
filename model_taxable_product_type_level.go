@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type TaxableProductTypeLevel struct {
 	Id *int32 `json:"id,omitempty"`
 	TaxCodeLevel TaxCodeLevelReference `json:"taxCodeLevel"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TaxableProductTypeLevel TaxableProductTypeLevel
@@ -151,6 +151,11 @@ func (o TaxableProductTypeLevel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,15 +183,22 @@ func (o *TaxableProductTypeLevel) UnmarshalJSON(data []byte) (err error) {
 
 	varTaxableProductTypeLevel := _TaxableProductTypeLevel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTaxableProductTypeLevel)
+	err = json.Unmarshal(data, &varTaxableProductTypeLevel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TaxableProductTypeLevel(varTaxableProductTypeLevel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "taxCodeLevel")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

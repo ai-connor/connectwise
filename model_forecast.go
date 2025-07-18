@@ -41,7 +41,10 @@ type Forecast struct {
 	BillingTerms *BillingTermsReference `json:"billingTerms,omitempty"`
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Forecast Forecast
 
 // NewForecast instantiates a new Forecast object
 // This constructor will assign default values to properties that have it defined,
@@ -870,7 +873,54 @@ func (o Forecast) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Forecast) UnmarshalJSON(data []byte) (err error) {
+	varForecast := _Forecast{}
+
+	err = json.Unmarshal(data, &varForecast)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Forecast(varForecast)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "forecastItems")
+		delete(additionalProperties, "productRevenue")
+		delete(additionalProperties, "serviceRevenue")
+		delete(additionalProperties, "agreementRevenue")
+		delete(additionalProperties, "timeRevenue")
+		delete(additionalProperties, "expenseRevenue")
+		delete(additionalProperties, "forecastRevenueTotals")
+		delete(additionalProperties, "inclusiveRevenueTotals")
+		delete(additionalProperties, "recurringTotal")
+		delete(additionalProperties, "wonRevenue")
+		delete(additionalProperties, "lostRevenue")
+		delete(additionalProperties, "openRevenue")
+		delete(additionalProperties, "otherRevenue1")
+		delete(additionalProperties, "otherRevenue2")
+		delete(additionalProperties, "salesTaxRevenue")
+		delete(additionalProperties, "forecastTotalWithTaxes")
+		delete(additionalProperties, "expectedProbability")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableForecast struct {

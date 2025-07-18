@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type PricingDetail struct {
 	EndDate *time.Time `json:"endDate,omitempty"`
 	NoEndDate *bool `json:"noEndDate,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PricingDetail PricingDetail
@@ -332,6 +332,11 @@ func (o PricingDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -359,15 +364,27 @@ func (o *PricingDetail) UnmarshalJSON(data []byte) (err error) {
 
 	varPricingDetail := _PricingDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPricingDetail)
+	err = json.Unmarshal(data, &varPricingDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PricingDetail(varPricingDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "subCategory")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "noEndDate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

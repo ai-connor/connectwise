@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -88,6 +87,7 @@ type ServiceSignoff struct {
 	CreditCardFieldsFlag NullableBool `json:"creditCardFieldsFlag,omitempty"`
 	DefaultFFFlag NullableBool `json:"defaultFFFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ServiceSignoff ServiceSignoff
@@ -2625,6 +2625,11 @@ func (o ServiceSignoff) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2652,15 +2657,76 @@ func (o *ServiceSignoff) UnmarshalJSON(data []byte) (err error) {
 
 	varServiceSignoff := _ServiceSignoff{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varServiceSignoff)
+	err = json.Unmarshal(data, &varServiceSignoff)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ServiceSignoff(varServiceSignoff)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "visibleLogoFlag")
+		delete(additionalProperties, "companyInfoFlag")
+		delete(additionalProperties, "billingTermsFlag")
+		delete(additionalProperties, "summaryFlag")
+		delete(additionalProperties, "discussionFlag")
+		delete(additionalProperties, "taskFlag")
+		delete(additionalProperties, "task")
+		delete(additionalProperties, "configurationsFlag")
+		delete(additionalProperties, "internalNotesFlag")
+		delete(additionalProperties, "resolutionFlag")
+		delete(additionalProperties, "timeFlag")
+		delete(additionalProperties, "timeMemberFlag")
+		delete(additionalProperties, "timeDateFlag")
+		delete(additionalProperties, "timeStartEndFlag")
+		delete(additionalProperties, "timeBillFlag")
+		delete(additionalProperties, "timeHoursFlag")
+		delete(additionalProperties, "timeRateFlag")
+		delete(additionalProperties, "timeExtendedAmountFlag")
+		delete(additionalProperties, "timeWorkTypeFlag")
+		delete(additionalProperties, "timeAgreementFlag")
+		delete(additionalProperties, "timeNotesFlag")
+		delete(additionalProperties, "timeManualFlag")
+		delete(additionalProperties, "timeManualEntry")
+		delete(additionalProperties, "timeTaxFlag")
+		delete(additionalProperties, "expenseFlag")
+		delete(additionalProperties, "expenseDateFlag")
+		delete(additionalProperties, "expenseMemberFlag")
+		delete(additionalProperties, "expenseTypeFlag")
+		delete(additionalProperties, "expenseBillFlag")
+		delete(additionalProperties, "expenseAmountFlag")
+		delete(additionalProperties, "expenseAgreementFlag")
+		delete(additionalProperties, "expenseNotesFlag")
+		delete(additionalProperties, "expenseTaxFlag")
+		delete(additionalProperties, "expenseManualFlag")
+		delete(additionalProperties, "expenseManualEntry")
+		delete(additionalProperties, "productFlag")
+		delete(additionalProperties, "productDescriptionFlag")
+		delete(additionalProperties, "productBillFlag")
+		delete(additionalProperties, "productQuantityFlag")
+		delete(additionalProperties, "productPriceFlag")
+		delete(additionalProperties, "productExtendedAmountFlag")
+		delete(additionalProperties, "productAgreementFlag")
+		delete(additionalProperties, "productManualFlag")
+		delete(additionalProperties, "productManualEntry")
+		delete(additionalProperties, "productTaxFlag")
+		delete(additionalProperties, "technicianSignoffFlag")
+		delete(additionalProperties, "customerSignoffTextFlag")
+		delete(additionalProperties, "customerSignoffText")
+		delete(additionalProperties, "customerSignoffFieldsFlag")
+		delete(additionalProperties, "billingMethodsTextFlag")
+		delete(additionalProperties, "billingMethodsText")
+		delete(additionalProperties, "creditCardFieldsFlag")
+		delete(additionalProperties, "defaultFFFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -46,6 +45,7 @@ type BoardAutoTemplate struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	GrandParentId NullableInt32 `json:"grandParentId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BoardAutoTemplate BoardAutoTemplate
@@ -1066,6 +1066,11 @@ func (o BoardAutoTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GrandParentConnectWiseId) {
 		toSerialize["grandParentConnectWiseId"] = o.GrandParentConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1096,15 +1101,44 @@ func (o *BoardAutoTemplate) UnmarshalJSON(data []byte) (err error) {
 
 	varBoardAutoTemplate := _BoardAutoTemplate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBoardAutoTemplate)
+	err = json.Unmarshal(data, &varBoardAutoTemplate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BoardAutoTemplate(varBoardAutoTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "subtype")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "serviceTemplate")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "summarySetting")
+		delete(additionalProperties, "discussionSetting")
+		delete(additionalProperties, "internalAnalysisSetting")
+		delete(additionalProperties, "resolutionSetting")
+		delete(additionalProperties, "tasksSetting")
+		delete(additionalProperties, "documentsSetting")
+		delete(additionalProperties, "resourcesSetting")
+		delete(additionalProperties, "budgetHoursSetting")
+		delete(additionalProperties, "financeInformationSetting")
+		delete(additionalProperties, "sendNotesAsEmailSetting")
+		delete(additionalProperties, "impactUrgencySetting")
+		delete(additionalProperties, "templatePrioritySetting")
+		delete(additionalProperties, "autoApplyFlag")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -52,6 +51,7 @@ type Commission struct {
 	ProductsFlag NullableBool `json:"productsFlag,omitempty"`
 	MyOpportunitiesFlag NullableBool `json:"myOpportunitiesFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Commission Commission
@@ -1214,6 +1214,11 @@ func (o Commission) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1241,15 +1246,49 @@ func (o *Commission) UnmarshalJSON(data []byte) (err error) {
 
 	varCommission := _Commission{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommission)
+	err = json.Unmarshal(data, &varCommission)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Commission(varCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "commissionPercent")
+		delete(additionalProperties, "dateStart")
+		delete(additionalProperties, "dateEnd")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "serviceBoard")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "territory")
+		delete(additionalProperties, "billingMethod")
+		delete(additionalProperties, "serviceType")
+		delete(additionalProperties, "projectBoard")
+		delete(additionalProperties, "projectType")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "numberOfMonths")
+		delete(additionalProperties, "productCategory")
+		delete(additionalProperties, "productSubCategory")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "commissionBasis")
+		delete(additionalProperties, "invoiceOption")
+		delete(additionalProperties, "servicesFlag")
+		delete(additionalProperties, "agreementsFlag")
+		delete(additionalProperties, "productsFlag")
+		delete(additionalProperties, "myOpportunitiesFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

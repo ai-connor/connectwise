@@ -28,7 +28,10 @@ type ProjectSecurityRoleSetting struct {
 	ModuleIdentifier *string `json:"moduleIdentifier,omitempty"`
 	MyFlag NullableBool `json:"myFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectSecurityRoleSetting ProjectSecurityRoleSetting
 
 // NewProjectSecurityRoleSetting instantiates a new ProjectSecurityRoleSetting object
 // This constructor will assign default values to properties that have it defined,
@@ -387,7 +390,40 @@ func (o ProjectSecurityRoleSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectSecurityRoleSetting) UnmarshalJSON(data []byte) (err error) {
+	varProjectSecurityRoleSetting := _ProjectSecurityRoleSetting{}
+
+	err = json.Unmarshal(data, &varProjectSecurityRoleSetting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectSecurityRoleSetting(varProjectSecurityRoleSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "addLevel")
+		delete(additionalProperties, "editLevel")
+		delete(additionalProperties, "deleteLevel")
+		delete(additionalProperties, "inquireLevel")
+		delete(additionalProperties, "moduleIdentifier")
+		delete(additionalProperties, "myFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectSecurityRoleSetting struct {

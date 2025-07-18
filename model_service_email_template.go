@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -43,6 +42,7 @@ type ServiceEmailTemplate struct {
 	ServiceStatus *ServiceStatusReference `json:"serviceStatus,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ServiceEmailTemplate ServiceEmailTemplate
@@ -757,6 +757,11 @@ func (o ServiceEmailTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -784,15 +789,37 @@ func (o *ServiceEmailTemplate) UnmarshalJSON(data []byte) (err error) {
 
 	varServiceEmailTemplate := _ServiceEmailTemplate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varServiceEmailTemplate)
+	err = json.Unmarshal(data, &varServiceEmailTemplate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ServiceEmailTemplate(varServiceEmailTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "serviceSurvey")
+		delete(additionalProperties, "serviceBoard")
+		delete(additionalProperties, "useSenderFlag")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "emailAddress")
+		delete(additionalProperties, "subject")
+		delete(additionalProperties, "body")
+		delete(additionalProperties, "copySenderFlag")
+		delete(additionalProperties, "tasksFlag")
+		delete(additionalProperties, "resourceRecordsFlag")
+		delete(additionalProperties, "externalContactNotifications")
+		delete(additionalProperties, "internalContactNotifications")
+		delete(additionalProperties, "serviceStatus")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

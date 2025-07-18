@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type Category struct {
 	AddAllLocations NullableBool `json:"addAllLocations,omitempty"`
 	RemoveAllLocations NullableBool `json:"removeAllLocations,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Category Category
@@ -446,6 +446,11 @@ func (o Category) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -473,15 +478,29 @@ func (o *Category) UnmarshalJSON(data []byte) (err error) {
 
 	varCategory := _Category{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCategory)
+	err = json.Unmarshal(data, &varCategory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Category(varCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "priceLevelXref")
+		delete(additionalProperties, "integrationXref")
+		delete(additionalProperties, "locationIds")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "addAllLocations")
+		delete(additionalProperties, "removeAllLocations")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

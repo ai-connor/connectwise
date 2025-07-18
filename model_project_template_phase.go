@@ -32,7 +32,10 @@ type ProjectTemplatePhase struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	ParentConnectWiseId *string `json:"parentConnectWiseId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectTemplatePhase ProjectTemplatePhase
 
 // NewProjectTemplatePhase instantiates a new ProjectTemplatePhase object
 // This constructor will assign default values to properties that have it defined,
@@ -546,7 +549,45 @@ func (o ProjectTemplatePhase) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectTemplatePhase) UnmarshalJSON(data []byte) (err error) {
+	varProjectTemplatePhase := _ProjectTemplatePhase{}
+
+	err = json.Unmarshal(data, &varProjectTemplatePhase)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectTemplatePhase(varProjectTemplatePhase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "templateRecId")
+		delete(additionalProperties, "parentPhase")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "budgetHours")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "markAsMilestone")
+		delete(additionalProperties, "phaseBilledSeparately")
+		delete(additionalProperties, "wbsCode")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectTemplatePhase struct {

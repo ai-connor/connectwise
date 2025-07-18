@@ -23,7 +23,10 @@ type SystemDepartmentReference struct {
 	Identifier *string `json:"identifier,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SystemDepartmentReference SystemDepartmentReference
 
 // NewSystemDepartmentReference instantiates a new SystemDepartmentReference object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o SystemDepartmentReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SystemDepartmentReference) UnmarshalJSON(data []byte) (err error) {
+	varSystemDepartmentReference := _SystemDepartmentReference{}
+
+	err = json.Unmarshal(data, &varSystemDepartmentReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SystemDepartmentReference(varSystemDepartmentReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSystemDepartmentReference struct {

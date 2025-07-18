@@ -71,7 +71,10 @@ type GLExportTransactionDetail struct {
 	PriceLevelXref *string `json:"priceLevelXref,omitempty"`
 	LocationXref *string `json:"locationXref,omitempty"`
 	TaxLevels []GLExportTransactionDetailTaxLevel `json:"taxLevels,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportTransactionDetail GLExportTransactionDetail
 
 // NewGLExportTransactionDetail instantiates a new GLExportTransactionDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -2080,7 +2083,84 @@ func (o GLExportTransactionDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TaxLevels) {
 		toSerialize["taxLevels"] = o.TaxLevels
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportTransactionDetail) UnmarshalJSON(data []byte) (err error) {
+	varGLExportTransactionDetail := _GLExportTransactionDetail{}
+
+	err = json.Unmarshal(data, &varGLExportTransactionDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportTransactionDetail(varGLExportTransactionDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "documentType")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "glTypeId")
+		delete(additionalProperties, "glItemId")
+		delete(additionalProperties, "invoiceSummaryOption")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "salesCode")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "timeEntry")
+		delete(additionalProperties, "costAccountNumber")
+		delete(additionalProperties, "inventoryAccountNumber")
+		delete(additionalProperties, "productAccountNumber")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "taxCodeXref")
+		delete(additionalProperties, "taxAgencyXref")
+		delete(additionalProperties, "taxNote")
+		delete(additionalProperties, "taxRate")
+		delete(additionalProperties, "taxRatePercent")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "taxable2Flag")
+		delete(additionalProperties, "taxable3Flag")
+		delete(additionalProperties, "taxable4Flag")
+		delete(additionalProperties, "taxable5Flag")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "itemTaxableFlag")
+		delete(additionalProperties, "itemPrice")
+		delete(additionalProperties, "itemCost")
+		delete(additionalProperties, "itemDescription")
+		delete(additionalProperties, "salesDescription")
+		delete(additionalProperties, "unitOfMeasure")
+		delete(additionalProperties, "subCategory")
+		delete(additionalProperties, "serializedFlag")
+		delete(additionalProperties, "serialNumbers")
+		delete(additionalProperties, "warehouseSite")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "shipmentMethod")
+		delete(additionalProperties, "dropShippedFlag")
+		delete(additionalProperties, "itemTypeXref")
+		delete(additionalProperties, "inventoryXref")
+		delete(additionalProperties, "cogsXref")
+		delete(additionalProperties, "uomScheduleXref")
+		delete(additionalProperties, "priceLevelXref")
+		delete(additionalProperties, "locationXref")
+		delete(additionalProperties, "taxLevels")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportTransactionDetail struct {

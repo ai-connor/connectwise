@@ -27,7 +27,10 @@ type PhaseStatusInfo struct {
 	ClosedFlag NullableBool `json:"closedFlag,omitempty"`
 	BoardAssociationIds []int32 `json:"boardAssociationIds,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PhaseStatusInfo PhaseStatusInfo
 
 // NewPhaseStatusInfo instantiates a new PhaseStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -376,7 +379,40 @@ func (o PhaseStatusInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PhaseStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varPhaseStatusInfo := _PhaseStatusInfo{}
+
+	err = json.Unmarshal(data, &varPhaseStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PhaseStatusInfo(varPhaseStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "collapsedFlag")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "boardAssociationIds")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePhaseStatusInfo struct {

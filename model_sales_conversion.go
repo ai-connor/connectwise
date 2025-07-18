@@ -22,7 +22,10 @@ type SalesConversion struct {
 	ParentType *string `json:"parentType,omitempty"`
 	ConvertedTo *ConversionTypeReference `json:"convertedTo,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SalesConversion SalesConversion
 
 // NewSalesConversion instantiates a new SalesConversion object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o SalesConversion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SalesConversion) UnmarshalJSON(data []byte) (err error) {
+	varSalesConversion := _SalesConversion{}
+
+	err = json.Unmarshal(data, &varSalesConversion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SalesConversion(varSalesConversion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "parentType")
+		delete(additionalProperties, "convertedTo")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSalesConversion struct {

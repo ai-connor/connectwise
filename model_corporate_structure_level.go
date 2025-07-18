@@ -21,7 +21,10 @@ var _ MappedNullable = &CorporateStructureLevel{}
 type CorporateStructureLevel struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CorporateStructureLevel CorporateStructureLevel
 
 // NewCorporateStructureLevel instantiates a new CorporateStructureLevel object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o CorporateStructureLevel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CorporateStructureLevel) UnmarshalJSON(data []byte) (err error) {
+	varCorporateStructureLevel := _CorporateStructureLevel{}
+
+	err = json.Unmarshal(data, &varCorporateStructureLevel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CorporateStructureLevel(varCorporateStructureLevel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCorporateStructureLevel struct {

@@ -26,7 +26,10 @@ type TimePeriod struct {
 	EndDate *string `json:"endDate,omitempty"`
 	DeadlineDate *string `json:"deadlineDate,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimePeriod TimePeriod
 
 // NewTimePeriod instantiates a new TimePeriod object
 // This constructor will assign default values to properties that have it defined,
@@ -310,7 +313,39 @@ func (o TimePeriod) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimePeriod) UnmarshalJSON(data []byte) (err error) {
+	varTimePeriod := _TimePeriod{}
+
+	err = json.Unmarshal(data, &varTimePeriod)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimePeriod(varTimePeriod)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "timePeriodSetup")
+		delete(additionalProperties, "period")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "deadlineDate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimePeriod struct {

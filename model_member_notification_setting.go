@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type MemberNotificationSetting struct {
 	NotificationType NullableString `json:"notificationType"`
 	NotificationTrigger NullableString `json:"notificationTrigger"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MemberNotificationSetting MemberNotificationSetting
@@ -182,6 +182,11 @@ func (o MemberNotificationSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *MemberNotificationSetting) UnmarshalJSON(data []byte) (err error) {
 
 	varMemberNotificationSetting := _MemberNotificationSetting{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMemberNotificationSetting)
+	err = json.Unmarshal(data, &varMemberNotificationSetting)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MemberNotificationSetting(varMemberNotificationSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "notificationType")
+		delete(additionalProperties, "notificationTrigger")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

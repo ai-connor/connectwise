@@ -36,7 +36,10 @@ type BatchEntry struct {
 	Expense *ExpenseDetailReference `json:"expense,omitempty"`
 	AdjustmentDetail *AdjustmentDetailReference `json:"adjustmentDetail,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BatchEntry BatchEntry
 
 // NewBatchEntry instantiates a new BatchEntry object
 // This constructor will assign default values to properties that have it defined,
@@ -680,7 +683,49 @@ func (o BatchEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BatchEntry) UnmarshalJSON(data []byte) (err error) {
+	varBatchEntry := _BatchEntry{}
+
+	err = json.Unmarshal(data, &varBatchEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BatchEntry(varBatchEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "accountType")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "debit")
+		delete(additionalProperties, "credit")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "salesCode")
+		delete(additionalProperties, "costOfGoodsSoldAccountNumber")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "purchaseOrder")
+		delete(additionalProperties, "lineItem")
+		delete(additionalProperties, "transfer")
+		delete(additionalProperties, "expense")
+		delete(additionalProperties, "adjustmentDetail")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBatchEntry struct {

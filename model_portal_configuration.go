@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -49,6 +48,7 @@ type PortalConfiguration struct {
 	PortalImageCopySuccessFlag NullableBool `json:"portalImageCopySuccessFlag,omitempty"`
 	DisplayVendorFlag NullableBool `json:"displayVendorFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PortalConfiguration PortalConfiguration
@@ -776,6 +776,11 @@ func (o PortalConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -803,15 +808,38 @@ func (o *PortalConfiguration) UnmarshalJSON(data []byte) (err error) {
 
 	varPortalConfiguration := _PortalConfiguration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPortalConfiguration)
+	err = json.Unmarshal(data, &varPortalConfiguration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PortalConfiguration(varPortalConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "loginBackgroundColor")
+		delete(additionalProperties, "portalBackgroundColor")
+		delete(additionalProperties, "menuColor")
+		delete(additionalProperties, "buttonColor")
+		delete(additionalProperties, "headerColor")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "language")
+		delete(additionalProperties, "welcomeText")
+		delete(additionalProperties, "boardIds")
+		delete(additionalProperties, "agreementTypeIds")
+		delete(additionalProperties, "configTypeIds")
+		delete(additionalProperties, "locationIds")
+		delete(additionalProperties, "portalImageCopySuccessFlag")
+		delete(additionalProperties, "displayVendorFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -22,7 +22,10 @@ type ConfigurationTypeReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigurationTypeReference ConfigurationTypeReference
 
 // NewConfigurationTypeReference instantiates a new ConfigurationTypeReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o ConfigurationTypeReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigurationTypeReference) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationTypeReference := _ConfigurationTypeReference{}
+
+	err = json.Unmarshal(data, &varConfigurationTypeReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigurationTypeReference(varConfigurationTypeReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigurationTypeReference struct {

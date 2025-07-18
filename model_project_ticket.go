@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -119,6 +118,7 @@ type ProjectTicket struct {
 	ProcessNotifications NullableBool `json:"processNotifications,omitempty"`
 	SkipCallback NullableBool `json:"skipCallback,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectTicket ProjectTicket
@@ -3212,6 +3212,11 @@ func (o ProjectTicket) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -3240,15 +3245,99 @@ func (o *ProjectTicket) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectTicket := _ProjectTicket{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectTicket)
+	err = json.Unmarshal(data, &varProjectTicket)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectTicket(varProjectTicket)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "isIssueFlag")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "phase")
+		delete(additionalProperties, "wbsCode")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "siteName")
+		delete(additionalProperties, "addressLine1")
+		delete(additionalProperties, "addressLine2")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "stateIdentifier")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "contactName")
+		delete(additionalProperties, "contactPhoneNumber")
+		delete(additionalProperties, "contactPhoneExtension")
+		delete(additionalProperties, "contactEmailAddress")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "subType")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "owner")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "serviceLocation")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "requiredDate")
+		delete(additionalProperties, "budgetHours")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "knowledgeBaseCategoryId")
+		delete(additionalProperties, "knowledgeBaseSubCategoryId")
+		delete(additionalProperties, "knowledgeBaseLinkId")
+		delete(additionalProperties, "knowledgeBaseLinkType")
+		delete(additionalProperties, "allowAllClientsPortalView")
+		delete(additionalProperties, "customerUpdatedFlag")
+		delete(additionalProperties, "automaticEmailContactFlag")
+		delete(additionalProperties, "automaticEmailResourceFlag")
+		delete(additionalProperties, "automaticEmailCcFlag")
+		delete(additionalProperties, "automaticEmailCc")
+		delete(additionalProperties, "closedDate")
+		delete(additionalProperties, "closedBy")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "actualHours")
+		delete(additionalProperties, "approved")
+		delete(additionalProperties, "subBillingMethod")
+		delete(additionalProperties, "subBillingAmount")
+		delete(additionalProperties, "subDateAccepted")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "billExpenses")
+		delete(additionalProperties, "billProducts")
+		delete(additionalProperties, "predecessorType")
+		delete(additionalProperties, "predecessorId")
+		delete(additionalProperties, "predecessorClosedFlag")
+		delete(additionalProperties, "lagDays")
+		delete(additionalProperties, "lagNonworkingDaysFlag")
+		delete(additionalProperties, "estimatedStartDate")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "scheduleStartDate")
+		delete(additionalProperties, "scheduleEndDate")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "tasks")
+		delete(additionalProperties, "initialDescription")
+		delete(additionalProperties, "initialInternalAnalysis")
+		delete(additionalProperties, "initialResolution")
+		delete(additionalProperties, "contactEmailLookup")
+		delete(additionalProperties, "processNotifications")
+		delete(additionalProperties, "skipCallback")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

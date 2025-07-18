@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type KnowledgeBaseArticle struct {
 	DateCreated *string `json:"dateCreated,omitempty"`
 	CreatedBy *string `json:"createdBy,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _KnowledgeBaseArticle KnowledgeBaseArticle
@@ -497,6 +497,11 @@ func (o KnowledgeBaseArticle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -526,15 +531,31 @@ func (o *KnowledgeBaseArticle) UnmarshalJSON(data []byte) (err error) {
 
 	varKnowledgeBaseArticle := _KnowledgeBaseArticle{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varKnowledgeBaseArticle)
+	err = json.Unmarshal(data, &varKnowledgeBaseArticle)
 
 	if err != nil {
 		return err
 	}
 
 	*o = KnowledgeBaseArticle(varKnowledgeBaseArticle)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "issue")
+		delete(additionalProperties, "resolution")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "categoryId")
+		delete(additionalProperties, "subCategoryId")
+		delete(additionalProperties, "dateCreated")
+		delete(additionalProperties, "createdBy")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

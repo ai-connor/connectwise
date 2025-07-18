@@ -21,7 +21,10 @@ var _ MappedNullable = &GLExportTransactionDetailTaxLevel{}
 type GLExportTransactionDetailTaxLevel struct {
 	TaxableFlag *bool `json:"taxableFlag,omitempty"`
 	TaxLevel *int32 `json:"taxLevel,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportTransactionDetailTaxLevel GLExportTransactionDetailTaxLevel
 
 // NewGLExportTransactionDetailTaxLevel instantiates a new GLExportTransactionDetailTaxLevel object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GLExportTransactionDetailTaxLevel) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.TaxLevel) {
 		toSerialize["taxLevel"] = o.TaxLevel
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportTransactionDetailTaxLevel) UnmarshalJSON(data []byte) (err error) {
+	varGLExportTransactionDetailTaxLevel := _GLExportTransactionDetailTaxLevel{}
+
+	err = json.Unmarshal(data, &varGLExportTransactionDetailTaxLevel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportTransactionDetailTaxLevel(varGLExportTransactionDetailTaxLevel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "taxLevel")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportTransactionDetailTaxLevel struct {

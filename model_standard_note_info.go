@@ -26,7 +26,10 @@ type StandardNoteInfo struct {
 	Department *SystemDepartmentReference `json:"department,omitempty"`
 	Board *BoardReference `json:"board,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StandardNoteInfo StandardNoteInfo
 
 // NewStandardNoteInfo instantiates a new StandardNoteInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +303,39 @@ func (o StandardNoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StandardNoteInfo) UnmarshalJSON(data []byte) (err error) {
+	varStandardNoteInfo := _StandardNoteInfo{}
+
+	err = json.Unmarshal(data, &varStandardNoteInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StandardNoteInfo(varStandardNoteInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "contents")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStandardNoteInfo struct {

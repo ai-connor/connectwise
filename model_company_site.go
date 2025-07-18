@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -56,6 +55,7 @@ type CompanySite struct {
 	Company *CompanyReference `json:"company,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanySite CompanySite
@@ -1103,6 +1103,11 @@ func (o CompanySite) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1130,15 +1135,46 @@ func (o *CompanySite) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanySite := _CompanySite{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanySite)
+	err = json.Unmarshal(data, &varCompanySite)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanySite(varCompanySite)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "addressLine1")
+		delete(additionalProperties, "addressLine2")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "stateReference")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "addressFormat")
+		delete(additionalProperties, "phoneNumber")
+		delete(additionalProperties, "phoneNumberExt")
+		delete(additionalProperties, "faxNumber")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "expenseReimbursement")
+		delete(additionalProperties, "primaryAddressFlag")
+		delete(additionalProperties, "defaultShippingFlag")
+		delete(additionalProperties, "defaultBillingFlag")
+		delete(additionalProperties, "defaultMailingFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "billSeparateFlag")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "calendar")
+		delete(additionalProperties, "timeZone")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type ServiceTemplateInfo struct {
 	Name *string `json:"name,omitempty"`
 	TemplateFlag NullableBool `json:"templateFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceTemplateInfo ServiceTemplateInfo
 
 // NewServiceTemplateInfo instantiates a new ServiceTemplateInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o ServiceTemplateInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceTemplateInfo) UnmarshalJSON(data []byte) (err error) {
+	varServiceTemplateInfo := _ServiceTemplateInfo{}
+
+	err = json.Unmarshal(data, &varServiceTemplateInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceTemplateInfo(varServiceTemplateInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "templateFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceTemplateInfo struct {

@@ -31,7 +31,10 @@ type CompanyFinance struct {
 	Company *CompanyReference `json:"company,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CompanyFinance CompanyFinance
 
 // NewCompanyFinance instantiates a new CompanyFinance object
 // This constructor will assign default values to properties that have it defined,
@@ -550,7 +553,44 @@ func (o CompanyFinance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CompanyFinance) UnmarshalJSON(data []byte) (err error) {
+	varCompanyFinance := _CompanyFinance{}
+
+	err = json.Unmarshal(data, &varCompanyFinance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CompanyFinance(varCompanyFinance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "billOverrideFlag")
+		delete(additionalProperties, "billSrFlag")
+		delete(additionalProperties, "billCompleteSrFlag")
+		delete(additionalProperties, "billUnapprovedSrFlag")
+		delete(additionalProperties, "billRestrictPmFlag")
+		delete(additionalProperties, "billCompletePmFlag")
+		delete(additionalProperties, "billUnapprovedPmFlag")
+		delete(additionalProperties, "emailTemplate")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCompanyFinance struct {

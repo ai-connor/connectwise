@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -98,6 +97,7 @@ type Board struct {
 	SendToBundledFlag NullableBool `json:"sendToBundledFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Board Board
@@ -2827,6 +2827,11 @@ func (o Board) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2856,15 +2861,84 @@ func (o *Board) UnmarshalJSON(data []byte) (err error) {
 
 	varBoard := _Board{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBoard)
+	err = json.Unmarshal(data, &varBoard)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Board(varBoard)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "signOffTemplate")
+		delete(additionalProperties, "sendToContactFlag")
+		delete(additionalProperties, "contactTemplate")
+		delete(additionalProperties, "sendToResourceFlag")
+		delete(additionalProperties, "resourceTemplate")
+		delete(additionalProperties, "projectFlag")
+		delete(additionalProperties, "showDependenciesFlag")
+		delete(additionalProperties, "showEstimatesFlag")
+		delete(additionalProperties, "boardIcon")
+		delete(additionalProperties, "billTicketsAfterClosedFlag")
+		delete(additionalProperties, "billTicketSeparatelyFlag")
+		delete(additionalProperties, "billUnapprovedTimeExpenseFlag")
+		delete(additionalProperties, "overrideBillingSetupFlag")
+		delete(additionalProperties, "dispatchMember")
+		delete(additionalProperties, "serviceManagerMember")
+		delete(additionalProperties, "dutyManagerMember")
+		delete(additionalProperties, "oncallMember")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "billExpense")
+		delete(additionalProperties, "billProduct")
+		delete(additionalProperties, "autoCloseStatus")
+		delete(additionalProperties, "autoAssignNewTicketsFlag")
+		delete(additionalProperties, "autoAssignNewECTicketsFlag")
+		delete(additionalProperties, "autoAssignNewPortalTicketsFlag")
+		delete(additionalProperties, "discussionsLockedFlag")
+		delete(additionalProperties, "timeEntryLockedFlag")
+		delete(additionalProperties, "notifyEmailFrom")
+		delete(additionalProperties, "notifyEmailFromName")
+		delete(additionalProperties, "closedLoopDiscussionsFlag")
+		delete(additionalProperties, "closedLoopResolutionFlag")
+		delete(additionalProperties, "closedLoopInternalAnalysisFlag")
+		delete(additionalProperties, "timeEntryDiscussionFlag")
+		delete(additionalProperties, "timeEntryResolutionFlag")
+		delete(additionalProperties, "timeEntryInternalAnalysisFlag")
+		delete(additionalProperties, "problemSort")
+		delete(additionalProperties, "resolutionSort")
+		delete(additionalProperties, "internalAnalysisSort")
+		delete(additionalProperties, "emailConnectorAllowReopenClosedFlag")
+		delete(additionalProperties, "emailConnectorReopenStatus")
+		delete(additionalProperties, "emailConnectorReopenResourcesFlag")
+		delete(additionalProperties, "emailConnectorNewTicketNoMatchFlag")
+		delete(additionalProperties, "emailConnectorNeverReopenByDaysFlag")
+		delete(additionalProperties, "emailConnectorReopenDaysLimit")
+		delete(additionalProperties, "emailConnectorNeverReopenByDaysClosedFlag")
+		delete(additionalProperties, "emailConnectorReopenDaysClosedLimit")
+		delete(additionalProperties, "useMemberDisplayNameFlag")
+		delete(additionalProperties, "sendToCCFlag")
+		delete(additionalProperties, "autoAssignTicketOwnerFlag")
+		delete(additionalProperties, "autoAssignLimitFlag")
+		delete(additionalProperties, "autoAssignLimitAmount")
+		delete(additionalProperties, "closedLoopAllFlag")
+		delete(additionalProperties, "percentageCalculation")
+		delete(additionalProperties, "allSort")
+		delete(additionalProperties, "markFirstNoteIssueFlag")
+		delete(additionalProperties, "restrictBoardByDefaultFlag")
+		delete(additionalProperties, "sendToBundledFlag")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

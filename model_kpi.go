@@ -25,7 +25,10 @@ type KPI struct {
 	DateFilter *string `json:"dateFilter,omitempty"`
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _KPI KPI
 
 // NewKPI instantiates a new KPI object
 // This constructor will assign default values to properties that have it defined,
@@ -284,7 +287,38 @@ func (o KPI) ToMap() (map[string]interface{}, error) {
 	if o.InactiveFlag.IsSet() {
 		toSerialize["inactiveFlag"] = o.InactiveFlag.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *KPI) UnmarshalJSON(data []byte) (err error) {
+	varKPI := _KPI{}
+
+	err = json.Unmarshal(data, &varKPI)
+
+	if err != nil {
+		return err
+	}
+
+	*o = KPI(varKPI)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "dateFilter")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "inactiveFlag")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableKPI struct {

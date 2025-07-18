@@ -23,7 +23,10 @@ type EmailConnectorInfo struct {
 	DefaultCompany *CompanyReference `json:"defaultCompany,omitempty"`
 	ImapSetup *ImapSetupReference `json:"imapSetup,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EmailConnectorInfo EmailConnectorInfo
 
 // NewEmailConnectorInfo instantiates a new EmailConnectorInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o EmailConnectorInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EmailConnectorInfo) UnmarshalJSON(data []byte) (err error) {
+	varEmailConnectorInfo := _EmailConnectorInfo{}
+
+	err = json.Unmarshal(data, &varEmailConnectorInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EmailConnectorInfo(varEmailConnectorInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "defaultCompany")
+		delete(additionalProperties, "imapSetup")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEmailConnectorInfo struct {

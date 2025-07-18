@@ -26,7 +26,10 @@ type PurchaseOrderNote struct {
 	Flagged NullableBool `json:"flagged,omitempty"`
 	EnteredBy *string `json:"enteredBy,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PurchaseOrderNote PurchaseOrderNote
 
 // NewPurchaseOrderNote instantiates a new PurchaseOrderNote object
 // This constructor will assign default values to properties that have it defined,
@@ -320,7 +323,39 @@ func (o PurchaseOrderNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PurchaseOrderNote) UnmarshalJSON(data []byte) (err error) {
+	varPurchaseOrderNote := _PurchaseOrderNote{}
+
+	err = json.Unmarshal(data, &varPurchaseOrderNote)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PurchaseOrderNote(varPurchaseOrderNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "purchaseHeaderRecID")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "flagged")
+		delete(additionalProperties, "enteredBy")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePurchaseOrderNote struct {

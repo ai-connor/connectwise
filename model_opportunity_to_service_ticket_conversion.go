@@ -27,7 +27,10 @@ type OpportunityToServiceTicketConversion struct {
 	IncludeNoteIds []int32 `json:"includeNoteIds,omitempty"`
 	IncludeDocumentIds []int32 `json:"includeDocumentIds,omitempty"`
 	IncludeProductIds []int32 `json:"includeProductIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpportunityToServiceTicketConversion OpportunityToServiceTicketConversion
 
 // NewOpportunityToServiceTicketConversion instantiates a new OpportunityToServiceTicketConversion object
 // This constructor will assign default values to properties that have it defined,
@@ -366,7 +369,40 @@ func (o OpportunityToServiceTicketConversion) ToMap() (map[string]interface{}, e
 	if !IsNil(o.IncludeProductIds) {
 		toSerialize["includeProductIds"] = o.IncludeProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpportunityToServiceTicketConversion) UnmarshalJSON(data []byte) (err error) {
+	varOpportunityToServiceTicketConversion := _OpportunityToServiceTicketConversion{}
+
+	err = json.Unmarshal(data, &varOpportunityToServiceTicketConversion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpportunityToServiceTicketConversion(varOpportunityToServiceTicketConversion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ticketId")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "includeAllNotesFlag")
+		delete(additionalProperties, "includeAllDocumentsFlag")
+		delete(additionalProperties, "includeAllProductsFlag")
+		delete(additionalProperties, "includeNoteIds")
+		delete(additionalProperties, "includeDocumentIds")
+		delete(additionalProperties, "includeProductIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpportunityToServiceTicketConversion struct {

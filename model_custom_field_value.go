@@ -26,7 +26,10 @@ type CustomFieldValue struct {
 	NumberOfDecimals NullableInt32 `json:"numberOfDecimals,omitempty"`
 	Value any `json:"value,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomFieldValue CustomFieldValue
 
 // NewCustomFieldValue instantiates a new CustomFieldValue object
 // This constructor will assign default values to properties that have it defined,
@@ -340,7 +343,39 @@ func (o CustomFieldValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomFieldValue) UnmarshalJSON(data []byte) (err error) {
+	varCustomFieldValue := _CustomFieldValue{}
+
+	err = json.Unmarshal(data, &varCustomFieldValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomFieldValue(varCustomFieldValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "entryMethod")
+		delete(additionalProperties, "numberOfDecimals")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomFieldValue struct {

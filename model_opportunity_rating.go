@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type OpportunityRating struct {
 	Name string `json:"name"`
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OpportunityRating OpportunityRating
@@ -198,6 +198,11 @@ func (o OpportunityRating) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -225,15 +230,23 @@ func (o *OpportunityRating) UnmarshalJSON(data []byte) (err error) {
 
 	varOpportunityRating := _OpportunityRating{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOpportunityRating)
+	err = json.Unmarshal(data, &varOpportunityRating)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OpportunityRating(varOpportunityRating)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

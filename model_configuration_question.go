@@ -27,7 +27,10 @@ type ConfigurationQuestion struct {
 	NumberOfDecimals NullableInt32 `json:"numberOfDecimals,omitempty"`
 	FieldType NullableString `json:"fieldType,omitempty"`
 	RequiredFlag NullableBool `json:"requiredFlag,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigurationQuestion ConfigurationQuestion
 
 // NewConfigurationQuestion instantiates a new ConfigurationQuestion object
 // This constructor will assign default values to properties that have it defined,
@@ -396,7 +399,40 @@ func (o ConfigurationQuestion) ToMap() (map[string]interface{}, error) {
 	if o.RequiredFlag.IsSet() {
 		toSerialize["requiredFlag"] = o.RequiredFlag.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigurationQuestion) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationQuestion := _ConfigurationQuestion{}
+
+	err = json.Unmarshal(data, &varConfigurationQuestion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigurationQuestion(varConfigurationQuestion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "answerId")
+		delete(additionalProperties, "questionId")
+		delete(additionalProperties, "question")
+		delete(additionalProperties, "answer")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "numberOfDecimals")
+		delete(additionalProperties, "fieldType")
+		delete(additionalProperties, "requiredFlag")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigurationQuestion struct {

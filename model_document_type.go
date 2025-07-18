@@ -25,7 +25,10 @@ type DocumentType struct {
 	MimeType *string `json:"mimeType,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DocumentType DocumentType
 
 // NewDocumentType instantiates a new DocumentType object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o DocumentType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DocumentType) UnmarshalJSON(data []byte) (err error) {
+	varDocumentType := _DocumentType{}
+
+	err = json.Unmarshal(data, &varDocumentType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DocumentType(varDocumentType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fileExtension")
+		delete(additionalProperties, "icon")
+		delete(additionalProperties, "mimeType")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDocumentType struct {

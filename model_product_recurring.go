@@ -29,7 +29,10 @@ type ProductRecurring struct {
 	Cycles NullableInt32 `json:"cycles,omitempty"`
 	CycleType NullableString `json:"cycleType,omitempty"`
 	AgreementType *AgreementTypeReference `json:"agreementType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductRecurring ProductRecurring
 
 // NewProductRecurring instantiates a new ProductRecurring object
 // This constructor will assign default values to properties that have it defined,
@@ -423,7 +426,41 @@ func (o ProductRecurring) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AgreementType) {
 		toSerialize["agreementType"] = o.AgreementType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductRecurring) UnmarshalJSON(data []byte) (err error) {
+	varProductRecurring := _ProductRecurring{}
+
+	err = json.Unmarshal(data, &varProductRecurring)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductRecurring(varProductRecurring)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "recurringRevenue")
+		delete(additionalProperties, "recurringCost")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "billCycleId")
+		delete(additionalProperties, "billCycle")
+		delete(additionalProperties, "cycles")
+		delete(additionalProperties, "cycleType")
+		delete(additionalProperties, "agreementType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductRecurring struct {

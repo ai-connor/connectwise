@@ -25,7 +25,10 @@ type PortalSecurityLevel struct {
 	//  Max length: 50;
 	Caption *string `json:"caption,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PortalSecurityLevel PortalSecurityLevel
 
 // NewPortalSecurityLevel instantiates a new PortalSecurityLevel object
 // This constructor will assign default values to properties that have it defined,
@@ -239,7 +242,37 @@ func (o PortalSecurityLevel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PortalSecurityLevel) UnmarshalJSON(data []byte) (err error) {
+	varPortalSecurityLevel := _PortalSecurityLevel{}
+
+	err = json.Unmarshal(data, &varPortalSecurityLevel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PortalSecurityLevel(varPortalSecurityLevel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "captionIdentifier")
+		delete(additionalProperties, "isDefaultFlag")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePortalSecurityLevel struct {

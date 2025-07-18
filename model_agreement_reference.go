@@ -24,7 +24,10 @@ type AgreementReference struct {
 	Type *string `json:"type,omitempty"`
 	ChargeFirmFlag NullableBool `json:"chargeFirmFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementReference AgreementReference
 
 // NewAgreementReference instantiates a new AgreementReference object
 // This constructor will assign default values to properties that have it defined,
@@ -248,7 +251,37 @@ func (o AgreementReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementReference) UnmarshalJSON(data []byte) (err error) {
+	varAgreementReference := _AgreementReference{}
+
+	err = json.Unmarshal(data, &varAgreementReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementReference(varAgreementReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "chargeFirmFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementReference struct {

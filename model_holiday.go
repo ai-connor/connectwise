@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type Holiday struct {
 	TimeEnd *string `json:"timeEnd,omitempty"`
 	HolidayList *HolidayListReference `json:"holidayList,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Holiday Holiday
@@ -334,6 +334,11 @@ func (o Holiday) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -362,15 +367,27 @@ func (o *Holiday) UnmarshalJSON(data []byte) (err error) {
 
 	varHoliday := _Holiday{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHoliday)
+	err = json.Unmarshal(data, &varHoliday)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Holiday(varHoliday)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "allDayFlag")
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "timeStart")
+		delete(additionalProperties, "timeEnd")
+		delete(additionalProperties, "holidayList")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

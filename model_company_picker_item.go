@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type CompanyPickerItem struct {
 	// Gets or sets if true, this record was created by the vendor picker component. Otherwise, the record was created by the company picker component.
 	VendorPickerFlag NullableBool `json:"vendorPickerFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyPickerItem CompanyPickerItem
@@ -414,6 +414,11 @@ func (o CompanyPickerItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -441,15 +446,29 @@ func (o *CompanyPickerItem) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanyPickerItem := _CompanyPickerItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyPickerItem)
+	err = json.Unmarshal(data, &varCompanyPickerItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyPickerItem(varCompanyPickerItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "companyStatus")
+		delete(additionalProperties, "companyType")
+		delete(additionalProperties, "companySite")
+		delete(additionalProperties, "companyLocation")
+		delete(additionalProperties, "companyCountry")
+		delete(additionalProperties, "vendorPickerFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

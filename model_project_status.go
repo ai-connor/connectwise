@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type ProjectStatus struct {
 	CustomStatusIndicatorName *string `json:"customStatusIndicatorName,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectStatus ProjectStatus
@@ -445,6 +445,11 @@ func (o ProjectStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -472,15 +477,29 @@ func (o *ProjectStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectStatus := _ProjectStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectStatus)
+	err = json.Unmarshal(data, &varProjectStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectStatus(varProjectStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "noTimeFlag")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "statusIndicator")
+		delete(additionalProperties, "customStatusIndicatorName")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

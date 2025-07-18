@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type ProcurementAdjustment struct {
 	ClosedDate *time.Time `json:"closedDate,omitempty"`
 	AdjustmentDetails []AdjustmentDetail `json:"adjustmentDetails,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcurementAdjustment ProcurementAdjustment
@@ -407,6 +407,11 @@ func (o ProcurementAdjustment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -435,15 +440,29 @@ func (o *ProcurementAdjustment) UnmarshalJSON(data []byte) (err error) {
 
 	varProcurementAdjustment := _ProcurementAdjustment{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcurementAdjustment)
+	err = json.Unmarshal(data, &varProcurementAdjustment)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcurementAdjustment(varProcurementAdjustment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "closedBy")
+		delete(additionalProperties, "closedDate")
+		delete(additionalProperties, "adjustmentDetails")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

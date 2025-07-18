@@ -66,7 +66,10 @@ type MyMemberInfo struct {
 	SsoSessionFlag NullableBool `json:"ssoSessionFlag,omitempty"`
 	SsoClientId *string `json:"ssoClientId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MyMemberInfo MyMemberInfo
 
 // NewMyMemberInfo instantiates a new MyMemberInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -1875,7 +1878,78 @@ func (o MyMemberInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MyMemberInfo) UnmarshalJSON(data []byte) (err error) {
+	varMyMemberInfo := _MyMemberInfo{}
+
+	err = json.Unmarshal(data, &varMyMemberInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MyMemberInfo(varMyMemberInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "middleInitial")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "fullName")
+		delete(additionalProperties, "defaultEmail")
+		delete(additionalProperties, "photo")
+		delete(additionalProperties, "licenseClass")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "timeZone")
+		delete(additionalProperties, "useBrowserLanguageFlag")
+		delete(additionalProperties, "defaultLocation")
+		delete(additionalProperties, "defaultDepartment")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "dailyCapacity")
+		delete(additionalProperties, "requireExpenseEntryFlag")
+		delete(additionalProperties, "requireTimeSheetEntryFlag")
+		delete(additionalProperties, "requireStartAndEndTimeOnTimeEntryFlag")
+		delete(additionalProperties, "enterTimeAgainstCompanyFlag")
+		delete(additionalProperties, "allowExpensesEnteredAgainstCompaniesFlag")
+		delete(additionalProperties, "serviceDefaultBoard")
+		delete(additionalProperties, "serviceDefaultLocation")
+		delete(additionalProperties, "serviceDefaultDepartment")
+		delete(additionalProperties, "restrictServiceDefaultLocationFlag")
+		delete(additionalProperties, "restrictServiceDefaultDepartmentFlag")
+		delete(additionalProperties, "excludedServiceBoardIds")
+		delete(additionalProperties, "projectDefaultLocation")
+		delete(additionalProperties, "projectDefaultDepartment")
+		delete(additionalProperties, "projectDefaultBoard")
+		delete(additionalProperties, "restrictProjectDefaultLocationFlag")
+		delete(additionalProperties, "restrictProjectDefaultDepartmentFlag")
+		delete(additionalProperties, "excludedProjectBoardIds")
+		delete(additionalProperties, "scheduleDefaultLocation")
+		delete(additionalProperties, "scheduleDefaultDepartment")
+		delete(additionalProperties, "scheduleCapacity")
+		delete(additionalProperties, "serviceLocation")
+		delete(additionalProperties, "salesDefaultLocation")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "restrictDefaultWarehouseFlag")
+		delete(additionalProperties, "restrictDefaultWarehouseBinFlag")
+		delete(additionalProperties, "ssoSessionFlag")
+		delete(additionalProperties, "ssoClientId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMyMemberInfo struct {

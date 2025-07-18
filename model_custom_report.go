@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -123,6 +122,7 @@ type CustomReport struct {
 	InvoiceParamId NullableInt32 `json:"invoiceParamId,omitempty"`
 	InvoiceOverride *string `json:"invoiceOverride,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CustomReport CustomReport
@@ -3195,6 +3195,11 @@ func (o CustomReport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -3225,15 +3230,94 @@ func (o *CustomReport) UnmarshalJSON(data []byte) (err error) {
 
 	varCustomReport := _CustomReport{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCustomReport)
+	err = json.Unmarshal(data, &varCustomReport)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CustomReport(varCustomReport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "reportLink")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "module")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "generatedFlag")
+		delete(additionalProperties, "parameterPrefix")
+		delete(additionalProperties, "parameterSeparator")
+		delete(additionalProperties, "parameterNameSeparator")
+		delete(additionalProperties, "parameterSuffix")
+		delete(additionalProperties, "locationFlag")
+		delete(additionalProperties, "locationParamId")
+		delete(additionalProperties, "locationDefaultFlag")
+		delete(additionalProperties, "locationOverride")
+		delete(additionalProperties, "departmentFlag")
+		delete(additionalProperties, "departmentParamId")
+		delete(additionalProperties, "departmentDefaultFlag")
+		delete(additionalProperties, "departmentOverride")
+		delete(additionalProperties, "territoryFlag")
+		delete(additionalProperties, "territoryParamId")
+		delete(additionalProperties, "territoryDefaultFlag")
+		delete(additionalProperties, "territoryOverride")
+		delete(additionalProperties, "companyFlag")
+		delete(additionalProperties, "companyParamId")
+		delete(additionalProperties, "companyOverride")
+		delete(additionalProperties, "memberFlag")
+		delete(additionalProperties, "memberParamId")
+		delete(additionalProperties, "memberOverride")
+		delete(additionalProperties, "startDateFlag")
+		delete(additionalProperties, "startDateParamId")
+		delete(additionalProperties, "startDateOverride")
+		delete(additionalProperties, "endDateFlag")
+		delete(additionalProperties, "endDateParamId")
+		delete(additionalProperties, "endDateOverride")
+		delete(additionalProperties, "oppTypeFlag")
+		delete(additionalProperties, "oppTypeParamId")
+		delete(additionalProperties, "oppTypeOverride")
+		delete(additionalProperties, "opportunityFlag")
+		delete(additionalProperties, "opportunityParamId")
+		delete(additionalProperties, "opportunityOverride")
+		delete(additionalProperties, "marketingCampaignFlag")
+		delete(additionalProperties, "marketingCampaignParamId")
+		delete(additionalProperties, "marketingCampaignOverride")
+		delete(additionalProperties, "serviceBoardFlag")
+		delete(additionalProperties, "serviceBoardParamId")
+		delete(additionalProperties, "serviceBoardDefaultFlag")
+		delete(additionalProperties, "serviceBoardOverride")
+		delete(additionalProperties, "serviceTypeFlag")
+		delete(additionalProperties, "serviceTypeParamId")
+		delete(additionalProperties, "serviceTypeOverride")
+		delete(additionalProperties, "serviceStatusFlag")
+		delete(additionalProperties, "serviceStatusParamId")
+		delete(additionalProperties, "serviceStatusOverride")
+		delete(additionalProperties, "agreementTypeFlag")
+		delete(additionalProperties, "agreementTypeParamId")
+		delete(additionalProperties, "agreementTypeOverride")
+		delete(additionalProperties, "agreementFlag")
+		delete(additionalProperties, "agreementParamId")
+		delete(additionalProperties, "agreementOverride")
+		delete(additionalProperties, "projectTypeFlag")
+		delete(additionalProperties, "projectTypeParamId")
+		delete(additionalProperties, "projectTypeOverride")
+		delete(additionalProperties, "projectFlag")
+		delete(additionalProperties, "projectParamId")
+		delete(additionalProperties, "projectOverride")
+		delete(additionalProperties, "workRoleFlag")
+		delete(additionalProperties, "workRoleParamId")
+		delete(additionalProperties, "workRoleOverride")
+		delete(additionalProperties, "workTypeFlag")
+		delete(additionalProperties, "workTypeParamId")
+		delete(additionalProperties, "workTypeOverride")
+		delete(additionalProperties, "invoiceFlag")
+		delete(additionalProperties, "invoiceParamId")
+		delete(additionalProperties, "invoiceOverride")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

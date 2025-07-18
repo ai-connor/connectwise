@@ -28,7 +28,10 @@ type GLExport struct {
 	PurchaseTransactions []GLExportPurchaseTransaction `json:"purchaseTransactions,omitempty"`
 	AdjustmentTransactions []GLExportAdjustmentTransaction `json:"adjustmentTransactions,omitempty"`
 	InventoryTransfers []GLExportInventoryTransfer `json:"inventoryTransfers,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExport GLExport
 
 // NewGLExport instantiates a new GLExport object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +375,41 @@ func (o GLExport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InventoryTransfers) {
 		toSerialize["inventoryTransfers"] = o.InventoryTransfers
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExport) UnmarshalJSON(data []byte) (err error) {
+	varGLExport := _GLExport{}
+
+	err = json.Unmarshal(data, &varGLExport)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExport(varGLExport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "exportSettings")
+		delete(additionalProperties, "vendors")
+		delete(additionalProperties, "customers")
+		delete(additionalProperties, "transactions")
+		delete(additionalProperties, "expenses")
+		delete(additionalProperties, "expenseBills")
+		delete(additionalProperties, "purchaseTransactions")
+		delete(additionalProperties, "adjustmentTransactions")
+		delete(additionalProperties, "inventoryTransfers")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExport struct {

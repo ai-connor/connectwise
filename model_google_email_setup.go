@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type GoogleEmailSetup struct {
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	EmailConnector *EmailConnectorReference `json:"emailConnector,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GoogleEmailSetup GoogleEmailSetup
@@ -420,6 +420,11 @@ func (o GoogleEmailSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -451,15 +456,30 @@ func (o *GoogleEmailSetup) UnmarshalJSON(data []byte) (err error) {
 
 	varGoogleEmailSetup := _GoogleEmailSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGoogleEmailSetup)
+	err = json.Unmarshal(data, &varGoogleEmailSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GoogleEmailSetup(varGoogleEmailSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "inboxFolder")
+		delete(additionalProperties, "processedFolder")
+		delete(additionalProperties, "failedFolder")
+		delete(additionalProperties, "clientId")
+		delete(additionalProperties, "privateKey")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "emailConnector")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

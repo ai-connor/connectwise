@@ -45,7 +45,10 @@ type MemberDeactivation struct {
 	SendFromEmailNotify *MemberDeactivationItem `json:"sendFromEmailNotify,omitempty"`
 	// By default, this is set to false             If there is any open timesheets, system will return error message             that there is open timesheets still attached to this member             If user would like to delete member with open timesheets, they can set this boolean to TRUE             System will delete member and any associated open timesheets
 	DeleteOpenTimeSheetsFlag NullableBool `json:"deleteOpenTimeSheetsFlag,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberDeactivation MemberDeactivation
 
 // NewMemberDeactivation instantiates a new MemberDeactivation object
 // This constructor will assign default values to properties that have it defined,
@@ -924,7 +927,56 @@ func (o MemberDeactivation) ToMap() (map[string]interface{}, error) {
 	if o.DeleteOpenTimeSheetsFlag.IsSet() {
 		toSerialize["deleteOpenTimeSheetsFlag"] = o.DeleteOpenTimeSheetsFlag.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberDeactivation) UnmarshalJSON(data []byte) (err error) {
+	varMemberDeactivation := _MemberDeactivation{}
+
+	err = json.Unmarshal(data, &varMemberDeactivation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberDeactivation(varMemberDeactivation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity")
+		delete(additionalProperties, "serviceTeam")
+		delete(additionalProperties, "companyTeam")
+		delete(additionalProperties, "workflowEmail")
+		delete(additionalProperties, "serviceStatusWorkflow")
+		delete(additionalProperties, "ticketTemplate")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "salesTeam")
+		delete(additionalProperties, "projectManager")
+		delete(additionalProperties, "projectTimeApprover")
+		delete(additionalProperties, "projectExpenseApprover")
+		delete(additionalProperties, "knowledgeBaseArticle")
+		delete(additionalProperties, "myCompanyPresident")
+		delete(additionalProperties, "myCompanyCOO")
+		delete(additionalProperties, "myCompanyController")
+		delete(additionalProperties, "myCompanyDispatch")
+		delete(additionalProperties, "myCompanyServiceManager")
+		delete(additionalProperties, "myCompanyDutyManagerRole")
+		delete(additionalProperties, "departmentManager")
+		delete(additionalProperties, "dispatchMember")
+		delete(additionalProperties, "serviceManager")
+		delete(additionalProperties, "dutyManager")
+		delete(additionalProperties, "sendFromEmailNotify")
+		delete(additionalProperties, "deleteOpenTimeSheetsFlag")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberDeactivation struct {

@@ -27,7 +27,10 @@ type SetupScreen struct {
 	ModuleIdentifier *string `json:"moduleIdentifier,omitempty"`
 	ModuleName *string `json:"moduleName,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SetupScreen SetupScreen
 
 // NewSetupScreen instantiates a new SetupScreen object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +339,40 @@ func (o SetupScreen) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SetupScreen) UnmarshalJSON(data []byte) (err error) {
+	varSetupScreen := _SetupScreen{}
+
+	err = json.Unmarshal(data, &varSetupScreen)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SetupScreen(varSetupScreen)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "moduleDescription")
+		delete(additionalProperties, "moduleIdentifier")
+		delete(additionalProperties, "moduleName")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSetupScreen struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PurchaseOrderStatusNotification struct {
 	Email *string `json:"email,omitempty"`
 	WorkflowStep NullableInt32 `json:"workflowStep,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PurchaseOrderStatusNotification PurchaseOrderStatusNotification
@@ -306,6 +306,11 @@ func (o PurchaseOrderStatusNotification) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -333,15 +338,26 @@ func (o *PurchaseOrderStatusNotification) UnmarshalJSON(data []byte) (err error)
 
 	varPurchaseOrderStatusNotification := _PurchaseOrderStatusNotification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPurchaseOrderStatusNotification)
+	err = json.Unmarshal(data, &varPurchaseOrderStatusNotification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PurchaseOrderStatusNotification(varPurchaseOrderStatusNotification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "notifyWho")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "workflowStep")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

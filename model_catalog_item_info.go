@@ -35,7 +35,10 @@ type CatalogItemInfo struct {
 	VendorSku *string `json:"vendorSku,omitempty"`
 	BillableOption NullableString `json:"billableOption,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CatalogItemInfo CatalogItemInfo
 
 // NewCatalogItemInfo instantiates a new CatalogItemInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -714,7 +717,48 @@ func (o CatalogItemInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CatalogItemInfo) UnmarshalJSON(data []byte) (err error) {
+	varCatalogItemInfo := _CatalogItemInfo{}
+
+	err = json.Unmarshal(data, &varCatalogItemInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CatalogItemInfo(varCatalogItemInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "productClass")
+		delete(additionalProperties, "serializedCostFlag")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "dropShipFlag")
+		delete(additionalProperties, "specialOrderFlag")
+		delete(additionalProperties, "customerDescription")
+		delete(additionalProperties, "manufacturerPartNumber")
+		delete(additionalProperties, "vendorSku")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCatalogItemInfo struct {

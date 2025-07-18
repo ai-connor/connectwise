@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type ProductPickingShippingDetail struct {
 	ExpectedArrivalDate *time.Time `json:"expectedArrivalDate,omitempty"`
 	ShipmentDate *time.Time `json:"shipmentDate,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductPickingShippingDetail ProductPickingShippingDetail
@@ -615,6 +615,11 @@ func (o ProductPickingShippingDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -643,15 +648,34 @@ func (o *ProductPickingShippingDetail) UnmarshalJSON(data []byte) (err error) {
 
 	varProductPickingShippingDetail := _ProductPickingShippingDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductPickingShippingDetail)
+	err = json.Unmarshal(data, &varProductPickingShippingDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductPickingShippingDetail(varProductPickingShippingDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "pickedQuantity")
+		delete(additionalProperties, "shippedQuantity")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "shipmentMethod")
+		delete(additionalProperties, "serialNumber")
+		delete(additionalProperties, "serialNumberIds")
+		delete(additionalProperties, "trackingNumber")
+		delete(additionalProperties, "productItem")
+		delete(additionalProperties, "lineNumber")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "expectedArrivalDate")
+		delete(additionalProperties, "shipmentDate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

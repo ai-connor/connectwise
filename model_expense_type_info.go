@@ -25,7 +25,10 @@ type ExpenseTypeInfo struct {
 	AmountCaption *string `json:"amountCaption,omitempty"`
 	MileageFlag NullableBool `json:"mileageFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExpenseTypeInfo ExpenseTypeInfo
 
 // NewExpenseTypeInfo instantiates a new ExpenseTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -284,7 +287,38 @@ func (o ExpenseTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExpenseTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varExpenseTypeInfo := _ExpenseTypeInfo{}
+
+	err = json.Unmarshal(data, &varExpenseTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExpenseTypeInfo(varExpenseTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "amountCaption")
+		delete(additionalProperties, "mileageFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExpenseTypeInfo struct {

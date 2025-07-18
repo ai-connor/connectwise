@@ -71,7 +71,10 @@ type GLCaption struct {
 	//  Max length: 255;
 	Cogs10 *string `json:"cogs10,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLCaption GLCaption
 
 // NewGLCaption instantiates a new GLCaption object
 // This constructor will assign default values to properties that have it defined,
@@ -1320,7 +1323,64 @@ func (o GLCaption) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLCaption) UnmarshalJSON(data []byte) (err error) {
+	varGLCaption := _GLCaption{}
+
+	err = json.Unmarshal(data, &varGLCaption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLCaption(varGLCaption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "segment1")
+		delete(additionalProperties, "segment2")
+		delete(additionalProperties, "segment3")
+		delete(additionalProperties, "segment4")
+		delete(additionalProperties, "segment5")
+		delete(additionalProperties, "segment6")
+		delete(additionalProperties, "segment7")
+		delete(additionalProperties, "segment8")
+		delete(additionalProperties, "segment9")
+		delete(additionalProperties, "segment10")
+		delete(additionalProperties, "segment1type")
+		delete(additionalProperties, "segment2type")
+		delete(additionalProperties, "segment3type")
+		delete(additionalProperties, "segment4type")
+		delete(additionalProperties, "segment5type")
+		delete(additionalProperties, "segment6type")
+		delete(additionalProperties, "segment7type")
+		delete(additionalProperties, "segment8type")
+		delete(additionalProperties, "segment9type")
+		delete(additionalProperties, "segment10type")
+		delete(additionalProperties, "cogs1")
+		delete(additionalProperties, "cogs2")
+		delete(additionalProperties, "cogs3")
+		delete(additionalProperties, "cogs4")
+		delete(additionalProperties, "cogs5")
+		delete(additionalProperties, "cogs6")
+		delete(additionalProperties, "cogs7")
+		delete(additionalProperties, "cogs8")
+		delete(additionalProperties, "cogs9")
+		delete(additionalProperties, "cogs10")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLCaption struct {

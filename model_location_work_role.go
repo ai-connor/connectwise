@@ -24,7 +24,10 @@ type LocationWorkRole struct {
 	WorkRole *WorkRoleReference `json:"workRole,omitempty"`
 	WorkRoleInactiveFlag NullableBool `json:"workRoleInactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LocationWorkRole LocationWorkRole
 
 // NewLocationWorkRole instantiates a new LocationWorkRole object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o LocationWorkRole) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LocationWorkRole) UnmarshalJSON(data []byte) (err error) {
+	varLocationWorkRole := _LocationWorkRole{}
+
+	err = json.Unmarshal(data, &varLocationWorkRole)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LocationWorkRole(varLocationWorkRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workRoleInactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLocationWorkRole struct {

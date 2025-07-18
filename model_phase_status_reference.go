@@ -22,7 +22,10 @@ type PhaseStatusReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PhaseStatusReference PhaseStatusReference
 
 // NewPhaseStatusReference instantiates a new PhaseStatusReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o PhaseStatusReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PhaseStatusReference) UnmarshalJSON(data []byte) (err error) {
+	varPhaseStatusReference := _PhaseStatusReference{}
+
+	err = json.Unmarshal(data, &varPhaseStatusReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PhaseStatusReference(varPhaseStatusReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePhaseStatusReference struct {

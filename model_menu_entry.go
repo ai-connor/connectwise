@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type MenuEntry struct {
 	LargeMenuIconId NullableInt32 `json:"largeMenuIconId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MenuEntry MenuEntry
@@ -566,6 +566,11 @@ func (o MenuEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -596,15 +601,33 @@ func (o *MenuEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varMenuEntry := _MenuEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMenuEntry)
+	err = json.Unmarshal(data, &varMenuEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MenuEntry(varMenuEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "menuLocation")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "link")
+		delete(additionalProperties, "newWindowFlag")
+		delete(additionalProperties, "locationIds")
+		delete(additionalProperties, "origin")
+		delete(additionalProperties, "clientId")
+		delete(additionalProperties, "addAllLocations")
+		delete(additionalProperties, "removeAllLocations")
+		delete(additionalProperties, "smallMenuIconId")
+		delete(additionalProperties, "largeMenuIconId")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

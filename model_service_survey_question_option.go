@@ -22,7 +22,10 @@ type ServiceSurveyQuestionOption struct {
 	IncludeFlag NullableBool `json:"includeFlag,omitempty"`
 	Caption *string `json:"caption,omitempty"`
 	Points NullableInt32 `json:"points,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceSurveyQuestionOption ServiceSurveyQuestionOption
 
 // NewServiceSurveyQuestionOption instantiates a new ServiceSurveyQuestionOption object
 // This constructor will assign default values to properties that have it defined,
@@ -176,7 +179,35 @@ func (o ServiceSurveyQuestionOption) ToMap() (map[string]interface{}, error) {
 	if o.Points.IsSet() {
 		toSerialize["points"] = o.Points.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceSurveyQuestionOption) UnmarshalJSON(data []byte) (err error) {
+	varServiceSurveyQuestionOption := _ServiceSurveyQuestionOption{}
+
+	err = json.Unmarshal(data, &varServiceSurveyQuestionOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceSurveyQuestionOption(varServiceSurveyQuestionOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "includeFlag")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "points")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceSurveyQuestionOption struct {

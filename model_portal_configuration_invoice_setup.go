@@ -32,7 +32,10 @@ type PortalConfigurationInvoiceSetup struct {
 	AddAllStatuses NullableBool `json:"addAllStatuses,omitempty"`
 	RemoveAllStatuses NullableBool `json:"removeAllStatuses,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PortalConfigurationInvoiceSetup PortalConfigurationInvoiceSetup
 
 // NewPortalConfigurationInvoiceSetup instantiates a new PortalConfigurationInvoiceSetup object
 // This constructor will assign default values to properties that have it defined,
@@ -556,7 +559,45 @@ func (o PortalConfigurationInvoiceSetup) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PortalConfigurationInvoiceSetup) UnmarshalJSON(data []byte) (err error) {
+	varPortalConfigurationInvoiceSetup := _PortalConfigurationInvoiceSetup{}
+
+	err = json.Unmarshal(data, &varPortalConfigurationInvoiceSetup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PortalConfigurationInvoiceSetup(varPortalConfigurationInvoiceSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "portalConfiguration")
+		delete(additionalProperties, "displayInvPmtFlag")
+		delete(additionalProperties, "allowInvPmtFlag")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "paymentProcessor")
+		delete(additionalProperties, "login")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "urlOverride")
+		delete(additionalProperties, "billingStatusIds")
+		delete(additionalProperties, "addAllStatuses")
+		delete(additionalProperties, "removeAllStatuses")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePortalConfigurationInvoiceSetup struct {

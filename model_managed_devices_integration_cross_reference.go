@@ -30,7 +30,10 @@ type ManagedDevicesIntegrationCrossReference struct {
 	ConfigurationType *ConfigurationTypeReference `json:"configurationType,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManagedDevicesIntegrationCrossReference ManagedDevicesIntegrationCrossReference
 
 // NewManagedDevicesIntegrationCrossReference instantiates a new ManagedDevicesIntegrationCrossReference object
 // This constructor will assign default values to properties that have it defined,
@@ -384,7 +387,41 @@ func (o ManagedDevicesIntegrationCrossReference) ToMap() (map[string]interface{}
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManagedDevicesIntegrationCrossReference) UnmarshalJSON(data []byte) (err error) {
+	varManagedDevicesIntegrationCrossReference := _ManagedDevicesIntegrationCrossReference{}
+
+	err = json.Unmarshal(data, &varManagedDevicesIntegrationCrossReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManagedDevicesIntegrationCrossReference(varManagedDevicesIntegrationCrossReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "managedDevicesIntegration")
+		delete(additionalProperties, "vendorType")
+		delete(additionalProperties, "vendorLevel")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "configurationType")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManagedDevicesIntegrationCrossReference struct {

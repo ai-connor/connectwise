@@ -24,7 +24,10 @@ type UserDefinedFieldValueModel struct {
 	RowNum *int32 `json:"rowNum,omitempty"`
 	SkipLocationAndBillingUnit *bool `json:"skipLocationAndBillingUnit,omitempty"`
 	Filtered *bool `json:"filtered,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserDefinedFieldValueModel UserDefinedFieldValueModel
 
 // NewUserDefinedFieldValueModel instantiates a new UserDefinedFieldValueModel object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o UserDefinedFieldValueModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Filtered) {
 		toSerialize["filtered"] = o.Filtered
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserDefinedFieldValueModel) UnmarshalJSON(data []byte) (err error) {
+	varUserDefinedFieldValueModel := _UserDefinedFieldValueModel{}
+
+	err = json.Unmarshal(data, &varUserDefinedFieldValueModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserDefinedFieldValueModel(varUserDefinedFieldValueModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "userDefinedFieldRecId")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "rowNum")
+		delete(additionalProperties, "skipLocationAndBillingUnit")
+		delete(additionalProperties, "filtered")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserDefinedFieldValueModel struct {

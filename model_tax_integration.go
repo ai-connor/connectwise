@@ -45,7 +45,10 @@ type TaxIntegration struct {
 	AccountingIntegrationFlag NullableBool `json:"accountingIntegrationFlag,omitempty"`
 	TaxLineFlag NullableBool `json:"taxLineFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TaxIntegration TaxIntegration
 
 // NewTaxIntegration instantiates a new TaxIntegration object
 // This constructor will assign default values to properties that have it defined,
@@ -719,7 +722,49 @@ func (o TaxIntegration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TaxIntegration) UnmarshalJSON(data []byte) (err error) {
+	varTaxIntegration := _TaxIntegration{}
+
+	err = json.Unmarshal(data, &varTaxIntegration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TaxIntegration(varTaxIntegration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "taxIntegrationType")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "licenseKey")
+		delete(additionalProperties, "serviceUrl")
+		delete(additionalProperties, "companyCode")
+		delete(additionalProperties, "timeTaxCode")
+		delete(additionalProperties, "expenseTaxCode")
+		delete(additionalProperties, "productTaxCode")
+		delete(additionalProperties, "invoiceAmountTaxCode")
+		delete(additionalProperties, "enabledFlag")
+		delete(additionalProperties, "commitTransactionsFlag")
+		delete(additionalProperties, "salesInvoiceFlag")
+		delete(additionalProperties, "freightTaxCode")
+		delete(additionalProperties, "accountingIntegrationFlag")
+		delete(additionalProperties, "taxLineFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTaxIntegration struct {

@@ -25,7 +25,10 @@ type HttpRequestMessage struct {
 	RequestUri *string `json:"requestUri,omitempty"`
 	Headers []interface{} `json:"headers,omitempty"`
 	Properties map[string]map[string]interface{} `json:"properties,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HttpRequestMessage HttpRequestMessage
 
 // NewHttpRequestMessage instantiates a new HttpRequestMessage object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o HttpRequestMessage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Properties) {
 		toSerialize["properties"] = o.Properties
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HttpRequestMessage) UnmarshalJSON(data []byte) (err error) {
+	varHttpRequestMessage := _HttpRequestMessage{}
+
+	err = json.Unmarshal(data, &varHttpRequestMessage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HttpRequestMessage(varHttpRequestMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "requestUri")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "properties")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHttpRequestMessage struct {

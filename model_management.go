@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type Management struct {
 	// Gets or sets             this is only required when scheduleExecutiveSummaryReportFlag = true.
 	ExecutiveSummaryReportScheduleMinute NullableInt32 `json:"executiveSummaryReportScheduleMinute,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Management Management
@@ -412,6 +412,11 @@ func (o Management) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -442,15 +447,29 @@ func (o *Management) UnmarshalJSON(data []byte) (err error) {
 
 	varManagement := _Management{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagement)
+	err = json.Unmarshal(data, &varManagement)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Management(varManagement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "runTime")
+		delete(additionalProperties, "addedConfigurationStatus")
+		delete(additionalProperties, "deletedConfigurationStatus")
+		delete(additionalProperties, "integratorLogin")
+		delete(additionalProperties, "scheduleExecutiveSummaryReportFlag")
+		delete(additionalProperties, "executiveSummaryReportScheduleDay")
+		delete(additionalProperties, "executiveSummaryReportScheduleHour")
+		delete(additionalProperties, "executiveSummaryReportScheduleMinute")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

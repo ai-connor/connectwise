@@ -23,7 +23,10 @@ type AgreementTypeWorkRoleInfo struct {
 	Type *AgreementTypeReference `json:"type,omitempty"`
 	WorkRole *WorkRoleReference `json:"workRole,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementTypeWorkRoleInfo AgreementTypeWorkRoleInfo
 
 // NewAgreementTypeWorkRoleInfo instantiates a new AgreementTypeWorkRoleInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o AgreementTypeWorkRoleInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementTypeWorkRoleInfo) UnmarshalJSON(data []byte) (err error) {
+	varAgreementTypeWorkRoleInfo := _AgreementTypeWorkRoleInfo{}
+
+	err = json.Unmarshal(data, &varAgreementTypeWorkRoleInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementTypeWorkRoleInfo(varAgreementTypeWorkRoleInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementTypeWorkRoleInfo struct {

@@ -25,7 +25,10 @@ type ContactTypeInfo struct {
 	ServiceAlertFlag NullableBool `json:"serviceAlertFlag,omitempty"`
 	ServiceAlertMessage *string `json:"serviceAlertMessage,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ContactTypeInfo ContactTypeInfo
 
 // NewContactTypeInfo instantiates a new ContactTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -284,7 +287,38 @@ func (o ContactTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ContactTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varContactTypeInfo := _ContactTypeInfo{}
+
+	err = json.Unmarshal(data, &varContactTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContactTypeInfo(varContactTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "serviceAlertFlag")
+		delete(additionalProperties, "serviceAlertMessage")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContactTypeInfo struct {

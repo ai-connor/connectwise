@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type AgreementSite struct {
 	AgreementId NullableInt32 `json:"agreementId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AgreementSite AgreementSite
@@ -269,6 +269,11 @@ func (o AgreementSite) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -296,15 +301,25 @@ func (o *AgreementSite) UnmarshalJSON(data []byte) (err error) {
 
 	varAgreementSite := _AgreementSite{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAgreementSite)
+	err = json.Unmarshal(data, &varAgreementSite)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AgreementSite(varAgreementSite)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "agreementId")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

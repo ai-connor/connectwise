@@ -24,7 +24,10 @@ type BillingSetupInfo struct {
 	Location *SystemLocationReference `json:"location,omitempty"`
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BillingSetupInfo BillingSetupInfo
 
 // NewBillingSetupInfo instantiates a new BillingSetupInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o BillingSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BillingSetupInfo) UnmarshalJSON(data []byte) (err error) {
+	varBillingSetupInfo := _BillingSetupInfo{}
+
+	err = json.Unmarshal(data, &varBillingSetupInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BillingSetupInfo(varBillingSetupInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "remitName")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBillingSetupInfo struct {

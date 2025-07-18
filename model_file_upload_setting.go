@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type FileUploadSetting struct {
 	RestrictFileTypesFlag NullableBool `json:"restrictFileTypesFlag"`
 	GlobalFileSizeLimit NullableInt32 `json:"globalFileSizeLimit,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FileUploadSetting FileUploadSetting
@@ -199,6 +199,11 @@ func (o FileUploadSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -226,15 +231,23 @@ func (o *FileUploadSetting) UnmarshalJSON(data []byte) (err error) {
 
 	varFileUploadSetting := _FileUploadSetting{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFileUploadSetting)
+	err = json.Unmarshal(data, &varFileUploadSetting)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FileUploadSetting(varFileUploadSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "restrictFileTypesFlag")
+		delete(additionalProperties, "globalFileSizeLimit")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

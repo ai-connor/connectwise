@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type TaxCodeLevel struct {
 	SingleUnitMinimum NullableFloat64 `json:"singleUnitMinimum,omitempty"`
 	SingleUnitMaximum NullableFloat64 `json:"singleUnitMaximum,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TaxCodeLevel TaxCodeLevel
@@ -651,6 +651,11 @@ func (o TaxCodeLevel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -679,15 +684,34 @@ func (o *TaxCodeLevel) UnmarshalJSON(data []byte) (err error) {
 
 	varTaxCodeLevel := _TaxCodeLevel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTaxCodeLevel)
+	err = json.Unmarshal(data, &varTaxCodeLevel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TaxCodeLevel(varTaxCodeLevel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "taxLevel")
+		delete(additionalProperties, "taxRate")
+		delete(additionalProperties, "rateType")
+		delete(additionalProperties, "taxableMax")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "taxCodeXref")
+		delete(additionalProperties, "agencyXref")
+		delete(additionalProperties, "taxServicesFlag")
+		delete(additionalProperties, "taxExpensesFlag")
+		delete(additionalProperties, "taxProductsFlag")
+		delete(additionalProperties, "singleUnitFlag")
+		delete(additionalProperties, "singleUnitMinimum")
+		delete(additionalProperties, "singleUnitMaximum")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

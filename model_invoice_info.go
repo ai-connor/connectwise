@@ -30,7 +30,10 @@ type InvoiceInfo struct {
 	BillingSetup *BillingSetup `json:"billingSetup,omitempty"`
 	AgreementBillingInfo []AgreementBillingInfo `json:"agreementBillingInfo,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvoiceInfo InvoiceInfo
 
 // NewInvoiceInfo instantiates a new InvoiceInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -444,7 +447,43 @@ func (o InvoiceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvoiceInfo) UnmarshalJSON(data []byte) (err error) {
+	varInvoiceInfo := _InvoiceInfo{}
+
+	err = json.Unmarshal(data, &varInvoiceInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvoiceInfo(varInvoiceInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "invoiceTemplate")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "bundledComponentsInfo")
+		delete(additionalProperties, "expenses")
+		delete(additionalProperties, "timeEntries")
+		delete(additionalProperties, "logo")
+		delete(additionalProperties, "billingSetup")
+		delete(additionalProperties, "agreementBillingInfo")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvoiceInfo struct {

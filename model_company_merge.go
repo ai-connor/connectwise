@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -63,6 +62,7 @@ type CompanyMerge struct {
 	Projects NullableString `json:"projects,omitempty"`
 	Contacts NullableString `json:"contacts,omitempty"`
 	Documents NullableString `json:"documents,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyMerge CompanyMerge
@@ -1965,6 +1965,11 @@ func (o CompanyMerge) ToMap() (map[string]interface{}, error) {
 	if o.Documents.IsSet() {
 		toSerialize["documents"] = o.Documents.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1992,15 +1997,61 @@ func (o *CompanyMerge) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanyMerge := _CompanyMerge{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyMerge)
+	err = json.Unmarshal(data, &varCompanyMerge)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyMerge(varCompanyMerge)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "toCompanyId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "primaryAddress")
+		delete(additionalProperties, "primaryContact")
+		delete(additionalProperties, "phone")
+		delete(additionalProperties, "fax")
+		delete(additionalProperties, "website")
+		delete(additionalProperties, "market")
+		delete(additionalProperties, "territory")
+		delete(additionalProperties, "revenue")
+		delete(additionalProperties, "revenueYear")
+		delete(additionalProperties, "numberOfEmployees")
+		delete(additionalProperties, "sicCode")
+		delete(additionalProperties, "dateAcquired")
+		delete(additionalProperties, "timeZone")
+		delete(additionalProperties, "sourceList")
+		delete(additionalProperties, "userDefinedField1")
+		delete(additionalProperties, "userDefinedField2")
+		delete(additionalProperties, "userDefinedField3")
+		delete(additionalProperties, "userDefinedField4")
+		delete(additionalProperties, "userDefinedField5")
+		delete(additionalProperties, "userDefinedField6")
+		delete(additionalProperties, "userDefinedField7")
+		delete(additionalProperties, "userDefinedField8")
+		delete(additionalProperties, "userDefinedField9")
+		delete(additionalProperties, "userDefinedField10")
+		delete(additionalProperties, "billingAddress")
+		delete(additionalProperties, "billingContact")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "sites")
+		delete(additionalProperties, "activities")
+		delete(additionalProperties, "opportunities")
+		delete(additionalProperties, "services")
+		delete(additionalProperties, "projects")
+		delete(additionalProperties, "contacts")
+		delete(additionalProperties, "documents")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

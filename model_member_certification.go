@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type MemberCertification struct {
 	Member *MemberReference `json:"member,omitempty"`
 	Company *CompanyReference `json:"company,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MemberCertification MemberCertification
@@ -415,6 +415,11 @@ func (o MemberCertification) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -442,15 +447,29 @@ func (o *MemberCertification) UnmarshalJSON(data []byte) (err error) {
 
 	varMemberCertification := _MemberCertification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMemberCertification)
+	err = json.Unmarshal(data, &varMemberCertification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MemberCertification(varMemberCertification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "certification")
+		delete(additionalProperties, "percentComplete")
+		delete(additionalProperties, "dateReceived")
+		delete(additionalProperties, "dateExpires")
+		delete(additionalProperties, "certificationNumber")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -21,7 +21,10 @@ var _ MappedNullable = &ManagementLogDocumentInfo{}
 type ManagementLogDocumentInfo struct {
 	FullPathFileName *string `json:"fullPathFileName,omitempty"`
 	FileSize *string `json:"fileSize,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManagementLogDocumentInfo ManagementLogDocumentInfo
 
 // NewManagementLogDocumentInfo instantiates a new ManagementLogDocumentInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o ManagementLogDocumentInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FileSize) {
 		toSerialize["fileSize"] = o.FileSize
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManagementLogDocumentInfo) UnmarshalJSON(data []byte) (err error) {
+	varManagementLogDocumentInfo := _ManagementLogDocumentInfo{}
+
+	err = json.Unmarshal(data, &varManagementLogDocumentInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManagementLogDocumentInfo(varManagementLogDocumentInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fullPathFileName")
+		delete(additionalProperties, "fileSize")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManagementLogDocumentInfo struct {

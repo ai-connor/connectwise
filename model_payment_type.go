@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type PaymentType struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	CompanyFlag NullableBool `json:"companyFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaymentType PaymentType
@@ -271,6 +271,11 @@ func (o PaymentType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -299,15 +304,25 @@ func (o *PaymentType) UnmarshalJSON(data []byte) (err error) {
 
 	varPaymentType := _PaymentType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaymentType)
+	err = json.Unmarshal(data, &varPaymentType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaymentType(varPaymentType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "classification")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "companyFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

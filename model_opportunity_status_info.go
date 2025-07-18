@@ -24,7 +24,10 @@ type OpportunityStatusInfo struct {
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpportunityStatusInfo OpportunityStatusInfo
 
 // NewOpportunityStatusInfo instantiates a new OpportunityStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -248,7 +251,37 @@ func (o OpportunityStatusInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpportunityStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varOpportunityStatusInfo := _OpportunityStatusInfo{}
+
+	err = json.Unmarshal(data, &varOpportunityStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpportunityStatusInfo(varOpportunityStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpportunityStatusInfo struct {

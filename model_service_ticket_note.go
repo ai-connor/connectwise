@@ -37,7 +37,10 @@ type ServiceTicketNote struct {
 	Member *MemberReference `json:"member,omitempty"`
 	Contact *ContactReference `json:"contact,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceTicketNote ServiceTicketNote
 
 // NewServiceTicketNote instantiates a new ServiceTicketNote object
 // This constructor will assign default values to properties that have it defined,
@@ -786,7 +789,50 @@ func (o ServiceTicketNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceTicketNote) UnmarshalJSON(data []byte) (err error) {
+	varServiceTicketNote := _ServiceTicketNote{}
+
+	err = json.Unmarshal(data, &varServiceTicketNote)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceTicketNote(varServiceTicketNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "noteType")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "isMarkdownFlag")
+		delete(additionalProperties, "detailDescriptionFlag")
+		delete(additionalProperties, "internalAnalysisFlag")
+		delete(additionalProperties, "resolutionFlag")
+		delete(additionalProperties, "timeStart")
+		delete(additionalProperties, "timeEnd")
+		delete(additionalProperties, "bundledFlag")
+		delete(additionalProperties, "mergedFlag")
+		delete(additionalProperties, "issueFlag")
+		delete(additionalProperties, "originalAuthor")
+		delete(additionalProperties, "createdByParentFlag")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceTicketNote struct {

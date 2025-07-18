@@ -27,7 +27,10 @@ type ProjectBillingRate struct {
 	Member *MemberReference `json:"member,omitempty"`
 	MemberRecId *int32 `json:"memberRecId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectBillingRate ProjectBillingRate
 
 // NewProjectBillingRate instantiates a new ProjectBillingRate object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +339,40 @@ func (o ProjectBillingRate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectBillingRate) UnmarshalJSON(data []byte) (err error) {
+	varProjectBillingRate := _ProjectBillingRate{}
+
+	err = json.Unmarshal(data, &varProjectBillingRate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectBillingRate(varProjectBillingRate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "projectRecId")
+		delete(additionalProperties, "hourlyRate")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "activityClassRecId")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "memberRecId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectBillingRate struct {

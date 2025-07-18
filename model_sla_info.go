@@ -22,7 +22,10 @@ type SLAInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SLAInfo SLAInfo
 
 // NewSLAInfo instantiates a new SLAInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o SLAInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SLAInfo) UnmarshalJSON(data []byte) (err error) {
+	varSLAInfo := _SLAInfo{}
+
+	err = json.Unmarshal(data, &varSLAInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SLAInfo(varSLAInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSLAInfo struct {

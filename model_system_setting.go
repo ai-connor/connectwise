@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type SystemSetting struct {
 	Value string `json:"value"`
 	ValueType *string `json:"valueType,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SystemSetting SystemSetting
@@ -223,6 +223,11 @@ func (o SystemSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -250,15 +255,24 @@ func (o *SystemSetting) UnmarshalJSON(data []byte) (err error) {
 
 	varSystemSetting := _SystemSetting{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSystemSetting)
+	err = json.Unmarshal(data, &varSystemSetting)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SystemSetting(varSystemSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "valueType")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ManagementItSolutionAgreementInterfaceParameter struct {
 	WorkstationProduct *IvItemReference `json:"workstationProduct,omitempty"`
 	SpamStatsProduct *IvItemReference `json:"spamStatsProduct,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagementItSolutionAgreementInterfaceParameter ManagementItSolutionAgreementInterfaceParameter
@@ -295,6 +295,11 @@ func (o ManagementItSolutionAgreementInterfaceParameter) ToMap() (map[string]int
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -322,15 +327,26 @@ func (o *ManagementItSolutionAgreementInterfaceParameter) UnmarshalJSON(data []b
 
 	varManagementItSolutionAgreementInterfaceParameter := _ManagementItSolutionAgreementInterfaceParameter{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagementItSolutionAgreementInterfaceParameter)
+	err = json.Unmarshal(data, &varManagementItSolutionAgreementInterfaceParameter)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagementItSolutionAgreementInterfaceParameter(varManagementItSolutionAgreementInterfaceParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "managedDevicesIntegration")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "serverProduct")
+		delete(additionalProperties, "workstationProduct")
+		delete(additionalProperties, "spamStatsProduct")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

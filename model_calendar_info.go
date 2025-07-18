@@ -37,7 +37,10 @@ type CalendarInfo struct {
 	SundayStartTime *string `json:"sundayStartTime,omitempty"`
 	SundayEndTime *string `json:"sundayEndTime,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CalendarInfo CalendarInfo
 
 // NewCalendarInfo instantiates a new CalendarInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -696,7 +699,50 @@ func (o CalendarInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CalendarInfo) UnmarshalJSON(data []byte) (err error) {
+	varCalendarInfo := _CalendarInfo{}
+
+	err = json.Unmarshal(data, &varCalendarInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CalendarInfo(varCalendarInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "holidayList")
+		delete(additionalProperties, "mondayStartTime")
+		delete(additionalProperties, "mondayEndTime")
+		delete(additionalProperties, "tuesdayStartTime")
+		delete(additionalProperties, "tuesdayEndTime")
+		delete(additionalProperties, "wednesdayStartTime")
+		delete(additionalProperties, "wednesdayEndTime")
+		delete(additionalProperties, "thursdayStartTime")
+		delete(additionalProperties, "thursdayEndTime")
+		delete(additionalProperties, "fridayStartTime")
+		delete(additionalProperties, "fridayEndTime")
+		delete(additionalProperties, "saturdayStartTime")
+		delete(additionalProperties, "saturdayEndTime")
+		delete(additionalProperties, "sundayStartTime")
+		delete(additionalProperties, "sundayEndTime")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCalendarInfo struct {

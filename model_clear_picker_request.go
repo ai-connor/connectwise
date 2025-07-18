@@ -21,7 +21,10 @@ var _ MappedNullable = &ClearPickerRequest{}
 type ClearPickerRequest struct {
 	Member *MemberReference `json:"member,omitempty"`
 	Type NullableString `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ClearPickerRequest ClearPickerRequest
 
 // NewClearPickerRequest instantiates a new ClearPickerRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -130,7 +133,34 @@ func (o ClearPickerRequest) ToMap() (map[string]interface{}, error) {
 	if o.Type.IsSet() {
 		toSerialize["type"] = o.Type.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ClearPickerRequest) UnmarshalJSON(data []byte) (err error) {
+	varClearPickerRequest := _ClearPickerRequest{}
+
+	err = json.Unmarshal(data, &varClearPickerRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ClearPickerRequest(varClearPickerRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableClearPickerRequest struct {

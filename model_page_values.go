@@ -22,7 +22,10 @@ type PageValues struct {
 	Page NullableInt32 `json:"page,omitempty"`
 	PageSize NullableInt32 `json:"pageSize,omitempty"`
 	PageId NullableInt32 `json:"pageId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PageValues PageValues
 
 // NewPageValues instantiates a new PageValues object
 // This constructor will assign default values to properties that have it defined,
@@ -186,7 +189,35 @@ func (o PageValues) ToMap() (map[string]interface{}, error) {
 	if o.PageId.IsSet() {
 		toSerialize["pageId"] = o.PageId.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PageValues) UnmarshalJSON(data []byte) (err error) {
+	varPageValues := _PageValues{}
+
+	err = json.Unmarshal(data, &varPageValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PageValues(varPageValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "page")
+		delete(additionalProperties, "pageSize")
+		delete(additionalProperties, "pageId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePageValues struct {

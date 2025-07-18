@@ -21,7 +21,10 @@ var _ MappedNullable = &TimeEntryReference{}
 type TimeEntryReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeEntryReference TimeEntryReference
 
 // NewTimeEntryReference instantiates a new TimeEntryReference object
 // This constructor will assign default values to properties that have it defined,
@@ -130,7 +133,34 @@ func (o TimeEntryReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeEntryReference) UnmarshalJSON(data []byte) (err error) {
+	varTimeEntryReference := _TimeEntryReference{}
+
+	err = json.Unmarshal(data, &varTimeEntryReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeEntryReference(varTimeEntryReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeEntryReference struct {

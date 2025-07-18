@@ -24,7 +24,10 @@ type CorporateStructureInfo struct {
 	GroupCaption *string `json:"groupCaption,omitempty"`
 	BaseCurrency *CurrencyReference `json:"baseCurrency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CorporateStructureInfo CorporateStructureInfo
 
 // NewCorporateStructureInfo instantiates a new CorporateStructureInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o CorporateStructureInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CorporateStructureInfo) UnmarshalJSON(data []byte) (err error) {
+	varCorporateStructureInfo := _CorporateStructureInfo{}
+
+	err = json.Unmarshal(data, &varCorporateStructureInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CorporateStructureInfo(varCorporateStructureInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "locationCaption")
+		delete(additionalProperties, "groupCaption")
+		delete(additionalProperties, "baseCurrency")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCorporateStructureInfo struct {

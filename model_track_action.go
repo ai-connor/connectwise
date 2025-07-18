@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -45,6 +44,7 @@ type TrackAction struct {
 	NotifyWho *NotificationRecipientReference `json:"notifyWho,omitempty"`
 	NotifyFrom *NotificationRecipientReference `json:"notifyFrom,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TrackAction TrackAction
@@ -812,6 +812,11 @@ func (o TrackAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -839,15 +844,40 @@ func (o *TrackAction) UnmarshalJSON(data []byte) (err error) {
 
 	varTrackAction := _TrackAction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTrackAction)
+	err = json.Unmarshal(data, &varTrackAction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TrackAction(varTrackAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "notifyType")
+		delete(additionalProperties, "serviceTemplate")
+		delete(additionalProperties, "specificMemberTo")
+		delete(additionalProperties, "emailRecipient")
+		delete(additionalProperties, "specificMemberFrom")
+		delete(additionalProperties, "emailFrom")
+		delete(additionalProperties, "subject")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "activityType")
+		delete(additionalProperties, "activityStatus")
+		delete(additionalProperties, "companyStatus")
+		delete(additionalProperties, "track")
+		delete(additionalProperties, "attachedTrack")
+		delete(additionalProperties, "group")
+		delete(additionalProperties, "ccContact")
+		delete(additionalProperties, "bccContact")
+		delete(additionalProperties, "daysToExecute")
+		delete(additionalProperties, "notifyWho")
+		delete(additionalProperties, "notifyFrom")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

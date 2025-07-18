@@ -77,7 +77,10 @@ type UnpostedInvoice struct {
 	CreatedBy *string `json:"createdBy,omitempty"`
 	DateClosed *string `json:"dateClosed,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UnpostedInvoice UnpostedInvoice
 
 // NewUnpostedInvoice instantiates a new UnpostedInvoice object
 // This constructor will assign default values to properties that have it defined,
@@ -2111,7 +2114,83 @@ func (o UnpostedInvoice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UnpostedInvoice) UnmarshalJSON(data []byte) (err error) {
+	varUnpostedInvoice := _UnpostedInvoice{}
+
+	err = json.Unmarshal(data, &varUnpostedInvoice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnpostedInvoice(varUnpostedInvoice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "billingLogId")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "departmentId")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "billToSite")
+		delete(additionalProperties, "shipToCompany")
+		delete(additionalProperties, "shipToSite")
+		delete(additionalProperties, "invoiceNumber")
+		delete(additionalProperties, "invoiceDate")
+		delete(additionalProperties, "invoiceType")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "dueDays")
+		delete(additionalProperties, "dueDate")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "subTotal")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "hasTime")
+		delete(additionalProperties, "hasExpenses")
+		delete(additionalProperties, "hasProducts")
+		delete(additionalProperties, "invoiceTaxableFlag")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "avalaraTaxFlag")
+		delete(additionalProperties, "itemTaxableFlag")
+		delete(additionalProperties, "salesTaxAmount")
+		delete(additionalProperties, "stateTaxFlag")
+		delete(additionalProperties, "stateTaxXref")
+		delete(additionalProperties, "stateTaxAmount")
+		delete(additionalProperties, "countyTaxFlag")
+		delete(additionalProperties, "countyTaxXref")
+		delete(additionalProperties, "countyTaxAmount")
+		delete(additionalProperties, "cityTaxFlag")
+		delete(additionalProperties, "cityTaxXref")
+		delete(additionalProperties, "cityTaxAmount")
+		delete(additionalProperties, "countryTaxFlag")
+		delete(additionalProperties, "countryTaxXref")
+		delete(additionalProperties, "countryTaxAmount")
+		delete(additionalProperties, "compositeTaxFlag")
+		delete(additionalProperties, "compositeTaxXref")
+		delete(additionalProperties, "compositeTaxAmount")
+		delete(additionalProperties, "levelSixTaxFlag")
+		delete(additionalProperties, "levelSixTaxXref")
+		delete(additionalProperties, "levelSixTaxAmount")
+		delete(additionalProperties, "createdBy")
+		delete(additionalProperties, "dateClosed")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnpostedInvoice struct {

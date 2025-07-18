@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type ContactGroup struct {
 	ContactUnsubscribedEmailMessage *string `json:"contactUnsubscribedEmailMessage,omitempty"`
 	ContactGroupUnsubscribedEmailMessage *string `json:"contactGroupUnsubscribedEmailMessage,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ContactGroup ContactGroup
@@ -414,6 +414,11 @@ func (o ContactGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -441,15 +446,29 @@ func (o *ContactGroup) UnmarshalJSON(data []byte) (err error) {
 
 	varContactGroup := _ContactGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varContactGroup)
+	err = json.Unmarshal(data, &varContactGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ContactGroup(varContactGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "group")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "unsubscribeFlag")
+		delete(additionalProperties, "companyUnsubcribedEmailMessage")
+		delete(additionalProperties, "companyGroupUnsubscribedEmailMessage")
+		delete(additionalProperties, "contactUnsubscribedEmailMessage")
+		delete(additionalProperties, "contactGroupUnsubscribedEmailMessage")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

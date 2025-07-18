@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type BoardAutoAssignResource struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	GrandParentId NullableInt32 `json:"grandParentId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BoardAutoAssignResource BoardAutoAssignResource
@@ -387,6 +387,11 @@ func (o BoardAutoAssignResource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GrandParentConnectWiseId) {
 		toSerialize["grandParentConnectWiseId"] = o.GrandParentConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -414,15 +419,28 @@ func (o *BoardAutoAssignResource) UnmarshalJSON(data []byte) (err error) {
 
 	varBoardAutoAssignResource := _BoardAutoAssignResource{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBoardAutoAssignResource)
+	err = json.Unmarshal(data, &varBoardAutoAssignResource)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BoardAutoAssignResource(varBoardAutoAssignResource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "notifyWho")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

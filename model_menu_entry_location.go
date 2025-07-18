@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type MenuEntryLocation struct {
 	Location SystemLocationReference `json:"location"`
 	MenuEntry *SystemMenuEntryReference `json:"menuEntry,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MenuEntryLocation MenuEntryLocation
@@ -187,6 +187,11 @@ func (o MenuEntryLocation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *MenuEntryLocation) UnmarshalJSON(data []byte) (err error) {
 
 	varMenuEntryLocation := _MenuEntryLocation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMenuEntryLocation)
+	err = json.Unmarshal(data, &varMenuEntryLocation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MenuEntryLocation(varMenuEntryLocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "menuEntry")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

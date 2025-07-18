@@ -23,7 +23,10 @@ type ServiceTemplateReference struct {
 	Name *string `json:"name,omitempty"`
 	Summary *string `json:"summary,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceTemplateReference ServiceTemplateReference
 
 // NewServiceTemplateReference instantiates a new ServiceTemplateReference object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o ServiceTemplateReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceTemplateReference) UnmarshalJSON(data []byte) (err error) {
+	varServiceTemplateReference := _ServiceTemplateReference{}
+
+	err = json.Unmarshal(data, &varServiceTemplateReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceTemplateReference(varServiceTemplateReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceTemplateReference struct {

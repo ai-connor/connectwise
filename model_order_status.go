@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type OrderStatus struct {
 	ClosedFlag NullableBool `json:"closedFlag,omitempty"`
 	EmailTemplate *OrderStatusEmailTemplateReference `json:"emailTemplate,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OrderStatus OrderStatus
@@ -372,6 +372,11 @@ func (o OrderStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -399,15 +404,27 @@ func (o *OrderStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varOrderStatus := _OrderStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrderStatus)
+	err = json.Unmarshal(data, &varOrderStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrderStatus(varOrderStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "emailTemplate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

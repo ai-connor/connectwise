@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type DeliveryMethod struct {
 	IntegrationPrintFlag NullableBool `json:"integrationPrintFlag,omitempty"`
 	IntegrationActiveFlag NullableBool `json:"integrationActiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeliveryMethod DeliveryMethod
@@ -382,6 +382,11 @@ func (o DeliveryMethod) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -409,15 +414,27 @@ func (o *DeliveryMethod) UnmarshalJSON(data []byte) (err error) {
 
 	varDeliveryMethod := _DeliveryMethod{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeliveryMethod)
+	err = json.Unmarshal(data, &varDeliveryMethod)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeliveryMethod(varDeliveryMethod)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "emailFlag")
+		delete(additionalProperties, "integrationEmailFlag")
+		delete(additionalProperties, "integrationPrintFlag")
+		delete(additionalProperties, "integrationActiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

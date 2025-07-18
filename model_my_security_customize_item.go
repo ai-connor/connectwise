@@ -22,7 +22,10 @@ type MySecurityCustomizeItem struct {
 	Id *int32 `json:"id,omitempty"`
 	CustomizeIdentifier NullableString `json:"customizeIdentifier,omitempty"`
 	ItemIdentifier *string `json:"itemIdentifier,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MySecurityCustomizeItem MySecurityCustomizeItem
 
 // NewMySecurityCustomizeItem instantiates a new MySecurityCustomizeItem object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o MySecurityCustomizeItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ItemIdentifier) {
 		toSerialize["itemIdentifier"] = o.ItemIdentifier
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MySecurityCustomizeItem) UnmarshalJSON(data []byte) (err error) {
+	varMySecurityCustomizeItem := _MySecurityCustomizeItem{}
+
+	err = json.Unmarshal(data, &varMySecurityCustomizeItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MySecurityCustomizeItem(varMySecurityCustomizeItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "customizeIdentifier")
+		delete(additionalProperties, "itemIdentifier")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMySecurityCustomizeItem struct {

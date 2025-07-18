@@ -27,7 +27,10 @@ type PurchaseOrderStatusInfo struct {
 	DefaultClosedFlag NullableBool `json:"defaultClosedFlag,omitempty"`
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PurchaseOrderStatusInfo PurchaseOrderStatusInfo
 
 // NewPurchaseOrderStatusInfo instantiates a new PurchaseOrderStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -386,7 +389,40 @@ func (o PurchaseOrderStatusInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PurchaseOrderStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varPurchaseOrderStatusInfo := _PurchaseOrderStatusInfo{}
+
+	err = json.Unmarshal(data, &varPurchaseOrderStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PurchaseOrderStatusInfo(varPurchaseOrderStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "defaultClosedFlag")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePurchaseOrderStatusInfo struct {

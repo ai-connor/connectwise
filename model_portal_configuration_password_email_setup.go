@@ -35,7 +35,10 @@ type PortalConfigurationPasswordEmailSetup struct {
 	InvalidPasswordEmailSubject *string `json:"invalidPasswordEmailSubject,omitempty"`
 	InvalidPasswordEmailBody *string `json:"invalidPasswordEmailBody,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PortalConfigurationPasswordEmailSetup PortalConfigurationPasswordEmailSetup
 
 // NewPortalConfigurationPasswordEmailSetup instantiates a new PortalConfigurationPasswordEmailSetup object
 // This constructor will assign default values to properties that have it defined,
@@ -574,7 +577,46 @@ func (o PortalConfigurationPasswordEmailSetup) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PortalConfigurationPasswordEmailSetup) UnmarshalJSON(data []byte) (err error) {
+	varPortalConfigurationPasswordEmailSetup := _PortalConfigurationPasswordEmailSetup{}
+
+	err = json.Unmarshal(data, &varPortalConfigurationPasswordEmailSetup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PortalConfigurationPasswordEmailSetup(varPortalConfigurationPasswordEmailSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "validPasswordEmailUseCustomEmailFlag")
+		delete(additionalProperties, "validPasswordEmailFromFirstName")
+		delete(additionalProperties, "validPasswordEmailFromLastName")
+		delete(additionalProperties, "validPasswordEmailFromEmail")
+		delete(additionalProperties, "validPasswordEmailSubject")
+		delete(additionalProperties, "validPasswordEmailBody")
+		delete(additionalProperties, "invalidPasswordEmailUseCustomEmailFlag")
+		delete(additionalProperties, "invalidPasswordEmailFromFirstName")
+		delete(additionalProperties, "invalidPasswordEmailFromLastName")
+		delete(additionalProperties, "invalidPasswordEmailFromEmail")
+		delete(additionalProperties, "invalidPasswordEmailSubject")
+		delete(additionalProperties, "invalidPasswordEmailBody")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePortalConfigurationPasswordEmailSetup struct {

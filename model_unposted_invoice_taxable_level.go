@@ -24,7 +24,10 @@ type UnpostedInvoiceTaxableLevel struct {
 	TaxCodeXref *string `json:"taxCodeXref,omitempty"`
 	TaxAmount NullableFloat64 `json:"taxAmount,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UnpostedInvoiceTaxableLevel UnpostedInvoiceTaxableLevel
 
 // NewUnpostedInvoiceTaxableLevel instantiates a new UnpostedInvoiceTaxableLevel object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o UnpostedInvoiceTaxableLevel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UnpostedInvoiceTaxableLevel) UnmarshalJSON(data []byte) (err error) {
+	varUnpostedInvoiceTaxableLevel := _UnpostedInvoiceTaxableLevel{}
+
+	err = json.Unmarshal(data, &varUnpostedInvoiceTaxableLevel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnpostedInvoiceTaxableLevel(varUnpostedInvoiceTaxableLevel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "taxLevel")
+		delete(additionalProperties, "taxCodeXref")
+		delete(additionalProperties, "taxAmount")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnpostedInvoiceTaxableLevel struct {

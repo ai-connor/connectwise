@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ConfigurationTypeQuestionValue struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfigurationTypeQuestionValue ConfigurationTypeQuestionValue
@@ -316,6 +316,11 @@ func (o ConfigurationTypeQuestionValue) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -343,15 +348,26 @@ func (o *ConfigurationTypeQuestionValue) UnmarshalJSON(data []byte) (err error) 
 
 	varConfigurationTypeQuestionValue := _ConfigurationTypeQuestionValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfigurationTypeQuestionValue)
+	err = json.Unmarshal(data, &varConfigurationTypeQuestionValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfigurationTypeQuestionValue(varConfigurationTypeQuestionValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "configurationType")
+		delete(additionalProperties, "question")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

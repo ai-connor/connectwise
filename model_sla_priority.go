@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type SLAPriority struct {
 	ResolutionPercent NullableInt32 `json:"resolutionPercent,omitempty"`
 	Sla *SLAReference `json:"sla,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SLAPriority SLAPriority
@@ -463,6 +463,11 @@ func (o SLAPriority) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -490,15 +495,29 @@ func (o *SLAPriority) UnmarshalJSON(data []byte) (err error) {
 
 	varSLAPriority := _SLAPriority{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSLAPriority)
+	err = json.Unmarshal(data, &varSLAPriority)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SLAPriority(varSLAPriority)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "respondHours")
+		delete(additionalProperties, "respondPercent")
+		delete(additionalProperties, "planWithin")
+		delete(additionalProperties, "planWithinPercent")
+		delete(additionalProperties, "resolutionHours")
+		delete(additionalProperties, "resolutionPercent")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

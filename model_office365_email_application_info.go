@@ -22,7 +22,10 @@ type Office365EmailApplicationInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Office365EmailApplicationInfo Office365EmailApplicationInfo
 
 // NewOffice365EmailApplicationInfo instantiates a new Office365EmailApplicationInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o Office365EmailApplicationInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Office365EmailApplicationInfo) UnmarshalJSON(data []byte) (err error) {
+	varOffice365EmailApplicationInfo := _Office365EmailApplicationInfo{}
+
+	err = json.Unmarshal(data, &varOffice365EmailApplicationInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Office365EmailApplicationInfo(varOffice365EmailApplicationInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOffice365EmailApplicationInfo struct {

@@ -24,7 +24,10 @@ type SalesOrderRecap struct {
 	Cost *float64 `json:"cost,omitempty"`
 	Margin *float64 `json:"margin,omitempty"`
 	Percent *float64 `json:"percent,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SalesOrderRecap SalesOrderRecap
 
 // NewSalesOrderRecap instantiates a new SalesOrderRecap object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o SalesOrderRecap) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Percent) {
 		toSerialize["percent"] = o.Percent
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SalesOrderRecap) UnmarshalJSON(data []byte) (err error) {
+	varSalesOrderRecap := _SalesOrderRecap{}
+
+	err = json.Unmarshal(data, &varSalesOrderRecap)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SalesOrderRecap(varSalesOrderRecap)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "billableAmount")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "margin")
+		delete(additionalProperties, "percent")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSalesOrderRecap struct {

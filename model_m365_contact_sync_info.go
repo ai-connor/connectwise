@@ -22,7 +22,10 @@ type M365ContactSyncInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _M365ContactSyncInfo M365ContactSyncInfo
 
 // NewM365ContactSyncInfo instantiates a new M365ContactSyncInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o M365ContactSyncInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *M365ContactSyncInfo) UnmarshalJSON(data []byte) (err error) {
+	varM365ContactSyncInfo := _M365ContactSyncInfo{}
+
+	err = json.Unmarshal(data, &varM365ContactSyncInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = M365ContactSyncInfo(varM365ContactSyncInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableM365ContactSyncInfo struct {

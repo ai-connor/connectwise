@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type BillingStatus struct {
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	SentFlag NullableBool `json:"sentFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BillingStatus BillingStatus
@@ -382,6 +382,11 @@ func (o BillingStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -409,15 +414,27 @@ func (o *BillingStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varBillingStatus := _BillingStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBillingStatus)
+	err = json.Unmarshal(data, &varBillingStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BillingStatus(varBillingStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "sentFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

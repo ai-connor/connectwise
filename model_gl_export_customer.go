@@ -48,7 +48,10 @@ type GLExportCustomer struct {
 	CountryTaxAgencyXref *string `json:"countryTaxAgencyXref,omitempty"`
 	CompositeTaxAgencyXref *string `json:"compositeTaxAgencyXref,omitempty"`
 	TaxLevels []GLExportCustomerTaxLevel `json:"taxLevels,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportCustomer GLExportCustomer
 
 // NewGLExportCustomer instantiates a new GLExportCustomer object
 // This constructor will assign default values to properties that have it defined,
@@ -1172,7 +1175,61 @@ func (o GLExportCustomer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TaxLevels) {
 		toSerialize["taxLevels"] = o.TaxLevels
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportCustomer) UnmarshalJSON(data []byte) (err error) {
+	varGLExportCustomer := _GLExportCustomer{}
+
+	err = json.Unmarshal(data, &varGLExportCustomer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportCustomer(varGLExportCustomer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "companyType")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "billingTermsXref")
+		delete(additionalProperties, "dueDays")
+		delete(additionalProperties, "taxable")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "stateTaxXref")
+		delete(additionalProperties, "countyTaxXref")
+		delete(additionalProperties, "cityTaxXref")
+		delete(additionalProperties, "countryTaxXref")
+		delete(additionalProperties, "compositeTaxXref")
+		delete(additionalProperties, "stateTaxRate")
+		delete(additionalProperties, "countyTaxRate")
+		delete(additionalProperties, "cityTaxRate")
+		delete(additionalProperties, "countryTaxRate")
+		delete(additionalProperties, "compositeTaxRate")
+		delete(additionalProperties, "taxGroupRate")
+		delete(additionalProperties, "taxAgencyXref")
+		delete(additionalProperties, "stateTaxAgencyXref")
+		delete(additionalProperties, "countyTaxAgencyXref")
+		delete(additionalProperties, "cityTaxAgencyXref")
+		delete(additionalProperties, "countryTaxAgencyXref")
+		delete(additionalProperties, "compositeTaxAgencyXref")
+		delete(additionalProperties, "taxLevels")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportCustomer struct {

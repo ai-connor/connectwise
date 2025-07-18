@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CompanyType struct {
 	ServiceAlertMessage *string `json:"serviceAlertMessage,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyType CompanyType
@@ -363,6 +363,11 @@ func (o CompanyType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -390,15 +395,27 @@ func (o *CompanyType) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanyType := _CompanyType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyType)
+	err = json.Unmarshal(data, &varCompanyType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyType(varCompanyType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "vendorFlag")
+		delete(additionalProperties, "serviceAlertFlag")
+		delete(additionalProperties, "serviceAlertMessage")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

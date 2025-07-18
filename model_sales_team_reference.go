@@ -22,7 +22,10 @@ type SalesTeamReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Identifier *string `json:"identifier,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SalesTeamReference SalesTeamReference
 
 // NewSalesTeamReference instantiates a new SalesTeamReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o SalesTeamReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SalesTeamReference) UnmarshalJSON(data []byte) (err error) {
+	varSalesTeamReference := _SalesTeamReference{}
+
+	err = json.Unmarshal(data, &varSalesTeamReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SalesTeamReference(varSalesTeamReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSalesTeamReference struct {

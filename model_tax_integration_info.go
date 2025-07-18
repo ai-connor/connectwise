@@ -23,7 +23,10 @@ type TaxIntegrationInfo struct {
 	EnabledFlag *bool `json:"enabledFlag,omitempty"`
 	TaxIntegrationType *string `json:"taxIntegrationType,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TaxIntegrationInfo TaxIntegrationInfo
 
 // NewTaxIntegrationInfo instantiates a new TaxIntegrationInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o TaxIntegrationInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TaxIntegrationInfo) UnmarshalJSON(data []byte) (err error) {
+	varTaxIntegrationInfo := _TaxIntegrationInfo{}
+
+	err = json.Unmarshal(data, &varTaxIntegrationInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TaxIntegrationInfo(varTaxIntegrationInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "enabledFlag")
+		delete(additionalProperties, "taxIntegrationType")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTaxIntegrationInfo struct {

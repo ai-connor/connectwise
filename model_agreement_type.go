@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -91,6 +90,7 @@ type AgreementType struct {
 	InvoiceProratedAdditionsFlag NullableBool `json:"invoiceProratedAdditionsFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AgreementType AgreementType
@@ -2791,6 +2791,11 @@ func (o AgreementType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectWiseId) {
 		toSerialize["connectWiseId"] = o.ConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2824,15 +2829,85 @@ func (o *AgreementType) UnmarshalJSON(data []byte) (err error) {
 
 	varAgreementType := _AgreementType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAgreementType)
+	err = json.Unmarshal(data, &varAgreementType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AgreementType(varAgreementType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "prefixSuffixOption")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "prePaymentFlag")
+		delete(additionalProperties, "invoicePreSuffix")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "restrictLocationFlag")
+		delete(additionalProperties, "restrictDepartmentFlag")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "applicationUnits")
+		delete(additionalProperties, "applicationLimit")
+		delete(additionalProperties, "applicationCycle")
+		delete(additionalProperties, "applicationUnlimitedFlag")
+		delete(additionalProperties, "oneTimeFlag")
+		delete(additionalProperties, "coverAgreementTimeFlag")
+		delete(additionalProperties, "coverAgreementProductFlag")
+		delete(additionalProperties, "coverAgreementExpenseFlag")
+		delete(additionalProperties, "coverSalesTaxFlag")
+		delete(additionalProperties, "carryOverUnusedFlag")
+		delete(additionalProperties, "allowOverrunsFlag")
+		delete(additionalProperties, "expiredDays")
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "expireWhenZero")
+		delete(additionalProperties, "chargeToFirmFlag")
+		delete(additionalProperties, "employeeCompRate")
+		delete(additionalProperties, "employeeCompNotExceed")
+		delete(additionalProperties, "compHourlyRate")
+		delete(additionalProperties, "compLimitAmount")
+		delete(additionalProperties, "billingCycle")
+		delete(additionalProperties, "billOneTimeFlag")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "invoicingCycle")
+		delete(additionalProperties, "billAmount")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "restrictDownPaymentFlag")
+		delete(additionalProperties, "invoiceDescription")
+		delete(additionalProperties, "topCommentFlag")
+		delete(additionalProperties, "bottomCommentFlag")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "projectType")
+		delete(additionalProperties, "invoiceTemplate")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "billExpenses")
+		delete(additionalProperties, "billProducts")
+		delete(additionalProperties, "billableTimeInvoiceFlag")
+		delete(additionalProperties, "billableExpenseInvoiceFlag")
+		delete(additionalProperties, "billableProductInvoiceFlag")
+		delete(additionalProperties, "copyWorkRolesFlag")
+		delete(additionalProperties, "copyWorkTypesFlag")
+		delete(additionalProperties, "exclusionWorkRoleIds")
+		delete(additionalProperties, "addAllWorkRoleExclusions")
+		delete(additionalProperties, "removeAllWorkRoleExclusions")
+		delete(additionalProperties, "exclusionWorkTypeIds")
+		delete(additionalProperties, "addAllWorkTypeExclusions")
+		delete(additionalProperties, "removeAllWorkTypeExclusions")
+		delete(additionalProperties, "integrationXRef")
+		delete(additionalProperties, "prorateFlag")
+		delete(additionalProperties, "emailTemplate")
+		delete(additionalProperties, "autoInvoiceFlag")
+		delete(additionalProperties, "invoiceProratedAdditionsFlag")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

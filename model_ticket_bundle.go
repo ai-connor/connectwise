@@ -20,7 +20,10 @@ var _ MappedNullable = &TicketBundle{}
 // TicketBundle struct for TicketBundle
 type TicketBundle struct {
 	ChildTicketIds []int32 `json:"childTicketIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TicketBundle TicketBundle
 
 // NewTicketBundle instantiates a new TicketBundle object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o TicketBundle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ChildTicketIds) {
 		toSerialize["childTicketIds"] = o.ChildTicketIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TicketBundle) UnmarshalJSON(data []byte) (err error) {
+	varTicketBundle := _TicketBundle{}
+
+	err = json.Unmarshal(data, &varTicketBundle)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TicketBundle(varTicketBundle)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "childTicketIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTicketBundle struct {

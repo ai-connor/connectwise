@@ -36,7 +36,10 @@ type ProjectTicketNote struct {
 	Member *MemberReference `json:"member,omitempty"`
 	Contact *ContactReference `json:"contact,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectTicketNote ProjectTicketNote
 
 // NewProjectTicketNote instantiates a new ProjectTicketNote object
 // This constructor will assign default values to properties that have it defined,
@@ -695,7 +698,48 @@ func (o ProjectTicketNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectTicketNote) UnmarshalJSON(data []byte) (err error) {
+	varProjectTicketNote := _ProjectTicketNote{}
+
+	err = json.Unmarshal(data, &varProjectTicketNote)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectTicketNote(varProjectTicketNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "noteType")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "detailDescriptionFlag")
+		delete(additionalProperties, "internalAnalysisFlag")
+		delete(additionalProperties, "resolutionFlag")
+		delete(additionalProperties, "timeStart")
+		delete(additionalProperties, "timeEnd")
+		delete(additionalProperties, "bundledFlag")
+		delete(additionalProperties, "mergedFlag")
+		delete(additionalProperties, "issueFlag")
+		delete(additionalProperties, "originalAuthor")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectTicketNote struct {

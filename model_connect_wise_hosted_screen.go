@@ -22,7 +22,10 @@ type ConnectWiseHostedScreen struct {
 	Id *int32 `json:"id,omitempty"`
 	ScreenId *string `json:"screenId,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConnectWiseHostedScreen ConnectWiseHostedScreen
 
 // NewConnectWiseHostedScreen instantiates a new ConnectWiseHostedScreen object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o ConnectWiseHostedScreen) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConnectWiseHostedScreen) UnmarshalJSON(data []byte) (err error) {
+	varConnectWiseHostedScreen := _ConnectWiseHostedScreen{}
+
+	err = json.Unmarshal(data, &varConnectWiseHostedScreen)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConnectWiseHostedScreen(varConnectWiseHostedScreen)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "screenId")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConnectWiseHostedScreen struct {

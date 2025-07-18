@@ -39,7 +39,10 @@ type GLExportExpense struct {
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Total NullableFloat64 `json:"total,omitempty"`
 	Offset *GLExportExpenseOffset `json:"offset,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportExpense GLExportExpense
 
 // NewGLExportExpense instantiates a new GLExportExpense object
 // This constructor will assign default values to properties that have it defined,
@@ -778,7 +781,52 @@ func (o GLExportExpense) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Offset) {
 		toSerialize["offset"] = o.Offset
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportExpense) UnmarshalJSON(data []byte) (err error) {
+	varGLExportExpense := _GLExportExpense{}
+
+	err = json.Unmarshal(data, &varGLExportExpense)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportExpense(varGLExportExpense)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "documentType")
+		delete(additionalProperties, "apAccountNumber")
+		delete(additionalProperties, "apClass")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "glTypeId")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "periodStartDate")
+		delete(additionalProperties, "periodEndDate")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "vendorNumber")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "companyAccountNumber")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "offset")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportExpense struct {

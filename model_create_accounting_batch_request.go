@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type CreateAccountingBatchRequest struct {
 	// GL Entry RecIDs.
 	ProcessedRecordIds []*int32 `json:"processedRecordIds"`
 	SummarizeExpenses NullableBool `json:"summarizeExpenses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAccountingBatchRequest CreateAccountingBatchRequest
@@ -376,6 +376,11 @@ func (o CreateAccountingBatchRequest) ToMap() (map[string]interface{}, error) {
 	if o.SummarizeExpenses.IsSet() {
 		toSerialize["summarizeExpenses"] = o.SummarizeExpenses.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -403,15 +408,27 @@ func (o *CreateAccountingBatchRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateAccountingBatchRequest := _CreateAccountingBatchRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateAccountingBatchRequest)
+	err = json.Unmarshal(data, &varCreateAccountingBatchRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateAccountingBatchRequest(varCreateAccountingBatchRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "batchIdentifier")
+		delete(additionalProperties, "glInterfaceIdentifier")
+		delete(additionalProperties, "exportInvoicesFlag")
+		delete(additionalProperties, "exportExpensesFlag")
+		delete(additionalProperties, "exportProductsFlag")
+		delete(additionalProperties, "processedRecordIds")
+		delete(additionalProperties, "summarizeExpenses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

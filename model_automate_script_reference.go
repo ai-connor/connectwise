@@ -22,7 +22,10 @@ type AutomateScriptReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AutomateScriptReference AutomateScriptReference
 
 // NewAutomateScriptReference instantiates a new AutomateScriptReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o AutomateScriptReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AutomateScriptReference) UnmarshalJSON(data []byte) (err error) {
+	varAutomateScriptReference := _AutomateScriptReference{}
+
+	err = json.Unmarshal(data, &varAutomateScriptReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AutomateScriptReference(varAutomateScriptReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAutomateScriptReference struct {

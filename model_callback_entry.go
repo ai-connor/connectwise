@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type CallbackEntry struct {
 	IsSelfSuppressedFlag NullableBool `json:"isSelfSuppressedFlag,omitempty"`
 	ConnectWiseID *string `json:"connectWiseID,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CallbackEntry CallbackEntry
@@ -531,6 +531,11 @@ func (o CallbackEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -561,15 +566,32 @@ func (o *CallbackEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varCallbackEntry := _CallbackEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCallbackEntry)
+	err = json.Unmarshal(data, &varCallbackEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CallbackEntry(varCallbackEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "objectId")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "memberId")
+		delete(additionalProperties, "payloadVersion")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "isSoapCallbackFlag")
+		delete(additionalProperties, "isSelfSuppressedFlag")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

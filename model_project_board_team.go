@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type ProjectBoardTeam struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	GrandParentId NullableInt32 `json:"grandParentId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectBoardTeam ProjectBoardTeam
@@ -470,6 +470,11 @@ func (o ProjectBoardTeam) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GrandParentConnectWiseId) {
 		toSerialize["grandParentConnectWiseId"] = o.GrandParentConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -497,15 +502,30 @@ func (o *ProjectBoardTeam) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectBoardTeam := _ProjectBoardTeam{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectBoardTeam)
+	err = json.Unmarshal(data, &varProjectBoardTeam)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectBoardTeam(varProjectBoardTeam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

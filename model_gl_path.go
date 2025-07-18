@@ -31,7 +31,10 @@ type GLPath struct {
 	LastPaymentSync *time.Time `json:"lastPaymentSync,omitempty"`
 	LastPaymentSyncBy *MemberReference `json:"lastPaymentSyncBy,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLPath GLPath
 
 // NewGLPath instantiates a new GLPath object
 // This constructor will assign default values to properties that have it defined,
@@ -340,7 +343,40 @@ func (o GLPath) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLPath) UnmarshalJSON(data []byte) (err error) {
+	varGLPath := _GLPath{}
+
+	err = json.Unmarshal(data, &varGLPath)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLPath(varGLPath)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "path")
+		delete(additionalProperties, "sqlServerName")
+		delete(additionalProperties, "databaseName")
+		delete(additionalProperties, "lastPaymentSync")
+		delete(additionalProperties, "lastPaymentSyncBy")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLPath struct {

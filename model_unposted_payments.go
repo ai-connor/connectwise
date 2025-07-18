@@ -32,7 +32,10 @@ type UnpostedPayments struct {
 	PaymentSyncDate *string `json:"paymentSyncDate,omitempty"`
 	PaymentAccount *string `json:"paymentAccount,omitempty"`
 	ARPaymentAccount *string `json:"aRPaymentAccount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UnpostedPayments UnpostedPayments
 
 // NewUnpostedPayments instantiates a new UnpostedPayments object
 // This constructor will assign default values to properties that have it defined,
@@ -526,7 +529,45 @@ func (o UnpostedPayments) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ARPaymentAccount) {
 		toSerialize["aRPaymentAccount"] = o.ARPaymentAccount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UnpostedPayments) UnmarshalJSON(data []byte) (err error) {
+	varUnpostedPayments := _UnpostedPayments{}
+
+	err = json.Unmarshal(data, &varUnpostedPayments)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnpostedPayments(varUnpostedPayments)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "paymentDate")
+		delete(additionalProperties, "appliedBy")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "wisePayPayment")
+		delete(additionalProperties, "paymentSyncStatus")
+		delete(additionalProperties, "paymentSyncDate")
+		delete(additionalProperties, "paymentAccount")
+		delete(additionalProperties, "aRPaymentAccount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnpostedPayments struct {

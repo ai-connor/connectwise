@@ -24,7 +24,10 @@ type ServiceTicketLinkInfo struct {
 	LinkText *string `json:"linkText,omitempty"`
 	Url *string `json:"url,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceTicketLinkInfo ServiceTicketLinkInfo
 
 // NewServiceTicketLinkInfo instantiates a new ServiceTicketLinkInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o ServiceTicketLinkInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceTicketLinkInfo) UnmarshalJSON(data []byte) (err error) {
+	varServiceTicketLinkInfo := _ServiceTicketLinkInfo{}
+
+	err = json.Unmarshal(data, &varServiceTicketLinkInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceTicketLinkInfo(varServiceTicketLinkInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "linkText")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceTicketLinkInfo struct {

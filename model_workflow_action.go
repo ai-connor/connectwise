@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -74,6 +73,7 @@ type WorkflowAction struct {
 	ParentConnectWiseId *string `json:"parentConnectWiseId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WorkflowAction WorkflowAction
@@ -1831,6 +1831,11 @@ func (o WorkflowAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1858,15 +1863,66 @@ func (o *WorkflowAction) UnmarshalJSON(data []byte) (err error) {
 
 	varWorkflowAction := _WorkflowAction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWorkflowAction)
+	err = json.Unmarshal(data, &varWorkflowAction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WorkflowAction(varWorkflowAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "notifyType")
+		delete(additionalProperties, "notifyWho")
+		delete(additionalProperties, "specificMemberTo")
+		delete(additionalProperties, "emailRecipient")
+		delete(additionalProperties, "notifyFrom")
+		delete(additionalProperties, "specificMemberFrom")
+		delete(additionalProperties, "emailFrom")
+		delete(additionalProperties, "ccContact")
+		delete(additionalProperties, "bccContact")
+		delete(additionalProperties, "subject")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "activityStatus")
+		delete(additionalProperties, "activityType")
+		delete(additionalProperties, "attachedTrack")
+		delete(additionalProperties, "daysToExecute")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "boardStatus")
+		delete(additionalProperties, "serviceType")
+		delete(additionalProperties, "serviceSubType")
+		delete(additionalProperties, "serviceItem")
+		delete(additionalProperties, "group")
+		delete(additionalProperties, "serviceTemplate")
+		delete(additionalProperties, "invoiceMinDays")
+		delete(additionalProperties, "automateScript")
+		delete(additionalProperties, "scriptSuccessStatus")
+		delete(additionalProperties, "scriptFailStatus")
+		delete(additionalProperties, "detailNotesFlag")
+		delete(additionalProperties, "internalNotesFlag")
+		delete(additionalProperties, "auditNotesFlag")
+		delete(additionalProperties, "servicePriority")
+		delete(additionalProperties, "updateOwnerFlag")
+		delete(additionalProperties, "salesOrderStatus")
+		delete(additionalProperties, "projectStatus")
+		delete(additionalProperties, "companyStatus")
+		delete(additionalProperties, "attachments")
+		delete(additionalProperties, "serviceSurvey")
+		delete(additionalProperties, "specificTeamTo")
+		delete(additionalProperties, "attachConfigurationsFor")
+		delete(additionalProperties, "configurationType")
+		delete(additionalProperties, "configurationStatus")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

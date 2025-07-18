@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -59,6 +58,7 @@ type Crm struct {
 	Other2Caption *string `json:"other2Caption,omitempty"`
 	DefaultYear NullableBool `json:"defaultYear,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Crm Crm
@@ -953,6 +953,11 @@ func (o Crm) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -982,15 +987,43 @@ func (o *Crm) UnmarshalJSON(data []byte) (err error) {
 
 	varCrm := _Crm{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCrm)
+	err = json.Unmarshal(data, &varCrm)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Crm(varCrm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "companyListCount")
+		delete(additionalProperties, "lockProbabilityFlag")
+		delete(additionalProperties, "accountManagerRole")
+		delete(additionalProperties, "technicalContactRole")
+		delete(additionalProperties, "salesRepRole")
+		delete(additionalProperties, "companyIdGenerationFlag")
+		delete(additionalProperties, "excludeSpacesFlag")
+		delete(additionalProperties, "field1Caption")
+		delete(additionalProperties, "field2Caption")
+		delete(additionalProperties, "field3Caption")
+		delete(additionalProperties, "field4Caption")
+		delete(additionalProperties, "field5Caption")
+		delete(additionalProperties, "field6Caption")
+		delete(additionalProperties, "field7Caption")
+		delete(additionalProperties, "field8Caption")
+		delete(additionalProperties, "field9Caption")
+		delete(additionalProperties, "field10Caption")
+		delete(additionalProperties, "primaryRepCaption")
+		delete(additionalProperties, "secondaryRepCaption")
+		delete(additionalProperties, "other1Caption")
+		delete(additionalProperties, "other2Caption")
+		delete(additionalProperties, "defaultYear")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

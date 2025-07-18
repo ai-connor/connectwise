@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ProductTypeExemption struct {
 	ProductType ProductTypeReference `json:"productType"`
 	TaxableLevels []int32 `json:"taxableLevels,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductTypeExemption ProductTypeExemption
@@ -187,6 +187,11 @@ func (o ProductTypeExemption) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *ProductTypeExemption) UnmarshalJSON(data []byte) (err error) {
 
 	varProductTypeExemption := _ProductTypeExemption{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductTypeExemption)
+	err = json.Unmarshal(data, &varProductTypeExemption)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductTypeExemption(varProductTypeExemption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "taxableLevels")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

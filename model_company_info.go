@@ -51,7 +51,10 @@ type CompanyInfo struct {
 	TwitterUrl *string `json:"twitterUrl,omitempty"`
 	LinkedInUrl *string `json:"linkedInUrl,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CompanyInfo CompanyInfo
 
 // NewCompanyInfo instantiates a new CompanyInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -1240,7 +1243,64 @@ func (o CompanyInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CompanyInfo) UnmarshalJSON(data []byte) (err error) {
+	varCompanyInfo := _CompanyInfo{}
+
+	err = json.Unmarshal(data, &varCompanyInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CompanyInfo(varCompanyInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "territory")
+		delete(additionalProperties, "defaultContact")
+		delete(additionalProperties, "phoneNumber")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "isVendorFlag")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "billingSite")
+		delete(additionalProperties, "billingContact")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "deletedFlag")
+		delete(additionalProperties, "types")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "noServiceFlag")
+		delete(additionalProperties, "addressLine1")
+		delete(additionalProperties, "addressLine2")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "leadFlag")
+		delete(additionalProperties, "faxNumber")
+		delete(additionalProperties, "vendorIdentifier")
+		delete(additionalProperties, "taxIdentifier")
+		delete(additionalProperties, "facebookUrl")
+		delete(additionalProperties, "twitterUrl")
+		delete(additionalProperties, "linkedInUrl")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCompanyInfo struct {

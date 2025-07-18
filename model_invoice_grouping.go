@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type InvoiceGrouping struct {
 	ShowSubItemsFlag NullableBool `json:"showSubItemsFlag,omitempty"`
 	GroupParentChildAdditionsFlag *bool `json:"groupParentChildAdditionsFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InvoiceGrouping InvoiceGrouping
@@ -352,6 +352,11 @@ func (o InvoiceGrouping) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -380,15 +385,27 @@ func (o *InvoiceGrouping) UnmarshalJSON(data []byte) (err error) {
 
 	varInvoiceGrouping := _InvoiceGrouping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInvoiceGrouping)
+	err = json.Unmarshal(data, &varInvoiceGrouping)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InvoiceGrouping(varInvoiceGrouping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "customerDescription")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "showPriceFlag")
+		delete(additionalProperties, "showSubItemsFlag")
+		delete(additionalProperties, "groupParentChildAdditionsFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

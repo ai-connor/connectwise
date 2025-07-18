@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -44,6 +43,7 @@ type SLA struct {
 	ResolutionHours NullableFloat64 `json:"resolutionHours,omitempty"`
 	ResolutionPercent NullableInt32 `json:"resolutionPercent,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SLA SLA
@@ -909,6 +909,11 @@ func (o SLA) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -937,15 +942,41 @@ func (o *SLA) UnmarshalJSON(data []byte) (err error) {
 
 	varSLA := _SLA{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSLA)
+	err = json.Unmarshal(data, &varSLA)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SLA(varSLA)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "basedOn")
+		delete(additionalProperties, "customCalendar")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "applicationOrder")
+		delete(additionalProperties, "hiImpactHiUrgency")
+		delete(additionalProperties, "hiImpactMedUrgency")
+		delete(additionalProperties, "hiImpactLowUrgency")
+		delete(additionalProperties, "medImpactHiUrgency")
+		delete(additionalProperties, "medImpactMedUrgency")
+		delete(additionalProperties, "medImpactLowUrgency")
+		delete(additionalProperties, "lowImpactHiUrgency")
+		delete(additionalProperties, "lowImpactMedUrgency")
+		delete(additionalProperties, "lowImpactLowUrgency")
+		delete(additionalProperties, "respondHours")
+		delete(additionalProperties, "respondPercent")
+		delete(additionalProperties, "planWithin")
+		delete(additionalProperties, "planWithinPercent")
+		delete(additionalProperties, "resolutionHours")
+		delete(additionalProperties, "resolutionPercent")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

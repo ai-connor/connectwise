@@ -20,7 +20,10 @@ var _ MappedNullable = &Report{}
 // Report struct for Report
 type Report struct {
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Report Report
 
 // NewReport instantiates a new Report object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o Report) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Report) UnmarshalJSON(data []byte) (err error) {
+	varReport := _Report{}
+
+	err = json.Unmarshal(data, &varReport)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Report(varReport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReport struct {

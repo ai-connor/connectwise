@@ -25,7 +25,10 @@ type M365ContactSyncMonitoring struct {
 	ServiceBoardId NullableInt32 `json:"serviceBoardId,omitempty"`
 	ServiceBoardStatusId NullableInt32 `json:"serviceBoardStatusId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _M365ContactSyncMonitoring M365ContactSyncMonitoring
 
 // NewM365ContactSyncMonitoring instantiates a new M365ContactSyncMonitoring object
 // This constructor will assign default values to properties that have it defined,
@@ -284,7 +287,38 @@ func (o M365ContactSyncMonitoring) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *M365ContactSyncMonitoring) UnmarshalJSON(data []byte) (err error) {
+	varM365ContactSyncMonitoring := _M365ContactSyncMonitoring{}
+
+	err = json.Unmarshal(data, &varM365ContactSyncMonitoring)
+
+	if err != nil {
+		return err
+	}
+
+	*o = M365ContactSyncMonitoring(varM365ContactSyncMonitoring)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "monitoringTypeId")
+		delete(additionalProperties, "emailAddress")
+		delete(additionalProperties, "serviceBoardId")
+		delete(additionalProperties, "serviceBoardStatusId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableM365ContactSyncMonitoring struct {

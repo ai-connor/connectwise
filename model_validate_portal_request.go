@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &ValidatePortalRequest{}
 type ValidatePortalRequest struct {
 	Email string `json:"email"`
 	Password string `json:"password"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ValidatePortalRequest ValidatePortalRequest
@@ -106,6 +106,11 @@ func (o ValidatePortalRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["email"] = o.Email
 	toSerialize["password"] = o.Password
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *ValidatePortalRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varValidatePortalRequest := _ValidatePortalRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varValidatePortalRequest)
+	err = json.Unmarshal(data, &varValidatePortalRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ValidatePortalRequest(varValidatePortalRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

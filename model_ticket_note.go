@@ -33,7 +33,10 @@ type TicketNote struct {
 	InternalFlag NullableBool `json:"internalFlag,omitempty"`
 	ExternalFlag NullableBool `json:"externalFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TicketNote TicketNote
 
 // NewTicketNote instantiates a new TicketNote object
 // This constructor will assign default values to properties that have it defined,
@@ -642,7 +645,46 @@ func (o TicketNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TicketNote) UnmarshalJSON(data []byte) (err error) {
+	varTicketNote := _TicketNote{}
+
+	err = json.Unmarshal(data, &varTicketNote)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TicketNote(varTicketNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "ticketId")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "detailDescriptionFlag")
+		delete(additionalProperties, "internalAnalysisFlag")
+		delete(additionalProperties, "resolutionFlag")
+		delete(additionalProperties, "issueFlag")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "customerUpdatedFlag")
+		delete(additionalProperties, "processNotifications")
+		delete(additionalProperties, "internalFlag")
+		delete(additionalProperties, "externalFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTicketNote struct {

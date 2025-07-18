@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type MemberPersona struct {
 	PersonaId int32 `json:"personaId"`
 	Member *MemberReference `json:"member,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MemberPersona MemberPersona
@@ -261,6 +261,11 @@ func (o MemberPersona) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -289,15 +294,25 @@ func (o *MemberPersona) UnmarshalJSON(data []byte) (err error) {
 
 	varMemberPersona := _MemberPersona{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMemberPersona)
+	err = json.Unmarshal(data, &varMemberPersona)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MemberPersona(varMemberPersona)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "jobRolePercentage")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "personaId")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

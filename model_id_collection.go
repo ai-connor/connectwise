@@ -20,7 +20,10 @@ var _ MappedNullable = &IdCollection{}
 // IdCollection struct for IdCollection
 type IdCollection struct {
 	Ids []int32 `json:"ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IdCollection IdCollection
 
 // NewIdCollection instantiates a new IdCollection object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o IdCollection) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Ids) {
 		toSerialize["ids"] = o.Ids
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IdCollection) UnmarshalJSON(data []byte) (err error) {
+	varIdCollection := _IdCollection{}
+
+	err = json.Unmarshal(data, &varIdCollection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IdCollection(varIdCollection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIdCollection struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type SalesOrdersLineItem struct {
 	Quantity *int32 `json:"quantity,omitempty"`
 	QuantityCancelled *int32 `json:"quantityCancelled,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SalesOrdersLineItem SalesOrdersLineItem
@@ -296,6 +296,11 @@ func (o SalesOrdersLineItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -323,15 +328,26 @@ func (o *SalesOrdersLineItem) UnmarshalJSON(data []byte) (err error) {
 
 	varSalesOrdersLineItem := _SalesOrdersLineItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSalesOrdersLineItem)
+	err = json.Unmarshal(data, &varSalesOrdersLineItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SalesOrdersLineItem(varSalesOrdersLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "purchaseOrderNumber")
+		delete(additionalProperties, "salesOrder")
+		delete(additionalProperties, "billStatus")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "quantityCancelled")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

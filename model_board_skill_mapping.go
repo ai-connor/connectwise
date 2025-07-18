@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type BoardSkillMapping struct {
 	Skill SkillReference `json:"skill"`
 	Board *BoardReference `json:"board,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BoardSkillMapping BoardSkillMapping
@@ -313,6 +313,11 @@ func (o BoardSkillMapping) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -342,15 +347,27 @@ func (o *BoardSkillMapping) UnmarshalJSON(data []byte) (err error) {
 
 	varBoardSkillMapping := _BoardSkillMapping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBoardSkillMapping)
+	err = json.Unmarshal(data, &varBoardSkillMapping)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BoardSkillMapping(varBoardSkillMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "subType")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "skillCategory")
+		delete(additionalProperties, "skill")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

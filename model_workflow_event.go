@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type WorkflowEvent struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	ParentConnectWiseId *string `json:"parentConnectWiseId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WorkflowEvent WorkflowEvent
@@ -577,6 +577,11 @@ func (o WorkflowEvent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -604,15 +609,32 @@ func (o *WorkflowEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varWorkflowEvent := _WorkflowEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWorkflowEvent)
+	err = json.Unmarshal(data, &varWorkflowEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WorkflowEvent(varWorkflowEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "eventCondition")
+		delete(additionalProperties, "frequencyUnit")
+		delete(additionalProperties, "frequencyOfExecution")
+		delete(additionalProperties, "maxNumberOfExecution")
+		delete(additionalProperties, "executionTime")
+		delete(additionalProperties, "dateTestedUTC")
+		delete(additionalProperties, "testRecordsMatched")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

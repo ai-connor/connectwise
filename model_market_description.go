@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type MarketDescription struct {
 	Name string `json:"name"`
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MarketDescription MarketDescription
@@ -188,6 +188,11 @@ func (o MarketDescription) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -215,15 +220,23 @@ func (o *MarketDescription) UnmarshalJSON(data []byte) (err error) {
 
 	varMarketDescription := _MarketDescription{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMarketDescription)
+	err = json.Unmarshal(data, &varMarketDescription)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MarketDescription(varMarketDescription)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

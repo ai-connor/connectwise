@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ConvertToProject struct {
 	Project *ProjectReference `json:"project,omitempty"`
 	Phase ProjectPhaseReference `json:"phase"`
 	WbsCode string `json:"wbsCode"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConvertToProject ConvertToProject
@@ -224,6 +224,11 @@ func (o ConvertToProject) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["phase"] = o.Phase
 	toSerialize["wbsCode"] = o.WbsCode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,24 @@ func (o *ConvertToProject) UnmarshalJSON(data []byte) (err error) {
 
 	varConvertToProject := _ConvertToProject{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConvertToProject)
+	err = json.Unmarshal(data, &varConvertToProject)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConvertToProject(varConvertToProject)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "recordType")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "phase")
+		delete(additionalProperties, "wbsCode")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

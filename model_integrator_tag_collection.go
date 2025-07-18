@@ -20,7 +20,10 @@ var _ MappedNullable = &IntegratorTagCollection{}
 // IntegratorTagCollection struct for IntegratorTagCollection
 type IntegratorTagCollection struct {
 	Tags []string `json:"tags,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegratorTagCollection IntegratorTagCollection
 
 // NewIntegratorTagCollection instantiates a new IntegratorTagCollection object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o IntegratorTagCollection) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegratorTagCollection) UnmarshalJSON(data []byte) (err error) {
+	varIntegratorTagCollection := _IntegratorTagCollection{}
+
+	err = json.Unmarshal(data, &varIntegratorTagCollection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegratorTagCollection(varIntegratorTagCollection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegratorTagCollection struct {

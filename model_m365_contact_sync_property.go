@@ -26,7 +26,10 @@ type M365ContactSyncProperty struct {
 	WildCard *string `json:"wildCard,omitempty"`
 	CompanyRecID *int32 `json:"companyRecID,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _M365ContactSyncProperty M365ContactSyncProperty
 
 // NewM365ContactSyncProperty instantiates a new M365ContactSyncProperty object
 // This constructor will assign default values to properties that have it defined,
@@ -320,7 +323,39 @@ func (o M365ContactSyncProperty) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *M365ContactSyncProperty) UnmarshalJSON(data []byte) (err error) {
+	varM365ContactSyncProperty := _M365ContactSyncProperty{}
+
+	err = json.Unmarshal(data, &varM365ContactSyncProperty)
+
+	if err != nil {
+		return err
+	}
+
+	*o = M365ContactSyncProperty(varM365ContactSyncProperty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "includeExcludeType")
+		delete(additionalProperties, "propertyType")
+		delete(additionalProperties, "excludeIncludeFlag")
+		delete(additionalProperties, "wildCard")
+		delete(additionalProperties, "companyRecID")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableM365ContactSyncProperty struct {

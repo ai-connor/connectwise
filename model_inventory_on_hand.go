@@ -26,7 +26,10 @@ type InventoryOnHand struct {
 	OnHand NullableInt32 `json:"onHand,omitempty"`
 	SerialNumbers []OnHandSerialNumberReference `json:"serialNumbers,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventoryOnHand InventoryOnHand
 
 // NewInventoryOnHand instantiates a new InventoryOnHand object
 // This constructor will assign default values to properties that have it defined,
@@ -310,7 +313,39 @@ func (o InventoryOnHand) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventoryOnHand) UnmarshalJSON(data []byte) (err error) {
+	varInventoryOnHand := _InventoryOnHand{}
+
+	err = json.Unmarshal(data, &varInventoryOnHand)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventoryOnHand(varInventoryOnHand)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "catalogItem")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "onHand")
+		delete(additionalProperties, "serialNumbers")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventoryOnHand struct {

@@ -24,7 +24,10 @@ type ShipmentMethodInfo struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	TrackingUrl *string `json:"trackingUrl,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ShipmentMethodInfo ShipmentMethodInfo
 
 // NewShipmentMethodInfo instantiates a new ShipmentMethodInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o ShipmentMethodInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ShipmentMethodInfo) UnmarshalJSON(data []byte) (err error) {
+	varShipmentMethodInfo := _ShipmentMethodInfo{}
+
+	err = json.Unmarshal(data, &varShipmentMethodInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ShipmentMethodInfo(varShipmentMethodInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "trackingUrl")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShipmentMethodInfo struct {

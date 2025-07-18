@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type Imap struct {
 	SslFlag NullableBool `json:"sslFlag,omitempty"`
 	EmailConnector *EmailConnectorReference `json:"emailConnector,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Imap Imap
@@ -440,6 +440,11 @@ func (o Imap) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -473,15 +478,31 @@ func (o *Imap) UnmarshalJSON(data []byte) (err error) {
 
 	varImap := _Imap{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varImap)
+	err = json.Unmarshal(data, &varImap)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Imap(varImap)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "imapName")
+		delete(additionalProperties, "processedName")
+		delete(additionalProperties, "failedFolder")
+		delete(additionalProperties, "server")
+		delete(additionalProperties, "userName")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "port")
+		delete(additionalProperties, "sslFlag")
+		delete(additionalProperties, "emailConnector")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

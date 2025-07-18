@@ -21,7 +21,10 @@ var _ MappedNullable = &TimeSheetTierUpdate{}
 type TimeSheetTierUpdate struct {
 	Id *int32 `json:"id,omitempty"`
 	ApprovalType NullableString `json:"approvalType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeSheetTierUpdate TimeSheetTierUpdate
 
 // NewTimeSheetTierUpdate instantiates a new TimeSheetTierUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -130,7 +133,34 @@ func (o TimeSheetTierUpdate) ToMap() (map[string]interface{}, error) {
 	if o.ApprovalType.IsSet() {
 		toSerialize["approvalType"] = o.ApprovalType.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeSheetTierUpdate) UnmarshalJSON(data []byte) (err error) {
+	varTimeSheetTierUpdate := _TimeSheetTierUpdate{}
+
+	err = json.Unmarshal(data, &varTimeSheetTierUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeSheetTierUpdate(varTimeSheetTierUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "approvalType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeSheetTierUpdate struct {

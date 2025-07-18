@@ -22,7 +22,10 @@ type GenericNameIdDTO struct {
 	Id *int32 `json:"id,omitempty"`
 	Tag *string `json:"tag,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenericNameIdDTO GenericNameIdDTO
 
 // NewGenericNameIdDTO instantiates a new GenericNameIdDTO object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o GenericNameIdDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenericNameIdDTO) UnmarshalJSON(data []byte) (err error) {
+	varGenericNameIdDTO := _GenericNameIdDTO{}
+
+	err = json.Unmarshal(data, &varGenericNameIdDTO)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenericNameIdDTO(varGenericNameIdDTO)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "tag")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenericNameIdDTO struct {

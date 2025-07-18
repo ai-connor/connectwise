@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type OpportunityContact struct {
 	PhoneNumber *string `json:"phoneNumber,omitempty"`
 	EmailAddress *string `json:"emailAddress,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OpportunityContact OpportunityContact
@@ -423,6 +423,11 @@ func (o OpportunityContact) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -450,15 +455,29 @@ func (o *OpportunityContact) UnmarshalJSON(data []byte) (err error) {
 
 	varOpportunityContact := _OpportunityContact{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOpportunityContact)
+	err = json.Unmarshal(data, &varOpportunityContact)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OpportunityContact(varOpportunityContact)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "referralFlag")
+		delete(additionalProperties, "opportunityId")
+		delete(additionalProperties, "phoneNumber")
+		delete(additionalProperties, "emailAddress")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

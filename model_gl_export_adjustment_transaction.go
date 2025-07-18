@@ -28,7 +28,10 @@ type GLExportAdjustmentTransaction struct {
 	GlClass *string `json:"glClass,omitempty"`
 	AdjustmentDescription *string `json:"adjustmentDescription,omitempty"`
 	AdjustmentDetail []GLExportAdjustmentTransactionDetail `json:"adjustmentDetail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportAdjustmentTransaction GLExportAdjustmentTransaction
 
 // NewGLExportAdjustmentTransaction instantiates a new GLExportAdjustmentTransaction object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +375,41 @@ func (o GLExportAdjustmentTransaction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AdjustmentDetail) {
 		toSerialize["adjustmentDetail"] = o.AdjustmentDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportAdjustmentTransaction) UnmarshalJSON(data []byte) (err error) {
+	varGLExportAdjustmentTransaction := _GLExportAdjustmentTransaction{}
+
+	err = json.Unmarshal(data, &varGLExportAdjustmentTransaction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportAdjustmentTransaction(varGLExportAdjustmentTransaction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "documentType")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "glTypeID")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "adjustmentDescription")
+		delete(additionalProperties, "adjustmentDetail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportAdjustmentTransaction struct {

@@ -24,7 +24,10 @@ type CompanyNoteTypeInfo struct {
 	Name *string `json:"name,omitempty"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CompanyNoteTypeInfo CompanyNoteTypeInfo
 
 // NewCompanyNoteTypeInfo instantiates a new CompanyNoteTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o CompanyNoteTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CompanyNoteTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varCompanyNoteTypeInfo := _CompanyNoteTypeInfo{}
+
+	err = json.Unmarshal(data, &varCompanyNoteTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CompanyNoteTypeInfo(varCompanyNoteTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCompanyNoteTypeInfo struct {

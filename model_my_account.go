@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -142,6 +141,7 @@ type MyAccount struct {
 	CopyColumnLayoutsAndFilters *bool `json:"copyColumnLayoutsAndFilters,omitempty"`
 	FromMemberRecId *int32 `json:"fromMemberRecId,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MyAccount MyAccount
@@ -3878,6 +3878,11 @@ func (o MyAccount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -3923,15 +3928,121 @@ func (o *MyAccount) UnmarshalJSON(data []byte) (err error) {
 
 	varMyAccount := _MyAccount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMyAccount)
+	err = json.Unmarshal(data, &varMyAccount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MyAccount(varMyAccount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "middleInitial")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "reportCard")
+		delete(additionalProperties, "licenseClass")
+		delete(additionalProperties, "disableOnlineFlag")
+		delete(additionalProperties, "enableMobileFlag")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "employeeIdentifer")
+		delete(additionalProperties, "vendorNumber")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "timeZone")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "serviceBoardTeamIds")
+		delete(additionalProperties, "enableMobileGpsFlag")
+		delete(additionalProperties, "inactiveDate")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "lastLogin")
+		delete(additionalProperties, "photo")
+		delete(additionalProperties, "partnerPortalFlag")
+		delete(additionalProperties, "clientId")
+		delete(additionalProperties, "stsUserAdminUrl")
+		delete(additionalProperties, "token")
+		delete(additionalProperties, "toastNotificationFlag")
+		delete(additionalProperties, "memberPersonas")
+		delete(additionalProperties, "office365")
+		delete(additionalProperties, "officeEmail")
+		delete(additionalProperties, "officePhone")
+		delete(additionalProperties, "officeExtension")
+		delete(additionalProperties, "mobileEmail")
+		delete(additionalProperties, "mobilePhone")
+		delete(additionalProperties, "mobileExtension")
+		delete(additionalProperties, "homeEmail")
+		delete(additionalProperties, "homePhone")
+		delete(additionalProperties, "homeExtension")
+		delete(additionalProperties, "defaultEmail")
+		delete(additionalProperties, "primaryEmail")
+		delete(additionalProperties, "defaultPhone")
+		delete(additionalProperties, "defaultLocation")
+		delete(additionalProperties, "defaultDepartment")
+		delete(additionalProperties, "reportsTo")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "timeApprover")
+		delete(additionalProperties, "expenseApprover")
+		delete(additionalProperties, "billableForecast")
+		delete(additionalProperties, "dailyCapacity")
+		delete(additionalProperties, "includeInUtilizationReportingFlag")
+		delete(additionalProperties, "requireExpenseEntryFlag")
+		delete(additionalProperties, "requireTimeSheetEntryFlag")
+		delete(additionalProperties, "requireStartAndEndTimeOnTimeEntryFlag")
+		delete(additionalProperties, "allowInCellEntryOnTimeSheet")
+		delete(additionalProperties, "enterTimeAgainstCompanyFlag")
+		delete(additionalProperties, "allowExpensesEnteredAgainstCompaniesFlag")
+		delete(additionalProperties, "timeReminderEmailFlag")
+		delete(additionalProperties, "daysTolerance")
+		delete(additionalProperties, "minimumHours")
+		delete(additionalProperties, "timeSheetStartDate")
+		delete(additionalProperties, "hireDate")
+		delete(additionalProperties, "serviceDefaultLocation")
+		delete(additionalProperties, "serviceDefaultDepartment")
+		delete(additionalProperties, "serviceDefaultBoard")
+		delete(additionalProperties, "projectDefaultLocation")
+		delete(additionalProperties, "projectDefaultDepartment")
+		delete(additionalProperties, "projectDefaultBoard")
+		delete(additionalProperties, "scheduleDefaultLocation")
+		delete(additionalProperties, "scheduleDefaultDepartment")
+		delete(additionalProperties, "scheduleCapacity")
+		delete(additionalProperties, "serviceLocation")
+		delete(additionalProperties, "hideMemberInDispatchPortalFlag")
+		delete(additionalProperties, "calendar")
+		delete(additionalProperties, "salesDefaultLocation")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "mapiName")
+		delete(additionalProperties, "calendarSyncIntegrationFlag")
+		delete(additionalProperties, "companyActivityTabFormat")
+		delete(additionalProperties, "invoiceTimeTabFormat")
+		delete(additionalProperties, "invoiceScreenDefaultTabFormat")
+		delete(additionalProperties, "invoicingDisplayOptions")
+		delete(additionalProperties, "agreementInvoicingDisplayOptions")
+		delete(additionalProperties, "authenticationServiceType")
+		delete(additionalProperties, "timebasedOneTimePasswordActivated")
+		delete(additionalProperties, "directionalSync")
+		delete(additionalProperties, "autoStartStopwatch")
+		delete(additionalProperties, "autoPopupQuickNotesWithStopwatch")
+		delete(additionalProperties, "signature")
+		delete(additionalProperties, "globalSearchDefaultTicketFilter")
+		delete(additionalProperties, "globalSearchDefaultSort")
+		delete(additionalProperties, "phoneSource")
+		delete(additionalProperties, "phoneIntegrationType")
+		delete(additionalProperties, "useBrowserLanguageFlag")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "copyPodLayouts")
+		delete(additionalProperties, "copySharedDefaultViews")
+		delete(additionalProperties, "copyColumnLayoutsAndFilters")
+		delete(additionalProperties, "fromMemberRecId")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

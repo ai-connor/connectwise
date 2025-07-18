@@ -25,7 +25,10 @@ type TimeRevenueReference struct {
 	Margin NullableFloat64 `json:"margin,omitempty"`
 	Percentage NullableFloat64 `json:"percentage,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeRevenueReference TimeRevenueReference
 
 // NewTimeRevenueReference instantiates a new TimeRevenueReference object
 // This constructor will assign default values to properties that have it defined,
@@ -314,7 +317,38 @@ func (o TimeRevenueReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeRevenueReference) UnmarshalJSON(data []byte) (err error) {
+	varTimeRevenueReference := _TimeRevenueReference{}
+
+	err = json.Unmarshal(data, &varTimeRevenueReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeRevenueReference(varTimeRevenueReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revenue")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "margin")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeRevenueReference struct {

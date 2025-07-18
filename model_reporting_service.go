@@ -29,7 +29,10 @@ type ReportingService struct {
 	//  Max length: 100;
 	ReportingUrl *string `json:"reportingUrl,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReportingService ReportingService
 
 // NewReportingService instantiates a new ReportingService object
 // This constructor will assign default values to properties that have it defined,
@@ -268,7 +271,38 @@ func (o ReportingService) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReportingService) UnmarshalJSON(data []byte) (err error) {
+	varReportingService := _ReportingService{}
+
+	err = json.Unmarshal(data, &varReportingService)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReportingService(varReportingService)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "reportingUserName")
+		delete(additionalProperties, "reportingPassword")
+		delete(additionalProperties, "reportingDomain")
+		delete(additionalProperties, "reportingUrl")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReportingService struct {

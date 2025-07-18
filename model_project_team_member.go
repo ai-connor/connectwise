@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type ProjectTeamMember struct {
 	StartDate *time.Time `json:"startDate,omitempty"`
 	EndDate *time.Time `json:"endDate,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectTeamMember ProjectTeamMember
@@ -379,6 +379,11 @@ func (o ProjectTeamMember) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -407,15 +412,28 @@ func (o *ProjectTeamMember) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectTeamMember := _ProjectTeamMember{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectTeamMember)
+	err = json.Unmarshal(data, &varProjectTeamMember)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectTeamMember(varProjectTeamMember)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "projectId")
+		delete(additionalProperties, "hours")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "projectRole")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

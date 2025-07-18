@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -54,6 +53,7 @@ type ExpenseEntry struct {
 	Phase *ProjectPhaseReference `json:"phase,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExpenseEntry ExpenseEntry
@@ -1265,6 +1265,11 @@ func (o ExpenseEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1294,15 +1299,50 @@ func (o *ExpenseEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varExpenseEntry := _ExpenseEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExpenseEntry)
+	err = json.Unmarshal(data, &varExpenseEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExpenseEntry(varExpenseEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "expenseReport")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "chargeToId")
+		delete(additionalProperties, "chargeToType")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "paymentMethod")
+		delete(additionalProperties, "classification")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "invoiceAmount")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "taxes")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "billAmount")
+		delete(additionalProperties, "agreementAmount")
+		delete(additionalProperties, "odometerStart")
+		delete(additionalProperties, "odometerEnd")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "phase")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

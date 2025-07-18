@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type OpportunityNote struct {
 	EnteredBy *string `json:"enteredBy,omitempty"`
 	MobileGuid NullableString `json:"mobileGuid,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OpportunityNote OpportunityNote
@@ -361,6 +361,11 @@ func (o OpportunityNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -388,15 +393,27 @@ func (o *OpportunityNote) UnmarshalJSON(data []byte) (err error) {
 
 	varOpportunityNote := _OpportunityNote{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOpportunityNote)
+	err = json.Unmarshal(data, &varOpportunityNote)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OpportunityNote(varOpportunityNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "opportunityId")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "flagged")
+		delete(additionalProperties, "enteredBy")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

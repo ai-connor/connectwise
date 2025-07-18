@@ -25,7 +25,10 @@ type Info struct {
 	LicenseBits []LicenseBit `json:"licenseBits,omitempty"`
 	CloudRegion *string `json:"cloudRegion,omitempty"`
 	MaxWorkFlowRecordsAllowed *int32 `json:"maxWorkFlowRecordsAllowed,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Info Info
 
 // NewInfo instantiates a new Info object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o Info) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaxWorkFlowRecordsAllowed) {
 		toSerialize["maxWorkFlowRecordsAllowed"] = o.MaxWorkFlowRecordsAllowed
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Info) UnmarshalJSON(data []byte) (err error) {
+	varInfo := _Info{}
+
+	err = json.Unmarshal(data, &varInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Info(varInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "isCloud")
+		delete(additionalProperties, "serverTimeZone")
+		delete(additionalProperties, "licenseBits")
+		delete(additionalProperties, "cloudRegion")
+		delete(additionalProperties, "maxWorkFlowRecordsAllowed")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInfo struct {

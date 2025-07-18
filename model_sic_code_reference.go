@@ -22,7 +22,10 @@ type SicCodeReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SicCodeReference SicCodeReference
 
 // NewSicCodeReference instantiates a new SicCodeReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o SicCodeReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SicCodeReference) UnmarshalJSON(data []byte) (err error) {
+	varSicCodeReference := _SicCodeReference{}
+
+	err = json.Unmarshal(data, &varSicCodeReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SicCodeReference(varSicCodeReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSicCodeReference struct {

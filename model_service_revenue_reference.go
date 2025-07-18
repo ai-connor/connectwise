@@ -25,7 +25,10 @@ type ServiceRevenueReference struct {
 	Margin NullableFloat64 `json:"margin,omitempty"`
 	Percentage NullableFloat64 `json:"percentage,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceRevenueReference ServiceRevenueReference
 
 // NewServiceRevenueReference instantiates a new ServiceRevenueReference object
 // This constructor will assign default values to properties that have it defined,
@@ -314,7 +317,38 @@ func (o ServiceRevenueReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceRevenueReference) UnmarshalJSON(data []byte) (err error) {
+	varServiceRevenueReference := _ServiceRevenueReference{}
+
+	err = json.Unmarshal(data, &varServiceRevenueReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceRevenueReference(varServiceRevenueReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revenue")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "margin")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceRevenueReference struct {

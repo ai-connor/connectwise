@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SurveyOption struct {
 	Points NullableInt32 `json:"points"`
 	Visibleflag NullableBool `json:"visibleflag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SurveyOption SurveyOption
@@ -227,6 +227,11 @@ func (o SurveyOption) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *SurveyOption) UnmarshalJSON(data []byte) (err error) {
 
 	varSurveyOption := _SurveyOption{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSurveyOption)
+	err = json.Unmarshal(data, &varSurveyOption)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SurveyOption(varSurveyOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "points")
+		delete(additionalProperties, "visibleflag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type PortalReport struct {
 	CustomFlag NullableBool `json:"customFlag,omitempty"`
 	DisplayFlag NullableBool `json:"displayFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PortalReport PortalReport
@@ -354,6 +354,11 @@ func (o PortalReport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -382,15 +387,27 @@ func (o *PortalReport) UnmarshalJSON(data []byte) (err error) {
 
 	varPortalReport := _PortalReport{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPortalReport)
+	err = json.Unmarshal(data, &varPortalReport)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PortalReport(varPortalReport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "portalConfiguration")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "openSameWindowFlag")
+		delete(additionalProperties, "customFlag")
+		delete(additionalProperties, "displayFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

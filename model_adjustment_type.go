@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type AdjustmentType struct {
 	DateCreated *time.Time `json:"dateCreated,omitempty"`
 	CreatedBy *string `json:"createdBy,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AdjustmentType AdjustmentType
@@ -308,6 +308,11 @@ func (o AdjustmentType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -335,15 +340,26 @@ func (o *AdjustmentType) UnmarshalJSON(data []byte) (err error) {
 
 	varAdjustmentType := _AdjustmentType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAdjustmentType)
+	err = json.Unmarshal(data, &varAdjustmentType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AdjustmentType(varAdjustmentType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "auditTrailFlag")
+		delete(additionalProperties, "dateCreated")
+		delete(additionalProperties, "createdBy")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

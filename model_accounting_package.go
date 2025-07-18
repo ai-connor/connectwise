@@ -22,7 +22,10 @@ type AccountingPackage struct {
 	Id *int32 `json:"id,omitempty"`
 	Identifier *string `json:"identifier,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AccountingPackage AccountingPackage
 
 // NewAccountingPackage instantiates a new AccountingPackage object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o AccountingPackage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AccountingPackage) UnmarshalJSON(data []byte) (err error) {
+	varAccountingPackage := _AccountingPackage{}
+
+	err = json.Unmarshal(data, &varAccountingPackage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AccountingPackage(varAccountingPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAccountingPackage struct {

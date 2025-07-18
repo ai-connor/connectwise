@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -106,6 +105,7 @@ type MemberTemplate struct {
 	FromMemberRecId *int32 `json:"fromMemberRecId,omitempty"`
 	FromMemberTemplateRecId *int32 `json:"fromMemberTemplateRecId,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MemberTemplate MemberTemplate
@@ -3423,6 +3423,11 @@ func (o MemberTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -3450,15 +3455,102 @@ func (o *MemberTemplate) UnmarshalJSON(data []byte) (err error) {
 
 	varMemberTemplate := _MemberTemplate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMemberTemplate)
+	err = json.Unmarshal(data, &varMemberTemplate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MemberTemplate(varMemberTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "templateDescription")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "reportCard")
+		delete(additionalProperties, "enableMobileFlag")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "timeZone")
+		delete(additionalProperties, "partnerPortalFlag")
+		delete(additionalProperties, "stsUserAdminUrl")
+		delete(additionalProperties, "toastNotificationFlag")
+		delete(additionalProperties, "memberPersonas")
+		delete(additionalProperties, "adminFlag")
+		delete(additionalProperties, "structureLevel")
+		delete(additionalProperties, "securityLocation")
+		delete(additionalProperties, "defaultLocation")
+		delete(additionalProperties, "defaultDepartment")
+		delete(additionalProperties, "reportsTo")
+		delete(additionalProperties, "restrictLocationFlag")
+		delete(additionalProperties, "restrictDepartmentFlag")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "timeApprover")
+		delete(additionalProperties, "expenseApprover")
+		delete(additionalProperties, "billableForecast")
+		delete(additionalProperties, "dailyCapacity")
+		delete(additionalProperties, "hourlyCost")
+		delete(additionalProperties, "hourlyRate")
+		delete(additionalProperties, "includeInUtilizationReportingFlag")
+		delete(additionalProperties, "requireExpenseEntryFlag")
+		delete(additionalProperties, "requireTimeSheetEntryFlag")
+		delete(additionalProperties, "requireStartAndEndTimeOnTimeEntryFlag")
+		delete(additionalProperties, "allowInCellEntryOnTimeSheet")
+		delete(additionalProperties, "enterTimeAgainstCompanyFlag")
+		delete(additionalProperties, "allowExpensesEnteredAgainstCompaniesFlag")
+		delete(additionalProperties, "timeReminderEmailFlag")
+		delete(additionalProperties, "daysTolerance")
+		delete(additionalProperties, "minimumHours")
+		delete(additionalProperties, "timeSheetStartDate")
+		delete(additionalProperties, "serviceDefaultLocation")
+		delete(additionalProperties, "serviceDefaultDepartment")
+		delete(additionalProperties, "serviceDefaultBoard")
+		delete(additionalProperties, "restrictServiceDefaultLocationFlag")
+		delete(additionalProperties, "restrictServiceDefaultDepartmentFlag")
+		delete(additionalProperties, "excludedServiceBoardIds")
+		delete(additionalProperties, "teams")
+		delete(additionalProperties, "serviceBoardTeamIds")
+		delete(additionalProperties, "projectDefaultLocation")
+		delete(additionalProperties, "projectDefaultDepartment")
+		delete(additionalProperties, "projectDefaultBoard")
+		delete(additionalProperties, "restrictProjectDefaultLocationFlag")
+		delete(additionalProperties, "restrictProjectDefaultDepartmentFlag")
+		delete(additionalProperties, "excludedProjectBoardIds")
+		delete(additionalProperties, "scheduleDefaultLocation")
+		delete(additionalProperties, "scheduleDefaultDepartment")
+		delete(additionalProperties, "scheduleCapacity")
+		delete(additionalProperties, "serviceLocation")
+		delete(additionalProperties, "restrictScheduleFlag")
+		delete(additionalProperties, "hideMemberInDispatchPortalFlag")
+		delete(additionalProperties, "calendar")
+		delete(additionalProperties, "salesDefaultLocation")
+		delete(additionalProperties, "restrictDefaultSalesTerritoryFlag")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "restrictDefaultWarehouseFlag")
+		delete(additionalProperties, "restrictDefaultWarehouseBinFlag")
+		delete(additionalProperties, "companyActivityTabFormat")
+		delete(additionalProperties, "invoiceTimeTabFormat")
+		delete(additionalProperties, "invoiceScreenDefaultTabFormat")
+		delete(additionalProperties, "invoicingDisplayOptions")
+		delete(additionalProperties, "agreementInvoicingDisplayOptions")
+		delete(additionalProperties, "autoStartStopwatch")
+		delete(additionalProperties, "autoPopupQuickNotesWithStopwatch")
+		delete(additionalProperties, "globalSearchDefaultTicketFilter")
+		delete(additionalProperties, "globalSearchDefaultSort")
+		delete(additionalProperties, "phoneSource")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "copyPodLayouts")
+		delete(additionalProperties, "copySharedDefaultViews")
+		delete(additionalProperties, "copyColumnLayoutsAndFilters")
+		delete(additionalProperties, "fromMemberRecId")
+		delete(additionalProperties, "fromMemberTemplateRecId")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type WonRevenueReference struct {
 	Margin NullableFloat64 `json:"margin,omitempty"`
 	Percentage NullableFloat64 `json:"percentage,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WonRevenueReference WonRevenueReference
 
 // NewWonRevenueReference instantiates a new WonRevenueReference object
 // This constructor will assign default values to properties that have it defined,
@@ -314,7 +317,38 @@ func (o WonRevenueReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WonRevenueReference) UnmarshalJSON(data []byte) (err error) {
+	varWonRevenueReference := _WonRevenueReference{}
+
+	err = json.Unmarshal(data, &varWonRevenueReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WonRevenueReference(varWonRevenueReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revenue")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "margin")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWonRevenueReference struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type CompanyTeam struct {
 	TechFlag NullableBool `json:"techFlag,omitempty"`
 	SalesFlag NullableBool `json:"salesFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyTeam CompanyTeam
@@ -469,6 +469,11 @@ func (o CompanyTeam) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -496,15 +501,30 @@ func (o *CompanyTeam) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanyTeam := _CompanyTeam{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyTeam)
+	err = json.Unmarshal(data, &varCompanyTeam)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyTeam(varCompanyTeam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "teamRole")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "accountManagerFlag")
+		delete(additionalProperties, "techFlag")
+		delete(additionalProperties, "salesFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

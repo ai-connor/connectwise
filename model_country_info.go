@@ -29,7 +29,10 @@ type CountryInfo struct {
 	LocalizationCaptionOne *string `json:"localizationCaptionOne,omitempty"`
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CountryInfo CountryInfo
 
 // NewCountryInfo instantiates a new CountryInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o CountryInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CountryInfo) UnmarshalJSON(data []byte) (err error) {
+	varCountryInfo := _CountryInfo{}
+
+	err = json.Unmarshal(data, &varCountryInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CountryInfo(varCountryInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "cityCaption")
+		delete(additionalProperties, "stateCaption")
+		delete(additionalProperties, "zipCaption")
+		delete(additionalProperties, "dialingPrefix")
+		delete(additionalProperties, "localizationCaptionOne")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCountryInfo struct {

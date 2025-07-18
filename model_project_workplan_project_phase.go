@@ -39,7 +39,10 @@ type ProjectWorkplanProjectPhase struct {
 	BillPhaseSeparately NullableBool `json:"billPhaseSeparately,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectWorkplanProjectPhase ProjectWorkplanProjectPhase
 
 // NewProjectWorkplanProjectPhase instantiates a new ProjectWorkplanProjectPhase object
 // This constructor will assign default values to properties that have it defined,
@@ -848,7 +851,52 @@ func (o ProjectWorkplanProjectPhase) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectWorkplanProjectPhase) UnmarshalJSON(data []byte) (err error) {
+	varProjectWorkplanProjectPhase := _ProjectWorkplanProjectPhase{}
+
+	err = json.Unmarshal(data, &varProjectWorkplanProjectPhase)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectWorkplanProjectPhase(varProjectWorkplanProjectPhase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "projectId")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "parentPhase")
+		delete(additionalProperties, "wbsCode")
+		delete(additionalProperties, "markAsMilestoneFlag")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "budgetHours")
+		delete(additionalProperties, "actualHours")
+		delete(additionalProperties, "billableHours")
+		delete(additionalProperties, "scheduled_Hours")
+		delete(additionalProperties, "scheduled_Start")
+		delete(additionalProperties, "scheduled_End")
+		delete(additionalProperties, "scheduled_Duration")
+		delete(additionalProperties, "billPhaseSeparately")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectWorkplanProjectPhase struct {

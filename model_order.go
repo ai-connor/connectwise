@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -64,6 +63,7 @@ type Order struct {
 	SubTotal *float64 `json:"subTotal,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Order Order
@@ -1573,6 +1573,11 @@ func (o Order) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1602,15 +1607,60 @@ func (o *Order) UnmarshalJSON(data []byte) (err error) {
 
 	varOrder := _Order{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrder)
+	err = json.Unmarshal(data, &varOrder)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Order(varOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "phone")
+		delete(additionalProperties, "phoneExt")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "orderDate")
+		delete(additionalProperties, "dueDate")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "poNumber")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "salesRep")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "billClosedFlag")
+		delete(additionalProperties, "billShippedFlag")
+		delete(additionalProperties, "restrictDownpaymentFlag")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "topCommentFlag")
+		delete(additionalProperties, "bottomCommentFlag")
+		delete(additionalProperties, "shipToCompany")
+		delete(additionalProperties, "shipToContact")
+		delete(additionalProperties, "shipToSite")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "billToContact")
+		delete(additionalProperties, "billToSite")
+		delete(additionalProperties, "productIds")
+		delete(additionalProperties, "documentIds")
+		delete(additionalProperties, "invoiceIds")
+		delete(additionalProperties, "configIds")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "taxTotal")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "companyLocation")
+		delete(additionalProperties, "subTotal")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

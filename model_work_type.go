@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -41,6 +40,7 @@ type WorkType struct {
 	// Used only on create to add the work type to all agreement and agreement type exclusion lists
 	AddAllAgreementExclusions NullableBool `json:"addAllAgreementExclusions,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WorkType WorkType
@@ -737,6 +737,11 @@ func (o WorkType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -767,15 +772,36 @@ func (o *WorkType) UnmarshalJSON(data []byte) (err error) {
 
 	varWorkType := _WorkType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWorkType)
+	err = json.Unmarshal(data, &varWorkType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WorkType(varWorkType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "rateType")
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "hoursMin")
+		delete(additionalProperties, "hoursMax")
+		delete(additionalProperties, "roundBillHoursTo")
+		delete(additionalProperties, "accrualType")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "overallDefaultFlag")
+		delete(additionalProperties, "activityDefaultFlag")
+		delete(additionalProperties, "utilizationFlag")
+		delete(additionalProperties, "costMultiplier")
+		delete(additionalProperties, "integrationXRef")
+		delete(additionalProperties, "addAllAgreementExclusions")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

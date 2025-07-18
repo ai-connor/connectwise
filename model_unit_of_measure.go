@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type UnitOfMeasure struct {
 	//  Max length: 31;
 	UomScheduleXref *string `json:"uomScheduleXref,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UnitOfMeasure UnitOfMeasure
@@ -281,6 +281,11 @@ func (o UnitOfMeasure) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -308,15 +313,25 @@ func (o *UnitOfMeasure) UnmarshalJSON(data []byte) (err error) {
 
 	varUnitOfMeasure := _UnitOfMeasure{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUnitOfMeasure)
+	err = json.Unmarshal(data, &varUnitOfMeasure)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UnitOfMeasure(varUnitOfMeasure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "uomScheduleXref")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

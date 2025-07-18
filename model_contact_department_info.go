@@ -22,7 +22,10 @@ type ContactDepartmentInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ContactDepartmentInfo ContactDepartmentInfo
 
 // NewContactDepartmentInfo instantiates a new ContactDepartmentInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o ContactDepartmentInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ContactDepartmentInfo) UnmarshalJSON(data []byte) (err error) {
+	varContactDepartmentInfo := _ContactDepartmentInfo{}
+
+	err = json.Unmarshal(data, &varContactDepartmentInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContactDepartmentInfo(varContactDepartmentInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContactDepartmentInfo struct {

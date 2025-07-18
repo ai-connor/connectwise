@@ -23,7 +23,10 @@ type ManufacturerInfo struct {
 	Name *string `json:"name,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManufacturerInfo ManufacturerInfo
 
 // NewManufacturerInfo instantiates a new ManufacturerInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o ManufacturerInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManufacturerInfo) UnmarshalJSON(data []byte) (err error) {
+	varManufacturerInfo := _ManufacturerInfo{}
+
+	err = json.Unmarshal(data, &varManufacturerInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManufacturerInfo(varManufacturerInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManufacturerInfo struct {

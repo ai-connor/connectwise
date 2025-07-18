@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type EmailConnectorParsingRule struct {
 	ServiceItem *ServiceItemReference `json:"serviceItem,omitempty"`
 	ServiceBoard *BoardReference `json:"serviceBoard,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EmailConnectorParsingRule EmailConnectorParsingRule
@@ -460,6 +460,11 @@ func (o EmailConnectorParsingRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -489,15 +494,31 @@ func (o *EmailConnectorParsingRule) UnmarshalJSON(data []byte) (err error) {
 
 	varEmailConnectorParsingRule := _EmailConnectorParsingRule{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEmailConnectorParsingRule)
+	err = json.Unmarshal(data, &varEmailConnectorParsingRule)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EmailConnectorParsingRule(varEmailConnectorParsingRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "parsingStyle")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "parsingVariable")
+		delete(additionalProperties, "searchTerm")
+		delete(additionalProperties, "servicePriority")
+		delete(additionalProperties, "serviceStatus")
+		delete(additionalProperties, "serviceType")
+		delete(additionalProperties, "serviceSubType")
+		delete(additionalProperties, "serviceItem")
+		delete(additionalProperties, "serviceBoard")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

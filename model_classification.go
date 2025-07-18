@@ -26,7 +26,10 @@ type Classification struct {
 	CompanyFlag NullableBool `json:"companyFlag,omitempty"`
 	EmployeeFlag NullableBool `json:"employeeFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Classification Classification
 
 // NewClassification instantiates a new Classification object
 // This constructor will assign default values to properties that have it defined,
@@ -340,7 +343,39 @@ func (o Classification) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Classification) UnmarshalJSON(data []byte) (err error) {
+	varClassification := _Classification{}
+
+	err = json.Unmarshal(data, &varClassification)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Classification(varClassification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "multiplier")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "companyFlag")
+		delete(additionalProperties, "employeeFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableClassification struct {

@@ -24,7 +24,10 @@ type MemberForCalSync struct {
 	Office365Id *string `json:"office365Id,omitempty"`
 	MapiName *string `json:"mapiName,omitempty"`
 	CalendarSyncIntegrationFlag NullableBool `json:"calendarSyncIntegrationFlag,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberForCalSync MemberForCalSync
 
 // NewMemberForCalSync instantiates a new MemberForCalSync object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o MemberForCalSync) ToMap() (map[string]interface{}, error) {
 	if o.CalendarSyncIntegrationFlag.IsSet() {
 		toSerialize["calendarSyncIntegrationFlag"] = o.CalendarSyncIntegrationFlag.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberForCalSync) UnmarshalJSON(data []byte) (err error) {
+	varMemberForCalSync := _MemberForCalSync{}
+
+	err = json.Unmarshal(data, &varMemberForCalSync)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberForCalSync(varMemberForCalSync)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "memberId")
+		delete(additionalProperties, "office365Id")
+		delete(additionalProperties, "mapiName")
+		delete(additionalProperties, "calendarSyncIntegrationFlag")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberForCalSync struct {

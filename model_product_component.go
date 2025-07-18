@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type ProductComponent struct {
 	Price NullableFloat64 `json:"price,omitempty"`
 	Cost NullableFloat64 `json:"cost,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductComponent ProductComponent
@@ -657,6 +657,11 @@ func (o ProductComponent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -685,15 +690,34 @@ func (o *ProductComponent) UnmarshalJSON(data []byte) (err error) {
 
 	varProductComponent := _ProductComponent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductComponent)
+	err = json.Unmarshal(data, &varProductComponent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductComponent(varProductComponent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "catalogItem")
+		delete(additionalProperties, "hidePriceFlag")
+		delete(additionalProperties, "hideItemIdentifierFlag")
+		delete(additionalProperties, "hideDescriptionFlag")
+		delete(additionalProperties, "hideQuantityFlag")
+		delete(additionalProperties, "hideExtendedPriceFlag")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "parentProductItem")
+		delete(additionalProperties, "productItem")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

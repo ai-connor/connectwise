@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type LinkClicked struct {
 	//  Max length: 2083;
 	Url string `json:"url"`
 	QueryString *string `json:"queryString,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LinkClicked LinkClicked
@@ -264,6 +264,11 @@ func (o LinkClicked) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.QueryString) {
 		toSerialize["queryString"] = o.QueryString
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -292,15 +297,25 @@ func (o *LinkClicked) UnmarshalJSON(data []byte) (err error) {
 
 	varLinkClicked := _LinkClicked{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLinkClicked)
+	err = json.Unmarshal(data, &varLinkClicked)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LinkClicked(varLinkClicked)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "campaignId")
+		delete(additionalProperties, "contactId")
+		delete(additionalProperties, "dateClicked")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "queryString")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

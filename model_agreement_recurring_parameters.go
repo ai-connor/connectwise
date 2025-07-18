@@ -36,7 +36,10 @@ type AgreementRecurringParameters struct {
 	Currency *GenericNameIdDTO `json:"currency,omitempty"`
 	AutoInvoiceFlag *bool `json:"autoInvoiceFlag,omitempty"`
 	UserDefinedFieldValues []UserDefinedFieldValueModel `json:"userDefinedFieldValues,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementRecurringParameters AgreementRecurringParameters
 
 // NewAgreementRecurringParameters instantiates a new AgreementRecurringParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -680,7 +683,49 @@ func (o AgreementRecurringParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserDefinedFieldValues) {
 		toSerialize["userDefinedFieldValues"] = o.UserDefinedFieldValues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementRecurringParameters) UnmarshalJSON(data []byte) (err error) {
+	varAgreementRecurringParameters := _AgreementRecurringParameters{}
+
+	err = json.Unmarshal(data, &varAgreementRecurringParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementRecurringParameters(varAgreementRecurringParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "billingCycle")
+		delete(additionalProperties, "cycleBase")
+		delete(additionalProperties, "aGRAmount")
+		delete(additionalProperties, "taxable")
+		delete(additionalProperties, "childrenAmount")
+		delete(additionalProperties, "additionsAmount")
+		delete(additionalProperties, "totalAmount")
+		delete(additionalProperties, "aGRProrate")
+		delete(additionalProperties, "billStartDate")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "terms")
+		delete(additionalProperties, "prorateFlag")
+		delete(additionalProperties, "invoiceProratedAdditionsFlag")
+		delete(additionalProperties, "restrictDownpayment")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "autoInvoiceFlag")
+		delete(additionalProperties, "userDefinedFieldValues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementRecurringParameters struct {

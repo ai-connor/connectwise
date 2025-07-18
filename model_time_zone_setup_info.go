@@ -23,7 +23,10 @@ type TimeZoneSetupInfo struct {
 	Name *string `json:"name,omitempty"`
 	Offset NullableFloat64 `json:"offset,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeZoneSetupInfo TimeZoneSetupInfo
 
 // NewTimeZoneSetupInfo instantiates a new TimeZoneSetupInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o TimeZoneSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeZoneSetupInfo) UnmarshalJSON(data []byte) (err error) {
+	varTimeZoneSetupInfo := _TimeZoneSetupInfo{}
+
+	err = json.Unmarshal(data, &varTimeZoneSetupInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeZoneSetupInfo(varTimeZoneSetupInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "offset")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeZoneSetupInfo struct {

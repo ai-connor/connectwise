@@ -22,7 +22,10 @@ type EmailConnectorParsingStyleReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EmailConnectorParsingStyleReference EmailConnectorParsingStyleReference
 
 // NewEmailConnectorParsingStyleReference instantiates a new EmailConnectorParsingStyleReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o EmailConnectorParsingStyleReference) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EmailConnectorParsingStyleReference) UnmarshalJSON(data []byte) (err error) {
+	varEmailConnectorParsingStyleReference := _EmailConnectorParsingStyleReference{}
+
+	err = json.Unmarshal(data, &varEmailConnectorParsingStyleReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EmailConnectorParsingStyleReference(varEmailConnectorParsingStyleReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEmailConnectorParsingStyleReference struct {

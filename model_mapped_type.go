@@ -25,7 +25,10 @@ type MappedType struct {
 	RecIdField *string `json:"recIdField,omitempty"`
 	GlType NullableString `json:"glType,omitempty"`
 	SortOrder *int32 `json:"sortOrder,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MappedType MappedType
 
 // NewMappedType instantiates a new MappedType object
 // This constructor will assign default values to properties that have it defined,
@@ -274,7 +277,38 @@ func (o MappedType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SortOrder) {
 		toSerialize["sortOrder"] = o.SortOrder
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MappedType) UnmarshalJSON(data []byte) (err error) {
+	varMappedType := _MappedType{}
+
+	err = json.Unmarshal(data, &varMappedType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MappedType(varMappedType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "table")
+		delete(additionalProperties, "recIdField")
+		delete(additionalProperties, "glType")
+		delete(additionalProperties, "sortOrder")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMappedType struct {

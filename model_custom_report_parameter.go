@@ -26,7 +26,10 @@ type CustomReportParameter struct {
 	CaptionName *string `json:"captionName,omitempty"`
 	CustomReport *CustomReportReference `json:"customReport,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomReportParameter CustomReportParameter
 
 // NewCustomReportParameter instantiates a new CustomReportParameter object
 // This constructor will assign default values to properties that have it defined,
@@ -230,7 +233,37 @@ func (o CustomReportParameter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomReportParameter) UnmarshalJSON(data []byte) (err error) {
+	varCustomReportParameter := _CustomReportParameter{}
+
+	err = json.Unmarshal(data, &varCustomReportParameter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomReportParameter(varCustomReportParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "captionName")
+		delete(additionalProperties, "customReport")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomReportParameter struct {

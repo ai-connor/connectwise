@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type EmailOpened struct {
 	CampaignId NullableInt32 `json:"campaignId,omitempty"`
 	ContactId NullableInt32 `json:"contactId"`
 	DateOpened *time.Time `json:"dateOpened,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EmailOpened EmailOpened
@@ -200,6 +200,11 @@ func (o EmailOpened) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DateOpened) {
 		toSerialize["dateOpened"] = o.DateOpened
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -227,15 +232,23 @@ func (o *EmailOpened) UnmarshalJSON(data []byte) (err error) {
 
 	varEmailOpened := _EmailOpened{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEmailOpened)
+	err = json.Unmarshal(data, &varEmailOpened)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EmailOpened(varEmailOpened)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "campaignId")
+		delete(additionalProperties, "contactId")
+		delete(additionalProperties, "dateOpened")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

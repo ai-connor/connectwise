@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type ScheduleType struct {
 	Where *ServiceLocationReference `json:"where,omitempty"`
 	SystemFlag NullableBool `json:"systemFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleType ScheduleType
@@ -298,6 +298,11 @@ func (o ScheduleType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -326,15 +331,26 @@ func (o *ScheduleType) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleType := _ScheduleType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleType)
+	err = json.Unmarshal(data, &varScheduleType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleType(varScheduleType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "chargeCode")
+		delete(additionalProperties, "where")
+		delete(additionalProperties, "systemFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type DepartmentLocationInfo struct {
 	Location *SystemLocationReference `json:"location,omitempty"`
 	Department *SystemDepartmentReference `json:"department,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DepartmentLocationInfo DepartmentLocationInfo
 
 // NewDepartmentLocationInfo instantiates a new DepartmentLocationInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o DepartmentLocationInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DepartmentLocationInfo) UnmarshalJSON(data []byte) (err error) {
+	varDepartmentLocationInfo := _DepartmentLocationInfo{}
+
+	err = json.Unmarshal(data, &varDepartmentLocationInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DepartmentLocationInfo(varDepartmentLocationInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDepartmentLocationInfo struct {

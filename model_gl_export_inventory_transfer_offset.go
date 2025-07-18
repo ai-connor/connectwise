@@ -28,7 +28,10 @@ type GLExportInventoryTransferOffset struct {
 	Memo *string `json:"memo,omitempty"`
 	Description *string `json:"description,omitempty"`
 	GlTypeId *string `json:"glTypeId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportInventoryTransferOffset GLExportInventoryTransferOffset
 
 // NewGLExportInventoryTransferOffset instantiates a new GLExportInventoryTransferOffset object
 // This constructor will assign default values to properties that have it defined,
@@ -392,7 +395,41 @@ func (o GLExportInventoryTransferOffset) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.GlTypeId) {
 		toSerialize["glTypeId"] = o.GlTypeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportInventoryTransferOffset) UnmarshalJSON(data []byte) (err error) {
+	varGLExportInventoryTransferOffset := _GLExportInventoryTransferOffset{}
+
+	err = json.Unmarshal(data, &varGLExportInventoryTransferOffset)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportInventoryTransferOffset(varGLExportInventoryTransferOffset)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "documentType")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "glTypeId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportInventoryTransferOffset struct {

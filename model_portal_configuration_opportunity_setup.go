@@ -61,7 +61,10 @@ type PortalConfigurationOpportunitySetup struct {
 	ConfirmationEmailSubject *string `json:"confirmationEmailSubject,omitempty"`
 	ConfirmationEmailBody *string `json:"confirmationEmailBody,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PortalConfigurationOpportunitySetup PortalConfigurationOpportunitySetup
 
 // NewPortalConfigurationOpportunitySetup instantiates a new PortalConfigurationOpportunitySetup object
 // This constructor will assign default values to properties that have it defined,
@@ -1595,7 +1598,71 @@ func (o PortalConfigurationOpportunitySetup) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PortalConfigurationOpportunitySetup) UnmarshalJSON(data []byte) (err error) {
+	varPortalConfigurationOpportunitySetup := _PortalConfigurationOpportunitySetup{}
+
+	err = json.Unmarshal(data, &varPortalConfigurationOpportunitySetup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PortalConfigurationOpportunitySetup(varPortalConfigurationOpportunitySetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "opportunityStatusRecIDs")
+		delete(additionalProperties, "addAllOpportunityStatuses")
+		delete(additionalProperties, "removeAllOpportunityStatuses")
+		delete(additionalProperties, "opportunityTypeRecIDs")
+		delete(additionalProperties, "addAllOpportunityTypes")
+		delete(additionalProperties, "removeAllOpportunityTypes")
+		delete(additionalProperties, "restrictViewByOpportunityStatusFlag")
+		delete(additionalProperties, "restrictViewByOpportunityTypeFlag")
+		delete(additionalProperties, "acceptanceChangeStatusFlag")
+		delete(additionalProperties, "acceptanceCreateActivityFlag")
+		delete(additionalProperties, "acceptanceOpportunityStatus")
+		delete(additionalProperties, "acceptanceSendEmailFlag")
+		delete(additionalProperties, "acceptanceEmailFromFirstName")
+		delete(additionalProperties, "acceptanceEmailFromLastName")
+		delete(additionalProperties, "acceptanceEmailSubject")
+		delete(additionalProperties, "acceptanceEmailBody")
+		delete(additionalProperties, "acceptanceFromEmail")
+		delete(additionalProperties, "acceptanceEmailActivityType")
+		delete(additionalProperties, "acceptanceEmailAssignedByMember")
+		delete(additionalProperties, "rejectionChangeStatusFlag")
+		delete(additionalProperties, "rejectionCreateActivityFlag")
+		delete(additionalProperties, "rejectionOpportunityStatus")
+		delete(additionalProperties, "rejectionSendEmailFlag")
+		delete(additionalProperties, "rejectionEmailFromFirstName")
+		delete(additionalProperties, "rejectionEmailFromLastName")
+		delete(additionalProperties, "rejectionFromEmail")
+		delete(additionalProperties, "rejectionEmailSubject")
+		delete(additionalProperties, "rejectionEmailBody")
+		delete(additionalProperties, "rejectionEmailActivityType")
+		delete(additionalProperties, "rejectionEmailAssignedByMember")
+		delete(additionalProperties, "confirmationSendEmailFlag")
+		delete(additionalProperties, "confirmationEmailUseDefaultCompanyEmailAddressFlag")
+		delete(additionalProperties, "confirmationEmailFromFirstName")
+		delete(additionalProperties, "confirmationEmailFromLastName")
+		delete(additionalProperties, "confirmationFromEmail")
+		delete(additionalProperties, "confirmationEmailSubject")
+		delete(additionalProperties, "confirmationEmailBody")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePortalConfigurationOpportunitySetup struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type MinimumStockByWarehouse struct {
 	Warehouse WarehouseReference `json:"warehouse"`
 	MinimumStock NullableInt32 `json:"minimumStock"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MinimumStockByWarehouse MinimumStockByWarehouse
@@ -180,6 +180,11 @@ func (o MinimumStockByWarehouse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -208,15 +213,23 @@ func (o *MinimumStockByWarehouse) UnmarshalJSON(data []byte) (err error) {
 
 	varMinimumStockByWarehouse := _MinimumStockByWarehouse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMinimumStockByWarehouse)
+	err = json.Unmarshal(data, &varMinimumStockByWarehouse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MinimumStockByWarehouse(varMinimumStockByWarehouse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "minimumStock")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

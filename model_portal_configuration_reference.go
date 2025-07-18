@@ -22,7 +22,10 @@ type PortalConfigurationReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PortalConfigurationReference PortalConfigurationReference
 
 // NewPortalConfigurationReference instantiates a new PortalConfigurationReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o PortalConfigurationReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PortalConfigurationReference) UnmarshalJSON(data []byte) (err error) {
+	varPortalConfigurationReference := _PortalConfigurationReference{}
+
+	err = json.Unmarshal(data, &varPortalConfigurationReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PortalConfigurationReference(varPortalConfigurationReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePortalConfigurationReference struct {

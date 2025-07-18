@@ -26,7 +26,10 @@ type ScheduleTypeInfo struct {
 	Where *ServiceLocationReference `json:"where,omitempty"`
 	SystemFlag NullableBool `json:"systemFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScheduleTypeInfo ScheduleTypeInfo
 
 // NewScheduleTypeInfo instantiates a new ScheduleTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -310,7 +313,39 @@ func (o ScheduleTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduleTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varScheduleTypeInfo := _ScheduleTypeInfo{}
+
+	err = json.Unmarshal(data, &varScheduleTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduleTypeInfo(varScheduleTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "chargeCode")
+		delete(additionalProperties, "where")
+		delete(additionalProperties, "systemFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduleTypeInfo struct {

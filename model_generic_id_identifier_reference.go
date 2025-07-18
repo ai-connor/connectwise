@@ -22,7 +22,10 @@ type GenericIdIdentifierReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Identifier *string `json:"identifier,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenericIdIdentifierReference GenericIdIdentifierReference
 
 // NewGenericIdIdentifierReference instantiates a new GenericIdIdentifierReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o GenericIdIdentifierReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenericIdIdentifierReference) UnmarshalJSON(data []byte) (err error) {
+	varGenericIdIdentifierReference := _GenericIdIdentifierReference{}
+
+	err = json.Unmarshal(data, &varGenericIdIdentifierReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenericIdIdentifierReference(varGenericIdIdentifierReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenericIdIdentifierReference struct {

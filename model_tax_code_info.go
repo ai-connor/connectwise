@@ -32,7 +32,10 @@ type TaxCodeInfo struct {
 	LevelFiveRate NullableFloat64 `json:"levelFiveRate,omitempty"`
 	LevelSixRate NullableFloat64 `json:"levelSixRate,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TaxCodeInfo TaxCodeInfo
 
 // NewTaxCodeInfo instantiates a new TaxCodeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -586,7 +589,45 @@ func (o TaxCodeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TaxCodeInfo) UnmarshalJSON(data []byte) (err error) {
+	varTaxCodeInfo := _TaxCodeInfo{}
+
+	err = json.Unmarshal(data, &varTaxCodeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TaxCodeInfo(varTaxCodeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "effectiveDate")
+		delete(additionalProperties, "cancelDate")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "levelOneRate")
+		delete(additionalProperties, "levelTwoRate")
+		delete(additionalProperties, "levelThreeRate")
+		delete(additionalProperties, "levelFourRate")
+		delete(additionalProperties, "levelFiveRate")
+		delete(additionalProperties, "levelSixRate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTaxCodeInfo struct {

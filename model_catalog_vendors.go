@@ -26,7 +26,10 @@ type CatalogVendors struct {
 	VendorSku *string `json:"vendorSku,omitempty"`
 	IsPreferredVendor *bool `json:"isPreferredVendor,omitempty"`
 	VendorName *string `json:"vendorName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CatalogVendors CatalogVendors
 
 // NewCatalogVendors instantiates a new CatalogVendors object
 // This constructor will assign default values to properties that have it defined,
@@ -275,7 +278,38 @@ func (o CatalogVendors) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VendorName) {
 		toSerialize["vendorName"] = o.VendorName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CatalogVendors) UnmarshalJSON(data []byte) (err error) {
+	varCatalogVendors := _CatalogVendors{}
+
+	err = json.Unmarshal(data, &varCatalogVendors)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CatalogVendors(varCatalogVendors)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "catalogItemId")
+		delete(additionalProperties, "vendorId")
+		delete(additionalProperties, "vendorSku")
+		delete(additionalProperties, "isPreferredVendor")
+		delete(additionalProperties, "vendorName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCatalogVendors struct {

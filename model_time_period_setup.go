@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type TimePeriodSetup struct {
 	LastDayFlag NullableBool `json:"lastDayFlag,omitempty"`
 	DaysPastEndDate NullableInt32 `json:"daysPastEndDate"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TimePeriodSetup TimePeriodSetup
@@ -567,6 +567,11 @@ func (o TimePeriodSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -599,15 +604,33 @@ func (o *TimePeriodSetup) UnmarshalJSON(data []byte) (err error) {
 
 	varTimePeriodSetup := _TimePeriodSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTimePeriodSetup)
+	err = json.Unmarshal(data, &varTimePeriodSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TimePeriodSetup(varTimePeriodSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "periodApplyTo")
+		delete(additionalProperties, "year")
+		delete(additionalProperties, "numberFuturePeriods")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "firstPeriodEndDate")
+		delete(additionalProperties, "monthlyPeriodEnds")
+		delete(additionalProperties, "semiMonthlyFirstPeriod")
+		delete(additionalProperties, "semiMonthlySecondPeriod")
+		delete(additionalProperties, "semiMonthlyLastDayFlag")
+		delete(additionalProperties, "lastDayFlag")
+		delete(additionalProperties, "daysPastEndDate")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

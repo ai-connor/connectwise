@@ -28,7 +28,10 @@ type CwTimeZone struct {
 	// Determined based on system library value for specified timeZone.             Not able to be used in query params at this time.
 	DaylightSavingsFlag NullableBool `json:"daylightSavingsFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CwTimeZone CwTimeZone
 
 // NewCwTimeZone instantiates a new CwTimeZone object
 // This constructor will assign default values to properties that have it defined,
@@ -312,7 +315,39 @@ func (o CwTimeZone) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CwTimeZone) UnmarshalJSON(data []byte) (err error) {
+	varCwTimeZone := _CwTimeZone{}
+
+	err = json.Unmarshal(data, &varCwTimeZone)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CwTimeZone(varCwTimeZone)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "offset")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "daylightSavingsFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCwTimeZone struct {

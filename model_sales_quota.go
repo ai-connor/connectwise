@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -54,6 +53,7 @@ type SalesQuota struct {
 	DecemberMargin NullableFloat64 `json:"decemberMargin,omitempty"`
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SalesQuota SalesQuota
@@ -1472,6 +1472,11 @@ func (o SalesQuota) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1500,15 +1505,52 @@ func (o *SalesQuota) UnmarshalJSON(data []byte) (err error) {
 
 	varSalesQuota := _SalesQuota{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSalesQuota)
+	err = json.Unmarshal(data, &varSalesQuota)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SalesQuota(varSalesQuota)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "forecastYear")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "subCategory")
+		delete(additionalProperties, "januaryRevenue")
+		delete(additionalProperties, "januaryMargin")
+		delete(additionalProperties, "februaryRevenue")
+		delete(additionalProperties, "februaryMargin")
+		delete(additionalProperties, "marchRevenue")
+		delete(additionalProperties, "marchMargin")
+		delete(additionalProperties, "aprilRevenue")
+		delete(additionalProperties, "aprilMargin")
+		delete(additionalProperties, "mayRevenue")
+		delete(additionalProperties, "mayMargin")
+		delete(additionalProperties, "juneRevenue")
+		delete(additionalProperties, "juneMargin")
+		delete(additionalProperties, "julyRevenue")
+		delete(additionalProperties, "julyMargin")
+		delete(additionalProperties, "augustRevenue")
+		delete(additionalProperties, "augustMargin")
+		delete(additionalProperties, "septemberRevenue")
+		delete(additionalProperties, "septemberMargin")
+		delete(additionalProperties, "octoberRevenue")
+		delete(additionalProperties, "octoberMargin")
+		delete(additionalProperties, "novemberRevenue")
+		delete(additionalProperties, "novemberMargin")
+		delete(additionalProperties, "decemberRevenue")
+		delete(additionalProperties, "decemberMargin")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

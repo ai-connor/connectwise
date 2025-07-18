@@ -25,7 +25,10 @@ type Version struct {
 	Revision *int32 `json:"revision,omitempty"`
 	MajorRevision *int32 `json:"majorRevision,omitempty"`
 	MinorRevision *int32 `json:"minorRevision,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Version Version
 
 // NewVersion instantiates a new Version object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o Version) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MinorRevision) {
 		toSerialize["minorRevision"] = o.MinorRevision
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Version) UnmarshalJSON(data []byte) (err error) {
+	varVersion := _Version{}
+
+	err = json.Unmarshal(data, &varVersion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Version(varVersion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "major")
+		delete(additionalProperties, "minor")
+		delete(additionalProperties, "build")
+		delete(additionalProperties, "revision")
+		delete(additionalProperties, "majorRevision")
+		delete(additionalProperties, "minorRevision")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVersion struct {

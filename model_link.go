@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type Link struct {
 	Url *string `json:"url,omitempty"`
 	ScreenLink NullableString `json:"screenLink,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Link Link
@@ -281,6 +281,11 @@ func (o Link) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -308,15 +313,25 @@ func (o *Link) UnmarshalJSON(data []byte) (err error) {
 
 	varLink := _Link{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLink)
+	err = json.Unmarshal(data, &varLink)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Link(varLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "tableReferenceId")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "screenLink")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

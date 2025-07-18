@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type SubCategory struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Category ProductCategoryReference `json:"category"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubCategory SubCategory
@@ -308,6 +308,11 @@ func (o SubCategory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -336,15 +341,26 @@ func (o *SubCategory) UnmarshalJSON(data []byte) (err error) {
 
 	varSubCategory := _SubCategory{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubCategory)
+	err = json.Unmarshal(data, &varSubCategory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubCategory(varSubCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "integrationXref")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -24,7 +24,10 @@ type BillingStatusInfo struct {
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BillingStatusInfo BillingStatusInfo
 
 // NewBillingStatusInfo instantiates a new BillingStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -248,7 +251,37 @@ func (o BillingStatusInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BillingStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varBillingStatusInfo := _BillingStatusInfo{}
+
+	err = json.Unmarshal(data, &varBillingStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BillingStatusInfo(varBillingStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBillingStatusInfo struct {

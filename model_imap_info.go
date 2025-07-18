@@ -23,7 +23,10 @@ type ImapInfo struct {
 	Name *string `json:"name,omitempty"`
 	EmailConnector *EmailConnectorReference `json:"emailConnector,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ImapInfo ImapInfo
 
 // NewImapInfo instantiates a new ImapInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o ImapInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ImapInfo) UnmarshalJSON(data []byte) (err error) {
+	varImapInfo := _ImapInfo{}
+
+	err = json.Unmarshal(data, &varImapInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ImapInfo(varImapInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "emailConnector")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableImapInfo struct {

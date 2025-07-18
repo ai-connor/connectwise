@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -85,6 +84,7 @@ type PurchaseOrder struct {
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PurchaseOrder PurchaseOrder
@@ -2144,6 +2144,11 @@ func (o PurchaseOrder) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2173,15 +2178,74 @@ func (o *PurchaseOrder) UnmarshalJSON(data []byte) (err error) {
 
 	varPurchaseOrder := _PurchaseOrder{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPurchaseOrder)
+	err = json.Unmarshal(data, &varPurchaseOrder)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PurchaseOrder(varPurchaseOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "businessUnit")
+		delete(additionalProperties, "cancelReason")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "closedBy")
+		delete(additionalProperties, "customerCity")
+		delete(additionalProperties, "customerCompany")
+		delete(additionalProperties, "customerContact")
+		delete(additionalProperties, "customerCountry")
+		delete(additionalProperties, "customerExtension")
+		delete(additionalProperties, "customerName")
+		delete(additionalProperties, "customerPhone")
+		delete(additionalProperties, "customerSite")
+		delete(additionalProperties, "customerSiteName")
+		delete(additionalProperties, "customerState")
+		delete(additionalProperties, "customerStreetLine1")
+		delete(additionalProperties, "customerStreetLine2")
+		delete(additionalProperties, "customerZip")
+		delete(additionalProperties, "dateClosed")
+		delete(additionalProperties, "dropShipCustomerFlag")
+		delete(additionalProperties, "enteredBy")
+		delete(additionalProperties, "freightCost")
+		delete(additionalProperties, "freightPackingSlip")
+		delete(additionalProperties, "freightTaxTotal")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "poDate")
+		delete(additionalProperties, "poNumber")
+		delete(additionalProperties, "salesTax")
+		delete(additionalProperties, "shipmentDate")
+		delete(additionalProperties, "shipmentMethod")
+		delete(additionalProperties, "shippingInstructions")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "subTotal")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "taxFreightFlag")
+		delete(additionalProperties, "taxPoFlag")
+		delete(additionalProperties, "terms")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "trackingNumber")
+		delete(additionalProperties, "updateShipmentInfo")
+		delete(additionalProperties, "updateVendorOrderNumber")
+		delete(additionalProperties, "vendorCompany")
+		delete(additionalProperties, "vendorContact")
+		delete(additionalProperties, "vendorInvoiceDate")
+		delete(additionalProperties, "vendorInvoiceNumber")
+		delete(additionalProperties, "vendorOrderNumber")
+		delete(additionalProperties, "vendorSite")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseContact")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

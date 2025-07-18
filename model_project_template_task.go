@@ -31,7 +31,10 @@ type ProjectTemplateTask struct {
 	Summary *string `json:"summary,omitempty"`
 	Code *ServiceCodeReference `json:"code,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectTemplateTask ProjectTemplateTask
 
 // NewProjectTemplateTask instantiates a new ProjectTemplateTask object
 // This constructor will assign default values to properties that have it defined,
@@ -520,7 +523,44 @@ func (o ProjectTemplateTask) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectTemplateTask) UnmarshalJSON(data []byte) (err error) {
+	varProjectTemplateTask := _ProjectTemplateTask{}
+
+	err = json.Unmarshal(data, &varProjectTemplateTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectTemplateTask(varProjectTemplateTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "ticketId")
+		delete(additionalProperties, "sequence")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectTemplateTask struct {

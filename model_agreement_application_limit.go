@@ -22,7 +22,10 @@ type AgreementApplicationLimit struct {
 	Id *int32 `json:"id,omitempty"`
 	Tag *string `json:"tag,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementApplicationLimit AgreementApplicationLimit
 
 // NewAgreementApplicationLimit instantiates a new AgreementApplicationLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o AgreementApplicationLimit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementApplicationLimit) UnmarshalJSON(data []byte) (err error) {
+	varAgreementApplicationLimit := _AgreementApplicationLimit{}
+
+	err = json.Unmarshal(data, &varAgreementApplicationLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementApplicationLimit(varAgreementApplicationLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "tag")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementApplicationLimit struct {

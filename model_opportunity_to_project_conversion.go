@@ -34,7 +34,10 @@ type OpportunityToProjectConversion struct {
 	IncludeNoteIds []int32 `json:"includeNoteIds,omitempty"`
 	IncludeDocumentIds []int32 `json:"includeDocumentIds,omitempty"`
 	IncludeProductIds []int32 `json:"includeProductIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpportunityToProjectConversion OpportunityToProjectConversion
 
 // NewOpportunityToProjectConversion instantiates a new OpportunityToProjectConversion object
 // This constructor will assign default values to properties that have it defined,
@@ -638,7 +641,47 @@ func (o OpportunityToProjectConversion) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.IncludeProductIds) {
 		toSerialize["includeProductIds"] = o.IncludeProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpportunityToProjectConversion) UnmarshalJSON(data []byte) (err error) {
+	varOpportunityToProjectConversion := _OpportunityToProjectConversion{}
+
+	err = json.Unmarshal(data, &varOpportunityToProjectConversion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpportunityToProjectConversion(varOpportunityToProjectConversion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "projectId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "manager")
+		delete(additionalProperties, "estimatedStart")
+		delete(additionalProperties, "estimatedEnd")
+		delete(additionalProperties, "includeAllNotesFlag")
+		delete(additionalProperties, "includeAllDocumentsFlag")
+		delete(additionalProperties, "includeAllProductsFlag")
+		delete(additionalProperties, "includeNoteIds")
+		delete(additionalProperties, "includeDocumentIds")
+		delete(additionalProperties, "includeProductIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpportunityToProjectConversion struct {

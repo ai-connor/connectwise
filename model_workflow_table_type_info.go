@@ -23,7 +23,10 @@ type WorkflowTableTypeInfo struct {
 	Identifier *string `json:"identifier,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WorkflowTableTypeInfo WorkflowTableTypeInfo
 
 // NewWorkflowTableTypeInfo instantiates a new WorkflowTableTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o WorkflowTableTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WorkflowTableTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varWorkflowTableTypeInfo := _WorkflowTableTypeInfo{}
+
+	err = json.Unmarshal(data, &varWorkflowTableTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WorkflowTableTypeInfo(varWorkflowTableTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWorkflowTableTypeInfo struct {

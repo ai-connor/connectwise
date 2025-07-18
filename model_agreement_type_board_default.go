@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type AgreementTypeBoardDefault struct {
 	ServiceType *ServiceTypeReference `json:"serviceType,omitempty"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AgreementTypeBoardDefault AgreementTypeBoardDefault
@@ -341,6 +341,11 @@ func (o AgreementTypeBoardDefault) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -368,15 +373,27 @@ func (o *AgreementTypeBoardDefault) UnmarshalJSON(data []byte) (err error) {
 
 	varAgreementTypeBoardDefault := _AgreementTypeBoardDefault{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAgreementTypeBoardDefault)
+	err = json.Unmarshal(data, &varAgreementTypeBoardDefault)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AgreementTypeBoardDefault(varAgreementTypeBoardDefault)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "serviceType")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

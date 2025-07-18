@@ -24,7 +24,10 @@ type MemberSsoSettingsReference struct {
 	UserName *string `json:"userName,omitempty"`
 	Email *string `json:"email,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberSsoSettingsReference MemberSsoSettingsReference
 
 // NewMemberSsoSettingsReference instantiates a new MemberSsoSettingsReference object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o MemberSsoSettingsReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberSsoSettingsReference) UnmarshalJSON(data []byte) (err error) {
+	varMemberSsoSettingsReference := _MemberSsoSettingsReference{}
+
+	err = json.Unmarshal(data, &varMemberSsoSettingsReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberSsoSettingsReference(varMemberSsoSettingsReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "ssoUserId")
+		delete(additionalProperties, "userName")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberSsoSettingsReference struct {

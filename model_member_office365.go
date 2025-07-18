@@ -21,7 +21,10 @@ var _ MappedNullable = &MemberOffice365{}
 type MemberOffice365 struct {
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberOffice365 MemberOffice365
 
 // NewMemberOffice365 instantiates a new MemberOffice365 object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o MemberOffice365) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberOffice365) UnmarshalJSON(data []byte) (err error) {
+	varMemberOffice365 := _MemberOffice365{}
+
+	err = json.Unmarshal(data, &varMemberOffice365)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberOffice365(varMemberOffice365)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberOffice365 struct {

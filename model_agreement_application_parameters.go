@@ -36,7 +36,10 @@ type AgreementApplicationParameters struct {
 	PrepayFlag *bool `json:"prepayFlag,omitempty"`
 	AgrBillingCycle *AgreementApplicationBillingCycle `json:"agrBillingCycle,omitempty"`
 	UserDefinedFieldValues []UserDefinedFieldValueModel `json:"userDefinedFieldValues,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementApplicationParameters AgreementApplicationParameters
 
 // NewAgreementApplicationParameters instantiates a new AgreementApplicationParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -680,7 +683,49 @@ func (o AgreementApplicationParameters) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.UserDefinedFieldValues) {
 		toSerialize["userDefinedFieldValues"] = o.UserDefinedFieldValues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementApplicationParameters) UnmarshalJSON(data []byte) (err error) {
+	varAgreementApplicationParameters := _AgreementApplicationParameters{}
+
+	err = json.Unmarshal(data, &varAgreementApplicationParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementApplicationParameters(varAgreementApplicationParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationUnit")
+		delete(additionalProperties, "applicationLimit")
+		delete(additionalProperties, "applicationLimitAmount")
+		delete(additionalProperties, "availablePer")
+		delete(additionalProperties, "coversTimeFlag")
+		delete(additionalProperties, "coversExpensesFlag")
+		delete(additionalProperties, "coversProductsFlag")
+		delete(additionalProperties, "coversTaxFlag")
+		delete(additionalProperties, "carryoverUnusedFlag")
+		delete(additionalProperties, "carryOverDays")
+		delete(additionalProperties, "allowOverrunsFlag")
+		delete(additionalProperties, "overrunLimit")
+		delete(additionalProperties, "agreementExpiresFlag")
+		delete(additionalProperties, "chargeAdjustmentsFlag")
+		delete(additionalProperties, "prepayFlag")
+		delete(additionalProperties, "agrBillingCycle")
+		delete(additionalProperties, "userDefinedFieldValues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementApplicationParameters struct {

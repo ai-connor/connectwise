@@ -22,7 +22,10 @@ type ConfigurationTypeQuestionReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Question *string `json:"question,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigurationTypeQuestionReference ConfigurationTypeQuestionReference
 
 // NewConfigurationTypeQuestionReference instantiates a new ConfigurationTypeQuestionReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o ConfigurationTypeQuestionReference) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigurationTypeQuestionReference) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationTypeQuestionReference := _ConfigurationTypeQuestionReference{}
+
+	err = json.Unmarshal(data, &varConfigurationTypeQuestionReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigurationTypeQuestionReference(varConfigurationTypeQuestionReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "question")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigurationTypeQuestionReference struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type QuoteLink struct {
 	NewWindowFlag NullableBool `json:"newWindowFlag,omitempty"`
 	AsioQuotingFlag NullableBool `json:"asioQuotingFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QuoteLink QuoteLink
@@ -326,6 +326,11 @@ func (o QuoteLink) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -353,15 +358,26 @@ func (o *QuoteLink) UnmarshalJSON(data []byte) (err error) {
 
 	varQuoteLink := _QuoteLink{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varQuoteLink)
+	err = json.Unmarshal(data, &varQuoteLink)
 
 	if err != nil {
 		return err
 	}
 
 	*o = QuoteLink(varQuoteLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "link")
+		delete(additionalProperties, "allLocationsFlag")
+		delete(additionalProperties, "newWindowFlag")
+		delete(additionalProperties, "asioQuotingFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

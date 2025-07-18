@@ -22,7 +22,10 @@ type ChargeCodeReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ChargeCodeReference ChargeCodeReference
 
 // NewChargeCodeReference instantiates a new ChargeCodeReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o ChargeCodeReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ChargeCodeReference) UnmarshalJSON(data []byte) (err error) {
+	varChargeCodeReference := _ChargeCodeReference{}
+
+	err = json.Unmarshal(data, &varChargeCodeReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ChargeCodeReference(varChargeCodeReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableChargeCodeReference struct {

@@ -24,7 +24,10 @@ type ProductDetach struct {
 	RemoveFromOpportunity *bool `json:"removeFromOpportunity,omitempty"`
 	RemoveFromSalesOrder *bool `json:"removeFromSalesOrder,omitempty"`
 	RemoveFromProject *bool `json:"removeFromProject,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductDetach ProductDetach
 
 // NewProductDetach instantiates a new ProductDetach object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o ProductDetach) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemoveFromProject) {
 		toSerialize["removeFromProject"] = o.RemoveFromProject
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductDetach) UnmarshalJSON(data []byte) (err error) {
+	varProductDetach := _ProductDetach{}
+
+	err = json.Unmarshal(data, &varProductDetach)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductDetach(varProductDetach)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "removeFromTicket")
+		delete(additionalProperties, "removeFromInvoice")
+		delete(additionalProperties, "removeFromOpportunity")
+		delete(additionalProperties, "removeFromSalesOrder")
+		delete(additionalProperties, "removeFromProject")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductDetach struct {

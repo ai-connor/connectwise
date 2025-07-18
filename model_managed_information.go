@@ -26,7 +26,10 @@ type ManagedInformation struct {
 	ChildConfigurationsMatchingOn *string `json:"childConfigurationsMatchingOn,omitempty"`
 	InactivateConfigurationsMatchingOn *string `json:"inactivateConfigurationsMatchingOn,omitempty"`
 	InactiveConfigurationStatusId *int32 `json:"inactiveConfigurationStatusId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManagedInformation ManagedInformation
 
 // NewManagedInformation instantiates a new ManagedInformation object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +303,39 @@ func (o ManagedInformation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InactiveConfigurationStatusId) {
 		toSerialize["inactiveConfigurationStatusId"] = o.InactiveConfigurationStatusId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManagedInformation) UnmarshalJSON(data []byte) (err error) {
+	varManagedInformation := _ManagedInformation{}
+
+	err = json.Unmarshal(data, &varManagedInformation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManagedInformation(varManagedInformation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "managementSolutionName")
+		delete(additionalProperties, "managedIdentifier")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "childConfigurationsMatchingOn")
+		delete(additionalProperties, "inactivateConfigurationsMatchingOn")
+		delete(additionalProperties, "inactiveConfigurationStatusId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManagedInformation struct {

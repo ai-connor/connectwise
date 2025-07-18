@@ -30,7 +30,10 @@ type ApiRequest struct {
 	MiscProperties map[string]map[string]interface{} `json:"miscProperties,omitempty"`
 	MemberContext *string `json:"memberContext,omitempty"`
 	UpdateOnlyCesProperties *bool `json:"updateOnlyCesProperties,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApiRequest ApiRequest
 
 // NewApiRequest instantiates a new ApiRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -464,7 +467,43 @@ func (o ApiRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateOnlyCesProperties) {
 		toSerialize["updateOnlyCesProperties"] = o.UpdateOnlyCesProperties
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApiRequest) UnmarshalJSON(data []byte) (err error) {
+	varApiRequest := _ApiRequest{}
+
+	err = json.Unmarshal(data, &varApiRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApiRequest(varApiRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "entity")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "page")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "miscProperties")
+		delete(additionalProperties, "memberContext")
+		delete(additionalProperties, "updateOnlyCesProperties")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApiRequest struct {

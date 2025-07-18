@@ -21,7 +21,10 @@ var _ MappedNullable = &ReportDataResponse{}
 type ReportDataResponse struct {
 	ColumnDefinitions []map[string]ReportColumnDefinition `json:"column_definitions,omitempty"`
 	RowValues [][]map[string]interface{} `json:"row_values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReportDataResponse ReportDataResponse
 
 // NewReportDataResponse instantiates a new ReportDataResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o ReportDataResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RowValues) {
 		toSerialize["row_values"] = o.RowValues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReportDataResponse) UnmarshalJSON(data []byte) (err error) {
+	varReportDataResponse := _ReportDataResponse{}
+
+	err = json.Unmarshal(data, &varReportDataResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReportDataResponse(varReportDataResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "column_definitions")
+		delete(additionalProperties, "row_values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReportDataResponse struct {

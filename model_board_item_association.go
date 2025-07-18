@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type BoardItemAssociation struct {
 	Item *ServiceItemReference `json:"item,omitempty"`
 	Board *BoardReference `json:"board,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BoardItemAssociation BoardItemAssociation
@@ -316,6 +316,11 @@ func (o BoardItemAssociation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -343,15 +348,26 @@ func (o *BoardItemAssociation) UnmarshalJSON(data []byte) (err error) {
 
 	varBoardItemAssociation := _BoardItemAssociation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBoardItemAssociation)
+	err = json.Unmarshal(data, &varBoardItemAssociation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BoardItemAssociation(varBoardItemAssociation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "subTypeAssociationIds")
+		delete(additionalProperties, "addAllSubTypesFlag")
+		delete(additionalProperties, "removeAllSubTypesFlag")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

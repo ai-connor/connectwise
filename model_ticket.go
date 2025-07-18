@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -161,6 +160,7 @@ type Ticket struct {
 	ResolvedBy *string `json:"resolvedBy,omitempty"`
 	MinutesWaiting NullableInt32 `json:"minutesWaiting,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Ticket Ticket
@@ -4784,6 +4784,11 @@ func (o Ticket) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -4812,15 +4817,135 @@ func (o *Ticket) UnmarshalJSON(data []byte) (err error) {
 
 	varTicket := _Ticket{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTicket)
+	err = json.Unmarshal(data, &varTicket)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Ticket(varTicket)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "recordType")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "siteName")
+		delete(additionalProperties, "addressLine1")
+		delete(additionalProperties, "addressLine2")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "stateIdentifier")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "contactName")
+		delete(additionalProperties, "contactPhoneNumber")
+		delete(additionalProperties, "contactPhoneExtension")
+		delete(additionalProperties, "contactEmailAddress")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "subType")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "team")
+		delete(additionalProperties, "owner")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "serviceLocation")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "requiredDate")
+		delete(additionalProperties, "budgetHours")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "impact")
+		delete(additionalProperties, "externalXRef")
+		delete(additionalProperties, "poNumber")
+		delete(additionalProperties, "knowledgeBaseCategoryId")
+		delete(additionalProperties, "knowledgeBaseSubCategoryId")
+		delete(additionalProperties, "allowAllClientsPortalView")
+		delete(additionalProperties, "customerUpdatedFlag")
+		delete(additionalProperties, "automaticEmailContactFlag")
+		delete(additionalProperties, "automaticEmailResourceFlag")
+		delete(additionalProperties, "automaticEmailCcFlag")
+		delete(additionalProperties, "automaticEmailCc")
+		delete(additionalProperties, "initialDescription")
+		delete(additionalProperties, "initialInternalAnalysis")
+		delete(additionalProperties, "initialResolution")
+		delete(additionalProperties, "initialDescriptionFrom")
+		delete(additionalProperties, "contactEmailLookup")
+		delete(additionalProperties, "processNotifications")
+		delete(additionalProperties, "skipCallback")
+		delete(additionalProperties, "closedDate")
+		delete(additionalProperties, "closedBy")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "actualHours")
+		delete(additionalProperties, "approved")
+		delete(additionalProperties, "estimatedExpenseCost")
+		delete(additionalProperties, "estimatedExpenseRevenue")
+		delete(additionalProperties, "estimatedProductCost")
+		delete(additionalProperties, "estimatedProductRevenue")
+		delete(additionalProperties, "estimatedTimeCost")
+		delete(additionalProperties, "estimatedTimeRevenue")
+		delete(additionalProperties, "billingMethod")
+		delete(additionalProperties, "billingAmount")
+		delete(additionalProperties, "hourlyRate")
+		delete(additionalProperties, "subBillingMethod")
+		delete(additionalProperties, "subBillingAmount")
+		delete(additionalProperties, "subDateAccepted")
+		delete(additionalProperties, "dateResolved")
+		delete(additionalProperties, "dateResplan")
+		delete(additionalProperties, "dateResponded")
+		delete(additionalProperties, "resolveMinutes")
+		delete(additionalProperties, "resPlanMinutes")
+		delete(additionalProperties, "respondMinutes")
+		delete(additionalProperties, "isInSla")
+		delete(additionalProperties, "knowledgeBaseLinkId")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "parentTicketId")
+		delete(additionalProperties, "hasChildTicket")
+		delete(additionalProperties, "hasMergedChildTicketFlag")
+		delete(additionalProperties, "knowledgeBaseLinkType")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "billExpenses")
+		delete(additionalProperties, "billProducts")
+		delete(additionalProperties, "predecessorType")
+		delete(additionalProperties, "predecessorId")
+		delete(additionalProperties, "predecessorClosedFlag")
+		delete(additionalProperties, "lagDays")
+		delete(additionalProperties, "lagNonworkingDaysFlag")
+		delete(additionalProperties, "estimatedStartDate")
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "slaStatus")
+		delete(additionalProperties, "requestForChangeFlag")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "mergedParentTicket")
+		delete(additionalProperties, "integratorTags")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "escalationStartDateUTC")
+		delete(additionalProperties, "escalationLevel")
+		delete(additionalProperties, "minutesBeforeWaiting")
+		delete(additionalProperties, "respondedSkippedMinutes")
+		delete(additionalProperties, "resplanSkippedMinutes")
+		delete(additionalProperties, "respondedHours")
+		delete(additionalProperties, "respondedBy")
+		delete(additionalProperties, "resplanHours")
+		delete(additionalProperties, "resplanBy")
+		delete(additionalProperties, "resolutionHours")
+		delete(additionalProperties, "resolvedBy")
+		delete(additionalProperties, "minutesWaiting")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

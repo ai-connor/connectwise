@@ -23,7 +23,10 @@ type LegacySubCategoryInfo struct {
 	Name *string `json:"name,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LegacySubCategoryInfo LegacySubCategoryInfo
 
 // NewLegacySubCategoryInfo instantiates a new LegacySubCategoryInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o LegacySubCategoryInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LegacySubCategoryInfo) UnmarshalJSON(data []byte) (err error) {
+	varLegacySubCategoryInfo := _LegacySubCategoryInfo{}
+
+	err = json.Unmarshal(data, &varLegacySubCategoryInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LegacySubCategoryInfo(varLegacySubCategoryInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLegacySubCategoryInfo struct {

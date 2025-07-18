@@ -29,7 +29,10 @@ type DocumentSetup struct {
 	//  Max length: 200;
 	TemplateOutputPath *string `json:"templateOutputPath,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DocumentSetup DocumentSetup
 
 // NewDocumentSetup instantiates a new DocumentSetup object
 // This constructor will assign default values to properties that have it defined,
@@ -323,7 +326,39 @@ func (o DocumentSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DocumentSetup) UnmarshalJSON(data []byte) (err error) {
+	varDocumentSetup := _DocumentSetup{}
+
+	err = json.Unmarshal(data, &varDocumentSetup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DocumentSetup(varDocumentSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "uploadAsLinkFlag")
+		delete(additionalProperties, "isPublicFlag")
+		delete(additionalProperties, "docPath")
+		delete(additionalProperties, "templatePath")
+		delete(additionalProperties, "templateOutputPath")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDocumentSetup struct {

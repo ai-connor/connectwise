@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -48,6 +47,7 @@ type TicketStopwatch struct {
 	ShowNotesInResolutionFlag NullableBool `json:"showNotesInResolutionFlag,omitempty"`
 	EmailNotesToContactFlag NullableBool `json:"emailNotesToContactFlag,omitempty"`
 	EmailNotesToResourcesFlag NullableBool `json:"emailNotesToResourcesFlag,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TicketStopwatch TicketStopwatch
@@ -1039,6 +1039,11 @@ func (o TicketStopwatch) ToMap() (map[string]interface{}, error) {
 	if o.EmailNotesToResourcesFlag.IsSet() {
 		toSerialize["emailNotesToResourcesFlag"] = o.EmailNotesToResourcesFlag.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1068,15 +1073,44 @@ func (o *TicketStopwatch) UnmarshalJSON(data []byte) (err error) {
 
 	varTicketStopwatch := _TicketStopwatch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTicketStopwatch)
+	err = json.Unmarshal(data, &varTicketStopwatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TicketStopwatch(varTicketStopwatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "dateEntered")
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "serviceStatus")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "ticketMobileGuid")
+		delete(additionalProperties, "totalPauseTime")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "showNotesInDiscussionFlag")
+		delete(additionalProperties, "showNotesInInternalFlag")
+		delete(additionalProperties, "showNotesInResolutionFlag")
+		delete(additionalProperties, "emailNotesToContactFlag")
+		delete(additionalProperties, "emailNotesToResourcesFlag")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

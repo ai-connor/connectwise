@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type OpportunityStatus struct {
 	EnteredBy *string `json:"enteredBy,omitempty"`
 	DateEntered *time.Time `json:"dateEntered,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OpportunityStatus OpportunityStatus
@@ -455,6 +455,11 @@ func (o OpportunityStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -482,15 +487,29 @@ func (o *OpportunityStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varOpportunityStatus := _OpportunityStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOpportunityStatus)
+	err = json.Unmarshal(data, &varOpportunityStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OpportunityStatus(varOpportunityStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "wonFlag")
+		delete(additionalProperties, "lostFlag")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "enteredBy")
+		delete(additionalProperties, "dateEntered")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

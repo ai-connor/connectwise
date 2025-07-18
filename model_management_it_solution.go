@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -57,6 +56,7 @@ type ManagementItSolution struct {
 	LevelVarDomain *string `json:"levelVarDomain,omitempty"`
 	NoDisplayFlag NullableBool `json:"noDisplayFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagementItSolution ManagementItSolution
@@ -892,6 +892,11 @@ func (o ManagementItSolution) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -920,15 +925,41 @@ func (o *ManagementItSolution) UnmarshalJSON(data []byte) (err error) {
 
 	varManagementItSolution := _ManagementItSolution{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagementItSolution)
+	err = json.Unmarshal(data, &varManagementItSolution)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagementItSolution(varManagementItSolution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "managementItSolutionType")
+		delete(additionalProperties, "managementSolutionName")
+		delete(additionalProperties, "managementServerUrl")
+		delete(additionalProperties, "webserviceOverrideUrl")
+		delete(additionalProperties, "portalOverrideLoginUrl")
+		delete(additionalProperties, "globalLoginFlag")
+		delete(additionalProperties, "globalLoginUsername")
+		delete(additionalProperties, "globalLoginPassword")
+		delete(additionalProperties, "usingSslFlag")
+		delete(additionalProperties, "nAbleUsername")
+		delete(additionalProperties, "nAblePassword")
+		delete(additionalProperties, "overrideWebServiceLocationFlag")
+		delete(additionalProperties, "overrideLoginLocationFlag")
+		delete(additionalProperties, "continuumApiUsername")
+		delete(additionalProperties, "continuumApiPassword")
+		delete(additionalProperties, "levelApiUsername")
+		delete(additionalProperties, "levelApiPassword")
+		delete(additionalProperties, "levelVarDomain")
+		delete(additionalProperties, "noDisplayFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

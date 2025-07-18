@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -53,6 +52,7 @@ type ProjectTemplateTicket struct {
 	WorkRole *WorkRoleReference `json:"workRole,omitempty"`
 	WorkType *WorkTypeReference `json:"workType,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectTemplateTicket ProjectTemplateTicket
@@ -1230,6 +1230,11 @@ func (o ProjectTemplateTicket) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1257,15 +1262,48 @@ func (o *ProjectTemplateTicket) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectTemplateTicket := _ProjectTemplateTicket{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectTemplateTicket)
+	err = json.Unmarshal(data, &varProjectTemplateTicket)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectTemplateTicket(varProjectTemplateTicket)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "projectTemplateId")
+		delete(additionalProperties, "projectTemplatePhaseId")
+		delete(additionalProperties, "lineNumber")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "projectTemplatePhaseCwId")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "internalAnalysis")
+		delete(additionalProperties, "resolution")
+		delete(additionalProperties, "budgetHours")
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "wbsCode")
+		delete(additionalProperties, "billSeparatelyFlag")
+		delete(additionalProperties, "markAsMilestoneFlag")
+		delete(additionalProperties, "recordType")
+		delete(additionalProperties, "pmTmpProjectRecID")
+		delete(additionalProperties, "predecessorType")
+		delete(additionalProperties, "predecessorId")
+		delete(additionalProperties, "predecessorClosedFlag")
+		delete(additionalProperties, "lagDays")
+		delete(additionalProperties, "lagNonworkingDaysFlag")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

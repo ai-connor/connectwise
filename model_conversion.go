@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type Conversion struct {
 	UomType UnitOfMeasureReference `json:"uomType"`
 	ParentUOM *UnitOfMeasureReference `json:"parentUOM,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Conversion Conversion
@@ -233,6 +233,11 @@ func (o Conversion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -260,15 +265,24 @@ func (o *Conversion) UnmarshalJSON(data []byte) (err error) {
 
 	varConversion := _Conversion{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConversion)
+	err = json.Unmarshal(data, &varConversion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Conversion(varConversion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "uomType")
+		delete(additionalProperties, "parentUOM")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

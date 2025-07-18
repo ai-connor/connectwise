@@ -30,7 +30,10 @@ type GLExportAdjustmentTransactionDetail struct {
 	InventoryAccountNumber *string `json:"inventoryAccountNumber,omitempty"`
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	ProductAccountNumber *string `json:"productAccountNumber,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportAdjustmentTransactionDetail GLExportAdjustmentTransactionDetail
 
 // NewGLExportAdjustmentTransactionDetail instantiates a new GLExportAdjustmentTransactionDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -474,7 +477,43 @@ func (o GLExportAdjustmentTransactionDetail) ToMap() (map[string]interface{}, er
 	if !IsNil(o.ProductAccountNumber) {
 		toSerialize["productAccountNumber"] = o.ProductAccountNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportAdjustmentTransactionDetail) UnmarshalJSON(data []byte) (err error) {
+	varGLExportAdjustmentTransactionDetail := _GLExportAdjustmentTransactionDetail{}
+
+	err = json.Unmarshal(data, &varGLExportAdjustmentTransactionDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportAdjustmentTransactionDetail(varGLExportAdjustmentTransactionDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "costAccountNumber")
+		delete(additionalProperties, "inventoryAccountNumber")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "productAccountNumber")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportAdjustmentTransactionDetail struct {

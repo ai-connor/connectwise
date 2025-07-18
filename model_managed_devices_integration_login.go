@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ManagedDevicesIntegrationLogin struct {
 	Password *string `json:"password,omitempty"`
 	Member MemberReference `json:"member"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagedDevicesIntegrationLogin ManagedDevicesIntegrationLogin
@@ -252,6 +252,11 @@ func (o ManagedDevicesIntegrationLogin) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -280,15 +285,25 @@ func (o *ManagedDevicesIntegrationLogin) UnmarshalJSON(data []byte) (err error) 
 
 	varManagedDevicesIntegrationLogin := _ManagedDevicesIntegrationLogin{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagedDevicesIntegrationLogin)
+	err = json.Unmarshal(data, &varManagedDevicesIntegrationLogin)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagedDevicesIntegrationLogin(varManagedDevicesIntegrationLogin)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "managedDevicesIntegration")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

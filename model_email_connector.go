@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -56,6 +55,7 @@ type EmailConnector struct {
 	InboundTicketMailboxId *string `json:"inboundTicketMailboxId,omitempty"`
 	UseEmailMessageIdFlag NullableBool `json:"useEmailMessageIdFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EmailConnector EmailConnector
@@ -1270,6 +1270,11 @@ func (o EmailConnector) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1299,15 +1304,51 @@ func (o *EmailConnector) UnmarshalJSON(data []byte) (err error) {
 
 	varEmailConnector := _EmailConnector{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEmailConnector)
+	err = json.Unmarshal(data, &varEmailConnector)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EmailConnector(varEmailConnector)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "emailServerType")
+		delete(additionalProperties, "imapSetup")
+		delete(additionalProperties, "office365EmailSetup")
+		delete(additionalProperties, "asio365EmailSetup")
+		delete(additionalProperties, "googleEmailSetup")
+		delete(additionalProperties, "serviceBoard")
+		delete(additionalProperties, "defaultCompany")
+		delete(additionalProperties, "defaultMember")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "emailNotifyFrom")
+		delete(additionalProperties, "bccEmailTo")
+		delete(additionalProperties, "emailErrorsTo")
+		delete(additionalProperties, "setEmailToDefaultContactFlag")
+		delete(additionalProperties, "noResponseFlag")
+		delete(additionalProperties, "neverRespondFlag")
+		delete(additionalProperties, "discardDuplicatesFlag")
+		delete(additionalProperties, "postRepliesToTicketFlag")
+		delete(additionalProperties, "createContactFlag")
+		delete(additionalProperties, "responseEmailForNew")
+		delete(additionalProperties, "responseEmailForExisting")
+		delete(additionalProperties, "sourceOverride")
+		delete(additionalProperties, "priorityOverride")
+		delete(additionalProperties, "typeOverride")
+		delete(additionalProperties, "subTypeOverride")
+		delete(additionalProperties, "itemOverride")
+		delete(additionalProperties, "statusOverride")
+		delete(additionalProperties, "addCcFlag")
+		delete(additionalProperties, "inboundTicketMailboxId")
+		delete(additionalProperties, "useEmailMessageIdFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

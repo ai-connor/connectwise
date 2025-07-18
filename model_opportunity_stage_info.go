@@ -25,7 +25,10 @@ type OpportunityStageInfo struct {
 	Color *string `json:"color,omitempty"`
 	SequenceNumber NullableInt32 `json:"sequenceNumber,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpportunityStageInfo OpportunityStageInfo
 
 // NewOpportunityStageInfo instantiates a new OpportunityStageInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -274,7 +277,38 @@ func (o OpportunityStageInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpportunityStageInfo) UnmarshalJSON(data []byte) (err error) {
+	varOpportunityStageInfo := _OpportunityStageInfo{}
+
+	err = json.Unmarshal(data, &varOpportunityStageInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpportunityStageInfo(varOpportunityStageInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "probability")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpportunityStageInfo struct {

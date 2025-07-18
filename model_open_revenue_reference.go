@@ -25,7 +25,10 @@ type OpenRevenueReference struct {
 	Margin NullableFloat64 `json:"margin,omitempty"`
 	Percentage NullableFloat64 `json:"percentage,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpenRevenueReference OpenRevenueReference
 
 // NewOpenRevenueReference instantiates a new OpenRevenueReference object
 // This constructor will assign default values to properties that have it defined,
@@ -314,7 +317,38 @@ func (o OpenRevenueReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpenRevenueReference) UnmarshalJSON(data []byte) (err error) {
+	varOpenRevenueReference := _OpenRevenueReference{}
+
+	err = json.Unmarshal(data, &varOpenRevenueReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpenRevenueReference(varOpenRevenueReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revenue")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "margin")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpenRevenueReference struct {

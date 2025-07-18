@@ -23,7 +23,10 @@ type GenericBoardTeamReference struct {
 	Name *string `json:"name,omitempty"`
 	IsProjectTeamFlag *bool `json:"isProjectTeamFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenericBoardTeamReference GenericBoardTeamReference
 
 // NewGenericBoardTeamReference instantiates a new GenericBoardTeamReference object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o GenericBoardTeamReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenericBoardTeamReference) UnmarshalJSON(data []byte) (err error) {
+	varGenericBoardTeamReference := _GenericBoardTeamReference{}
+
+	err = json.Unmarshal(data, &varGenericBoardTeamReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenericBoardTeamReference(varGenericBoardTeamReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "isProjectTeamFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenericBoardTeamReference struct {

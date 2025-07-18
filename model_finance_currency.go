@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type FinanceCurrency struct {
 	NumberOfDecimals NullableInt32 `json:"numberOfDecimals,omitempty"`
 	ReportFormat *string `json:"reportFormat,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FinanceCurrency FinanceCurrency
@@ -593,6 +593,11 @@ func (o FinanceCurrency) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -621,15 +626,33 @@ func (o *FinanceCurrency) UnmarshalJSON(data []byte) (err error) {
 
 	varFinanceCurrency := _FinanceCurrency{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFinanceCurrency)
+	err = json.Unmarshal(data, &varFinanceCurrency)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FinanceCurrency(varFinanceCurrency)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "currencyIdentifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "displayIdFlag")
+		delete(additionalProperties, "displaySymbolFlag")
+		delete(additionalProperties, "currencyCode")
+		delete(additionalProperties, "thousandsSeparator")
+		delete(additionalProperties, "decimalSeparator")
+		delete(additionalProperties, "negativeParenthesesFlag")
+		delete(additionalProperties, "rightAlign")
+		delete(additionalProperties, "numberOfDecimals")
+		delete(additionalProperties, "reportFormat")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

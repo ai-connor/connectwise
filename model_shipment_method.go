@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ShipmentMethod struct {
 	//  Max length: 200;
 	TrackingUrl *string `json:"trackingUrl,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ShipmentMethod ShipmentMethod
@@ -235,6 +235,11 @@ func (o ShipmentMethod) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -262,15 +267,24 @@ func (o *ShipmentMethod) UnmarshalJSON(data []byte) (err error) {
 
 	varShipmentMethod := _ShipmentMethod{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varShipmentMethod)
+	err = json.Unmarshal(data, &varShipmentMethod)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ShipmentMethod(varShipmentMethod)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "trackingUrl")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

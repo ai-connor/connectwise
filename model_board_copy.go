@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type BoardCopy struct {
 	Id int32 `json:"id"`
 	//  Max length: 50;
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BoardCopy BoardCopy
@@ -107,6 +107,11 @@ func (o BoardCopy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *BoardCopy) UnmarshalJSON(data []byte) (err error) {
 
 	varBoardCopy := _BoardCopy{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBoardCopy)
+	err = json.Unmarshal(data, &varBoardCopy)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BoardCopy(varBoardCopy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

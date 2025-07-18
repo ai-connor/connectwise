@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type ManagementNetworkSecurity struct {
 	//  Max length: 100;
 	Site string `json:"site"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagementNetworkSecurity ManagementNetworkSecurity
@@ -254,6 +254,11 @@ func (o ManagementNetworkSecurity) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -282,15 +287,25 @@ func (o *ManagementNetworkSecurity) UnmarshalJSON(data []byte) (err error) {
 
 	varManagementNetworkSecurity := _ManagementNetworkSecurity{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagementNetworkSecurity)
+	err = json.Unmarshal(data, &varManagementNetworkSecurity)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagementNetworkSecurity(varManagementNetworkSecurity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

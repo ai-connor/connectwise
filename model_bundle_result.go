@@ -27,7 +27,10 @@ type BundleResult struct {
 	Success *bool `json:"success,omitempty"`
 	StatusCode *int32 `json:"statusCode,omitempty"`
 	Error *ErrorResponseMessage `json:"error,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BundleResult BundleResult
 
 // NewBundleResult instantiates a new BundleResult object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +339,40 @@ func (o BundleResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BundleResult) UnmarshalJSON(data []byte) (err error) {
+	varBundleResult := _BundleResult{}
+
+	err = json.Unmarshal(data, &varBundleResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BundleResult(varBundleResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "resourceType")
+		delete(additionalProperties, "entities")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "success")
+		delete(additionalProperties, "statusCode")
+		delete(additionalProperties, "error")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBundleResult struct {

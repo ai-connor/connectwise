@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -113,6 +112,7 @@ type Agreement struct {
 	AgreementStatus NullableString `json:"agreementStatus,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Agreement Agreement
@@ -3398,6 +3398,11 @@ func (o Agreement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -3428,15 +3433,101 @@ func (o *Agreement) UnmarshalJSON(data []byte) (err error) {
 
 	varAgreement := _Agreement{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAgreement)
+	err = json.Unmarshal(data, &varAgreement)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Agreement(varAgreement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "subContractCompany")
+		delete(additionalProperties, "subContractContact")
+		delete(additionalProperties, "parentAgreement")
+		delete(additionalProperties, "customerPO")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "restrictLocationFlag")
+		delete(additionalProperties, "restrictDepartmentFlag")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "noEndingDateFlag")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "cancelledFlag")
+		delete(additionalProperties, "dateCancelled")
+		delete(additionalProperties, "reasonCancelled")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "workOrder")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "applicationUnits")
+		delete(additionalProperties, "applicationLimit")
+		delete(additionalProperties, "applicationCycle")
+		delete(additionalProperties, "applicationUnlimitedFlag")
+		delete(additionalProperties, "oneTimeFlag")
+		delete(additionalProperties, "coverAgreementTime")
+		delete(additionalProperties, "coverAgreementProduct")
+		delete(additionalProperties, "coverAgreementExpense")
+		delete(additionalProperties, "coverSalesTax")
+		delete(additionalProperties, "carryOverUnused")
+		delete(additionalProperties, "allowOverruns")
+		delete(additionalProperties, "expiredDays")
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "expireWhenZero")
+		delete(additionalProperties, "chargeToFirm")
+		delete(additionalProperties, "employeeCompRate")
+		delete(additionalProperties, "employeeCompNotExceed")
+		delete(additionalProperties, "compHourlyRate")
+		delete(additionalProperties, "compLimitAmount")
+		delete(additionalProperties, "billingCycle")
+		delete(additionalProperties, "billOneTimeFlag")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "invoicingCycle")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "billToContact")
+		delete(additionalProperties, "billToSite")
+		delete(additionalProperties, "billAmount")
+		delete(additionalProperties, "taxable")
+		delete(additionalProperties, "prorateFirstBill")
+		delete(additionalProperties, "billStartDate")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "restrictDownPayment")
+		delete(additionalProperties, "prorateFlag")
+		delete(additionalProperties, "invoiceProratedAdditionsFlag")
+		delete(additionalProperties, "invoiceDescription")
+		delete(additionalProperties, "topComment")
+		delete(additionalProperties, "bottomComment")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "projectType")
+		delete(additionalProperties, "invoiceTemplate")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "billExpenses")
+		delete(additionalProperties, "billProducts")
+		delete(additionalProperties, "billableTimeInvoice")
+		delete(additionalProperties, "billableExpenseInvoice")
+		delete(additionalProperties, "billableProductInvoice")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "periodType")
+		delete(additionalProperties, "autoInvoiceFlag")
+		delete(additionalProperties, "nextInvoiceDate")
+		delete(additionalProperties, "companyLocation")
+		delete(additionalProperties, "shipToCompany")
+		delete(additionalProperties, "shipToContact")
+		delete(additionalProperties, "shipToSite")
+		delete(additionalProperties, "agreementStatus")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

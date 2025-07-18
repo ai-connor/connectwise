@@ -22,7 +22,10 @@ type PatchOperation struct {
 	Op *string `json:"op,omitempty"`
 	Path *string `json:"path,omitempty"`
 	Value map[string]interface{} `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PatchOperation PatchOperation
 
 // NewPatchOperation instantiates a new PatchOperation object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o PatchOperation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PatchOperation) UnmarshalJSON(data []byte) (err error) {
+	varPatchOperation := _PatchOperation{}
+
+	err = json.Unmarshal(data, &varPatchOperation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PatchOperation(varPatchOperation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "op")
+		delete(additionalProperties, "path")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePatchOperation struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type AddressFormat struct {
 	AddAllCountries NullableBool `json:"addAllCountries,omitempty"`
 	RemoveAllCountries NullableBool `json:"removeAllCountries,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddressFormat AddressFormat
@@ -354,6 +354,11 @@ func (o AddressFormat) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -382,15 +387,27 @@ func (o *AddressFormat) UnmarshalJSON(data []byte) (err error) {
 
 	varAddressFormat := _AddressFormat{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddressFormat)
+	err = json.Unmarshal(data, &varAddressFormat)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddressFormat(varAddressFormat)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "countryIds")
+		delete(additionalProperties, "addAllCountries")
+		delete(additionalProperties, "removeAllCountries")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

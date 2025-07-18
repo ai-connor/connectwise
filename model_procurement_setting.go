@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -46,6 +45,7 @@ type ProcurementSetting struct {
 	NotificationForChangesInShippingInfoFlag NullableBool `json:"notificationForChangesInShippingInfoFlag,omitempty"`
 	//  Max length: 250;
 	ShippingInfoNotificationEmail *string `json:"shippingInfoNotificationEmail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProcurementSetting ProcurementSetting
@@ -926,6 +926,11 @@ func (o ProcurementSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ShippingInfoNotificationEmail) {
 		toSerialize["shippingInfoNotificationEmail"] = o.ShippingInfoNotificationEmail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -954,15 +959,40 @@ func (o *ProcurementSetting) UnmarshalJSON(data []byte) (err error) {
 
 	varProcurementSetting := _ProcurementSetting{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProcurementSetting)
+	err = json.Unmarshal(data, &varProcurementSetting)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProcurementSetting(varProcurementSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "startingPurchaseOrderNum")
+		delete(additionalProperties, "purchaseOrderPrefix")
+		delete(additionalProperties, "purchaseOrderSuffix")
+		delete(additionalProperties, "prefixSuffixType")
+		delete(additionalProperties, "disableCostUpdatesFlag")
+		delete(additionalProperties, "disableNegativeInventoryFlag")
+		delete(additionalProperties, "costingMethod")
+		delete(additionalProperties, "autoClosePurchaseOrderFlag")
+		delete(additionalProperties, "autoClosePurchaseOrderItemFlag")
+		delete(additionalProperties, "autoApprovePurchaseOrderFlag")
+		delete(additionalProperties, "taxPurchaseOrderFlag")
+		delete(additionalProperties, "taxFreightFlag")
+		delete(additionalProperties, "useVendorTaxCodeFlag")
+		delete(additionalProperties, "numDecimalPlaces")
+		delete(additionalProperties, "disableAutoPickFlag")
+		delete(additionalProperties, "defaultProductTaxableFlag")
+		delete(additionalProperties, "eoriNumber")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "notificationForChangesInShippingInfoFlag")
+		delete(additionalProperties, "shippingInfoNotificationEmail")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type OsGradeWeight struct {
 	OsGradeWeight *float64 `json:"osGradeWeight,omitempty"`
 	OsName *string `json:"osName,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OsGradeWeight OsGradeWeight
 
 // NewOsGradeWeight instantiates a new OsGradeWeight object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o OsGradeWeight) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OsGradeWeight) UnmarshalJSON(data []byte) (err error) {
+	varOsGradeWeight := _OsGradeWeight{}
+
+	err = json.Unmarshal(data, &varOsGradeWeight)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OsGradeWeight(varOsGradeWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "osGradeWeight")
+		delete(additionalProperties, "osName")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOsGradeWeight struct {

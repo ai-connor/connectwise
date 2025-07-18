@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -49,6 +48,7 @@ type Campaign struct {
 	ActualROI NullableFloat64 `json:"actualROI,omitempty"`
 	EmailsSent NullableInt32 `json:"emailsSent,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Campaign Campaign
@@ -1104,6 +1104,11 @@ func (o Campaign) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1134,15 +1139,45 @@ func (o *Campaign) UnmarshalJSON(data []byte) (err error) {
 
 	varCampaign := _Campaign{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCampaign)
+	err = json.Unmarshal(data, &varCampaign)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Campaign(varCampaign)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "subType")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "inactive")
+		delete(additionalProperties, "inactiveDaysAfterEnd")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "defaultGroup")
+		delete(additionalProperties, "marketingManagerDefaultTrackId")
+		delete(additionalProperties, "opportunityDefaultTrackId")
+		delete(additionalProperties, "impressions")
+		delete(additionalProperties, "budgetRevenue")
+		delete(additionalProperties, "budgetCost")
+		delete(additionalProperties, "actualCost")
+		delete(additionalProperties, "budgetGrossMargin")
+		delete(additionalProperties, "budgetROI")
+		delete(additionalProperties, "actualRevenue")
+		delete(additionalProperties, "actualGrossMargin")
+		delete(additionalProperties, "actualROI")
+		delete(additionalProperties, "emailsSent")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

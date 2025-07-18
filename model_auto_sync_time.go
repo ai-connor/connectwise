@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type AutoSyncTime struct {
 	SyncTime string `json:"syncTime"`
 	TimeZone TimeZoneSetupReference `json:"timeZone"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AutoSyncTime AutoSyncTime
@@ -178,6 +178,11 @@ func (o AutoSyncTime) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -206,15 +211,23 @@ func (o *AutoSyncTime) UnmarshalJSON(data []byte) (err error) {
 
 	varAutoSyncTime := _AutoSyncTime{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAutoSyncTime)
+	err = json.Unmarshal(data, &varAutoSyncTime)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AutoSyncTime(varAutoSyncTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "syncTime")
+		delete(additionalProperties, "timeZone")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

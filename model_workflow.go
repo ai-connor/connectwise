@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type Workflow struct {
 	Board *BoardReference `json:"board,omitempty"`
 	ConnectWiseID *string `json:"connectWiseID,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Workflow Workflow
@@ -547,6 +547,11 @@ func (o Workflow) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -575,15 +580,32 @@ func (o *Workflow) UnmarshalJSON(data []byte) (err error) {
 
 	varWorkflow := _Workflow{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWorkflow)
+	err = json.Unmarshal(data, &varWorkflow)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Workflow(varWorkflow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "tableType")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "activateFlag")
+		delete(additionalProperties, "batchInterval")
+		delete(additionalProperties, "batchFrequencyUnit")
+		delete(additionalProperties, "batchLastRan")
+		delete(additionalProperties, "batchSchedule")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

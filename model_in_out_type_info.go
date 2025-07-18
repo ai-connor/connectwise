@@ -22,7 +22,10 @@ type InOutTypeInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InOutTypeInfo InOutTypeInfo
 
 // NewInOutTypeInfo instantiates a new InOutTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o InOutTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InOutTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varInOutTypeInfo := _InOutTypeInfo{}
+
+	err = json.Unmarshal(data, &varInOutTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InOutTypeInfo(varInOutTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInOutTypeInfo struct {

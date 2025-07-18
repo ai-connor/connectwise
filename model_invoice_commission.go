@@ -37,7 +37,10 @@ type InvoiceCommission struct {
 	AdjustedDate *string `json:"adjustedDate,omitempty"`
 	AdjustmentReason *string `json:"adjustmentReason,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvoiceCommission InvoiceCommission
 
 // NewInvoiceCommission instantiates a new InvoiceCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -746,7 +749,50 @@ func (o InvoiceCommission) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvoiceCommission) UnmarshalJSON(data []byte) (err error) {
+	varInvoiceCommission := _InvoiceCommission{}
+
+	err = json.Unmarshal(data, &varInvoiceCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvoiceCommission(varInvoiceCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "percent")
+		delete(additionalProperties, "splitPercent")
+		delete(additionalProperties, "adjustment")
+		delete(additionalProperties, "netAmount")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "activity")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "salesOrder")
+		delete(additionalProperties, "adjustedBy")
+		delete(additionalProperties, "adjustedDate")
+		delete(additionalProperties, "adjustmentReason")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvoiceCommission struct {

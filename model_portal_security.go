@@ -21,7 +21,10 @@ var _ MappedNullable = &PortalSecurity{}
 type PortalSecurity struct {
 	Identifier *string `json:"identifier,omitempty"`
 	Enabled NullableBool `json:"enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PortalSecurity PortalSecurity
 
 // NewPortalSecurity instantiates a new PortalSecurity object
 // This constructor will assign default values to properties that have it defined,
@@ -130,7 +133,34 @@ func (o PortalSecurity) ToMap() (map[string]interface{}, error) {
 	if o.Enabled.IsSet() {
 		toSerialize["enabled"] = o.Enabled.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PortalSecurity) UnmarshalJSON(data []byte) (err error) {
+	varPortalSecurity := _PortalSecurity{}
+
+	err = json.Unmarshal(data, &varPortalSecurity)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PortalSecurity(varPortalSecurity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "enabled")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePortalSecurity struct {

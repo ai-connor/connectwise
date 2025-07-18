@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type LdapConfiguration struct {
 	// Domain Name of the server. Max length: 50;
 	Domain string `json:"domain"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LdapConfiguration LdapConfiguration
@@ -208,6 +208,11 @@ func (o LdapConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -237,15 +242,24 @@ func (o *LdapConfiguration) UnmarshalJSON(data []byte) (err error) {
 
 	varLdapConfiguration := _LdapConfiguration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLdapConfiguration)
+	err = json.Unmarshal(data, &varLdapConfiguration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LdapConfiguration(varLdapConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "server")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

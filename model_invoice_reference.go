@@ -26,7 +26,10 @@ type InvoiceReference struct {
 	InvoiceDate *string `json:"invoiceDate,omitempty"`
 	ChargeFirmFlag NullableBool `json:"chargeFirmFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvoiceReference InvoiceReference
 
 // NewInvoiceReference instantiates a new InvoiceReference object
 // This constructor will assign default values to properties that have it defined,
@@ -320,7 +323,39 @@ func (o InvoiceReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvoiceReference) UnmarshalJSON(data []byte) (err error) {
+	varInvoiceReference := _InvoiceReference{}
+
+	err = json.Unmarshal(data, &varInvoiceReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvoiceReference(varInvoiceReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "billingType")
+		delete(additionalProperties, "applyToType")
+		delete(additionalProperties, "invoiceDate")
+		delete(additionalProperties, "chargeFirmFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvoiceReference struct {

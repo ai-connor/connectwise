@@ -23,7 +23,10 @@ type OpportunityRatingInfo struct {
 	Name *string `json:"name,omitempty"`
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpportunityRatingInfo OpportunityRatingInfo
 
 // NewOpportunityRatingInfo instantiates a new OpportunityRatingInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o OpportunityRatingInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpportunityRatingInfo) UnmarshalJSON(data []byte) (err error) {
+	varOpportunityRatingInfo := _OpportunityRatingInfo{}
+
+	err = json.Unmarshal(data, &varOpportunityRatingInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpportunityRatingInfo(varOpportunityRatingInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpportunityRatingInfo struct {

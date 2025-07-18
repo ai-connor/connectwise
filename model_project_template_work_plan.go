@@ -21,7 +21,10 @@ var _ MappedNullable = &ProjectTemplateWorkPlan{}
 type ProjectTemplateWorkPlan struct {
 	TemplateId *int32 `json:"templateId,omitempty"`
 	Phases []TemplatePhase `json:"phases,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectTemplateWorkPlan ProjectTemplateWorkPlan
 
 // NewProjectTemplateWorkPlan instantiates a new ProjectTemplateWorkPlan object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o ProjectTemplateWorkPlan) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Phases) {
 		toSerialize["phases"] = o.Phases
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectTemplateWorkPlan) UnmarshalJSON(data []byte) (err error) {
+	varProjectTemplateWorkPlan := _ProjectTemplateWorkPlan{}
+
+	err = json.Unmarshal(data, &varProjectTemplateWorkPlan)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectTemplateWorkPlan(varProjectTemplateWorkPlan)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "templateId")
+		delete(additionalProperties, "phases")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectTemplateWorkPlan struct {

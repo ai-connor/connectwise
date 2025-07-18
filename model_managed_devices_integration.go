@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -42,6 +41,7 @@ type ManagedDevicesIntegration struct {
 	DisableNewCrossReferencesFlag NullableBool `json:"disableNewCrossReferencesFlag,omitempty"`
 	ConfigBillCustomerFlag NullableBool `json:"configBillCustomerFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagedDevicesIntegration ManagedDevicesIntegration
@@ -631,6 +631,11 @@ func (o ManagedDevicesIntegration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -661,15 +666,35 @@ func (o *ManagedDevicesIntegration) UnmarshalJSON(data []byte) (err error) {
 
 	varManagedDevicesIntegration := _ManagedDevicesIntegration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagedDevicesIntegration)
+	err = json.Unmarshal(data, &varManagedDevicesIntegration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagedDevicesIntegration(varManagedDevicesIntegration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "solution")
+		delete(additionalProperties, "portalUrl")
+		delete(additionalProperties, "loginBy")
+		delete(additionalProperties, "globalLoginUsername")
+		delete(additionalProperties, "globalLoginPassword")
+		delete(additionalProperties, "defaultBillingLevel")
+		delete(additionalProperties, "managementItSetupType")
+		delete(additionalProperties, "defaultLocation")
+		delete(additionalProperties, "defaultDepartment")
+		delete(additionalProperties, "integratorLogin")
+		delete(additionalProperties, "matchOnSerialNumberFlag")
+		delete(additionalProperties, "disableNewCrossReferencesFlag")
+		delete(additionalProperties, "configBillCustomerFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

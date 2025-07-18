@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -92,6 +91,7 @@ type TimeEntry struct {
 	TaxCode *TaxCodeReference `json:"taxCode,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TimeEntry TimeEntry
@@ -2554,6 +2554,11 @@ func (o TimeEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2581,15 +2586,81 @@ func (o *TimeEntry) UnmarshalJSON(data []byte) (err error) {
 
 	varTimeEntry := _TimeEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTimeEntry)
+	err = json.Unmarshal(data, &varTimeEntry)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TimeEntry(varTimeEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "companyType")
+		delete(additionalProperties, "chargeToId")
+		delete(additionalProperties, "chargeToType")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "businessGroupDesc")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "activity")
+		delete(additionalProperties, "opportunityRecid")
+		delete(additionalProperties, "projectActivity")
+		delete(additionalProperties, "territory")
+		delete(additionalProperties, "timeStart")
+		delete(additionalProperties, "timeEnd")
+		delete(additionalProperties, "hoursDeduct")
+		delete(additionalProperties, "actualHours")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "addToDetailDescriptionFlag")
+		delete(additionalProperties, "addToInternalAnalysisFlag")
+		delete(additionalProperties, "addToResolutionFlag")
+		delete(additionalProperties, "emailResourceFlag")
+		delete(additionalProperties, "emailContactFlag")
+		delete(additionalProperties, "emailCcFlag")
+		delete(additionalProperties, "emailCc")
+		delete(additionalProperties, "hoursBilled")
+		delete(additionalProperties, "invoiceHours")
+		delete(additionalProperties, "hourlyCost")
+		delete(additionalProperties, "enteredBy")
+		delete(additionalProperties, "dateEntered")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "hourlyRate")
+		delete(additionalProperties, "overageRate")
+		delete(additionalProperties, "agreementHours")
+		delete(additionalProperties, "agreementAmount")
+		delete(additionalProperties, "agreementAdjustment")
+		delete(additionalProperties, "adjustment")
+		delete(additionalProperties, "invoiceReady")
+		delete(additionalProperties, "timeSheet")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "phase")
+		delete(additionalProperties, "ticketBoard")
+		delete(additionalProperties, "ticketStatus")
+		delete(additionalProperties, "ticketType")
+		delete(additionalProperties, "ticketSubType")
+		delete(additionalProperties, "invoiceFlag")
+		delete(additionalProperties, "extendedInvoiceAmount")
+		delete(additionalProperties, "locationName")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

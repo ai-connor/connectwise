@@ -26,7 +26,10 @@ type AccountingBatch struct {
 	ExportProductsFlag NullableBool `json:"exportProductsFlag,omitempty"`
 	ClosedFlag NullableBool `json:"closedFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AccountingBatch AccountingBatch
 
 // NewAccountingBatch instantiates a new AccountingBatch object
 // This constructor will assign default values to properties that have it defined,
@@ -340,7 +343,39 @@ func (o AccountingBatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AccountingBatch) UnmarshalJSON(data []byte) (err error) {
+	varAccountingBatch := _AccountingBatch{}
+
+	err = json.Unmarshal(data, &varAccountingBatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AccountingBatch(varAccountingBatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "batchIdentifier")
+		delete(additionalProperties, "exportInvoicesFlag")
+		delete(additionalProperties, "exportExpensesFlag")
+		delete(additionalProperties, "exportProductsFlag")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAccountingBatch struct {

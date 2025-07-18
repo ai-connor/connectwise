@@ -33,7 +33,10 @@ type OrderToProjectConversion struct {
 	IncludeAllProductsFlag NullableBool `json:"includeAllProductsFlag,omitempty"`
 	IncludeDocumentIds []int32 `json:"includeDocumentIds,omitempty"`
 	IncludeProductIds []int32 `json:"includeProductIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrderToProjectConversion OrderToProjectConversion
 
 // NewOrderToProjectConversion instantiates a new OrderToProjectConversion object
 // This constructor will assign default values to properties that have it defined,
@@ -592,7 +595,46 @@ func (o OrderToProjectConversion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IncludeProductIds) {
 		toSerialize["includeProductIds"] = o.IncludeProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrderToProjectConversion) UnmarshalJSON(data []byte) (err error) {
+	varOrderToProjectConversion := _OrderToProjectConversion{}
+
+	err = json.Unmarshal(data, &varOrderToProjectConversion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderToProjectConversion(varOrderToProjectConversion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "projectId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "manager")
+		delete(additionalProperties, "estimatedStart")
+		delete(additionalProperties, "estimatedEnd")
+		delete(additionalProperties, "copyOverNotes")
+		delete(additionalProperties, "includeAllDocumentsFlag")
+		delete(additionalProperties, "includeAllProductsFlag")
+		delete(additionalProperties, "includeDocumentIds")
+		delete(additionalProperties, "includeProductIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrderToProjectConversion struct {

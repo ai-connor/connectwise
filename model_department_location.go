@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type DepartmentLocation struct {
 	AddAllLocations NullableBool `json:"addAllLocations,omitempty"`
 	RemoveAllLocations NullableBool `json:"removeAllLocations,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DepartmentLocation DepartmentLocation
@@ -459,6 +459,11 @@ func (o DepartmentLocation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -486,15 +491,30 @@ func (o *DepartmentLocation) UnmarshalJSON(data []byte) (err error) {
 
 	varDepartmentLocation := _DepartmentLocation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDepartmentLocation)
+	err = json.Unmarshal(data, &varDepartmentLocation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DepartmentLocation(varDepartmentLocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "departmentManager")
+		delete(additionalProperties, "dispatch")
+		delete(additionalProperties, "serviceManager")
+		delete(additionalProperties, "dutyManager")
+		delete(additionalProperties, "ldapConfig")
+		delete(additionalProperties, "addAllLocations")
+		delete(additionalProperties, "removeAllLocations")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

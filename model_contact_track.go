@@ -30,7 +30,10 @@ type ContactTrack struct {
 	Company *CompanyReference `json:"company,omitempty"`
 	Contact *ContactReference `json:"contact,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ContactTrack ContactTrack
 
 // NewContactTrack instantiates a new ContactTrack object
 // This constructor will assign default values to properties that have it defined,
@@ -464,7 +467,43 @@ func (o ContactTrack) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ContactTrack) UnmarshalJSON(data []byte) (err error) {
+	varContactTrack := _ContactTrack{}
+
+	err = json.Unmarshal(data, &varContactTrack)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContactTrack(varContactTrack)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "trackId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "actionTaken")
+		delete(additionalProperties, "actionRemaining")
+		delete(additionalProperties, "startedBy")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContactTrack struct {

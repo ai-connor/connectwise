@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -50,6 +49,7 @@ type Activity struct {
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Activity Activity
@@ -958,6 +958,11 @@ func (o Activity) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -986,15 +991,44 @@ func (o *Activity) UnmarshalJSON(data []byte) (err error) {
 
 	varActivity := _Activity{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varActivity)
+	err = json.Unmarshal(data, &varActivity)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Activity(varActivity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "phoneNumber")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "campaign")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "dateStart")
+		delete(additionalProperties, "dateEnd")
+		delete(additionalProperties, "assignedBy")
+		delete(additionalProperties, "assignTo")
+		delete(additionalProperties, "scheduleStatus")
+		delete(additionalProperties, "reminder")
+		delete(additionalProperties, "where")
+		delete(additionalProperties, "notifyFlag")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

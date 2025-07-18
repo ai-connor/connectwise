@@ -24,7 +24,10 @@ type ParsingType struct {
 	ParseRule *string `json:"parseRule,omitempty"`
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ParsingType ParsingType
 
 // NewParsingType instantiates a new ParsingType object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o ParsingType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ParsingType) UnmarshalJSON(data []byte) (err error) {
+	varParsingType := _ParsingType{}
+
+	err = json.Unmarshal(data, &varParsingType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ParsingType(varParsingType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "parseRule")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableParsingType struct {

@@ -25,7 +25,10 @@ type AuditTrailEntry struct {
 	AuditType *string `json:"auditType,omitempty"`
 	AuditSubType *string `json:"auditSubType,omitempty"`
 	AuditSource *string `json:"auditSource,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AuditTrailEntry AuditTrailEntry
 
 // NewAuditTrailEntry instantiates a new AuditTrailEntry object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o AuditTrailEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AuditSource) {
 		toSerialize["auditSource"] = o.AuditSource
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AuditTrailEntry) UnmarshalJSON(data []byte) (err error) {
+	varAuditTrailEntry := _AuditTrailEntry{}
+
+	err = json.Unmarshal(data, &varAuditTrailEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AuditTrailEntry(varAuditTrailEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "enteredDate")
+		delete(additionalProperties, "enteredBy")
+		delete(additionalProperties, "auditType")
+		delete(additionalProperties, "auditSubType")
+		delete(additionalProperties, "auditSource")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAuditTrailEntry struct {

@@ -27,7 +27,10 @@ type Experiment struct {
 	InactiveFlag *bool `json:"inactiveFlag,omitempty"`
 	MemberInactiveFlag *bool `json:"memberInactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Experiment Experiment
 
 // NewExperiment instantiates a new Experiment object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +339,40 @@ func (o Experiment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Experiment) UnmarshalJSON(data []byte) (err error) {
+	varExperiment := _Experiment{}
+
+	err = json.Unmarshal(data, &varExperiment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Experiment(varExperiment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "experimentId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "properties")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "memberInactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExperiment struct {

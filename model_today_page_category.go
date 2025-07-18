@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type TodayPageCategory struct {
 	SortOrder NullableInt32 `json:"sortOrder"`
 	Location *SystemLocationReference `json:"location,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TodayPageCategory TodayPageCategory
@@ -217,6 +217,11 @@ func (o TodayPageCategory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -245,15 +250,24 @@ func (o *TodayPageCategory) UnmarshalJSON(data []byte) (err error) {
 
 	varTodayPageCategory := _TodayPageCategory{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTodayPageCategory)
+	err = json.Unmarshal(data, &varTodayPageCategory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TodayPageCategory(varTodayPageCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -38,6 +37,7 @@ type Warehouse struct {
 	LockedFlag NullableBool `json:"lockedFlag,omitempty"`
 	Currency *CurrencyReference `json:"currency,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Warehouse Warehouse
@@ -607,6 +607,11 @@ func (o Warehouse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -636,15 +641,34 @@ func (o *Warehouse) UnmarshalJSON(data []byte) (err error) {
 
 	varWarehouse := _Warehouse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWarehouse)
+	err = json.Unmarshal(data, &varWarehouse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Warehouse(varWarehouse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "manager")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "locationXref")
+		delete(additionalProperties, "locationDefaultFlag")
+		delete(additionalProperties, "overallDefaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "lockedFlag")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

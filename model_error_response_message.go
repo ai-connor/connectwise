@@ -22,7 +22,10 @@ type ErrorResponseMessage struct {
 	Code *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	Errors []ValidationError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ErrorResponseMessage ErrorResponseMessage
 
 // NewErrorResponseMessage instantiates a new ErrorResponseMessage object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o ErrorResponseMessage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ErrorResponseMessage) UnmarshalJSON(data []byte) (err error) {
+	varErrorResponseMessage := _ErrorResponseMessage{}
+
+	err = json.Unmarshal(data, &varErrorResponseMessage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ErrorResponseMessage(varErrorResponseMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableErrorResponseMessage struct {

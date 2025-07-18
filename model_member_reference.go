@@ -24,7 +24,10 @@ type MemberReference struct {
 	Name *string `json:"name,omitempty"`
 	DailyCapacity NullableFloat64 `json:"dailyCapacity,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberReference MemberReference
 
 // NewMemberReference instantiates a new MemberReference object
 // This constructor will assign default values to properties that have it defined,
@@ -248,7 +251,37 @@ func (o MemberReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberReference) UnmarshalJSON(data []byte) (err error) {
+	varMemberReference := _MemberReference{}
+
+	err = json.Unmarshal(data, &varMemberReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberReference(varMemberReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "dailyCapacity")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberReference struct {

@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -42,6 +41,7 @@ type AgreementWorkType struct {
 	AgreementId NullableInt32 `json:"agreementId,omitempty"`
 	Company *CompanyReference `json:"company,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AgreementWorkType AgreementWorkType
@@ -849,6 +849,11 @@ func (o AgreementWorkType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -877,15 +882,39 @@ func (o *AgreementWorkType) UnmarshalJSON(data []byte) (err error) {
 
 	varAgreementWorkType := _AgreementWorkType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAgreementWorkType)
+	err = json.Unmarshal(data, &varAgreementWorkType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AgreementWorkType(varAgreementWorkType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "rateType")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "hoursMax")
+		delete(additionalProperties, "hoursMin")
+		delete(additionalProperties, "roundBillHours")
+		delete(additionalProperties, "overageRate")
+		delete(additionalProperties, "overageRateType")
+		delete(additionalProperties, "agreementLimit")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "effectiveDate")
+		delete(additionalProperties, "endingDate")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "agreementId")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

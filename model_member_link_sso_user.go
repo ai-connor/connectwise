@@ -21,7 +21,10 @@ var _ MappedNullable = &MemberLinkSsoUser{}
 type MemberLinkSsoUser struct {
 	//  Max length: 100;
 	SsoUserId *string `json:"ssoUserId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberLinkSsoUser MemberLinkSsoUser
 
 // NewMemberLinkSsoUser instantiates a new MemberLinkSsoUser object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o MemberLinkSsoUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SsoUserId) {
 		toSerialize["ssoUserId"] = o.SsoUserId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberLinkSsoUser) UnmarshalJSON(data []byte) (err error) {
+	varMemberLinkSsoUser := _MemberLinkSsoUser{}
+
+	err = json.Unmarshal(data, &varMemberLinkSsoUser)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberLinkSsoUser(varMemberLinkSsoUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ssoUserId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberLinkSsoUser struct {

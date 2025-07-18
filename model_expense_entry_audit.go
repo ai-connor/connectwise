@@ -28,7 +28,10 @@ type ExpenseEntryAudit struct {
 	NewValue *string `json:"newValue,omitempty"`
 	Value *string `json:"value,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExpenseEntryAudit ExpenseEntryAudit
 
 // NewExpenseEntryAudit instantiates a new ExpenseEntryAudit object
 // This constructor will assign default values to properties that have it defined,
@@ -392,7 +395,41 @@ func (o ExpenseEntryAudit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExpenseEntryAudit) UnmarshalJSON(data []byte) (err error) {
+	varExpenseEntryAudit := _ExpenseEntryAudit{}
+
+	err = json.Unmarshal(data, &varExpenseEntryAudit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExpenseEntryAudit(varExpenseEntryAudit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "oldValue")
+		delete(additionalProperties, "newValue")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExpenseEntryAudit struct {

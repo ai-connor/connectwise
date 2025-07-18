@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -109,6 +108,7 @@ type Invoice struct {
 	UnbatchedBatch *BatchReference `json:"unbatchedBatch,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Invoice Invoice
@@ -3124,6 +3124,11 @@ func (o Invoice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -3152,15 +3157,97 @@ func (o *Invoice) UnmarshalJSON(data []byte) (err error) {
 
 	varInvoice := _Invoice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInvoice)
+	err = json.Unmarshal(data, &varInvoice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Invoice(varInvoice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "invoiceNumber")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "shipToCompany")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "applyToType")
+		delete(additionalProperties, "applyToId")
+		delete(additionalProperties, "attention")
+		delete(additionalProperties, "shipToAttention")
+		delete(additionalProperties, "billingSite")
+		delete(additionalProperties, "billingSiteAddressLine1")
+		delete(additionalProperties, "billingSiteAddressLine2")
+		delete(additionalProperties, "billingSiteCity")
+		delete(additionalProperties, "billingSiteState")
+		delete(additionalProperties, "billingSiteZip")
+		delete(additionalProperties, "billingSiteCountry")
+		delete(additionalProperties, "shippingSite")
+		delete(additionalProperties, "shippingSiteAddressLine1")
+		delete(additionalProperties, "shippingSiteAddressLine2")
+		delete(additionalProperties, "shippingSiteCity")
+		delete(additionalProperties, "shippingSiteState")
+		delete(additionalProperties, "shippingSiteZip")
+		delete(additionalProperties, "shippingSiteCountry")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "customerPO")
+		delete(additionalProperties, "templateSetupId")
+		delete(additionalProperties, "invoiceTemplate")
+		delete(additionalProperties, "emailTemplateId")
+		delete(additionalProperties, "addToBatchEmailList")
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "restrictDownpaymentFlag")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "departmentId")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "territoryId")
+		delete(additionalProperties, "territory")
+		delete(additionalProperties, "topComment")
+		delete(additionalProperties, "bottomComment")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "downpaymentPreviouslyTaxedFlag")
+		delete(additionalProperties, "serviceTotal")
+		delete(additionalProperties, "overrideDownPaymentAmountFlag")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "dueDate")
+		delete(additionalProperties, "expenseTotal")
+		delete(additionalProperties, "productTotal")
+		delete(additionalProperties, "previousProgressApplied")
+		delete(additionalProperties, "serviceAdjustmentAmount")
+		delete(additionalProperties, "agreementAmount")
+		delete(additionalProperties, "downpaymentApplied")
+		delete(additionalProperties, "subtotal")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "remainingDownpayment")
+		delete(additionalProperties, "salesTax")
+		delete(additionalProperties, "adjustmentReason")
+		delete(additionalProperties, "adjustedBy")
+		delete(additionalProperties, "closedBy")
+		delete(additionalProperties, "payments")
+		delete(additionalProperties, "credits")
+		delete(additionalProperties, "balance")
+		delete(additionalProperties, "specialInvoiceFlag")
+		delete(additionalProperties, "billingSetupReference")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "phase")
+		delete(additionalProperties, "salesOrder")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "glBatch")
+		delete(additionalProperties, "unbatchedBatch")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

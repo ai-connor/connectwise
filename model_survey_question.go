@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type SurveyQuestion struct {
 	RequiredFlag NullableBool `json:"requiredFlag,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SurveyQuestion SurveyQuestion
@@ -413,6 +413,11 @@ func (o SurveyQuestion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -443,15 +448,29 @@ func (o *SurveyQuestion) UnmarshalJSON(data []byte) (err error) {
 
 	varSurveyQuestion := _SurveyQuestion{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSurveyQuestion)
+	err = json.Unmarshal(data, &varSurveyQuestion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SurveyQuestion(varSurveyQuestion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "survey")
+		delete(additionalProperties, "fieldType")
+		delete(additionalProperties, "entryType")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "question")
+		delete(additionalProperties, "numberOfDecimals")
+		delete(additionalProperties, "requiredFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type StatusIndicator struct {
 	Color *string `json:"color,omitempty"`
 	Icon *string `json:"icon,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StatusIndicator StatusIndicator
 
 // NewStatusIndicator instantiates a new StatusIndicator object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o StatusIndicator) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StatusIndicator) UnmarshalJSON(data []byte) (err error) {
+	varStatusIndicator := _StatusIndicator{}
+
+	err = json.Unmarshal(data, &varStatusIndicator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StatusIndicator(varStatusIndicator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "icon")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStatusIndicator struct {

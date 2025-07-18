@@ -21,7 +21,10 @@ var _ MappedNullable = &MemberDeactivationItem{}
 type MemberDeactivationItem struct {
 	Count *int32 `json:"count,omitempty"`
 	ReAssignToMember *MemberReference `json:"reAssignToMember,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemberDeactivationItem MemberDeactivationItem
 
 // NewMemberDeactivationItem instantiates a new MemberDeactivationItem object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o MemberDeactivationItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReAssignToMember) {
 		toSerialize["reAssignToMember"] = o.ReAssignToMember
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemberDeactivationItem) UnmarshalJSON(data []byte) (err error) {
+	varMemberDeactivationItem := _MemberDeactivationItem{}
+
+	err = json.Unmarshal(data, &varMemberDeactivationItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberDeactivationItem(varMemberDeactivationItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "reAssignToMember")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemberDeactivationItem struct {

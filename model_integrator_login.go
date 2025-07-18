@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -100,6 +99,7 @@ type IntegratorLogin struct {
 	AgreementCallbackLegacyFlag NullableBool `json:"agreementCallbackLegacyFlag,omitempty"`
 	DocumentApiFlag NullableBool `json:"documentApiFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IntegratorLogin IntegratorLogin
@@ -2577,6 +2577,11 @@ func (o IntegratorLogin) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2604,15 +2609,78 @@ func (o *IntegratorLogin) UnmarshalJSON(data []byte) (err error) {
 
 	varIntegratorLogin := _IntegratorLogin{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIntegratorLogin)
+	err = json.Unmarshal(data, &varIntegratorLogin)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IntegratorLogin(varIntegratorLogin)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "canAccessAllRecordsFlag")
+		delete(additionalProperties, "canAccessAllApisFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "dateInactivated")
+		delete(additionalProperties, "inactivatedBy")
+		delete(additionalProperties, "serviceTicketApiFlag")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "serviceBoardCallbackUrl")
+		delete(additionalProperties, "serviceBoardLegacyCallbackFlag")
+		delete(additionalProperties, "timeEntryApiFlag")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "timeEntryCallbackUrl")
+		delete(additionalProperties, "timeEntryLegacyCallbackFlag")
+		delete(additionalProperties, "managedServicesApiFlag")
+		delete(additionalProperties, "managedServicesAutoChildFlag")
+		delete(additionalProperties, "managedServicesChildingFlag")
+		delete(additionalProperties, "contactApiFlag")
+		delete(additionalProperties, "contactCallbackUrl")
+		delete(additionalProperties, "contactLegacyCallbackFlag")
+		delete(additionalProperties, "companyApiFlag")
+		delete(additionalProperties, "companyCallbackUrl")
+		delete(additionalProperties, "companyLegacyCallbackFlag")
+		delete(additionalProperties, "activityApiFlag")
+		delete(additionalProperties, "activityCallbackUrl")
+		delete(additionalProperties, "activityLegacyCallbackFlag")
+		delete(additionalProperties, "invoiceApiFlag")
+		delete(additionalProperties, "productApiFlag")
+		delete(additionalProperties, "productCallbackUrl")
+		delete(additionalProperties, "productLegacyCallbackFlag")
+		delete(additionalProperties, "opportunityApiFlag")
+		delete(additionalProperties, "opportunityCallbackUrl")
+		delete(additionalProperties, "opportunityLegacyCallbackFlag")
+		delete(additionalProperties, "opportunityConversionApiFlag")
+		delete(additionalProperties, "memberApiFlag")
+		delete(additionalProperties, "marketingApiFlag")
+		delete(additionalProperties, "purchasingApiFlag")
+		delete(additionalProperties, "purchasingCallbackUrl")
+		delete(additionalProperties, "purchasingLegacyCallbackFlag")
+		delete(additionalProperties, "reportingApiFlag")
+		delete(additionalProperties, "systemApiFlag")
+		delete(additionalProperties, "projectApiFlag")
+		delete(additionalProperties, "projectCallbackUrl")
+		delete(additionalProperties, "projectLegacyCallbackFlag")
+		delete(additionalProperties, "configurationApiFlag")
+		delete(additionalProperties, "configurationAutoChildFlag")
+		delete(additionalProperties, "configurationChildlingFlag")
+		delete(additionalProperties, "configurationCallbackUrl")
+		delete(additionalProperties, "configurationLegacyCallbackFlag")
+		delete(additionalProperties, "scheduleApiFlag")
+		delete(additionalProperties, "scheduleCallbackUrl")
+		delete(additionalProperties, "scheduleLegacyCallbackFlag")
+		delete(additionalProperties, "agreementApiFlag")
+		delete(additionalProperties, "agreementCallbackUrl")
+		delete(additionalProperties, "agreementCallbackLegacyFlag")
+		delete(additionalProperties, "documentApiFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

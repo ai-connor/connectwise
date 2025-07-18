@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type WorkRoleLocation struct {
 	HourlyRate NullableFloat64 `json:"hourlyRate,omitempty"`
 	WorkRole *WorkRoleReference `json:"workRole,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WorkRoleLocation WorkRoleLocation
@@ -233,6 +233,11 @@ func (o WorkRoleLocation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -260,15 +265,24 @@ func (o *WorkRoleLocation) UnmarshalJSON(data []byte) (err error) {
 
 	varWorkRoleLocation := _WorkRoleLocation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWorkRoleLocation)
+	err = json.Unmarshal(data, &varWorkRoleLocation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WorkRoleLocation(varWorkRoleLocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "hourlyRate")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

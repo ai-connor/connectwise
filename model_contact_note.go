@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ContactNote struct {
 	Flagged NullableBool `json:"flagged,omitempty"`
 	EnteredBy *string `json:"enteredBy,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ContactNote ContactNote
@@ -315,6 +315,11 @@ func (o ContactNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -342,15 +347,26 @@ func (o *ContactNote) UnmarshalJSON(data []byte) (err error) {
 
 	varContactNote := _ContactNote{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varContactNote)
+	err = json.Unmarshal(data, &varContactNote)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ContactNote(varContactNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "contactId")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "flagged")
+		delete(additionalProperties, "enteredBy")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

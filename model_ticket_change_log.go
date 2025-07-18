@@ -82,7 +82,10 @@ type TicketChangeLog struct {
 	// Merged Parent Ticket ID.
 	MergedParentTicketId NullableInt32 `json:"mergedParentTicketId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TicketChangeLog TicketChangeLog
 
 // NewTicketChangeLog instantiates a new TicketChangeLog object
 // This constructor will assign default values to properties that have it defined,
@@ -1341,7 +1344,64 @@ func (o TicketChangeLog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TicketChangeLog) UnmarshalJSON(data []byte) (err error) {
+	varTicketChangeLog := _TicketChangeLog{}
+
+	err = json.Unmarshal(data, &varTicketChangeLog)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TicketChangeLog(varTicketChangeLog)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "partnerId")
+		delete(additionalProperties, "productInstanceId")
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "boardId")
+		delete(additionalProperties, "boardName")
+		delete(additionalProperties, "companyIdentifier")
+		delete(additionalProperties, "companyName")
+		delete(additionalProperties, "contactId")
+		delete(additionalProperties, "contactName")
+		delete(additionalProperties, "impact")
+		delete(additionalProperties, "ownerIdentifier")
+		delete(additionalProperties, "priorityId")
+		delete(additionalProperties, "priorityLevel")
+		delete(additionalProperties, "priorityName")
+		delete(additionalProperties, "prioritySort")
+		delete(additionalProperties, "resourceList")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "slaName")
+		delete(additionalProperties, "slaStatus")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "teamName")
+		delete(additionalProperties, "ticketNumber")
+		delete(additionalProperties, "recordType")
+		delete(additionalProperties, "ticketOwner")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "customerUpdatedFlag")
+		delete(additionalProperties, "processingStatus")
+		delete(additionalProperties, "parentTicketId")
+		delete(additionalProperties, "mergedParentTicketId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTicketChangeLog struct {

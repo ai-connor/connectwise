@@ -22,7 +22,10 @@ type TaxCodeReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TaxCodeReference TaxCodeReference
 
 // NewTaxCodeReference instantiates a new TaxCodeReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o TaxCodeReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TaxCodeReference) UnmarshalJSON(data []byte) (err error) {
+	varTaxCodeReference := _TaxCodeReference{}
+
+	err = json.Unmarshal(data, &varTaxCodeReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TaxCodeReference(varTaxCodeReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTaxCodeReference struct {

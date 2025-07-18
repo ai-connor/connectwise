@@ -22,7 +22,10 @@ type RmaStatusEmailTemplateReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RmaStatusEmailTemplateReference RmaStatusEmailTemplateReference
 
 // NewRmaStatusEmailTemplateReference instantiates a new RmaStatusEmailTemplateReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o RmaStatusEmailTemplateReference) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RmaStatusEmailTemplateReference) UnmarshalJSON(data []byte) (err error) {
+	varRmaStatusEmailTemplateReference := _RmaStatusEmailTemplateReference{}
+
+	err = json.Unmarshal(data, &varRmaStatusEmailTemplateReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RmaStatusEmailTemplateReference(varRmaStatusEmailTemplateReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRmaStatusEmailTemplateReference struct {

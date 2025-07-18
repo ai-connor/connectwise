@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -42,6 +41,7 @@ type ActivityStopwatch struct {
 	WorkRole *WorkRoleReference `json:"workRole,omitempty"`
 	WorkType *WorkTypeReference `json:"workType,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ActivityStopwatch ActivityStopwatch
@@ -775,6 +775,11 @@ func (o ActivityStopwatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -804,15 +809,38 @@ func (o *ActivityStopwatch) UnmarshalJSON(data []byte) (err error) {
 
 	varActivityStopwatch := _ActivityStopwatch{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varActivityStopwatch)
+	err = json.Unmarshal(data, &varActivityStopwatch)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ActivityStopwatch(varActivityStopwatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activityId")
+		delete(additionalProperties, "activityMobileGuid")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "dateEntered")
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "totalPauseTime")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -37,7 +37,10 @@ type AgreementRecap struct {
 	UnbilledOverageAmount *float64 `json:"unbilledOverageAmount,omitempty"`
 	UnbilledPeriods *int32 `json:"unbilledPeriods,omitempty"`
 	UsedAmount *float64 `json:"usedAmount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementRecap AgreementRecap
 
 // NewAgreementRecap instantiates a new AgreementRecap object
 // This constructor will assign default values to properties that have it defined,
@@ -696,7 +699,50 @@ func (o AgreementRecap) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UsedAmount) {
 		toSerialize["usedAmount"] = o.UsedAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementRecap) UnmarshalJSON(data []byte) (err error) {
+	varAgreementRecap := _AgreementRecap{}
+
+	err = json.Unmarshal(data, &varAgreementRecap)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementRecap(varAgreementRecap)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "adjustmentAmount")
+		delete(additionalProperties, "agreementStatus")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "availableAmount")
+		delete(additionalProperties, "companyName")
+		delete(additionalProperties, "isUnlimited")
+		delete(additionalProperties, "lastInvoiceAmount")
+		delete(additionalProperties, "lastInvoiceDate")
+		delete(additionalProperties, "lastInvoiceNumber")
+		delete(additionalProperties, "nextInvoiceAmount")
+		delete(additionalProperties, "nextInvoiceDate")
+		delete(additionalProperties, "overrunAmount")
+		delete(additionalProperties, "remainingAmount")
+		delete(additionalProperties, "startingAmount")
+		delete(additionalProperties, "unbilledOverageAmount")
+		delete(additionalProperties, "unbilledPeriods")
+		delete(additionalProperties, "usedAmount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementRecap struct {

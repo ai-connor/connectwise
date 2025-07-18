@@ -36,7 +36,10 @@ type EmailToken struct {
 	TracksFlag NullableBool `json:"tracksFlag,omitempty"`
 	WorkflowFlag NullableBool `json:"workflowFlag,omitempty"`
 	PortalPasswordFlag NullableBool `json:"portalPasswordFlag,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EmailToken EmailToken
 
 // NewEmailToken instantiates a new EmailToken object
 // This constructor will assign default values to properties that have it defined,
@@ -800,7 +803,49 @@ func (o EmailToken) ToMap() (map[string]interface{}, error) {
 	if o.PortalPasswordFlag.IsSet() {
 		toSerialize["portalPasswordFlag"] = o.PortalPasswordFlag.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EmailToken) UnmarshalJSON(data []byte) (err error) {
+	varEmailToken := _EmailToken{}
+
+	err = json.Unmarshal(data, &varEmailToken)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EmailToken(varEmailToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "token")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "addressFlag")
+		delete(additionalProperties, "agreementFlag")
+		delete(additionalProperties, "companyFlag")
+		delete(additionalProperties, "configFlag")
+		delete(additionalProperties, "contactFlag")
+		delete(additionalProperties, "invoiceFlag")
+		delete(additionalProperties, "purchaseOrderFlag")
+		delete(additionalProperties, "purchaseOrderStatusFlag")
+		delete(additionalProperties, "rmaFlag")
+		delete(additionalProperties, "salesFlag")
+		delete(additionalProperties, "serviceFlag")
+		delete(additionalProperties, "tracksFlag")
+		delete(additionalProperties, "workflowFlag")
+		delete(additionalProperties, "portalPasswordFlag")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEmailToken struct {

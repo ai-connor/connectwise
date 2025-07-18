@@ -31,7 +31,10 @@ type SsoUser struct {
 	DateEntered *string `json:"dateEntered,omitempty"`
 	LastUpdated *string `json:"lastUpdated,omitempty"`
 	LinkedMember *MemberReference `json:"linkedMember,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SsoUser SsoUser
 
 // NewSsoUser instantiates a new SsoUser object
 // This constructor will assign default values to properties that have it defined,
@@ -510,7 +513,44 @@ func (o SsoUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LinkedMember) {
 		toSerialize["linkedMember"] = o.LinkedMember
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SsoUser) UnmarshalJSON(data []byte) (err error) {
+	varSsoUser := _SsoUser{}
+
+	err = json.Unmarshal(data, &varSsoUser)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SsoUser(varSsoUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "ssoUserId")
+		delete(additionalProperties, "userName")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "emailConfirmed")
+		delete(additionalProperties, "disabledFlag")
+		delete(additionalProperties, "linkedFlag")
+		delete(additionalProperties, "dateEntered")
+		delete(additionalProperties, "lastUpdated")
+		delete(additionalProperties, "linkedMember")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSsoUser struct {

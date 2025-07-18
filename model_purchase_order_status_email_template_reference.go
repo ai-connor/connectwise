@@ -22,7 +22,10 @@ type PurchaseOrderStatusEmailTemplateReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PurchaseOrderStatusEmailTemplateReference PurchaseOrderStatusEmailTemplateReference
 
 // NewPurchaseOrderStatusEmailTemplateReference instantiates a new PurchaseOrderStatusEmailTemplateReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o PurchaseOrderStatusEmailTemplateReference) ToMap() (map[string]interface
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PurchaseOrderStatusEmailTemplateReference) UnmarshalJSON(data []byte) (err error) {
+	varPurchaseOrderStatusEmailTemplateReference := _PurchaseOrderStatusEmailTemplateReference{}
+
+	err = json.Unmarshal(data, &varPurchaseOrderStatusEmailTemplateReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PurchaseOrderStatusEmailTemplateReference(varPurchaseOrderStatusEmailTemplateReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePurchaseOrderStatusEmailTemplateReference struct {

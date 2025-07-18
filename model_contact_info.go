@@ -44,7 +44,10 @@ type ContactInfo struct {
 	TwitterUrl *string `json:"twitterUrl,omitempty"`
 	LinkedInUrl *string `json:"linkedInUrl,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ContactInfo ContactInfo
 
 // NewContactInfo instantiates a new ContactInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -978,7 +981,57 @@ func (o ContactInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ContactInfo) UnmarshalJSON(data []byte) (err error) {
+	varContactInfo := _ContactInfo{}
+
+	err = json.Unmarshal(data, &varContactInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContactInfo(varContactInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "communicationItems")
+		delete(additionalProperties, "defaultPhoneNbr")
+		delete(additionalProperties, "defaultPhoneType")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "companyLocation")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "types")
+		delete(additionalProperties, "addressLine1")
+		delete(additionalProperties, "addressLine2")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "defaultBillingFlag")
+		delete(additionalProperties, "facebookUrl")
+		delete(additionalProperties, "twitterUrl")
+		delete(additionalProperties, "linkedInUrl")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContactInfo struct {

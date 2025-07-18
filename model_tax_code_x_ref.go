@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type TaxCodeXRef struct {
 	TaxCode *TaxCodeReference `json:"taxCode,omitempty"`
 	TaxableLevels []int32 `json:"taxableLevels,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TaxCodeXRef TaxCodeXRef
@@ -546,6 +546,11 @@ func (o TaxCodeXRef) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -573,15 +578,31 @@ func (o *TaxCodeXRef) UnmarshalJSON(data []byte) (err error) {
 
 	varTaxCodeXRef := _TaxCodeXRef{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTaxCodeXRef)
+	err = json.Unmarshal(data, &varTaxCodeXRef)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TaxCodeXRef(varTaxCodeXRef)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "levelOne")
+		delete(additionalProperties, "levelTwo")
+		delete(additionalProperties, "levelThree")
+		delete(additionalProperties, "levelFour")
+		delete(additionalProperties, "levelFive")
+		delete(additionalProperties, "levelSix")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "taxableLevels")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

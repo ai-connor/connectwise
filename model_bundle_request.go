@@ -23,7 +23,10 @@ type BundleRequest struct {
 	ResourceType *string `json:"resourceType,omitempty"`
 	Version *string `json:"version,omitempty"`
 	ApiRequest *ApiRequest `json:"apiRequest,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BundleRequest BundleRequest
 
 // NewBundleRequest instantiates a new BundleRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o BundleRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ApiRequest) {
 		toSerialize["apiRequest"] = o.ApiRequest
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BundleRequest) UnmarshalJSON(data []byte) (err error) {
+	varBundleRequest := _BundleRequest{}
+
+	err = json.Unmarshal(data, &varBundleRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BundleRequest(varBundleRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "resourceType")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "apiRequest")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBundleRequest struct {

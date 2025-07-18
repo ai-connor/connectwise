@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ManagedDevicesIntegrationNotification struct {
 	Member *MemberReference `json:"member,omitempty"`
 	LogType NullableString `json:"logType"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagedDevicesIntegrationNotification ManagedDevicesIntegrationNotification
@@ -252,6 +252,11 @@ func (o ManagedDevicesIntegrationNotification) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -280,15 +285,25 @@ func (o *ManagedDevicesIntegrationNotification) UnmarshalJSON(data []byte) (err 
 
 	varManagedDevicesIntegrationNotification := _ManagedDevicesIntegrationNotification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagedDevicesIntegrationNotification)
+	err = json.Unmarshal(data, &varManagedDevicesIntegrationNotification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagedDevicesIntegrationNotification(varManagedDevicesIntegrationNotification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "managedDevicesIntegration")
+		delete(additionalProperties, "notifyWho")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "logType")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

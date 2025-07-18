@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type BillingCycle struct {
 	DefaultFlag *bool `json:"defaultFlag,omitempty"`
 	BillingOptions NullableString `json:"billingOptions"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BillingCycle BillingCycle
@@ -245,6 +245,11 @@ func (o BillingCycle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -274,15 +279,25 @@ func (o *BillingCycle) UnmarshalJSON(data []byte) (err error) {
 
 	varBillingCycle := _BillingCycle{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBillingCycle)
+	err = json.Unmarshal(data, &varBillingCycle)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BillingCycle(varBillingCycle)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "billingOptions")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

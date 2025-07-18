@@ -24,7 +24,10 @@ type UserDefinedFieldOption struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	SortOrder NullableInt32 `json:"sortOrder,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserDefinedFieldOption UserDefinedFieldOption
 
 // NewUserDefinedFieldOption instantiates a new UserDefinedFieldOption object
 // This constructor will assign default values to properties that have it defined,
@@ -258,7 +261,37 @@ func (o UserDefinedFieldOption) ToMap() (map[string]interface{}, error) {
 	if o.SortOrder.IsSet() {
 		toSerialize["sortOrder"] = o.SortOrder.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserDefinedFieldOption) UnmarshalJSON(data []byte) (err error) {
+	varUserDefinedFieldOption := _UserDefinedFieldOption{}
+
+	err = json.Unmarshal(data, &varUserDefinedFieldOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserDefinedFieldOption(varUserDefinedFieldOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "optionValue")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "sortOrder")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserDefinedFieldOption struct {

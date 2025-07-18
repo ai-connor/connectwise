@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -115,6 +114,7 @@ type Company struct {
 	IntegratorTags []string `json:"integratorTags,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Company Company
@@ -2723,6 +2723,11 @@ func (o Company) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2751,15 +2756,90 @@ func (o *Company) UnmarshalJSON(data []byte) (err error) {
 
 	varCompany := _Company{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompany)
+	err = json.Unmarshal(data, &varCompany)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Company(varCompany)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "addressLine1")
+		delete(additionalProperties, "addressLine2")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "zip")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "phoneNumber")
+		delete(additionalProperties, "faxNumber")
+		delete(additionalProperties, "website")
+		delete(additionalProperties, "territory")
+		delete(additionalProperties, "market")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "defaultContact")
+		delete(additionalProperties, "dateAcquired")
+		delete(additionalProperties, "sicCode")
+		delete(additionalProperties, "parentCompany")
+		delete(additionalProperties, "annualRevenue")
+		delete(additionalProperties, "creditLimit")
+		delete(additionalProperties, "additionalDebt")
+		delete(additionalProperties, "numberOfEmployees")
+		delete(additionalProperties, "yearEstablished")
+		delete(additionalProperties, "revenueYear")
+		delete(additionalProperties, "ownershipType")
+		delete(additionalProperties, "timeZoneSetup")
+		delete(additionalProperties, "leadSource")
+		delete(additionalProperties, "leadFlag")
+		delete(additionalProperties, "unsubscribeFlag")
+		delete(additionalProperties, "calendar")
+		delete(additionalProperties, "userDefinedField1")
+		delete(additionalProperties, "userDefinedField2")
+		delete(additionalProperties, "userDefinedField3")
+		delete(additionalProperties, "userDefinedField4")
+		delete(additionalProperties, "userDefinedField5")
+		delete(additionalProperties, "userDefinedField6")
+		delete(additionalProperties, "userDefinedField7")
+		delete(additionalProperties, "userDefinedField8")
+		delete(additionalProperties, "userDefinedField9")
+		delete(additionalProperties, "userDefinedField10")
+		delete(additionalProperties, "vendorIdentifier")
+		delete(additionalProperties, "taxIdentifier")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "invoiceTemplate")
+		delete(additionalProperties, "pricingSchedule")
+		delete(additionalProperties, "companyEntityType")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "billingSite")
+		delete(additionalProperties, "billingContact")
+		delete(additionalProperties, "invoiceDeliveryMethod")
+		delete(additionalProperties, "invoiceToEmailAddress")
+		delete(additionalProperties, "invoiceCCEmailAddress")
+		delete(additionalProperties, "deletedFlag")
+		delete(additionalProperties, "dateDeleted")
+		delete(additionalProperties, "deletedBy")
+		delete(additionalProperties, "mobileGuid")
+		delete(additionalProperties, "facebookUrl")
+		delete(additionalProperties, "twitterUrl")
+		delete(additionalProperties, "linkedInUrl")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "territoryManager")
+		delete(additionalProperties, "resellerIdentifier")
+		delete(additionalProperties, "isVendorFlag")
+		delete(additionalProperties, "types")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "integratorTags")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -35,7 +35,10 @@ type NotificationRecipient struct {
 	ProcurementFlag NullableBool `json:"procurementFlag,omitempty"`
 	KnowledgeBaseFlag NullableBool `json:"knowledgeBaseFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotificationRecipient NotificationRecipient
 
 // NewNotificationRecipient instantiates a new NotificationRecipient object
 // This constructor will assign default values to properties that have it defined,
@@ -744,7 +747,48 @@ func (o NotificationRecipient) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotificationRecipient) UnmarshalJSON(data []byte) (err error) {
+	varNotificationRecipient := _NotificationRecipient{}
+
+	err = json.Unmarshal(data, &varNotificationRecipient)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationRecipient(varNotificationRecipient)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "externalFlag")
+		delete(additionalProperties, "serviceFlag")
+		delete(additionalProperties, "salesFlag")
+		delete(additionalProperties, "invoiceFlag")
+		delete(additionalProperties, "agreementFlag")
+		delete(additionalProperties, "memberFlag")
+		delete(additionalProperties, "configFlag")
+		delete(additionalProperties, "mspFlag")
+		delete(additionalProperties, "trackFlag")
+		delete(additionalProperties, "projectFlag")
+		delete(additionalProperties, "procurementFlag")
+		delete(additionalProperties, "knowledgeBaseFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotificationRecipient struct {

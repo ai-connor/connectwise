@@ -22,7 +22,10 @@ type ReportColumnDefinition struct {
 	Type *string `json:"type,omitempty"`
 	IsNullable *bool `json:"isNullable,omitempty"`
 	IdentityColumn *bool `json:"identityColumn,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReportColumnDefinition ReportColumnDefinition
 
 // NewReportColumnDefinition instantiates a new ReportColumnDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o ReportColumnDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IdentityColumn) {
 		toSerialize["identityColumn"] = o.IdentityColumn
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReportColumnDefinition) UnmarshalJSON(data []byte) (err error) {
+	varReportColumnDefinition := _ReportColumnDefinition{}
+
+	err = json.Unmarshal(data, &varReportColumnDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReportColumnDefinition(varReportColumnDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "isNullable")
+		delete(additionalProperties, "identityColumn")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReportColumnDefinition struct {

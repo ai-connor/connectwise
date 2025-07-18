@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type PricingSchedule struct {
 	SetAllCompaniesFlag NullableBool `json:"setAllCompaniesFlag,omitempty"`
 	RemoveAllCompaniesFlag NullableBool `json:"removeAllCompaniesFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PricingSchedule PricingSchedule
@@ -408,6 +408,11 @@ func (o PricingSchedule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -435,15 +440,28 @@ func (o *PricingSchedule) UnmarshalJSON(data []byte) (err error) {
 
 	varPricingSchedule := _PricingSchedule{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPricingSchedule)
+	err = json.Unmarshal(data, &varPricingSchedule)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PricingSchedule(varPricingSchedule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "companies")
+		delete(additionalProperties, "setAllCompaniesFlag")
+		delete(additionalProperties, "removeAllCompaniesFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type ProjectBoardKanbanStatus struct {
 	SrStatusId *int32 `json:"srStatusId,omitempty"`
 	Order NullableInt32 `json:"order,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectBoardKanbanStatus ProjectBoardKanbanStatus
 
 // NewProjectBoardKanbanStatus instantiates a new ProjectBoardKanbanStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -202,7 +205,36 @@ func (o ProjectBoardKanbanStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectBoardKanbanStatus) UnmarshalJSON(data []byte) (err error) {
+	varProjectBoardKanbanStatus := _ProjectBoardKanbanStatus{}
+
+	err = json.Unmarshal(data, &varProjectBoardKanbanStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectBoardKanbanStatus(varProjectBoardKanbanStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "srStatusId")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectBoardKanbanStatus struct {

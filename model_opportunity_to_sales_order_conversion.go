@@ -27,7 +27,10 @@ type OpportunityToSalesOrderConversion struct {
 	IncludeNoteIds []int32 `json:"includeNoteIds,omitempty"`
 	IncludeDocumentIds []int32 `json:"includeDocumentIds,omitempty"`
 	IncludeProductIds []int32 `json:"includeProductIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpportunityToSalesOrderConversion OpportunityToSalesOrderConversion
 
 // NewOpportunityToSalesOrderConversion instantiates a new OpportunityToSalesOrderConversion object
 // This constructor will assign default values to properties that have it defined,
@@ -366,7 +369,40 @@ func (o OpportunityToSalesOrderConversion) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.IncludeProductIds) {
 		toSerialize["includeProductIds"] = o.IncludeProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpportunityToSalesOrderConversion) UnmarshalJSON(data []byte) (err error) {
+	varOpportunityToSalesOrderConversion := _OpportunityToSalesOrderConversion{}
+
+	err = json.Unmarshal(data, &varOpportunityToSalesOrderConversion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpportunityToSalesOrderConversion(varOpportunityToSalesOrderConversion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "salesOrderId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "includeAllNotesFlag")
+		delete(additionalProperties, "includeAllDocumentsFlag")
+		delete(additionalProperties, "includeAllProductsFlag")
+		delete(additionalProperties, "includeNoteIds")
+		delete(additionalProperties, "includeDocumentIds")
+		delete(additionalProperties, "includeProductIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpportunityToSalesOrderConversion struct {

@@ -26,7 +26,10 @@ type ServiceTeam struct {
 	Department *SystemDepartmentReference `json:"department,omitempty"`
 	DeleteNotifyFlag NullableBool `json:"deleteNotifyFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceTeam ServiceTeam
 
 // NewServiceTeam instantiates a new ServiceTeam object
 // This constructor will assign default values to properties that have it defined,
@@ -310,7 +313,39 @@ func (o ServiceTeam) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceTeam) UnmarshalJSON(data []byte) (err error) {
+	varServiceTeam := _ServiceTeam{}
+
+	err = json.Unmarshal(data, &varServiceTeam)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceTeam(varServiceTeam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "leader")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "deleteNotifyFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceTeam struct {

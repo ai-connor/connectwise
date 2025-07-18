@@ -79,7 +79,10 @@ type GLExportTransaction struct {
 	ShipContact *string `json:"shipContact,omitempty"`
 	Detail []GLExportTransactionDetail `json:"detail,omitempty"`
 	TaxLevels []GLExportTransactionTaxLevel `json:"taxLevels,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportTransaction GLExportTransaction
 
 // NewGLExportTransaction instantiates a new GLExportTransaction object
 // This constructor will assign default values to properties that have it defined,
@@ -2428,7 +2431,92 @@ func (o GLExportTransaction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TaxLevels) {
 		toSerialize["taxLevels"] = o.TaxLevels
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportTransaction) UnmarshalJSON(data []byte) (err error) {
+	varGLExportTransaction := _GLExportTransaction{}
+
+	err = json.Unmarshal(data, &varGLExportTransaction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportTransaction(varGLExportTransaction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "glTypeId")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "documentNumber")
+		delete(additionalProperties, "documentType")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "attention")
+		delete(additionalProperties, "salesTerritory")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "companyType")
+		delete(additionalProperties, "companyAccountNumber")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "billingTermsXref")
+		delete(additionalProperties, "dueDays")
+		delete(additionalProperties, "dueDate")
+		delete(additionalProperties, "emailDeliveryFlag")
+		delete(additionalProperties, "printDeliveryFlag")
+		delete(additionalProperties, "agreementPrePaymentFlag")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "billingType")
+		delete(additionalProperties, "glEntryIds")
+		delete(additionalProperties, "purchaseOrder")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "salesRepId")
+		delete(additionalProperties, "salesRepName")
+		delete(additionalProperties, "taxable")
+		delete(additionalProperties, "taxableTotal")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "taxGroupRate")
+		delete(additionalProperties, "piggyBackFlag")
+		delete(additionalProperties, "taxAccountNumber")
+		delete(additionalProperties, "salesTax")
+		delete(additionalProperties, "stateTax")
+		delete(additionalProperties, "countyTax")
+		delete(additionalProperties, "cityTax")
+		delete(additionalProperties, "taxableAmount1")
+		delete(additionalProperties, "taxableAmount2")
+		delete(additionalProperties, "taxableAmount3")
+		delete(additionalProperties, "taxableAmount4")
+		delete(additionalProperties, "taxableAmount5")
+		delete(additionalProperties, "taxAgencyXref")
+		delete(additionalProperties, "stateTaxXref")
+		delete(additionalProperties, "countyTaxXref")
+		delete(additionalProperties, "taxId")
+		delete(additionalProperties, "taxDpAppliedFlag")
+		delete(additionalProperties, "useAvalaraFlag")
+		delete(additionalProperties, "sendAvalaraTaxFlag")
+		delete(additionalProperties, "shipToCompany")
+		delete(additionalProperties, "shipToCompanyAccountNumber")
+		delete(additionalProperties, "shipToCompanyType")
+		delete(additionalProperties, "shipToTaxId")
+		delete(additionalProperties, "shipSite")
+		delete(additionalProperties, "shipContact")
+		delete(additionalProperties, "detail")
+		delete(additionalProperties, "taxLevels")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportTransaction struct {

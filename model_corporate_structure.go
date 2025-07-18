@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -46,6 +45,7 @@ type CorporateStructure struct {
 	ServiceManager *MemberReference `json:"serviceManager,omitempty"`
 	DutyManager *MemberReference `json:"dutyManager,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CorporateStructure CorporateStructure
@@ -683,6 +683,11 @@ func (o CorporateStructure) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -713,15 +718,37 @@ func (o *CorporateStructure) UnmarshalJSON(data []byte) (err error) {
 
 	varCorporateStructure := _CorporateStructure{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCorporateStructure)
+	err = json.Unmarshal(data, &varCorporateStructure)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CorporateStructure(varCorporateStructure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "levelCount")
+		delete(additionalProperties, "level1Name")
+		delete(additionalProperties, "level2Name")
+		delete(additionalProperties, "level3Name")
+		delete(additionalProperties, "level4Name")
+		delete(additionalProperties, "level5Name")
+		delete(additionalProperties, "fiscalYearStart")
+		delete(additionalProperties, "locationCaption")
+		delete(additionalProperties, "groupCaption")
+		delete(additionalProperties, "baseCurrency")
+		delete(additionalProperties, "president")
+		delete(additionalProperties, "chiefOperatingOfficer")
+		delete(additionalProperties, "controller")
+		delete(additionalProperties, "dispatcher")
+		delete(additionalProperties, "serviceManager")
+		delete(additionalProperties, "dutyManager")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

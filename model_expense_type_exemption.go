@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ExpenseTypeExemption struct {
 	ExpenseType ExpenseTypeReference `json:"expenseType"`
 	TaxableLevels []int32 `json:"taxableLevels,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExpenseTypeExemption ExpenseTypeExemption
@@ -187,6 +187,11 @@ func (o ExpenseTypeExemption) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *ExpenseTypeExemption) UnmarshalJSON(data []byte) (err error) {
 
 	varExpenseTypeExemption := _ExpenseTypeExemption{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExpenseTypeExemption)
+	err = json.Unmarshal(data, &varExpenseTypeExemption)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExpenseTypeExemption(varExpenseTypeExemption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "expenseType")
+		delete(additionalProperties, "taxableLevels")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

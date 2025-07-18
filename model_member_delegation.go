@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type MemberDelegation struct {
 	DateEnd time.Time `json:"dateEnd"`
 	Member *MemberReference `json:"member,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MemberDelegation MemberDelegation
@@ -271,6 +271,11 @@ func (o MemberDelegation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -301,15 +306,26 @@ func (o *MemberDelegation) UnmarshalJSON(data []byte) (err error) {
 
 	varMemberDelegation := _MemberDelegation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMemberDelegation)
+	err = json.Unmarshal(data, &varMemberDelegation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MemberDelegation(varMemberDelegation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "delegationType")
+		delete(additionalProperties, "delegatedTo")
+		delete(additionalProperties, "dateStart")
+		delete(additionalProperties, "dateEnd")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -24,7 +24,10 @@ type BoardSubTypeInfo struct {
 	InactiveFlag NullableBool `json:"inactiveFlag,omitempty"`
 	TypeAssociationIds []int32 `json:"typeAssociationIds,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BoardSubTypeInfo BoardSubTypeInfo
 
 // NewBoardSubTypeInfo instantiates a new BoardSubTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o BoardSubTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BoardSubTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varBoardSubTypeInfo := _BoardSubTypeInfo{}
+
+	err = json.Unmarshal(data, &varBoardSubTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BoardSubTypeInfo(varBoardSubTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "typeAssociationIds")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBoardSubTypeInfo struct {

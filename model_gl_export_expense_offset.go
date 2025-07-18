@@ -29,7 +29,10 @@ type GLExportExpenseOffset struct {
 	Memo *string `json:"memo,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Total NullableFloat64 `json:"total,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportExpenseOffset GLExportExpenseOffset
 
 // NewGLExportExpenseOffset instantiates a new GLExportExpenseOffset object
 // This constructor will assign default values to properties that have it defined,
@@ -428,7 +431,42 @@ func (o GLExportExpenseOffset) ToMap() (map[string]interface{}, error) {
 	if o.Total.IsSet() {
 		toSerialize["total"] = o.Total.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportExpenseOffset) UnmarshalJSON(data []byte) (err error) {
+	varGLExportExpenseOffset := _GLExportExpenseOffset{}
+
+	err = json.Unmarshal(data, &varGLExportExpenseOffset)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportExpenseOffset(varGLExportExpenseOffset)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "documentDate")
+		delete(additionalProperties, "documentType")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "glTypeId")
+		delete(additionalProperties, "glClass")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "memo")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "total")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportExpenseOffset struct {

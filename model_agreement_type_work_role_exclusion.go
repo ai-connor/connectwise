@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type AgreementTypeWorkRoleExclusion struct {
 	Type *AgreementTypeReference `json:"type,omitempty"`
 	WorkRole WorkRoleReference `json:"workRole"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AgreementTypeWorkRoleExclusion AgreementTypeWorkRoleExclusion
@@ -187,6 +187,11 @@ func (o AgreementTypeWorkRoleExclusion) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *AgreementTypeWorkRoleExclusion) UnmarshalJSON(data []byte) (err error) 
 
 	varAgreementTypeWorkRoleExclusion := _AgreementTypeWorkRoleExclusion{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAgreementTypeWorkRoleExclusion)
+	err = json.Unmarshal(data, &varAgreementTypeWorkRoleExclusion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AgreementTypeWorkRoleExclusion(varAgreementTypeWorkRoleExclusion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

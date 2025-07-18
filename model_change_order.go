@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type ChangeOrder struct {
 	Id *int32 `json:"id,omitempty"`
 	PurchaseHeaderRecId int32 `json:"purchaseHeaderRecId"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ChangeOrder ChangeOrder
@@ -151,6 +151,11 @@ func (o ChangeOrder) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,15 +183,22 @@ func (o *ChangeOrder) UnmarshalJSON(data []byte) (err error) {
 
 	varChangeOrder := _ChangeOrder{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChangeOrder)
+	err = json.Unmarshal(data, &varChangeOrder)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ChangeOrder(varChangeOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "purchaseHeaderRecId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

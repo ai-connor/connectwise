@@ -22,7 +22,10 @@ type EntityType struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Code *string `json:"code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EntityType EntityType
 
 // NewEntityType instantiates a new EntityType object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o EntityType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EntityType) UnmarshalJSON(data []byte) (err error) {
+	varEntityType := _EntityType{}
+
+	err = json.Unmarshal(data, &varEntityType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EntityType(varEntityType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEntityType struct {

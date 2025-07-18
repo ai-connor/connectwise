@@ -29,7 +29,10 @@ type GLExportVendor struct {
 	DueDays NullableInt32 `json:"dueDays,omitempty"`
 	Site *SiteReference `json:"site,omitempty"`
 	TaxCode *TaxCodeReference `json:"taxCode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GLExportVendor GLExportVendor
 
 // NewGLExportVendor instantiates a new GLExportVendor object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o GLExportVendor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TaxCode) {
 		toSerialize["taxCode"] = o.TaxCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GLExportVendor) UnmarshalJSON(data []byte) (err error) {
+	varGLExportVendor := _GLExportVendor{}
+
+	err = json.Unmarshal(data, &varGLExportVendor)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GLExportVendor(varGLExportVendor)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "vendorNumber")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "dueDays")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "taxCode")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGLExportVendor struct {

@@ -28,7 +28,10 @@ type AgreementAdjustment struct {
 	AgreementId NullableInt32 `json:"agreementId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementAdjustment AgreementAdjustment
 
 // NewAgreementAdjustment instantiates a new AgreementAdjustment object
 // This constructor will assign default values to properties that have it defined,
@@ -322,7 +325,39 @@ func (o AgreementAdjustment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementAdjustment) UnmarshalJSON(data []byte) (err error) {
+	varAgreementAdjustment := _AgreementAdjustment{}
+
+	err = json.Unmarshal(data, &varAgreementAdjustment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementAdjustment(varAgreementAdjustment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "effectiveDate")
+		delete(additionalProperties, "agreementId")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementAdjustment struct {

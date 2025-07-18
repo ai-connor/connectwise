@@ -20,7 +20,10 @@ var _ MappedNullable = &IRestIdentifiedItem{}
 // IRestIdentifiedItem struct for IRestIdentifiedItem
 type IRestIdentifiedItem struct {
 	Id *int32 `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IRestIdentifiedItem IRestIdentifiedItem
 
 // NewIRestIdentifiedItem instantiates a new IRestIdentifiedItem object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o IRestIdentifiedItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IRestIdentifiedItem) UnmarshalJSON(data []byte) (err error) {
+	varIRestIdentifiedItem := _IRestIdentifiedItem{}
+
+	err = json.Unmarshal(data, &varIRestIdentifiedItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IRestIdentifiedItem(varIRestIdentifiedItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIRestIdentifiedItem struct {

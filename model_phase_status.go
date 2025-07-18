@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type PhaseStatus struct {
 	// Required when statusIndicator is Custom. Max length: 30;
 	CustomStatusIndicatorName *string `json:"customStatusIndicatorName,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PhaseStatus PhaseStatus
@@ -445,6 +445,11 @@ func (o PhaseStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -472,15 +477,29 @@ func (o *PhaseStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varPhaseStatus := _PhaseStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPhaseStatus)
+	err = json.Unmarshal(data, &varPhaseStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PhaseStatus(varPhaseStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "inactiveFlag")
+		delete(additionalProperties, "collapsedFlag")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "boardAssociationIds")
+		delete(additionalProperties, "statusIndicator")
+		delete(additionalProperties, "customStatusIndicatorName")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ManagementReportNotification struct {
 	GlobalFlag NullableBool `json:"globalFlag,omitempty"`
 	Company *CompanyReference `json:"company,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagementReportNotification ManagementReportNotification
@@ -306,6 +306,11 @@ func (o ManagementReportNotification) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -333,15 +338,26 @@ func (o *ManagementReportNotification) UnmarshalJSON(data []byte) (err error) {
 
 	varManagementReportNotification := _ManagementReportNotification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagementReportNotification)
+	err = json.Unmarshal(data, &varManagementReportNotification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagementReportNotification(varManagementReportNotification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "notifyWho")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "globalFlag")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

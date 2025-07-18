@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -66,6 +65,7 @@ type PortalConfigurationProjectSetup struct {
 	ProjectIssueAssignedFlag NullableBool `json:"projectIssueAssignedFlag,omitempty"`
 	ProjectDetailTotalHoursFlag NullableBool `json:"projectDetailTotalHoursFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PortalConfigurationProjectSetup PortalConfigurationProjectSetup
@@ -2075,6 +2075,11 @@ func (o PortalConfigurationProjectSetup) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2102,15 +2107,64 @@ func (o *PortalConfigurationProjectSetup) UnmarshalJSON(data []byte) (err error)
 
 	varPortalConfigurationProjectSetup := _PortalConfigurationProjectSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPortalConfigurationProjectSetup)
+	err = json.Unmarshal(data, &varPortalConfigurationProjectSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PortalConfigurationProjectSetup(varPortalConfigurationProjectSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "portalConfig")
+		delete(additionalProperties, "projectNameFlag")
+		delete(additionalProperties, "projectTypeFlag")
+		delete(additionalProperties, "statusFlag")
+		delete(additionalProperties, "projectManagerFlag")
+		delete(additionalProperties, "billingMethodFlag")
+		delete(additionalProperties, "contactFlag")
+		delete(additionalProperties, "estimatedStartFlag")
+		delete(additionalProperties, "estimatedEndFlag")
+		delete(additionalProperties, "descriptionFlag")
+		delete(additionalProperties, "lastUpdatedFlag")
+		delete(additionalProperties, "onlyDisplay")
+		delete(additionalProperties, "timeMaterialBudgetHrsFlag")
+		delete(additionalProperties, "timeMaterialScheduledStartFlag")
+		delete(additionalProperties, "timeMaterialScheduledFinishFlag")
+		delete(additionalProperties, "timeMaterialScheduledHrsFlag")
+		delete(additionalProperties, "timeMaterialActualStartFlag")
+		delete(additionalProperties, "timeMaterialActualFinishFlag")
+		delete(additionalProperties, "timeMaterialActualHrsFlag")
+		delete(additionalProperties, "timeMaterialBillFlag")
+		delete(additionalProperties, "timeMaterialStatusFlag")
+		delete(additionalProperties, "timeMaterialAssignedFlag")
+		delete(additionalProperties, "fixedFeeBudgetHrsFlag")
+		delete(additionalProperties, "fixedFeeScheduledStartFlag")
+		delete(additionalProperties, "fixedFeeScheduledFinishFlag")
+		delete(additionalProperties, "fixedFeeScheduledHrsFlag")
+		delete(additionalProperties, "fixedFeeActualStartFlag")
+		delete(additionalProperties, "fixedFeeActualFinishFlag")
+		delete(additionalProperties, "fixedFeeActualHrsFlag")
+		delete(additionalProperties, "fixedFeeBillFlag")
+		delete(additionalProperties, "fixedFeeStatusFlag")
+		delete(additionalProperties, "fixedFeeAssignedFlag")
+		delete(additionalProperties, "projectIssueBudgetHrsFlag")
+		delete(additionalProperties, "projectIssueScheduledStartFlag")
+		delete(additionalProperties, "projectIssueScheduledFinishFlag")
+		delete(additionalProperties, "projectIssueScheduledHrsFlag")
+		delete(additionalProperties, "projectIssueActualStartFlag")
+		delete(additionalProperties, "projectIssueActualFinishFlag")
+		delete(additionalProperties, "projectIssueActualHrsFlag")
+		delete(additionalProperties, "projectIssueBillFlag")
+		delete(additionalProperties, "projectIssueStatusFlag")
+		delete(additionalProperties, "projectIssueAssignedFlag")
+		delete(additionalProperties, "projectDetailTotalHoursFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ManagementBackup struct {
 	Item CatalogItemReference `json:"item"`
 	BillingLevel NullableString `json:"billingLevel"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManagementBackup ManagementBackup
@@ -207,6 +207,11 @@ func (o ManagementBackup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -236,15 +241,24 @@ func (o *ManagementBackup) UnmarshalJSON(data []byte) (err error) {
 
 	varManagementBackup := _ManagementBackup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManagementBackup)
+	err = json.Unmarshal(data, &varManagementBackup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ManagementBackup(varManagementBackup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "billingLevel")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

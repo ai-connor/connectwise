@@ -24,7 +24,10 @@ type WorkflowNotifyTypeInfo struct {
 	Name *string `json:"name,omitempty"`
 	IsSetupFlag NullableBool `json:"isSetupFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WorkflowNotifyTypeInfo WorkflowNotifyTypeInfo
 
 // NewWorkflowNotifyTypeInfo instantiates a new WorkflowNotifyTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -238,7 +241,37 @@ func (o WorkflowNotifyTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WorkflowNotifyTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varWorkflowNotifyTypeInfo := _WorkflowNotifyTypeInfo{}
+
+	err = json.Unmarshal(data, &varWorkflowNotifyTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WorkflowNotifyTypeInfo(varWorkflowNotifyTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "isSetupFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWorkflowNotifyTypeInfo struct {

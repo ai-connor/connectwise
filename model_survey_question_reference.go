@@ -22,7 +22,10 @@ type SurveyQuestionReference struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	Question *string `json:"question,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SurveyQuestionReference SurveyQuestionReference
 
 // NewSurveyQuestionReference instantiates a new SurveyQuestionReference object
 // This constructor will assign default values to properties that have it defined,
@@ -166,7 +169,35 @@ func (o SurveyQuestionReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SurveyQuestionReference) UnmarshalJSON(data []byte) (err error) {
+	varSurveyQuestionReference := _SurveyQuestionReference{}
+
+	err = json.Unmarshal(data, &varSurveyQuestionReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SurveyQuestionReference(varSurveyQuestionReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "question")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSurveyQuestionReference struct {

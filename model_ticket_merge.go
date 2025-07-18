@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &TicketMerge{}
 type TicketMerge struct {
 	MergeTicketIds []int32 `json:"mergeTicketIds"`
 	Status ServiceStatusReference `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TicketMerge TicketMerge
@@ -106,6 +106,11 @@ func (o TicketMerge) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["mergeTicketIds"] = o.MergeTicketIds
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *TicketMerge) UnmarshalJSON(data []byte) (err error) {
 
 	varTicketMerge := _TicketMerge{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTicketMerge)
+	err = json.Unmarshal(data, &varTicketMerge)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TicketMerge(varTicketMerge)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mergeTicketIds")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

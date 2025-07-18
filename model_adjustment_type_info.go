@@ -22,7 +22,10 @@ type AdjustmentTypeInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AdjustmentTypeInfo AdjustmentTypeInfo
 
 // NewAdjustmentTypeInfo instantiates a new AdjustmentTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o AdjustmentTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AdjustmentTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varAdjustmentTypeInfo := _AdjustmentTypeInfo{}
+
+	err = json.Unmarshal(data, &varAdjustmentTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AdjustmentTypeInfo(varAdjustmentTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAdjustmentTypeInfo struct {

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -147,6 +146,7 @@ type RmaTag struct {
 	ClosedBy *MemberReference `json:"closedBy,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RmaTag RmaTag
@@ -3355,6 +3355,11 @@ func (o RmaTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -3388,15 +3393,111 @@ func (o *RmaTag) UnmarshalJSON(data []byte) (err error) {
 
 	varRmaTag := _RmaTag{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRmaTag)
+	err = json.Unmarshal(data, &varRmaTag)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RmaTag(varRmaTag)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "serviceTicket")
+		delete(additionalProperties, "salesOrder")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "ivDescription")
+		delete(additionalProperties, "productDescription")
+		delete(additionalProperties, "serialNumber")
+		delete(additionalProperties, "mfgItemID")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "listPrice")
+		delete(additionalProperties, "unitPrice")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "problemDescription")
+		delete(additionalProperties, "returnedCompany")
+		delete(additionalProperties, "returnedContact")
+		delete(additionalProperties, "returnedContactType")
+		delete(additionalProperties, "returnedContactPhone")
+		delete(additionalProperties, "returnedContactExtension")
+		delete(additionalProperties, "returnedContactEmail")
+		delete(additionalProperties, "returnedContactAddressLine1")
+		delete(additionalProperties, "returnedContactAddressLine2")
+		delete(additionalProperties, "returnedContactCity")
+		delete(additionalProperties, "returnedContactState")
+		delete(additionalProperties, "returnedContactZip")
+		delete(additionalProperties, "returnedContactCountry")
+		delete(additionalProperties, "rmaDisposition")
+		delete(additionalProperties, "returnedSite")
+		delete(additionalProperties, "purchasedCompany")
+		delete(additionalProperties, "purchasedContact")
+		delete(additionalProperties, "purchasedContactType")
+		delete(additionalProperties, "purchasedContactPhone")
+		delete(additionalProperties, "purchasedContactExtension")
+		delete(additionalProperties, "purchasedContactEmail")
+		delete(additionalProperties, "purchasedContactAddressLine1")
+		delete(additionalProperties, "purchasedContactAddressLine2")
+		delete(additionalProperties, "purchasedContactCity")
+		delete(additionalProperties, "purchasedContactState")
+		delete(additionalProperties, "purchasedContactZip")
+		delete(additionalProperties, "purchasedContactCountry")
+		delete(additionalProperties, "purchasedInvoiceNumber")
+		delete(additionalProperties, "purchasedInvoiceDate")
+		delete(additionalProperties, "purchasedOrderNumber")
+		delete(additionalProperties, "purchasedVendorAction")
+		delete(additionalProperties, "purchasedVendorRmaNumber")
+		delete(additionalProperties, "purchasedSite")
+		delete(additionalProperties, "purchasedNotes")
+		delete(additionalProperties, "warrantyCompany")
+		delete(additionalProperties, "warrantyContact")
+		delete(additionalProperties, "warrantyContactType")
+		delete(additionalProperties, "warrantyContactPhone")
+		delete(additionalProperties, "warrantyContactEmail")
+		delete(additionalProperties, "warrantyContactExtension")
+		delete(additionalProperties, "warrantyContactAddressLine1")
+		delete(additionalProperties, "warrantyContactAddressLine2")
+		delete(additionalProperties, "warrantyContactCity")
+		delete(additionalProperties, "warrantyContactState")
+		delete(additionalProperties, "warrantyContactZip")
+		delete(additionalProperties, "warrantyContactCountry")
+		delete(additionalProperties, "warrantySite")
+		delete(additionalProperties, "warrantyNotes")
+		delete(additionalProperties, "repairCompany")
+		delete(additionalProperties, "repairContact")
+		delete(additionalProperties, "repairContactType")
+		delete(additionalProperties, "repairContactPhone")
+		delete(additionalProperties, "repairContactExtension")
+		delete(additionalProperties, "repairContactEmail")
+		delete(additionalProperties, "repairContactAddressLine1")
+		delete(additionalProperties, "repairContactAddressLine2")
+		delete(additionalProperties, "repairContactCity")
+		delete(additionalProperties, "repairContactState")
+		delete(additionalProperties, "repairContactZip")
+		delete(additionalProperties, "repairContactCountry")
+		delete(additionalProperties, "repairOrderNumber")
+		delete(additionalProperties, "repairSite")
+		delete(additionalProperties, "repairNotes")
+		delete(additionalProperties, "dropShipFlag")
+		delete(additionalProperties, "shipMethod")
+		delete(additionalProperties, "shippingDate")
+		delete(additionalProperties, "shippingTrackingNumber")
+		delete(additionalProperties, "internalNotes")
+		delete(additionalProperties, "closingNotes")
+		delete(additionalProperties, "dateClosed")
+		delete(additionalProperties, "accountManager")
+		delete(additionalProperties, "technicalContact")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "closedBy")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

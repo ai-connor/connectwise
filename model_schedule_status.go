@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ScheduleStatus struct {
 	DefaultFlag NullableBool `json:"defaultFlag,omitempty"`
 	ShowAsTentativeFlag NullableBool `json:"showAsTentativeFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleStatus ScheduleStatus
@@ -244,6 +244,11 @@ func (o ScheduleStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -271,15 +276,24 @@ func (o *ScheduleStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleStatus := _ScheduleStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleStatus)
+	err = json.Unmarshal(data, &varScheduleStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleStatus(varScheduleStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "showAsTentativeFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

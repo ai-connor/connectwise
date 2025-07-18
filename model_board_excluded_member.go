@@ -28,7 +28,10 @@ type BoardExcludedMember struct {
 	ParentId NullableInt32 `json:"parentId,omitempty"`
 	GrandParentId NullableInt32 `json:"grandParentId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BoardExcludedMember BoardExcludedMember
 
 // NewBoardExcludedMember instantiates a new BoardExcludedMember object
 // This constructor will assign default values to properties that have it defined,
@@ -402,7 +405,41 @@ func (o BoardExcludedMember) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GrandParentConnectWiseId) {
 		toSerialize["grandParentConnectWiseId"] = o.GrandParentConnectWiseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BoardExcludedMember) UnmarshalJSON(data []byte) (err error) {
+	varBoardExcludedMember := _BoardExcludedMember{}
+
+	err = json.Unmarshal(data, &varBoardExcludedMember)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BoardExcludedMember(varBoardExcludedMember)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "memberId")
+		delete(additionalProperties, "boardId")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBoardExcludedMember struct {

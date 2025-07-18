@@ -28,7 +28,10 @@ type WorkflowTriggerOption struct {
 	ParentConnectWiseId *string `json:"parentConnectWiseId,omitempty"`
 	GrandParentConnectWiseId *string `json:"grandParentConnectWiseId,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WorkflowTriggerOption WorkflowTriggerOption
 
 // NewWorkflowTriggerOption instantiates a new WorkflowTriggerOption object
 // This constructor will assign default values to properties that have it defined,
@@ -392,7 +395,41 @@ func (o WorkflowTriggerOption) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WorkflowTriggerOption) UnmarshalJSON(data []byte) (err error) {
+	varWorkflowTriggerOption := _WorkflowTriggerOption{}
+
+	err = json.Unmarshal(data, &varWorkflowTriggerOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WorkflowTriggerOption(varWorkflowTriggerOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "customField")
+		delete(additionalProperties, "connectWiseID")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "grandParentId")
+		delete(additionalProperties, "parentConnectWiseId")
+		delete(additionalProperties, "grandParentConnectWiseId")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWorkflowTriggerOption struct {

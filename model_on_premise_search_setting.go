@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type OnPremiseSearchSetting struct {
 	Id *int32 `json:"id,omitempty"`
 	Password string `json:"password"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OnPremiseSearchSetting OnPremiseSearchSetting
@@ -151,6 +151,11 @@ func (o OnPremiseSearchSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,15 +183,22 @@ func (o *OnPremiseSearchSetting) UnmarshalJSON(data []byte) (err error) {
 
 	varOnPremiseSearchSetting := _OnPremiseSearchSetting{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOnPremiseSearchSetting)
+	err = json.Unmarshal(data, &varOnPremiseSearchSetting)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OnPremiseSearchSetting(varOnPremiseSearchSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

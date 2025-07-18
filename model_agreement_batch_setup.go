@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type AgreementBatchSetup struct {
 	NextRunDate time.Time `json:"nextRunDate"`
 	DaysInAdvance NullableInt32 `json:"daysInAdvance"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AgreementBatchSetup AgreementBatchSetup
@@ -181,6 +181,11 @@ func (o AgreementBatchSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -209,15 +214,23 @@ func (o *AgreementBatchSetup) UnmarshalJSON(data []byte) (err error) {
 
 	varAgreementBatchSetup := _AgreementBatchSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAgreementBatchSetup)
+	err = json.Unmarshal(data, &varAgreementBatchSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AgreementBatchSetup(varAgreementBatchSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "nextRunDate")
+		delete(additionalProperties, "daysInAdvance")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

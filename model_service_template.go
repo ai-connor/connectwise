@@ -67,7 +67,10 @@ type ServiceTemplate struct {
 	EmailCC *string `json:"emailCC,omitempty"`
 	RestrictDownpaymentFlag NullableBool `json:"restrictDownpaymentFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceTemplate ServiceTemplate
 
 // NewServiceTemplate instantiates a new ServiceTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -1976,7 +1979,80 @@ func (o ServiceTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceTemplate) UnmarshalJSON(data []byte) (err error) {
+	varServiceTemplate := _ServiceTemplate{}
+
+	err = json.Unmarshal(data, &varServiceTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceTemplate(varServiceTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "item")
+		delete(additionalProperties, "subtype")
+		delete(additionalProperties, "serviceLocation")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "team")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "assignedNotifyFlag")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "problem")
+		delete(additionalProperties, "hoursBudget")
+		delete(additionalProperties, "internalAnalysis")
+		delete(additionalProperties, "timeBillableFlag")
+		delete(additionalProperties, "expenseBillableFlag")
+		delete(additionalProperties, "purchaseOrderNumber")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "billComplete_Flag")
+		delete(additionalProperties, "billServiceSeparatelyFlag")
+		delete(additionalProperties, "billingAmount")
+		delete(additionalProperties, "billUnapprovedTimeAndExpensesFlag")
+		delete(additionalProperties, "overrideFlag")
+		delete(additionalProperties, "timeInvoiceFlag")
+		delete(additionalProperties, "expenseInvoiceFlag")
+		delete(additionalProperties, "productInvoiceFlag")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "billingMethod")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "impact")
+		delete(additionalProperties, "assignedBy")
+		delete(additionalProperties, "scheduleDaysBefore")
+		delete(additionalProperties, "serviceDaysBefore")
+		delete(additionalProperties, "attachScheduleToNewServiceFlag")
+		delete(additionalProperties, "templateFlag")
+		delete(additionalProperties, "emailContactFlag")
+		delete(additionalProperties, "emailResourceFlag")
+		delete(additionalProperties, "emailCCFlag")
+		delete(additionalProperties, "emailCC")
+		delete(additionalProperties, "restrictDownpaymentFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceTemplate struct {

@@ -75,7 +75,10 @@ type UnpostedExpense struct {
 	LevelSixTaxAmount NullableFloat64 `json:"levelSixTaxAmount,omitempty"`
 	DateClosed *string `json:"dateClosed,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UnpostedExpense UnpostedExpense
 
 // NewUnpostedExpense instantiates a new UnpostedExpense object
 // This constructor will assign default values to properties that have it defined,
@@ -2069,7 +2072,81 @@ func (o UnpostedExpense) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UnpostedExpense) UnmarshalJSON(data []byte) (err error) {
+	varUnpostedExpense := _UnpostedExpense{}
+
+	err = json.Unmarshal(data, &varUnpostedExpense)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnpostedExpense(varUnpostedExpense)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "departmentId")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "accountNumber")
+		delete(additionalProperties, "creditAccount")
+		delete(additionalProperties, "expenseDetailId")
+		delete(additionalProperties, "expenseType")
+		delete(additionalProperties, "classification")
+		delete(additionalProperties, "glType")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "dateExpense")
+		delete(additionalProperties, "chargeCode")
+		delete(additionalProperties, "chargeDescription")
+		delete(additionalProperties, "inPolicy")
+		delete(additionalProperties, "paymentMethod")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "billableAmount")
+		delete(additionalProperties, "nonBillableAmount")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "agreementAmountCovered")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "projectPhase")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "avalaraTaxFlag")
+		delete(additionalProperties, "itemTaxableFlag")
+		delete(additionalProperties, "salesTaxAmount")
+		delete(additionalProperties, "stateTaxFlag")
+		delete(additionalProperties, "stateTaxXref")
+		delete(additionalProperties, "stateTaxAmount")
+		delete(additionalProperties, "countyTaxFlag")
+		delete(additionalProperties, "countyTaxXref")
+		delete(additionalProperties, "countyTaxAmount")
+		delete(additionalProperties, "cityTaxFlag")
+		delete(additionalProperties, "cityTaxXref")
+		delete(additionalProperties, "cityTaxAmount")
+		delete(additionalProperties, "countryTaxFlag")
+		delete(additionalProperties, "countryTaxXref")
+		delete(additionalProperties, "countryTaxAmount")
+		delete(additionalProperties, "compositeTaxFlag")
+		delete(additionalProperties, "compositeTaxXref")
+		delete(additionalProperties, "compositeTaxAmount")
+		delete(additionalProperties, "levelSixTaxFlag")
+		delete(additionalProperties, "levelSixTaxXref")
+		delete(additionalProperties, "levelSixTaxAmount")
+		delete(additionalProperties, "dateClosed")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnpostedExpense struct {

@@ -160,7 +160,10 @@ type TimeEntryChangeLog struct {
 	Phase *ProjectPhaseReference `json:"phase,omitempty"`
 	Activity *ActivityReference `json:"activity,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeEntryChangeLog TimeEntryChangeLog
 
 // NewTimeEntryChangeLog instantiates a new TimeEntryChangeLog object
 // This constructor will assign default values to properties that have it defined,
@@ -3079,7 +3082,108 @@ func (o TimeEntryChangeLog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeEntryChangeLog) UnmarshalJSON(data []byte) (err error) {
+	varTimeEntryChangeLog := _TimeEntryChangeLog{}
+
+	err = json.Unmarshal(data, &varTimeEntryChangeLog)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeEntryChangeLog(varTimeEntryChangeLog)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "partnerId")
+		delete(additionalProperties, "productInstanceId")
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "activitySubject")
+		delete(additionalProperties, "actualUtilizedHrs")
+		delete(additionalProperties, "agreementAdjustmentFirm")
+		delete(additionalProperties, "agreementAdjustmentTotal")
+		delete(additionalProperties, "agreementAmountCovered")
+		delete(additionalProperties, "agreementHoursCovered")
+		delete(additionalProperties, "billableAmount")
+		delete(additionalProperties, "billableFlag")
+		delete(additionalProperties, "billableHours")
+		delete(additionalProperties, "billableUtilizedHours")
+		delete(additionalProperties, "memberDailyCapacity")
+		delete(additionalProperties, "billableOption")
+		delete(additionalProperties, "businessGroup")
+		delete(additionalProperties, "locationName")
+		delete(additionalProperties, "chargeCode")
+		delete(additionalProperties, "chargeTo")
+		delete(additionalProperties, "chargeToType")
+		delete(additionalProperties, "chargeToRecId")
+		delete(additionalProperties, "companyAndAgreement")
+		delete(additionalProperties, "companyName")
+		delete(additionalProperties, "timeStart")
+		delete(additionalProperties, "timeStartUtc")
+		delete(additionalProperties, "timeEnd")
+		delete(additionalProperties, "timeEndUtc")
+		delete(additionalProperties, "dateStart")
+		delete(additionalProperties, "dateInvoice")
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "hourlyCost")
+		delete(additionalProperties, "hourlyCostDecimal")
+		delete(additionalProperties, "hourlyRate")
+		delete(additionalProperties, "hoursActual")
+		delete(additionalProperties, "internalNote")
+		delete(additionalProperties, "invoiceAdjustmentFirm")
+		delete(additionalProperties, "invoiceAdjustmentTotal")
+		delete(additionalProperties, "invoiceFlag")
+		delete(additionalProperties, "invoiceNumber")
+		delete(additionalProperties, "invoiceReady")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "memberId")
+		delete(additionalProperties, "nonBillableAmt")
+		delete(additionalProperties, "nonBillableHrs")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "opportunityRecId")
+		delete(additionalProperties, "optionId")
+		delete(additionalProperties, "projectActivity")
+		delete(additionalProperties, "projectName")
+		delete(additionalProperties, "projectPhase")
+		delete(additionalProperties, "serviceRequestStatus")
+		delete(additionalProperties, "serviceRequestSummary")
+		delete(additionalProperties, "territory")
+		delete(additionalProperties, "timeRecId")
+		delete(additionalProperties, "timeStatus")
+		delete(additionalProperties, "utilizationFlag")
+		delete(additionalProperties, "companyType")
+		delete(additionalProperties, "ticketCurrentBoard")
+		delete(additionalProperties, "ticketType")
+		delete(additionalProperties, "ticketSubtype")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "billingStatus")
+		delete(additionalProperties, "processingStatus")
+		delete(additionalProperties, "invoicedhours")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "workType")
+		delete(additionalProperties, "workRole")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "invoice")
+		delete(additionalProperties, "ticket")
+		delete(additionalProperties, "project")
+		delete(additionalProperties, "phase")
+		delete(additionalProperties, "activity")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeEntryChangeLog struct {

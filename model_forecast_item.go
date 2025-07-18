@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -55,6 +54,7 @@ type ForecastItem struct {
 	SubNumber *int32 `json:"subNumber,omitempty"`
 	TaxableFlag *bool `json:"taxableFlag,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ForecastItem ForecastItem
@@ -1131,6 +1131,11 @@ func (o ForecastItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1160,15 +1165,49 @@ func (o *ForecastItem) UnmarshalJSON(data []byte) (err error) {
 
 	varForecastItem := _ForecastItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varForecastItem)
+	err = json.Unmarshal(data, &varForecastItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ForecastItem(varForecastItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "forecastDescription")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "catalogItem")
+		delete(additionalProperties, "productDescription")
+		delete(additionalProperties, "productClass")
+		delete(additionalProperties, "revenue")
+		delete(additionalProperties, "cost")
+		delete(additionalProperties, "margin")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "includeFlag")
+		delete(additionalProperties, "quoteWerksDocNo")
+		delete(additionalProperties, "quoteWerksDocName")
+		delete(additionalProperties, "quoteWerksQuantity")
+		delete(additionalProperties, "forecastType")
+		delete(additionalProperties, "linkFlag")
+		delete(additionalProperties, "recurringRevenue")
+		delete(additionalProperties, "recurringCost")
+		delete(additionalProperties, "recurringDateStart")
+		delete(additionalProperties, "recurringDateEnd")
+		delete(additionalProperties, "billCycle")
+		delete(additionalProperties, "cycleBasis")
+		delete(additionalProperties, "cycles")
+		delete(additionalProperties, "recurringFlag")
+		delete(additionalProperties, "sequenceNumber")
+		delete(additionalProperties, "subNumber")
+		delete(additionalProperties, "taxableFlag")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

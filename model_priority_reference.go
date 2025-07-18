@@ -24,7 +24,10 @@ type PriorityReference struct {
 	Sort NullableInt32 `json:"sort,omitempty"`
 	Level *string `json:"level,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PriorityReference PriorityReference
 
 // NewPriorityReference instantiates a new PriorityReference object
 // This constructor will assign default values to properties that have it defined,
@@ -248,7 +251,37 @@ func (o PriorityReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PriorityReference) UnmarshalJSON(data []byte) (err error) {
+	varPriorityReference := _PriorityReference{}
+
+	err = json.Unmarshal(data, &varPriorityReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PriorityReference(varPriorityReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sort")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePriorityReference struct {

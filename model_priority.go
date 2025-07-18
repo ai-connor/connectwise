@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type Priority struct {
 	UrgencySortOrder *string `json:"urgencySortOrder,omitempty"`
 	Level NullableString `json:"level,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Priority Priority
@@ -391,6 +391,11 @@ func (o Priority) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -419,15 +424,28 @@ func (o *Priority) UnmarshalJSON(data []byte) (err error) {
 
 	varPriority := _Priority{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPriority)
+	err = json.Unmarshal(data, &varPriority)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Priority(varPriority)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "sortOrder")
+		delete(additionalProperties, "defaultFlag")
+		delete(additionalProperties, "imageLink")
+		delete(additionalProperties, "urgencySortOrder")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

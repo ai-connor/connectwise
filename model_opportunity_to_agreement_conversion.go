@@ -35,7 +35,10 @@ type OpportunityToAgreementConversion struct {
 	IncludeNoteIds []int32 `json:"includeNoteIds,omitempty"`
 	IncludeDocumentIds []int32 `json:"includeDocumentIds,omitempty"`
 	IncludeProductIds []int32 `json:"includeProductIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpportunityToAgreementConversion OpportunityToAgreementConversion
 
 // NewOpportunityToAgreementConversion instantiates a new OpportunityToAgreementConversion object
 // This constructor will assign default values to properties that have it defined,
@@ -704,7 +707,48 @@ func (o OpportunityToAgreementConversion) ToMap() (map[string]interface{}, error
 	if !IsNil(o.IncludeProductIds) {
 		toSerialize["includeProductIds"] = o.IncludeProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpportunityToAgreementConversion) UnmarshalJSON(data []byte) (err error) {
+	varOpportunityToAgreementConversion := _OpportunityToAgreementConversion{}
+
+	err = json.Unmarshal(data, &varOpportunityToAgreementConversion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpportunityToAgreementConversion(varOpportunityToAgreementConversion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "agreementId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "startDate")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "noEndingDateFlag")
+		delete(additionalProperties, "billCycleId")
+		delete(additionalProperties, "billOneTimeFlag")
+		delete(additionalProperties, "locationId")
+		delete(additionalProperties, "businessUnitId")
+		delete(additionalProperties, "includeAllNotesFlag")
+		delete(additionalProperties, "includeAllDocumentsFlag")
+		delete(additionalProperties, "includeAllProductsFlag")
+		delete(additionalProperties, "includeNoteIds")
+		delete(additionalProperties, "includeDocumentIds")
+		delete(additionalProperties, "includeProductIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpportunityToAgreementConversion struct {

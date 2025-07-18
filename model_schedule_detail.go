@@ -25,7 +25,10 @@ type ScheduleDetail struct {
 	DateEnd *string `json:"dateEnd,omitempty"`
 	Member *MemberReference `json:"member,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScheduleDetail ScheduleDetail
 
 // NewScheduleDetail instantiates a new ScheduleDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o ScheduleDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduleDetail) UnmarshalJSON(data []byte) (err error) {
+	varScheduleDetail := _ScheduleDetail{}
+
+	err = json.Unmarshal(data, &varScheduleDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduleDetail(varScheduleDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "scheduleEntry")
+		delete(additionalProperties, "dateStart")
+		delete(additionalProperties, "dateEnd")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduleDetail struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &EntityTypeInfo{}
 type EntityTypeInfo struct {
 	Id *int32 `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EntityTypeInfo EntityTypeInfo
 
 // NewEntityTypeInfo instantiates a new EntityTypeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o EntityTypeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EntityTypeInfo) UnmarshalJSON(data []byte) (err error) {
+	varEntityTypeInfo := _EntityTypeInfo{}
+
+	err = json.Unmarshal(data, &varEntityTypeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EntityTypeInfo(varEntityTypeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEntityTypeInfo struct {

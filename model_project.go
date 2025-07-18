@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -98,6 +97,7 @@ type Project struct {
 	OverridePercentComplete NullableBool `json:"overridePercentComplete,omitempty"`
 	ShowOverridePercentFlag NullableBool `json:"showOverridePercentFlag,omitempty"`
 	CustomFields []CustomFieldValue `json:"customFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Project Project
@@ -2747,6 +2747,11 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomFields) {
 		toSerialize["customFields"] = o.CustomFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2779,15 +2784,87 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 
 	varProject := _Project{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProject)
+	err = json.Unmarshal(data, &varProject)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Project(varProject)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "actualEnd")
+		delete(additionalProperties, "actualHours")
+		delete(additionalProperties, "actualStart")
+		delete(additionalProperties, "agreement")
+		delete(additionalProperties, "billExpenses")
+		delete(additionalProperties, "billingAmount")
+		delete(additionalProperties, "billingAttention")
+		delete(additionalProperties, "billingMethod")
+		delete(additionalProperties, "billingRateType")
+		delete(additionalProperties, "billingTerms")
+		delete(additionalProperties, "billProducts")
+		delete(additionalProperties, "billProjectAfterClosedFlag")
+		delete(additionalProperties, "billTime")
+		delete(additionalProperties, "billToCompany")
+		delete(additionalProperties, "billToContact")
+		delete(additionalProperties, "billToSite")
+		delete(additionalProperties, "billUnapprovedTimeAndExpense")
+		delete(additionalProperties, "board")
+		delete(additionalProperties, "budgetAnalysis")
+		delete(additionalProperties, "budgetFlag")
+		delete(additionalProperties, "budgetHours")
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "customerPO")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "downpayment")
+		delete(additionalProperties, "estimatedEnd")
+		delete(additionalProperties, "percentComplete")
+		delete(additionalProperties, "estimatedExpenseRevenue")
+		delete(additionalProperties, "estimatedHours")
+		delete(additionalProperties, "estimatedProductRevenue")
+		delete(additionalProperties, "estimatedStart")
+		delete(additionalProperties, "estimatedTimeRevenue")
+		delete(additionalProperties, "expenseApprover")
+		delete(additionalProperties, "includeDependenciesFlag")
+		delete(additionalProperties, "includeEstimatesFlag")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "department")
+		delete(additionalProperties, "manager")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "opportunity")
+		delete(additionalProperties, "projectTemplateId")
+		delete(additionalProperties, "restrictDownPaymentFlag")
+		delete(additionalProperties, "scheduledEnd")
+		delete(additionalProperties, "scheduledHours")
+		delete(additionalProperties, "scheduledStart")
+		delete(additionalProperties, "shipToCompany")
+		delete(additionalProperties, "shipToContact")
+		delete(additionalProperties, "shipToSite")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "closedFlag")
+		delete(additionalProperties, "timeApprover")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "doNotDisplayInPortalFlag")
+		delete(additionalProperties, "billingStartDate")
+		delete(additionalProperties, "poAmount")
+		delete(additionalProperties, "estimatedTimeCost")
+		delete(additionalProperties, "estimatedExpenseCost")
+		delete(additionalProperties, "estimatedProductCost")
+		delete(additionalProperties, "taxCode")
+		delete(additionalProperties, "companyLocation")
+		delete(additionalProperties, "_info")
+		delete(additionalProperties, "overridePercentComplete")
+		delete(additionalProperties, "showOverridePercentFlag")
+		delete(additionalProperties, "customFields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

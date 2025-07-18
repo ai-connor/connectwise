@@ -13,7 +13,6 @@ package cwapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type AllowedOrigin struct {
 	LastUpdateUtc *time.Time `json:"lastUpdateUtc,omitempty"`
 	UpdatedBy *string `json:"updatedBy,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AllowedOrigin AllowedOrigin
@@ -253,6 +253,11 @@ func (o AllowedOrigin) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -281,15 +286,25 @@ func (o *AllowedOrigin) UnmarshalJSON(data []byte) (err error) {
 
 	varAllowedOrigin := _AllowedOrigin{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAllowedOrigin)
+	err = json.Unmarshal(data, &varAllowedOrigin)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AllowedOrigin(varAllowedOrigin)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "origin")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "lastUpdateUtc")
+		delete(additionalProperties, "updatedBy")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

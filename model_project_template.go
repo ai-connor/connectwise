@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ProjectTemplate struct {
 	ConnectWiseId *string `json:"connectWiseId,omitempty"`
 	Type *ProjectTypeReference `json:"type,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectTemplate ProjectTemplate
@@ -260,6 +260,11 @@ func (o ProjectTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -287,15 +292,25 @@ func (o *ProjectTemplate) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectTemplate := _ProjectTemplate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectTemplate)
+	err = json.Unmarshal(data, &varProjectTemplate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectTemplate(varProjectTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "connectWiseId")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

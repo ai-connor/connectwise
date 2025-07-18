@@ -24,7 +24,10 @@ type AgreementBillingInfo struct {
 	AgreementAmount *float64 `json:"agreementAmount,omitempty"`
 	AgreementRecId *int32 `json:"agreementRecId,omitempty"`
 	ParentRecId *int32 `json:"parentRecId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgreementBillingInfo AgreementBillingInfo
 
 // NewAgreementBillingInfo instantiates a new AgreementBillingInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o AgreementBillingInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ParentRecId) {
 		toSerialize["parentRecId"] = o.ParentRecId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgreementBillingInfo) UnmarshalJSON(data []byte) (err error) {
+	varAgreementBillingInfo := _AgreementBillingInfo{}
+
+	err = json.Unmarshal(data, &varAgreementBillingInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgreementBillingInfo(varAgreementBillingInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "agreementName")
+		delete(additionalProperties, "agreementType")
+		delete(additionalProperties, "agreementAmount")
+		delete(additionalProperties, "agreementRecId")
+		delete(additionalProperties, "parentRecId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgreementBillingInfo struct {

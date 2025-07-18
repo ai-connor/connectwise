@@ -36,7 +36,10 @@ type ServiceNote struct {
 	ExternalFlag NullableBool `json:"externalFlag,omitempty"`
 	SentimentScore NullableFloat64 `json:"sentimentScore,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceNote ServiceNote
 
 // NewServiceNote instantiates a new ServiceNote object
 // This constructor will assign default values to properties that have it defined,
@@ -760,7 +763,49 @@ func (o ServiceNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceNote) UnmarshalJSON(data []byte) (err error) {
+	varServiceNote := _ServiceNote{}
+
+	err = json.Unmarshal(data, &varServiceNote)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceNote(varServiceNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "ticketId")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "detailDescriptionFlag")
+		delete(additionalProperties, "internalAnalysisFlag")
+		delete(additionalProperties, "resolutionFlag")
+		delete(additionalProperties, "issueFlag")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "contact")
+		delete(additionalProperties, "customerUpdatedFlag")
+		delete(additionalProperties, "processNotifications")
+		delete(additionalProperties, "dateCreated")
+		delete(additionalProperties, "createdBy")
+		delete(additionalProperties, "internalFlag")
+		delete(additionalProperties, "externalFlag")
+		delete(additionalProperties, "sentimentScore")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceNote struct {

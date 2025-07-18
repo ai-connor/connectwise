@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ProjectNote struct {
 	Type *NoteTypeReference `json:"type,omitempty"`
 	Flagged NullableBool `json:"flagged,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectNote ProjectNote
@@ -279,6 +279,11 @@ func (o ProjectNote) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -306,15 +311,25 @@ func (o *ProjectNote) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectNote := _ProjectNote{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectNote)
+	err = json.Unmarshal(data, &varProjectNote)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectNote(varProjectNote)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "projectId")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "flagged")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

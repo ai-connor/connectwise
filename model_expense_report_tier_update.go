@@ -21,7 +21,10 @@ var _ MappedNullable = &ExpenseReportTierUpdate{}
 type ExpenseReportTierUpdate struct {
 	Id *int32 `json:"id,omitempty"`
 	ApprovalType NullableString `json:"approvalType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExpenseReportTierUpdate ExpenseReportTierUpdate
 
 // NewExpenseReportTierUpdate instantiates a new ExpenseReportTierUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -130,7 +133,34 @@ func (o ExpenseReportTierUpdate) ToMap() (map[string]interface{}, error) {
 	if o.ApprovalType.IsSet() {
 		toSerialize["approvalType"] = o.ApprovalType.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExpenseReportTierUpdate) UnmarshalJSON(data []byte) (err error) {
+	varExpenseReportTierUpdate := _ExpenseReportTierUpdate{}
+
+	err = json.Unmarshal(data, &varExpenseReportTierUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExpenseReportTierUpdate(varExpenseReportTierUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "approvalType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExpenseReportTierUpdate struct {

@@ -25,7 +25,10 @@ type OnHandSerialNumber struct {
 	Warehouse *WarehouseReference `json:"warehouse,omitempty"`
 	WarehouseBin *WarehouseBinReference `json:"warehouseBin,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OnHandSerialNumber OnHandSerialNumber
 
 // NewOnHandSerialNumber instantiates a new OnHandSerialNumber object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o OnHandSerialNumber) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OnHandSerialNumber) UnmarshalJSON(data []byte) (err error) {
+	varOnHandSerialNumber := _OnHandSerialNumber{}
+
+	err = json.Unmarshal(data, &varOnHandSerialNumber)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OnHandSerialNumber(varOnHandSerialNumber)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "serial")
+		delete(additionalProperties, "catalogItem")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "warehouseBin")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOnHandSerialNumber struct {

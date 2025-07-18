@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ChargeCodeExpenseType struct {
 	Type ExpenseTypeReference `json:"type"`
 	ChargeCode *ChargeCodeReference `json:"chargeCode,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ChargeCodeExpenseType ChargeCodeExpenseType
@@ -187,6 +187,11 @@ func (o ChargeCodeExpenseType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,15 +219,23 @@ func (o *ChargeCodeExpenseType) UnmarshalJSON(data []byte) (err error) {
 
 	varChargeCodeExpenseType := _ChargeCodeExpenseType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChargeCodeExpenseType)
+	err = json.Unmarshal(data, &varChargeCodeExpenseType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ChargeCodeExpenseType(varChargeCodeExpenseType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "chargeCode")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type EPayConfiguration struct {
 	//  Max length: 500;
 	InitializationVector *string `json:"initializationVector,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EPayConfiguration EPayConfiguration
@@ -308,6 +308,11 @@ func (o EPayConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -338,15 +343,27 @@ func (o *EPayConfiguration) UnmarshalJSON(data []byte) (err error) {
 
 	varEPayConfiguration := _EPayConfiguration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEPayConfiguration)
+	err = json.Unmarshal(data, &varEPayConfiguration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EPayConfiguration(varEPayConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "storeIdentifier")
+		delete(additionalProperties, "encryptionKey")
+		delete(additionalProperties, "initializationVector")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

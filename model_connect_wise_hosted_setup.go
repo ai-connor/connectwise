@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -47,6 +46,7 @@ type ConnectWiseHostedSetup struct {
 	CreatedBy *string `json:"createdBy,omitempty"`
 	DateCreated *string `json:"dateCreated,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConnectWiseHostedSetup ConnectWiseHostedSetup
@@ -771,6 +771,11 @@ func (o ConnectWiseHostedSetup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -801,15 +806,38 @@ func (o *ConnectWiseHostedSetup) UnmarshalJSON(data []byte) (err error) {
 
 	varConnectWiseHostedSetup := _ConnectWiseHostedSetup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConnectWiseHostedSetup)
+	err = json.Unmarshal(data, &varConnectWiseHostedSetup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConnectWiseHostedSetup(varConnectWiseHostedSetup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "screenId")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "clientId")
+		delete(additionalProperties, "origin")
+		delete(additionalProperties, "podHeight")
+		delete(additionalProperties, "toolbarButtonDialogHeight")
+		delete(additionalProperties, "toolbarButtonDialogWidth")
+		delete(additionalProperties, "toolbarButtonText")
+		delete(additionalProperties, "toolbarButtonToolTip")
+		delete(additionalProperties, "toolbarButtonIconDocumentId")
+		delete(additionalProperties, "disabledFlag")
+		delete(additionalProperties, "locationIds")
+		delete(additionalProperties, "locationsEnabledFlag")
+		delete(additionalProperties, "createdBy")
+		delete(additionalProperties, "dateCreated")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

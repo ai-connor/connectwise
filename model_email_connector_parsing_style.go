@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type EmailConnectorParsingStyle struct {
 	ParseRule string `json:"parseRule"`
 	Priority NullableInt32 `json:"priority"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EmailConnectorParsingStyle EmailConnectorParsingStyle
@@ -208,6 +208,11 @@ func (o EmailConnectorParsingStyle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -237,15 +242,24 @@ func (o *EmailConnectorParsingStyle) UnmarshalJSON(data []byte) (err error) {
 
 	varEmailConnectorParsingStyle := _EmailConnectorParsingStyle{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEmailConnectorParsingStyle)
+	err = json.Unmarshal(data, &varEmailConnectorParsingStyle)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EmailConnectorParsingStyle(varEmailConnectorParsingStyle)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "parsingType")
+		delete(additionalProperties, "parseRule")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

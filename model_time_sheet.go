@@ -29,7 +29,10 @@ type TimeSheet struct {
 	Hours NullableFloat64 `json:"hours,omitempty"`
 	Deadline *string `json:"deadline,omitempty"`
 	Info *map[string]string `json:"_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeSheet TimeSheet
 
 // NewTimeSheet instantiates a new TimeSheet object
 // This constructor will assign default values to properties that have it defined,
@@ -448,7 +451,42 @@ func (o TimeSheet) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Info) {
 		toSerialize["_info"] = o.Info
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeSheet) UnmarshalJSON(data []byte) (err error) {
+	varTimeSheet := _TimeSheet{}
+
+	err = json.Unmarshal(data, &varTimeSheet)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeSheet(varTimeSheet)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "member")
+		delete(additionalProperties, "year")
+		delete(additionalProperties, "period")
+		delete(additionalProperties, "dateStart")
+		delete(additionalProperties, "dateEnd")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "hours")
+		delete(additionalProperties, "deadline")
+		delete(additionalProperties, "_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeSheet struct {
