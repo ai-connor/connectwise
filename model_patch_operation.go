@@ -21,7 +21,7 @@ var _ MappedNullable = &PatchOperation{}
 type PatchOperation struct {
 	Op *string `json:"op,omitempty"`
 	Path *string `json:"path,omitempty"`
-	Value map[string]interface{} `json:"value,omitempty"`
+	Value any `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,19 +109,18 @@ func (o *PatchOperation) SetPath(v string) {
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *PatchOperation) GetValue() map[string]interface{} {
+func (o *PatchOperation) GetValue() any {
 	if o == nil || IsNil(o.Value) {
-		var ret map[string]interface{}
-		return ret
+		return ""
 	}
 	return o.Value
 }
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PatchOperation) GetValueOk() (map[string]interface{}, bool) {
+func (o *PatchOperation) GetValueOk() (any, bool) {
 	if o == nil || IsNil(o.Value) {
-		return map[string]interface{}{}, false
+		return "", false
 	}
 	return o.Value, true
 }
@@ -136,7 +135,7 @@ func (o *PatchOperation) HasValue() bool {
 }
 
 // SetValue gets a reference to the given map[string]interface{} and assigns it to the Value field.
-func (o *PatchOperation) SetValue(v map[string]interface{}) {
+func (o *PatchOperation) SetValue(v any) {
 	o.Value = v
 }
 
