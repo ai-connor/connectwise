@@ -12,7 +12,6 @@ package cwapi
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
 )
 
@@ -27,8 +26,8 @@ type ScheduleEntry struct {
 	Name *string `json:"name,omitempty"`
 	Member *MemberReference `json:"member,omitempty"`
 	Where *ServiceLocationReference `json:"where,omitempty"`
-	DateStart *time.Time `json:"dateStart,omitempty"`
-	DateEnd *time.Time `json:"dateEnd,omitempty"`
+	DateStart *string `json:"dateStart,omitempty"`
+	DateEnd *string `json:"dateEnd,omitempty"`
 	Reminder *ReminderReference `json:"reminder,omitempty"`
 	Status *ScheduleStatusReference `json:"status,omitempty"`
 	Type ScheduleTypeReference `json:"type"`
@@ -41,8 +40,8 @@ type ScheduleEntry struct {
 	AddMemberToProjectFlag NullableBool `json:"addMemberToProjectFlag,omitempty"`
 	ProjectRoleId NullableInt32 `json:"projectRoleId,omitempty"`
 	MobileGuid NullableString `json:"mobileGuid,omitempty"`
-	AcknowledgedDate *time.Time `json:"acknowledgedDate,omitempty"`
-	CloseDate *time.Time `json:"closeDate,omitempty"`
+	AcknowledgedDate *string `json:"acknowledgedDate,omitempty"`
+	CloseDate *string `json:"closeDate,omitempty"`
 	NotifyResource NullableBool `json:"notifyResource,omitempty"`
 	NotificationSent NullableBool `json:"notificationSent,omitempty"`
 	NotificationResponse *string `json:"notificationResponse,omitempty"`
@@ -244,9 +243,9 @@ func (o *ScheduleEntry) SetWhere(v ServiceLocationReference) {
 }
 
 // GetDateStart returns the DateStart field value if set, zero value otherwise.
-func (o *ScheduleEntry) GetDateStart() time.Time {
+func (o *ScheduleEntry) GetDateStart() string {
 	if o == nil || IsNil(o.DateStart) {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 	return *o.DateStart
@@ -254,7 +253,7 @@ func (o *ScheduleEntry) GetDateStart() time.Time {
 
 // GetDateStartOk returns a tuple with the DateStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ScheduleEntry) GetDateStartOk() (*time.Time, bool) {
+func (o *ScheduleEntry) GetDateStartOk() (*string, bool) {
 	if o == nil || IsNil(o.DateStart) {
 		return nil, false
 	}
@@ -270,15 +269,15 @@ func (o *ScheduleEntry) HasDateStart() bool {
 	return false
 }
 
-// SetDateStart gets a reference to the given time.Time and assigns it to the DateStart field.
-func (o *ScheduleEntry) SetDateStart(v time.Time) {
+// SetDateStart gets a reference to the given string and assigns it to the DateStart field.
+func (o *ScheduleEntry) SetDateStart(v string) {
 	o.DateStart = &v
 }
 
 // GetDateEnd returns the DateEnd field value if set, zero value otherwise.
-func (o *ScheduleEntry) GetDateEnd() time.Time {
+func (o *ScheduleEntry) GetDateEnd() string {
 	if o == nil || IsNil(o.DateEnd) {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 	return *o.DateEnd
@@ -286,7 +285,7 @@ func (o *ScheduleEntry) GetDateEnd() time.Time {
 
 // GetDateEndOk returns a tuple with the DateEnd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ScheduleEntry) GetDateEndOk() (*time.Time, bool) {
+func (o *ScheduleEntry) GetDateEndOk() (*string, bool) {
 	if o == nil || IsNil(o.DateEnd) {
 		return nil, false
 	}
@@ -302,8 +301,8 @@ func (o *ScheduleEntry) HasDateEnd() bool {
 	return false
 }
 
-// SetDateEnd gets a reference to the given time.Time and assigns it to the DateEnd field.
-func (o *ScheduleEntry) SetDateEnd(v time.Time) {
+// SetDateEnd gets a reference to the given string and assigns it to the DateEnd field.
+func (o *ScheduleEntry) SetDateEnd(v string) {
 	o.DateEnd = &v
 }
 
@@ -764,9 +763,9 @@ func (o *ScheduleEntry) UnsetMobileGuid() {
 }
 
 // GetAcknowledgedDate returns the AcknowledgedDate field value if set, zero value otherwise.
-func (o *ScheduleEntry) GetAcknowledgedDate() time.Time {
+func (o *ScheduleEntry) GetAcknowledgedDate() string {
 	if o == nil || IsNil(o.AcknowledgedDate) {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 	return *o.AcknowledgedDate
@@ -774,7 +773,7 @@ func (o *ScheduleEntry) GetAcknowledgedDate() time.Time {
 
 // GetAcknowledgedDateOk returns a tuple with the AcknowledgedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ScheduleEntry) GetAcknowledgedDateOk() (*time.Time, bool) {
+func (o *ScheduleEntry) GetAcknowledgedDateOk() (*string, bool) {
 	if o == nil || IsNil(o.AcknowledgedDate) {
 		return nil, false
 	}
@@ -790,15 +789,15 @@ func (o *ScheduleEntry) HasAcknowledgedDate() bool {
 	return false
 }
 
-// SetAcknowledgedDate gets a reference to the given time.Time and assigns it to the AcknowledgedDate field.
-func (o *ScheduleEntry) SetAcknowledgedDate(v time.Time) {
+// SetAcknowledgedDate gets a reference to the given string and assigns it to the AcknowledgedDate field.
+func (o *ScheduleEntry) SetAcknowledgedDate(v string) {
 	o.AcknowledgedDate = &v
 }
 
 // GetCloseDate returns the CloseDate field value if set, zero value otherwise.
-func (o *ScheduleEntry) GetCloseDate() time.Time {
+func (o *ScheduleEntry) GetCloseDate() string {
 	if o == nil || IsNil(o.CloseDate) {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 	return *o.CloseDate
@@ -806,7 +805,7 @@ func (o *ScheduleEntry) GetCloseDate() time.Time {
 
 // GetCloseDateOk returns a tuple with the CloseDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ScheduleEntry) GetCloseDateOk() (*time.Time, bool) {
+func (o *ScheduleEntry) GetCloseDateOk() (*string, bool) {
 	if o == nil || IsNil(o.CloseDate) {
 		return nil, false
 	}
@@ -822,8 +821,8 @@ func (o *ScheduleEntry) HasCloseDate() bool {
 	return false
 }
 
-// SetCloseDate gets a reference to the given time.Time and assigns it to the CloseDate field.
-func (o *ScheduleEntry) SetCloseDate(v time.Time) {
+// SetCloseDate gets a reference to the given string and assigns it to the CloseDate field.
+func (o *ScheduleEntry) SetCloseDate(v string) {
 	o.CloseDate = &v
 }
 

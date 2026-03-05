@@ -254635,7 +254635,7 @@ components:
       example:
         mobileGuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         endTimeSet: true
-        dateEnd: 2000-01-23T04:56:07.000+00:00
+        dateEnd: dateEnd
         type:
           identifier: identifier
           _info:
@@ -254643,8 +254643,8 @@ components:
           id: 1
         projectRoleId: 5
         acknowledgedFlag: true
-        acknowledgedDate: 2000-01-23T04:56:07.000+00:00
-        dateStart: 2000-01-23T04:56:07.000+00:00
+        acknowledgedDate: acknowledgedDate
+        dateStart: dateStart
         meetingFlag: true
         allowScheduleConflictsFlag: true
         member:
@@ -254673,7 +254673,7 @@ components:
           name: name
           id: 5
         notificationSent: true
-        closeDate: 2000-01-23T04:56:07.000+00:00
+        closeDate: closeDate
         name: name
         startTimeSet: true
         ownerFlag: true
@@ -254704,10 +254704,8 @@ components:
         where:
           $ref: '#/components/schemas/ServiceLocationReference'
         dateStart:
-          format: date-time
           type: string
         dateEnd:
-          format: date-time
           type: string
         reminder:
           $ref: '#/components/schemas/ReminderReference'
@@ -254744,10 +254742,8 @@ components:
           nullable: true
           type: string
         acknowledgedDate:
-          format: date-time
           type: string
         closeDate:
-          format: date-time
           type: string
         notifyResource:
           nullable: true

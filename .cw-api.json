@@ -289051,12 +289051,10 @@
             "$ref": "#/components/schemas/ServiceLocationReference"
           },
           "dateStart": {
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           "dateEnd": {
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           "reminder": {
             "$ref": "#/components/schemas/ReminderReference"
@@ -289105,12 +289103,10 @@
             "nullable": true
           },
           "acknowledgedDate": {
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           "closeDate": {
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           "notifyResource": {
             "type": "boolean",
