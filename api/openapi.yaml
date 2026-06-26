@@ -242250,7 +242250,6 @@ components:
       - defaultEmail
       - defaultPhone
       - firstName
-      - hireDate
       - identifier
       - lastName
       - licenseClass

@@ -277600,7 +277600,6 @@
           "licenseClass",
           "firstName",
           "lastName",
-          "hireDate",
           "defaultEmail",
           "defaultPhone",
           "securityRole"

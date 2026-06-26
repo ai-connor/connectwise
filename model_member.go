@@ -45,7 +45,7 @@ type Member struct {
 	MiddleInitial *string `json:"middleInitial,omitempty"`
 	//  Max length: 30;
 	LastName string `json:"lastName"`
-	HireDate time.Time `json:"hireDate"`
+	HireDate *time.Time `json:"hireDate,omitempty"`
 	Country *CountryReference `json:"country,omitempty"`
 	Photo *DocumentReference `json:"photo,omitempty"`
 	//  Max length: 250;
@@ -174,13 +174,12 @@ type _Member Member
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMember(identifier string, licenseClass NullableString, firstName string, lastName string, hireDate time.Time, defaultEmail NullableString, defaultPhone NullableString, securityRole SecurityRoleReference) *Member {
+func NewMember(identifier string, licenseClass NullableString, firstName string, lastName string, defaultEmail NullableString, defaultPhone NullableString, securityRole SecurityRoleReference) *Member {
 	this := Member{}
 	this.Identifier = identifier
 	this.LicenseClass = licenseClass
 	this.FirstName = firstName
 	this.LastName = lastName
-	this.HireDate = hireDate
 	this.DefaultEmail = defaultEmail
 	this.DefaultPhone = defaultPhone
 	this.SecurityRole = securityRole
@@ -739,28 +738,36 @@ func (o *Member) SetLastName(v string) {
 	o.LastName = v
 }
 
-// GetHireDate returns the HireDate field value
+// GetHireDate returns the HireDate field value if set, zero value otherwise.
 func (o *Member) GetHireDate() time.Time {
-	if o == nil {
+	if o == nil || IsNil(o.HireDate) {
 		var ret time.Time
 		return ret
 	}
-
-	return o.HireDate
+	return *o.HireDate
 }
 
-// GetHireDateOk returns a tuple with the HireDate field value
+// GetHireDateOk returns a tuple with the HireDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Member) GetHireDateOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.HireDate) {
 		return nil, false
 	}
-	return &o.HireDate, true
+	return o.HireDate, true
 }
 
-// SetHireDate sets field value
+// HasHireDate returns a boolean if a field has been set.
+func (o *Member) HasHireDate() bool {
+	if o != nil && !IsNil(o.HireDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetHireDate gets a reference to the given time.Time and assigns it to the HireDate field.
 func (o *Member) SetHireDate(v time.Time) {
-	o.HireDate = v
+	o.HireDate = &v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
@@ -4702,7 +4709,9 @@ func (o Member) ToMap() (map[string]interface{}, error) {
 		toSerialize["middleInitial"] = o.MiddleInitial
 	}
 	toSerialize["lastName"] = o.LastName
-	toSerialize["hireDate"] = o.HireDate
+	if !IsNil(o.HireDate) {
+		toSerialize["hireDate"] = o.HireDate
+	}
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
@@ -5038,7 +5047,6 @@ func (o *Member) UnmarshalJSON(data []byte) (err error) {
 		"licenseClass",
 		"firstName",
 		"lastName",
-		"hireDate",
 		"defaultEmail",
 		"defaultPhone",
 		"securityRole",
