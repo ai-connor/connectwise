@@ -277599,7 +277599,6 @@
           "identifier",
           "licenseClass",
           "firstName",
-          "lastName",
           "defaultEmail",
           "defaultPhone",
           "securityRole"

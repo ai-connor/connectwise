@@ -44,7 +44,7 @@ type Member struct {
 	//  Max length: 1;
 	MiddleInitial *string `json:"middleInitial,omitempty"`
 	//  Max length: 30;
-	LastName string `json:"lastName"`
+	LastName *string `json:"lastName,omitempty"`
 	HireDate *time.Time `json:"hireDate,omitempty"`
 	Country *CountryReference `json:"country,omitempty"`
 	Photo *DocumentReference `json:"photo,omitempty"`
@@ -174,12 +174,11 @@ type _Member Member
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMember(identifier string, licenseClass NullableString, firstName string, lastName string, defaultEmail NullableString, defaultPhone NullableString, securityRole SecurityRoleReference) *Member {
+func NewMember(identifier string, licenseClass NullableString, firstName string, defaultEmail NullableString, defaultPhone NullableString, securityRole SecurityRoleReference) *Member {
 	this := Member{}
 	this.Identifier = identifier
 	this.LicenseClass = licenseClass
 	this.FirstName = firstName
-	this.LastName = lastName
 	this.DefaultEmail = defaultEmail
 	this.DefaultPhone = defaultPhone
 	this.SecurityRole = securityRole
@@ -714,28 +713,36 @@ func (o *Member) SetMiddleInitial(v string) {
 	o.MiddleInitial = &v
 }
 
-// GetLastName returns the LastName field value
+// GetLastName returns the LastName field value if set, zero value otherwise.
 func (o *Member) GetLastName() string {
-	if o == nil {
+	if o == nil || IsNil(o.LastName) {
 		var ret string
 		return ret
 	}
-
-	return o.LastName
+	return *o.LastName
 }
 
-// GetLastNameOk returns a tuple with the LastName field value
+// GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Member) GetLastNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LastName) {
 		return nil, false
 	}
-	return &o.LastName, true
+	return o.LastName, true
 }
 
-// SetLastName sets field value
+// HasLastName returns a boolean if a field has been set.
+func (o *Member) HasLastName() bool {
+	if o != nil && !IsNil(o.LastName) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastName gets a reference to the given string and assigns it to the LastName field.
 func (o *Member) SetLastName(v string) {
-	o.LastName = v
+	o.LastName = &v
 }
 
 // GetHireDate returns the HireDate field value if set, zero value otherwise.
@@ -4708,7 +4715,9 @@ func (o Member) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MiddleInitial) {
 		toSerialize["middleInitial"] = o.MiddleInitial
 	}
-	toSerialize["lastName"] = o.LastName
+	if !IsNil(o.LastName) {
+		toSerialize["lastName"] = o.LastName
+	}
 	if !IsNil(o.HireDate) {
 		toSerialize["hireDate"] = o.HireDate
 	}
@@ -5046,7 +5055,6 @@ func (o *Member) UnmarshalJSON(data []byte) (err error) {
 		"identifier",
 		"licenseClass",
 		"firstName",
-		"lastName",
 		"defaultEmail",
 		"defaultPhone",
 		"securityRole",
